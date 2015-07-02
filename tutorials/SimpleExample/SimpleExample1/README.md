@@ -1,7 +1,9 @@
-from __init__ import *
+# Simple example 1
+
+This example shows the most simple way to create a windows form application.
 
 
-
+```python
 class SimpleExample1(AutoForm):
 	
 	def __init__(self):
@@ -21,17 +23,6 @@ class SimpleExample1(AutoForm):
 	def __buttonAction(self):
 		"""Button action event"""
 		self._fullname.value = self._firstname.value +" "+ self._middlename.value +" "+ self._lastname.value
+```
 
-
-
-
-
-
-
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-
-#Execute the application
-if __name__ == "__main__":	 app.startApp( SimpleExample1 )
-	
+![Simple example 1](screenshot.png?raw=true "Screen")

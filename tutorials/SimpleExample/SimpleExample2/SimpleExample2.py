@@ -15,7 +15,9 @@ class SimpleExample2(AutoForm):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = ['_firstname','_middlename','_lastname','_button']
+		self._formset = ['_firstname','_middlename','_lastname','_button', ' ']
+		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
+		#If you remove the ' ' the forms will occupy the entire window
 
 		#Definition of the button action
 		self._button.value = self.__buttonAction
