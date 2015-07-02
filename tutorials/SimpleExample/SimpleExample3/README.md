@@ -8,7 +8,7 @@ On this example we show you how to organize the forms side by side using the var
 			'_fullname', (' ' ,'_button', ' '), ' ']
 ```
 
-Note:
+**Notes:**
 - Forms vertically organized - use list.
 - Forms horizontally organized - use a tuple.
 

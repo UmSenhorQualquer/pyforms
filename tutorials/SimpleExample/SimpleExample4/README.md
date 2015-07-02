@@ -11,7 +11,8 @@ On this example we show you how to define tabs using dictionaries in the variabl
 					  '=',(' ','_button', ' ') ]
 ```
 
-Note: Take a look between the First name, Middle name, and Last name controls, you will find a splitter which you can move. 
+**Notes:**
+Take a look between the First name, Middle name, and Last name controls, you will find a splitter which you can move. 
 The same between the Tabs and the Button.
 - Use the sign '=' for a vertical splitter
 - Use the signs '||' for a horizontal splitter

@@ -8,6 +8,7 @@ On this example we show you how to organize the forms using the variable "self._
 	self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
 ```
 
-Note: You can you use the value ' ' in the self._formset to force the Windows Form to give a blank space on the window.
+**Notes:**
+You can you use the value ' ' in the self._formset to force the Windows Form to give a blank space on the window.
 
 ![Simple example 2](screenshot.png?raw=true "Screen")

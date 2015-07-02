@@ -26,4 +26,7 @@ class SimpleExample1(AutoForm):
 		" "+ self._lastname.value
 ```
 
+**Notes:**
+To simplify the code in the SimpleExample1.py file, I did import the Control classes in the file __init__.py
+
 ![Simple example 1](screenshot.png?raw=true "Screen")
