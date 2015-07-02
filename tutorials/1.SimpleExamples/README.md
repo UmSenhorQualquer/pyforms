@@ -4,7 +4,7 @@
 
 Shows the most simple way to create windows forms application using pyforms.
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample1/screenshot.png?raw=true "Screen")
 
 
 
@@ -12,7 +12,7 @@ Shows the most simple way to create windows forms application using pyforms.
 
 Shows you how to organize the forms using the variable "self._formset".
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample2/screenshot.png?raw=true "Screen")
 
 
 
@@ -20,7 +20,7 @@ Shows you how to organize the forms using the variable "self._formset".
 
 Shows you how to organize the forms **side by side** using the variable "self._formset".
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample3/screenshot.png?raw=true "Screen")
 
 
 
@@ -28,7 +28,7 @@ Shows you how to organize the forms **side by side** using the variable "self._f
 
 Shows you how to **define tabs** using dictionaries in the variable "self._formset".
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample4/screenshot.png?raw=true "Screen")
 
 
 
@@ -36,7 +36,7 @@ Shows you how to **define tabs** using dictionaries in the variable "self._forms
 
 Shows you how to define the **application main menu** using the AutoForm.mainmenu property.
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample5/screenshot.png?raw=true "Screen")
 
 
 
@@ -44,4 +44,4 @@ Shows you how to define the **application main menu** using the AutoForm.mainmen
 
 This example shows you how to implement a **popup menu** for a Control.
 
-![Simple example ](/SimpleExample/screenshot.png?raw=true "Screen")
+![Simple example ](/SimpleExample6/screenshot.png?raw=true "Screen")
