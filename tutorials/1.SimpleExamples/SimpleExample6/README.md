@@ -1,6 +1,6 @@
 # Simple example 5
 
-On this example we show you how to define the a Popup Menu for a Control.
+This example shows you how to implement a Popup Menu for a Control.
 		
 ```python
 self._fullname.addPopupSubMenuOption('Path', 

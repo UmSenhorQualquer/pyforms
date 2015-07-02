@@ -1,6 +1,6 @@
 # Simple example 4
 
-On this example we show you how to define tabs using dictionaries in the variable "self._formset".
+This example shows you how to define tabs using dictionaries in the variable "self._formset".
 		
 ```python
 	#Use dictionaries for tabs

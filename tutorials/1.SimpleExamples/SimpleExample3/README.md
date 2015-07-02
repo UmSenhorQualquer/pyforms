@@ -1,6 +1,6 @@
 # Simple example 4
 
-On this example we show you how to organize the forms side by side using the variable "self._formset".
+This example shows you how to organize the forms side by side using the variable "self._formset".
 		
 ```python
 	#Add the name of the forms variables inside tuples organize these forms side by side

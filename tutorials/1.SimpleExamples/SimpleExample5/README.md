@@ -1,6 +1,6 @@
 # Simple example 5
 
-On this example we show you how to define the application Main menu using the AutoForm.mainmenu property.
+This example shows you how to define the application Main menu using the AutoForm.mainmenu property.
 		
 ```python
 self.mainmenu = [

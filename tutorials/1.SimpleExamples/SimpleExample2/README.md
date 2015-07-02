@@ -1,7 +1,7 @@
 # Simple example 2
 
 In the previous example the forms were not properly ordered. 
-On this example we show you how to organize the forms using the variable "self._formset".
+This example shows you how to organize the forms using the variable "self._formset".
 		
 ```python
 	#Add this line to the constructor and you will be able to organize the forms.

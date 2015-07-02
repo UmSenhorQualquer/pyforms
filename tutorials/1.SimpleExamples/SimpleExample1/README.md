@@ -1,6 +1,6 @@
 # Simple example 1
 
-This example shows the most simple way of creating a windows form application using pyforms.
+This example shows the most simple way to create windows form application using pyforms..
 
 
 ```python
