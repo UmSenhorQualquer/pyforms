@@ -44,4 +44,4 @@ Shows you how to define the **application main menu** using the AutoForm.mainmen
 
 This example shows you how to implement a **popup menu** for a Control.
 
-![Simple example ](/SimpleExample6/screenshot.png?raw=true "Screen")
+![Simple example ](SimpleExample6/screenshot.png?raw=true "Screen")
