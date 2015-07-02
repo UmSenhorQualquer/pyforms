@@ -15,19 +15,23 @@ class SimpleExample4(AutoForm):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = [ {'Tab1':['_firstname','||','_middlename'], 'Tab2':['_lastname']},'=','_button' ]
+		self._formset = [ {
+						  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
+						  	'Tab2': ['_fullname']
+						  },
+						  '=',(' ','_button', ' ') ]
 		#Use dictionaries for tabs
 		#Use the sign '=' for a vertical splitter
 		#Use the signs '||' for a horizontal splitter
 
-		#Definition of the button action
+		#Define the button action
 		self._button.value = self.__buttonAction
 
 
 	def __buttonAction(self):
 		"""Button action event"""
-		self._fullname.value = self._firstname.value +" "+ self._middlename.value +" "+ self._lastname.value
-
+		self._fullname.value = self._firstname.value +" "+ self._middlename.value + \
+		" "+ self._lastname.value
 
 
 

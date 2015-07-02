@@ -20,7 +20,8 @@ class SimpleExample1(AutoForm):
 
 	def __buttonAction(self):
 		"""Button action event"""
-		self._fullname.value = self._firstname.value +" "+ self._middlename.value +" "+ self._lastname.value
+		self._fullname.value = self._firstname.value +" "+ self._middlename.value + \
+		" "+ self._lastname.value
 
 
 

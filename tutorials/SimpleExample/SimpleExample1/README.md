@@ -1,6 +1,6 @@
 # Simple example 1
 
-This example shows the most simple way to create a windows form application.
+This example shows the most simple way of creating a windows form application using pyforms.
 
 
 ```python
@@ -22,7 +22,8 @@ class SimpleExample1(AutoForm):
 
 	def __buttonAction(self):
 		"""Button action event"""
-		self._fullname.value = self._firstname.value +" "+ self._middlename.value +" "+ self._lastname.value
+		self._fullname.value = self._firstname.value +" "+ self._middlename.value + \
+		" "+ self._lastname.value
 ```
 
 ![Simple example 1](screenshot.png?raw=true "Screen")
