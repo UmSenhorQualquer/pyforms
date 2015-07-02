@@ -267,7 +267,7 @@ class ControlImage(ControlBase):
         self._value = value
 
         if isinstance(self._value, list) or isinstance(self._value, tuple):
-            self._videoWidget.paint( self._value )
+            self._imageWidget.paint( self._value )
         else:
             self._imageWidget.paint( [self._value] )
 

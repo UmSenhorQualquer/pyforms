@@ -230,9 +230,10 @@ class ControlBoundingSlider(ControlBase):
     _min = 0
     _max = 100
 
-    def __init__(self, label = "", defaultValue = 0, min = 0, max = 100, horizontal=False, **kwargs):
+    def __init__(self, label = "", defaultValue = [20,40], min = 0, max = 100, horizontal=False, **kwargs):
         #self._min = min
         #self._max = max
+        #self.value = defaultValue
         self._horizontal = horizontal
         ControlBase.__init__(self, label, defaultValue, **kwargs)
         

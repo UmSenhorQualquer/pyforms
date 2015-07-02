@@ -14,7 +14,7 @@ class ControlFilesTree(ControlBase):
     @value.setter
     def value(self, value): 
         ControlBase.value.fset(self,value)
-        model = QtGui.QFileSystemModel(parent=self._parent)
+        model = QtGui.QFileSystemModel(parent=None)
         self._form.setModel(model)
         model.setRootPath(QtCore.QDir.currentPath())
 

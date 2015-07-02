@@ -10,8 +10,8 @@ class ControlCheckBoxList(ControlBase):
 
         self._form.label.setText(self._label)
 
-    def __add__(self, other):
-        val = other
+    def __add__(self, val):
+        print val
         if isinstance( val, tuple ):
             item=QtGui.QListWidgetItem(val[0])
             if val[1]: item.setCheckState( QtCore.Qt.Checked)
