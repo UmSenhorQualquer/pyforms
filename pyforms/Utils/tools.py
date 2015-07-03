@@ -1,9 +1,16 @@
 import os,sys
-import cv2, math
+import math
 from numpy import *
 import zipfile
 from subprocess import Popen, PIPE
 import subprocess
+
+try: 
+    import cv2
+except:
+    print "Warning: It was not possible to import the cv2 library in the Utils.tools package"
+
+    
 
 def getFileInSameDirectory(file, name):
 	module_path = os.path.abspath(os.path.dirname(file))

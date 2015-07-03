@@ -25,11 +25,18 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 
 ### Requirements
 
-* PyQt 4
-* pyopengl
+* [Python 2.7](https://www.python.org/download/releases/2.7/)
+* [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
+* [PyOpenGL](http://pyopengl.sourceforge.net/)
 
 
 ### Ubuntu 14
+* 
+* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4 python-qt4-gl```
+* Numpy: ```sudo apt-get install python-numpy```
+* PyOpenGL: ```sudo pip install pyopengl```
+* Python OpenCV: ```sudo apt-get install python-opencv```
+* Scipy: sudo apt-get install python-scipy
 
 ### Mac OSx
 
