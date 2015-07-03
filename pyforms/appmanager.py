@@ -8,7 +8,7 @@ class Container(object):
 		self._algorithm = ClassObject()
 		self._algorithm.initForm()
 	
-		form_path = os.path.join(tools.get_object_class_path( Container ), 'qtforms', 'mainWindow.ui')
+		form_path = os.path.join(tools.get_object_class_path( Container ), 'mainWindow.ui')
 		self._form = uic.loadUi( form_path )
 		self._form.verticalLayout.addWidget( self._algorithm )
 		self._form.verticalLayout.setMargin(10)

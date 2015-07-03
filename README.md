@@ -34,7 +34,7 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 ### Ubuntu 14
 
 * PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
-* PyQt4 [Optional]: ```sudo apt-get install python-qt4-gl```
+* PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
 * Numpy [Optional]: ```sudo apt-get install python-numpy```
 * PyOpenGL [Optional]: ```sudo pip install pyopengl```
 * VisVis [Optional]: ```sudo pip install visvis```

@@ -5,13 +5,15 @@ from pyforms.Controls.ControlBase import ControlBase
 class ControlText(ControlBase):
 
     def initControl(self):
-        control_path = tools.getFileInSameDirectory(__file__,"textInput.ui")
-        self._form = uic.loadUi( control_path )
-        self._form.label.setText(self._label)
-        self._form.lineEdit.setText(self._value)
+        super(ControlText, self).initControl()
+        self.form.lineEdit.editingFinished.connect( self.finishEditing )
 
-        self._form.lineEdit.editingFinished.connect( self.finishEditing )
 
+    def finishEditing(self): 
+        """Function called when the lineEdit widget is edited"""
+        self.changed()
+
+       
     ############################################################################
     ############ Properties ####################################################
     ############################################################################
