@@ -1,8 +1,20 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-from Controls.ControlBase import ControlBase
+__author__      = "Ricardo Ribeiro"
+__credits__     = ["Ricardo Ribeiro"]
+__license__     = "MIT"
+__version__     = "0.0"
+__maintainer__  = "Ricardo Ribeiro"
+__email__       = "ricardojvr@gmail.com"
+__status__      = "Development"
+
+
+
+from pyforms.Controls.ControlBase import ControlBase
 from datetime import datetime, timedelta
 from PyQt4 import uic, QtGui, QtCore
-from BaseWidget import BaseWidget
+from pyforms.BaseWidget import BaseWidget
 import time, subprocess, os
 
 class AutoForm(BaseWidget):

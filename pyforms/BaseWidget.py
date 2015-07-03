@@ -1,4 +1,16 @@
-from Controls.ControlBase import ControlBase
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+__author__      = "Ricardo Ribeiro"
+__credits__     = ["Ricardo Ribeiro"]
+__license__     = "MIT"
+__version__     = "0.0"
+__maintainer__  = "Ricardo Ribeiro"
+__email__       = "ricardojvr@gmail.com"
+__status__      = "Development"
+
+
+from pyforms.Controls.ControlBase import ControlBase
 from datetime import datetime, timedelta
 from PyQt4 import uic, QtGui, QtCore
 import time, subprocess, os
