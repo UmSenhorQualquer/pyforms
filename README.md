@@ -16,7 +16,7 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 * Due to its simplicity it has a low learning curve.
 
 ## Examples of applications developed in Pyforms
-* [![Python Video Annotator]](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
+* [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
 
 
 ## Rationale behind the framework
