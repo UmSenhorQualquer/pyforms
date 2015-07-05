@@ -44,4 +44,4 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 
 ## License
 
-Pyforms is open-source licensed under the MIT license.
+Pyforms is open-source library under the MIT license.

@@ -1,8 +1,18 @@
 from PyQt4 import QtGui
 
 class AddMenuFuntionality(object):
+	"""
+	This class is a module of the application PeopleWindow.py
+	It is a simple a example of how applications can be devided in modules with pyforms.
+	It adds the Open and Save functionality
+	"""
 
 	def initForm(self):
+		"""
+		This function will be called when the windows is being created
+		"""
+
+		#It adds the next options to the main menu
 		self.mainmenu.append(
 				{ 'File': [
 						{'Save as': self.__savePeople},

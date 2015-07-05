@@ -4,7 +4,9 @@ from PersonWindow import PersonWindow
 from AddMenuFuntionality import AddMenuFuntionality
 
 class PeopleWindow(AddMenuFuntionality, People, AutoForm):
-
+	"""
+	This applications is a GUI implementation of the People class
+	"""
 
 	def __init__(self):
 		People.__init__(self)
@@ -25,16 +27,25 @@ class PeopleWindow(AddMenuFuntionality, People, AutoForm):
 		
 
 	def addPerson(self, person):
+		"""
+		Redifines the addPerson function from People class to update the GUI everytime a new person is added.
+		"""
 		super(PeopleWindow, self).addPerson(person)
 		self._peopleList += [person._firstName, person._middleName, person._lastName]
 
 
 	def __addPersonBtnAction(self):
+		"""
+		Add person button event
+		"""
 		win = PersonWindow()
 		win.parent = self
 		win.show()
 
 	def __rmPersonBtnAction(self):
+		"""
+		Remove person button event
+		"""
 		self.removePerson( self._peopleList.mouseSelectedRowIndex )
 		self._peopleList -= self._peopleList.mouseSelectedRowIndex
 		
