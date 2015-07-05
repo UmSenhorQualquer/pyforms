@@ -23,7 +23,7 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 
 ## Installation
 
-#### Requirements
+##### Requirements
 
 * [Python 2.7](https://www.python.org/download/releases/2.7/)
 * [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
