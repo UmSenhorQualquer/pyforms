@@ -1,8 +1,8 @@
 # Code organization example
 
-On this example it will be shown how to modularize the code to facilitate the maintaince and the readability of the code.
+On this example it will be shown how to modularize your code, in a in MVC way.
 
-## 1. Implement our model.
+## 1. Implement the model.
 
 Person.py
 ```python
