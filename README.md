@@ -31,13 +31,13 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 * [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
 * [Numpy](http://www.numpy.org/) [Optional - Only used by some Controls]
 
-#### Ubuntu 14
+##### Ubuntu 14
 
 * run ```sudo python setup.py install```
 * PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
 * PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
 
-#### Mac OSx
+##### Mac OSx
 
 * run ```sudo python setup.py install```
 * install pyqt4 with the gl module
