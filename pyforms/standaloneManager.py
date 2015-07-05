@@ -57,6 +57,8 @@ class StandAloneContainer(QtGui.QMainWindow):
 								action.triggered.connect(func)
 								menu.addAction(action)
 
+							
+
 
 def startApp(ClassObject):
 	app = QtGui.QApplication(sys.argv)

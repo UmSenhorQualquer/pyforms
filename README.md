@@ -3,7 +3,7 @@
 
 Pyforms is a Python 2.7 framework to develop GUI application, which promotes modular software design and code reusability with minimal effort.
 ### It offers:
-* A Python layer of Windows forms, based on PyQT, OpenGL and other libraries.
+* A Python layer of Windows forms, based on PyQt, OpenGL and other libraries.
 * A group of rules and methodologies that help the developer maintaining his code short, clean, reusable and readable. 
 
 ## Advantages
@@ -36,15 +36,11 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 * run ```sudo python setup.py install```
 * PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
 * PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
-* Numpy [Optional]: ```sudo apt-get install python-numpy```
-* PyOpenGL [Optional]: ```sudo pip install pyopengl```
-* VisVis [Optional]: ```sudo pip install visvis```
 
 ### Mac OSx
 
 * run ```sudo python setup.py install```
-* PyOpenGL [Optional]: ```sudo pip install pyopengl```
-* VisVis [Optional]: ```sudo pip install visvis```
+* install pyqt4 with the gl module
 
 ## License
 

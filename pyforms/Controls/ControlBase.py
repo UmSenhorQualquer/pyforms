@@ -20,14 +20,16 @@ class ControlBase(object):
 	The control has a lineEdit widget
 	"""
 
-	def __init__(self, label = "", defaultValue = ""):
-		self._value     = defaultValue
-		self._form      = None  #Qt widget
-		self._parent    = None  #Parent window
-		self._label     = label #Label
-		self._popupMenu = None
+	def __init__(self, label='', defaultValue=''):
+		self._value     	= defaultValue
+		self._form      	= None  #Qt widget
+		self._parent    	= None  #Parent window
+		self._label     	= label #Label
+		self._popupMenu 	= None
 
 		self.initControl()
+
+		
 
 	def initControl(self):
 		"""
@@ -181,7 +183,8 @@ class ControlBase(object):
 	def value(self, value):
 		oldvalue = self._value
 		self._value = value
-		if oldvalue!=value: self.changed()
+		if oldvalue!=value: 
+			self.changed()
 
 	############################################################################
 	# Return or update the label of the Control 
