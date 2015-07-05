@@ -81,6 +81,7 @@ class ComputerVisionAlgorithm(AutoForm):
 		#Define the event called before showing the image in the player
 		self._player.processFrame 	= self.__processFrame
 
+		#Define the organization of the Form Controls
 		self._formset = [ 
 			('_videofile', '_outputfile'), 
 			'_threshold', 
