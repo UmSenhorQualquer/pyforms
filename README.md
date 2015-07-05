@@ -19,6 +19,32 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 * [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
 
 
+## Installation
+
+##### Requirements
+
+* [Python 2.7](https://www.python.org/download/releases/2.7/)
+* [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
+* [PyOpenGL](http://pyopengl.sourceforge.net/) [Optional - Only used by some Controls]
+* [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
+* [Numpy](http://www.numpy.org/) [Optional - Only used by some Controls]
+
+##### Ubuntu 14
+
+* run ```sudo python setup.py install```
+* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
+* PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
+
+##### Mac OSx
+
+* run ```sudo python setup.py install```
+* install pyqt4 with the gl module
+
+## License
+
+Pyforms is open-source library under the MIT license.
+
+
 ## Rationale behind the framework
 
 The development of this library started with the necessity of allowing users with low programming skills to edit parameters of computer vision applications implemented in python scripts.
@@ -57,7 +83,12 @@ class ComputerVisionAlgorithm(AutoForm):
 		#Define the event called before showing the image in the player
 		self._player.processFrame 	= self.__processFrame
 
-		self._formset = [ ('_videofile', '_outputfile'), '_threshold', ('_blobsize', '_runbutton', '_player') ]
+		self._formset = [ 
+			('_videofile', '_outputfile'), 
+			'_threshold', 
+			('_blobsize', '_runbutton'), 
+			'_player'
+		]
 
 
 	def __videoFileSelectionEvent(self):
@@ -79,27 +110,4 @@ class ComputerVisionAlgorithm(AutoForm):
 		pass
 ```
 
-## Installation
-
-##### Requirements
-
-* [Python 2.7](https://www.python.org/download/releases/2.7/)
-* [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
-* [PyOpenGL](http://pyopengl.sourceforge.net/) [Optional - Only used by some Controls]
-* [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
-* [Numpy](http://www.numpy.org/) [Optional - Only used by some Controls]
-
-##### Ubuntu 14
-
-* run ```sudo python setup.py install```
-* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
-* PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
-
-##### Mac OSx
-
-* run ```sudo python setup.py install```
-* install pyqt4 with the gl module
-
-## License
-
-Pyforms is open-source library under the MIT license.
+![ScreenShot](tutorials/1.SimpleExamples/ComputerVisionAlgorithmExample/screenshot.png?raw=true "Screen")

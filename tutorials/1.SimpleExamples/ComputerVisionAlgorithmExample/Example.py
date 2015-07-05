@@ -32,7 +32,12 @@ class ComputerVisionAlgorithm(AutoForm):
 		#Define the event called before showing the image in the player
 		self._player.processFrame 	= self.__processFrame
 
-		self._formset = [ ('_videofile', '_outputfile'), '_threshold', ('_blobsize', '_runbutton', '_player') ]
+		self._formset = [ 
+			('_videofile', '_outputfile'), 
+			'_threshold', 
+			('_blobsize', '_runbutton'), 
+			'_player'
+		]
 
 
 	def __videoFileSelectionEvent(self):

@@ -11,13 +11,16 @@ __status__      = "Development"
 
 
 from ControlBase import ControlBase
-import pyforms.Utils.tools as tools
+import pyforms.Utils.tools as tools, math
 from PyQt4 import uic
 from PyQt4.QtOpenGL import QGLWidget
 from PyQt4 import QtCore
 import OpenGL.GL  as GL
 import OpenGL.GLU as GLU
-import cv2, math
+try:
+    import cv2
+except:
+    print "Warning: was not possible to import cv2 in ControlPlayer"
 from PyQt4.QtGui import QApplication
 
 
