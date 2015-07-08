@@ -37,7 +37,8 @@ class ControlList(ControlBase):
     def initControl(self):
         control_path = tools.getFileInSameDirectory(__file__,"list.ui")
         self._form = uic.loadUi( control_path )
-        self._form.label.setText(self.label)
+        if self.label!='': self._form.label.setText(self.label)
+        else: self._form.label.hide()
         self._form.tableWidget.currentCellChanged.connect( self.tableWidgetCellChanged )
         self._form.tableWidget.itemSelectionChanged.connect( self.tableWidgetItemSelectionChanged )
 

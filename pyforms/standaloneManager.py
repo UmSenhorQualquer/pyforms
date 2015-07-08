@@ -23,7 +23,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 		self.setCentralWidget(w)
 		self.setWindowTitle( w.title )
 
-		for key, dock in w.docks.items():
+		for key, item in w.docks.items():
 			side = QtCore.Qt.RightDockWidgetArea
 			if key=='left':
 				side = QtCore.Qt.LeftDockWidgetArea
@@ -33,10 +33,15 @@ class StandAloneContainer(QtGui.QMainWindow):
 				side = QtCore.Qt.TopDockWidgetArea
 			elif key=='bottom':
 				side = QtCore.Qt.BottomDockWidgetArea
-			if isinstance(dock,list):
-				for x in dock: self.addDockWidget( side , x.form )
+			if isinstance(item,list):
+				for x in item: 
+					dock = QtGui.QDockWidget(self)
+					dock.setWidget(x.form)
+					self.addDockWidget( side , dock )
 			else:
-				self.addDockWidget( side , dock.form )
+				dock = QtGui.QDockWidget(self)
+				dock.setWidget(item.form)
+				self.addDockWidget( side , dock )
 
 
 		if len(w.mainmenu)>0: self.__initMainMenu( w.mainmenu )
