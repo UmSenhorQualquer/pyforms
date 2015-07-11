@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.Controls.ControlCheckBox.ControlCheckBox</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.Controls-module.html">Package&nbsp;Controls</a> ::
+        <a href="pyforms.Controls.ControlCheckBox-module.html">Module&nbsp;ControlCheckBox</a> ::
+        Class&nbsp;ControlCheckBox
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ControlCheckBox</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__8" name="uml_class_diagram_for_pyforms__8">
+<area shape="rect" id="node1_22" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#initControl" title="Load Control and initiate the events" alt="" coords="132,399,296,419"/>
+<area shape="rect" id="node1_23" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#load" title="Load a value from the dict variable" alt="" coords="132,419,296,439"/>
+<area shape="rect" id="node1_24" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#save" title="Save a value to dict variable" alt="" coords="132,439,296,459"/>
+<area shape="rect" id="node1_25" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#uncheck" title="pyforms.Controls.ControlCheckBox.ControlCheckBox.uncheck" alt="" coords="132,459,296,479"/>
+<area shape="rect" id="node1_26" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#check" title="pyforms.Controls.ControlCheckBox.ControlCheckBox.check" alt="" coords="132,479,296,499"/>
+<area shape="rect" id="node1_27" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#isChecked" title="pyforms.Controls.ControlCheckBox.ControlCheckBox.isChecked" alt="" coords="132,499,296,519"/>
+<area shape="rect" id="node1_28" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#checkedToggle" title="pyforms.Controls.ControlCheckBox.ControlCheckBox.checkedToggle" alt="" coords="132,519,296,539"/>
+<area shape="rect" id="node1_29" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#value" title="pyforms.Controls.ControlCheckBox.ControlCheckBox.value" alt="" coords="132,539,296,559"/>
+<area shape="rect" id="node1" href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html" title="pyforms.Controls.ControlCheckBox.ControlCheckBox" alt="" coords="119,365,307,565"/>
+<area shape="rect" id="node2_30" href="javascript:void(0);" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="16,40,413,60"/>
+<area shape="rect" id="node2_31" href="javascript:void(0);" title="repr(x)" alt="" coords="16,60,413,80"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="Show the control" alt="" coords="16,80,413,100"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="Hide the control" alt="" coords="16,100,413,120"/>
+<area shape="rect" id="node2_34" href="javascript:void(0);" title="Add an option to the Control popup menu" alt="" coords="16,120,413,140"/>
+<area shape="rect" id="node2_35" href="javascript:void(0);" title="Add submenu options to the Control popup menu" alt="" coords="16,140,413,160"/>
+<area shape="rect" id="node2_36" href="javascript:void(0);" title="Function called when ever the Control value is changed" alt="" coords="16,160,413,180"/>
+<area shape="rect" id="node2_37" href="javascript:void(0);" title="Function called before open the Control popup menu" alt="" coords="16,180,413,200"/>
+<area shape="rect" id="node2_38" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.enabled" alt="" coords="16,200,413,220"/>
+<area shape="rect" id="node2_39" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.label" alt="" coords="16,220,413,240"/>
+<area shape="rect" id="node2_40" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.form" alt="" coords="16,240,413,260"/>
+<area shape="rect" id="node2_41" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.parent" alt="" coords="16,260,413,280"/>
+<area shape="rect" id="node2_42" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.maxWidth" alt="" coords="16,280,413,300"/>
+<area shape="rect" id="node2_43" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.minHeight" alt="" coords="16,320,413,340"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="Implements a base control The control has a lineEdit widget" alt="" coords="4,6,425,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__8.gif" alt='' usemap="#uml_class_diagram_for_pyforms__8" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#initControl" class="summary-sig-name">initControl</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Load Control and initiate the events</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.initControl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#load" class="summary-sig-name">load</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Load a value from the dict variable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.load">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#save" class="summary-sig-name">save</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Save a value to dict variable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.save">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="uncheck"></a><span class="summary-sig-name">uncheck</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.uncheck">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check"></a><span class="summary-sig-name">check</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.check">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isChecked"></a><span class="summary-sig-name">isChecked</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.isChecked">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="checkedToggle"></a><span class="summary-sig-name">checkedToggle</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.checkedToggle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlCheckBox.ControlCheckBox-class.html#value" class="summary-sig-name">value</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b>:
+      <code>__init__</code>,
+      <code>__repr__</code>,
+      <code>aboutToShowContextMenuEvent</code>,
+      <code>addPopupMenuOption</code>,
+      <code>addPopupSubMenuOption</code>,
+      <code>changed</code>,
+      <code>enabled</code>,
+      <code>form</code>,
+      <code>hide</code>,
+      <code>label</code>,
+      <code>maxHeight</code>,
+      <code>maxWidth</code>,
+      <code>minHeight</code>,
+      <code>minWidth</code>,
+      <code>parent</code>,
+      <code>show</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="initControl"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initControl</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.initControl">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load Control and initiate the events</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#initControl">ControlBase.ControlBase.initControl</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="load"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.load">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load a value from the dict variable</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> - dictionary with the value of the Control</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#load">ControlBase.ControlBase.load</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="save"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">save</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.save">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Save a value to dict variable</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> - dictionary with to where the value of the Control will be added</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#save">ControlBase.ControlBase.save</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">value</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlCheckBox-pysrc.html#ControlCheckBox.value">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@value.setter</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#value">ControlBase.ControlBase.value</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jul 11 12:07:45 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

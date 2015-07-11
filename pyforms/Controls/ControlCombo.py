@@ -70,7 +70,7 @@ class ControlCombo(ControlBase):
             if value == val:
                 index = self._form.comboBox.findText(key)
                 self._form.comboBox.setCurrentIndex(index)
-                if self._value!=value: self.valueUpdated(value)
+                if self._value!=value: self.changed()
                 self._value = val
 
     @property

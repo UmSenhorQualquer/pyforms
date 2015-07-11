@@ -43,8 +43,7 @@ class ControlHidden(ControlBase):
     def save(self, data):
         if self.value: data['value'] = self.value
 
-    def valueUpdated(self, value): pass
-
+   
     def show(self): pass
 
     def hide(self): pass

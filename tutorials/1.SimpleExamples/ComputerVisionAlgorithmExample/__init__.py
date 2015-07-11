@@ -14,7 +14,7 @@ from pyforms.AutoForm 				import AutoForm
 from pyforms.Controls.ControlText 	import ControlText
 from pyforms.Controls.ControlButton import ControlButton
 from pyforms.Controls.ControlSlider import ControlSlider
-from pyforms.Controls.ControlPlayer import ControlPlayer
 from pyforms.Controls.ControlFile import ControlFile
+from pyforms.Controls.ControlPlayer.ControlPlayer import ControlPlayer
 
 import pyforms.standaloneManager as app

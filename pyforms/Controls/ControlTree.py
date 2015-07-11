@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore
 class ControlTree(ControlBase):
 
 	def initControl(self):
-		self._form = QtGui.QTreeView()
+		self._form = QtGui.QTreeWidget()
 
 		view = self._form
 		view.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
@@ -15,9 +15,9 @@ class ControlTree(ControlBase):
 		view.setDragEnabled(True)
 		view.setAcceptDrops(True)
 		
-		view.setModel(QtGui.QStandardItemModel())
+		#view.setModel(QtGui.QStandardItemModel())
 		
-		view.model().itemChanged.connect(self.__itemChangedEvent)
+		view.model().dataChanged.connect(self.__itemChangedEvent)
 		
 		view.selectionChanged = self.selectionChanged
 

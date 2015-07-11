@@ -118,15 +118,13 @@ class GaugeWidgetVertical(QtGui.QWidget):
 
                     self.repaint()
 
-                    self.valueUpdated( self._minVal, self._maxVal )
+                    self.changed()
 
             self._lastMouseY = event.y()
 
     def mouseReleaseEvent(self, event):
         self._lastMouseY = None
 
-    def valueUpdated(self, minval, maxval):
-        pass
 
 
 
@@ -216,7 +214,7 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
                         if new_min<self._maxVal: self._minVal = new_min
 
                     self.repaint()
-                    self.valueUpdated( self._minVal, self._maxVal )
+                    self.changed()
 
             self._lastMouseY = event.x()
 
@@ -252,13 +250,10 @@ class ControlBoundingSlider(ControlBase):
     def initControl(self):
         if self._horizontal: self._form = GaugeWidgetHorizontal()
         else: self._form = GaugeWidgetVertical()
-        self._form.valueUpdated = self._update
 
     def _update(self, minval, maxval):
         self.value = minval, maxval
         
-    def valueChanged(self, value):
-        self.value = value
 
     def load(self, data):
         if 'value' in data: self.value = data['value']

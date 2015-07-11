@@ -21,6 +21,8 @@ class ControlBase(object):
 	"""
 
 	def __init__(self, label='', defaultValue=''):
+		super(ControlBase,self).__init__()
+		
 		self._value     	= defaultValue
 		self._form      	= None  #Qt widget
 		self._parent    	= None  #Parent window
@@ -42,7 +44,9 @@ class ControlBase(object):
 
 		self.form.lineEdit.editingFinished.connect( self.finishEditing )
 
-	def __repr__(self): return self.value
+
+
+	def __repr__(self): return str(self._value)
 
 	############################################################################
 	############ Funcions ######################################################
@@ -183,8 +187,7 @@ class ControlBase(object):
 	def value(self, value):
 		oldvalue = self._value
 		self._value = value
-		if oldvalue!=value: 
-			self.changed()
+		if oldvalue!=value:  self.changed()
 
 	############################################################################
 	# Return or update the label of the Control 

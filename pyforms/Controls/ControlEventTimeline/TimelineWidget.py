@@ -447,6 +447,7 @@ class TimelineWidget(QtGui.QWidget):
             self._video_playing = not self._video_playing
             self.playVideoEvent()
             self.repaint()
+            
 
         # Increase video frame rate (FPS) by 5
         if event.key() == QtCore.Qt.Key_Plus:

@@ -10,7 +10,7 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-import csv
+import csv, os
 
 from PyQt4 import QtGui, QtCore
 
@@ -19,12 +19,13 @@ from TimelineWidget import TimelineWidget
 from TimelinePopupWindow import TimelinePopupWindow
 
 
-class ControlEventTimeline(ControlBase):
+class ControlEventTimeline(ControlBase, QtGui.QWidget):
     """
         Timeline events editor
     """
 
     def __init__(self, label = "", defaultValue = 0, min = 0, max = 100, **kwargs):
+        QtGui.QWidget.__init__(self)
         ControlBase.__init__(self, label, defaultValue, **kwargs)
         self._max = 100
 
@@ -47,10 +48,14 @@ class ControlEventTimeline(ControlBase):
         self.addPopupSubMenuOption("Clean", {'Current line': self.__cleanLine, 'Everything': self.__clean, 'Charts': self.__cleanCharts })
 
     def initControl(self):
-        self._form = QtGui.QWidget()
+        #Get the current path of the file
+        rootPath = os.path.dirname(__file__)
+
         vlayout = QtGui.QVBoxLayout()
         hlayout = QtGui.QHBoxLayout()
-        self._form.setLayout(vlayout)
+        self.setLayout(vlayout)
+
+        
 
         #Add scroll area
         scrollarea = QtGui.QScrollArea()
@@ -85,8 +90,8 @@ class ControlEventTimeline(ControlBase):
         slider.setPageStep(1)
         slider.setTickPosition(QtGui.QSlider.NoTicks)  # TicksBothSides
         slider.valueChanged.connect(self.__scaleSliderChange)
-        slider_icon_zoom_in = QtGui.QPixmap("pyforms/Controls/uipics/zoom_in.png")
-        slider_icon_zoom_out = QtGui.QPixmap("pyforms/Controls/uipics/zoom_out.png")
+        slider_icon_zoom_in = QtGui.QPixmap(os.path.join(rootPath, "..","uipics","zoom_in.png"))
+        slider_icon_zoom_out = QtGui.QPixmap(os.path.join(rootPath, "..","uipics","zoom_out.png"))
         slider_label_zoom_in = QtGui.QLabel()
         slider_label_zoom_out = QtGui.QLabel()
         slider_label_zoom_in.setPixmap(slider_icon_zoom_in)
@@ -111,11 +116,11 @@ class ControlEventTimeline(ControlBase):
 
         # Import/Export Buttons
         btn_import = QtGui.QPushButton("Import")
-        btn_import_icon = QtGui.QIcon("pyforms/Controls/uipics/page_white_get.png")
+        btn_import_icon = QtGui.QIcon(os.path.join(rootPath, "..","uipics","page_white_get.png"))
         btn_import.setIcon(btn_import_icon)
         btn_import.clicked.connect(self.__import)
         btn_export = QtGui.QPushButton("Export")
-        btn_export_icon = QtGui.QIcon("pyforms/Controls/uipics/page_white_put.png")
+        btn_export_icon = QtGui.QIcon(os.path.join(rootPath, "..","uipics","page_white_put.png"))
         btn_export.setIcon(btn_export_icon)
         btn_export.clicked.connect(self.__export)
         # importexport_vlayout = QtGui.QVBoxLayout()
@@ -210,7 +215,7 @@ class ControlEventTimeline(ControlBase):
     def __import(self):
         """Import annotations from a file."""
 
-        filename = QtGui.QFileDialog.getOpenFileName(parent=self._form,
+        filename = QtGui.QFileDialog.getOpenFileName(parent=self,
                                                      caption="Import annotations file",
                                                      directory="",
                                                      filter="*.csv",
@@ -235,7 +240,7 @@ class ControlEventTimeline(ControlBase):
                            "Make sure to export current annotations first to save.",
                            "\n",
                            "Are you sure you want to proceed?"]
-                reply = QtGui.QMessageBox.question(self._form,
+                reply = QtGui.QMessageBox.question(self,
                                                    "Warning!",
                                                    "".join(message),
                                                    QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
@@ -256,7 +261,7 @@ class ControlEventTimeline(ControlBase):
         # Update info right before exporting
         self._time._update_tracks_info()
 
-        filename = QtGui.QFileDialog.getSaveFileName(parent=self._form,
+        filename = QtGui.QFileDialog.getSaveFileName(parent=self,
                                                      caption="Export annotations file",
                                                      directory=self.getExportFilename(),
                                                      filter="CSV Files (*.csv)",
@@ -269,20 +274,20 @@ class ControlEventTimeline(ControlBase):
             print "Annotations file exported: {:s}".format(filename)
 
     def __cleanLine(self):
-        reply = QtGui.QMessageBox.question(self._form, 'Confirm',
+        reply = QtGui.QMessageBox.question(self, 'Confirm',
             "Are you sure you want to clean all the events?", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes: self._time.cleanLine()
 
     def __cleanCharts(self):
-        reply = QtGui.QMessageBox.question(self._form, 'Confirm',
+        reply = QtGui.QMessageBox.question(self, 'Confirm',
             "Are you sure you want to clean all the charts?", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes: self._time.cleanCharts()
 
 
     def __clean(self):
-        reply = QtGui.QMessageBox.question(self._form, 'Confirm',
+        reply = QtGui.QMessageBox.question(self, 'Confirm',
             "Are you sure you want to clean all the events?", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes: self._time.clean()
@@ -338,7 +343,7 @@ class ControlEventTimeline(ControlBase):
     def max(self): return self._time.minimumWidth()
 
     @max.setter
-    def max(self, value): self._max = value; self._time.setMinimumWidth(value); self._form.repaint()
+    def max(self, value): self._max = value; self._time.setMinimumWidth(value); self.repaint()
 
     @property
     def mouseOverLine(self):
@@ -361,3 +366,5 @@ class ControlEventTimeline(ControlBase):
     def fpsChanged(self, value): self._time.fpsChangeEvent = value
 
 
+    @property
+    def form(self): return self
