@@ -10,7 +10,7 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-from ControlText import ControlText
+from pyforms.Controls.ControlText import ControlText
 import pyforms.Utils.tools as tools
 from PyQt4 import uic
 from PyQt4 import QtGui

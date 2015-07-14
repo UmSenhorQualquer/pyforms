@@ -12,7 +12,7 @@ __status__      = "Development"
 
 import pyforms.Utils.tools as tools
 from PyQt4 import uic, QtGui, QtCore
-from ControlBase import ControlBase
+from pyforms.Controls.ControlBase import ControlBase
 
 from visvis import Point, Pointset    
 import visvis as vv

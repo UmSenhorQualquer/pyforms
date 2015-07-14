@@ -12,7 +12,7 @@ __status__      = "Development"
 
 import pyforms.Utils.tools as tools
 from PyQt4 import uic, QtGui
-from ControlBase import ControlBase
+from pyforms.Controls.ControlBase import ControlBase
 
 class ControlEmptyWidget(ControlBase):
 

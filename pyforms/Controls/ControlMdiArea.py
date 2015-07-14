@@ -10,7 +10,7 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 from PyQt4 import uic, QtGui
-from ControlBase import ControlBase
+from pyforms.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
 
 class ControlMdiArea(ControlBase):
