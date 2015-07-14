@@ -26,7 +26,7 @@ class Example1(AutoForm):
 		self._slider		= ControlSlider('Slider')
 		
 
-		self._formset = [ (' ','_checkbox',' '), '_slider', ('_checkboxList', '_player') ]
+		self._formset = [  '_slider', ('_checkboxList', '_player'), ('_checkbox',' ') ]
 
 
 		self._checkboxList.value = [ ('Item 1', True), ('Item 2', False), ('Item 3', True)]

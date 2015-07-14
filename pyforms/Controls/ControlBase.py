@@ -156,7 +156,7 @@ class ControlBase(object):
 
 
 	def __openPopupMenu(self, position):
-		if self._popupMenu: self._popupMenu.exec_(self._form.mapToGlobal(position))
+		if self._popupMenu: self._popupMenu.exec_(self.form.mapToGlobal(position))
 
 
 

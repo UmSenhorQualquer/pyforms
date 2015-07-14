@@ -129,9 +129,38 @@ class BaseWidget(QtGui.QWidget):
                     layout.addWidget( c )
                     self._tabs.append(c)
                 else:
-                    param = self.formControls[row]
-                    param.parent = self
-                    layout.addWidget( param.form )
+                    param = self.formControls.get(row, None)
+                    if param==None:
+                        label = QtGui.QLabel()
+                        label.setSizePolicy( QtGui.QSizePolicy.Maximum,QtGui.QSizePolicy.Maximum )
+                        #layout.addWidget( label )
+
+                        if row.startswith('info:'): 
+                            label.setText(row[5:])
+                            font = QtGui.QFont(); font.setPointSize(10); label.setFont(font)
+                        elif row.startswith('h1:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(17); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h2:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(16); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h3:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(15); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h4:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(14); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h5:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(12); font.setBold(True); label.setFont(font)
+                        else:
+                            label.setText(row)
+                            font = QtGui.QFont(); font.setPointSize(10); label.setFont(font)
+
+                        layout.addWidget( label )
+                    else:
+                        param.parent = self
+                        layout.addWidget( param.form )
         elif type(formset) is list:
             layout = QtGui.QVBoxLayout()
             for row in formset:
@@ -146,9 +175,39 @@ class BaseWidget(QtGui.QWidget):
                     layout.addWidget( c )
                     self._tabs.append(c)
                 else:
-                    param = self.formControls[row]
-                    param.parent = self
-                    layout.addWidget( param.form )
+                    param = self.formControls.get(row, None)
+                    if param==None:
+                        label = QtGui.QLabel()
+                        label.setSizePolicy( QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
+                        label.resize(30,30)
+                        #layout.addWidget( label )
+
+                        if row.startswith('info:'): 
+                            label.setText(row[5:])
+                            font = QtGui.QFont(); font.setPointSize(10); label.setFont(font)
+                        elif row.startswith('h1:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(17); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h2:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(16); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h3:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(15); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h4:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(14); font.setBold(True); label.setFont(font)
+                        elif row.startswith('h5:'): 
+                            label.setText(row[3:])
+                            font = QtGui.QFont(); font.setPointSize(12); font.setBold(True); label.setFont(font)
+                        else:
+                            label.setText(row)
+                            font = QtGui.QFont(); font.setPointSize(10); label.setFont(font)
+
+                        layout.addWidget( label )
+                    else:
+                        param.parent = self
+                        layout.addWidget( param.form )
         layout.setMargin(0)
         control.setLayout(layout)
         return control
@@ -223,7 +282,7 @@ class BaseWidget(QtGui.QWidget):
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         (output, error) = proc.communicate()
         if cwd!=None: os.chdir(currentdirectory)
-        if error: print 'Error: ', error
+        if error: print('Error: '+ error)
         return output
 
     @property

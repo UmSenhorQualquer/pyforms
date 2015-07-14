@@ -36,6 +36,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         self._deltaActions = [self._deltaLockAction,
                               self._deltaColorAction,
                               self._deltaRemoveAction]
+                              
         for action in self._deltaActions:
             action.setVisible(False)
         self.addPopupMenuOption("-")
@@ -250,7 +251,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
             with open(filename, 'rb') as csvfile:
                 csvfile = csv.reader(csvfile, dialect='excel')
                 self._time.import_csv(csvfile)
-            print "Annotations file imported: {:s}".format(filename)
+            print("Annotations file imported: {:s}".format(filename))
 
         # Update info after importing from a file
         self._time._update_tracks_info()
@@ -271,7 +272,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
                 # spamwriter = csv.writer(csvfile, delimiter=';', quotechar='"')
                 spamwriter = csv.writer(csvfile, dialect='excel')
                 self._time.export_csv(spamwriter)
-            print "Annotations file exported: {:s}".format(filename)
+            print("Annotations file exported: {:s}".format(filename))
 
     def __cleanLine(self):
         reply = QtGui.QMessageBox.question(self, 'Confirm',
