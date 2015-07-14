@@ -177,7 +177,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         timeline_default_color = parent.color
         try:
             parent.color = d[i][1]
-        except KeyError, e:
+        except KeyError as e:
             error_message = ("You tried to edit an empty track.",
                              "\n",
                              "Initialize it by creating an event first.")

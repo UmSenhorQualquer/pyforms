@@ -20,7 +20,7 @@ import subprocess
 try: 
     import cv2
 except:
-    print "Warning: It was not possible to import the cv2 library in the Utils.tools package"
+    print( "Warning: It was not possible to import the cv2 library in the Utils.tools package")
 
     
 
@@ -83,11 +83,11 @@ def zipdir(path, zippath):
         for filename in files: zippath.write(os.path.join(root, filename))
     """
     execStr = ['zip', '-r',zippath, path]
-    print ' '.join(execStr)
+    print(' '.join(execStr))
     proc = subprocess.Popen(execStr, stdout=PIPE, stderr=PIPE)
     (output, error) = proc.communicate()
-    if error: print 'error: ', error
-    print 'output: ', output
+    if error: print ('error: '+ error)
+    print('output: '+ output)
         
 
 def zipfiles(files, zippath):

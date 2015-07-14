@@ -19,7 +19,7 @@ import OpenGL.GLU as GLU
 try:
     import cv2
 except:
-    print "Warning: was not possible to import cv2 in ControlPlayer"
+    print("Warning: was not possible to import cv2 in ControlPlayer")
 from PyQt4.QtGui import QApplication
 
 

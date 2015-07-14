@@ -57,7 +57,7 @@ class TimelineChart(object):
 
 		diff = self._graphMax - self._graphMin
 
-		print left, right, len(self._data)
+		
 
 		yMiddle = self._graphMin+diff/2
 		for pos1, pos2 in zip(self._data[start+1:end], self._data[start:end]):

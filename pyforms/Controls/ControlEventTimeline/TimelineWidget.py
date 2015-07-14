@@ -356,28 +356,28 @@ class TimelineWidget(QtGui.QWidget):
         """Prints tracks info on screen."""
         d = self._tracks_info
         if d:  # returns True if dict is not empty
-            print "{0:=>79}".format(" TIMELINE INFO")
-            print "Number of active tracks:", self._n_tracks
-            print "Total number of events created:", len(self._data)
-            print "Tracks:"
-            print "{0:>8} {1:^50} {2:^7} {3:>11}".format("ID",
+            print( "{0:=>79}".format(" TIMELINE INFO"))
+            print( "Number of active tracks:", self._n_tracks)
+            print( "Total number of events created:", len(self._data))
+            print( "Tracks:")
+            print("{0:>8} {1:^50} {2:^7} {3:>11}".format("ID",
                                                          "Label",
                                                          "Color",
-                                                         "# of events")
-            print "{0:-<79}".format("    ")
+                                                         "# of events"))
+            print( "{0:-<79}".format("    "))
             for key, value in d.items():
                 if self._selected_track == key:
                     sel = ">"
                 else:
                     sel = ""
-                print "{0:>4}{1:>4}{2:^50}{3:7}{4:^11}".format(sel,
+                print( "{0:>4}{1:>4}{2:^50}{3:7}{4:^11}".format(sel,
                                                                key,
                                                                value[0],
                                                                value[1].name(),
-                                                               len(value[2]))
-            print
+                                                               len(value[2])))
+            print()
         else:
-            print "Nothing here."
+            print("Nothing here.")
 
     ######################################################################################
     #### EVENTS ##########################################################################
@@ -560,7 +560,7 @@ class TimelineWidget(QtGui.QWidget):
                     self.repaint()
                     self._creating_event = False
                 else:
-                    print "Event auto creation aborted."
+                    print( "Event auto creation aborted.")
                     self._creating_event = False
 
     def mousePressEvent(self, event):

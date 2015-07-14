@@ -18,7 +18,7 @@ import pyforms.Utils.tools as tools
 try:
     import cv2
 except:
-    print "Warning: was not possible to import cv2 in ControlPlayer"
+    print("Warning: was not possible to import cv2 in ControlPlayer")
 from PyQt4.QtGui import QApplication
 
 from VideoGLWidget import VideoGLWidget
@@ -137,21 +137,17 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         """Slot for Play/Pause functionality."""
         if self.videoPlay.isChecked():
             timeout_interval = (1000 / self._videoFPS)
-            print "VIDEO PLAYING @", self._videoFPS, "FPS"
             self._timer.start(timeout_interval)
         else:
-            print "VIDEO STOPPED"
             self._timer.stop()
 
     def pausePlay(self):
         if not self.videoPlay.isChecked():
             self.videoPlay.setChecked(True)
             timeout_interval = (1000 / self._videoFPS)
-            print "VIDEO PLAYING @", self._videoFPS, "FPS"
             self._timer.start(timeout_interval)
         else:
             self.videoPlay.setChecked(False)
-            print "VIDEO STOPPED"
             self._timer.stop()
 
     def videoFPS_valueChanged(self):
@@ -159,7 +155,6 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         self._videoFPS = self.videoFPS.value()
         timeout_interval = (1000 / self._videoFPS)
         self._timer.setInterval(timeout_interval)
-        print "VIDEO PLAYING @", self._videoFPS, "FPS"
     
     def save(self, data):
         if self.value: data['value'] = self.value.captureFrom
