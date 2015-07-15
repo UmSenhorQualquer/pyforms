@@ -1,18 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-__author__ = "Ricardo Ribeiro"
-__credits__ = ["Ricardo Ribeiro"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
-__status__ = "Development"
-
+'''
+@author: Ricardo Ribeiro
+@credits: Ricardo Ribeiro
+@license: MIT
+@version: 0.0
+@maintainer: Ricardo Ribeiro
+@email: ricardojvr@gmail.com
+@status: Development
+@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
+'''
 
 from pyforms.Controls.ControlBase import ControlBase
 from datetime import datetime, timedelta
-from PyQt4 import uic, QtGui, QtCore
+from PyQt4 import QtGui, QtCore
 import time
 import subprocess
 import os
@@ -60,7 +61,7 @@ class BaseWidget(QtGui.QWidget):
         Generate the module Form
         """
         if not self._formLoaded:
-            if self._formset != None:
+            if self._formset is not None:
                 control = self.generatePanel(self._formset)
                 self.layout().addWidget(control)
             else:
@@ -143,7 +144,7 @@ class BaseWidget(QtGui.QWidget):
                     self._tabs.append(c)
                 else:
                     param = self.formControls.get(row, None)
-                    if param == None:
+                    if param is None:
                         label = QtGui.QLabel()
                         label.setSizePolicy(
                             QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
@@ -210,7 +211,7 @@ class BaseWidget(QtGui.QWidget):
                     self._tabs.append(c)
                 else:
                     param = self.formControls.get(row, None)
-                    if param == None:
+                    if param is None:
                         label = QtGui.QLabel()
                         label.setSizePolicy(
                             QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
@@ -332,13 +333,13 @@ class BaseWidget(QtGui.QWidget):
         self._progress.value = self._progress.max
 
     def executeCommand(self, cmd, cwd=None):
-        if cwd != None:
+        if cwd is not None:
             currentdirectory = os.getcwd()
             os.chdir(cwd)
         proc = subprocess.Popen(
             cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         (output, error) = proc.communicate()
-        if cwd != None:
+        if cwd is not None:
             os.chdir(currentdirectory)
         if error:
             print('Error: ' + error)
