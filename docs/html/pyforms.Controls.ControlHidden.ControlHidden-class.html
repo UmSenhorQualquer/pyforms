@@ -66,7 +66,7 @@
 <center>
 <center>  <map id="uml_class_diagram_for_pyforms__21" name="uml_class_diagram_for_pyforms__21">
 <area shape="rect" id="node1_18" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="99,179,331,199"/>
-<area shape="rect" id="node1_19" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#initControl" title="Load Control and initiate the events" alt="" coords="99,199,331,219"/>
+<area shape="rect" id="node1_19" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#initForm" title="Load Control and initiate the events" alt="" coords="99,199,331,219"/>
 <area shape="rect" id="node1_20" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#finishEditing" title="pyforms.Controls.ControlHidden.ControlHidden.finishEditing" alt="" coords="99,219,331,239"/>
 <area shape="rect" id="node1_21" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#changed" title="Function called when ever the Control value is changed" alt="" coords="99,239,331,259"/>
 <area shape="rect" id="node1_22" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#load" title="Load a value from the dict variable" alt="" coords="99,259,331,279"/>
@@ -74,17 +74,17 @@
 <area shape="rect" id="node1_24" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#show" title="Show the control" alt="" coords="99,299,331,319"/>
 <area shape="rect" id="node1_25" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#hide" title="Hide the control" alt="" coords="99,319,331,339"/>
 <area shape="rect" id="node1_26" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#enabled" title="pyforms.Controls.ControlHidden.ControlHidden.enabled" alt="" coords="99,339,331,359"/>
-<area shape="rect" id="node1_27" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#value" title="pyforms.Controls.ControlHidden.ControlHidden.value" alt="" coords="99,359,331,379"/>
-<area shape="rect" id="node1_28" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#label" title="pyforms.Controls.ControlHidden.ControlHidden.label" alt="" coords="99,379,331,399"/>
-<area shape="rect" id="node1_29" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#form" title="pyforms.Controls.ControlHidden.ControlHidden.form" alt="" coords="99,399,331,419"/>
-<area shape="rect" id="node1_30" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#parent" title="pyforms.Controls.ControlHidden.ControlHidden.parent" alt="" coords="99,419,331,439"/>
+<area shape="rect" id="node1_27" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#value" title="This property return and set what the control should manage or store." alt="" coords="99,359,331,379"/>
+<area shape="rect" id="node1_28" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#label" title="Label of the control, if applies" alt="" coords="99,379,331,399"/>
+<area shape="rect" id="node1_29" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#form" title="Returns the Widget of the control." alt="" coords="99,399,331,419"/>
+<area shape="rect" id="node1_30" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#parent" title="Returns or set the parent basewidget where the Control is" alt="" coords="99,419,331,439"/>
 <area shape="rect" id="node1_31" href="pyforms.Controls.ControlHidden.ControlHidden-class.html#minHeight" title="pyforms.Controls.ControlHidden.ControlHidden.minHeight" alt="" coords="99,459,331,479"/>
 <area shape="rect" id="node1" href="pyforms.Controls.ControlHidden.ControlHidden-class.html" title="pyforms.Controls.ControlHidden.ControlHidden" alt="" coords="87,145,343,485"/>
-<area shape="rect" id="node2_32" href="javascript:void(0);" title="repr(x)" alt="" coords="16,39,413,59"/>
-<area shape="rect" id="node2_33" href="javascript:void(0);" title="Add an option to the Control popup menu" alt="" coords="16,59,413,79"/>
-<area shape="rect" id="node2_34" href="javascript:void(0);" title="Add submenu options to the Control popup menu" alt="" coords="16,79,413,99"/>
-<area shape="rect" id="node2_35" href="javascript:void(0);" title="Function called before open the Control popup menu" alt="" coords="16,99,413,119"/>
-<area shape="rect" id="node2" href="javascript:void(0);" title="Implements a base control The control has a lineEdit widget" alt="" coords="4,5,425,125"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="Add an option to the Control popup menu" alt="" coords="16,39,413,59"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="Add submenu options to the Control popup menu" alt="" coords="16,59,413,79"/>
+<area shape="rect" id="node2_34" href="javascript:void(0);" title="Function called before open the Control popup menu" alt="" coords="16,79,413,99"/>
+<area shape="rect" id="node2_35" href="javascript:void(0);" title="This property return and set the name of the control" alt="" coords="16,99,413,119"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="This class represents the most basic control that can exist A Control is a Widget or a group of widgets that can be reused from application to application" alt="" coords="4,5,425,125"/>
 </map>
   <img src="uml_class_diagram_for_pyforms__21.gif" alt='' usemap="#uml_class_diagram_for_pyforms__21" ismap="ismap" class="graph-without-title" />
 </center>
@@ -132,10 +132,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#initControl" class="summary-sig-name">initControl</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#initForm" class="summary-sig-name">initForm</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Load Control and initiate the events</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.initControl">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.initForm">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -270,7 +270,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#value" class="summary-sig-name">value</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">value</span>)</span></td>
+        <span class="summary-sig-arg">value</span>)</span><br />
+      This property return and set what the control should manage or store.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.value">source&nbsp;code</a></span>
             
@@ -287,7 +288,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#label" class="summary-sig-name">label</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">value</span>)</span></td>
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Label of the control, if applies</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.label">source&nbsp;code</a></span>
             
@@ -303,7 +305,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#form" class="summary-sig-name">form</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#form" class="summary-sig-name">form</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the Widget of the control.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.form">source&nbsp;code</a></span>
             
@@ -320,7 +323,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="pyforms.Controls.ControlHidden.ControlHidden-class.html#parent" class="summary-sig-name">parent</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">value</span>)</span></td>
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Returns or set the parent basewidget where the Control is</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.parent">source&nbsp;code</a></span>
             
@@ -401,10 +405,10 @@
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b>:
-      <code>__repr__</code>,
       <code>aboutToShowContextMenuEvent</code>,
       <code>addPopupMenuOption</code>,
-      <code>addPopupSubMenuOption</code>
+      <code>addPopupSubMenuOption</code>,
+      <code>name</code>
       </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
@@ -414,6 +418,7 @@
       <code>__new__</code>,
       <code>__reduce__</code>,
       <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
       <code>__str__</code>,
@@ -530,24 +535,24 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="initControl"></a>
+<a name="initForm"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">initControl</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initForm</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.initControl">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pyforms.Controls.ControlHidden-pysrc.html#ControlHidden.initForm">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
   <p>Load Control and initiate the events</p>
   <dl class="fields">
     <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#initControl">ControlBase.ControlBase.initControl</a>
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#initForm">ControlBase.ControlBase.initForm</a>
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -701,6 +706,7 @@
     </ul></dd>
     <dt>Overrides:
         <a href="pyforms.Controls.ControlBase.ControlBase-class.html#enabled">ControlBase.ControlBase.enabled</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -720,7 +726,8 @@
     </td>
   </tr></table>
   
-  
+  <p>This property return and set what the control should manage or 
+  store.</p>
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
@@ -728,6 +735,7 @@
     </ul></dd>
     <dt>Overrides:
         <a href="pyforms.Controls.ControlBase.ControlBase-class.html#value">ControlBase.ControlBase.value</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -747,7 +755,7 @@
     </td>
   </tr></table>
   
-  
+  <p>Label of the control, if applies</p>
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
@@ -755,6 +763,7 @@
     </ul></dd>
     <dt>Overrides:
         <a href="pyforms.Controls.ControlBase.ControlBase-class.html#label">ControlBase.ControlBase.label</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -773,7 +782,8 @@
     </td>
   </tr></table>
   
-  
+  <p>Returns the Widget of the control. This property will be deprecated in
+  a future version.</p>
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
@@ -781,6 +791,7 @@
     </ul></dd>
     <dt>Overrides:
         <a href="pyforms.Controls.ControlBase.ControlBase-class.html#form">ControlBase.ControlBase.form</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -800,7 +811,7 @@
     </td>
   </tr></table>
   
-  
+  <p>Returns or set the parent basewidget where the Control is</p>
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
@@ -808,6 +819,7 @@
     </ul></dd>
     <dt>Overrides:
         <a href="pyforms.Controls.ControlBase.ControlBase-class.html#parent">ControlBase.ControlBase.parent</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -833,9 +845,6 @@
     <dd><ul class="nomargin-top">
         <li><code>@maxWidth.setter</code></li>
     </ul></dd>
-    <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#maxWidth">ControlBase.ControlBase.maxWidth</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -860,9 +869,6 @@
     <dd><ul class="nomargin-top">
         <li><code>@minWidth.setter</code></li>
     </ul></dd>
-    <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#minWidth">ControlBase.ControlBase.minWidth</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -887,9 +893,6 @@
     <dd><ul class="nomargin-top">
         <li><code>@maxHeight.setter</code></li>
     </ul></dd>
-    <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#maxHeight">ControlBase.ControlBase.maxHeight</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -914,9 +917,6 @@
     <dd><ul class="nomargin-top">
         <li><code>@minHeight.setter</code></li>
     </ul></dd>
-    <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#minHeight">ControlBase.ControlBase.minHeight</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -952,7 +952,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jul 11 12:07:46 2015
+    Generated by Epydoc 3.0.1 on Wed Jul 15 23:19:47 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

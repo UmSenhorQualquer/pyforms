@@ -16,7 +16,7 @@ from pyforms.Controls.ControlBase import ControlBase
 
 class ControlCheckBox(ControlBase):
 
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"checkbox.ui")
         self._form = uic.loadUi( control_path )
         self._form.checkBox.setText(self._label)

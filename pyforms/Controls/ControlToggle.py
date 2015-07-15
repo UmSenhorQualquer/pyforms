@@ -14,8 +14,8 @@ from pyforms.Controls.ControlButton import ControlButton
 
 class ControlToggle(ControlButton):
 
-    def initControl(self):
-        ControlToggle.initControl(self)
+    def initForm(self):
+        ControlToggle.initForm(self)
         self._form.pushButton.setCheckable(True)
 
     def uncheck(self): self._form.pushButton.setChecked(False)

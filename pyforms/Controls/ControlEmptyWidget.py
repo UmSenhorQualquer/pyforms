@@ -13,38 +13,57 @@ __status__      = "Development"
 import pyforms.Utils.tools as tools
 from PyQt4 import uic, QtGui
 from pyforms.Controls.ControlBase import ControlBase
+from pyforms.BaseWidget import BaseWidget
 
-class ControlEmptyWidget(ControlBase):
+class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
-    def initControl(self):
-        
-        self._form = QtGui.QWidget()
-        layout = QtGui.QVBoxLayout()
-        layout.setMargin(0)
-        self._form.setLayout( layout )
+	def __init__(self, label=''):
+		ControlBase.__init__(self, label)
+		QtGui.QWidget.__init__(self)
 
-    ############################################################################
-    ############ Properties ####################################################
-    ############################################################################
+		layout = QtGui.QVBoxLayout(); layout.setMargin(0)
+		self.form.setLayout( layout )
 
-    @property
-    def value(self): return ControlBase.value.fget(self)
+	def initForm(self):
+		pass
 
-    @value.setter
-    def value(self, value):
-        if isinstance( self._value, list ):
-            for w in self._value:
-                if w!=None and w!="": self._form.layout().removeWidget( w.form )
-        else:
-            if self._value!=None and self._value!="": self._form.layout().removeWidget( self._value.form )
+	############################################################################
+	############ Properties ####################################################
+	############################################################################
 
-        if isinstance( value, list ):
-            for w in value:
-                self._form.layout().addWidget( w.form )
-        else:
-            self._form.layout().addWidget( value.form )
+	@property
+	def value(self): return ControlBase.value.fget(self)
 
-        ControlBase.value.fset(self,value)
-        
-        
-    
+	@value.setter
+	def value(self, value):
+		ControlBase.value.fset(self, value)
+		
+		if isinstance( self._value, list ):
+			for w in self._value:
+				if w!=None and w!="": self.form.layout().removeWidget( w.form )
+		else:
+			if self._value!=None and self._value!="": self.form.layout().removeWidget( self._value.form )
+
+		if isinstance( value, list ):
+			for w in value:
+				self.form.layout().addWidget( w.form )
+		else:
+			self.form.layout().addWidget( value.form )
+
+		#The initForm should be called only for the BaseWidget
+		if isinstance(value, BaseWidget): value.initForm()
+		
+		
+	@property
+	def form(self): return self
+
+	def save(self, data): 
+		if self.value!='':
+			data['value'] = {}
+			self.value.save(data['value'])
+
+	def load(self, data):
+		if 'value' in data: self.value.load(data['value'])
+
+
+	

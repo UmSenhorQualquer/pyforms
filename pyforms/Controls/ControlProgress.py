@@ -26,7 +26,7 @@ class ControlProgress(ControlBase):
         
         ControlBase.__init__(self, label, defaultValue)
         
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"progressInput.ui")
         self._form = uic.loadUi( control_path )
         self._form.horizontalSlider.setMinimum(self._min)

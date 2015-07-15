@@ -2,37 +2,35 @@ from pyforms.Controls.ControlBase import ControlBase
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 
-class ControlTree(ControlBase):
+class ControlTree(ControlBase,QtGui.QTreeWidget):
 
-	def initControl(self):
-		self._form = QtGui.QTreeWidget()
+	def __init__(self, label='', default=''):
+		ControlBase.__init__(self,label, default)
+		QtGui.QTreeWidget.__init__(self)
 
-		view = self._form
-		view.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-		view.setUniformRowHeights(True)
-		view.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
-		view.setDragEnabled(True)
-		view.setAcceptDrops(True)
+
+	def initForm(self):
+		self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+		self.setUniformRowHeights(True)
+		self.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+		self.setDragEnabled(True)
+		self.setAcceptDrops(True)
 		
-		view.model().dataChanged.connect(self.__itemChangedEvent)
+		self.model().dataChanged.connect(self.__itemChangedEvent)
 		
-		view.selectionChanged = self.selectionChanged
+		self.selectionChanged = self.selectionChanged
 
-		self.showHeader = False
+		
 
 	@property
-	def showHeader(self): return self.form.header().isVisible()
+	def showHeader(self): return self.header().isVisible()
 	@showHeader.setter
 	def showHeader(self, value): 
-		if value: self.form.header().show()
-		else: self.form.header().hide()
+		if value: 
+			self.header().show()
+		else: 
+			self.header().hide()
 
-
-	@property
-	def model(self): return self._form.model()
-	@model.setter
-	def model(self, value): 
-		self.form.setModel(value)
 
 	def __itemChangedEvent(self, item): self.itemChangedEvent(item)
 
@@ -42,13 +40,13 @@ class ControlTree(ControlBase):
 	def itemSelectionChanged(self):pass
 
 	def selectionChanged(self, selected, deselected ):
-		super(QtGui.QTreeView, self._form).selectionChanged(selected, deselected)
+		super(QtGui.QTreeView, self).selectionChanged(selected, deselected)
 		self.itemSelectionChanged()
 
 	@property
 	def mouseSelectedRowsIndexes(self):
 		result = []
-		for index in self._form.selectedIndexes():
+		for index in self.selectedIndexes():
 			result.append( index.row() )
 		return list( set(result) )
 
@@ -61,7 +59,7 @@ class ControlTree(ControlBase):
 
 	@property
 	def selectedItem(self):
-		for index in self._form.selectedIndexes():
+		for index in self.selectedIndexes():
 			item = index.model().itemFromIndex(index)
 			return item
 		else:
@@ -70,9 +68,9 @@ class ControlTree(ControlBase):
 	@property
 	def cells(self): 
 		results = []
-		for row in range(self.model.rowCount()):
+		for row in range(self.model().rowCount()):
 			r = []
-			for col in range(self.model.columnCount()):
+			for col in range(self.model().columnCount()):
 				r.append( self.model.item(row, col) )
 				"""
 				try:
@@ -87,7 +85,7 @@ class ControlTree(ControlBase):
 
 	def __add__(self, other):
 		if isinstance(other, QtGui.QTreeWidgetItem):
-			self.model.invisibleRootItem().appendRow( other )
+			self.model().invisibleRootItem().appendRow( other )
 
 		elif isinstance(other, list):
 			for x in other:
@@ -98,7 +96,7 @@ class ControlTree(ControlBase):
 			item = QtGui.QTreeWidgetItem( other )
 			self.form.addTopLevelItem(item)
 
-		self._form.setFirstColumnSpanned(self.model.rowCount()-1, self._form.rootIndex(), True)
+		self.setFirstColumnSpanned(self.model().rowCount()-1, self.rootIndex(), True)
 		return self
 
 	def __sub__(self, other):
@@ -107,14 +105,16 @@ class ControlTree(ControlBase):
 				indexToRemove = self.mouseSelectedRowIndex
 			else:
 				indexToRemove = other
-			self.model.removeRow(indexToRemove)
+			self.model().removeRow(indexToRemove)
 		return self
 
-	
+	@property
+	def form(self): return self
+		
 
 	@property
 	def value(self):  
-		return self._form.model().invisibleRootItem()
+		return self.model().invisibleRootItem()
 		return self.recursivelyReadRoot(root)
 
 	@value.setter
@@ -122,4 +122,9 @@ class ControlTree(ControlBase):
 		for row in value: self += row
 
 
-	def getAllSceneObjects(self): return self.model.getChildrens()
+	def getAllSceneObjects(self): return self.model().getChildrens()
+
+
+
+	def save(self, data): pass
+	def load(self, data): pass

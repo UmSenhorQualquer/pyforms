@@ -27,7 +27,7 @@ class ControlList(ControlBase, QtGui.QWidget):
         
 
 
-    def initControl(self):
+    def initForm(self):
         plusFunction=self._plusFunction
         minusFunction=self._minusFunction
         

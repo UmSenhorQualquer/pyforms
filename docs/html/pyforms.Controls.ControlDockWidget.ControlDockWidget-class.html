@@ -51,6 +51,8 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
             >]&nbsp;|&nbsp;<a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html"
@@ -60,33 +62,36 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ControlDockWidget</h1><p class="nomargin-top"></p>
+<h1 class="epydoc">Class ControlDockWidget</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_pyforms__12" name="uml_class_diagram_for_pyforms__12">
-<area shape="rect" id="node1_20" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#label" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.label" alt="" coords="156,427,272,447"/>
-<area shape="rect" id="node1_21" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#value" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.value" alt="" coords="156,447,272,467"/>
-<area shape="rect" id="node1_22" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#initControl" title="Load Control and initiate the events" alt="" coords="156,469,272,489"/>
-<area shape="rect" id="node1" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html" title="pyforms.Controls.ControlDockWidget.ControlDockWidget" alt="" coords="143,401,283,495"/>
-<area shape="rect" id="node2_23" href="pyforms.Controls.ControlBase.ControlBase-class.html#enabled" title="pyforms.Controls.ControlBase.ControlBase.enabled" alt="" coords="16,32,413,52"/>
-<area shape="rect" id="node2_24" href="pyforms.Controls.ControlBase.ControlBase-class.html#form" title="pyforms.Controls.ControlBase.ControlBase.form" alt="" coords="16,52,413,72"/>
-<area shape="rect" id="node2_25" href="pyforms.Controls.ControlBase.ControlBase-class.html#parent" title="pyforms.Controls.ControlBase.ControlBase.parent" alt="" coords="16,72,413,92"/>
-<area shape="rect" id="node2_26" href="pyforms.Controls.ControlBase.ControlBase-class.html#maxWidth" title="pyforms.Controls.ControlBase.ControlBase.maxWidth" alt="" coords="16,92,413,112"/>
-<area shape="rect" id="node2_27" href="pyforms.Controls.ControlBase.ControlBase-class.html#minWidth" title="pyforms.Controls.ControlBase.ControlBase.minWidth" alt="" coords="16,112,413,132"/>
-<area shape="rect" id="node2_28" href="pyforms.Controls.ControlBase.ControlBase-class.html#maxHeight" title="pyforms.Controls.ControlBase.ControlBase.maxHeight" alt="" coords="16,132,413,152"/>
-<area shape="rect" id="node2_29" href="pyforms.Controls.ControlBase.ControlBase-class.html#minHeight" title="pyforms.Controls.ControlBase.ControlBase.minHeight" alt="" coords="16,152,413,172"/>
-<area shape="rect" id="node2_30" href="pyforms.Controls.ControlBase.ControlBase-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="16,175,413,195"/>
-<area shape="rect" id="node2_31" href="pyforms.Controls.ControlBase.ControlBase-class.html#__repr__" title="repr(x)" alt="" coords="16,195,413,215"/>
-<area shape="rect" id="node2_32" href="pyforms.Controls.ControlBase.ControlBase-class.html#load" title="Load a value from the dict variable" alt="" coords="16,215,413,235"/>
-<area shape="rect" id="node2_33" href="pyforms.Controls.ControlBase.ControlBase-class.html#save" title="Save a value to dict variable" alt="" coords="16,235,413,255"/>
-<area shape="rect" id="node2_34" href="pyforms.Controls.ControlBase.ControlBase-class.html#show" title="Show the control" alt="" coords="16,255,413,275"/>
-<area shape="rect" id="node2_35" href="pyforms.Controls.ControlBase.ControlBase-class.html#hide" title="Hide the control" alt="" coords="16,275,413,295"/>
-<area shape="rect" id="node2_36" href="pyforms.Controls.ControlBase.ControlBase-class.html#addPopupMenuOption" title="Add an option to the Control popup menu" alt="" coords="16,295,413,315"/>
-<area shape="rect" id="node2_37" href="pyforms.Controls.ControlBase.ControlBase-class.html#addPopupSubMenuOption" title="Add submenu options to the Control popup menu" alt="" coords="16,315,413,335"/>
-<area shape="rect" id="node2_38" href="pyforms.Controls.ControlBase.ControlBase-class.html#changed" title="Function called when ever the Control value is changed" alt="" coords="16,335,413,355"/>
-<area shape="rect" id="node2_39" href="pyforms.Controls.ControlBase.ControlBase-class.html#aboutToShowContextMenuEvent" title="Function called before open the Control popup menu" alt="" coords="16,355,413,375"/>
-<area shape="rect" id="node2" href="pyforms.Controls.ControlBase.ControlBase-class.html" title="Implements a base control The control has a lineEdit widget" alt="" coords="4,6,425,381"/>
+<center>  <map id="uml_class_diagram_for_pyforms__11" name="uml_class_diagram_for_pyforms__11">
+<area shape="rect" id="node1_21" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#SIDE_LEFT" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.SIDE_LEFT" alt="" coords="144,392,339,412"/>
+<area shape="rect" id="node1_22" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#SIDE_RIGHT" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.SIDE_RIGHT" alt="" coords="144,412,339,432"/>
+<area shape="rect" id="node1_23" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#SIDE_TOP" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.SIDE_TOP" alt="" coords="144,432,339,452"/>
+<area shape="rect" id="node1_24" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#SIDE_BOTTOM" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.SIDE_BOTTOM" alt="" coords="144,452,339,472"/>
+<area shape="rect" id="node1_25" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#SIDE_DETACHED" title="pyforms.Controls.ControlDockWidget.ControlDockWidget.SIDE_DETACHED" alt="" coords="144,472,339,492"/>
+<area shape="rect" id="node1_26" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="144,495,339,515"/>
+<area shape="rect" id="node1_27" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#label" title="Label of the control, if applies" alt="" coords="144,515,339,535"/>
+<area shape="rect" id="node1_28" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#save" title="Save a value to dict variable" alt="" coords="144,535,339,555"/>
+<area shape="rect" id="node1_29" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#load" title="Load a value from the dict variable" alt="" coords="144,555,339,575"/>
+<area shape="rect" id="node1" href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html" title="pyforms.Controls.ControlDockWidget.ControlDockWidget" alt="" coords="132,366,351,581"/>
+<area shape="rect" id="node2_30" href="javascript:void(0);" title="Load Control and initiate the events" alt="" coords="117,280,365,300"/>
+<area shape="rect" id="node2_31" href="javascript:void(0);" title="This property return and set what the control should manage or store." alt="" coords="117,300,365,320"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="Returns the Widget of the control." alt="" coords="117,320,365,340"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="pyforms.Controls.ControlEmptyWidget.ControlEmptyWidget" alt="" coords="105,246,377,346"/>
+<area shape="rect" id="node3" href="javascript:void(0);" title="PyQt4.QtGui.QWidget" alt="" coords="5,93,161,139"/>
+<area shape="rect" id="node4_33" href="javascript:void(0);" title="Show the control" alt="" coords="201,40,599,60"/>
+<area shape="rect" id="node4_34" href="javascript:void(0);" title="Hide the control" alt="" coords="201,60,599,80"/>
+<area shape="rect" id="node4_35" href="javascript:void(0);" title="Add an option to the Control popup menu" alt="" coords="201,80,599,100"/>
+<area shape="rect" id="node4_36" href="javascript:void(0);" title="Add submenu options to the Control popup menu" alt="" coords="201,100,599,120"/>
+<area shape="rect" id="node4_37" href="javascript:void(0);" title="Function called when ever the Control value is changed" alt="" coords="201,120,599,140"/>
+<area shape="rect" id="node4_38" href="javascript:void(0);" title="Function called before open the Control popup menu" alt="" coords="201,140,599,160"/>
+<area shape="rect" id="node4_39" href="javascript:void(0);" title="pyforms.Controls.ControlBase.ControlBase.enabled" alt="" coords="201,160,599,180"/>
+<area shape="rect" id="node4_40" href="javascript:void(0);" title="This property return and set the name of the control" alt="" coords="201,180,599,200"/>
+<area shape="rect" id="node4_41" href="javascript:void(0);" title="Returns or set the parent basewidget where the Control is" alt="" coords="201,200,599,220"/>
+<area shape="rect" id="node4" href="javascript:void(0);" title="This class represents the most basic control that can exist A Control is a Widget or a group of widgets that can be reused from application to application" alt="" coords="189,6,611,226"/>
 </map>
-  <img src="uml_class_diagram_for_pyforms__12.gif" alt='' usemap="#uml_class_diagram_for_pyforms__12" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_pyforms__11.gif" alt='' usemap="#uml_class_diagram_for_pyforms__11" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -95,8 +100,17 @@
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
-  <td align="left" colspan="2" class="table-header">
-    <span class="table-header">Instance Methods</span></td>
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
@@ -104,10 +118,66 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#initControl" class="summary-sig-name">initControl</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Load Control and initiate the events</td>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">side</span>=<span class="summary-sig-default">'left'</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
           <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.__init__">source&nbsp;code</a></span>
             
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#label" class="summary-sig-name">label</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Label of the control, if applies</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.label">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#save" class="summary-sig-name">save</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Save a value to dict variable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.save">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#load" class="summary-sig-name">load</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Load a value from the dict variable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.load">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -117,17 +187,21 @@
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html">ControlBase.ControlBase</a></code></b>:
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#__init__">__init__</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#__repr__">__repr__</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#aboutToShowContextMenuEvent">aboutToShowContextMenuEvent</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#addPopupMenuOption">addPopupMenuOption</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#addPopupSubMenuOption">addPopupSubMenuOption</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#changed">changed</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#hide">hide</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#load">load</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#save">save</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#show">show</a></code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlEmptyWidget.ControlEmptyWidget</code></b>:
+      <code>form</code>,
+      <code>initForm</code>,
+      <code>value</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b>:
+      <code>aboutToShowContextMenuEvent</code>,
+      <code>addPopupMenuOption</code>,
+      <code>addPopupSubMenuOption</code>,
+      <code>changed</code>,
+      <code>enabled</code>,
+      <code>hide</code>,
+      <code>name</code>,
+      <code>parent</code>,
+      <code>show</code>
       </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
@@ -137,6 +211,7 @@
       <code>__new__</code>,
       <code>__reduce__</code>,
       <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
       <code>__str__</code>,
@@ -145,39 +220,78 @@
     </td>
   </tr>
 </table>
-<!-- ==================== PROPERTIES ==================== -->
-<a name="section-Properties"></a>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
-  <td align="left" colspan="2" class="table-header">
-    <span class="table-header">Properties</span></td>
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#label" class="summary-name">label</a>
+        <a name="SIDE_LEFT"></a><span class="summary-name">SIDE_LEFT</span> = <code title="'left'">'left'</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyforms.Controls.ControlDockWidget.ControlDockWidget-class.html#value" class="summary-name">value</a>
+        <a name="SIDE_RIGHT"></a><span class="summary-name">SIDE_RIGHT</span> = <code title="'right'">'right'</code>
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SIDE_TOP"></a><span class="summary-name">SIDE_TOP</span> = <code title="'top'">'top'</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SIDE_BOTTOM"></a><span class="summary-name">SIDE_BOTTOM</span> = <code title="'bottom'">'bottom'</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SIDE_DETACHED"></a><span class="summary-name">SIDE_DETACHED</span> = <code title="'detached'">'detached'</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html">ControlBase.ControlBase</a></code></b>:
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#enabled">enabled</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#form">form</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#maxHeight">maxHeight</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#maxWidth">maxWidth</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#minHeight">minHeight</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#minWidth">minWidth</a></code>,
-      <code><a href="pyforms.Controls.ControlBase.ControlBase-class.html#parent">parent</a></code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__class__</code>
       </p>
@@ -189,76 +303,126 @@
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
-  <td align="left" colspan="2" class="table-header">
-    <span class="table-header">Method Details</span></td>
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
 </tr>
 </table>
-<a name="initControl"></a>
+<a name="__init__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">initControl</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">label</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">side</span>=<span class="sig-default">'left'</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    >&nbsp;
+    ><span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Load Control and initiate the events</p>
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
   <dl class="fields">
     <dt>Overrides:
-        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#initControl">ControlBase.ControlBase.initControl</a>
+        object.__init__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
 </div>
-<br />
-<!-- ==================== PROPERTY DETAILS ==================== -->
-<a name="section-PropertyDetails"></a>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td align="left" colspan="2" class="table-header">
-    <span class="table-header">Property Details</span></td>
-</tr>
-</table>
 <a name="label"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">label</h3>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">label</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.label">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
   
+  <p>Label of the control, if applies</p>
   <dl class="fields">
-    <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.label(<span class="summary-sig-arg">self</span>)</span>
-    </dd>
-    <dt>Set Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.label(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">value</span>)</span>
-    </dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@label.setter</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#label">ControlBase.ControlBase.label</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="value"></a>
+<a name="save"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">value</h3>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">save</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.save">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
   
+  <p>Save a value to dict variable</p>
   <dl class="fields">
-    <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.value(<span class="summary-sig-arg">self</span>)</span>
-    </dd>
-    <dt>Set Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.value(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">value</span>)</span>
-    </dd>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> - dictionary with to where the value of the Control will be added</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#save">ControlBase.ControlBase.save</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="load"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.Controls.ControlDockWidget-pysrc.html#ControlDockWidget.load">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load a value from the dict variable</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> - dictionary with the value of the Control</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.Controls.ControlBase.ControlBase-class.html#load">ControlBase.ControlBase.load</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -294,7 +458,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jul 10 11:38:10 2015
+    Generated by Epydoc 3.0.1 on Wed Jul 15 23:19:47 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
