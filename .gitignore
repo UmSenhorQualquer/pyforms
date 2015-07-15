@@ -55,3 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
+.project
+.pydevproject
+.settings/org.eclipse.core.resources.prefs
