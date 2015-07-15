@@ -48,7 +48,7 @@ class TimelineChart(object):
 
 	def draw(self,  painter, left, right, top, bottom):
 		painter.setPen(self._color)
-		painter.setOpacity(0.5)
+		painter.setOpacity(0.7)
 		
 		maxHeight 	= (bottom-top)
 		start 		= self._widget.x2frame(left)
@@ -56,7 +56,7 @@ class TimelineChart(object):
 		end   		= len(self._data) if end>len(self._data) else end
 
 		diff = self._graphMax - self._graphMin
-
+		if diff<=0: diff=1
 		
 
 		yMiddle = self._graphMin+diff/2

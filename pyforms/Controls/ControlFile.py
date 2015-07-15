@@ -23,7 +23,7 @@ class ControlFile(ControlText):
         self._form.label.setText(self._label)
 
     def pushButton_clicked(self):
-        value = str(QtGui.QFileDialog.getOpenFileName(self._form, 'Choose a file', self.value, options=QtGui.QFileDialog.DontUseNativeDialog))
+        value = str(QtGui.QFileDialog.getOpenFileName(self._form, 'Choose a file', self.value))
         if value: self.value = value
 
     @property

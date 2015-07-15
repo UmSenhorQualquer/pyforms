@@ -72,7 +72,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         self._currentFrame = None
         self._draw_on_video = True  # Controls if anything is drawn on the video
         self._videoFPS = None  # Sets the FPS rate at which the video is played
-        
+
 
 
     @property
@@ -172,16 +172,19 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
                 self._videoWidget.paint( [frame] )
 
 
-    def convertFrameToTime(self, frame):
-        currentMilliseconds = (frame / self.fps ) * 1000
-        totalseconds = int(currentMilliseconds/1000)
+    def convertFrameToTime(self, totalMilliseconds):
+        #totalMilliseconds = totalMilliseconds*(1000.0/self._value.get(cv2.cv.CV_CAP_PROP_FPS))
+
+        totalseconds = int(totalMilliseconds/1000)
         minutes = int(totalseconds / 60)
         seconds = totalseconds - (minutes*60)
-        milliseconds = currentMilliseconds - (totalseconds*1000)
+        milliseconds = totalMilliseconds - (totalseconds*1000)
         return ( minutes, seconds, milliseconds )
 
     def videoProgress_valueChanged(self):
-        ( minutes, seconds, milliseconds ) = self.convertFrameToTime( self.videoProgress.value() )
+        milli = self._value.get(cv2.cv.CV_CAP_PROP_POS_MSEC)
+        milli -= 1000.0/self._value.get(cv2.cv.CV_CAP_PROP_FPS)
+        ( minutes, seconds, milliseconds ) = self.convertFrameToTime( milli )
         self.videoTime.setText( "%02d:%02d:%03d" % ( minutes, seconds, milliseconds ) )
 
     _updateVideoFrame = True
@@ -230,6 +233,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         elif isinstance(value, str) and value:
             self._value = cv2.VideoCapture(value)
             self.fps = self._value.get(cv2.cv.CV_CAP_PROP_FPS)
+            print("Open video with",self._value.get(cv2.cv.CV_CAP_PROP_FPS), 'fps')
         else:
             self._value = None
 
