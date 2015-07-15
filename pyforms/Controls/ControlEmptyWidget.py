@@ -37,15 +37,16 @@ class ControlEmptyWidget(ControlBase):
         if isinstance(self._value, list):
             for w in self._value:
                 if w is not None and w != "":
-                    self._form.layout().removeWidget(w._form)
+                    self._form.layout().removeWidget(w.form)
         else:
             if self._value is not None and self._value != "":
-                self._form.layout().removeWidget(self._value._form)
+                self._form.layout().removeWidget(self._value.form)
 
         if isinstance(value, list):
             for w in value:
-                self._form.layout().addWidget(w._form)
+
+                self._form.layout().addWidget(w.form)
         else:
-            self._form.layout().addWidget(value._form)
+            self._form.layout().addWidget(value.form)
 
         ControlBase.value.fset(self, value)
