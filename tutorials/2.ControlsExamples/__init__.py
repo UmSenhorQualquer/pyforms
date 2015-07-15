@@ -24,6 +24,7 @@ from pyforms.Controls.ControlFilesTree 		import ControlFilesTree
 from pyforms.Controls.ControlImage 			import ControlImage
 from pyforms.Controls.ControlList 			import ControlList
 from pyforms.Controls.ControlPlayer.ControlPlayer 		import ControlPlayer
+from pyforms.Controls.ControlTree 		import ControlTree
 from pyforms.Controls.ControlProgress 		import ControlProgress
 from pyforms.Controls.ControlSlider 		import ControlSlider
 from pyforms.Controls.ControlVisVis 		import ControlVisVis

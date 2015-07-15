@@ -9,39 +9,30 @@ class ControlTree(ControlBase):
 
 		view = self._form
 		view.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-		view.header().hide()
 		view.setUniformRowHeights(True)
 		view.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
 		view.setDragEnabled(True)
 		view.setAcceptDrops(True)
 		
-		#view.setModel(QtGui.QStandardItemModel())
-		
 		view.model().dataChanged.connect(self.__itemChangedEvent)
 		
 		view.selectionChanged = self.selectionChanged
 
-		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		# populate data
-		"""
-		for i in range(3):
-			parent1 = QtGui.QStandardItem('Family {}. Some long status text for sp'.format(i))
-			for j in range(3):
-				child1 = QtGui.QStandardItem('Child {}'.format(i*3+j))
-				parent1.appendRow(child1)
-			model.appendRow(parent1)
-			# span container columns
-			view.setFirstColumnSpanned(i, view.rootIndex(), True)
-		"""
+		self.showHeader = False
 
+	@property
+	def showHeader(self): return self.form.header().isVisible()
+	@showHeader.setter
+	def showHeader(self, value): 
+		if value: self.form.header().show()
+		else: self.form.header().hide()
 
 
 	@property
 	def model(self): return self._form.model()
 	@model.setter
 	def model(self, value): 
-		self._model = value
-		self._form.setModel(value)
+		self.form.setModel(value)
 
 	def __itemChangedEvent(self, item): self.itemChangedEvent(item)
 
@@ -79,10 +70,10 @@ class ControlTree(ControlBase):
 	@property
 	def cells(self): 
 		results = []
-		for row in range(self._model.rowCount()):
+		for row in range(self.model.rowCount()):
 			r = []
-			for col in range(self._model.columnCount()):
-				r.append( self._model.item(row, col) )
+			for col in range(self.model.columnCount()):
+				r.append( self.model.item(row, col) )
 				"""
 				try:
 					r.append( self._model.item(col, row) )
@@ -95,18 +86,19 @@ class ControlTree(ControlBase):
 
 
 	def __add__(self, other):
-		if isinstance(other, TreeItem):
-			self._model.invisibleRootItem().appendRow( other )
+		if isinstance(other, QtGui.QTreeWidgetItem):
+			self.model.invisibleRootItem().appendRow( other )
 
 		elif isinstance(other, list):
 			for x in other:
-				item = QtGui.QStandardItem( x )
-				self._model.appendRow( item )
+				print x
+				item = QtGui.QTreeWidgetItem( x )
+				self.form.addTopLevelItem(item)
 		else:
-			item = QtGui.QStandardItem( other )
-			self._model.appendRow( item )
+			item = QtGui.QTreeWidgetItem( other )
+			self.form.addTopLevelItem(item)
 
-		self._form.setFirstColumnSpanned(self._model.rowCount()-1, self._form.rootIndex(), True)
+		self._form.setFirstColumnSpanned(self.model.rowCount()-1, self._form.rootIndex(), True)
 		return self
 
 	def __sub__(self, other):
@@ -130,4 +122,4 @@ class ControlTree(ControlBase):
 		for row in value: self += row
 
 
-	def getAllSceneObjects(self): return self._model.getChildrens()
+	def getAllSceneObjects(self): return self.model.getChildrens()
