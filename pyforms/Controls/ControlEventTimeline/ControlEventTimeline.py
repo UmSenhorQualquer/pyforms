@@ -219,17 +219,22 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         filename = QtGui.QFileDialog.getOpenFileName(parent=self,
                                                      caption="Import annotations file",
                                                      directory="",
-                                                     filter="*.csv",
-                                                     options=QtGui.QFileDialog.DontUseNativeDialog)
+                                                     filter="*.csv")
         if filename=='': return
+        separator = ','
 
-        with open(filename, 'rb') as csvfile:
-            csvfile = csv.reader(csvfile, dialect='excel')
+        with open(filename, 'rU') as csvfile:
+            line = csvfile.readline()
+            if ";" in line: separator = ';'
+
+
+        with open(filename, 'rU') as csvfile:
+            csvfile = csv.reader(csvfile, delimiter=separator)
             row = next(csvfile)
 
         if len(row)==2:
-            with open(filename, 'rb') as csvfile:
-                csvfile = csv.reader(csvfile, dialect='excel')
+            with open(filename, 'rU') as csvfile:
+                csvfile = csv.reader(csvfile, delimiter=separator)
                 self._time.importchart_csv(csvfile)
         else:
             #FIXME Get directory from where the video was loaded
@@ -248,8 +253,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
                                                    QtGui.QMessageBox.No)
                 if reply != QtGui.QMessageBox.Yes: return
 
-            with open(filename, 'rb') as csvfile:
-                csvfile = csv.reader(csvfile, dialect='excel')
+            with open(filename, 'rU') as csvfile:
+                csvfile = csv.reader(csvfile, delimiter=separator)
                 self._time.import_csv(csvfile)
             print("Annotations file imported: {:s}".format(filename))
 

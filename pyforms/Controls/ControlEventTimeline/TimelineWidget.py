@@ -39,7 +39,7 @@ class TimelineWidget(QtGui.QWidget):
         self.setPalette(palette)
 
         self._chartsColors = [ 
-            QtGui.QColor(255,0,0), QtGui.QColor(0,255,0), 
+            QtGui.QColor(255,0,0), QtGui.QColor(0,100,0), 
             QtGui.QColor(0,0,255), QtGui.QColor(100,100,0), 
             QtGui.QColor(100,0,100), QtGui.QColor(0,100,100)
         ]
