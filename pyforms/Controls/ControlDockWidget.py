@@ -1,29 +1,34 @@
 import pyforms.Utils.tools as tools
 from PyQt4 import uic, QtGui,QtCore
-from pyforms.Controls.ControlBase import ControlBase
+from pyforms.Controls.ControlEmptyWidget import ControlEmptyWidget
 
-class ControlDockWidget(ControlBase):
+class ControlDockWidget(ControlEmptyWidget):
 
-    def initControl(self):
-        self._form = QtGui.QDockWidget()
-        self._form.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
-        self._form.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-        self.form.layout().setMargin(0)
-    ############################################################################
+	SIDE_LEFT 		= 'left'
+	SIDE_RIGHT 		= 'right'
+	SIDE_TOP 		= 'top'
+	SIDE_BOTTOM 	= 'bottom'
+	SIDE_DETACHED 	= 'detached'
+
+	def __init__(self, label='', side='left'):
+		super(ControlDockWidget, self).__init__(label)
+		self.side = side
+
+	@property
+	def label(self): return self._label
+
+	@label.setter
+	def label(self, value): 
+		self._label = value
+		self.dock.setWindowTitle(value)
 
 
-    @property
-    def label(self): return self._form.windowTitle()
+	def save(self, data):
+		data['side']=self.side
+		super(ControlDockWidget, self).save(data)
 
-    @label.setter
-    def label(self, value): ControlBase.label.fset(self, value); self._form.setWindowTitle(value)
+	def load(self, data):
+		self.side = data['side']
+		print data
+		super(ControlDockWidget, self).load(data)
 
-    ############################################################################
-    
-    @property
-    def value(self): return ControlBase.value.fget(self)
-
-    @value.setter
-    def value(self, value): 
-        ControlBase.label.fset(self, value);
-        self._form.setWidget(value.form)

@@ -15,7 +15,7 @@ import pyforms.Utils.tools as tools
 
 class ControlMdiArea(ControlBase):
 
-    def initControl(self):
+    def initForm(self):
         self._form = QtGui.QMdiArea()
         
     ############################################################################

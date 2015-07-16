@@ -1,0 +1,1 @@
+{"_projectTree": {"side": "detached", "value": {"_projectTree": {}, "_addButton": {}}}, "_mdiArea": {}, "_details": {"side": "right"}}

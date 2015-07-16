@@ -30,7 +30,7 @@ class TimelineWidget(QtGui.QWidget):
         # self.setFocusPolicy(QtCore.Qt.StrongFocus)
         #self.grabKeyboard()
         self.setMouseTracking(True)
-        self.setMinimumWidth(30)
+        self.setMinimumWidth(300000)
         # self.setMinimumHeight(30)
 
         # Timeline background color

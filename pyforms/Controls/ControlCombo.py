@@ -18,7 +18,7 @@ class ControlCombo(ControlBase):
 
     _items = None
 
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"comboInput.ui")
         self._form = uic.loadUi( control_path )
         self._form.label.setText(self._label)

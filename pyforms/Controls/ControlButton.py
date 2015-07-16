@@ -16,7 +16,7 @@ from pyforms.Controls.ControlBase import ControlBase
 
 class ControlButton(ControlBase):
 
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"button.ui")
         self._form = uic.loadUi( control_path )
         self._form.pushButton.setText(self._label)

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bifn/python
 # -*- coding: utf-8 -*-
 '''
 @author: Ricardo Ribeiro
@@ -17,15 +17,14 @@ from PyQt4 import QtGui, QtCore
 import time
 import subprocess
 import os
-import pickle
+import json
 
 
 class BaseWidget(QtGui.QWidget):
-
-    _formset = None
-    _splitters = None
-    _tabs = None
-
+    """
+    The class implements the most basic widget or window. 
+    """
+    
     def __init__(self, title):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
@@ -66,8 +65,9 @@ class BaseWidget(QtGui.QWidget):
                 self.layout().addWidget(control)
             else:
                 allparams = self.formControls
-                for param in allparams.values():
+                for key, param in allparams.items():
                     param.parent = self
+                    param.name = key
                     self.layout().addWidget(param.form)
             self._formLoaded = True
 
@@ -194,6 +194,7 @@ class BaseWidget(QtGui.QWidget):
                         layout.addWidget(label)
                     else:
                         param.parent = self
+                        param.name = row
                         layout.addWidget(param.form)
         elif type(formset) is list:
             layout = QtGui.QVBoxLayout()
@@ -262,6 +263,7 @@ class BaseWidget(QtGui.QWidget):
                         layout.addWidget(label)
                     else:
                         param.parent = self
+                        param.name = row
                         layout.addWidget(param.form)
         layout.setMargin(0)
         control.setLayout(layout)
@@ -366,27 +368,41 @@ class BaseWidget(QtGui.QWidget):
     @docks.setter
     def docks(self, value): self._docks = value
 
-    def saveWindow(self, saver):
+
+    def save(self, data):
         allparams = self.formControls
-        data = {}
         for name, param in allparams.items():
             data[name] = {}
             param.save(data[name])
 
+
+    def saveWindow(self):
+        allparams = self.formControls
+        data = {}
+        self.save(data)
+
         filename = QtGui.QFileDialog.getSaveFileName(self, 'Select file')
-        output = open(filename, 'wb')
-        pickle.dump(data, output)
+        output = open(str(filename), 'wb')
+        json.dump(data, output)
         output.close()
 
-    def loadWindow(self):
-        filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
+    def loadWindowData(self, filename):
         pkl_file = open(filename, 'rb')
-        project_data = pickle.load(pkl_file)
+
+        project_data = json.load(pkl_file)
         pkl_file.close()
         data = dict(project_data)
 
+        self.load(data)
+        
+    def load(self, data):
         allparams = self.formControls
         for name, param in allparams.items():
-            if name in loader:
+            if name in data:
                 param.load(data[name])
         self.initForm()
+
+
+    def loadWindow(self):
+        filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
+        self.loadWindowData(str(filename) )

@@ -32,7 +32,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
     def __init__(self, *args):
         super(ControlPlayer,self).__init__(*args)
 
-    def initControl(self):
+    def initForm(self):
         #Get the current path of the file
         rootPath = os.path.dirname(__file__)
         

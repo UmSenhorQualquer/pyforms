@@ -16,8 +16,8 @@ from pyforms.Controls.ControlBase import ControlBase
 
 class ControlText(ControlBase):
 
-    def initControl(self):
-        super(ControlText, self).initControl()
+    def initForm(self):
+        super(ControlText, self).initForm()
         self.form.lineEdit.editingFinished.connect( self.finishEditing )
 
 

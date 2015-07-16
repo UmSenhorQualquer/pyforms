@@ -16,7 +16,7 @@ from pyforms.Controls.ControlBase import ControlBase
 
 class ControlCheckBoxList(ControlBase):
 
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"tree.ui")
         self._form = uic.loadUi( control_path )
 

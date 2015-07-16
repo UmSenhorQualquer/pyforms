@@ -17,7 +17,7 @@ from PyQt4 import QtGui
 
 class ControlFile(ControlText):
 
-    def initControl(self):
+    def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__,"fileInput.ui")
         self._form = uic.loadUi( control_path )
         self._form.label.setText(self._label)

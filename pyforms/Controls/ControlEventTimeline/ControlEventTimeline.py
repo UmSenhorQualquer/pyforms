@@ -48,7 +48,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Clean", {'Current line': self.__cleanLine, 'Everything': self.__clean, 'Charts': self.__cleanCharts })
 
-    def initControl(self):
+    def initForm(self):
         #Get the current path of the file
         rootPath = os.path.dirname(__file__)
 

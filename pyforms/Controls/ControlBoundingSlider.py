@@ -247,7 +247,7 @@ class ControlBoundingSlider(ControlBase):
         self._horizontal = horizontal
         ControlBase.__init__(self, label, defaultValue, **kwargs)
         
-    def initControl(self):
+    def initForm(self):
         if self._horizontal: self._form = GaugeWidgetHorizontal()
         else: self._form = GaugeWidgetVertical()
 

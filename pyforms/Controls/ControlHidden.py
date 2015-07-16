@@ -28,9 +28,9 @@ class ControlHidden(ControlBase):
         self._value = defaultValue
         self._parent = 1
         self._label = label
-        self.initControl()
+        self.initForm()
 
-    def initControl(self): pass
+    def initForm(self): pass
 
     def finishEditing(self):
         self.changed()

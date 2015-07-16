@@ -16,8 +16,10 @@ import pyforms.Utils.tools as tools
 
 class ControlBase(object):
 	"""
-	Implements a base control
-	The control has a lineEdit widget
+	This class represents the most basic control that can exist
+	A Control is a Widget or a group of widgets that can be reused from application to application
+
+	@undocumented: __repr__
 	"""
 
 	def __init__(self, label='', defaultValue=''):
@@ -29,11 +31,11 @@ class ControlBase(object):
 		self._label     	= label #Label
 		self._popupMenu 	= None
 
-		self.initControl()
+		self.initForm()
 
 		
 
-	def initControl(self):
+	def initForm(self):
 		"""
 		Load Control and initiate the events
 		"""
@@ -172,10 +174,13 @@ class ControlBase(object):
 	# Set the Control enabled or disabled
 
 	@property
-	def enabled(self): return self.form.isEnabled()
+	def enabled(self): 
+		return self.form.isEnabled()
 
 	@enabled.setter
-	def enabled(self, value): self.form.setEnabled(value)
+	def enabled(self, value): 
+		"""@type  value: boolean"""
+		self.form.setEnabled(value)
 
 	############################################################################
 	# Return or update the value of the Control
@@ -185,9 +190,25 @@ class ControlBase(object):
 
 	@value.setter
 	def value(self, value):
+		"""
+		This property return and set what the control should manage or store.
+		@type  value: string
+		"""
 		oldvalue = self._value
 		self._value = value
 		if oldvalue!=value:  self.changed()
+
+
+	@property
+	def name(self): return self.form.objectName()
+
+	@value.setter
+	def name(self, value):
+		"""
+		This property return and set the name of the control
+		@type  value: string
+		"""
+		self.form.setObjectName(value)
 
 	############################################################################
 	# Return or update the label of the Control 
@@ -196,13 +217,23 @@ class ControlBase(object):
 	def label(self): return self._label
 
 	@label.setter
-	def label(self, value): self._label = value
+	def label(self, value): 
+		"""
+		Label of the control, if applies
+		@type  value: string
+		"""
+		self._label = value
 
 	############################################################################
 	# Return the QT widget
 
 	@property
-	def form(self): return self._form
+	def form(self): 
+		"""
+		Returns the Widget of the control. 
+		This property will be deprecated in a future version.
+		"""
+		return self._form
 
 	############################################################################
 	# Parent window
@@ -211,40 +242,12 @@ class ControlBase(object):
 	def parent(self): return self._parent
 
 	@parent.setter
-	def parent(self, value): self._parent = value
+	def parent(self, value):
+		"""
+		Returns or set the parent basewidget where the Control is
+		@type  value: BaseWidget
+		"""
+		self._parent = value
 
-	############################################################################
-	# Return or define the max Width
 
-	@property
-	def maxWidth(self): return self.form.maximumWidth()
 
-	@maxWidth.setter
-	def maxWidth(self, value): self.form.setMaximumWidth(value)
-
-	############################################################################
-	# Return or define the min Width
-
-	@property
-	def minWidth(self): return self.form.minimumWidth()
-
-	@minWidth.setter
-	def minWidth(self, value): self.form.setMinimumWidth(value)
-
-	############################################################################
-	# Return or define the max Height
-
-	@property
-	def maxHeight(self): return self.form.MaximumHeight()
-
-	@maxHeight.setter
-	def maxHeight(self, value): self.form.setMaximumHeight(value)
-
-	############################################################################
-	# Return or define the min Height
-
-	@property
-	def minHeight(self): return self.form.minimumHeight()
-
-	@minHeight.setter
-	def minHeight(self, value): self.form.setMinimumHeight(value)

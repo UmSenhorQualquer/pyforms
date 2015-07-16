@@ -20,7 +20,7 @@ import numpy as np
 
 class ControlVisVisVolume(ControlBase):
 
-    def initControl(self):
+    def initForm(self):
         self._form = QtGui.QWidget();layout = QtGui.QVBoxLayout();layout.setMargin(0);self._form.setLayout( layout )
         self._app = vv.use('pyqt4')
         self._first=True
