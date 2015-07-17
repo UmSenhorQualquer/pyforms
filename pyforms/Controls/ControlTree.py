@@ -86,7 +86,6 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
 
         elif isinstance(other, list):
             for x in other:
-                # print(x)
                 item = QtGui.QTreeWidgetItem(x)
                 self.form.addTopLevelItem(item)
         else:
@@ -111,13 +110,13 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
 
     @property
     def value(self):
-        return self.model().invisibleRootItem()
-        return self.recursivelyReadRoot(root)
-
+        return None
+    
     @value.setter
     def value(self, value):
-        for row in value:
-            self += row
+        self.addTopLevelItem(value)
+        #for row in value:
+        #    self += row
 
     def getAllSceneObjects(self): return self.model().getChildrens()
 
