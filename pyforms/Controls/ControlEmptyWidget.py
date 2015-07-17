@@ -1,69 +1,71 @@
-#!/usr/bin/python
+#!/usr/bifn/python
 # -*- coding: utf-8 -*-
+'''
+@author: Ricardo Ribeiro
+@credits: Ricardo Ribeiro
+@license: MIT
+@version: 0.0
+@maintainer: Ricardo Ribeiro
+@email: ricardojvr@gmail.com
+@status: Development
+@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
+'''
 
-__author__      = "Ricardo Ribeiro"
-__credits__     = ["Ricardo Ribeiro"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
-
-
-import pyforms.Utils.tools as tools
-from PyQt4 import uic, QtGui
+from PyQt4 import QtGui
 from pyforms.Controls.ControlBase import ControlBase
 from pyforms.BaseWidget import BaseWidget
 
+
 class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
-	def __init__(self, label=''):
-		ControlBase.__init__(self, label)
-		QtGui.QWidget.__init__(self)
+    def __init__(self, label=''):
+        ControlBase.__init__(self, label)
+        QtGui.QWidget.__init__(self)
 
-		layout = QtGui.QVBoxLayout(); layout.setMargin(0)
-		self.form.setLayout( layout )
+        layout = QtGui.QVBoxLayout()
+        layout.setMargin(0)
+        self.form.setLayout(layout)
 
-	def initForm(self):
-		pass
+    def initForm(self):
+        pass
 
-	############################################################################
-	############ Properties ####################################################
-	############################################################################
+    ##########################################################################
+    ############ Properties ##################################################
+    ##########################################################################
 
-	@property
-	def value(self): return ControlBase.value.fget(self)
+    @property
+    def value(self): return ControlBase.value.fget(self)
 
-	@value.setter
-	def value(self, value):
-		ControlBase.value.fset(self, value)
-		
-		if isinstance( self._value, list ):
-			for w in self._value:
-				if w!=None and w!="": self.form.layout().removeWidget( w.form )
-		else:
-			if self._value!=None and self._value!="": self.form.layout().removeWidget( self._value.form )
+    @value.setter
+    def value(self, value):
+        ControlBase.value.fset(self, value)
 
-		if isinstance( value, list ):
-			for w in value:
-				self.form.layout().addWidget( w.form )
-		else:
-			self.form.layout().addWidget( value.form )
+        if isinstance(self._value, list):
+            for w in self._value:
+                if w != None and w != "":
+                    self.form.layout().removeWidget(w.form)
+        else:
+            if self._value != None and self._value != "":
+                self.form.layout().removeWidget(self._value.form)
 
-		#The initForm should be called only for the BaseWidget
-		if isinstance(value, BaseWidget): value.initForm()
-		
-		
-	@property
-	def form(self): return self
+        if isinstance(value, list):
+            for w in value:
+                self.form.layout().addWidget(w.form)
+        else:
+            self.form.layout().addWidget(value.form)
 
-	def save(self, data): 
-		if self.value!='':
-			data['value'] = {}
-			self.value.save(data['value'])
+        # The initForm should be called only for the BaseWidget
+        if isinstance(value, BaseWidget):
+            value.initForm()
 
-	def load(self, data):
-		if 'value' in data: self.value.load(data['value'])
+    @property
+    def form(self): return self
 
+    def save(self, data):
+        if self.value != '':
+            data['value'] = {}
+            self.value.save(data['value'])
 
-	
+    def load(self, data):
+        if 'value' in data:
+            self.value.load(data['value'])
