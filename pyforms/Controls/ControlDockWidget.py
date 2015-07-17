@@ -22,9 +22,11 @@ class ControlDockWidget(ControlEmptyWidget):
     SIDE_BOTTOM = 'bottom'
     SIDE_DETACHED = 'detached'
 
-    def __init__(self, label='', side='left'):
+    def __init__(self, label='', default=None, side='left'):
         super(ControlDockWidget, self).__init__(label)
         self.side = side
+        if default is not None:
+            self.value = default
 
     @property
     def label(self): return self._label
