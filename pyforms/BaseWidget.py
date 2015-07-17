@@ -1,4 +1,4 @@
-#!/usr/bifn/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
 @author: Ricardo Ribeiro
