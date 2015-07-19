@@ -36,7 +36,8 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
 	@value.setter
 	def value(self, value):
-		ControlBase.value.fset(self, value)
+		ControlBase.value.fset(self, value)		
+		if value==None or value=='': return 
 		
 		if isinstance( self._value, list ):
 			for w in self._value:

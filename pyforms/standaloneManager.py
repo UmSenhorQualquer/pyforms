@@ -50,7 +50,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                     dock = QtGui.QDockWidget(self)
                     dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
                     #dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-                    dock.layout().setMargin(0)
+                    #dock.layout().setMargin(0)
 
                     dock.setWidget(x.form)
                     dock.setWindowTitle(x.label)
@@ -60,7 +60,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                 dock = QtGui.QDockWidget(self)
                 dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
                 #dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-                dock.layout().setMargin(0)
+                #dock.layout().setMargin(0)
 
                 dock.setWidget(item.form)
                 self.addDockWidget(side, dock)
@@ -69,6 +69,11 @@ class StandAloneContainer(QtGui.QMainWindow):
         
         if len(w.mainmenu) > 0:
             self.__initMainMenu(w.mainmenu)
+
+        try:
+            self.loadStyleSheetFile('style.css')
+        except:
+            pass
 
     def __initMainMenu(self, options, keys={}):
         menubar = self.menuBar()
@@ -84,6 +89,12 @@ class StandAloneContainer(QtGui.QMainWindow):
                             if func:
                                 action.triggered.connect(func)
                                 menu.addAction(action)
+
+    def loadStyleSheetFile(self, filename):
+        infile = open(filename, 'r')
+        text = infile.read()
+        infile.close()
+        self.setStyleSheet(text)
 
 
 def startApp(ClassObject):

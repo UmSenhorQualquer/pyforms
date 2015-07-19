@@ -38,38 +38,41 @@ class TimelineChart(object):
 					self._data.append( (lastX+i,y) )
 					#self._data.append( None )
 			self._data.append( (x,y) )
-
 			lastX = x
-		#If the first frame of the data i not 0 fill the data array with Nones
-		#for i in range( int(data[0][0]) ): self._data.append(None)
 
-		#self._data 	+= data
-		
+		if self._graphMin<0: 
+			min2Zero = 0 - self._graphMin
+			self._graphMin += min2Zero
+			self._graphMax += min2Zero
+			newData = []
+			for f, y in self._data:
+				newData.append( (f, y+min2Zero) )
+
+			self._data = newData
+
 
 	def draw(self,  painter, left, right, top, bottom):
 		painter.setPen(self._color)
 		painter.setOpacity(0.7)
 		
-		maxHeight 	= (bottom-top)
-		start 		= self._widget.x2frame(left)
-		end   		= self._widget.x2frame(right)
-		end   		= len(self._data) if end>len(self._data) else end
+		maxPixelsHeight = (bottom-top) 
+		start 			= self._widget.x2frame(left)
+		end   			= self._widget.x2frame(right)
+		end   			= len(self._data) if end>len(self._data) else end
 
-		diff = self._graphMax - self._graphMin
-		if diff<=0: diff=1
+		diffMinMaxValue = self._graphMax - self._graphMin
+		if diffMinMaxValue<=0: diffMinMaxValue=1
 		
-
-		yMiddle = self._graphMin+diff/2
 		for pos1, pos2 in zip(self._data[start+1:end], self._data[start:end]):
 			if pos1 and pos2: 
 				x ,y  	= pos1
 				xx,yy 	= pos2
 
-				y -= self._graphMin
-				yy -= self._graphMin
+				#y -= self._graphMin
+				#yy -= self._graphMin
 
-				y  		=  (y*maxHeight)  // diff #+ yMiddle
-				yy 		=  (yy*maxHeight) // diff #+ yMiddle
+				y  		=  (y*maxPixelsHeight)  // diffMinMaxValue #+ yMiddle
+				yy 		=  (yy*maxPixelsHeight) // diffMinMaxValue #+ yMiddle
 
 				painter.drawLine(self._widget.frame2x(xx), yy, self._widget.frame2x(x), y );
 

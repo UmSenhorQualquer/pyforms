@@ -114,11 +114,13 @@ class ControlTree(ControlBase,QtGui.QTreeWidget):
 
 	@property
 	def value(self):  
-		return self.model().invisibleRootItem()
+		return None
 		return self.recursivelyReadRoot(root)
 
 	@value.setter
 	def value(self, value):
+		self.addTopLevelItems(value)
+
 		for row in value: self += row
 
 

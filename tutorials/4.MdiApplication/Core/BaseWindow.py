@@ -22,12 +22,6 @@ class BaseWindow(BaseWidget):
 
 		self._formset = ['_details','_projectTree']
 
-		self._projectTree.value = ProjectTree()
-
-		
-
-
-
 		self.mainmenu.append(
 				{ 'File': [
 						{'Save as': self.saveWindow},
