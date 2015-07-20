@@ -26,13 +26,11 @@ class ControlList(ControlBase, QWidget):
     """
 
     def __init__(self, label="", defaultValue="", plusFunction=None,
-                 minusFunction=None, horizontalHeaders=[], verticalHeaders=[]):
+                 minusFunction=None):
         QWidget.__init__(self)
 
         self._plusFunction = plusFunction
         self._minusFunction = minusFunction
-        self._horizontalHeaders = horizontalHeaders
-        self._verticalHeaders = verticalHeaders
         ControlBase.__init__(self, label, defaultValue)
 
     def initForm(self):
@@ -62,9 +60,6 @@ class ControlList(ControlBase, QWidget):
         else:
             self.plusButton.pressed.connect(plusFunction)
             self.minusButton.pressed.connect(minusFunction)
-
-        if self._horizontalHeaders:
-            self.__setHorizontalHeaders__()
 
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
@@ -107,12 +102,20 @@ class ControlList(ControlBase, QWidget):
             self.tableWidget.removeRow(indexToRemove)
         return self
 
-    def __setHorizontalHeaders__(self):
+    @property
+    def horizontalHeaders(self):
+        return self._horizontalHeaders
+
+    @horizontalHeaders.setter
+    def horizontalHeaders(self, horizontalHeaders):
         """Set horizontal headers in the table list."""
-        self.tableWidget.setColumnCount(len(self._horizontalHeaders))
+
+        self._horizontalHeaders = horizontalHeaders
+
+        self.tableWidget.setColumnCount(len(horizontalHeaders))
         self.tableWidget.horizontalHeader().setVisible(True)
 
-        for idx, header in enumerate(self._horizontalHeaders):
+        for idx, header in enumerate(horizontalHeaders):
             item = QTableWidgetItem()
             item.setText(header)
             self.tableWidget.setHorizontalHeaderItem(idx, item)
