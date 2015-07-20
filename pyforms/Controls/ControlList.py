@@ -25,14 +25,14 @@ class ControlList(ControlBase, QWidget):
         It allows to implement a list view
     """
 
-    def __init__(self, label="",
-                 defaultValue="",
-                 plusFunction=None,
-                 minusFunction=None):
+    def __init__(self, label="", defaultValue="", plusFunction=None,
+                 minusFunction=None, horizontalHeaders=[], verticalHeaders=[]):
         QWidget.__init__(self)
 
         self._plusFunction = plusFunction
         self._minusFunction = minusFunction
+        self._horizontalHeaders = horizontalHeaders
+        self._verticalHeaders = verticalHeaders
         ControlBase.__init__(self, label, defaultValue)
 
     def initForm(self):
@@ -62,6 +62,9 @@ class ControlList(ControlBase, QWidget):
         else:
             self.plusButton.pressed.connect(plusFunction)
             self.minusButton.pressed.connect(minusFunction)
+
+        if self._horizontalHeaders:
+            self.__setHorizontalHeaders__()
 
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
@@ -103,6 +106,16 @@ class ControlList(ControlBase, QWidget):
                 indexToRemove = other
             self.tableWidget.removeRow(indexToRemove)
         return self
+
+    def __setHorizontalHeaders__(self):
+        """Set horizontal headers in the table list."""
+        self.tableWidget.setColumnCount(len(self._horizontalHeaders))
+        self.tableWidget.horizontalHeader().setVisible(True)
+
+        for idx, header in enumerate(self._horizontalHeaders):
+            item = QTableWidgetItem()
+            item.setText(header)
+            self.tableWidget.setHorizontalHeaderItem(idx, item)
 
     def setValue(self, column, row, value):
         self.tableWidget.item(row, column).setText(str(value))
