@@ -6,7 +6,8 @@
 '''
 
 from pyforms.Controls.ControlBase import ControlBase
-from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView, QAbstractItemView
+from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView
+from PyQt4.QtGui import QAbstractItemView
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
