@@ -22,6 +22,7 @@ class ControlButton(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "button.ui")
         self._form = uic.loadUi(control_path)
         self._form.pushButton.setText(self._label)
+        self.tooltip = None
 
     def load(self, data): pass
 
@@ -47,3 +48,11 @@ class ControlButton(ControlBase):
     @value.setter
     def value(self, value):
         self._form.pushButton.pressed.connect(value)
+
+    @property
+    def tooltip(self):
+        return self._form.getToolTip()
+
+    @tooltip.setter
+    def tooltip(self, value):
+        self._form.setToolTip(value)
