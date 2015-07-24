@@ -46,8 +46,11 @@ class ControlList(ControlBase, QWidget):
 
         self.tableWidget.currentCellChanged.connect(
             self.tableWidgetCellChanged)
+        self.tableWidget.currentItemChanged.connect(
+            self.tableWidgetItemChanged)
         self.tableWidget.itemSelectionChanged.connect(
             self.tableWidgetItemSelectionChanged)
+        self.tableWidget.model().dataChanged.connect(self._dataChangedEvent)
 
         if plusFunction is None and minusFunction is None:
             self.bottomBar.hide()
@@ -61,9 +64,18 @@ class ControlList(ControlBase, QWidget):
             self.plusButton.pressed.connect(plusFunction)
             self.minusButton.pressed.connect(minusFunction)
 
+    def _dataChangedEvent(self, item):
+        self.dataChangedEvent(
+            item.row(), item.column(), self.tableWidget.model().data(item))
+
+    def dataChangedEvent(self, row, col): pass
+
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
         self.currentCellChanged(nextRow, nextCol, previousRow, previousCol)
+
+    def tableWidgetItemChanged(self, current, previous):
+        self.currentItemChanged(current, previous)
 
     def tableWidgetItemSelectionChanged(self):
         self.itemSelectionChanged()
@@ -72,6 +84,8 @@ class ControlList(ControlBase, QWidget):
 
     def currentCellChanged(
         self, nextRow, nextCol, previousRow, previousCol): pass
+
+    def currentItemChanged(self, current, previous): pass
 
     def clear(self):
         self.tableWidget.clear()
@@ -82,7 +96,10 @@ class ControlList(ControlBase, QWidget):
 
         index = self.tableWidget.rowCount()
         self.tableWidget.insertRow(index)
-        self.tableWidget.setColumnCount(len(other))
+
+        if self.tableWidget.columnCount() < len(other):
+            self.tableWidget.setColumnCount(len(other))
+
         for i in range(0, len(other)):
             v = other[i]
             args = [str(v)] if not hasattr(
@@ -161,6 +178,8 @@ class ControlList(ControlBase, QWidget):
     def value(self, value):
         for row in value:
             self += row
+    # TODO: implement += on self.value? I want to add a list of tuples to
+    # self.value
 
     @property
     def mouseSelectedRowsIndexes(self):
