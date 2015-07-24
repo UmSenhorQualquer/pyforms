@@ -1,9 +1,7 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-''' Control Tree
-
-'''
+""""pyforms.Controls.Control Tree"""
 
 from pyforms.Controls.ControlBase import ControlBase
 from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView
@@ -53,6 +51,14 @@ class ControlTree(ControlBase, QTreeWidget):
     def itemChangedEvent(self, item): pass
 
     def itemSelectionChanged(self): pass
+
+    def rowsInsertedEvent(self, parent, start, end):
+        """ This event is called every time a new row is added to the tree"""
+        pass
+
+    def rowsInserted(self, parent, start, end):
+        super(ControlTree, self).rowsInserted(parent, start, end)
+        self.rowsInsertedEvent(parent, start, end)
 
     def selectionChanged(self, selected, deselected):
         super(QTreeView, self).selectionChanged(selected, deselected)
