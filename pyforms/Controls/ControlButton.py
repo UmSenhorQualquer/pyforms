@@ -17,11 +17,16 @@ from pyforms.Controls.ControlBase import ControlBase
 
 
 class ControlButton(ControlBase):
-
+    
+    def __init__(self, label='', defaultValue='', checkable=False):
+        self._checkable = checkable
+        super(ControlButton, self).__init__(label, defaultValue)
+        
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "button.ui")
         self._form = uic.loadUi(control_path)
         self._form.pushButton.setText(self._label)
+        self._form.pushButton.setCheckable(self._checkable)
         self.tooltip = None
 
     def load(self, data): pass
@@ -47,7 +52,7 @@ class ControlButton(ControlBase):
 
     @value.setter
     def value(self, value):
-        self._form.pushButton.pressed.connect(value)
+        self._form.pushButton.clicked[bool].connect(value)
 
     @property
     def tooltip(self):
@@ -56,3 +61,9 @@ class ControlButton(ControlBase):
     @tooltip.setter
     def tooltip(self, value):
         self._form.setToolTip(value)
+        
+    def setChecked(self, value):
+        self._form.pushButton.setChecked(value)
+        
+    def isChecked(self):
+        return self._form.pushButton.isChecked()
