@@ -25,6 +25,8 @@ class ControlList(ControlBase, QtGui.QWidget):
         self._minusFunction = minusFunction
         ControlBase.__init__(self, label, defaultValue)
         
+    def __repr__(self): return "ControlList "+str(self._value)
+
 
 
     def initForm(self):
@@ -70,10 +72,12 @@ class ControlList(ControlBase, QtGui.QWidget):
         self.tableWidget.setRowCount(0)
 
     def __add__(self, other):
-        
+
         index = self.tableWidget.rowCount()
         self.tableWidget.insertRow( index )
-        self.tableWidget.setColumnCount(len(other))
+        if self.tableWidget.currentColumn()<len(other):
+            self.tableWidget.setColumnCount(len(other))
+            
         for i in range(0, len(other)):
             v = other[i]
             args = [str(v)] if not hasattr(v, 'icon') else [QtGui.QIcon(v.icon), str(v)]
@@ -113,6 +117,17 @@ class ControlList(ControlBase, QtGui.QWidget):
 
     @property
     def count(self): return self.tableWidget.rowCount()
+
+
+    @property
+    def allItems(self):
+        """
+        Return all the Tree Items of the list, organized by row, col
+        """ 
+        rows = []
+        for row in range(self.tableWidget.rowCount()):
+            rows.append( [self.tableWidget.item(row, col) for col in range(self.tableWidget.columnCount())] )
+        return rows
 
     @property
     def value(self):

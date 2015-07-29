@@ -1,131 +1,112 @@
 from pyforms.Controls.ControlBase import ControlBase
-from PyQt4 import uic
-from PyQt4 import QtGui, QtCore
-
-class ControlTree(ControlBase,QtGui.QTreeWidget):
-
-	def __init__(self, label='', default=''):
-		ControlBase.__init__(self,label, default)
-		QtGui.QTreeWidget.__init__(self)
+from PyQt4 import QtGui
 
 
-	def initForm(self):
-		self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-		self.setUniformRowHeights(True)
-		self.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
-		self.setDragEnabled(True)
-		self.setAcceptDrops(True)
-		
-		self.model().dataChanged.connect(self.__itemChangedEvent)
-		
-		self.selectionChanged = self.selectionChanged
+class ControlTree(ControlBase, QtGui.QTreeWidget):
 
-		
+    def __init__(self, label='', default=''):
+        ControlBase.__init__(self, label, default)
+        QtGui.QTreeWidget.__init__(self)
 
-	@property
-	def showHeader(self): return self.header().isVisible()
-	@showHeader.setter
-	def showHeader(self, value): 
-		if value: 
-			self.header().show()
-		else: 
-			self.header().hide()
+    def initForm(self):
+        self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.setUniformRowHeights(True)
+        self.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+        self.setDragEnabled(True)
+        self.setAcceptDrops(True)
 
+        self.model().dataChanged.connect(self.__itemChangedEvent)
 
-	def __itemChangedEvent(self, item): self.itemChangedEvent(item)
+        self.selectionChanged = self.selectionChanged
 
-	def itemChangedEvent(self, item): pass
-		
+    @property
+    def showHeader(self): return self.header().isVisible()
 
-	def itemSelectionChanged(self):pass
+    @showHeader.setter
+    def showHeader(self, value):
+        if value:
+            self.header().show()
+        else:
+            self.header().hide()
 
-	def selectionChanged(self, selected, deselected ):
-		super(QtGui.QTreeView, self).selectionChanged(selected, deselected)
-		self.itemSelectionChanged()
+    def __itemChangedEvent(self, item): self.itemChangedEvent(item)
 
-	@property
-	def mouseSelectedRowsIndexes(self):
-		result = []
-		for index in self.selectedIndexes():
-			result.append( index.row() )
-		return list( set(result) )
+    def itemChangedEvent(self, item): pass
 
+    def itemSelectionChanged(self): pass
 
-	@property
-	def mouseSelectedRowIndex(self):
-		indexes = self.mouseSelectedRowsIndexes
-		if len(indexes)>0: return indexes[0]
-		else: return None
+    def selectionChanged(self, selected, deselected):
+        super(QtGui.QTreeView, self).selectionChanged(selected, deselected)
+        self.itemSelectionChanged()
 
-	@property
-	def selectedItem(self):
-		for index in self.selectedIndexes():
-			item = index.model().itemFromIndex(index)
-			return item
-		else:
-			return None
+    @property
+    def mouseSelectedRowsIndexes(self):
+        result = []
+        for index in self.selectedIndexes():
+            result.append(index.row())
+        return list(set(result))
 
-	@property
-	def cells(self): 
-		results = []
-		for row in range(self.model().rowCount()):
-			r = []
-			for col in range(self.model().columnCount()):
-				r.append( self.model.item(row, col) )
-				"""
-				try:
-					r.append( self._model.item(col, row) )
-				except:
-					r.append( None )
-					pass"""
-			if len(r)>0: results.append(r)
+    @property
+    def mouseSelectedRowIndex(self):
+        indexes = self.mouseSelectedRowsIndexes
+        if len(indexes) > 0:
+            return indexes[0]
+        else:
+            return None
 
-		return results
+    @property
+    def selectedItem(self):
+        for index in self.selectedIndexes():
+            item = index.model().itemFromIndex(index)
+            return item
+        else:
+            return None
 
+    @property
+    def cells(self):
+        results = []
+        for row in range(self.model().rowCount()):
+            r = []
+            for col in range(self.model().columnCount()):
+                r.append(self.model.item(row, col))
+                
+            if len(r) > 0: results.append(r)
 
-	def __add__(self, other):
-		if isinstance(other, QtGui.QTreeWidgetItem):
-			self.model().invisibleRootItem().appendRow( other )
+        return results
 
-		elif isinstance(other, list):
-			for x in other:
-				print x
-				item = QtGui.QTreeWidgetItem( x )
-				self.form.addTopLevelItem(item)
-		else:
-			item = QtGui.QTreeWidgetItem( other )
-			self.form.addTopLevelItem(item)
+    def __add__(self, other):
+        if isinstance(other, QtGui.QTreeWidgetItem):
+            self.model().invisibleRootItem().appendRow(other)
 
-		self.setFirstColumnSpanned(self.model().rowCount()-1, self.rootIndex(), True)
-		return self
+        elif isinstance(other, list):
+            for x in other:
+                item = QtGui.QTreeWidgetItem(x)
+                self.form.addTopLevelItem(item)
+        else:
+            item = QtGui.QTreeWidgetItem(other)
+            self.form.addTopLevelItem(item)
 
-	def __sub__(self, other):
-		if isinstance(other, int):
-			if other < 0:
-				indexToRemove = self.mouseSelectedRowIndex
-			else:
-				indexToRemove = other
-			self.model().removeRow(indexToRemove)
-		return self
+        self.setFirstColumnSpanned(
+            self.model().rowCount() - 1, self.rootIndex(), True)
+        return self
 
-	@property
-	def form(self): return self
-		
+    def __sub__(self, other):
+        if isinstance(other, int):
+            if other < 0:
+                indexToRemove = self.mouseSelectedRowIndex
+            else:
+                indexToRemove = other
+            self.model().removeRow(indexToRemove)
+        return self
 
-	@property
-	def value(self):  
-		return None
-		return self.recursivelyReadRoot(root)
+    @property
+    def form(self): return self
 
-	@value.setter
-	def value(self, value):
-		self.addTopLevelItems(value)
-
-		for row in value: self += row
-
-
-	def getAllSceneObjects(self): return self.model().getChildrens()
-
+    @property
+    def value(self): return None
+    
+    @value.setter
+    def value(self, value):  self.addTopLevelItem(value)
 
 
 	def save(self, data): pass

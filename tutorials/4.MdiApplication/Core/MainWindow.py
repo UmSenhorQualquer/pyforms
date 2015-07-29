@@ -1,5 +1,5 @@
 import pyforms.standaloneManager as app
-from BaseWindow import BaseWindow
+from Core.BaseWindow import BaseWindow
 
 class MainWindow(BaseWindow):
 	

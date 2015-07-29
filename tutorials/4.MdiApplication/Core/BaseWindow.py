@@ -6,8 +6,12 @@ from pyforms.Controls.ControlButton 	import ControlButton
 from pyforms.Controls.ControlDockWidget import ControlDockWidget
 from pyforms.Controls.ControlMdiArea 	import ControlMdiArea
 
+<<<<<<< HEAD
 from SimpleExample1 import SimpleExample1
 from Controllers.ProjectTree import ProjectTree
+=======
+from Core.Controllers.ProjectTree import ProjectTree
+>>>>>>> bb49d47a4018d583cd9cfbb512d802a9dc758acf
 
 class BaseWindow(BaseWidget):
 

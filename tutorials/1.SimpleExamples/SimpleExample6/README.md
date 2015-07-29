@@ -1,4 +1,4 @@
-# Simple example 5
+# Simple example 6
 
 This example shows you how to implement a Popup Menu for a Control.
 		

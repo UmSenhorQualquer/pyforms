@@ -1,19 +1,21 @@
-#!/usr/bin/python
+#!/usr/bifn/python
 # -*- coding: utf-8 -*-
-
-__author__      = "Ricardo Ribeiro"
-__credits__     = ["Ricardo Ribeiro"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
-
-
-import pyforms.Utils.tools as tools
-from PyQt4 import uic, QtGui
+'''
+@author: Ricardo Ribeiro
+@credits: Ricardo Ribeiro
+@license: MIT
+@version: 0.0
+@maintainer: Ricardo Ribeiro
+@email: ricardojvr@gmail.com
+@status: Development
+@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
+'''
+import sip
+			
+from PyQt4 import QtGui
 from pyforms.Controls.ControlBase import ControlBase
 from pyforms.BaseWidget import BaseWidget
+
 
 class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
@@ -37,14 +39,15 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self, value)		
-		if value==None or value=='': return 
+		self.__clearLayout()
+			
+
+		if value is None or value=='':  return 
 		
 		if isinstance( self._value, list ):
 			for w in self._value:
 				if w!=None and w!="": self.form.layout().removeWidget( w.form )
-		else:
-			if self._value!=None and self._value!="": self.form.layout().removeWidget( self._value.form )
-
+		
 		if isinstance( value, list ):
 			for w in value:
 				self.form.layout().addWidget( w.form )
@@ -67,4 +70,12 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 		if 'value' in data: self.value.load(data['value'])
 
 
-	
+
+
+
+	def __clearLayout(self):
+		if self.form.layout() is not None:
+			old_layout = self.form.layout()
+			for i in reversed(range(old_layout.count())):
+				old_layout.itemAt(i).widget().setParent(None)
+			

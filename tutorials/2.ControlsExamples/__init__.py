@@ -9,7 +9,7 @@ __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
-from pyforms.AutoForm 						import AutoForm
+from pyforms.BaseWidget 					import BaseWidget
 from pyforms.Controls.ControlBoundingSlider import ControlBoundingSlider
 from pyforms.Controls.ControlText 			import ControlText
 from pyforms.Controls.ControlButton 		import ControlButton
@@ -24,7 +24,6 @@ from pyforms.Controls.ControlFilesTree 		import ControlFilesTree
 from pyforms.Controls.ControlImage 			import ControlImage
 from pyforms.Controls.ControlList 			import ControlList
 from pyforms.Controls.ControlPlayer.ControlPlayer 		import ControlPlayer
-from pyforms.Controls.ControlTree 		import ControlTree
 from pyforms.Controls.ControlProgress 		import ControlProgress
 from pyforms.Controls.ControlSlider 		import ControlSlider
 from pyforms.Controls.ControlVisVis 		import ControlVisVis

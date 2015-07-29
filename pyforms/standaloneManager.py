@@ -28,12 +28,12 @@ class StandAloneContainer(QtGui.QMainWindow):
         self.setWindowTitle(w.title)
 
         w.docks = {}
-        for key, item in w.formControls.items():
+        for name, item in w.formControls.items():
             if isinstance(item, ControlDockWidget):
                 if item.side not in w.docks: w.docks[item.side] = []
-                w.docks[item.side].append( item )
+                w.docks[item.side].append( (name,item) )
 
-        for key, item in w.docks.items():
+        for key, widgets in w.docks.items():
             side = QtCore.Qt.RightDockWidgetArea
             if key == 'left':
                 side = QtCore.Qt.LeftDockWidgetArea
@@ -45,16 +45,17 @@ class StandAloneContainer(QtGui.QMainWindow):
                 side = QtCore.Qt.BottomDockWidgetArea
             else: 
                 side = QtCore.Qt.LeftDockWidgetArea
-            if isinstance(item, list):
-                for x in item:
+
+            if isinstance(widgets, list):
+                for name,widget in widgets:
                     dock = QtGui.QDockWidget(self)
                     dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
-                    #dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-                    #dock.layout().setMargin(0)
-
-                    dock.setWidget(x.form)
-                    dock.setWindowTitle(x.label)
-                    x.dock = dock
+                    dock.setObjectName(name)
+                
+                    print dock.objectName(),1
+                    dock.setWidget(widget.form)
+                    dock.setWindowTitle(widget.label)
+                    widget.dock = dock
                     self.addDockWidget(side, dock)
             else:
                 dock = QtGui.QDockWidget(self)
@@ -62,13 +63,18 @@ class StandAloneContainer(QtGui.QMainWindow):
                 #dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
                 #dock.layout().setMargin(0)
 
-                dock.setWidget(item.form)
+                print dock.objectName(), 2
+                dock.setObjectName(name)
+                dock.setWidget(widget.form)
                 self.addDockWidget(side, dock)
-                dock.setWindowTitle(item.label)
+                dock.setWindowTitle(widget.label)
                 x.dock = dock
         
         if len(w.mainmenu) > 0:
             self.__initMainMenu(w.mainmenu)
+
+
+
 
         try:
             self.loadStyleSheetFile('style.css')

@@ -14,7 +14,7 @@ from __init__ import *
 import numpy as np
 
 
-class Example3(AutoForm):
+class Example3(BaseWidget):
 	
 	def __init__(self):
 		super(Example3,self).__init__('Simple example 1')
@@ -25,11 +25,9 @@ class Example3(AutoForm):
 		self._progress 		= ControlProgress('Progress bar')
 		self._visvisVolume	= ControlVisVisVolume('Visvis')
 		self._timeline 		= ControlEventTimeline('Timeline')
-		self._tree 			= ControlTree('Tree label')
-		
 		
 
-		self._formset = [ ('_combobox',' '), '_progress', '=','_visvisVolume', '=', '_list', '_timeline', '_tree']
+		self._formset = [ ('_combobox',' '), '_progress', '=','_visvisVolume', '=', '_list', '_timeline']
 
 		
 		self._combobox.addItem('Item 1', 'Value 1')
@@ -46,11 +44,6 @@ class Example3(AutoForm):
 		#############################################
 
 		self._visvisVolume.value = imageWithVolume
-
-		self._tree.value = [ ('ddd',), ('fff',)]
-
-		self._tree += [ ('ccc',)]
-		self._tree -= 0
 
 ##################################################################################################################
 ##################################################################################################################

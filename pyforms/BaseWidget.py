@@ -22,9 +22,9 @@ import json
 
 class BaseWidget(QtGui.QWidget):
     """
-    The class implements the most basic widget or window. 
+    The class implements the most basic widget or window.
     """
-    
+
     def __init__(self, title):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
@@ -361,13 +361,11 @@ class BaseWidget(QtGui.QWidget):
     @docks.setter
     def docks(self, value): self._docks = value
 
-
     def save(self, data):
         allparams = self.formControls
         for name, param in allparams.items():
             data[name] = {}
             param.save(data[name])
-
 
     def saveWindow(self):
         allparams = self.formControls
@@ -380,14 +378,11 @@ class BaseWidget(QtGui.QWidget):
         output.close()
 
     def loadWindowData(self, filename):
-        pkl_file = open(filename, 'rb')
-
-        project_data = json.load(pkl_file)
-        pkl_file.close()
+        with open(filename) as pkl_file:
+            project_data = json.load(pkl_file)
         data = dict(project_data)
-
         self.load(data)
-        
+
     def load(self, data):
         allparams = self.formControls
         for name, param in allparams.items():
@@ -395,7 +390,6 @@ class BaseWidget(QtGui.QWidget):
                 param.load(data[name])
         self.initForm()
 
-
     def loadWindow(self):
         filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
-        self.loadWindowData(str(filename) )
+        self.loadWindowData(str(filename))
