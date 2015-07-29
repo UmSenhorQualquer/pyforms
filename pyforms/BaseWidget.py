@@ -1,4 +1,4 @@
-#!/usr/bifn/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
 @author: Ricardo Ribeiro
@@ -380,12 +380,12 @@ class BaseWidget(QtGui.QWidget):
         self.save(data)
 
         filename = QtGui.QFileDialog.getSaveFileName(self, 'Select file')
-        output = open(str(filename), 'wb')
-        json.dump(data, output)
-        output.close()
+
+        with open(filename, 'w') as output_file:
+            json.dump(data, output_file)
 
     def loadWindowData(self, filename):
-        with open(filename) as pkl_file:
+        with open(filename, 'r') as pkl_file:
             project_data = json.load(pkl_file)
         data = dict(project_data)
         self.load(data)
@@ -399,4 +399,4 @@ class BaseWidget(QtGui.QWidget):
 
     def loadWindow(self):
         filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
-        self.loadWindowData(str(filename))
+        self.loadWindowData(str(filename[0]))

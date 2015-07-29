@@ -1,17 +1,33 @@
+# !/usr/bin/python
+# -*- coding: utf-8 -*-
+
+""""pyforms.Controls.Control Tree"""
+
 from pyforms.Controls.ControlBase import ControlBase
-from PyQt4 import QtGui
+from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView
+from PyQt4.QtGui import QAbstractItemView
+
+__author__ = "Ricardo Ribeiro"
+__copyright__ = ""
+__credits__ = "Ricardo Ribeiro"
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
+__status__ = "Development"
 
 
-class ControlTree(ControlBase, QtGui.QTreeWidget):
+class ControlTree(ControlBase, QTreeWidget):
+    """This class represents a wrapper to the QTreeWidget"""
 
     def __init__(self, label='', default=''):
         ControlBase.__init__(self, label, default)
-        QtGui.QTreeWidget.__init__(self)
+        QTreeWidget.__init__(self)
 
     def initForm(self):
-        self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.setUniformRowHeights(True)
-        self.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+        self.setDragDropMode(QAbstractItemView.InternalMove)
         self.setDragEnabled(True)
         self.setAcceptDrops(True)
 
@@ -20,7 +36,8 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
         self.selectionChanged = self.selectionChanged
 
     @property
-    def showHeader(self): return self.header().isVisible()
+    def showHeader(self):
+        return self.header().isVisible()
 
     @showHeader.setter
     def showHeader(self, value):
@@ -35,8 +52,16 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
 
     def itemSelectionChanged(self): pass
 
+    def rowsInsertedEvent(self, parent, start, end):
+        """ This event is called every time a new row is added to the tree"""
+        pass
+
+    def rowsInserted(self, parent, start, end):
+        super(ControlTree, self).rowsInserted(parent, start, end)
+        self.rowsInsertedEvent(parent, start, end)
+
     def selectionChanged(self, selected, deselected):
-        super(QtGui.QTreeView, self).selectionChanged(selected, deselected)
+        super(QTreeView, self).selectionChanged(selected, deselected)
         self.itemSelectionChanged()
 
     @property
@@ -81,15 +106,15 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
         return results
 
     def __add__(self, other):
-        if isinstance(other, QtGui.QTreeWidgetItem):
+        if isinstance(other, QTreeWidgetItem):
             self.model().invisibleRootItem().appendRow(other)
 
         elif isinstance(other, list):
             for x in other:
-                item = QtGui.QTreeWidgetItem(x)
+                item = QTreeWidgetItem(x)
                 self.form.addTopLevelItem(item)
         else:
-            item = QtGui.QTreeWidgetItem(other)
+            item = QTreeWidgetItem(other)
             self.form.addTopLevelItem(item)
 
         self.setFirstColumnSpanned(
@@ -111,11 +136,11 @@ class ControlTree(ControlBase, QtGui.QTreeWidget):
     @property
     def value(self):
         return None
-    
+
     @value.setter
     def value(self, value):
         self.addTopLevelItem(value)
-        #for row in value:
+        # for row in value:
         #    self += row
 
     def getAllSceneObjects(self): return self.model().getChildrens()

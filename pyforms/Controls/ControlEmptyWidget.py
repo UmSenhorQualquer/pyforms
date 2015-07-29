@@ -40,6 +40,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
     def value(self, value):
         ControlBase.value.fset(self, value)
         if value is None:
+            self.clearLayout()
             return
 
         if isinstance(self._value, list):
@@ -54,6 +55,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
             for w in value:
                 self.form.layout().addWidget(w.form)
         else:
+            self.clearLayout()
             self.form.layout().addWidget(value.form)
 
         # The initForm should be called only for the BaseWidget
@@ -69,5 +71,12 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
             self.value.save(data['value'])
 
     def load(self, data):
+        # TODO: remove print
+        print(data)
         if 'value' in data:
             self.value.load(data['value'])
+
+    def clearLayout(self):
+        l = self.form.layout()
+        for i in reversed(range(l.count())):
+            l.itemAt(i).widget().setParent(None)

@@ -57,7 +57,7 @@ class SimpleExample6(AutoForm):
 		]
 
 	def __dummyEvent(self):
-		print "Menu option selected"
+		print ("Menu option selected")
 
 
 ##################################################################################################################
