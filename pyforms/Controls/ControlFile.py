@@ -1,30 +1,33 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__      = "Ricardo Ribeiro"
-__credits__     = ["Ricardo Ribeiro"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
-
-
 from pyforms.Controls.ControlText import ControlText
 import pyforms.Utils.tools as tools
 from PyQt4 import uic
-from PyQt4 import QtGui
+from PyQt4.QtGui import QFileDialog
+
+__author__ = "Ricardo Ribeiro"
+__copyright__ = ""
+__credits__ = "Ricardo Ribeiro"
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
+__status__ = "Development"
+
 
 class ControlFile(ControlText):
 
     def initForm(self):
-        control_path = tools.getFileInSameDirectory(__file__,"fileInput.ui")
-        self._form = uic.loadUi( control_path )
+        control_path = tools.getFileInSameDirectory(__file__, "fileInput.ui")
+        self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
 
     def pushButton_clicked(self):
-        value = str(QtGui.QFileDialog.getOpenFileName(self._form, 'Choose a file', self.value))
-        if value: self.value = value
+        value = str(QFileDialog.getOpenFileName(
+            self._form, self._label, self.value))
+        if value:
+            self.value = value
 
     @property
     def parent(self): return ControlText.parent.fget(self, value)

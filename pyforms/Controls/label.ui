@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>130</width>
+    <width>110</width>
     <height>38</height>
    </rect>
   </property>
@@ -38,12 +38,9 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>TextLabel</string>
+      <string>Default label</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEdit"/>
    </item>
   </layout>
  </widget>

@@ -19,6 +19,7 @@ from pyforms.BaseWidget import BaseWidget
 
 class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
+
 	def __init__(self, label=''):
 		ControlBase.__init__(self, label)
 		QtGui.QWidget.__init__(self)

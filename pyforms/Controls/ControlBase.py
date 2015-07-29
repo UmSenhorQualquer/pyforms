@@ -1,18 +1,21 @@
-#!/usr/bifn/python
+# !/usr/bin/python
 # -*- coding: utf-8 -*-
-'''
-@author: Ricardo Ribeiro
-@credits: Ricardo Ribeiro
-@license: MIT
-@version: 0.0
-@maintainer: Ricardo Ribeiro
-@email: ricardojvr@gmail.com
-@status: Development
-@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
-'''
+
+""" Control Base
+
+"""
 
 from PyQt4 import uic, QtGui, QtCore
 import pyforms.Utils.tools as tools
+
+__author__ = "Ricardo Ribeiro"
+__copyright__ = ""
+__credits__ = "Ricardo Ribeiro"
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
+__status__ = "Development"
 
 
 class ControlBase(object):
@@ -43,7 +46,7 @@ class ControlBase(object):
         self.form.label.setText(self._label)
         self.form.lineEdit.setText(self._value)
 
-        self.form.lineEdit.editingFinished.connect(self.finishEditing)
+        # self.form.lineEdit.editingFinished.connect(self.finishEditing)
 
     def __repr__(self): return str(self._value)
 
@@ -172,7 +175,8 @@ class ControlBase(object):
     # Return or update the value of the Control
 
     @property
-    def value(self): return self._value
+    def value(self):
+        return self._value
 
     @value.setter
     def value(self, value):
@@ -186,9 +190,10 @@ class ControlBase(object):
             self.changed()
 
     @property
-    def name(self): return self.form.objectName()
+    def name(self):
+        return self.form.objectName()
 
-    @value.setter
+    @name.setter
     def name(self, value):
         """
         This property return and set the name of the control
@@ -200,7 +205,8 @@ class ControlBase(object):
     # Return or update the label of the Control
 
     @property
-    def label(self): return self._label
+    def label(self):
+        return self._label
 
     @label.setter
     def label(self, value):
