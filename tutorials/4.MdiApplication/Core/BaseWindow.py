@@ -6,7 +6,12 @@ from pyforms.Controls.ControlButton 	import ControlButton
 from pyforms.Controls.ControlDockWidget import ControlDockWidget
 from pyforms.Controls.ControlMdiArea 	import ControlMdiArea
 
+<<<<<<< HEAD
+from SimpleExample1 import SimpleExample1
+from Controllers.ProjectTree import ProjectTree
+=======
 from Core.Controllers.ProjectTree import ProjectTree
+>>>>>>> bb49d47a4018d583cd9cfbb512d802a9dc758acf
 
 class BaseWindow(BaseWidget):
 
@@ -17,16 +22,13 @@ class BaseWindow(BaseWidget):
 		#Definition of the forms fields
 		self._mdiArea 			= ControlMdiArea()
 
+		self._textField 		= ControlText("EXample")
 		self._projectTree  		= ControlDockWidget('Project tree', side=ControlDockWidget.SIDE_RIGHT)
 		self._details  			= ControlDockWidget('Details', 		side=ControlDockWidget.SIDE_RIGHT)
 
-		self._formset = ['_details','_projectTree']
+		self._formset = [ '_textField']
 
-		self._projectTree.value = ProjectTree()
-
-		
-
-
+		self._details.value = SimpleExample1()
 
 		self.mainmenu.append(
 				{ 'File': [

@@ -14,7 +14,7 @@ from __init__ import *
 import numpy as np
 
 
-class Example3(AutoForm):
+class Example3(BaseWidget):
 	
 	def __init__(self):
 		super(Example3,self).__init__('Simple example 1')

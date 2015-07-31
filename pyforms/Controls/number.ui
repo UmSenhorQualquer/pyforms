@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>130</width>
+    <width>141</width>
     <height>38</height>
    </rect>
   </property>
@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit"/>
+    <widget class="QSpinBox" name="spinBox"/>
    </item>
   </layout>
  </widget>

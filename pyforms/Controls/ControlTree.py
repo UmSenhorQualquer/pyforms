@@ -94,14 +94,8 @@ class ControlTree(ControlBase, QTreeWidget):
             r = []
             for col in range(self.model().columnCount()):
                 r.append(self.model.item(row, col))
-                """
-				try:
-					r.append( self._model.item(col, row) )
-				except:
-					r.append( None )
-					pass"""
-            if len(r) > 0:
-                results.append(r)
+                
+            if len(r) > 0: results.append(r)
 
         return results
 
@@ -134,17 +128,10 @@ class ControlTree(ControlBase, QTreeWidget):
     def form(self): return self
 
     @property
-    def value(self):
-        return None
-
+    def value(self): return None
+    
     @value.setter
-    def value(self, value):
-        self.addTopLevelItem(value)
-        # for row in value:
-        #    self += row
+    def value(self, value):  self.addTopLevelItem(value)
 
-    def getAllSceneObjects(self): return self.model().getChildrens()
-
-    def save(self, data): pass
-
-    def load(self, data): pass
+	def save(self, data): pass
+	def load(self, data): pass

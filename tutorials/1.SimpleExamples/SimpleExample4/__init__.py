@@ -1,5 +1,5 @@
 
-from pyforms.AutoForm 				import AutoForm
+from pyforms.BaseWidget 			import BaseWidget
 from pyforms.Controls.ControlText 	import ControlText
 from pyforms.Controls.ControlButton import ControlButton
 

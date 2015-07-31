@@ -12,29 +12,33 @@
 '''
 
 import pyforms.Utils.tools as tools
-from PyQt4 import uic
+from PyQt4 import QtCore, QtGui
 from pyforms.Controls.ControlBase import ControlBase
+from PyQt4 import QtCore, QtGui
 
+class ControlLabel(ControlBase, QtGui.QLabel):
 
-class ControlLabel(ControlBase):
+    def __init__(self, label='', defaultValue=''):
+        QtGui.QLabel.__init__(self)
+        ControlBase.__init__(self, label, defaultValue)
 
-    def initForm(self):
-        control_path = tools.getFileInSameDirectory(__file__, "label.ui")
-        self._form = uic.loadUi(control_path)
-        self._form.label.setText(self._label)
+    def initForm(self): 
+        self.value = self._value
 
     def load(self, data): pass
 
     def save(self, data): pass
 
-    ##########################################################################
-'''
     @property
-    def text(self):
-        return ControlBase.label.fget(self)
+    def form(self): return self
 
-    @label.setter
-    def text(self, value):
-        ControlBase.label.fset(self, value)
-        self._form.pushButton.setText(self._label)
-'''
+    @property
+    def value(self):
+        return ControlBase.value.fget(self)
+
+    @value.setter
+    def value(self, value):
+        ControlBase.value.fset(self, value)
+        self.setText(value)
+        
+        

@@ -2,7 +2,7 @@ from __init__ import *
 
 
 
-class SimpleExample3(AutoForm):
+class SimpleExample3(BaseWidget):
 	
 	def __init__(self):
 		super(SimpleExample3,self).__init__('Simple example 3')

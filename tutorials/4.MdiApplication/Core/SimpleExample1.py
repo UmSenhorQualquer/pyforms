@@ -10,14 +10,19 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-from __init__ import *
+
+from pyforms.BaseWidget 				import BaseWidget
+from pyforms.Controls.ControlText 	import ControlText
+from pyforms.Controls.ControlButton import ControlButton
+
+import pyforms.standaloneManager as app
 
 
 
-class SimpleExample4(BaseWidget):
+class SimpleExample1(BaseWidget):
 	
 	def __init__(self):
-		super(SimpleExample4,self).__init__('Simple example 4')
+		super(SimpleExample1,self).__init__('Simple example 1')
 
 		#Definition of the forms fields
 		self._firstname 	= ControlText('First name', 'Default value')
@@ -25,16 +30,6 @@ class SimpleExample4(BaseWidget):
 		self._lastname 		= ControlText('Lastname name')
 		self._fullname 		= ControlText('Full name')
 		self._button 		= ControlButton('Press this button')
-
-		#Define the organization of the forms
-		self._formset = [ {
-						  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
-						  	'Tab2': ['_fullname']
-						  },
-						  '=',(' ','_button', ' ') ]
-		#Use dictionaries for tabs
-		#Use the sign '=' for a vertical splitter
-		#Use the signs '||' for a horizontal splitter
 
 		#Define the button action
 		self._button.value = self.__buttonAction
@@ -47,10 +42,14 @@ class SimpleExample4(BaseWidget):
 
 
 
+
+
+
+
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( SimpleExample4 )
+if __name__ == "__main__":	 app.startApp( SimpleExample1 )
 	

@@ -1,16 +1,3 @@
-#!/usr/bifn/python
-# -*- coding: utf-8 -*-
-'''
-@author: Ricardo Ribeiro
-@credits: Ricardo Ribeiro
-@license: MIT
-@version: 0.0
-@maintainer: Ricardo Ribeiro
-@email: ricardojvr@gmail.com
-@status: Development
-@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
-'''
-
 from pyforms.Controls.ControlEmptyWidget import ControlEmptyWidget
 
 

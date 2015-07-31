@@ -32,6 +32,10 @@ class ControlList(ControlBase, QWidget):
         self._plusFunction = plusFunction
         self._minusFunction = minusFunction
         ControlBase.__init__(self, label, defaultValue)
+        
+    def __repr__(self): return "ControlList "+str(self._value)
+
+
 
     def initForm(self):
         plusFunction = self._plusFunction
@@ -95,11 +99,11 @@ class ControlList(ControlBase, QWidget):
     def __add__(self, other):
 
         index = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(index)
 
-        if self.tableWidget.columnCount() < len(other):
+        self.tableWidget.insertRow( index )
+        if self.tableWidget.currentColumn()<len(other):
             self.tableWidget.setColumnCount(len(other))
-
+ 
         for i in range(0, len(other)):
             v = other[i]
             args = [str(v)] if not hasattr(
@@ -158,6 +162,17 @@ class ControlList(ControlBase, QWidget):
 
     @property
     def count(self): return self.tableWidget.rowCount()
+
+
+    @property
+    def allItems(self):
+        """
+        Return all the Tree Items of the list, organized by row, col
+        """ 
+        rows = []
+        for row in range(self.tableWidget.rowCount()):
+            rows.append( [self.tableWidget.item(row, col) for col in range(self.tableWidget.columnCount())] )
+        return rows
 
     @property
     def value(self):

@@ -40,20 +40,13 @@ class BaseWidget(QtGui.QWidget):
         self._formset = None
         self._formLoaded = False
 
-        try:
-            self.loadStyleSheetFile('style.css')
-        except:
-            pass
+        
 
     ##########################################################################
     ############ Module functions  ###########################################
     ##########################################################################
 
-    def loadStyleSheetFile(self, filename):
-        infile = open(filename, 'r')
-        text = infile.read()
-        infile.close()
-        self.setStyleSheet(text)
+    
 
     def initForm(self):
         """

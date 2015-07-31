@@ -14,7 +14,7 @@ from __init__ import *
 
 
 
-class SimpleExample2(AutoForm):
+class SimpleExample2(BaseWidget):
 	
 	def __init__(self):
 		super(SimpleExample2,self).__init__('Simple example 2')
