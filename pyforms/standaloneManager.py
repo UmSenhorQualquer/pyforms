@@ -30,8 +30,9 @@ class StandAloneContainer(QtGui.QMainWindow):
         w.docks = {}
         for name, item in w.formControls.items():
             if isinstance(item, ControlDockWidget):
-                if item.side not in w.docks: w.docks[item.side] = []
-                w.docks[item.side].append( (name,item) )
+                if item.side not in w.docks:
+                    w.docks[item.side] = []
+                w.docks[item.side].append((name, item))
 
         for key, widgets in w.docks.items():
             side = QtCore.Qt.RightDockWidgetArea
@@ -43,38 +44,37 @@ class StandAloneContainer(QtGui.QMainWindow):
                 side = QtCore.Qt.TopDockWidgetArea
             elif key == 'bottom':
                 side = QtCore.Qt.BottomDockWidgetArea
-            else: 
+            else:
                 side = QtCore.Qt.LeftDockWidgetArea
 
             if isinstance(widgets, list):
-                for name,widget in widgets:
+                for name, widget in widgets:
                     dock = QtGui.QDockWidget(self)
-                    dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
+                    dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
+                                     QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
                     dock.setObjectName(name)
-                
-                    print dock.objectName(),1
+
+                    # print dock.objectName(),1
                     dock.setWidget(widget.form)
                     dock.setWindowTitle(widget.label)
                     widget.dock = dock
                     self.addDockWidget(side, dock)
             else:
                 dock = QtGui.QDockWidget(self)
-                dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable | QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable ) 
-                #dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-                #dock.layout().setMargin(0)
+                dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
+                                 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
+                # dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
+                # dock.layout().setMargin(0)
 
-                print dock.objectName(), 2
+                # print dock.objectName(), 2
                 dock.setObjectName(name)
                 dock.setWidget(widget.form)
                 self.addDockWidget(side, dock)
                 dock.setWindowTitle(widget.label)
                 x.dock = dock
-        
+
         if len(w.mainmenu) > 0:
             self.__initMainMenu(w.mainmenu)
-
-
-
 
         try:
             self.loadStyleSheetFile('style.css')
