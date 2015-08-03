@@ -319,7 +319,7 @@ class BaseWidget(QtGui.QWidget):
                       (float(self._processing_count) / float(self._progress.max)
                        ) * 100.0, self._processing_count, self._progress.max,
                       self._processing_count / total_passed_time)
-            self._progress.label = "Elapsed: %d:%d:%d:%d; Remaining: %d:%d:%d:%d; Processed %0.2f %%  (%d/%d); FPS: %0.3f" % values
+            self._progress.label = "Elapsed: %d:%d:%d:%d; Remaining: %d:%d:%d:%d; Processed %0.2f %%  (%d/%d); Cicles per second: %0.3f" % values
 
         QtGui.QApplication.processEvents()
 

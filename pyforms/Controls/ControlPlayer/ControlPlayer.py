@@ -32,12 +32,16 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
     def __init__(self, *args):
         super(ControlPlayer,self).__init__(*args)
 
+
+
+
     def initForm(self):
         #Get the current path of the file
         rootPath = os.path.dirname(__file__)
         
         #Load the UI for the self instance
         uic.loadUi( os.path.join(rootPath, "video.ui") , self)
+
 
         #Define the icon for the Play button
         icon = QtGui.QIcon()
@@ -68,10 +72,22 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.updateFrame)
 
+        self.form.horizontalSlider.valueChanged.connect( self.__rotateZ )
+        self.form.verticalSlider.valueChanged.connect( self.__rotateX )
 
         self._currentFrame = None
         self._draw_on_video = True  # Controls if anything is drawn on the video
         self._videoFPS = None  # Sets the FPS rate at which the video is played
+
+        self.view3D = False
+
+
+    def __rotateX(self): 
+        self._videoWidget.rotateX = self.form.verticalSlider.value()
+        self.refresh()
+    def __rotateZ(self): 
+        self._videoWidget.rotateZ = self.form.horizontalSlider.value()
+        self.refresh()
 
 
 
@@ -94,6 +110,13 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
     def onEndDrag(self): return self._videoWidget.onEndDrag
     @onEndDrag.setter
     def onEndDrag(self, value): self._videoWidget.onEndDrag = value
+
+    @property
+    def view3D(self): return self._videoWidget.onEndDrag
+    @view3D.setter
+    def view3D(self, value): 
+        self.form.horizontalSlider.setVisible(value)
+        self.form.verticalSlider.setVisible(value)
 
     @property
     def onKeyRelease(self): return self._videoWidget.onKeyRelease
@@ -315,4 +338,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
     @property
     def form(self): return self
+    
+    @property
+    def point(self): return self._videoWidget.point
+
+    @point.setter
+    def point(self, value): self._videoWidget.point = value
     

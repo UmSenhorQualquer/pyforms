@@ -39,7 +39,34 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="videoLayout"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="videoLayout"/>
+     </item>
+     <item>
+      <widget class="QSlider" name="verticalSlider">
+       <property name="maximum">
+        <number>90</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="maximum">
+      <number>360</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QFrame" name="videoControl">

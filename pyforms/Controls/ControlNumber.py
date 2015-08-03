@@ -55,13 +55,13 @@ class ControlNumber(ControlBase):
 
 	@property
 	def value(self): 
-		self._value = str(self.form.spinBox.value())
+		self._value = self.form.spinBox.value()
 		return self._value
 
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self,value)
-		self.form.spinBox.valueFromText(str(value))
+		self.form.spinBox.setValue(int(value))
 
 
 	@property

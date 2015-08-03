@@ -72,7 +72,7 @@ class ControlList(ControlBase, QWidget):
         self.dataChangedEvent(
             item.row(), item.column(), self.tableWidget.model().data(item))
 
-    def dataChangedEvent(self, row, col): pass
+    def dataChangedEvent(self, row, col, item): pass
 
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
@@ -95,7 +95,7 @@ class ControlList(ControlBase, QWidget):
         self.tableWidget.clear()
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
-
+        
     def __add__(self, other):
 
         index = self.tableWidget.rowCount()
@@ -191,6 +191,7 @@ class ControlList(ControlBase, QWidget):
 
     @value.setter
     def value(self, value):
+        self.clear()
         for row in value:
             self += row
     # TODO: implement += on self.value? I want to add a list of tuples to
