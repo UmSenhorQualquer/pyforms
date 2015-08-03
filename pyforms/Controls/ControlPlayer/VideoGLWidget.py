@@ -245,7 +245,7 @@ class VideoGLWidget(QGLWidget):
 		self._mouseY = event.y()
 		self.repaint()
 		if hasattr(self, 'imgWidth'):
-			self.onDoubleClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth) )
+			self.onDoubleClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth)-self.imgHeight/2.0 )
 
 	def mouseReleaseEvent(self, event):
 		self._mouseDown = False
@@ -259,7 +259,7 @@ class VideoGLWidget(QGLWidget):
 
 		if event.button()==1:
 			if hasattr(self, 'imgWidth') and self._mouseLeftDown:
-				self.onEndDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth) ) )
+				self.onEndDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth)-self.imgHeight/2.0 ) )
 			self._mouseLeftDown = False
 
 	def mousePressEvent(self, event):
@@ -272,7 +272,7 @@ class VideoGLWidget(QGLWidget):
 		self.repaint()
 
 		if hasattr(self, 'imgWidth'):
-			self.onClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth) )
+			self.onClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth)-self.imgHeight/2.0)
 
 
 		if event.button()==1:
@@ -289,7 +289,7 @@ class VideoGLWidget(QGLWidget):
 		self._mouseY = event.y()
 		self.repaint()
 		if self._mouseLeftDown and self._mouseDown:
-			self.onDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth) ) )
+			self.onDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth)-self.imgHeight/2.0) )
 
 	def keyReleaseEvent(self, event):
 		super(QGLWidget, self).keyReleaseEvent(event)
