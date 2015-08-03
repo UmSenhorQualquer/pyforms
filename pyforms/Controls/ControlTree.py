@@ -94,8 +94,9 @@ class ControlTree(ControlBase, QTreeWidget):
             r = []
             for col in range(self.model().columnCount()):
                 r.append(self.model.item(row, col))
-                
-            if len(r) > 0: results.append(r)
+
+            if len(r) > 0:
+                results.append(r)
 
         return results
 
@@ -129,9 +130,10 @@ class ControlTree(ControlBase, QTreeWidget):
 
     @property
     def value(self): return None
-    
-    @value.setter
-    def value(self, value):  self.addTopLevelItem(value)
 
-	def save(self, data): pass
-	def load(self, data): pass
+    @value.setter
+    def value(self, value): self.addTopLevelItem(value)
+
+    def save(self, data): pass
+
+    def load(self, data): pass
