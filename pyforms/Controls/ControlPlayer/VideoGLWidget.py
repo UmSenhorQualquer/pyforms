@@ -82,12 +82,8 @@ class VideoGLWidget(QGLWidget):
 
 	def drawVideo(self, _width, _height, x , y, z):
 		GL.glPushMatrix()
-
 		
 		GL.glTranslatef(x, y, z)
-
-		
-	
 		GL.glBegin(GL.GL_QUADS )
 		GL.glTexCoord2f( 0.0, 1.0 );
 		GL.glVertex3f( 0, -_height/2.0, 0 );#top left

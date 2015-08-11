@@ -35,11 +35,32 @@ class ControlVisVisVolume(ControlBase):
 
         layout.addWidget(widget)
 
+        self._colorMap = vv.CM_AUTUMN
 
     ############################################################################
     ############ Properties ####################################################
     ############################################################################
 
+    @property
+    def colorMap(self):
+        return self._colorMap
+    
+    @colorMap.setter
+    def colorMap(self, value): 
+        self._colorMap=value
+        self.refresh()
+
+    def refresh(self):
+        if len(self._value)>1:
+            a = vv.gca()
+            view = a.GetView()
+            a.Clear()
+            vv.volshow3(self._value, renderStyle='mip', cm=self._colorMap )
+            if not self._first:
+                a = vv.gca()
+                a.SetView(view)
+
+            self._first=False
 
     @property
     def value(self): return None
@@ -47,15 +68,9 @@ class ControlVisVisVolume(ControlBase):
     @value.setter
     def value(self, value):
 
-        a = vv.gca()
-        view = a.GetView()
-        a.Clear()
-        vv.volshow3(value, renderStyle='mip')
-        if not self._first:
-            a = vv.gca()
-            a.SetView(view)
+        self._value = value
 
-        self._first=False
+        self.refresh()
         
 
         

@@ -71,23 +71,24 @@ class ControlList(ControlBase, QWidget):
     def _dataChangedEvent(self, item):
         self.dataChangedEvent(
             item.row(), item.column(), self.tableWidget.model().data(item))
+        self.changed()
 
     def dataChangedEvent(self, row, col, item): pass
 
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
         self.currentCellChanged(nextRow, nextCol, previousRow, previousCol)
+        self.changed()
 
-    def tableWidgetItemChanged(self, current, previous):
+    def tableWidgetItemChanged(self, current, previous): 
         self.currentItemChanged(current, previous)
+        self.changed()
 
-    def tableWidgetItemSelectionChanged(self):
-        self.itemSelectionChanged()
+    def tableWidgetItemSelectionChanged(self): self.itemSelectionChanged()
 
     def itemSelectionChanged(self): pass
 
-    def currentCellChanged(
-        self, nextRow, nextCol, previousRow, previousCol): pass
+    def currentCellChanged(self, nextRow, nextCol, previousRow, previousCol): pass
 
     def currentItemChanged(self, current, previous): pass
 

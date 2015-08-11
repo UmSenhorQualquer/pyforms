@@ -14,7 +14,7 @@ import pyforms.Utils.tools as tools
 from PyQt4 import uic, QtGui,QtCore
 from pyforms.Controls.ControlBase import ControlBase
 
-class GaugeWidgetVertical(QtGui.QWidget):
+class GaugeWidgetVertical(ControlBase, QtGui.QWidget):
 
     def __init__(self, *args, **kwargs):
         super(GaugeWidgetVertical, self).__init__(*args, **kwargs)
