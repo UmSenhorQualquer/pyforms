@@ -26,9 +26,9 @@ class ControlBase(object):
     @undocumented: __repr__
     """
 
-    def __init__(self, label='', defaultValue=''):
+    def __init__(self, label='', defaultValue='', helptext=''):
         super(ControlBase, self).__init__()
-
+        self._help = helptext
         self._value = defaultValue
         self._form = None  # Qt widget
         self._parent = None  # Parent window
@@ -45,6 +45,7 @@ class ControlBase(object):
         self._form = uic.loadUi(control_path)
         self.form.label.setText(self._label)
         self.form.lineEdit.setText(self._value)
+        self.form.setToolTip(self.help)
 
         # self.form.lineEdit.editingFinished.connect(self.finishEditing)
 
@@ -240,3 +241,7 @@ class ControlBase(object):
         @type  value: BaseWidget
         """
         self._parent = value
+
+
+    @property
+    def help(self): return self._help if self._help else ''

@@ -1,11 +1,11 @@
-import pyforms.standaloneManager as app
-from pyforms.BaseWidget import BaseWidget
+import pyforms
+from pyforms import BaseWidget
 
 
 from PyQt4 import QtGui, QtCore
-from pyforms.Controls.ControlText 		import ControlText
-from pyforms.Controls.ControlButton 	import ControlButton
-from pyforms.Controls.ControlTree import ControlTree
+from pyforms.Controls import ControlText
+from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlTree
 
 
 class ProjectTree(BaseWidget):
@@ -33,4 +33,4 @@ class ProjectTree(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( BaseWindow )
+if __name__ == "__main__":	 pyforms.startApp( ProjectTree )

@@ -1,4 +1,4 @@
-# Simple example 4
+# Simple example 3
 
 This example shows you how to organize the forms side by side using the variable "self._formset".
 		

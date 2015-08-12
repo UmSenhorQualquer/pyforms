@@ -10,11 +10,11 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-from pyforms.AutoForm 				import AutoForm
-from pyforms.Controls.ControlText 	import ControlText
-from pyforms.Controls.ControlButton import ControlButton
-from pyforms.Controls.ControlSlider import ControlSlider
-from pyforms.Controls.ControlFile import ControlFile
-from pyforms.Controls.ControlPlayer.ControlPlayer import ControlPlayer
+from pyforms import BaseWidget
+from pyforms.Controls import ControlText
+from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlSlider
+from pyforms.Controls import ControlFile
+from pyforms.Controls import ControlPlayer
 
-import pyforms.standaloneManager as app
+import pyforms

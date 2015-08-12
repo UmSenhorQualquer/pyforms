@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.web.Controls.ControlCombo.ControlCombo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.web-module.html">Package&nbsp;web</a> ::
+        <a href="pyforms.web.Controls-module.html">Package&nbsp;Controls</a> ::
+        <a href="pyforms.web.Controls.ControlCombo-module.html">Module&nbsp;ControlCombo</a> ::
+        Class&nbsp;ControlCombo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ControlCombo</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__61" name="uml_class_diagram_for_pyforms__61">
+<area shape="rect" id="node1_23" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="20,400,345,420"/>
+<area shape="rect" id="node1_24" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#initControl" title="pyforms.web.Controls.ControlCombo.ControlCombo.initControl" alt="" coords="20,420,345,440"/>
+<area shape="rect" id="node1_25" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#currentIndexChanged" title="pyforms.web.Controls.ControlCombo.ControlCombo.currentIndexChanged" alt="" coords="20,440,345,460"/>
+<area shape="rect" id="node1_26" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#addItem" title="pyforms.web.Controls.ControlCombo.ControlCombo.addItem" alt="" coords="20,460,345,480"/>
+<area shape="rect" id="node1_27" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#clearItems" title="pyforms.web.Controls.ControlCombo.ControlCombo.clearItems" alt="" coords="20,480,345,500"/>
+<area shape="rect" id="node1_28" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#items" title="pyforms.web.Controls.ControlCombo.ControlCombo.items" alt="" coords="20,500,345,520"/>
+<area shape="rect" id="node1_29" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#values" title="pyforms.web.Controls.ControlCombo.ControlCombo.values" alt="" coords="20,520,345,540"/>
+<area shape="rect" id="node1_30" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#value" title="pyforms.web.Controls.ControlCombo.ControlCombo.value" alt="" coords="20,540,345,560"/>
+<area shape="rect" id="node1_31" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#text" title="pyforms.web.Controls.ControlCombo.ControlCombo.text" alt="" coords="20,560,345,580"/>
+<area shape="rect" id="node1" href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html" title="pyforms.web.Controls.ControlCombo.ControlCombo" alt="" coords="8,366,357,586"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.finishEditing" alt="" coords="17,40,347,60"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.updateControl" alt="" coords="17,60,347,80"/>
+<area shape="rect" id="node2_34" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.changed" alt="" coords="17,80,347,100"/>
+<area shape="rect" id="node2_35" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.load" alt="" coords="17,100,347,120"/>
+<area shape="rect" id="node2_36" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.save" alt="" coords="17,120,347,140"/>
+<area shape="rect" id="node2_37" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.valueUpdated" alt="" coords="17,140,347,160"/>
+<area shape="rect" id="node2_38" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.show" alt="" coords="17,160,347,180"/>
+<area shape="rect" id="node2_39" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.hide" alt="" coords="17,180,347,200"/>
+<area shape="rect" id="node2_40" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.openPopupMenu" alt="" coords="17,200,347,220"/>
+<area shape="rect" id="node2_41" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.addPopupSubMenuOption" alt="" coords="17,220,347,240"/>
+<area shape="rect" id="node2_42" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.addPopupMenuOption" alt="" coords="17,240,347,260"/>
+<area shape="rect" id="node2_43" href="javascript:void(0);" title="repr(x)" alt="" coords="17,260,347,280"/>
+<area shape="rect" id="node2_44" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.help" alt="" coords="17,280,347,300"/>
+<area shape="rect" id="node2_45" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase.httpRequest" alt="" coords="17,320,347,340"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="pyforms.web.Controls.ControlBase.ControlBase" alt="" coords="5,6,358,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__61.gif" alt='' usemap="#uml_class_diagram_for_pyforms__61" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>=<span class="summary-sig-default">&quot;&quot;</span>,
+        <span class="summary-sig-arg">defaultValue</span>=<span class="summary-sig-default">&quot;&quot;</span>,
+        <span class="summary-sig-arg">helptext</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#initControl" class="summary-sig-name">initControl</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.initControl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="currentIndexChanged"></a><span class="summary-sig-name">currentIndexChanged</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.currentIndexChanged">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addItem"></a><span class="summary-sig-name">addItem</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>,
+        <span class="summary-sig-arg">value</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.addItem">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clearItems"></a><span class="summary-sig-name">clearItems</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.clearItems">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#items" class="summary-sig-name">items</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.items">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#values" class="summary-sig-name">values</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.values">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#value" class="summary-sig-name">value</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.web.Controls.ControlCombo.ControlCombo-class.html#text" class="summary-sig-name">text</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b>:
+      <code>__repr__</code>,
+      <code>__str__</code>,
+      <code>addPopupMenuOption</code>,
+      <code>addPopupSubMenuOption</code>,
+      <code>changed</code>,
+      <code>enabled</code>,
+      <code>finishEditing</code>,
+      <code>help</code>,
+      <code>hide</code>,
+      <code>httpRequest</code>,
+      <code>label</code>,
+      <code>load</code>,
+      <code>maxHeight</code>,
+      <code>maxWidth</code>,
+      <code>minHeight</code>,
+      <code>minWidth</code>,
+      <code>openPopupMenu</code>,
+      <code>parent</code>,
+      <code>save</code>,
+      <code>show</code>,
+      <code>storage</code>,
+      <code>updateControl</code>,
+      <code>valueUpdated</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b> (private):
+      <code>_controlHTML</code>,
+      <code>_label</code>,
+      <code>_value</code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">label</span>=<span class="sig-default">&quot;&quot;</span>,
+        <span class="sig-arg">defaultValue</span>=<span class="sig-default">&quot;&quot;</span>,
+        <span class="sig-arg">helptext</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="initControl"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initControl</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.initControl">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="pyforms.web.Controls.ControlBase.ControlBase-class.html#initControl">ControlBase.ControlBase.initControl</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="items"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">items</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.items">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="values"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">values</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.values">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">value</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.value">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@value.setter</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.web.Controls.ControlBase.ControlBase-class.html#value">ControlBase.ControlBase.value</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="text"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">text</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.web.Controls.ControlCombo-pysrc.html#ControlCombo.text">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@text.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Aug 13 00:09:30 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

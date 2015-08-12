@@ -1,12 +1,12 @@
 from __init__ import *
 from Person import Person
 
-class PersonWindow(Person, AutoForm):
+class PersonWindow(Person, BaseWidget):
 
 
 	def __init__(self):
 		Person.__init__(self, '', '', '')
-		AutoForm.__init__(self,'Person window')
+		BaseWidget.__init__(self,'Person window')
 
 		#Definition of the forms fields
 		self._firstnameField 	= ControlText('First name')
@@ -37,4 +37,4 @@ class PersonWindow(Person, AutoForm):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( PersonWindow )
+if __name__ == "__main__":	 pyforms.startApp( PersonWindow )

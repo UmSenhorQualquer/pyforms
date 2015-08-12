@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.Controls.ControlImage.ImageGLWidget</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="pyforms.gui.Controls-module.html">Package&nbsp;Controls</a> ::
+        <a href="pyforms.gui.Controls.ControlImage-module.html">Module&nbsp;ControlImage</a> ::
+        Class&nbsp;ImageGLWidget
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ImageGLWidget</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__23" name="uml_class_diagram_for_pyforms__23">
+<area shape="rect" id="node1_15" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#__init__" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.__init__" alt="" coords="16,40,240,60"/>
+<area shape="rect" id="node1_16" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#initializeGL" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.initializeGL" alt="" coords="16,60,240,80"/>
+<area shape="rect" id="node1_17" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#resizeGL" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.resizeGL" alt="" coords="16,80,240,100"/>
+<area shape="rect" id="node1_18" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#drawVideo" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.drawVideo" alt="" coords="16,100,240,120"/>
+<area shape="rect" id="node1_19" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#paintGL" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.paintGL" alt="" coords="16,120,240,140"/>
+<area shape="rect" id="node1_20" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#reset" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.reset" alt="" coords="16,140,240,160"/>
+<area shape="rect" id="node1_21" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#paint" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.paint" alt="" coords="16,160,240,180"/>
+<area shape="rect" id="node1_22" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#wheelEvent" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.wheelEvent" alt="" coords="16,180,240,200"/>
+<area shape="rect" id="node1_23" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#mouseReleaseEvent" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.mouseReleaseEvent" alt="" coords="16,200,240,220"/>
+<area shape="rect" id="node1_24" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#mousePressEvent" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.mousePressEvent" alt="" coords="16,220,240,240"/>
+<area shape="rect" id="node1_25" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#mouseMoveEvent" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.mouseMoveEvent" alt="" coords="16,240,240,260"/>
+<area shape="rect" id="node1_26" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#onMove" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.onMove" alt="" coords="16,260,240,280"/>
+<area shape="rect" id="node1_27" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#onPress" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.onPress" alt="" coords="16,280,240,300"/>
+<area shape="rect" id="node1_28" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#onDrag" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.onDrag" alt="" coords="16,300,240,320"/>
+<area shape="rect" id="node1_29" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#onEndDrag" title="pyforms.gui.Controls.ControlImage.ImageGLWidget.onEndDrag" alt="" coords="16,320,240,340"/>
+<area shape="rect" id="node1" href="pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html" title="pyforms.gui.Controls.ControlImage.ImageGLWidget" alt="" coords="4,6,252,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__23.gif" alt='' usemap="#uml_class_diagram_for_pyforms__23" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parent</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="initializeGL"></a><span class="summary-sig-name">initializeGL</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.initializeGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="resizeGL"></a><span class="summary-sig-name">resizeGL</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.resizeGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="drawVideo"></a><span class="summary-sig-name">drawVideo</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">z</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.drawVideo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintGL"></a><span class="summary-sig-name">paintGL</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.paintGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="reset"></a><span class="summary-sig-name">reset</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.reset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paint"></a><span class="summary-sig-name">paint</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">frames</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.paint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wheelEvent"></a><span class="summary-sig-name">wheelEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.wheelEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseReleaseEvent"></a><span class="summary-sig-name">mouseReleaseEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.mouseReleaseEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mousePressEvent"></a><span class="summary-sig-name">mousePressEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.mousePressEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseMoveEvent"></a><span class="summary-sig-name">mouseMoveEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.mouseMoveEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onMove"></a><span class="summary-sig-name">onMove</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">point</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.onMove">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onPress"></a><span class="summary-sig-name">onPress</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">button</span>,
+        <span class="summary-sig-arg">point</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.onPress">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onDrag"></a><span class="summary-sig-name">onDrag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">startPoint</span>,
+        <span class="summary-sig-arg">endPoint</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.onDrag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onEndDrag"></a><span class="summary-sig-name">onEndDrag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">startPoint</span>,
+        <span class="summary-sig-arg">endPoint</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlImage-pysrc.html#ImageGLWidget.onEndDrag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_image2Display"></a><span class="summary-name">_image2Display</span> = <code title="None">None</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_zoom"></a><span class="summary-name">_zoom</span> = <code title="1.0">1.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_mouseX"></a><span class="summary-name">_mouseX</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_mouseY"></a><span class="summary-name">_mouseY</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_width"></a><span class="summary-name">_width</span> = <code title="1.0">1.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_height"></a><span class="summary-name">_height</span> = <code title="1.0">1.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_glX"></a><span class="summary-name">_glX</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_glY"></a><span class="summary-name">_glY</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_glZ"></a><span class="summary-name">_glZ</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_x"></a><span class="summary-name">_x</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_y"></a><span class="summary-name">_y</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_lastGlX"></a><span class="summary-name">_lastGlX</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_lastGlY"></a><span class="summary-name">_lastGlY</span> = <code title="0.0">0.0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_mouseDown"></a><span class="summary-name">_mouseDown</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_mouseLeftDown"></a><span class="summary-name">_mouseLeftDown</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_mouseRightDown"></a><span class="summary-name">_mouseRightDown</span> = <code title="False">False</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_texture"></a><span class="summary-name">_texture</span><br />
+      Opengl texture variable
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Aug 13 00:09:28 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

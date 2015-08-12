@@ -9,8 +9,8 @@ __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
-from pyforms.BaseWidget 			import BaseWidget
-from pyforms.Controls.ControlText 	import ControlText
-from pyforms.Controls.ControlButton import ControlButton
+from pyforms 			import BaseWidget
+from pyforms.Controls 	import ControlText
+from pyforms.Controls import ControlButton
 
-import pyforms.standaloneManager as app
+import pyforms

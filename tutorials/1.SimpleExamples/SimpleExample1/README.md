@@ -4,7 +4,7 @@ This example shows the most simple way to create windows form application using 
 
 
 ```python
-class SimpleExample1(AutoForm):
+class SimpleExample1(BaseWidget):
 	
 	def __init__(self):
 		super(SimpleExample1,self).__init__('Simple example 1')

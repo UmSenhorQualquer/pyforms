@@ -12,7 +12,7 @@ __status__      = "Development"
 
 from __init__ import *
 
-class ComputerVisionAlgorithm(AutoForm):
+class ComputerVisionAlgorithm(BaseWidget):
 	
 	def __init__(self):
 		super(ComputerVisionAlgorithm,self).__init__('Computer vision algorithm example')
@@ -66,4 +66,4 @@ class ComputerVisionAlgorithm(AutoForm):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( ComputerVisionAlgorithm )
+if __name__ == "__main__":	 pyforms.startApp( ComputerVisionAlgorithm )

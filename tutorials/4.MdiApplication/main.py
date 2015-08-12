@@ -1,4 +1,4 @@
-import pyforms.standaloneManager as app
+import pyforms
 from Core.MainWindow import MainWindow
 
 
@@ -7,4 +7,4 @@ from Core.MainWindow import MainWindow
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( MainWindow )
+if __name__ == "__main__":	 pyforms.startApp( MainWindow )

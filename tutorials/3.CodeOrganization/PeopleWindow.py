@@ -3,14 +3,14 @@ from People import People
 from PersonWindow import PersonWindow
 from AddMenuFuntionality import AddMenuFuntionality
 
-class PeopleWindow(AddMenuFuntionality, People, AutoForm):
+class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	"""
 	This applications is a GUI implementation of the People class
 	"""
 
 	def __init__(self):
 		People.__init__(self)
-		AutoForm.__init__(self,'People window')
+		BaseWidget.__init__(self,'People window')
 
 		#Definition of the forms fields
 		self._peopleList 	= ControlList('People')
@@ -58,4 +58,4 @@ class PeopleWindow(AddMenuFuntionality, People, AutoForm):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( PeopleWindow )
+if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )

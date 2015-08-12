@@ -1,17 +1,13 @@
-import pyforms.standaloneManager as app
-from pyforms.BaseWidget import BaseWidget
+import pyforms
+from pyforms import BaseWidget
 
-from pyforms.Controls.ControlText 		import ControlText
-from pyforms.Controls.ControlButton 	import ControlButton
-from pyforms.Controls.ControlDockWidget import ControlDockWidget
-from pyforms.Controls.ControlMdiArea 	import ControlMdiArea
+from pyforms.Controls	import ControlText
+from pyforms.Controls	import ControlButton
+from pyforms.Controls 	import ControlDockWidget
+from pyforms.Controls	import ControlMdiArea
 
-<<<<<<< HEAD
-from SimpleExample1 import SimpleExample1
-from Controllers.ProjectTree import ProjectTree
-=======
+from Core.SimpleExample1 import SimpleExample1
 from Core.Controllers.ProjectTree import ProjectTree
->>>>>>> bb49d47a4018d583cd9cfbb512d802a9dc758acf
 
 class BaseWindow(BaseWidget):
 
@@ -51,4 +47,4 @@ class BaseWindow(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( BaseWindow )
+if __name__ == "__main__":	 pyforms.startApp( BaseWindow )

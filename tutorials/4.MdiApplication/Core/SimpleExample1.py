@@ -11,11 +11,11 @@ __status__      = "Development"
 
 
 
-from pyforms.BaseWidget 				import BaseWidget
-from pyforms.Controls.ControlText 	import ControlText
-from pyforms.Controls.ControlButton import ControlButton
+from pyforms 			import BaseWidget
+from pyforms.Controls 	import ControlText
+from pyforms.Controls 	import ControlButton
 
-import pyforms.standaloneManager as app
+
 
 
 
@@ -51,5 +51,7 @@ class SimpleExample1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( SimpleExample1 )
+if __name__ == "__main__":	 
+	import pyforms
+	pyforms.startApp( SimpleExample1 )
 	

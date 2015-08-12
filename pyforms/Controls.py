@@ -1,6 +1,5 @@
 from pyforms import conf
 
-print conf.PYFORMS_MODE
 
 if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 
