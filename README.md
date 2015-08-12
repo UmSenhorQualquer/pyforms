@@ -61,7 +61,7 @@ For the GUIs that I wanted to build for my python scripts, I would like to have 
 The result was the simplicity that we can see in the example below:
 
 ```python
-class ComputerVisionAlgorithm(AutoForm):
+class ComputerVisionAlgorithm(BaseWidget):
 	
 	def __init__(self):
 		super(ComputerVisionAlgorithm,self).__init__('Computer vision algorithm example')

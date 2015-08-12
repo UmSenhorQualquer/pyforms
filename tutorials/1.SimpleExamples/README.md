@@ -34,7 +34,7 @@ Shows you how to **define tabs** using dictionaries in the variable "self._forms
 
 ## Example 5
 
-Shows you how to define the **application main menu** using the AutoForm.mainmenu property.
+Shows you how to define the **application main menu** using the BaseWidget.mainmenu property.
 
 ![Simple example ](SimpleExample5/screenshot.png?raw=true "Screen")
 

@@ -20,7 +20,7 @@ class People(object):
 
 PersonWindow.py
 ```python
-class PersonWindow(Person, AutoForm):
+class PersonWindow(Person, BaseWidget):
 	...
 ```
 
@@ -31,7 +31,7 @@ If we is being developed by a team of developers we can distribute the windows i
 
 PeopleWindow.py
 ```python
-class PeopleWindow(People, AutoForm):
+class PeopleWindow(People, BaseWidget):
 	...
 ```
 
@@ -47,6 +47,6 @@ class AddMenuFuntionality(object):
 
 PeopleWindow.py
 ```python
-class PeopleWindow(AddMenuFuntionality, People, AutoForm):
+class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	...
 ```
