@@ -16,7 +16,10 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	
 	from pyforms.gui 			import Controls
 	from pyforms.gui.BaseWidget	import BaseWidget
-	from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+	try:
+		from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+	except:
+		pass
 	
 	if conf.PYFORMS_MODE in ['GUI-OPENCSP']: 	from pyforms.gui.appmanager import startApp
 	else: 										from pyforms.gui.standaloneManager import startApp
@@ -36,6 +39,8 @@ elif conf.PYFORMS_MODE in ['WEB']:
 
 	from pyforms.web 						import Controls
 	from pyforms.web.BaseWidget				import BaseWidget
-	from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+	try:
+		from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+	except:pass
 
 	from pyforms.web.appmanager 			import startApp
