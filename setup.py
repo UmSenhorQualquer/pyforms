@@ -27,11 +27,16 @@ setup(
 	
 	packages=[
 		'pyforms',
-		'pyforms.Controls', 
 		'pyforms.Utils',
-		'pyforms.Controls.ControlEventTimeline',
-		'pyforms.Controls.ControlPlayer' ],
-	package_data={'pyforms': ['Controls/uipics/*.png', 'mainWindow.ui', 'Controls/*.ui', 'Controls/ControlPlayer/*.ui', 'Controls/ControlEventTimeline/*.ui']},
+		'pyforms.terminal',
+		'pyforms.terminal.Controls', 
+		'pyforms.web',
+		'pyforms.web.Controls', 
+		'pyforms.gui',
+		'pyforms.gui.Controls', 
+		'pyforms.gui.Controls.ControlEventTimeline',
+		'pyforms.gui.Controls.ControlPlayer' ],
+	package_data={'pyforms': ['gui/Controls/uipics/*.png', 'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 'gui/Controls/ControlEventTimeline/*.ui']},
 
 	install_requires=[
 		"pyopengl >= 3.1.0",

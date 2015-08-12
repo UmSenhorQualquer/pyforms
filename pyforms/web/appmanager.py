@@ -1,0 +1,1 @@
+def startApp(ClassObject): pass

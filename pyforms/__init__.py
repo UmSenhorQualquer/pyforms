@@ -9,4 +9,33 @@ __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
+from pyforms import conf
 
+
+if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
+	
+	from pyforms.gui 			import Controls
+	from pyforms.gui.BaseWidget	import BaseWidget
+	from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+	
+	if conf.PYFORMS_MODE in ['GUI-OPENCSP']: 	from pyforms.gui.appmanager import startApp
+	else: 										from pyforms.gui.standaloneManager import startApp
+
+
+
+elif conf.PYFORMS_MODE in ['TERMINAL']:
+
+	from pyforms.terminal 				import Controls
+	from pyforms.terminal.BaseWidget	import BaseWidget
+
+	from pyforms.terminal.appmanager 	import startApp
+
+
+
+elif conf.PYFORMS_MODE in ['WEB']:
+
+	from pyforms.web 						import Controls
+	from pyforms.web.BaseWidget				import BaseWidget
+	from pyforms.web.PyFormsStateMachine	import PyFormsStateMachine
+
+	from pyforms.web.appmanager 			import startApp

@@ -9,25 +9,25 @@ __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
-from pyforms.BaseWidget 					import BaseWidget
-from pyforms.Controls.ControlBoundingSlider import ControlBoundingSlider
-from pyforms.Controls.ControlText 			import ControlText
-from pyforms.Controls.ControlButton 		import ControlButton
-from pyforms.Controls.ControlCheckBox 		import ControlCheckBox
-from pyforms.Controls.ControlCheckBoxList 	import ControlCheckBoxList
-from pyforms.Controls.ControlCombo 			import ControlCombo
-from pyforms.Controls.ControlDir 			import ControlDir
-from pyforms.Controls.ControlDockWidget 	import ControlDockWidget
-from pyforms.Controls.ControlEmptyWidget 	import ControlEmptyWidget
-from pyforms.Controls.ControlFile 			import ControlFile
-from pyforms.Controls.ControlFilesTree 		import ControlFilesTree
-from pyforms.Controls.ControlImage 			import ControlImage
-from pyforms.Controls.ControlList 			import ControlList
-from pyforms.Controls.ControlPlayer.ControlPlayer 		import ControlPlayer
-from pyforms.Controls.ControlProgress 		import ControlProgress
-from pyforms.Controls.ControlSlider 		import ControlSlider
-from pyforms.Controls.ControlVisVis 		import ControlVisVis
-from pyforms.Controls.ControlVisVisVolume 	import ControlVisVisVolume
-from pyforms.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
+from pyforms 					import BaseWidget
+from pyforms.Controls import ControlBoundingSlider
+from pyforms.Controls 			import ControlText
+from pyforms.Controls 		import ControlButton
+from pyforms.Controls 		import ControlCheckBox
+from pyforms.Controls 	import ControlCheckBoxList
+from pyforms.Controls 			import ControlCombo
+from pyforms.Controls 			import ControlDir
+from pyforms.Controls 	import ControlDockWidget
+from pyforms.Controls 	import ControlEmptyWidget
+from pyforms.Controls 			import ControlFile
+from pyforms.Controls 		import ControlFilesTree
+from pyforms.Controls 			import ControlImage
+from pyforms.Controls 			import ControlList
+from pyforms.Controls 		import ControlPlayer
+from pyforms.Controls 		import ControlProgress
+from pyforms.Controls 		import ControlSlider
+from pyforms.Controls 		import ControlVisVis
+from pyforms.Controls 	import ControlVisVisVolume
+from pyforms.Controls 	import ControlEventTimeline
 
-import pyforms.standaloneManager as app
+import pyforms

@@ -16,6 +16,7 @@ from __init__ import *
 
 class SimpleExample1(BaseWidget):
 	
+	
 	def __init__(self):
 		super(SimpleExample1,self).__init__('Simple example 1')
 
@@ -46,5 +47,5 @@ class SimpleExample1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
 	

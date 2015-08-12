@@ -25,7 +25,7 @@ class Example1(BaseWidget):
 		self._player 		= ControlPlayer('Choose a file')
 		self._slider		= ControlSlider('Slider')
 		
-
+		self._player.show()
 		self._formset = [  '_slider', ('_checkboxList', '_player'), ('_checkbox',' ') ]
 
 
@@ -42,4 +42,4 @@ class Example1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( Example1 )
+if __name__ == "__main__":	 pyforms.startApp( Example1 )
