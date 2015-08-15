@@ -1,7 +1,7 @@
 import sys, glob, os
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
-import Utils.tools as tools, time
+import pyforms.Utils.tools as tools, time
 from pyforms.gui.BaseWidget import BaseWidget
 
 from pyStateMachine.States.State import State

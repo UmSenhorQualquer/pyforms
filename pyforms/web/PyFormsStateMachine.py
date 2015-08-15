@@ -2,7 +2,7 @@ import sys, glob, os
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 import pyforms.Utils.tools as tools, time
-from django.conf import settings
+import settings
 
 
 from pyforms.web.BaseWidget import BaseWidget
@@ -43,8 +43,13 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		for fromStateName, state in reversed( self.states.items() ):
 			if hasattr(state,'APP_CLASS'):
 				# Add the instance of the application to the State machine node
-				app = state.APP_CLASS(); app.initForm(); state._application = app 	
+				app = state.APP_CLASS(); 
+				#app.initForm(); 
+				state._application = app 	
 				app._controlsPrefix = fromStateName
+
+		self._html = ''
+		self._js = ''
 
 
 	def initForm(self):
@@ -57,14 +62,8 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		self._appsOutParams = {}
 						
 
-	def generateHTMLForm(self, params=None):
-		"""
-		Generate the module Form
-		"""
-		self.initForm()
-
 		self._controls = []
-		html = '<h3>Application workflow states</h3><br/>'
+		self._html = '<h3>Application workflow states</h3><br/>'
 		
 		# Load the applications
 		for fromStateName, state in reversed( self.states.items() ):
@@ -73,18 +72,18 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 				app = state._application
 
 				if app._formset != None:
-					html += '<h4 class="statemachine-toggleButton" state="{0}" >{0} <small>({1})</small></h4>'.format(fromStateName, app._title)
-					html += '<div id="statemachine-{0}-form" style="display:none;" >'.format( fromStateName )
-					html += app.generatePanel(app._formset)
-					html += '</div><hr/>'
+					self._html += '<h4 class="statemachine-toggleButton" state="{0}" >{0} <small>({1})</small></h4>'.format(fromStateName, app._title)
+					self._html += '<div id="statemachine-{0}-form" style="display:none;" >'.format( fromStateName )
+					self._html += app.generatePanel(app._formset)
+					self._html += '</div><hr/>'
 				self._controls += app._controls
 		
-		html += '<br/><br/><h3>Application workflow diagram</h3>'
-		html += '<img src="/load/{0}/statemachine/diagram/" >'.format(self.__class__.__name__)
+		self._html += '<br/><br/><h3>Application workflow diagram</h3>'
+		self._html += '<img src="/load/{0}/statemachine/diagram/" >'.format(self.__class__.__name__)
 		self._formLoaded = True
 		
-		js = "\n".join( self._controls )
-		return { 'code': html, 'controls_js': js, 'title': self._title }
+		self._js = "\n".join( self._controls )
+		return {  'title': self._title }
 
 				
 		

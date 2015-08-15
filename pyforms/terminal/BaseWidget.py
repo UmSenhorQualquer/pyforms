@@ -1,4 +1,4 @@
-from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox
+from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase
 from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 
@@ -26,9 +26,11 @@ class BaseWidget(object):
 
     def initForm(self):
         result = {}
-        for name, var in vars(self).items():
+        for name, var in self.formControls.items():
             if isinstance(var, (ControlFile,ControlSlider,ControlText, ControlCombo,ControlCheckBox) ):
                 self._parser.add_argument("--%s" % name, help=var.label)
+
+        self._parser.add_argument("--exec", default='', help='Function from the application that should be executed. Use | to separate a list of functions.')
         
         args = self._parser.parse_args()
         for name, var in vars(self).items():
@@ -51,7 +53,9 @@ class BaseWidget(object):
             elif isinstance(var, ControlSlider):
                 var.value = int(args.__dict__[name])
 
-        self.execute()
+        
+        for function in args.__dict__['exec'].split('|'):
+            if len(function)>0: getattr(self, function)()
 
 
     def __downloadFile(self, url, outFilepath):
@@ -131,3 +135,15 @@ class BaseWidget(object):
         #print 'output: ', output
         return ''#output
 
+
+
+    @property
+    def formControls(self):
+        """
+        Return all the form controls from the the module
+        """
+        result = {}
+        for name, var in vars(self).items():
+            if isinstance(var, ControlBase):
+                result[name] = var
+        return result

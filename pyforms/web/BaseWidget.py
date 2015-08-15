@@ -14,31 +14,31 @@ class BaseWidget(object):
     _splitters = None
 
     def __init__(self, title):
-        print "-----"
         self._splitters     = []
         self._title         = title
         self._formLoaded    = False
         self._controls      = []
         self._controlsPrefix = ''
+        self._html          = ''
+        self._js            = ''
 
     ############################################################################
     ############ Module functions  #############################################
     ############################################################################
 
-    def initForm(self): pass
-        
-
-    def generateHTMLForm(self, params=None):
+    def initForm(self):
         """
         Generate the module Form
         """
-        html = ""
-        if self._formset != None: html += self.generatePanel(self._formset)
+        self._html = ''
+        self._js = ''
+        if self._formset != None: 
+            self._html += self.generatePanel(self._formset)
+            self._js = "\n".join( self._controls )
         self._formLoaded = True
-        
-        js = "\n".join( self._controls )
-        return { 'code': html, 'controls_js': js, 'title': self._title }
+        return { 'code': self._html, 'controls_js': self._js, 'title': self._title }
 
+        
 
     def generateTabs(self, formsetDict):
         """
@@ -222,4 +222,10 @@ class BaseWidget(object):
         for control in self.formControls.values(): control.httpRequest = value
     #######################################################
 
-        
+    
+    @property
+    def html(self): return self._html
+
+    @property
+    def js(self): return self._js
+    

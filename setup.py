@@ -32,11 +32,18 @@ setup(
 		'pyforms.terminal.Controls', 
 		'pyforms.web',
 		'pyforms.web.Controls', 
+		'pyforms.web.django', 
+		'pyforms.web.django.templatetags', 
 		'pyforms.gui',
 		'pyforms.gui.Controls', 
 		'pyforms.gui.Controls.ControlEventTimeline',
 		'pyforms.gui.Controls.ControlPlayer' ],
-	package_data={'pyforms': ['gui/Controls/uipics/*.png', 'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 'gui/Controls/ControlEventTimeline/*.ui']},
+	package_data={'pyforms': [
+			'web/django/*.js', 
+			'gui/Controls/uipics/*.png', 
+			'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 
+			'gui/Controls/ControlEventTimeline/*.ui']
+		},
 
 	install_requires=[
 		"pyopengl >= 3.1.0",
