@@ -28,17 +28,21 @@ Pyforms is a Python 2.7 framework to develop GUI application, which promotes mod
 * [PyOpenGL](http://pyopengl.sourceforge.net/) [Optional - Only used by some Controls]
 * [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
 * [Numpy](http://www.numpy.org/) [Optional - Only used by some Controls]
+* [setuptools] (https://pypi.python.org/pypi/setuptools)
 
 ##### Ubuntu 14
 
 * run ```sudo python setup.py install```
 * PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
 * PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
+* setuptools: ```sudo apt-get install python-setuptools```
 
 ##### Mac OSx
 
+* Install python and its tools using [Homebrew] (http://brew.sh)
+* [Scientific Python on Mac OS X 10.9+ with homebrew | Jörn's Blog](https://joernhees.de/blog/2014/02/25/scientific-python-on-mac-os-x-10-9-with-homebrew/)
+* [Installing scientific Python on Mac OS X | Lowin Data Company](http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/)
 * run ```sudo python setup.py install```
-* install pyqt4 with the gl module
 
 ## License
 
