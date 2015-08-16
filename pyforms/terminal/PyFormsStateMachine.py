@@ -1,8 +1,7 @@
 import sys, glob, os
-from PyQt4 import uic
-from PyQt4 import QtGui, QtCore
 import pyforms.Utils.tools as tools, time
-from pyforms.gui.BaseWidget import BaseWidget
+import argparse
+from pyforms.terminal.BaseWidget import BaseWidget
 
 from pyStateMachine.States.State import State
 from pyStateMachine.StateMachineControllers.StatesController import StatesController
@@ -23,59 +22,61 @@ def gotoAppState(true=None, false=None, trueParms={}, falseParms={}):
 
 class PyFormsState(State):
 
+	
 	def run(self, inVar):
-		if hasattr(self,'_application'): self._application.execute()
+		if hasattr(self,'_application'):  self._application.executeEvents()
 		return super(PyFormsState, self).run(inVar)
 
 
 class PyFormsStateMachine(StatesController, BaseWidget):
 
+	_parser = argparse.ArgumentParser()
+	
+
 	def __init__(self, title):
 		BaseWidget.__init__(self, title)
 		StatesController.__init__(self, self.STATES)		
 		
-		for stateName, state in self.states.items():
-				if hasattr(state,'APP_CLASS'):
-					state._application = state.APP_CLASS();
-
+		for fromStateName, state in self.states.items():
+			if hasattr(state,'APP_CLASS'):
+				# Add the instance of the application to the State machine node
+				app 				= state.APP_CLASS(); 
+				app._parser 		= self._parser
+				app._controlsPrefix = fromStateName
+				state._application 	= app 	
+				
 
 	def initForm(self):
-		tabs = QtGui.QTabWidget(self)
-		
-		self.layout().addWidget(tabs)
-		self.layout().setMargin(0)
-		self.layout().setSpacing(0)
-		
-
-		# Load the State machine graph
-		self.exportGraph()
-		self._image = QtGui.QLabel()
-		self._image.setPixmap(QtGui.QPixmap('stateMachine.png'))	
-		scrollArea = QtGui.QScrollArea();
- 		scrollArea.setWidget(self._image);
- 		tabs.addTab(scrollArea, 'State machine')
 
  		apps 	 	   		= {}
  		self._paramsFlow 	= {}
  		self._initalParms	= {}
  		self._appsOutParams = {}
 
-		# Load the applications
+ 		# Load the applications
 		for fromStateName, state in reversed( self.states.items() ):
 			if hasattr(state,'APP_CLASS'):
-				
 				# Add the instance of the application to the State machine node
 				app = state._application
-				app.initForm(); 
-				# Add the application form to a new Tab
-				tabs.addTab(app, fromStateName)
-				
-						
-
+				app.initForm(parse=False);
 		
-		 		
- 		
+		self._parser.add_argument(
+			"--exec", default='', 
+			help='Function from the application that should be executed. Use | to separate a list of functions.')
+		
+		self._args = self._parser.parse_args()
 
+		for fromStateName, state in reversed( self.states.items() ):
+			if hasattr(state,'APP_CLASS'):
+				app 		= state._application
+				app._args 	= self._args
+				app.parseTerminalParameters()	
+
+		for function in self._args.__dict__.get("exec", []).split('|'):
+			if len(function)>0:
+				getattr(self, function)()
+
+ 		
 	def iterateStates(self):
 		"""
 		Iterate states - each call go to another level
@@ -86,7 +87,11 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 			for fromStateName, toStateName, inputParam in self._waitingStates:
 				state = self._states[toStateName]
 				if hasattr(state,'APP_CLASS'):
-					state._application = state.APP_CLASS(); state._application.initForm()
+					app = state.APP_CLASS(); 
+					state._application = app
+					state._application.initForm(parse=False)
+					app._args 	= self._args
+					app.parseTerminalParameters()	
 
 					# Initiante the application with the default values set by the user
 					for controlName, controlValue in self._initalParms[toStateName].items():
@@ -134,7 +139,6 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 
 
 	def execute(self): 
-
 		apps 	 	   		= {}
  		inParams 	   		= {}
 
@@ -166,8 +170,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 				for controlName, control in state._application.formControls.items():
 					self._initalParms[stateName][controlName] = control.value
 			
-
-		while not self.ended:  self.iterateStates()
+		while not self.ended: self.iterateStates()
 
 		
 	def eventExtraComment(self, e, result):

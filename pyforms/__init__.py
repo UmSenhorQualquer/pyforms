@@ -35,6 +35,11 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 	from pyforms.terminal 				import Controls
 	from pyforms.terminal.BaseWidget	import BaseWidget
 
+	try:
+		from pyforms.terminal.PyFormsStateMachine	import PyFormsStateMachine, gotoAppState, PyFormsState
+	except:
+		print("PyFormsStateMachine is not working")
+
 	from pyforms.terminal.appmanager 	import startApp
 
 
