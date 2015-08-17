@@ -60,7 +60,8 @@ class ControlButton(ControlBase):
 
     @tooltip.setter
     def tooltip(self, value):
-        if value!=None: self._form.setToolTip(value)
+        if value is not None:
+            self._form.setToolTip(value)
 
     def setChecked(self, value):
         self._form.pushButton.setChecked(value)
