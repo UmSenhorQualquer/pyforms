@@ -1,22 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__      = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__     = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
+""" pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow
 
+"""
 
 from PyQt4 import uic
 from PyQt4 import QtCore, QtGui
-
 import pyforms.Utils.tools as tools
 # from pyforms.gui.BaseWidget import BaseWidget
 # from pyforms.gui.Controls.ControlButton import ControlButton
 # from pyforms.gui.Controls.ControlCombo import ControlCombo
+
+__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = "Ricardo Ribeiro"
+__email__ = "ricardojvr@gmail.com"
+__status__ = "Development"
 
 
 class TimelinePopupWindow(QtGui.QDialog):
@@ -31,7 +33,8 @@ class TimelinePopupWindow(QtGui.QDialog):
     def __init__(self, parent, track_id):
         super(TimelinePopupWindow, self).__init__(parent=parent)
         self._parent = parent
-        control_path = tools.getFileInSameDirectory(__file__, "TimelinePopupWindow.ui")
+        control_path = tools.getFileInSameDirectory(
+            __file__, "TimelinePopupWindow.ui")
         self._ui = uic.loadUi(control_path)
         self._ui.setWindowTitle("Track {:d} properties".format(track_id + 1))
 
@@ -48,7 +51,8 @@ class TimelinePopupWindow(QtGui.QDialog):
         self.__preview_color()
 
         # SIGNALS
-        self._ui.comboBox.currentIndexChanged.connect(self.__on_comboBox_change)
+        self._ui.comboBox.currentIndexChanged.connect(
+            self.__on_comboBox_change)
         self._ui.pushButton_add.clicked.connect(self.__add_behavior)
         self._ui.pushButton_remove.clicked.connect(self.__remove_behavior)
         self._ui.pushButton_color.clicked.connect(self.__pick_color)
@@ -61,7 +65,8 @@ class TimelinePopupWindow(QtGui.QDialog):
     def __add_behavior(self):
         """Add a behavior to the already existing ones."""
         cb = self._ui.comboBox
-        text, ok = QtGui.QInputDialog.getText(self, 'Add behavior', 'Description:', text='')
+        text, ok = QtGui.QInputDialog.getText(
+            self, 'Add behavior', 'Description:', text='')
         if ok:
             self.behavior = str(text)
             self.behaviors.append(self.behavior)
@@ -149,26 +154,9 @@ class TimelinePopupWindow(QtGui.QDialog):
             cb.setEnabled(False)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 ###
-###     MAYBE IN THE FUTURE IMPLEMENT THIS USING THE BaseWidget
+# MAYBE IN THE FUTURE IMPLEMENT THIS USING THE BaseWidget
 
 # class TimelinePopupWindow(BaseWidget):
 #     """

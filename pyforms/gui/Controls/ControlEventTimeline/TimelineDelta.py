@@ -1,19 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__      = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__     = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
+""" pyforms.gui.Controls.ControlEventTimeline.TimelineDelta
 
+"""
 
 from PyQt4 import QtGui
 
+__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = "Ricardo Ribeiro"
+__email__ = "ricardojvr@gmail.com"
+__status__ = "Development"
+
 
 class TimelineDelta(object):
+
     def __init__(self, begin, end=30, title=None, height=30, top=0, parent=None):
         self._top = top
         self._height = height
@@ -30,13 +34,12 @@ class TimelineDelta(object):
         if self.track >= self._parent.numberoftracks:
             self._parent.numberoftracks = self.track + 1
 
-
-    ######################################################################################
-    #### HELPERS/FUNCTIONS ###############################################################
-    ######################################################################################
+    ##########################################################################
+    #### HELPERS/FUNCTIONS ###################################################
+    ##########################################################################
 
     def collide(self, x, y):
-        return self.begin <= x <= self.end and self._top <= y<= (self._top + self._height)
+        return self.begin <= x <= self.end and self._top <= y <= (self._top + self._height)
 
     def canSlideBegin(self, x, y):
         return not self._lock and x == int(round(self.begin)) and self._top <= y <= (self._top + self._height)
@@ -79,7 +82,8 @@ class TimelineDelta(object):
             self._begin = 0
 
     def move(self, x, y):
-        if self._lock: return
+        if self._lock:
+            return
         if (self.begin + x) >= 0 and (self.end + x) <= self._parent.width():
             self._begin += x / self._parent._scale
             self._end += x / self._parent._scale
@@ -87,13 +91,16 @@ class TimelineDelta(object):
         new_track = (y - 20) // 34
         if current_track != new_track and new_track >= 0 and new_track <= self._parent.numberoftracks:
             self.track = new_track
-            if new_track >= self._parent.numberoftracks: self._parent.numberoftracks += 1
+            if new_track >= self._parent.numberoftracks:
+                self._parent.numberoftracks += 1
 
     def showEditWindow(self):
-        text, ok = QtGui.QInputDialog.getText(self._parent, 'Edit event',  'Comment:', text=self._title)
-        if ok: self._title = str(text)
+        text, ok = QtGui.QInputDialog.getText(
+            self._parent, 'Edit event',  'Comment:', text=self._title)
+        if ok:
+            self._title = str(text)
 
-    def draw(self, painter, showvalues = False):
+    def draw(self, painter, showvalues=False):
         start, end = self.begin, self.end
         if self._lock:
             transparency = 0.1
@@ -101,56 +108,67 @@ class TimelineDelta(object):
             transparency = 0.5
         painter.setPen(QtGui.QColor(0, 0, 0))
         painter.setOpacity(transparency)
-        painter.drawRoundedRect(start, self._top, end-start, self._height, 3,3)
+        painter.drawRoundedRect(
+            start, self._top, end - start, self._height, 3, 3)
         painter.setOpacity(1.0)
 
-        painter.drawText(start+3, self._top+19, self._title )
+        painter.drawText(start + 3, self._top + 19, self._title)
         if showvalues:
-            painter.drawText(start, self._top+44, "[%d;%d] delta:%d" % (self._begin, self._end, self._end-self._begin))
+            painter.drawText(
+                start, self._top + 44, "[%d;%d] delta:%d" % (self._begin, self._end, self._end - self._begin))
 
-
-    ######################################################################################
-    #### PROPERTIES ######################################################################
-    ######################################################################################
+    ##########################################################################
+    #### PROPERTIES ##########################################################
+    ##########################################################################
 
     @property
     def lock(self): return self._lock
+
     @lock.setter
     def lock(self, value): self._lock = value
 
     @property
-    def begin(self): return self._begin*self._parent._scale
+    def begin(self): return self._begin * self._parent._scale
+
     @begin.setter
     def begin(self, value):
-        if self._lock: return
-        self._begin = value/self._parent._scale
-        if self._begin<0: self._begin=0
+        if self._lock:
+            return
+        self._begin = value / self._parent._scale
+        if self._begin < 0:
+            self._begin = 0
 
     @property
-    def end(self): return self._end*self._parent._scale
+    def end(self): return self._end * self._parent._scale
+
     @end.setter
     def end(self, value):
-        if self._lock: return
-        self._end = value/self._parent._scale
-        if self._end>(self._parent.width()/self._parent._scale):
-            self._end=(self._parent.width()/self._parent._scale)
+        if self._lock:
+            return
+        self._end = value / self._parent._scale
+        if self._end > (self._parent.width() / self._parent._scale):
+            self._end = (self._parent.width() / self._parent._scale)
 
     @property
     def track(self):
         return (self._top - 20) // 34
+
     @track.setter
     def track(self, value):
-        #FIXME This was preventing assigning a track when importing ingo locked
+        # FIXME This was preventing assigning a track when importing ingo locked
         # Is it needed?
         # if self._lock: return
         self._top = value * 34 + 20
 
     @property
     def color(self): return self._defautcolor
+
     @color.setter
     def color(self, value):
-        if type(value)==str: self._defautcolor = QtGui.QColor(value)
-        else: self._defautcolor = value
+        if type(value) == str:
+            self._defautcolor = QtGui.QColor(value)
+        else:
+            self._defautcolor = value
 
     # @property
     # def row(self):
@@ -172,8 +190,7 @@ class TimelineDelta(object):
 
     #     if self.track>=self._parent.numberoftracks: self._parent.numberoftracks = self.track+1
 
-
-    #TODO redefinition of the property above to write to file in the new format
+    # TODO redefinition of the property above to write to file in the new format
     # This is a bad idea, better to access these individually
     @property
     def properties(self):
@@ -186,7 +203,7 @@ class TimelineDelta(object):
 
     @properties.setter
     def properties(self, value):
-        self._lock = value[0]=='True'
+        self._lock = value[0] == 'True'
         self._begin = int(value[1])
         self._end = int(value[2])
         self._title = value[3]
@@ -195,17 +212,3 @@ class TimelineDelta(object):
 
         if self.track >= self._parent.numberoftracks:
             self._parent.numberoftracks = self.track + 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-

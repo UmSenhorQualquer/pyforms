@@ -19,7 +19,7 @@ try:
 	import OpenGL.GLU as GLU
 	from PyQt4.QtOpenGL import QGLWidget
 except:
-	print "No OpenGL library available"
+	print ("No OpenGL library available")
 
 
 

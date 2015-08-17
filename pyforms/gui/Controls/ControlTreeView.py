@@ -1,4 +1,4 @@
-from ControlBase import ControlBase
+from pyforms.gui.Controls.ControlBase import ControlBase
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 
@@ -87,7 +87,7 @@ class ControlTreeView(ControlBase):
 			for col in range(self._model.columnCount()):
 				r.append( self._model.item(row, col) )
 			if len(r)>0: results.append(r)
-			print r, '---'
+			# print r, '---'
 
 		return results
 
