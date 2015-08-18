@@ -53,7 +53,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		self._image.setPixmap(QtGui.QPixmap('stateMachine.png'))	
 		scrollArea = QtGui.QScrollArea();
  		scrollArea.setWidget(self._image);
- 		tabs.addTab(scrollArea, 'State machine')
+ 		tabs.addTab(scrollArea, 'State Machine Diagram')
 
  		apps 	 	   		= {}
  		self._paramsFlow 	= {}
@@ -66,6 +66,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 				
 				# Add the instance of the application to the State machine node
 				app = state._application
+				if hasattr(state, '_formset'): app._formset = state._formset
 				app.initForm(); 
 				# Add the application form to a new Tab
 				tabs.addTab(app, fromStateName)
@@ -171,6 +172,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 
 		
 	def eventExtraComment(self, e, result):
+		return None
 		if result:
 			if len(e.trueParms)>0: 
 				res = ""
@@ -178,7 +180,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 					inStateName, inParamName = inparam.split('.')
 					outStateName, outParamName = outparam.split('.')
 
-					inParamName = self.states[inStateName]._application.formControls[inParamName].label
+					inParamName  = self.states[inStateName]._application.formControls[inParamName].label
 					outParamName = self.states[outStateName]._application.formControls[outParamName].label
 					res += '{0}::{1}={2}::{3}\n'.format(inStateName, inParamName, outStateName, outParamName)
 				return res

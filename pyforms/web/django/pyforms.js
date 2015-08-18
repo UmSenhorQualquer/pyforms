@@ -10,8 +10,8 @@ function ControlButton( label, dom_id, help ){
 		var html = "<div class='ControlButton' >";
 		html +="<button title='"+help+"'  value='"+this.LABEL+"' id='"+dom_id+"' class='btn' >";
 		html += '<i class="glyphicon glyphicon-cog"></i> '+ this.LABEL;
-	    html += '</button>';
-	    html += '</div>';
+		html += '</button>';
+		html += '</div>';
 		$( "#place"+this.DOMID ).html(html);
 
 		$( "#"+this.DOMID ).click(function(){
@@ -79,6 +79,52 @@ function FileRowEvent(row, dom){
 	return row;
 }
 
+function ControlDir( label, dom_id, value, help ){
+	this.LABEL = label;
+	this.DOMID = dom_id;
+	var self = this;
+
+	this.setValue = function(value){
+		$( "#"+this.DOMID ).val(value)
+	};
+	this.getValue = function(){ return $( "#"+this.DOMID ).val(); };
+	this.rawValue = function(value){ return $( "#"+this.DOMID ).val(); };
+	this.load = function(){
+		var html = "<div class='ControlFile' ><label for='"+this.DOMID+"' title='"+help+"' >"+this.LABEL+"</label>";
+		html += "<input type='text' class='filename' name='"+dom_id+"' id='"+dom_id+"' value='"+value+"' />";
+		//html += "<input class='choose-file-button' type='image' src='/static/upload.png' id='button"+dom_id+"' />";
+		html += '<button id="button'+dom_id+'" class="btn "><i class="glyphicon glyphicon-folder-open icon-white"></i></button>';
+		html += "<div id='dialog"+this.DOMID+"' dom-id='"+this.DOMID+"' class='dialog' style='display:none;' title='Pick a file'></div>";
+		
+		function reloadFolder(){
+			var folder = $('#files-browser-div').dataviewer('path');
+			if(folder==undefined) folder = '/';
+			$("#dialog"+self.DOMID).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
+			$("#dialog"+self.DOMID).dataviewer();
+		}
+		
+		$("#place"+this.DOMID ).replaceWith(html);
+		$("#dialog"+this.DOMID).dataviewer({ 
+			titles: ['File name','Size', 'Created on',''],
+			sizes: 	['auto','120px','220px','50px'],
+			sortingColumns: [0,1,2],
+			updateRowFunction: FileRowEvent,
+			extra_buttons: [{
+				btnId:'reload-folder', 
+				btnLabel:'Reload', 
+				btnAction: reloadFolder
+			}]
+		});
+
+		$( "#button"+this.DOMID ).unbind('click');
+		$( "#button"+this.DOMID ).click(function(){
+			$("#dialog"+dom_id ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
+			reloadFolder();
+		});
+	};
+	
+};
+
 
 function ControlFile( label, dom_id, value, help ){
 	this.LABEL = label;
@@ -111,10 +157,10 @@ function ControlFile( label, dom_id, value, help ){
 			sortingColumns: [0,1,2],
 			updateRowFunction: FileRowEvent,
 			extra_buttons: [{
-	            btnId:'reload-folder', 
-	            btnLabel:'Reload', 
-	            btnAction: reloadFolder
-	        }]
+				btnId:'reload-folder', 
+				btnLabel:'Reload', 
+				btnAction: reloadFolder
+			}]
 		});
 
 		$( "#button"+this.DOMID ).unbind('click');
@@ -219,8 +265,8 @@ function ControlSlider( label, dom_id, value, min, max, help  ){
 		$( "#place"+this.DOMID ).replaceWith(html);
 		$( "#"+this.DOMID ).slider({ 
 			slide: function( event, ui ) {
-        		$( "#value"+dom_id ).html(  ui.value );
-      		},
+				$( "#value"+dom_id ).html(  ui.value );
+			},
 			stop: function(){ FireEvent( dom_id, 'changed' )}, min: this.MIN, max: this.MAX,  value: this.VALUE });
 	};
 	
@@ -251,9 +297,9 @@ function ControlBoundingSlider( label, dom_id, value, min, max, horizontal, help
 		$( "#place"+this.DOMID ).replaceWith(html);
 		$( "#"+this.DOMID ).slider({ 
 			range: true,
-      		slide: function( event, ui ) {
-        		$( "#value"+dom_id ).html(  ui.value );
-      		},
+			slide: function( event, ui ) {
+				$( "#value"+dom_id ).html(  ui.value );
+			},
 			stop: function(){ FireEvent( dom_id, 'changed' )}, 
 			min: this.MIN, max: this.MAX, values: this.VALUE });
 	};
