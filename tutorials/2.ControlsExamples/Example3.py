@@ -27,7 +27,7 @@ class Example3(BaseWidget):
 		self._timeline 		= ControlEventTimeline('Timeline')
 		
 
-		self._formset = [ ('_combobox',' '), '_progress', '=','_visvisVolume', '=', '_list', '_timeline']
+		self._formset = [ ('_combobox',' '), '_progress', '=',('_visvisVolume', '||','_list'), '_timeline']
 
 		
 		self._combobox.addItem('Item 1', 'Value 1')

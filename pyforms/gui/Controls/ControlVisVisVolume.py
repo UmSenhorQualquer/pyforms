@@ -32,6 +32,7 @@ class ControlVisVisVolume(ControlBase):
         policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         widget = self._fig._widget
         widget.setSizePolicy(policy)
+        widget.setMinimumSize(100, 100)
 
         layout.addWidget(widget)
 

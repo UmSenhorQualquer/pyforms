@@ -1,4 +1,4 @@
-from ControlBase import ControlBase
+from pyforms.gui.Controls.ControlBase import ControlBase
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 
