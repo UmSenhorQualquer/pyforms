@@ -1,16 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__      = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__     = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__     = "MIT"
-__version__     = "0.0"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
+""" pyforms.gui.Controls.ControlEventTimeline.TimelinePointer
 
+"""
 
 from PyQt4 import QtGui, QtCore
+
+__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = "Ricardo Ribeiro"
+__email__ = "ricardojvr@gmail.com"
+__status__ = "Development"
 
 
 class TimelinePointer(object):
@@ -20,15 +23,16 @@ class TimelinePointer(object):
         self._parent = parent
 
     def draw(self, painter, showvalues=False):
-        painter.setPen(QtGui.QColor(0,255,0))
-        painter.setBrush(QtGui.QColor(0,255,0))
-        painter.drawLine(self.position, 8, self.position, self._parent.height())
-        painter.drawEllipse(QtCore.QPoint(self.position,8), 5, 5)
-        painter.drawText(self.position+8, 8+4, str(self._position))
+        painter.setPen(QtGui.QColor(0, 255, 0))
+        painter.setBrush(QtGui.QColor(0, 255, 0))
+        painter.drawLine(
+            self.position, 8, self.position, self._parent.height())
+        painter.drawEllipse(QtCore.QPoint(self.position, 8), 5, 5)
+        painter.drawText(self.position + 8, 8 + 4, str(self._position))
 
-    ######################################################################################
-    #### HELPERS/FUNCTIONS ###############################################################
-    ######################################################################################
+    ##########################################################################
+    #### HELPERS/FUNCTIONS ###################################################
+    ##########################################################################
 
     def moveEvent(self):
         pass
@@ -42,51 +46,23 @@ class TimelinePointer(object):
     def canSlideEnd(self, x, y):
         return False
 
-    
     def move(self, x, y):
-        x = int(round(x/self._parent._scale))
-        if (self._position-x)>=0 and (self._position-x)<=(self._parent.width()/self._parent._scale):
+        x = int(round(x / self._parent._scale))
+        if (self._position - x) >= 0 and (self._position - x) <= (self._parent.width() / self._parent._scale):
             self._position += x
             self.moveEvent()
 
-    ######################################################################################
-    #### PROPERTIES ######################################################################
-    ######################################################################################
+    ##########################################################################
+    #### PROPERTIES ##########################################################
+    ##########################################################################
 
     @property
-    def position(self): return self._position*self._parent._scale
+    def position(self): return self._position * self._parent._scale
+
     @position.setter
-    def position(self, value): self._position = int(round(value/self._parent._scale)); self.moveEvent()
+    def position(self, value):
+        self._position = int(round(value / self._parent._scale))
+        self.moveEvent()
 
     @property
     def frame(self): return self._position
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -87,7 +87,7 @@ class ControlTreeView(ControlBase):
 			for col in range(self._model.columnCount()):
 				r.append( self._model.item(row, col) )
 			if len(r)>0: results.append(r)
-			print r, '---'
+			# print r, '---'
 
 		return results
 

@@ -5,7 +5,7 @@ try:
 	from OpenGL.GLU import *
 	from PyQt4.QtOpenGL import QGLWidget
 except:
-	print "No OpenGL library available"
+	print ("No OpenGL library available")
 
 
 
