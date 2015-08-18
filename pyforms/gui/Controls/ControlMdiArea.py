@@ -29,15 +29,17 @@ class ControlMdiArea(ControlBase):
     def value(self, value):
         if isinstance( self._value, list ):
             for w in self._value:
-                if w!=None and w!="": self._form.layout().removeWidget( w._form )
+                if w!=None and w!="": self._form.addSubWindow( w.form )
         else:
-            if self._value!=None and self._value!="": self._form.layout().removeWidget( self._value._form )
+            if self._value!=None and self._value!="": 
+                #self._form.layout().removeWidget( self._value.form )
+                self._form.addSubWindow( value.form )
 
         if isinstance( value, list ):
             for w in value:
-                self._form.layout().addWidget( w._form )
+                self._form.layout().addWidget( w.form )
         else:
-            self._form.layout().addWidget( value._form )
+            self._form.addSubWindow( value.form )
 
         ControlBase.value.fset(self,value)
         
