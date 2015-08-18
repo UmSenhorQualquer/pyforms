@@ -26,8 +26,8 @@ class Example4(BaseWidget):
 
 		self._formset = [ '_visvis' ]
 
-		values1 =  [ (i, random.random()) for i in range(130) ]
-		values2 =  [ (i, random.random()) for i in range(130) ]
+		values1 =  [ (i, random.random(), random.random()) for i in range(130) ]
+		values2 =  [ (i, random.random(), random.random()) for i in range(130) ]
 	
 		self._visvis.value = [values1, values2]
 

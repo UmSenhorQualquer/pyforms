@@ -34,6 +34,8 @@ class SimpleExample1(BaseWidget):
 		#Define the button action
 		self._button.value = self.__buttonAction
 
+		
+
 
 	def __buttonAction(self):
 		"""Button action event"""

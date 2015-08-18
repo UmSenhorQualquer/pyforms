@@ -6,7 +6,7 @@ class MainWindow(BaseWindow):
 	def __init__(self):
 		super(MainWindow, self).__init__()
 
-		self.loadWindowData('teste.txt')
+		#self.loadWindowData('teste.txt')
 
 
 ##################################################################################################################

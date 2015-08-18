@@ -22,9 +22,13 @@ class BaseWindow(BaseWidget):
 		self._projectTree  		= ControlDockWidget('Project tree', side=ControlDockWidget.SIDE_RIGHT)
 		self._details  			= ControlDockWidget('Details', 		side=ControlDockWidget.SIDE_RIGHT)
 
-		self._formset = [ '_textField']
+		self._formset = [ '_textField', '_mdiArea']
 
 		self._details.value = SimpleExample1()
+		
+		simple = SimpleExample1(); simple.initForm()
+		self._mdiArea.value = simple
+
 
 		self.mainmenu.append(
 				{ 'File': [
