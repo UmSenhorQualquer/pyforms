@@ -1,44 +1,35 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-'''
-@author: Ricardo Ribeiro
-@credits: Ricardo Ribeiro
-@license: MIT
-@version: 0.0
-@maintainer: Ricardo Ribeiro
-@email: ricardojvr@gmail.com
-@status: Development
-@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
-'''
+
+""" pyforms.gui.Controls.ControlLabel"""
 
 import pyforms.Utils.tools as tools
-from PyQt4 import QtCore, QtGui
+from PyQt4 import uic
 from pyforms.gui.Controls.ControlBase import ControlBase
-from PyQt4 import QtCore, QtGui
 
-class ControlLabel(ControlBase, QtGui.QLabel):
+__author__ = "Carlos Mão de Ferro"
+__copyright__ = ""
+__credits__ = "Carlos Mão de Ferro"
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
+__status__ = "Development"
 
-    def __init__(self, label='', defaultValue=''):
-        QtGui.QLabel.__init__(self)
-        ControlBase.__init__(self, label, defaultValue)
 
-    def initForm(self): 
-        self.value = self._value
+class ControlLabel(ControlBase):
+
+    def __init__(self, label=''):
+        super(ControlLabel, self).__init__(label)
+
+    def initForm(self):
+        control_path = tools.getFileInSameDirectory(__file__, "label.ui")
+        self._form = uic.loadUi(control_path)
+        self._form.label.setText(self._label)
 
     def load(self, data): pass
 
     def save(self, data): pass
 
     @property
-    def form(self): return self
-
-    @property
-    def value(self):
-        return ControlBase.value.fget(self)
-
-    @value.setter
-    def value(self, value):
-        ControlBase.value.fset(self, value)
-        self.setText(value)
-        
-        
+    def form(self): return self._form
