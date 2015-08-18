@@ -50,7 +50,8 @@ class ControlVisVis(ControlBase):
 
         colors = ['r','g','b','c','m','y','k','w']
         for index, dataset in enumerate(self._value):
-            l = visvis.plot(dataset, ms='.', mc=colors[ index % len(colors) ], mw='3', ls='', mew=0 )
+            l = visvis.plot(dataset, ms='o', mc=colors[ index % len(colors) ], mw='3', ls='', mew=0 )
+            #l = visvis.plot(dataset, ms='o', mc=colors[ index % len(colors) ], mw='3', ls='', mew=0 )
             l.alpha = 0.3
 
 
