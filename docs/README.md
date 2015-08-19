@@ -2,12 +2,12 @@
 
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
-### It offers:
+### It offers
 * A Python layer of Desktop forms, based on PyQt, OpenGL and other libraries.
 * A Python layer that allow applications to run on Desktop GUI, Web and terminal without requiring code modifications.
 * A group of rules and methodologies that help the developer maintaining his code short, clean, reusable and readable. 
 
-![Diagram](docs/pyforms.png?raw=true "Screen")
+![Diagram](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/pyforms.png?raw=true "Screen")
 
 
 ## Installation
