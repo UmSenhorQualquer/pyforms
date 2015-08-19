@@ -23,10 +23,7 @@ class StandAloneContainer(QtGui.QMainWindow):
     def __init__(self, ClassObject):
         super(QtGui.QMainWindow, self).__init__()
         w = ClassObject()
-        w.initForm()
-        self.setCentralWidget(w)
-        self.setWindowTitle(w.title)
-
+       
         w.docks = {}
         for name, item in w.formControls.items():
             if isinstance(item, ControlDockWidget):
@@ -58,6 +55,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                     dock.setWidget(widget.form)
                     dock.setWindowTitle(widget.label)
                     widget.dock = dock
+                    print widget
                     self.addDockWidget(side, dock)
             else:
                 dock = QtGui.QDockWidget(self)
@@ -71,7 +69,12 @@ class StandAloneContainer(QtGui.QMainWindow):
                 dock.setWidget(widget.form)
                 self.addDockWidget(side, dock)
                 dock.setWindowTitle(widget.label)
-                x.dock = dock
+                widget.dock = dock
+                print widget
+
+        w.initForm()
+        self.setCentralWidget(w)
+        self.setWindowTitle(w.title)
 
         if len(w.mainmenu) > 0:
             self.__initMainMenu(w.mainmenu)

@@ -1,4 +1,4 @@
-from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase
+from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir
 from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 
@@ -13,7 +13,7 @@ class BaseWidget(object):
 	
 	
 	def __init__(self, title):
-		self._parser = argparse.ArgumentParser()
+		self._parser = argpaPYFORMS_MODE = 'TERMINAL'rse.ArgumentParser()
 		f = open('pid.txt', 'w')
 		f.write(str(os.getpid()))
 		f.close()
@@ -30,7 +30,7 @@ class BaseWidget(object):
 		result = {}
 		for fieldname, var in self.formControls.items():
 			name = var._name
-			if isinstance(var, (ControlFile,ControlSlider,ControlText, ControlCombo,ControlCheckBox) ):
+			if isinstance(var, (ControlFile,ControlSlider,ControlText, ControlCombo,ControlCheckBox, ControlDir) ):
 				self._parser.add_argument("--%s" % name, help=var.label)
 
 		if parse:
@@ -77,6 +77,11 @@ class BaseWidget(object):
 		for function in self._args.__dict__.get("exec{0}".format(self._controlsPrefix), []).split('|'):
 			if len(function)>0: getattr(self, function)()
 
+		res = {}
+		for controlName, control in self.formControls.items(): res[controlName] = control.value
+		outfile = open('out-parameters.txt', 'wb')
+		outfile.write( str(res) )
+		outfile.close()
 
 
 	def __downloadFile(self, url, outFilepath):

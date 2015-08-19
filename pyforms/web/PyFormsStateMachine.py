@@ -40,13 +40,11 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		BaseWidget.__init__(self, title)
 		StatesController.__init__(self, self.STATES)		
 
-		for fromStateName, state in reversed( self.states.items() ):
-			if hasattr(state,'APP_CLASS'):
-				# Add the instance of the application to the State machine node
-				app = state.APP_CLASS(); 
-				#app.initForm(); 
-				state._application = app 	
-				app._controlsPrefix = fromStateName
+		for stateName, state in self.states.items():
+			if hasattr(state, 'init'): 
+				state.init()
+			if hasattr(state, 'app') and state.app:
+				state.app._controlsPrefix = stateName
 
 		self._html = ''
 		self._js = ''
@@ -55,28 +53,21 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 	def initForm(self):
 		image = os.path.join( settings.MEDIA_ROOT, 'statesmachines', '{0}.png'.format( self.__class__.__name__) )
 		self.exportGraph(image)
-
-		apps 	 	   		= {}
-		self._paramsFlow 	= {}
-		self._initalParms	= {}
-		self._appsOutParams = {}
-						
-
+				
 		self._controls = []
 		self._html = '<h3>Application workflow states</h3><br/>'
 		
 		# Load the applications
 		for fromStateName, state in reversed( self.states.items() ):
-			if hasattr(state,'APP_CLASS'):
+			if hasattr(state, 'app') and state.app:
 				# Add the instance of the application to the State machine node
-				app = state._application
-
-				if app._formset != None:
-					self._html += '<h4 class="statemachine-toggleButton" state="{0}" >{0} <small>({1})</small></h4>'.format(fromStateName, app._title)
-					self._html += '<div id="statemachine-{0}-form" style="display:none;" >'.format( fromStateName )
-					self._html += app.generatePanel(app._formset)
-					self._html += '</div><hr/>'
-				self._controls += app._controls
+				formset = state.app.formControls.keys() if state.app._formset==None else state.app._formset
+				
+				self._html += '<h4 class="statemachine-toggleButton" state="{0}" >{0} <small>({1})</small></h4>'.format(fromStateName, state.app.title)
+				self._html += '<div id="statemachine-{0}-form" style="display:none;" >'.format( fromStateName )
+				self._html += state.app.generatePanel(formset)
+				self._html += '</div><hr/>'
+				self._controls += state.app._controls
 		
 		self._html += '<br/><br/><h3>Application workflow diagram</h3>'
 		self._html += '<img src="/load/{0}/statemachine/diagram/" >'.format(self.__class__.__name__)
@@ -187,7 +178,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 			tmp = key.split('-')
 			if len(tmp)>1: 
 				stateName, controlName = tmp
-				self.states[stateName]._application.formControls[controlName].value = value
+				self.states[stateName].app.formControls[controlName].value = value
 			elif key in self.formControls:
 				control = self.formControls[key]
 				control.value = value
@@ -196,7 +187,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 			tmp = params['event']['control'].split('-')
 			if len(tmp)>1:
 				stateName, controlName = tmp
-				control = self.states[stateName]._application.formControls[controlName]
+				control = self.states[stateName].app.formControls[controlName]
 				func = getattr(control, params['event']['event'])
 				func()
 			else:
@@ -209,8 +200,8 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 	def serializeForm(self):
 		res = {}
 		for stateName, state in reversed( self.states.items() ):
-			if hasattr(state, '_application'):
-				res.update( state._application.serializeForm() )
+			if hasattr(state, 'app') and state.app!=None:
+				res.update( state.app.serializeForm() )
 
 		for key, item in self.formControls.items():
 			if isinstance(item, ControlPlayer ): 

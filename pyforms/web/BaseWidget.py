@@ -224,8 +224,14 @@ class BaseWidget(object):
 
     
     @property
-    def html(self): return self._html
+    def form(self): return self._html
 
     @property
     def js(self): return self._js
     
+
+    @property
+    def title(self): return self._title
+
+    @title.setter
+    def title(self, value): self._title = value

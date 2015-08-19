@@ -80,3 +80,15 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 			for i in reversed(range(old_layout.count())):
 				old_layout.itemAt(i).widget().setParent(None)
 			
+
+	def show(self):
+		"""
+		Show the control
+		"""
+		QtGui.QWidget.show(self)
+
+	def hide(self):
+		"""
+		Hide the control
+		"""
+		QtGui.QWidget.hide(self)
