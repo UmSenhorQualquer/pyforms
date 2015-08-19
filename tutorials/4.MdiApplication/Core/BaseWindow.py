@@ -27,8 +27,9 @@ class BaseWindow(BaseWidget):
 		self._formset = [ '_addWindow','_open2Window','_textField', '_mdiArea']
 
 		self._details.value = SimpleExample1()
-		
-		self._mdiArea.showCloseButton = False
+
+
+		#self._mdiArea.showCloseButton = False
 		self._addWindow.value = self.__addWindow		
 		self._open2Window.value = self.__open2Windows
 
@@ -43,7 +44,11 @@ class BaseWindow(BaseWidget):
 			)
 
 	def __open2Windows(self):
-		self._mdiArea.value = [ SimpleExample1(),  SimpleExample1()]
+		self._mdiArea.value = [ self._simple,  SimpleExample1()]
+		try:
+			self._mdiArea.value = [ self._simple,  SimpleExample1()]
+		except:
+			self._mdiArea.value = [   SimpleExample1()]
 
 	def __addWindow(self):
 		self._simple = SimpleExample1(); 

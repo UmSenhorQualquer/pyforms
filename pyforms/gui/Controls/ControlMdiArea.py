@@ -48,13 +48,10 @@ class ControlMdiArea(ControlBase, QMdiArea):
 		if not other._formLoaded: other.initForm()
 		other.subwindow = self.addSubWindow(other)
 		other.subwindow.overrideWindowFlags( self.__flags() )
-		other.close 	= self.__hideWindow
 		other.show()
 		
 		self.value.append(other)
 		return self
-
-	def __hideWindow(self): self.hide()
 
 	##########################################################################
 	############ Properties ##################################################

@@ -31,3 +31,15 @@ class ControlDockWidget(ControlEmptyWidget):
         self.side = data['side']
         # print(data)
         super(ControlDockWidget, self).load(data)
+
+    def show(self):
+        """
+        Show the control
+        """
+        self.dock.show()
+
+    def hide(self):
+        """
+        Hide the control
+        """
+        self.dock.hide()
