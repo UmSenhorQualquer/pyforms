@@ -18,7 +18,7 @@ except:
     print("Warning: was not possible to import cv2 in ControlPlayer")
 
 from PyQt4.QtGui import QApplication
-from pyforms.gui.Controls.ControlPlayer import VideoGLWidget
+from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 
 __author__ = "Ricardo Ribeiro"

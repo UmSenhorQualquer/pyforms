@@ -10,6 +10,9 @@ Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI appl
 
 ![Diagram](docs/pyforms.png?raw=true "Screen")
 
+Example of an application running in the Desktop, Web and Terminal enviroments:
+
+![Application-Example](docs/example.png?raw=true "Screen")
 
 ## Advantages
 * With a minimal API, interfaces are easily defined using a short Python code.
