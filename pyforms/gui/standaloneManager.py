@@ -55,7 +55,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                     dock.setWidget(widget.form)
                     dock.setWindowTitle(widget.label)
                     widget.dock = dock
-                    print widget
+                    # print (widget
                     self.addDockWidget(side, dock)
             else:
                 dock = QtGui.QDockWidget(self)
@@ -70,7 +70,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                 self.addDockWidget(side, dock)
                 dock.setWindowTitle(widget.label)
                 widget.dock = dock
-                print widget
+                # print widget
 
         w.initForm()
         self.setCentralWidget(w)
