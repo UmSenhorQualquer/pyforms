@@ -60,6 +60,10 @@ class BaseWidget(object):
 					else:
 						var.value = value
 
+				if isinstance(var, ControlDir):
+					value = self._args.__dict__[name]
+					var.value = value
+
 				elif isinstance(var,  (ControlText, ControlCombo)):
 					var.value = self._args.__dict__[name]
 				elif isinstance(var, ControlCheckBox):

@@ -42,6 +42,7 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 	from pyforms.terminal.Controls.ControlCheckBox 		import ControlCheckBox
 	from pyforms.terminal.Controls.ControlCombo 		import ControlCombo
 	from pyforms.terminal.Controls.ControlFile 			import ControlFile
+	from pyforms.terminal.Controls.ControlDir 			import ControlDir
 	from pyforms.terminal.Controls.ControlImage 		import ControlImage
 	from pyforms.terminal.Controls.ControlSlider 		import ControlSlider
 	from pyforms.terminal.Controls.ControlPlayer 		import ControlPlayer
@@ -54,6 +55,7 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms.web.Controls.ControlButton 		import ControlButton
 	from pyforms.web.Controls.ControlCheckBox 		import ControlCheckBox
 	from pyforms.web.Controls.ControlCombo 			import ControlCombo
+	from pyforms.web.Controls.ControlDir 			import ControlDir
 	from pyforms.web.Controls.ControlFile 			import ControlFile
 	from pyforms.web.Controls.ControlImage 			import ControlImage
 	from pyforms.web.Controls.ControlSlider 		import ControlSlider
