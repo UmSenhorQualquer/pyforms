@@ -28,6 +28,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
         ControlBase.__init__(self, label)
         self._value = []
         self._showCloseButton = True
+        self._openWindows = []
 
     def initForm(self): pass
 
@@ -44,7 +45,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
         return flags
 
     def __add__(self, other):
-        if other not in self._value:
+        if other.title not in self._openWindows:
             if not other._formLoaded:
                 other.initForm()
             other.subwindow = self.addSubWindow(other)
@@ -53,6 +54,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
             other.closeEvent = self._subWindowClosed
 
             self.value.append(other)
+            self._openWindows.append(other.title)
         return self
 
     def _subWindowClosed(self, closeEvent):
@@ -60,6 +62,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
         if activeWidget in self._value:
             self._value.remove(activeWidget)
         self.removeSubWindow(self.activeSubWindow())
+        self._openWindows.remove(activeWidget.title)
         closeEvent.accept()
 
     ##########################################################################
