@@ -13,7 +13,7 @@ class BaseWidget(object):
 	
 	
 	def __init__(self, title):
-		self._parser = argpaPYFORMS_MODE = 'TERMINAL'rse.ArgumentParser()
+		self._parser = argparse.ArgumentParser()
 		f = open('pid.txt', 'w')
 		f.write(str(os.getpid()))
 		f.close()

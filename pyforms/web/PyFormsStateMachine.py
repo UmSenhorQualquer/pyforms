@@ -9,7 +9,7 @@ from pyforms.web.BaseWidget import BaseWidget
 from pyforms.web.Controls.ControlPlayer import ControlPlayer
 from pyforms.web.Controls.ControlButton import ControlButton
 
-from pyStateMachine.States.State import State
+from pyStateMachine.States.State import State, EndState
 from pyStateMachine.StateMachineControllers.StatesController import StatesController
 
 
@@ -26,11 +26,32 @@ def gotoAppState(true=None, false=None, trueParms={}, falseParms={}):
 	return go2decorator
 
 
+
 class PyFormsState(State):
 
-	def run(self, inVar):
-		if hasattr(self,'_application'): self._application.execute()
-		return super(PyFormsState, self).run(inVar)
+	def init(self): pass
+
+	def enter(self, inVar, currentState={}): return inVar
+
+	def leave(self, inVar, currentState={}): return inVar
+
+	def execute(self): 
+		if self.app!=None and hasattr(self.app, 'execute'): self.app.execute()
+
+
+	@property
+	def app(self): return self._app if hasattr(self, '_app') else None
+	
+	@app.setter
+	def app(self, value): self._app = value
+
+
+	def initForm(self):
+		if hasattr(self, 'app') and self.app: self.app.initForm(); 
+
+	@property
+	def form(self): return self.app.form if self.app else None
+	
 
 		
 
@@ -48,6 +69,8 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 
 		self._html = ''
 		self._js = ''
+
+		self._currentIteration = 0
 
 
 	def initForm(self):
@@ -76,7 +99,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		self._js = "\n".join( self._controls )
 		return {  'title': self._title }
 
-				
+	#def submit(self)
 		
 
 	def iterateStates(self):
@@ -85,95 +108,55 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		"""
 		if len(self._waitingStates)>0:
 			statesOutputs = []
-
-			for fromStateName, toStateName, inputParam in self._waitingStates:
-				state = self._states[toStateName]
-				if hasattr(state,'APP_CLASS'):
-					state._application = state.APP_CLASS(); state._application.initForm()
-
-					# Initiante the application with the default values set by the user
-					for controlName, controlValue in self._initalParms[toStateName].items():
-						getattr(state._application, controlName).value = controlValue
-
-					if toStateName in self._paramsFlow:
-						for inParm, outParam in self._paramsFlow[toStateName][fromStateName].items():
-							state._application.formControls[inParm].value = self._appsOutParams[outParam]
-					else:
-						print "no params found for", toStateName
-
+			print self._waitingStates
 
 			#First run all the pending states
 			for fromStateName, toStateName, inputParam in self._waitingStates:
-				state = self._states[toStateName]
-				statesOutputs.append( (toStateName ,state, state.run(inputParam) ) )
+				state 				= self._states[toStateName]
+				copyOfCurrentState 	= dict(self._currentState)
 
-
+				if isinstance(state, EndState): executionDetails = (toStateName, state, inputParam )
+				else:
+					p = state.enter(inputParam, copyOfCurrentState)
+					state.execute()
+					outParam = state.leave(p, copyOfCurrentState)
+					executionDetails = (toStateName, state, outParam )
+				
+				statesOutputs.append( executionDetails )
 
 			#Check the events of each exectuted state:
 			for stateName, state, output in statesOutputs:
-
-				if hasattr(state,'_application'):
-					for controlName, control in state._application.formControls.items():
-						self._appsOutParams['{0}.{1}'.format(stateName, controlName)] = control.value
-
 				#Remove the exectued state from the waiting queue
 				self._waitingStates.pop(0) 
-
 				#Check each event
 				for e in state.events:
 					#Select the next state to go
 					go2State = e.go2StateTrue if e(state, output) else e.go2StateFalse
-
-					
 					#In case the state is None, it stops the state execution
-					if go2State!=None: 
-						self._waitingStates.append( [stateName, go2State, output] )
-					else:
-						self._waitingStates.append( [stateName, 'EndState', output] )
+					if go2State!=None:  self._waitingStates.append( [stateName, go2State, output] )
+					else: 				self._waitingStates.append( [stateName, 'EndState', output] )
 
+			"Save the currentState of the iteration"
+			self._currentState = self.__returnCurrentStatesValues()
 		else:
-			print "State machine ended"
+			print("State machine ended")
+
+		self._currentIteration += 1
 
 
 
 	def execute(self): 
+		# Initiate the parameters set by the user
+		self._currentState = self.returnCurrentStatesValues()
 
-		apps 	 	   		= {}
-		inParams 	   		= {}
-
-
-		# Load the applications
-		for fromStateName, state in reversed( self.states.items() ):
-			if hasattr(state,'APP_CLASS'):
-				
-				for e in state.events:
-					for paramIn, paramOut in e.trueParms.items():
-						#For each event define the flow of parameters
-
-						if e.go2StateTrue not in self._paramsFlow:  
-							self._paramsFlow[e.go2StateTrue] = {}
-						if paramIn 		  not in self._paramsFlow[e.go2StateTrue]:  
-							self._paramsFlow[e.go2StateTrue][fromStateName] = {}
-
-						paramState, stateParam = paramIn.split('.')
-						self._paramsFlow[e.go2StateTrue][fromStateName][stateParam] = paramOut
-						
-
-		self._appsOutParams = {}
-
-		
-		# Save the parameters set by the user
-		for stateName, state in reversed( self.states.items() ):
-			if hasattr(state, '_application'):
-				self._initalParms[stateName] = {}
-				for controlName, control in state._application.formControls.items():
-					self._initalParms[stateName][controlName] = control.value
-			
-
+		# Iterate the states execution
 		while not self.ended:  self.iterateStates()
 
 	
 	def loadSerializedForm(self, params):
+
+		self._currentIteration = params.get('currentIteration', 0)
+
 		for key, value in params.items():
 			tmp = key.split('-')
 			if len(tmp)>1: 
@@ -195,7 +178,7 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 					if key==params['event']['control']:
 						func = getattr(item, params['event']['event'])
 						func()
-					
+		
 	
 	def serializeForm(self):
 		res = {}
@@ -212,32 +195,25 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 			else:
 				res[item._name] = item.value
 
+		res['currentIteration'] = self._currentIteration
 		return res
 
+	def returnCurrentStatesValues(self):
+		"""
+		Iterate all the states and save the values of their controls
+		"""
+		currentState = {}
+		for stateName, state in reversed( self.states.items() ):
+			appState = {}
+			#The state has an application associated to it
+			if hasattr(state, 'app') and state.app:
+				for controlName, control in state.app.formControls.items():
+					appState[controlName] = control.value
+			currentState[stateName] = appState
+		return currentState
 
-	def eventExtraComment(self, e, result):
-		if result:
-			if len(e.trueParms)>0: 
-				res = ""
-				for inparam, outparam in e.trueParms.items():
-					inStateName, inParamName = inparam.split('.')
-					outStateName, outParamName = outparam.split('.')
-
-					inParamName = self.states[inStateName]._application.formControls[inParamName].label
-					outParamName = self.states[outStateName]._application.formControls[outParamName].label
-					res += '{0}::{1}={2}::{3}\n'.format(inStateName, inParamName, outStateName, outParamName)
-				return res
-			else:
-				return None
-		else:
-			if len(e.falseParms)>0:
-				for inparam, outparm in e.falseParms.items():
-					inParamName = self.states[inStateName]._application.formControls[inParamName].label
-					outParamName = self.states[outStateName]._application.formControls[outParamName].label
-					res += '{0}::{1}={2}::{3}\n'.format(inStateName, inParamName, outStateName, outParamName)
-				return res
-			else:
-				return None
+	@property
+	def currentIteration(self): return self._currentIteration
 
 
 

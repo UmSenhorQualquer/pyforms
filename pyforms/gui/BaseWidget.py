@@ -11,13 +11,12 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.Controls.ControlBase       import ControlBase
+from pyforms.gui.Controls.ControlProgress   import ControlProgress
+import os, json, subprocess, time
 from datetime import datetime, timedelta
 from PyQt4 import QtGui, QtCore
-import time
-import subprocess
-import os
-import json
+from pyforms import conf
 
 
 class BaseWidget(QtGui.QWidget):
@@ -53,6 +52,11 @@ class BaseWidget(QtGui.QWidget):
         Generate the module Form
         """
         if not self._formLoaded:
+
+            if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
+                self._progress = ControlProgress("Progress", 0, 100)
+                if self._formset != None: self._formset += ['_progress']
+
             if self._formset is not None:
                 control = self.generatePanel(self._formset)
                 self.layout().addWidget(control)
