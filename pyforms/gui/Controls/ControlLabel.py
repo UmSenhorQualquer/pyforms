@@ -32,7 +32,7 @@ class ControlLabel(ControlBase):
     def save(self, data): pass
 
     def changed(self):
-        self._form.label.setText(self._label)
+        self._form.label.setText(self._value)
 
     @property
     def form(self): return self._form
