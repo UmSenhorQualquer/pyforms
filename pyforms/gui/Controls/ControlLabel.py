@@ -20,7 +20,7 @@ __status__ = "Development"
 class ControlLabel(ControlBase):
 
     def __init__(self, label=''):
-        super(ControlLabel, self).__init__(label)
+        super(ControlLabel, self).__init__(label=label, defaultValue=label)
 
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "label.ui")
@@ -31,13 +31,7 @@ class ControlLabel(ControlBase):
 
     def save(self, data): pass
 
-    @property
-    def value(self):
-        self._value = self._form.label.getText(self._label)
-        return self._value
-
-    @value.setter
-    def value(self, value):
+    def changed(self):
         self._form.label.setText(self._label)
 
     @property
