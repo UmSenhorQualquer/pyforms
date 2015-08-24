@@ -32,4 +32,13 @@ class ControlLabel(ControlBase):
     def save(self, data): pass
 
     @property
+    def value(self):
+        self._value = self._form.label.getText(self._label)
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        self._form.label.setText(self._label)
+
+    @property
     def form(self): return self._form
