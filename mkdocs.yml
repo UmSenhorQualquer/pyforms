@@ -1,3 +1,4 @@
 site_name: PyForms
 pages:
-- 'index.md'
+- Home: 'index.md'
+- About: 'about/license.md'
