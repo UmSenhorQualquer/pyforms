@@ -18,9 +18,9 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlButton(ControlBase):
 
-    def __init__(self, label='', defaultValue='', checkable=False):
+    def __init__(self, label='', checkable=False):
         self._checkable = checkable
-        super(ControlButton, self).__init__(label, defaultValue)
+        super(ControlButton, self).__init__(label)
 
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "button.ui")

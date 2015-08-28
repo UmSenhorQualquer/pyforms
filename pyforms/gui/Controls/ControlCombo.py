@@ -28,16 +28,44 @@ class ControlCombo(ControlBase):
         self._form.label.setText(self._label)
         self._form.comboBox.currentIndexChanged.connect(
             self.currentIndexChanged)
+        self._form.comboBox.activated.connect(
+            self._activated)
+        self._form.comboBox.highlighted.connect(
+            self._highlighted)
 
         self._items = {}
 
         self._addingItem = False
 
     def currentIndexChanged(self, index):
+        """Called when the user chooses an item in the combobox and 
+        the selected choice is different from the last one selected.
+        @index: item's index
+        """
         if not self._addingItem:
             item = self._form.comboBox.currentText()
             if len(item) >= 1:
                 ControlBase.value.fset(self, self._items[str(item)])
+
+    def _activated(self, index):
+        self.activated(index)
+
+    def activated(self, index):
+        """Called when the user chooses an item in the combobox.
+        Note that this signal happens even when the choice is not changed
+        @index: item's index
+        """
+        pass
+
+    def _highlighted(self, index):
+        """Called when an item in the combobox popup
+         list is highlighted by the user.
+         @index: item's index
+        """
+        self.activated(index)
+
+    def highlighted(self, index):
+        pass
 
     def addItem(self, label, value=None):
         self._addingItem = True
