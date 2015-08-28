@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.PyFormsStateMachine.PyFormsStateMachine</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="pyforms.gui.PyFormsStateMachine-module.html">Module&nbsp;PyFormsStateMachine</a> ::
+        Class&nbsp;PyFormsStateMachine
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class PyFormsStateMachine</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__42" name="uml_class_diagram_for_pyforms__42">
+<area shape="rect" id="node1_18" href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__" title="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__init__" alt="" coords="73,399,208,419"/>
+<area shape="rect" id="node1_19" href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm" title="Generate the module Form" alt="" coords="73,419,208,439"/>
+<area shape="rect" id="node1_20" href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#iterateStates" title="Iterate states &#45; each call go to another level" alt="" coords="73,439,208,459"/>
+<area shape="rect" id="node1_21" href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#execute" title="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.execute" alt="" coords="73,459,208,479"/>
+<area shape="rect" id="node1" href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html" title="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine" alt="" coords="61,365,219,485"/>
+<area shape="rect" id="node2_22" href="javascript:void(0);" title="Generate QTabWidget for the module form" alt="" coords="17,40,264,60"/>
+<area shape="rect" id="node2_23" href="javascript:void(0);" title="Generate a panel for the module form with all the controls formset format &#160;example: [(&#39;_video&#39;, &#39;_arenas&#39;, &#39;_run&#39;), {&quot;Player&quot;:[&#39;_threshold&#39;, &#160;&quot;_player&quot;, &quot;=&quot;, &quot;_results&quot;, &quot;_query&quot;], &quot;Background image&quot;:[(&#39; &#39;, &#160;&#39;_selectBackground&#39;, &#39;_paintBackground&#39;), &#39;_image&#39;]}, &quot;_progress&quot;] tuple: &#160;will display the controls in the same horizontal line list: will display &#160;the controls in the same vertical line dict: will display the controls in a tab widget &#39;||&#39;: will plit the controls in a horizontal line &#39;=&#39;: will plit the controls in a vertical line" alt="" coords="17,60,264,80"/>
+<area shape="rect" id="node2_24" href="javascript:void(0);" title="OTModuleProjectItem.show reimplementation" alt="" coords="17,80,264,100"/>
+<area shape="rect" id="node2_25" href="javascript:void(0);" title="Return all the form controls from the the module" alt="" coords="17,100,264,120"/>
+<area shape="rect" id="node2_26" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.start_progress" alt="" coords="17,120,264,140"/>
+<area shape="rect" id="node2_27" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.update_progress" alt="" coords="17,140,264,160"/>
+<area shape="rect" id="node2_28" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.end_progress" alt="" coords="17,160,264,180"/>
+<area shape="rect" id="node2_29" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.executeCommand" alt="" coords="17,180,264,200"/>
+<area shape="rect" id="node2_30" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.form" alt="" coords="17,200,264,220"/>
+<area shape="rect" id="node2_31" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.title" alt="" coords="17,220,264,240"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.mainmenu" alt="" coords="17,240,264,260"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.docks" alt="" coords="17,260,264,280"/>
+<area shape="rect" id="node2_34" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.save" alt="" coords="17,280,264,300"/>
+<area shape="rect" id="node2_35" href="javascript:void(0);" title="pyforms.gui.BaseWidget.BaseWidget.loadWindow" alt="" coords="17,320,264,340"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="The class implements the most basic widget or window." alt="" coords="5,6,275,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__42.gif" alt='' usemap="#uml_class_diagram_for_pyforms__42" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">title</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm" class="summary-sig-name">initForm</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Generate the module Form</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.initForm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="iterateStates"></a><span class="summary-sig-name">iterateStates</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Iterate states - each call go to another level</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.iterateStates">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="execute"></a><span class="summary-sig-name">execute</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.execute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__returnCurrentStatesValues"></a><span class="summary-sig-name">__returnCurrentStatesValues</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Iterate all the states and save the values of their controls</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.__returnCurrentStatesValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>BaseWidget.BaseWidget</code></b>:
+      <code>docks</code>,
+      <code>end_progress</code>,
+      <code>executeCommand</code>,
+      <code>form</code>,
+      <code>formControls</code>,
+      <code>generatePanel</code>,
+      <code>generateTabs</code>,
+      <code>load</code>,
+      <code>loadWindow</code>,
+      <code>loadWindowData</code>,
+      <code>mainmenu</code>,
+      <code>save</code>,
+      <code>saveWindow</code>,
+      <code>show</code>,
+      <code>start_progress</code>,
+      <code>title</code>,
+      <code>update_progress</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">title</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="pyforms.gui.BaseWidget.BaseWidget-class.html#__init__">BaseWidget.BaseWidget.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="initForm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initForm</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.PyFormsStateMachine-pysrc.html#PyFormsStateMachine.initForm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate the module Form</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="pyforms.gui.BaseWidget.BaseWidget-class.html#initForm">BaseWidget.BaseWidget.initForm</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Aug 28 19:37:18 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

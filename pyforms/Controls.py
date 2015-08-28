@@ -16,12 +16,17 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlFile 			import ControlFile
 	from pyforms.gui.Controls.ControlFilesTree 		import ControlFilesTree
 	from pyforms.gui.Controls.ControlHidden 		import ControlHidden
-	from pyforms.gui.Controls.ControlImage 			import ControlImage
 	from pyforms.gui.Controls.ControlLabel 			import ControlLabel
 	from pyforms.gui.Controls.ControlList 			import ControlList
 	from pyforms.gui.Controls.ControlMdiArea 		import ControlMdiArea
 	from pyforms.gui.Controls.ControlNumber 		import ControlNumber
-	from pyforms.gui.Controls.ControlOpenGL 		import ControlOpenGL
+	try:
+		from pyforms.gui.Controls.ControlOpenGL 		import ControlOpenGL
+		from pyforms.gui.Controls.ControlImage 			import ControlImage
+		from pyforms.gui.Controls.ControlPlayer.ControlPlayer 	import ControlPlayer
+	except:
+		print("GL widgets not working")
+
 	from pyforms.gui.Controls.ControlProgress 		import ControlProgress
 	from pyforms.gui.Controls.ControlSlider 		import ControlSlider
 	from pyforms.gui.Controls.ControlTextArea 		import ControlTextArea
@@ -30,7 +35,6 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlTreeView 		import ControlTreeView
 	from pyforms.gui.Controls.ControlVisVis 		import ControlVisVis
 	from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
-	from pyforms.gui.Controls.ControlPlayer.ControlPlayer 	import ControlPlayer
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
 
 

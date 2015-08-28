@@ -1,0 +1,4 @@
+pages:
+- Home: 'README.md'
+- About:
+    - 'License': 'about/license.md'

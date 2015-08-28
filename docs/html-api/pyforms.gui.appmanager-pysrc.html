@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.appmanager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        Module&nbsp;appmanager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.appmanager-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyforms.gui.appmanager-module.html">Module pyforms.gui.appmanager</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">glob</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PyQt4</tt> <tt class="py-keyword">import</tt> <tt class="py-name">uic</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PyQt4</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QtGui</tt><tt class="py-op">,</tt> <tt class="py-name">QtCore</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package pyforms=pyforms-module.html,Module pyforms.web.django.templatetags.pyforms=pyforms.web.django.templatetags.pyforms-module.html"><a title="pyforms
+pyforms.web.django.templatetags.pyforms" class="py-name" href="#" onclick="return doclink('link-0', 'pyforms', 'link-0');">pyforms</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package pyforms.Utils=pyforms.Utils-module.html"><a title="pyforms.Utils" class="py-name" href="#" onclick="return doclink('link-1', 'Utils', 'link-1');">Utils</a></tt><tt class="py-op">.</tt><tt class="py-name">tools</tt> <tt class="py-keyword">as</tt> <tt class="py-name">tools</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="Container"></a><div id="Container-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="Container-toggle" onclick="return toggle('Container');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyforms.gui.appmanager.Container-class.html">Container</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Container-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Container-expanded"><a name="Container.__init__"></a><div id="Container.__init__-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="Container.__init__-toggle" onclick="return toggle('Container.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.appmanager.Container-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ClassObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Container.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Container.__init__-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt> <tt class="py-op">=</tt> <tt class="py-name">ClassObject</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.initForm()=pyforms.gui.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.gui.Controls.ControlBase.ControlBase.initForm()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#initForm,Method pyforms.gui.Controls.ControlBase.ControlBase.initForm()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#initForm,Method pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.initForm()=pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider-class.html#initForm,Method pyforms.gui.Controls.ControlButton.ControlButton.initForm()=pyforms.gui.Controls.ControlButton.ControlButton-class.html#initForm,Method pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.initForm()=pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#initForm,Method pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList.initForm()=pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList-class.html#initForm,Method pyforms.gui.Controls.ControlCombo.ControlCombo.initForm()=pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#initForm,Method pyforms.gui.Controls.ControlDir.ControlDir.initForm()=pyforms.gui.Controls.ControlDir.ControlDir-class.html#initForm,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#initForm,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#initForm,Method pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.initForm()=pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#initForm,Method pyforms.gui.Controls.ControlFile.ControlFile.initForm()=pyforms.gui.Controls.ControlFile.ControlFile-class.html#initForm,Method pyforms.gui.Controls.ControlFilesTree.ControlFilesTree.initForm()=pyforms.gui.Controls.ControlFilesTree.ControlFilesTree-class.html#initForm,Method pyforms.gui.Controls.ControlHidden.ControlHidden.initForm()=pyforms.gui.Controls.ControlHidden.ControlHidden-class.html#initForm,Method pyforms.gui.Controls.ControlImage.ControlImage.initForm()=pyforms.gui.Controls.ControlImage.ControlImage-class.html#initForm,Method pyforms.gui.Controls.ControlLabel.ControlLabel.initForm()=pyforms.gui.Controls.ControlLabel.ControlLabel-class.html#initForm,Method pyforms.gui.Controls.ControlList.ControlList.initForm()=pyforms.gui.Controls.ControlList.ControlList-class.html#initForm,Method pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.initForm()=pyforms.gui.Controls.ControlMdiArea.ControlMdiArea-class.html#initForm,Method pyforms.gui.Controls.ControlNumber.ControlNumber.initForm()=pyforms.gui.Controls.ControlNumber.ControlNumber-class.html#initForm,Method pyforms.gui.Controls.ControlOpenGL.ControlOpenGL.initForm()=pyforms.gui.Controls.ControlOpenGL.ControlOpenGL-class.html#initForm,Method pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.initForm()=pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer-class.html#initForm,Method pyforms.gui.Controls.ControlProgress.ControlProgress.initForm()=pyforms.gui.Controls.ControlProgress.ControlProgress-class.html#initForm,Method pyforms.gui.Controls.ControlSlider.ControlSlider.initForm()=pyforms.gui.Controls.ControlSlider.ControlSlider-class.html#initForm,Method pyforms.gui.Controls.ControlText.ControlText.initForm()=pyforms.gui.Controls.ControlText.ControlText-class.html#initForm,Method pyforms.gui.Controls.ControlTextArea.ControlTextArea.initForm()=pyforms.gui.Controls.ControlTextArea.ControlTextArea-class.html#initForm,Method pyforms.gui.Controls.ControlToolBox.ControlToolBox.initForm()=pyforms.gui.Controls.ControlToolBox.ControlToolBox-class.html#initForm,Method pyforms.gui.Controls.ControlTree.ControlTree.initForm()=pyforms.gui.Controls.ControlTree.ControlTree-class.html#initForm,Method pyforms.gui.Controls.ControlTreeView.ControlTreeView.initForm()=pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#initForm,Method pyforms.gui.Controls.ControlVisVis.ControlVisVis.initForm()=pyforms.gui.Controls.ControlVisVis.ControlVisVis-class.html#initForm,Method pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume.initForm()=pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume-class.html#initForm,Method pyforms.gui.PyFormsStateMachine.PyFormsState.initForm()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm,Method pyforms.terminal.BaseWidget.BaseWidget.initForm()=pyforms.terminal.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.initForm()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm,Method pyforms.web.BaseWidget.BaseWidget.initForm()=pyforms.web.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.web.PyFormsStateMachine.PyFormsState.initForm()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.web.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.web.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm"><a title="pyforms.gui.BaseWidget.BaseWidget.initForm
+pyforms.gui.Controls.ControlBase.ControlBase.initForm
+pyforms.gui.Controls.ControlBase.ControlBase.initForm
+pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.initForm
+pyforms.gui.Controls.ControlButton.ControlButton.initForm
+pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.initForm
+pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList.initForm
+pyforms.gui.Controls.ControlCombo.ControlCombo.initForm
+pyforms.gui.Controls.ControlDir.ControlDir.initForm
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.initForm
+pyforms.gui.Controls.ControlFile.ControlFile.initForm
+pyforms.gui.Controls.ControlFilesTree.ControlFilesTree.initForm
+pyforms.gui.Controls.ControlHidden.ControlHidden.initForm
+pyforms.gui.Controls.ControlImage.ControlImage.initForm
+pyforms.gui.Controls.ControlLabel.ControlLabel.initForm
+pyforms.gui.Controls.ControlList.ControlList.initForm
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.initForm
+pyforms.gui.Controls.ControlNumber.ControlNumber.initForm
+pyforms.gui.Controls.ControlOpenGL.ControlOpenGL.initForm
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.initForm
+pyforms.gui.Controls.ControlProgress.ControlProgress.initForm
+pyforms.gui.Controls.ControlSlider.ControlSlider.initForm
+pyforms.gui.Controls.ControlText.ControlText.initForm
+pyforms.gui.Controls.ControlTextArea.ControlTextArea.initForm
+pyforms.gui.Controls.ControlToolBox.ControlToolBox.initForm
+pyforms.gui.Controls.ControlTree.ControlTree.initForm
+pyforms.gui.Controls.ControlTreeView.ControlTreeView.initForm
+pyforms.gui.Controls.ControlVisVis.ControlVisVis.initForm
+pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume.initForm
+pyforms.gui.PyFormsStateMachine.PyFormsState.initForm
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm
+pyforms.terminal.BaseWidget.BaseWidget.initForm
+pyforms.terminal.PyFormsStateMachine.PyFormsState.initForm
+pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.initForm
+pyforms.web.BaseWidget.BaseWidget.initForm
+pyforms.web.PyFormsStateMachine.PyFormsState.initForm
+pyforms.web.PyFormsStateMachine.PyFormsStateMachine.initForm" class="py-name" href="#" onclick="return doclink('link-2', 'initForm', 'link-2');">initForm</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                <tt class="py-name">form_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">tools</tt><tt class="py-op">.</tt><tt class="py-name">get_object_class_path</tt><tt class="py-op">(</tt> <tt id="link-3" class="py-name" targets="Class pyforms.gui.appmanager.Container=pyforms.gui.appmanager.Container-class.html"><a title="pyforms.gui.appmanager.Container" class="py-name" href="#" onclick="return doclink('link-3', 'Container', 'link-3');">Container</a></tt> <tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">'mainWindow.ui'</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable pyforms.gui.Controls.ControlHidden.ControlHidden._form=pyforms.gui.Controls.ControlHidden.ControlHidden-class.html#_form"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-4', '_form', 'link-4');">_form</a></tt> <tt class="py-op">=</tt> <tt class="py-name">uic</tt><tt class="py-op">.</tt><tt class="py-name">loadUi</tt><tt class="py-op">(</tt> <tt class="py-name">form_path</tt> <tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-5', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">verticalLayout</tt><tt class="py-op">.</tt><tt class="py-name">addWidget</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt> <tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-6', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">verticalLayout</tt><tt class="py-op">.</tt><tt class="py-name">setMargin</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-7', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">verticalLayout</tt><tt class="py-op">.</tt><tt class="py-name">setSpacing</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-8', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionExit</tt><tt class="py-op">.</tt><tt class="py-name">triggered</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method pyforms.gui.appmanager.Container.actionExit_triggered()=pyforms.gui.appmanager.Container-class.html#actionExit_triggered"><a title="pyforms.gui.appmanager.Container.actionExit_triggered" class="py-name" href="#" onclick="return doclink('link-9', 'actionExit_triggered', 'link-9');">actionExit_triggered</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-10', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.show()=pyforms.gui.BaseWidget.BaseWidget-class.html#show,Method pyforms.gui.BaseWidget.BaseWidget.show()=pyforms.gui.BaseWidget.BaseWidget-class.html#show,Method pyforms.gui.Controls.ControlBase.ControlBase.show()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#show,Method pyforms.gui.Controls.ControlBase.ControlBase.show()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#show,Method pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.show()=pyforms.gui.Controls.ControlDockWidget.ControlDockWidget-class.html#show,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.show()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#show,Method pyforms.gui.Controls.ControlHidden.ControlHidden.show()=pyforms.gui.Controls.ControlHidden.ControlHidden-class.html#show,Method pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.show()=pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer-class.html#show,Method pyforms.terminal.Controls.ControlBase.ControlBase.show()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#show,Method pyforms.terminal.Controls.ControlBase.ControlBase.show()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#show,Method pyforms.web.BaseWidget.BaseWidget.show()=pyforms.web.BaseWidget.BaseWidget-class.html#show,Method pyforms.web.BaseWidget.BaseWidget.show()=pyforms.web.BaseWidget.BaseWidget-class.html#show,Method pyforms.web.Controls.ControlBase.ControlBase.show()=pyforms.web.Controls.ControlBase.ControlBase-class.html#show,Method pyforms.web.Controls.ControlBase.ControlBase.show()=pyforms.web.Controls.ControlBase.ControlBase-class.html#show"><a title="pyforms.gui.BaseWidget.BaseWidget.show
+pyforms.gui.BaseWidget.BaseWidget.show
+pyforms.gui.Controls.ControlBase.ControlBase.show
+pyforms.gui.Controls.ControlBase.ControlBase.show
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.show
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.show
+pyforms.gui.Controls.ControlHidden.ControlHidden.show
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.show
+pyforms.terminal.Controls.ControlBase.ControlBase.show
+pyforms.terminal.Controls.ControlBase.ControlBase.show
+pyforms.web.BaseWidget.BaseWidget.show
+pyforms.web.BaseWidget.BaseWidget.show
+pyforms.web.Controls.ControlBase.ControlBase.show
+pyforms.web.Controls.ControlBase.ControlBase.show" class="py-name" href="#" onclick="return doclink('link-11', 'show', 'link-11');">show</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-12', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">setWindowTitle</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.title()=pyforms.gui.BaseWidget.BaseWidget-class.html#title,Method pyforms.gui.BaseWidget.BaseWidget.title()=pyforms.gui.BaseWidget.BaseWidget-class.html#title,Method pyforms.web.BaseWidget.BaseWidget.title()=pyforms.web.BaseWidget.BaseWidget-class.html#title,Method pyforms.web.BaseWidget.BaseWidget.title()=pyforms.web.BaseWidget.BaseWidget-class.html#title"><a title="pyforms.gui.BaseWidget.BaseWidget.title
+pyforms.gui.BaseWidget.BaseWidget.title
+pyforms.web.BaseWidget.BaseWidget.title
+pyforms.web.BaseWidget.BaseWidget.title" class="py-name" href="#" onclick="return doclink('link-13', 'title', 'link-13');">title</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-14', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionStop</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-15', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionStop</tt><tt class="py-op">.</tt><tt class="py-name">triggered</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method pyforms.gui.appmanager.Container.actionStop_triggered()=pyforms.gui.appmanager.Container-class.html#actionStop_triggered"><a title="pyforms.gui.appmanager.Container.actionStop_triggered" class="py-name" href="#" onclick="return doclink('link-16', 'actionStop_triggered', 'link-16');">actionStop_triggered</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt>  </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                        <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">,</tt> <tt class="py-string">'execute'</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-17', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionRun</tt><tt class="py-op">.</tt><tt class="py-name">triggered</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method pyforms.gui.appmanager.Container.actionRun_triggered()=pyforms.gui.appmanager.Container-class.html#actionRun_triggered"><a title="pyforms.gui.appmanager.Container.actionRun_triggered" class="py-name" href="#" onclick="return doclink('link-18', 'actionRun_triggered', 'link-18');">actionRun_triggered</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-19', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">menuAlgorithm</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-20', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionRun</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt>  </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-21', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">menuAlgorithm</tt><tt class="py-op">.</tt><tt class="py-name">setVisible</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-22', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionRun</tt><tt class="py-op">.</tt><tt class="py-name">setVisible</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="Container.actionExit_triggered"></a><div id="Container.actionExit_triggered-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="Container.actionExit_triggered-toggle" onclick="return toggle('Container.actionExit_triggered');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.appmanager.Container-class.html#actionExit_triggered">actionExit_triggered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="Container.actionRun_triggered"></a><div id="Container.actionRun_triggered-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Container.actionRun_triggered-toggle" onclick="return toggle('Container.actionRun_triggered');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.appmanager.Container-class.html#actionRun_triggered">actionRun_triggered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">.</tt><tt class="py-name">stop</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-23', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionRun</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-24', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionStop</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method pyforms.gui.PyFormsStateMachine.PyFormsState.execute()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#execute,Method pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.execute()=pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#execute,Method pyforms.terminal.BaseWidget.BaseWidget.execute()=pyforms.terminal.BaseWidget.BaseWidget-class.html#execute,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.execute()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#execute,Method pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.execute()=pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine-class.html#execute,Method pyforms.web.PyFormsStateMachine.PyFormsState.execute()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#execute,Method pyforms.web.PyFormsStateMachine.PyFormsStateMachine.execute()=pyforms.web.PyFormsStateMachine.PyFormsStateMachine-class.html#execute"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.execute
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.execute
+pyforms.terminal.BaseWidget.BaseWidget.execute
+pyforms.terminal.PyFormsStateMachine.PyFormsState.execute
+pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.execute
+pyforms.web.PyFormsStateMachine.PyFormsState.execute
+pyforms.web.PyFormsStateMachine.PyFormsStateMachine.execute" class="py-name" href="#" onclick="return doclink('link-25', 'execute', 'link-25');">execute</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                 </tt>
+<a name="Container.actionStop_triggered"></a><div id="Container.actionStop_triggered-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="Container.actionStop_triggered-toggle" onclick="return toggle('Container.actionStop_triggered');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.appmanager.Container-class.html#actionStop_triggered">actionStop_triggered</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_algorithm</tt><tt class="py-op">.</tt><tt class="py-name">stop</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-26', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionRun</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="pyforms.gui.Controls.ControlHidden.ControlHidden._form" class="py-name" href="#" onclick="return doclink('link-27', '_form', 'link-4');">_form</a></tt><tt class="py-op">.</tt><tt class="py-name">actionStop</tt><tt class="py-op">.</tt><tt class="py-name">setEnabled</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="startApp"></a><div id="startApp-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="startApp-toggle" onclick="return toggle('startApp');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.appmanager-module.html#startApp">startApp</a><tt class="py-op">(</tt><tt class="py-param">ClassObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="startApp-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="startApp-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt id="link-28" class="py-name" targets="Method pyforms.gui.PyFormsStateMachine.PyFormsState.app()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.app()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.web.PyFormsStateMachine.PyFormsState.app()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#app"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-28', 'app', 'link-28');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QApplication</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">container</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="pyforms.gui.appmanager.Container" class="py-name" href="#" onclick="return doclink('link-29', 'Container', 'link-3');">Container</a></tt><tt class="py-op">(</tt><tt class="py-name">ClassObject</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-30', 'app', 'link-28');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">exec_</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Aug 28 19:37:21 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

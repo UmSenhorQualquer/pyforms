@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.Controls.ControlText.ControlText</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="pyforms.gui.Controls-module.html">Package&nbsp;Controls</a> ::
+        <a href="pyforms.gui.Controls.ControlText-module.html">Module&nbsp;ControlText</a> ::
+        Class&nbsp;ControlText
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.Controls.ControlText.ControlText-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ControlText</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__34" name="uml_class_diagram_for_pyforms__34">
+<area shape="rect" id="node1_18" href="pyforms.gui.Controls.ControlText.ControlText-class.html#initForm" title="Load Control and initiate the events" alt="" coords="160,377,268,397"/>
+<area shape="rect" id="node1_19" href="pyforms.gui.Controls.ControlText.ControlText-class.html#finishEditing" title="Function called when the lineEdit widget is edited" alt="" coords="160,397,268,417"/>
+<area shape="rect" id="node1_20" href="pyforms.gui.Controls.ControlText.ControlText-class.html#value" title="This property return and set what the control should manage or store." alt="" coords="160,417,268,437"/>
+<area shape="rect" id="node1_21" href="pyforms.gui.Controls.ControlText.ControlText-class.html#label" title="Label of the control, if applies" alt="" coords="160,437,268,457"/>
+<area shape="rect" id="node1" href="pyforms.gui.Controls.ControlText.ControlText-class.html" title="pyforms.gui.Controls.ControlText.ControlText" alt="" coords="147,344,279,464"/>
+<area shape="rect" id="node2_22" href="javascript:void(0);" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="16,39,413,59"/>
+<area shape="rect" id="node2_23" href="javascript:void(0);" title="Load a value from the dict variable" alt="" coords="16,59,413,79"/>
+<area shape="rect" id="node2_24" href="javascript:void(0);" title="Save a value to dict variable" alt="" coords="16,79,413,99"/>
+<area shape="rect" id="node2_25" href="javascript:void(0);" title="Show the control" alt="" coords="16,99,413,119"/>
+<area shape="rect" id="node2_26" href="javascript:void(0);" title="Hide the control" alt="" coords="16,119,413,139"/>
+<area shape="rect" id="node2_27" href="javascript:void(0);" title="Add an option to the Control popup menu" alt="" coords="16,139,413,159"/>
+<area shape="rect" id="node2_28" href="javascript:void(0);" title="Add submenu options to the Control popup menu" alt="" coords="16,159,413,179"/>
+<area shape="rect" id="node2_29" href="javascript:void(0);" title="Function called when ever the Control value is changed" alt="" coords="16,179,413,199"/>
+<area shape="rect" id="node2_30" href="javascript:void(0);" title="Function called before open the Control popup menu" alt="" coords="16,199,413,219"/>
+<area shape="rect" id="node2_31" href="javascript:void(0);" title="pyforms.gui.Controls.ControlBase.ControlBase.enabled" alt="" coords="16,219,413,239"/>
+<area shape="rect" id="node2_32" href="javascript:void(0);" title="This property return and set the name of the control" alt="" coords="16,239,413,259"/>
+<area shape="rect" id="node2_33" href="javascript:void(0);" title="Returns the Widget of the control." alt="" coords="16,259,413,279"/>
+<area shape="rect" id="node2_34" href="javascript:void(0);" title="Returns or set the parent basewidget where the Control is" alt="" coords="16,279,413,299"/>
+<area shape="rect" id="node2_35" href="javascript:void(0);" title="pyforms.gui.Controls.ControlBase.ControlBase.help" alt="" coords="16,299,413,319"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="This class represents the most basic control that can exist A Control is a Widget or a group of widgets that can be reused from application to application" alt="" coords="4,5,425,325"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__34.gif" alt='' usemap="#uml_class_diagram_for_pyforms__34" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlText.ControlText-class.html#initForm" class="summary-sig-name">initForm</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Load Control and initiate the events</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.initForm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="finishEditing"></a><span class="summary-sig-name">finishEditing</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Function called when the lineEdit widget is edited</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.finishEditing">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlText.ControlText-class.html#value" class="summary-sig-name">value</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      This property return and set what the control should manage or store.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlText.ControlText-class.html#label" class="summary-sig-name">label</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Label of the control, if applies</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.label">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>ControlBase.ControlBase</code></b>:
+      <code>__init__</code>,
+      <code>aboutToShowContextMenuEvent</code>,
+      <code>addPopupMenuOption</code>,
+      <code>addPopupSubMenuOption</code>,
+      <code>changed</code>,
+      <code>enabled</code>,
+      <code>form</code>,
+      <code>help</code>,
+      <code>hide</code>,
+      <code>load</code>,
+      <code>name</code>,
+      <code>parent</code>,
+      <code>save</code>,
+      <code>show</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="initForm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initForm</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.initForm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load Control and initiate the events</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="pyforms.gui.Controls.ControlBase.ControlBase-class.html#initForm">ControlBase.ControlBase.initForm</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">value</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.value">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This property return and set what the control should manage or 
+  store.</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@value.setter</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.gui.Controls.ControlBase.ControlBase-class.html#value">ControlBase.ControlBase.value</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">label</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlText-pysrc.html#ControlText.label">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Label of the control, if applies</p>
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@label.setter</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pyforms.gui.Controls.ControlBase.ControlBase-class.html#label">ControlBase.ControlBase.label</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Aug 28 19:37:17 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

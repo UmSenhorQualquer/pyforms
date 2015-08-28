@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        <a href="pyforms.gui.Controls-module.html">Package&nbsp;Controls</a> ::
+        <a href="pyforms.gui.Controls.ControlOpenGL-module.html">Module&nbsp;ControlOpenGL</a> ::
+        Class&nbsp;OpenglGLWidget
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class OpenglGLWidget</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__29" name="uml_class_diagram_for_pyforms__29">
+<area shape="rect" id="node1_15" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#__init__" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.__init__" alt="" coords="17,40,477,60"/>
+<area shape="rect" id="node1_16" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#initializeGL" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.initializeGL" alt="" coords="17,60,477,80"/>
+<area shape="rect" id="node1_17" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#resizeGL" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.resizeGL" alt="" coords="17,80,477,100"/>
+<area shape="rect" id="node1_18" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#paintGL" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.paintGL" alt="" coords="17,100,477,120"/>
+<area shape="rect" id="node1_19" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#wheelEvent" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.wheelEvent" alt="" coords="17,120,477,140"/>
+<area shape="rect" id="node1_20" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#mouseReleaseEvent" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.mouseReleaseEvent" alt="" coords="17,140,477,160"/>
+<area shape="rect" id="node1_21" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#mousePressEvent" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.mousePressEvent" alt="" coords="17,160,477,180"/>
+<area shape="rect" id="node1_22" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#mouseMoveEvent" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.mouseMoveEvent" alt="" coords="17,180,477,200"/>
+<area shape="rect" id="node1_23" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#onMove" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.onMove" alt="" coords="17,200,477,220"/>
+<area shape="rect" id="node1_24" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#onPress" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.onPress" alt="" coords="17,220,477,240"/>
+<area shape="rect" id="node1_25" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#onDrag" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.onDrag" alt="" coords="17,240,477,260"/>
+<area shape="rect" id="node1_26" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#onEndDrag" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.onEndDrag" alt="" coords="17,260,477,280"/>
+<area shape="rect" id="node1_27" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#scene" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.scene" alt="" coords="17,280,477,300"/>
+<area shape="rect" id="node1_28" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#mouseDown" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.mouseDown" alt="" coords="17,300,477,320"/>
+<area shape="rect" id="node1_29" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#resetZoomAndRotation" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.resetZoomAndRotation" alt="" coords="17,320,477,340"/>
+<area shape="rect" id="node1" href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html" title="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget" alt="" coords="5,6,489,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__29.gif" alt='' usemap="#uml_class_diagram_for_pyforms__29" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parent</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="initializeGL"></a><span class="summary-sig-name">initializeGL</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.initializeGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="resizeGL"></a><span class="summary-sig-name">resizeGL</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.resizeGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintGL"></a><span class="summary-sig-name">paintGL</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.paintGL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__updateMouse"></a><span class="summary-sig-name">__updateMouse</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>,
+        <span class="summary-sig-arg">pressed</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.__updateMouse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wheelEvent"></a><span class="summary-sig-name">wheelEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.wheelEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseReleaseEvent"></a><span class="summary-sig-name">mouseReleaseEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.mouseReleaseEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mousePressEvent"></a><span class="summary-sig-name">mousePressEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.mousePressEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseMoveEvent"></a><span class="summary-sig-name">mouseMoveEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.mouseMoveEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onMove"></a><span class="summary-sig-name">onMove</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">point</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.onMove">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onPress"></a><span class="summary-sig-name">onPress</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">button</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">glpoint</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.onPress">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onDrag"></a><span class="summary-sig-name">onDrag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">startPoint</span>,
+        <span class="summary-sig-arg">endPoint</span>,
+        <span class="summary-sig-arg">startGLPoint</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">endGLPoint</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.onDrag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onEndDrag"></a><span class="summary-sig-name">onEndDrag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">startPoint</span>,
+        <span class="summary-sig-arg">endPoint</span>,
+        <span class="summary-sig-arg">startGLPoint</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">endGLPoint</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.onEndDrag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#scene" class="summary-sig-name">scene</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.scene">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#mouseDown" class="summary-sig-name">mouseDown</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.mouseDown">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="resetZoomAndRotation"></a><span class="summary-sig-name">resetZoomAndRotation</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.resetZoomAndRotation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="scene"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">scene</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.scene">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@scene.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="mouseDown"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">mouseDown</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlOpenGL-pysrc.html#OpenglGLWidget.mouseDown">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Aug 28 19:37:17 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

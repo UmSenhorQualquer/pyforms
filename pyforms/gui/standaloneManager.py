@@ -59,6 +59,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                     dock.setWidget(widget.form)
                     dock.setWindowTitle(widget.label)
                     widget.dock = dock
+
                     self.addDockWidget(side, dock)
             else:
                 dock = QtGui.QDockWidget(self)
@@ -73,8 +74,7 @@ class StandAloneContainer(QtGui.QMainWindow):
                 self.addDockWidget(side, dock)
                 dock.setWindowTitle(widget.label)
                 widget.dock = dock
-                
-        
+
         if len(w.mainmenu) > 0:
             self.__initMainMenu(w.mainmenu)
 

@@ -54,7 +54,7 @@ class BaseWindow(BaseWidget):
 		self._simple = SimpleExample1(); 
 		self._mdiArea += self._simple
 
-		print self._simple.subwindow
+		print (self._simple.subwindow)
 
 	def __exit(self): exit()
 

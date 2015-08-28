@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.web.django.Applications</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.web-module.html">Package&nbsp;web</a> ::
+        <a href="pyforms.web.django-module.html">Package&nbsp;django</a> ::
+        Module&nbsp;Applications
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.web.django.Applications-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyforms.web.django.Applications-module.html">Module pyforms.web.django.Applications</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">inspect</tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="ApplicationsLoader"></a><div id="ApplicationsLoader-def"><a name="L3"></a><tt class="py-lineno"> 3</tt> <a class="py-toggle" href="#" id="ApplicationsLoader-toggle" onclick="return toggle('ApplicationsLoader');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyforms.web.django.Applications.ApplicationsLoader-class.html">ApplicationsLoader</a><tt class="py-op">:</tt> </tt>
+</div><div id="ApplicationsLoader-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ApplicationsLoader-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="ApplicationsLoader.__init__"></a><div id="ApplicationsLoader.__init__-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="ApplicationsLoader.__init__-toggle" onclick="return toggle('ApplicationsLoader.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.web.django.Applications.ApplicationsLoader-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">applicationsPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApplicationsLoader.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="ApplicationsLoader.__init__-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">                <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">applicationsPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="ApplicationsLoader.__getitem__"></a><div id="ApplicationsLoader.__getitem__-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="ApplicationsLoader.__getitem__-toggle" onclick="return toggle('ApplicationsLoader.__getitem__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.web.django.Applications.ApplicationsLoader-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">moduleclassname</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApplicationsLoader.__getitem__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="ApplicationsLoader.__getitem__-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">moduleclassname</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                        <tt class="py-name">modulename</tt> <tt class="py-op">=</tt> <tt class="py-string">'.'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt> <tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt> <tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                        <tt class="py-name">moduleclass</tt> <tt class="py-op">=</tt> <tt class="py-name">__import__</tt><tt class="py-op">(</tt><tt class="py-name">modulename</tt><tt class="py-op">,</tt> <tt class="py-name">fromlist</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                        <tt class="py-name">moduleclass</tt> <tt class="py-op">=</tt>  <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">moduleclass</tt><tt class="py-op">,</tt> <tt class="py-name">moduleclassname</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">moduleclass</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                        <tt class="py-name">moduleclass</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">moduleclass</tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="ApplicationsLoader.createInstance"></a><div id="ApplicationsLoader.createInstance-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="ApplicationsLoader.createInstance-toggle" onclick="return toggle('ApplicationsLoader.createInstance');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.web.django.Applications.ApplicationsLoader-class.html#createInstance">createInstance</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">moduleclassname</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApplicationsLoader.createInstance-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="ApplicationsLoader.createInstance-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt id="link-0" class="py-name" targets="Method pyforms.gui.PyFormsStateMachine.PyFormsState.app()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.app()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.web.PyFormsStateMachine.PyFormsState.app()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#app"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-0', 'app', 'link-0');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                <tt class="py-comment">#app.initForm()</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-1" class="py-name"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-1', 'app', 'link-0');">app</a></tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="ApplicationsLoader.moduleClassPath"></a><div id="ApplicationsLoader.moduleClassPath-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="ApplicationsLoader.moduleClassPath-toggle" onclick="return toggle('ApplicationsLoader.moduleClassPath');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.web.django.Applications.ApplicationsLoader-class.html#moduleClassPath">moduleClassPath</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">moduleclassname</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApplicationsLoader.moduleClassPath-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="ApplicationsLoader.moduleClassPath-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">inspect</tt><tt class="py-op">.</tt><tt class="py-name">getfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">moduleclassname</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Aug 28 19:37:20 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
