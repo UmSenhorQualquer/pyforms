@@ -272,8 +272,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
         elif isinstance(value, str) and value:
             self._value = cv2.VideoCapture(value)
             self.fps = self._value.get(cv2.cv.CV_CAP_PROP_FPS)
-            print("Open video with", self._value.get(
-                cv2.cv.CV_CAP_PROP_FPS), 'fps')
+            # print("Open video with", self._value.get(
+            #    cv2.cv.CV_CAP_PROP_FPS), 'fps')
         else:
             self._value = None
 
