@@ -2,6 +2,6 @@ site_name: PyForms
 pages:
 - Home: 'index.md'
 - API: 
-	- 'BaseWidget': 'api-documentation/basewidget.md'
-	- 'Controls': 'api-documentation/controls.md'
+    - 'BaseWidget': 'api-documentation/basewidget.md'
+    - 'Controls': 'api-documentation/controls.md'
 - About: 'about/license.md'
