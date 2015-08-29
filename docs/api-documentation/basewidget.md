@@ -1,4 +1,6 @@
-# BaseWidget
+***********
+Base widget
+***********
 
 ## __init__(title)
  	

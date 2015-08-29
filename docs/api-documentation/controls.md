@@ -1,8 +1,12 @@
-# Controls
+********
+Controls
+********
 
-## ControlBase
+ControlBase
+###########
 
-### Functions
+Functions
+*********
 
 #### __init__(label='', defaultValue='', helptext='')
 
@@ -43,7 +47,8 @@ Function called when ever the Control value is changed
 Function called before open the Control popup menu
  	
 
-### Properties 	
+Properties 	
+**********
 
 #### value
 
@@ -72,12 +77,14 @@ Returns or set the parent basewidget where the Control is
 
 
 
+ControlBoundingSlider
+#####################
 
-## ControlBoundingSlider
+ControlButton
+#############
 
-## ControlButton
-
-## ControlCheckBoxList
+ControlCheckBoxList
+###################
 
 ## ControlCheckBox
 
