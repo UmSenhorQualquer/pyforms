@@ -1,6 +1,4 @@
-# Controls
-
-## ControlBase
+# ControlBase
 
 ### Functions
 
@@ -10,35 +8,35 @@
 
 Load Control and initiate the events
  	
-#### load(self, data)
+#### load(data)
 
 Load a value from the dict variable
  	
-#### save(self, data)
+#### save(data)
 
 Save a value to dict variable
  	
-#### show(self)
+#### show()
 
 Show the control
  	
-#### hide(self)
+#### hide()
 
 Hide the control
  	
-#### addPopupMenuOption(self, label, functionAction=None, key=None)
+#### addPopupMenuOption(label, functionAction=None, key=None)
 
 Add an option to the Control popup menu
  	
-#### addPopupSubMenuOption(self, label, options, keys={})
+#### addPopupSubMenuOption(label, options, keys={})
 
 Add submenu options to the Control popup menu
  	
-#### changed(self) 
+#### changed() 
 
 Function called when ever the Control value is changed
  	
-#### aboutToShowContextMenuEvent(self)
+#### aboutToShowContextMenuEvent()
 
 Function called before open the Control popup menu
  	
@@ -73,54 +71,54 @@ source code
 
 
 
-## ControlBoundingSlider
+# ControlBoundingSlider
 
-## ControlButton
+# ControlButton
 
-## ControlCheckBoxList
+# ControlCheckBoxList
 
-## ControlCheckBox
+# ControlCheckBox
 
-## ControlCombo
+# ControlCombo
 
-## ControlDir
+# ControlDir
 
-## ControlDockWidget
+# ControlDockWidget
 
-## ControlEmptyWidget
+# ControlEmptyWidget
 
-## ControlFile
+# ControlFile
 
-## ControlFilesTree
+# ControlFilesTree
 
-## ControlHidden
+# ControlHidden
 
-## ControlImage
+# ControlImage
 
-## ControlLabel
+# ControlLabel
 
-## ControlList
+# ControlList
 
-## ControlMdiArea
+# ControlMdiArea
 
-## ControlNumber
+# ControlNumber
 
-## ControlOpenGL
+# ControlOpenGL
 
-## ControlProgress
+# ControlProgress
 
-## ControlSlider
+# ControlSlider
 
-## ControlTextArea
+# ControlTextArea
 
-## ControlText
+# ControlText
 
-## ControlToolBox
+# ControlToolBox
 
-## ControlTree
+# ControlTree
 
-## ControlTreeView
+# ControlTreeView
 
-## ControlVisVis
+# ControlVisVis
 
-## ControlVisVisVolume
+# ControlVisVisVolume
