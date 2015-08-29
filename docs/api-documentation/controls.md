@@ -1,23 +1,37 @@
 # Controls
 
+Controls implements UI interfaces for the user to interact with the applications.
+A BaseWidget is formed by a set of forms.
+
+Bellow we can find the description of all the Controls implemented in the PyForms library.
+
 ## ControlBase
 ***************************
+
+All the Controls inherit from this Control, therefore you can find its functions and properties in all the other controls listed bellow.
 
 ### Functions
 
 #### __init__(label='', defaultValue='', helptext='')
 
+Control constructer.
+*label* - Control label.
+*defaultValue* - Initial value of the control.
+*helptext* - Text shown when the mouse is over the control.
+
 #### initForm()
 
-Load Control and initiate the events
+Load the control UI and initiate all the events.
  	
 #### load(data)
 
-Load a value from the dict variable
+Function used to load the value of the control.
+*data* - Contains a dictionary with the required information to load the control.
  	
 #### save(data)
 
-Save a value to dict variable
+Save a value of the control to a dictionary variable.
+*data* - Dictionary where the control value should be saved.
  	
 #### show()
 
