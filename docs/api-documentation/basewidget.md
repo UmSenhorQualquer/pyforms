@@ -1,39 +1,41 @@
-# __init__(title)
+# BaseWidget
+
+## __init__(title)
  	
-# initForm() 
+## initForm() 
 
 Generate the module Form
  	
-# generateTabs(formsetDict) 
+## generateTabs(formsetDict) 
 
 Generate QTabWidget for the module form
  	
-# generatePanel(formset) 
+## generatePanel(formset) 
 
 Generate a panel for the module form with all the controls formset format example: [('_video', '_arenas', '_run'), {"Player":['_threshold', "_player", "=", "_results", "_query"], "Background image":[(' ', '_selectBackground', '_paintBackground'), '_image']}, "_progress"] tuple: will display the controls in the same horizontal line list: will display the controls in the same vertical line dict: will display the controls in a tab widget '||': will plit the controls in a horizontal line '=': will plit the controls in a vertical line
  	
-# show()
+## show()
 
 OTModuleProjectItem.show reimplementation
  	
-# formControls()
+## formControls()
 
 Return all the form controls from the the module
  	
-# form
+## form
  	
-# title
+## title
  	
-# mainmenu
+## mainmenu
  	
-# docks
+## docks
  	
-# save(data)
+## save(data)
  	
-# saveWindow()
+## saveWindow()
  	
-# loadWindowData(filename)
+## loadWindowData(filename)
  	
-# load(data)
+## load(data)
  	
-# loadWindow()
+## loadWindow()

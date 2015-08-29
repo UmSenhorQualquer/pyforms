@@ -1,4 +1,6 @@
-# ControlBase
+# Controls
+
+## ControlBase
 
 ### Functions
 
@@ -65,60 +67,60 @@ Returns or set the parent basewidget where the Control is
  	
 #### help
 
-### enabled
-
-source code
+#### enabled
 
 
 
-# ControlBoundingSlider
 
-# ControlButton
 
-# ControlCheckBoxList
+## ControlBoundingSlider
 
-# ControlCheckBox
+## ControlButton
 
-# ControlCombo
+## ControlCheckBoxList
 
-# ControlDir
+## ControlCheckBox
 
-# ControlDockWidget
+## ControlCombo
 
-# ControlEmptyWidget
+## ControlDir
 
-# ControlFile
+## ControlDockWidget
 
-# ControlFilesTree
+## ControlEmptyWidget
 
-# ControlHidden
+## ControlFile
 
-# ControlImage
+## ControlFilesTree
 
-# ControlLabel
+## ControlHidden
 
-# ControlList
+## ControlImage
 
-# ControlMdiArea
+## ControlLabel
 
-# ControlNumber
+## ControlList
 
-# ControlOpenGL
+## ControlMdiArea
 
-# ControlProgress
+## ControlNumber
 
-# ControlSlider
+## ControlOpenGL
 
-# ControlTextArea
+## ControlProgress
 
-# ControlText
+## ControlSlider
 
-# ControlToolBox
+## ControlTextArea
 
-# ControlTree
+## ControlText
 
-# ControlTreeView
+## ControlToolBox
 
-# ControlVisVis
+## ControlTree
 
-# ControlVisVisVolume
+## ControlTreeView
+
+## ControlVisVis
+
+## ControlVisVisVolume
