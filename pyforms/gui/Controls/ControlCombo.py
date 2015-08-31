@@ -27,7 +27,7 @@ class ControlCombo(ControlBase):
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
         self._form.comboBox.currentIndexChanged.connect(
-            self.currentIndexChanged)
+            self._currentIndexChanged)
         self._form.comboBox.activated.connect(
             self._activated)
         self._form.comboBox.highlighted.connect(
@@ -36,6 +36,9 @@ class ControlCombo(ControlBase):
         self._items = {}
 
         self._addingItem = False
+
+    def _currentIndexChanged(self, index):
+        self.currentIndexChanged(index)
 
     def currentIndexChanged(self, index):
         """Called when the user chooses an item in the combobox and 
