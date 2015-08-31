@@ -6,6 +6,7 @@
 from pyforms.gui.Controls.ControlBase import ControlBase
 from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView
 from PyQt4.QtGui import QAbstractItemView
+from PyQt4 import QtGui, QtCore
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
@@ -34,6 +35,10 @@ class ControlTree(ControlBase, QTreeWidget):
         self.model().dataChanged.connect(self.__itemChangedEvent)
 
         self.selectionChanged = self.selectionChanged
+
+        self._items = {}
+
+        self._actions = []
 
     @property
     def showHeader(self):
@@ -105,9 +110,8 @@ class ControlTree(ControlBase, QTreeWidget):
             self.model().invisibleRootItem().appendRow(other)
 
         elif isinstance(other, list):
-            for x in other:
-                item = QTreeWidgetItem(x)
-                self.form.addTopLevelItem(item)
+            item = QTreeWidgetItem(other)
+            self.form.addTopLevelItem(item)
         else:
             item = QTreeWidgetItem(other)
             self.form.addTopLevelItem(item)
@@ -125,11 +129,77 @@ class ControlTree(ControlBase, QTreeWidget):
             self.model().removeRow(indexToRemove)
         return self
 
+    def addMenuAction(self, label='', functionAction=None, key=None, item=None):
+        """
+        Add an option to the Control popup menu
+        @param label:           label of the option.
+        @param functionAction:  function called when the option is selected.
+        @param key:             shortcut key
+        """
+        if not self._popupMenu:
+            self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+            self.form.customContextMenuRequested.connect(self._openPopupMenu)
+            self._popupMenu = QtGui.QMenu()
+            self._popupMenu.aboutToShow.connect(
+                self.aboutToShowContextMenuEvent)
+
+        if label == "-":
+            pass
+            #action = self._popupMenu.addSeparator()
+            # self._actions.append(action)
+            #self._addActionToItem(action, item)
+
+        else:
+            action = QtGui.QAction(label, self.form)
+            if key is not None:
+                action.setShortcut(QtGui.QKeySequence(key))
+            if functionAction:
+                action.triggered.connect(functionAction)
+                self._actions.append(action)
+                self._addActionToItem(action, item)
+            return action
+
+    def _addActionToItem(self, action, item):
+        if item not in self._items.keys():
+            self._items.update({item: []})
+        self._items[item].append(action)
+        print("Appending action {action} to item {item}".format(
+            item=item, action=action.text()))
+
+    def _openPopupMenu(self, position):
+        if self._popupMenu:
+            self._popupMenu.exec_(self.form.mapToGlobal(position))
+
+    def aboutToShowContextMenuEvent(self):
+        """
+        Function called before open the Control popup menu
+        """
+        self._popupMenu.clear()
+        itemSelected = self.selectedItems()[0].text(0)
+        if itemSelected in self._items:
+            for action in self._items[itemSelected]:
+                self._popupMenu.addAction(action)
+                print("Adding action {action} to {item}".format(
+                    action=action.text(), item=itemSelected))
+
+    def resetMenu(self):
+        self._popupMenu.clear()
+        self._items = {}
+        self._actions = []
+
+    def addItem(self, name, parent=None):
+        newItem = None
+        if parent is None:
+            newItem = QTreeWidgetItem(self, [name])
+        else:
+            newItem = QTreeWidgetItem(parent, [name])
+        return newItem
+
     @property
     def form(self): return self
 
     @property
-    def value(self): return None
+    def value(self): return self
 
     @value.setter
     def value(self, value): self.addTopLevelItem(value)
