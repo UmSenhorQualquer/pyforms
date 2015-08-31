@@ -65,7 +65,7 @@ class ControlCombo(ControlBase):
          list is highlighted by the user.
          @index: item's index
         """
-        self.activated(index)
+        self.highlighted(index)
 
     def highlighted(self, index):
         pass
@@ -92,6 +92,15 @@ class ControlCombo(ControlBase):
         self._items = {}
         self._value = None
         self._form.comboBox.clear()
+
+    def setCurrentIndex(self, index):
+        self._form.comboBox.setCurrentIndex(index)
+
+    def currentIndex(self):
+        return self._form.comboBox.currentIndex()
+    
+    def count(self):
+        return self._form.comboBox.count()
 
     @property
     def items(self): return self._items.values()
