@@ -10,7 +10,7 @@ Bellow we can find the description of all the Controls implemented in the PyForm
 
 All the Controls inherit from this Control, therefore you can find its functions and properties in all the other controls listed bellow.
 
-### Constructer
+### **Constructer**
 ***************************
 
 #### \_\_init\_\_(label='', defaultValue='', helptext='')
@@ -103,7 +103,7 @@ Returns and set the control to enable or disable state.
 ## ControlBoundingSlider
 ***************************
 
-### Constructer
+### **Constructer**
 ***************************
 
 #### \_\_init\_\_(label="", defaultValue=[20,40], min=0, max=100, horizontal=False, **kwargs) 
@@ -131,7 +131,7 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 ## ControlButton
 ***************************
 
-### Constructer
+### **Constructer**
 ***************************
 
 #### \_\_init\_\_(label='', defaultValue='', checkable=False)
