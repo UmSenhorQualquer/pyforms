@@ -13,9 +13,9 @@ All the Controls inherit from this Control, therefore you can find its functions
 ### Functions
 ***************************
 
-#### __init__(label='', defaultValue='', helptext='')
+#### \_\_init\_\_(label='', defaultValue='', helptext='')
 
-Control constructer.
+Control constructer.  
 **label** - Control label.  
 **defaultValue** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
