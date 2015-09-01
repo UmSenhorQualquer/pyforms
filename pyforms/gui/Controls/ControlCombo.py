@@ -38,17 +38,18 @@ class ControlCombo(ControlBase):
         self._addingItem = False
 
     def _currentIndexChanged(self, index):
-        self.currentIndexChanged(index)
+        if not self._addingItem:
+            item = self._form.comboBox.currentText()
+            if len(item) >= 1:
+                ControlBase.value.fset(self, self._items[str(item)])
+                self.currentIndexChanged(index)
 
     def currentIndexChanged(self, index):
         """Called when the user chooses an item in the combobox and 
         the selected choice is different from the last one selected.
         @index: item's index
         """
-        if not self._addingItem:
-            item = self._form.comboBox.currentText()
-            if len(item) >= 1:
-                ControlBase.value.fset(self, self._items[str(item)])
+        pass
 
     def _activated(self, index):
         self.activated(index)
@@ -98,7 +99,7 @@ class ControlCombo(ControlBase):
 
     def currentIndex(self):
         return self._form.comboBox.currentIndex()
-    
+
     def count(self):
         return self._form.comboBox.count()
 
