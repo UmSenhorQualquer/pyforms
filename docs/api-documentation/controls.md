@@ -108,10 +108,10 @@ Returns and set the control to enable or disable state.
 
 #### \_\_init\_\_(label="", defaultValue=[20,40], min=0, max=100, horizontal=False, **kwargs) 
 
-**defaultValue** - The default value is a list containing in the first element the lower value and in the second element the upper value.
-**min** - Defines the minimum value that can be selected.
-**max** - Defines the maximum value that can be selected.
-**horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.
+**defaultValue** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
+**min** - Defines the minimum value that can be selected.  
+**max** - Defines the maximum value that can be selected.  
+**horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.  
 
 ### **Properties**
 *************************** 	
@@ -149,7 +149,7 @@ Because the value of this Control is a function, nothing is loaded
 
 Because the value of this Control is a function, nothing is saved
 
-#### click(self)
+#### click()
 
 This function simulates a click in the button.
 
@@ -181,7 +181,7 @@ Gets and sets a boolean indicating the state of the checkbox.
 ### **Functions**
 ***************************
  	
-__add__(self, val)
+#### __add__(val)
 
 Add more elements to the list.
 Usage:  
@@ -193,22 +193,22 @@ or
 controlVar += 'Element'
 ```  
 
-clear(self)
+#### clear()
 
 Clear all the elements from the list.
 
 ### **Properties**
 ***************************
  	
-count
+#### count
 
 Return how many elements the list have.
  	
-checkedIndexes
+#### checkedIndexes
 
 Returns the Elements with which have the checkboxes checked.
 
-value
+#### value
 
 It gets and sets all the List values. This property receives a list where each element is a Row in the list.
 
@@ -216,11 +216,70 @@ It gets and sets all the List values. This property receives a list where each e
 ## ControlCombo
 ***************************
 
+### **Functions**
+***************************
+ 	
+#### addItem(label, value=None)
+
+Add an item to the ComboBox. Items may have a value associated to it.
+ 	
+#### clearItems()
+
+Clear all the items of the ComboBox.
+
+### **Events**
+***************************
+
+#### currentIndexChanged(index) 
+
+Called when the user chooses an item in the combobox and the selected choice is different from the last one selected.
+ 	
+#### activated(index) 
+
+Called when the user chooses an item in the combobox.
+**index** - Activated item's index.
+ 	
+#### highlighted(index)
+
+Called when an item in the combobox popup list is highlighted by the user.  
+**index** - highlighted item's index.
+
+### **Properties**
+***************************
+
+#### items
+
+gets all the items of the combobox.
+ 	
+#### values
+
+gets all the values of the combobox.
+ 	
+#### value
+
+It returns the selected value of the combo box
+ 	
+#### text(value)
+
+Gets and set the current selected item text.
+
+
 ## ControlDir
 ***************************
 
+This control maybe used to select a directory.
+
 ## ControlDockWidget
 ***************************
+
+This control is used to create DockWidget.
+
+### **Constructer**
+***************************
+
+#### \_\_init\_\_(label='', default=None, side='left')
+
+**side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top and bottom.
 
 ## ControlEmptyWidget
 ***************************
