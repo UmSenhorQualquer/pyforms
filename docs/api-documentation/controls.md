@@ -20,7 +20,7 @@ Control constructer.
 **defaultValue** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
 
-### Functions
+### **Functions**
 ***************************
 
 #### initForm()
@@ -55,7 +55,7 @@ Add submenu options to the Control popup menu
  	
 	
 
-### Events
+### **Events**
 ***************************
 
 #### changed() 
@@ -67,7 +67,7 @@ Function called when ever the Control value is changed
 Function called before open the Control popup menu
  
 
-### Properties
+### **Properties**
 ***************************
 
 #### value
@@ -113,7 +113,7 @@ Returns and set the control to enable or disable state.
 **max** - Defines the maximum value that can be selected.
 **horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.
 
-### Properties
+### **Properties**
 *************************** 	
 
 #### value
@@ -138,7 +138,7 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 
 **checkable** - Flag indicating if the button is checkable or not.
  	 	
-### Functions
+### **Functions**
 ***************************
 
 #### load(data)
@@ -153,10 +153,9 @@ Because the value of this Control is a function, nothing is saved
 
 This function simulates a click in the button.
 
-### Properties
+### **Properties**
 ***************************
 
- 	
 #### value
 
 The value should be a pointer to function, that will be called everytime the button is pressed.
@@ -165,12 +164,54 @@ The value should be a pointer to function, that will be called everytime the but
 
 In case the button was initiated with the flag checkable=True, it will get and set the checked state of the button.
 
+## ControlCheckBox
+***************************
+
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets a boolean indicating the state of the checkbox.
+
 
 ## ControlCheckBoxList
 ***************************
 
-## ControlCheckBox
+### **Functions**
 ***************************
+ 	
+__add__(self, val)
+
+Add more elements to the list.
+Usage:  
+```python
+controlVar += ('Element', True)  
+```  
+or  
+```python
+controlVar += 'Element'
+```  
+
+clear(self)
+
+Clear all the elements from the list.
+
+### **Properties**
+***************************
+ 	
+count
+
+Return how many elements the list have.
+ 	
+checkedIndexes
+
+Returns the Elements with which have the checkboxes checked.
+
+value
+
+It gets and sets all the List values. This property receives a list where each element is a Row in the list.
+
 
 ## ControlCombo
 ***************************
