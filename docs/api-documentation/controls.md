@@ -451,6 +451,9 @@ Displays a text.
 ## ControlList
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlList.png?raw=true "Screen")
+
+
 Displays a list of values.
 
 ### **Constructer**
@@ -545,6 +548,8 @@ Gets and sets the icon size.
 ## ControlMdiArea
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlMdiArea.png?raw=true "Screen")
+
 
 ### **Constructor**
 ***************************
@@ -589,6 +594,9 @@ Sets a BaseWidget or a list of BaseWidgets representing the windows.
 ## ControlNumber
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlNumber.png?raw=true "Screen")
+
+
 ### **Constructor**
 ***************************
 
@@ -618,6 +626,9 @@ Defines the maximum value that can be selected.
 
 ## ControlOpenGL
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlOpenGL.png?raw=true "Screen")
+
 
 ### **Functions**
 ***************************
@@ -650,6 +661,9 @@ Gets and sets the GL window height
 ## ControlProgress
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlProgress.png?raw=true "Screen")
+
+
 ### **Constructor**
 ***************************
 
@@ -675,6 +689,8 @@ Defines the maximum value that can be selected.
 
 ## ControlSlider
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlSlider.png?raw=true "Screen")
 
 
 ### **Constructor**
@@ -705,6 +721,9 @@ Defines the maximum value that can be selected.
 ## ControlText
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlText.png?raw=true "Screen")
+
+
 ### **Events**
 ***************************
 
@@ -720,6 +739,7 @@ Event called when the user ends the control edition.
 ***************************
 
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
 
 
 
@@ -728,6 +748,7 @@ Event called when the user ends the control edition.
 ## ControlToolBox
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
 
 
 
@@ -737,6 +758,7 @@ Event called when the user ends the control edition.
 ## ControlTree
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTree.png?raw=true "Screen")
 
 
 
@@ -746,6 +768,7 @@ Event called when the user ends the control edition.
 ## ControlTreeView
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTreeView.png?raw=true "Screen")
 
 
 
@@ -754,6 +777,9 @@ Event called when the user ends the control edition.
 
 ## ControlVisVis
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
+
 
 ### **Functions**
 ***************************
@@ -774,6 +800,8 @@ Gets and sets a list of 2D or 3D points to display.
 
 ## ControlVisVisVolume
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVisVolume.png?raw=true "Screen")
 
 
 ### **Functions**
