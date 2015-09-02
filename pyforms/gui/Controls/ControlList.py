@@ -165,15 +165,6 @@ class ControlList(ControlBase, QWidget):
     def count(self): return self.tableWidget.rowCount()
 
 
-    @property
-    def allItems(self):
-        """
-        Return all the Tree Items of the list, organized by row, col
-        """ 
-        rows = []
-        for row in range(self.tableWidget.rowCount()):
-            rows.append( [self.tableWidget.item(row, col) for col in range(self.tableWidget.columnCount())] )
-        return rows
 
     @property
     def value(self):

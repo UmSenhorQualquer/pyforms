@@ -15,7 +15,6 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlEmptyWidget 	import ControlEmptyWidget
 	from pyforms.gui.Controls.ControlFile 			import ControlFile
 	from pyforms.gui.Controls.ControlFilesTree 		import ControlFilesTree
-	from pyforms.gui.Controls.ControlHidden 		import ControlHidden
 	from pyforms.gui.Controls.ControlLabel 			import ControlLabel
 	from pyforms.gui.Controls.ControlList 			import ControlList
 	from pyforms.gui.Controls.ControlMdiArea 		import ControlMdiArea

@@ -5,6 +5,12 @@ A BaseWidget is formed by a set of forms.
 
 Bellow we can find the description of all the Controls implemented in the PyForms library.
 
+
+
+
+
+
+
 ## ControlBase
 ***************************
 
@@ -19,6 +25,7 @@ Control constructer.
 **label** - Control label.  
 **defaultValue** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
+
 
 ### **Functions**
 ***************************
@@ -63,7 +70,6 @@ Add submenu options to the Control popup menu
 Function called when ever the Control value is changed
  	
 #### aboutToShowContextMenuEvent()
-
 Function called before open the Control popup menu
  
 
@@ -100,6 +106,12 @@ Returns and set the control to enable or disable state.
 
 
 
+
+
+
+
+
+
 ## ControlBoundingSlider
 ***************************
 
@@ -128,6 +140,12 @@ Gets and sets the the minimum value that can be selected in the bounding slider.
 
 Gets and sets the the maximum value that can be selected in the bounding slider.
 
+
+
+
+
+
+
 ## ControlButton
 ***************************
 
@@ -138,6 +156,7 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 
 **checkable** - Flag indicating if the button is checkable or not.
  	 	
+
 ### **Functions**
 ***************************
 
@@ -164,6 +183,12 @@ The value should be a pointer to function, that will be called everytime the but
 
 In case the button was initiated with the flag checkable=True, it will get and set the checked state of the button.
 
+
+
+
+
+
+
 ## ControlCheckBox
 ***************************
 
@@ -175,8 +200,15 @@ In case the button was initiated with the flag checkable=True, it will get and s
 Gets and sets a boolean indicating the state of the checkbox.
 
 
+
+
+
+
+
+
 ## ControlCheckBoxList
 ***************************
+
 
 ### **Functions**
 ***************************
@@ -213,8 +245,15 @@ Returns the Elements with which have the checkboxes checked.
 It gets and sets all the List values. This property receives a list where each element is a Row in the list.
 
 
+
+
+
+
+
+
 ## ControlCombo
 ***************************
+
 
 ### **Functions**
 ***************************
@@ -264,10 +303,22 @@ It returns the selected value of the combo box
 Gets and set the current selected item text.
 
 
+
+
+
+
+
+
 ## ControlDir
 ***************************
 
 This control maybe used to select a directory.
+
+
+
+
+
+
 
 ## ControlDockWidget
 ***************************
@@ -281,6 +332,12 @@ This control is used to create DockWidget.
 
 **side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top and bottom.
 
+
+
+
+
+
+
 ## ControlEmptyWidget
 ***************************
 
@@ -289,7 +346,7 @@ This Control may be used to display a BaseWidget or another Control inside.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(self, label='') 
+#### \_\_init\_\_(label='') 
 
 The constructer receives only a label.
 
@@ -299,6 +356,12 @@ The constructer receives only a label.
 #### value
 
 It may receive an element, or a list of elements from the types BaseWidget or BaseControl.
+
+
+
+
+
+
 
 ## ControlFile
 ***************************
@@ -311,6 +374,12 @@ The control may be used to select a file.
 #### value
 
 Gets and sets a file path.
+
+
+
+
+
+
 
 ## ControlFilesTree
 ***************************
@@ -328,50 +397,392 @@ Gets and sets a directory path.
 
 
 
-## ControlHidden
-***************************
+
+
+
+
 
 ## ControlImage
 ***************************
 
+Displays an image or a list of images.
+
+	
+
+### **Functions**
+***************************
+
+#### repaint()
+
+Redraw the image or set of images
+
+### **Properties**
+***************************
+ 	
+#### value
+
+This property receives an image or a list of images.
+
+
+
+
+
+
+
 ## ControlLabel
 ***************************
+
+Displays a text.
+
+
+
+
+
+
+
 
 ## ControlList
 ***************************
 
+Displays a list of values.
+
+### **Constructer**
+***************************
+ 	
+#### \_\_init\_\_(label="", defaultValue="", plusFunction=None, minusFunction=None)
+
+**defaultValue** - 
+**plusFunction** - 
+**minusFunction** - 
+
+
+### **Functions**
+***************************
+
+#### clear()
+
+Clear all the values from the list.
+ 	
+#### \_\_add\_\_(values)	source code
+
+Inserts a new row with the list of values.
+ 	
+#### \_\_sub\_\_(index)
+
+Removes the row with the index.
+
+#### setValue(column, row, value)
+
+Set the value of a specific cell.
+ 	
+#### getValue(column, row)	source code
+
+Get the value of a specific cell.
+
+### **Events**
+***************************
+ 	
+#### dataChangedEvent(row, col, item)  
+ 	
+#### tableWidgetCellChanged(nextRow, nextCol, previousRow, previousCol) 
+ 	
+#### tableWidgetItemChanged(current, previous) 
+ 	
+#### tableWidgetItemSelectionChanged() 
+ 	
+#### itemSelectionChanged() 
+ 	
+#### currentCellChanged(nextRow, nextCol, previousRow, previousCol) 
+ 	
+#### currentItemChanged(current, previous)
+
+### **Properties**
+***************************
+
+#### horizontalHeaders
+
+Get and set the horizontal headers in the table list.
+ 	
+#### selectEntireRow
+
+Accepts a boolean indicating if should allow only the selection of the entire row or not.
+ 	
+#### count
+
+Return the number of rows.
+ 	
+#### value
+
+Get and set the list values.
+ 	
+#### mouseSelectedRowsIndexes
+
+Return the selected indexes.
+ 	
+#### mouseSelectedRowIndex
+
+Return the selected index.
+ 	
+#### iconSize
+
+Gets and sets the icon size.
+
+
+
+
+
+
+
+
+
 ## ControlMdiArea
 ***************************
+
+
+### **Constructor**
+***************************
+	
+#### \_\_init\_\_(label='')
+
+The constructer receives only a label.
+
+
+### **Functions**
+***************************
+
+#### \_\_add\_\_(other)
+
+Usage:  
+```python
+controlVar += baseWidget
+```  
+or  
+```python
+controlVar += [baseWidget1 , baseWidget2]
+```  
+
+### **Properties**
+***************************
+
+#### showCloseButton
+
+Boolean flag, indicating if should show the subwindows close button or not.
+ 	
+#### value
+
+Sets a BaseWidget or a list of BaseWidgets representing the windows.
+
+
+
+
+
+
+
 
 ## ControlNumber
 ***************************
 
+### **Constructor**
+***************************
+
+#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+
+**min** - Defines the minimum value that can be selected.  
+**max** - Defines the maximum value that can be selected. 
+
+### **Properties**
+***************************
+
+#### min
+
+Defines the minimum value that can be selected.  
+ 	
+#### max
+
+Defines the maximum value that can be selected.  
+
+
+
+
+
+
+
+
+
 ## ControlOpenGL
 ***************************
+
+### **Functions**
+***************************
+
+#### repaint()
+
+Refresh the GL scene.
+ 	
+#### resetZoomAndRotation()
+
+Reset all the zoom and scene rotations.
+
+### **Properties**
+***************************
+ 	
+#### value
+
+Gets and sets a GL scene.
+ 	
+#### width
+
+Gets and sets the GL window width
+ 	
+#### height
+
+Gets and sets the GL window height
+
+
 
 ## ControlProgress
 ***************************
 
+### **Constructor**
+***************************
+
+#### \_\_init\_\_(label="%p%", defaultValue=0, min=0, max=100)
+
+**min** - Defines the minimum value that can be selected.  
+**max** - Defines the maximum value that can be selected. 
+
+### **Properties**
+***************************
+
+#### min
+
+Defines the minimum value that can be selected.  
+ 	
+#### max
+
+Defines the maximum value that can be selected.  
+
+
+
+
+
 ## ControlSlider
 ***************************
 
-## ControlTextArea
+
+### **Constructor**
 ***************************
+
+#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+
+**min** - Defines the minimum value that can be selected.  
+**max** - Defines the maximum value that can be selected. 
+
+### **Properties**
+***************************
+
+#### min
+
+Defines the minimum value that can be selected.  
+ 	
+#### max
+
+Defines the maximum value that can be selected.  
+
+
+
+
+
+
 
 ## ControlText
 ***************************
 
+### **Events**
+***************************
+
+#### finishEditing() 
+
+Event called when the user ends the control edition.
+
+
+
+
+
+## ControlTextArea
+***************************
+
+
+
+
+
+
+
 ## ControlToolBox
 ***************************
+
+
+
+
+
+
 
 ## ControlTree
 ***************************
 
+
+
+
+
+
+
 ## ControlTreeView
 ***************************
+
+
+
+
+
+
 
 ## ControlVisVis
 ***************************
 
+### **Functions**
+***************************
+
+#### refresh()
+
+Repaint the points
+ 	
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets a list of 2D or 3D points to display.
+
+
+
+
 ## ControlVisVisVolume
 ***************************
+
+
+### **Functions**
+***************************
+
+#### refresh()
+
+Repaint the image.
+ 	
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets an numpy array image with volume.
+
+#### colorMap
+
+Gets and sets the color map to display.
