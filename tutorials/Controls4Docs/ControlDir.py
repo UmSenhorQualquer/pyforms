@@ -20,9 +20,11 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', 0, 255, horizontal=True)
+		self._control 	= ControlDir('Files')
 		
-		self._formset = [' ','_control',' ']
+		self._formset = [' ',(' ', '_control', ' '),' ']
+
+		
 		
 
 

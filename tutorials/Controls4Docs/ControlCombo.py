@@ -20,11 +20,15 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', 0, 255, horizontal=True)
+		self._control 	= ControlCombo('Countries')
 		
-		self._formset = [' ','_control',' ']
+		self._formset = [' ',(' ', '_control', ' '),' ']
 		
-
+		self._control.addItem('Portugal', 'pt')
+		self._control.addItem('Angola', 'ao')
+		self._control.addItem('Moçambique', 'mz')
+		self._control.addItem('Brazil', 'br')
+		self._control.addItem('Cabo Verde', 'cv')
 
 
 ##################################################################################################################

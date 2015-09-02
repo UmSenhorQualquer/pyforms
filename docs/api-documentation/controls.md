@@ -180,6 +180,8 @@ In case the button was initiated with the flag checkable=True, it will get and s
 ## ControlCheckBox
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBox.png?raw=true "Screen")
+
 ### **Properties**
 ***************************
 
@@ -197,6 +199,7 @@ Gets and sets a boolean indicating the state of the checkbox.
 ## ControlCheckBoxList
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBoxList.png?raw=true "Screen")
 
 ### **Functions**
 ***************************
@@ -242,6 +245,7 @@ It gets and sets all the List values. This property receives a list where each e
 ## ControlCombo
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCombo.png?raw=true "Screen")
 
 ### **Functions**
 ***************************
@@ -299,6 +303,8 @@ Gets and set the current selected item text.
 
 ## ControlDir
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlDir.png?raw=true "Screen")
 
 This control maybe used to select a directory.
 

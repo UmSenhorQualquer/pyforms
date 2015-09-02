@@ -20,12 +20,11 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', 0, 255, horizontal=True)
+		self._control 	= ControlCheckBoxList('Check list')
 		
-		self._formset = [' ','_control',' ']
+		self._formset = [' ',(' ', '_control', ' '),' ']
 		
-
-
+		self._control.value = [('item1',True), ('item2',False), 'item3']
 
 ##################################################################################################################
 ##################################################################################################################
