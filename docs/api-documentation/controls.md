@@ -99,6 +99,8 @@ Returns and set the control to enable or disable state.
 ## ControlBoundingSlider
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlBoundingSlider.png?raw=true "Screen")
+
 ### **Constructer**
 ***************************
 
@@ -132,6 +134,8 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 
 ## ControlButton
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlButton.png?raw=true "Screen")
 
 ### **Constructer**
 ***************************
