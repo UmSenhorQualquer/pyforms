@@ -181,7 +181,7 @@ Gets and sets a boolean indicating the state of the checkbox.
 ### **Functions**
 ***************************
  	
-#### __add__(val)
+#### \_\_add\_\_(val)
 
 Add more elements to the list.
 Usage:  
@@ -284,11 +284,49 @@ This control is used to create DockWidget.
 ## ControlEmptyWidget
 ***************************
 
+This Control may be used to display a BaseWidget or another Control inside.
+
+### **Constructer**
+***************************
+
+#### \_\_init\_\_(self, label='') 
+
+The constructer receives only a label.
+
+### **Properties**
+***************************
+
+#### value
+
+It may receive an element, or a list of elements from the types BaseWidget or BaseControl.
+
 ## ControlFile
 ***************************
 
+The control may be used to select a file.
+
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets a file path.
+
 ## ControlFilesTree
 ***************************
+
+Show the directory files in a tree view
+
+⋅⋅⋅Note Is not fully developed yet.⋅⋅
+
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets a directory path.
+
+
 
 ## ControlHidden
 ***************************
@@ -324,11 +362,16 @@ This control is used to create DockWidget.
 ***************************
 
 ## ControlToolBox
+***************************
 
 ## ControlTree
+***************************
 
 ## ControlTreeView
+***************************
 
 ## ControlVisVis
+***************************
 
 ## ControlVisVisVolume
+***************************
