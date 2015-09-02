@@ -19,8 +19,7 @@ All the Controls inherit from this Control, therefore you can find its functions
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultValue='', helptext='')
-
+#### \_\_init\_\_(label='', defaultValue='', helptext='')  
 Control constructer.  
 **label** - Control label.  
 **defaultValue** - Initial value of the control.  
@@ -30,34 +29,27 @@ Control constructer.
 ### **Functions**
 ***************************
 
-#### initForm()
-
+#### initForm()  
 Load the control UI and initiate all the events.
  	
-#### load(data)
-
+#### load(data)  
 Function used to load the value of the control.  
 **data** - Contains a dictionary with the required information to load the control.
  	
-#### save(data)
-
+#### save(data)  
 Save a value of the control to a dictionary variable.  
 **data** - Dictionary where the control value should be saved.
  	
-#### show()
-
+#### show()  
 Show the control
  	
-#### hide()
-
+#### hide()  
 Hide the control
  	
-#### addPopupMenuOption(label, functionAction=None, key=None)
-
+#### addPopupMenuOption(label, functionAction=None, key=None)  
 Add an option to the Control popup menu
  	
-#### addPopupSubMenuOption(label, options, keys={})
-
+#### addPopupSubMenuOption(label, options, keys={})  
 Add submenu options to the Control popup menu
  	
 	
@@ -65,43 +57,35 @@ Add submenu options to the Control popup menu
 ### **Events**
 ***************************
 
-#### changed() 
-
+#### changed()  
 Function called when ever the Control value is changed
  	
-#### aboutToShowContextMenuEvent()
+#### aboutToShowContextMenuEvent()  
 Function called before open the Control popup menu
  
 
 ### **Properties**
 ***************************
 
-#### value
-
+#### value  
 This property return and set what the control should manage or store.
  	
-#### name
-
+#### name  
 This property return and set the name of the control
  	
-#### label
-
+#### label  
 Label of the control, if applies
  	
-#### form
-
+#### form  
 Returns the Widget of the control.
  	
-#### parent
-
+#### parent  
 Returns or set the parent basewidget where the Control is
  	
-#### help
-
+#### help  
 Return and set the tip box of the control
 
-#### enabled
-
+#### enabled  
 Returns and set the control to enable or disable state.
 
 
