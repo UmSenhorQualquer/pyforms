@@ -317,6 +317,8 @@ This control maybe used to select a directory.
 ## ControlDockWidget
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlDockWidget.png?raw=true "Screen")
+
 This control is used to create DockWidget.
 
 ### **Constructer**
@@ -360,6 +362,8 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 ## ControlFile
 ***************************
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFile.png?raw=true "Screen")
+
 The control may be used to select a file.
 
 ### **Properties**
@@ -377,6 +381,8 @@ Gets and sets a file path.
 
 ## ControlFilesTree
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFilesTree.png?raw=true "Screen")
 
 Show the directory files in a tree view
 
@@ -398,6 +404,10 @@ Gets and sets a directory path.
 
 ## ControlImage
 ***************************
+
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlImage.png?raw=true "Screen")
+
 
 Displays an image or a list of images.
 
@@ -425,6 +435,9 @@ This property receives an image or a list of images.
 
 ## ControlLabel
 ***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlLabel.png?raw=true "Screen")
+
 
 Displays a text.
 
