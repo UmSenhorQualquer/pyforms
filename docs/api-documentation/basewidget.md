@@ -2,6 +2,9 @@
 
 
 ## \_\_init\_\_(title)
+
+### **Functions**
+***************************
  	
 ## initForm() 
 
@@ -35,25 +38,58 @@ Generate a panel for the module form with all the controls formset format exampl
 ## show()
 
 OTModuleProjectItem.show reimplementation
- 	
-## formControls()
 
-Return all the form controls from the the module
- 	
-## form
- 	
-## title
- 	
-## mainmenu
- 	
-## docks
- 	
-## save(data)
- 	
 ## saveWindow()
+
+Open a Save file dialog, and saves the Window Controls data to the selected file in the JSON format.
+
+## save(data)
+
+Receives a dictionary, and stores all the Window Controls data on it.
  	
+**data** - dict where the data will be stored.
+
+## loadWindow()
+
+Opens a Open file dialog, and calls the function loadWindowData() 
+
 ## loadWindowData(filename)
+
+Loads the json data from a file and calls the function load()
  	
 ## load(data)
  	
-## loadWindow()
+Load the Window Controls data from a dictionary.
+
+### **Properties**
+***************************
+
+## formControls
+
+Returns a dictionary of all Controls in the Window.
+ 	
+## form
+
+Return QWidget representing the Window and the Controls. 
+ 	
+## title
+
+Get and sets the Window title.
+ 	
+## mainmenu
+
+Get and sets the Application main menu.
+
+Example:
+
+```python
+self.mainmenu = [
+		{ 'File': [
+				{'Save as': self.saveWindow},
+				{'Open as': self.loadWindow},
+				'-',
+				{'Exit': self.__exit},
+			]
+		}
+	]
+``` 

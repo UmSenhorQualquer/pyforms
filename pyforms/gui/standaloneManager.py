@@ -28,14 +28,14 @@ class StandAloneContainer(QtGui.QMainWindow):
         self.setCentralWidget(w)
         self.setWindowTitle(w.title)
        
-        w.docks = {}
+        docks = {}
         for name, item in w.formControls.items():
             if isinstance(item, ControlDockWidget):
-                if item.side not in w.docks:
-                    w.docks[item.side] = []
-                w.docks[item.side].append((name, item))
+                if item.side not in docks:
+                    docks[item.side] = []
+                docks[item.side].append((name, item))
 
-        for key, widgets in w.docks.items():
+        for key, widgets in docks.items():
             side = QtCore.Qt.RightDockWidgetArea
             if key == 'left':
                 side = QtCore.Qt.LeftDockWidgetArea

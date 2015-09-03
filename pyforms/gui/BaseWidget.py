@@ -35,7 +35,6 @@ class BaseWidget(QtGui.QWidget):
         self._mainmenu = []
         self._splitters = []
         self._tabs = []
-        self._docks = {}
         self._formset = None
         self._formLoaded = False
 
@@ -359,11 +358,6 @@ class BaseWidget(QtGui.QWidget):
     @mainmenu.setter
     def mainmenu(self, value): self._mainmenu = value
 
-    @property
-    def docks(self): return self._docks
-
-    @docks.setter
-    def docks(self, value): self._docks = value
 
     def save(self, data):
         allparams = self.formControls

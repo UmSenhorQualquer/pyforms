@@ -270,7 +270,6 @@ pyforms.gui.BaseWidget.BaseWidget.mainmenu	pyforms.gui.BaseWidget.BaseWidget-cla
 pyforms.gui.BaseWidget.BaseWidget.generatePanel	pyforms.gui.BaseWidget.BaseWidget-class.html#generatePanel
 pyforms.gui.BaseWidget.BaseWidget.update_progress	pyforms.gui.BaseWidget.BaseWidget-class.html#update_progress
 pyforms.gui.BaseWidget.BaseWidget.initForm	pyforms.gui.BaseWidget.BaseWidget-class.html#initForm
-pyforms.gui.BaseWidget.BaseWidget.docks	pyforms.gui.BaseWidget.BaseWidget-class.html#docks
 pyforms.gui.BaseWidget.BaseWidget.generateTabs	pyforms.gui.BaseWidget.BaseWidget-class.html#generateTabs
 pyforms.gui.BaseWidget.BaseWidget.loadWindow	pyforms.gui.BaseWidget.BaseWidget-class.html#loadWindow
 pyforms.gui.BaseWidget.BaseWidget.save	pyforms.gui.BaseWidget.BaseWidget-class.html#save
@@ -327,6 +326,7 @@ pyforms.gui.Controls.ControlButton.ControlButton.initForm	pyforms.gui.Controls.C
 pyforms.gui.Controls.ControlButton.ControlButton.value	pyforms.gui.Controls.ControlButton.ControlButton-class.html#value
 pyforms.gui.Controls.ControlCheckBox.ControlCheckBox	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html
 pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.load	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#load
+pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.__checkedToggle	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#__checkedToggle
 pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.save	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#save
 pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.initForm	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#initForm
 pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.value	pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#value
@@ -386,6 +386,7 @@ pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimel
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__removeSelected	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__removeSelected
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.getExportFilename	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#getExportFilename
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__init__	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__init__
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.playVideoEvent	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#playVideoEvent
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__setLinePropertiesEvent	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__setLinePropertiesEvent
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__scaleSliderChange	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__scaleSliderChange
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.form	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#form
@@ -396,7 +397,6 @@ pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimel
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.aboutToShowContextMenuEvent	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#aboutToShowContextMenuEvent
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.initForm	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#initForm
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__pickColor	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__pickColor
-pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.isPlaying	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#isPlaying
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__cleanCharts	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__cleanCharts
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.fpsChanged	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#fpsChanged
 pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.value	pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#value
@@ -764,11 +764,11 @@ pyforms.gui.PyFormsStateMachine.PyFormsState.init	pyforms.gui.PyFormsStateMachin
 pyforms.gui.PyFormsStateMachine.PyFormsState.initForm	pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#initForm
 pyforms.gui.PyFormsStateMachine.PyFormsState.enter	pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#enter
 pyforms.gui.PyFormsStateMachine.PyFormsStateMachine	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html
-pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__init__	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__
-pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__returnCurrentStatesValues	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__returnCurrentStatesValues
-pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm
 pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.iterateStates	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#iterateStates
 pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.execute	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#execute
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__returnCurrentStatesValues	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__returnCurrentStatesValues
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__init__	pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__
 pyforms.gui.appmanager.Container	pyforms.gui.appmanager.Container-class.html
 pyforms.gui.appmanager.Container.actionExit_triggered	pyforms.gui.appmanager.Container-class.html#actionExit_triggered
 pyforms.gui.appmanager.Container.actionRun_triggered	pyforms.gui.appmanager.Container-class.html#actionRun_triggered
