@@ -27,9 +27,6 @@ class SimpleExample(BaseWidget):
 
 		self._open.value = self.__open
 		
-	def initForm(self):
-		super(SimpleExample, self).initForm()
-
 	def __open(self):
 		self._control.value = '/home/ricardo/Desktop/lena_color.png'
 
