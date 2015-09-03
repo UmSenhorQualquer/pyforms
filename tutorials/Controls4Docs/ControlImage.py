@@ -31,8 +31,7 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample, self).initForm()
 
 	def __open(self):
-		img = cv2.imread('/home/ricardo/Desktop/lena_color.png', 1)
-		self._control.value = img
+		self._control.value = '/home/ricardo/Desktop/lena_color.png'
 
 
 

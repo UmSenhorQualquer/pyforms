@@ -380,11 +380,11 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     # Video playback properties
     @property
-    def isPlaying(self):
+    def playVideoEvent(self):
         return self._time.playVideoEvent
 
-    @isPlaying.setter
-    def isPlaying(self, value):
+    @playVideoEvent.setter
+    def playVideoEvent(self, value):
         self._time.playVideoEvent = value
 
     @property

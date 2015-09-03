@@ -365,7 +365,40 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlEventTimeline.png?raw=true "Screen")
 
 
+### **Constructor**
+***************************
 
+#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100, **kwargs)
+
+### **Functions**
+***************************
+ 	 	
+#### getExportFilename()
+ 	
+#### addRow(values)
+ 	
+#### addPeriod(value, track=0, color=None)	source code
+
+### **Events**
+***************************
+
+#### playVideoEvent()
+
+#### fpsChanged()
+
+#### pointerChanged()
+ 	
+### **Properties**
+***************************
+
+#### value
+
+#### max
+ 	
+#### mouseOverLine
+
+ 	
+ 	
 
 
 
@@ -435,11 +468,22 @@ Redraw the image or set of images
  	
 #### value
 
-This property receives an image or a list of images.
+This property receives an image path, a numpy image or a list of numpy images.
 
-
-
-
+Usage:  
+```python
+controlVar.value = 'lena_color.png'
+```  
+or  
+```python
+controlVar.value = cv2.imread('lena_color.png', 1)
+```  
+or  
+```python
+img1 = cv2.imread('lena_color.png', 1)
+img2 = cv2.imread('lena_color.png', 1)
+controlVar.value = [img1, img2]
+```  
 
 
 
