@@ -24,7 +24,7 @@ class BaseWidget(QtGui.QWidget):
     The class implements the most basic widget or window.
     """
 
-    def __init__(self, title):
+    def __init__(self, title='Untitled'):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
         self.setLayout(layout)
