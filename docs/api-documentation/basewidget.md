@@ -1,20 +1,22 @@
 # Base widget
 
+## **Constructor**
+***************************
 
-## \_\_init\_\_(title)
+### \_\_init\_\_(title)
 
-### **Functions**
+## **Functions**
 ***************************
  	
-## initForm() 
+### initForm() 
 
 Generate the module Form
  	
-## generateTabs(formsetDict) 
+### generateTabs(formsetDict) 
 
 Generate QTabWidget for the module form
  	
-## generatePanel(formset) 
+### generatePanel(formset) 
 
 Generate a panel for the module form with all the controls formset format example:
 
@@ -35,48 +37,48 @@ Generate a panel for the module form with all the controls formset format exampl
 **'||'**: Split the controls horizontally.
 **'='**: Split the controls vertically.
  	
-## show()
+### show()
 
 OTModuleProjectItem.show reimplementation
 
-## saveWindow()
+### saveWindow()
 
 Open a Save file dialog, and saves the Window Controls data to the selected file in the JSON format.
 
-## save(data)
+### save(data)
 
 Receives a dictionary, and stores all the Window Controls data on it.
  	
 **data** - dict where the data will be stored.
 
-## loadWindow()
+### loadWindow()
 
 Opens a Open file dialog, and calls the function loadWindowData() 
 
-## loadWindowData(filename)
+### loadWindowData(filename)
 
 Loads the json data from a file and calls the function load()
  	
-## load(data)
+### load(data)
  	
 Load the Window Controls data from a dictionary.
 
-### **Properties**
+## **Properties**
 ***************************
 
-## formControls
+### formControls
 
 Returns a dictionary of all Controls in the Window.
  	
-## form
+### form
 
 Return QWidget representing the Window and the Controls. 
  	
-## title
+### title
 
 Get and sets the Window title.
  	
-## mainmenu
+### mainmenu
 
 Get and sets the Application main menu.
 
