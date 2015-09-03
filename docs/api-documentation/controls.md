@@ -359,6 +359,16 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 
 
 
+## ControlEventTimeline
+***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlEventTimeline.png?raw=true "Screen")
+
+
+
+
+
+
 ## ControlFile
 ***************************
 
@@ -655,6 +665,21 @@ Gets and sets the GL window width
 #### height
 
 Gets and sets the GL window height
+
+
+
+
+
+
+
+## ControlPlayer
+***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlPlayer.png?raw=true "Screen")
+
+
+
+
 
 
 
