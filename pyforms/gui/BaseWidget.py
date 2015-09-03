@@ -271,7 +271,7 @@ class BaseWidget(QtGui.QWidget):
 
     def show(self):
         """
-        OTModuleProjectItem.show reimplementation
+        It shows the 
         """
         self.initForm()
         super(BaseWidget, self).show()

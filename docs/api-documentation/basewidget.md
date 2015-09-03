@@ -1,8 +1,36 @@
 # BaseWidget
 
-The BaseWidget is used to create a set of forms Controls. It can works as a main window or a panel that can be included inside other BaseWidgets.
+The BaseWidget is used to create a set of forms Controls. It can works as a main window or a panel that can be included in others BaseWidgets.
 
 This class inherit from the Qt QWidget.
+
+Usage example:
+```python
+class SimpleExample(BaseWidget):
+	
+	def __init__(self):
+		super(SimpleExample,self).__init__('Simple example')
+
+		#Definition of the forms fields
+		self._firstname 	= ControlText('First name', 'Default value')
+		self._middlename 	= ControlText('Middle name')
+		self._lastname 		= ControlText('Lastname name')
+		self._fullname 		= ControlText('Full name')
+		self._button 		= ControlButton('Press this button')
+
+		#Define the organization of the forms
+		self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
+		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
+		#If you remove the ' ' the forms will occupy the entire window
+
+		#Define the button action
+		self._button.value = self.__buttonAction
+
+	def __buttonAction(self):
+		"""Button action event"""
+		self._fullname.value = self._firstname.value +" "+ self._middlename.value + \
+		" "+ self._lastname.value
+```
 
 ## **Constructor**
 ***************************
@@ -11,16 +39,25 @@ This class inherit from the Qt QWidget.
 
 The constructer receives the title of the window.
 
+## **Important variables**
+***************************
+
+### _formset
+
+This variable is used to define the organization of the forms Controls in the BaseWidget.  
+When not defined it BaseWidget will assume generate this variable automatically.
+
+
 ## **Functions**
 ***************************
  	
 ### initForm() 
 
-Initiate the QWidget set of form Controls.
+Initialize the QWidget and its events with the set of form Controls.
  	
 ### generateTabs(formsetDict)
 
-Used when a dictionary is present in the the BaseWidget._formset variable.
+Used when a dictionary is present in the the BaseWidget._formset variable.  
 Returns a QTabWidget with the forms Controls organization described in the parameter formsetDict.
 Example:
 ```python
@@ -30,13 +67,13 @@ Example:
 }
 ```
 
-*Note:* Because a Python dictionary does not support order, we may use the format '[some characters]:[Tab name]' to order tabs. The generateTabs function will use the component [some characters] to order alfabetically the tabs.  
+**Note:** Because a Python dictionary does not support order, we may use the format '[some characters]:[Tab name]' to order tabs. The generateTabs function will use the component [some characters] to order alfabetically the tabs.  
 Only the component [Tab name] will be shown in the tab.
 
 	
 ### generatePanel(formset) 
 
-Used to construct a panel with forms Controls organization described in the BaseWidget._formset variable.
+Used to construct a panel with forms Controls organization described in the BaseWidget._formset variable.  
 Returns a QWidget with the forms Controls organization described in the parameter formset.
 
 **formset** - variable describing the organization of the forms Controls in the BaseWidget.  
@@ -70,7 +107,7 @@ Example:
  	
 ### show()
 
-OTModuleProjectItem.show reimplementation
+Calls the initForm() function and shows the BaseWidget.
 
 ### saveWindow()
 
