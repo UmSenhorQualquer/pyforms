@@ -20,7 +20,9 @@ class ControlCheckBox(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__,"checkbox.ui")
         self._form = uic.loadUi( control_path )
         self._form.checkBox.setText(self._label)
-        self._form.checkBox.stateChanged.connect(self.checkedToggle)
+        self._form.checkBox.stateChanged.connect(self.__checkedToggle)
+
+    def __checkedToggle(self): self.changed()
 
     def load(self, data):
         if 'value' in data: 
