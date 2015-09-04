@@ -129,7 +129,8 @@ class SimpleExample1(BaseWidget):
 ```
 
 Result:
-![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-2.png?raw=true "Screen")
+
+![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-3.png?raw=true "Screen")
 
 Try now:
 ```python
@@ -169,8 +170,6 @@ class SimpleExample1(BaseWidget):
 
 After you just need to set the BaseWidget.mainmenu property as the example bellow.
 
-Check the example:
-#Define the window main menu using the property main menu
 ```python
 	self.mainmenu = [
 		{ 'File': [
