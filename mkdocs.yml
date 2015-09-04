@@ -2,9 +2,9 @@ site_name: PyForms
 pages:
 - Home: 'index.md'
 - Getting started:
-	- 'The basic': 'getting-started/the-basic.md'
-	- 'Use multiple windows': 'getting-started/multiple-windows.md'
-	- 'Mdi applications': 'getting-started/mdi-applications.md'
+    - 'The basic': 'getting-started/the-basic.md'
+    - 'Use multiple windows': 'getting-started/multiple-windows.md'
+    - 'Mdi applications': 'getting-started/mdi-applications.md'
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
