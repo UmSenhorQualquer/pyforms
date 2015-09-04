@@ -168,22 +168,57 @@ class SimpleExample1(BaseWidget):
 		...
 ```
 
-After you just need to set the BaseWidget.mainmenu property as the example bellow.
+After you just need to set the BaseWidget.mainmenu property inside the your application class constructor as the example bellow.
 
 ```python
-	self.mainmenu = [
-		{ 'File': [
-				{'Open': self.__openEvent},
-				'-',
-				{'Save': self.__saveEvent},
-				{'Save as': self.__saveAsEvent}
-			]
-		},
-		{ 'Edit': [
-				{'Copy': self.__editEvent},
-				{'Past': self.__pastEvent}
-			]
-		}
-	]
+...
+
+class SimpleExample1(BaseWidget):
+	
+	def __init__(self):
+		...
+		self.mainmenu = [
+			{ 'File': [
+					{'Open': self.__openEvent},
+					'-',
+					{'Save': self.__saveEvent},
+					{'Save as': self.__saveAsEvent}
+				]
+			},
+			{ 'Edit': [
+					{'Copy': self.__editEvent},
+					{'Past': self.__pastEvent}
+				]
+			}
+		]
+
+	...
 ```
- 
+
+## **Add popup menus to the forms Controls.**
+***************************
+
+Use the function addPopupMenuOption or addPopupSubMenuOption to add a popup menu or a popup submenu to your Control.
+
+[Find here more details about the functions addPopupMenuOption and addPopupSubMenuOption.](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
+
+```python
+...
+
+class SimpleExample1(BaseWidget):
+	
+	def __init__(self):
+		...
+
+		self._fullname.addPopupSubMenuOption('Path', 
+			{
+				'Delete':           self.__dummyEvent, 
+				'Edit':             self.__dummyEvent,
+				'Interpolate':      self.__dummyEvent
+			})
+	...
+```	
+
+Result:
+
+![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-4.png?raw=true "Screen")
