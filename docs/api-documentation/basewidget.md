@@ -183,3 +183,5 @@ self.mainmenu = [
 		}
 	]
 ``` 
+
+**'-'**: Use the minus sign to create a split bar in the menu.

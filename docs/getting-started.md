@@ -105,7 +105,7 @@ This previews code will produce the next window, after you press the button:
 
 
 
-## **Organize your Controls**
+## **Organize your form Controls**
 ***************************
 
 Use the BaseWidget._formset variable to organize the Controls inside the Window.  
@@ -121,9 +121,70 @@ class SimpleExample1(BaseWidget):
 		...
 
 		#Define the organization of the forms
-		self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
+		self._formset = [ ('_firstname','_middlename','_lastname'), '_button', '_fullname', ' ']
 		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
 		#If you remove the ' ' the forms will occupy the entire window
 
 	...
 ```
+
+Result:
+![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-2.png?raw=true "Screen")
+
+Try now:
+```python
+self._formset = [ {
+		'Tab1':['_firstname','||','_middlename','||','_lastname'], 
+		'Tab2': ['_fullname']
+	},
+	'=',(' ','_button', ' ') ]
+#Use dictionaries for tabs
+#Use the sign '=' for a vertical splitter
+#Use the signs '||' for a horizontal splitter
+```
+
+## **Add a main menu**
+***************************
+
+To add a main menu to your application, first you need to define the functions that will work as the options actions.
+
+```python
+...
+
+class SimpleExample1(BaseWidget):
+	...
+
+	def __openEvent(self):
+		...
+
+	def __saveEvent(self):
+		...
+
+	def __editEvent(self):
+		...
+
+	def __pastEvent(self):
+		...
+```
+
+After you just need to set the BaseWidget.mainmenu property as the example bellow.
+
+Check the example:
+#Define the window main menu using the property main menu
+```python
+	self.mainmenu = [
+		{ 'File': [
+				{'Open': self.__openEvent},
+				'-',
+				{'Save': self.__saveEvent},
+				{'Save as': self.__saveAsEvent}
+			]
+		},
+		{ 'Edit': [
+				{'Copy': self.__editEvent},
+				{'Past': self.__pastEvent}
+			]
+		}
+	]
+```
+ 
