@@ -47,6 +47,34 @@ The constructer receives the title of the window.
 This variable is used to define the organization of the forms Controls in the BaseWidget.  
 When not defined it BaseWidget will assume generate this variable automatically.
 
+Example:
+```python
+self._formset = [
+	'info:Some title',
+	'h1:Some title',
+	'h2:Some title',
+	'h3:Some title',
+	'h4:Some title',
+	'h5:Some title',
+	(' ','free text', ' '),
+	('_video', '_arenas', '_run'), 
+	{
+		"Player": ['_threshold', "_player", "=", "_results", "_query"], 
+		"Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
+	}, 
+	"_progress"
+] 
+```
+
+**Tuple**: Displays the controls horizontally.  
+**List**: Displays the controls vertically.  
+**Dict**: Displays the controls in a tab widget.  
+**'||'**: Split the controls horizontally.  
+**'='**: Split the controls vertically.  
+**' '**: It creates an empty space. It can be used to align Controls to one expecific side.  
+**info:, h1:, h2:, h3:, h4:, h5:**: Is used to write some text in the interface with diferent sizes.  
+**free text** - It is possible also to write some free text.
+ 	
 
 ## **Functions**
 ***************************
@@ -96,15 +124,7 @@ Example:
 ] 
 ```
 
-**Tuple**: Displays the controls horizontally.  
-**List**: Displays the controls vertically.  
-**Dict**: Displays the controls in a tab widget.  
-**'||'**: Split the controls horizontally.  
-**'='**: Split the controls vertically.  
-**' '**: It creates an empty space. It can be used to align Controls to one expecific side.  
-**info:, h1:, h2:, h3:, h4:, h5:**: Is used to write some text in the interface with diferent sizes.  
-**free text** - It is possible also to write some free text.
- 	
+
 ### show()
 
 Calls the initForm() function and shows the BaseWidget.

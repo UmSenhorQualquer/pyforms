@@ -6,15 +6,23 @@ This page was based in the examples available on the github folder: [Tutorial - 
 ## **Prepare the application class**
 ***************************
 
-### Create the Python file that will store your applications. Example: SimpleExample.py
-### After import pyforms, the BaseWidget and Controls classes you will need:
+### Create the Python file that will store your applications. 
+
+Example: SimpleExample.py
+
+### Import the library.
+
+Import the pyforms library, the BaseWidget and the Controls classes that you will need:
 ```python
 import pyforms
 from   pyforms 			import BaseWidget
 from   pyforms.Controls import ControlText
 from   pyforms.Controls import ControlButton
 ```
-### Create your application class. This class should inherit from the class BaseWidget.
+
+### Create your application class.
+
+This class should inherit from the class BaseWidget.
 ```python
 class SimpleExample1(BaseWidget):
 	
@@ -40,18 +48,25 @@ If you run this file, it will produce the next window.
 
 ## **Add an action to the button**
 ***************************
-### Create the class function that will work as the button action.
+
+### Create the action
+
+Create the class function that will work as the button action.
 ```python
 def __buttonAction(self):
 	"""Button action event"""
 	self._fullname.value = self._firstname.value +" "+ self._middlename.value +" "+self._lastname.value
 ```
-### Set the function to be executed when the button is pressed. Inside the class constructor add the code:
+### Set the button action
+
+Configure the button to execute your function when pressed.  
+Inside the class constructor add the code:
 ```python
 #Define the button action
 self._button.value = self.__buttonAction
 ```
-### The final code should look like:
+
+The final code should look like:
 ```python
 import pyforms
 from   pyforms 			import BaseWidget
@@ -86,3 +101,29 @@ This previews code will produce the next window, after you press the button:
 
 ![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-2.png?raw=true "Screen")
 
+
+
+
+
+## **Organize your Controls**
+***************************
+
+Use the BaseWidget._formset variable to organize the Controls inside the Window.  
+[Find here more details about the _formset variable](http://pyforms.readthedocs.org/en/latest/api-documentation/basewidget/#important-variables)
+
+
+```python
+...
+
+class SimpleExample1(BaseWidget):
+	
+	def __init__(self):
+		...
+
+		#Define the organization of the forms
+		self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
+		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
+		#If you remove the ' ' the forms will occupy the entire window
+
+	...
+```
