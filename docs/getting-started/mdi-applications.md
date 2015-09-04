@@ -227,7 +227,7 @@ Result:
 ## **What next?**
 ***************************
 
-### Move to the [next tutorial](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
+### Move to the [next chapter](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
 
 
 ### Find out what you can do with other form Controls [here](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/)
