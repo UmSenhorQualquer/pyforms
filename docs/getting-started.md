@@ -198,7 +198,7 @@ class SimpleExample1(BaseWidget):
 ## **Add popup menus to the forms Controls.**
 ***************************
 
-Use the function addPopupMenuOption or addPopupSubMenuOption to add a popup menu or a popup submenu to your Control.
+Create the functions that will work as the popup menu options actions, as you have than in the main menu chapter, after use the functions addPopupMenuOption or addPopupSubMenuOption to add a popup menu or a popup submenu to your Control.
 
 [Find here more details about the functions addPopupMenuOption and addPopupSubMenuOption.](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
 
