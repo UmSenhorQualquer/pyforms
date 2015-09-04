@@ -1,6 +1,7 @@
 site_name: PyForms
 pages:
 - Home: 'index.md'
+- Getting started: 'getting-started.md'
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
