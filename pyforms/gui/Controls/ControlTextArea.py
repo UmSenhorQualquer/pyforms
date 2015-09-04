@@ -20,17 +20,19 @@ class ControlTextArea(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
-        self._form.plainTextEdit.setPlainText(self._value)
+        self._form.plainTextEdit.setPlainText(str(self._value))
+
+    def __add__(self, other):
+        self._form.plainTextEdit.appendPlainText(str(other))
+        return self
 
     @property
     def value(self):
-        self._value = str(self._form.plainTextEdit.toPlainText())
-        return self._value
+        return self._form.toPlainText()
 
     @value.setter
     def value(self, value):
-        ControlBase.value.fset(self, value)
-        self._form.plainTextEdit.setPlainText(self._value)
+        self._form.plainTextEdit.setPlainText(str(value))
 
     @property
     def readOnly(self):
