@@ -195,7 +195,7 @@ class SimpleExample1(BaseWidget):
 	...
 ```
 
-## **Add popup menus to the forms Controls.**
+## **Add popup menus to the forms Controls**
 ***************************
 
 Create the functions that will work as the popup menu options actions, as you have than in the main menu chapter, after use the functions **addPopupMenuOption** or **addPopupSubMenuOption** to add a popup menu or a popup submenu to your Control.
@@ -224,11 +224,11 @@ Result:
 ![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-4.png?raw=true "Screen")
 
 
-## **What next**
+## **What next?**
 ***************************
 
 ### Move to the [next tutorial](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
-.
+
 
 ### Find out what you can do with other form Controls [here](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/)
 
