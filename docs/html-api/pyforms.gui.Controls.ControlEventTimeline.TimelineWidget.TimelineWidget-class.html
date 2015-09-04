@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        pyforms ::
+        gui ::
+        Controls ::
+        ControlEventTimeline ::
+        TimelineWidget ::
+        TimelineWidget ::
+        Class&nbsp;TimelineWidget
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class TimelineWidget</h1><p class="nomargin-top"><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_pyforms__18" name="uml_class_diagram_for_pyforms__18">
+<area shape="rect" id="node1_14" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#__init__" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.__init__" alt="" coords="17,40,277,60"/>
+<area shape="rect" id="node1_15" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#x2frame" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.x2frame" alt="" coords="17,60,277,80"/>
+<area shape="rect" id="node1_16" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#frame2x" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.frame2x" alt="" coords="17,80,277,100"/>
+<area shape="rect" id="node1_17" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#removeSelected" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.removeSelected" alt="" coords="17,100,277,120"/>
+<area shape="rect" id="node1_18" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#lockSelected" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.lockSelected" alt="" coords="17,120,277,140"/>
+<area shape="rect" id="node1_19" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#selectDelta" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.selectDelta" alt="" coords="17,140,277,160"/>
+<area shape="rect" id="node1_20" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#importchart_csv" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.importchart_csv" alt="" coords="17,160,277,180"/>
+<area shape="rect" id="node1_21" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#import_csv" title="Extracts info from a file object and stores it in memory in order to &#160;display it on the timeline." alt="" coords="17,180,277,200"/>
+<area shape="rect" id="node1_22" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#export_csv" title="Processes all timeline data in an arranged format to be written in a CSV &#160;file." alt="" coords="17,200,277,220"/>
+<area shape="rect" id="node1_23" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#cleanCharts" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.cleanCharts" alt="" coords="17,220,277,240"/>
+<area shape="rect" id="node1_24" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#clean" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.clean" alt="" coords="17,240,277,260"/>
+<area shape="rect" id="node1_25" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#cleanLine" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.cleanLine" alt="" coords="17,260,277,280"/>
+<area shape="rect" id="node1_26" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#addPeriod" title="Adds an annotated interval." alt="" coords="17,280,277,300"/>
+<area shape="rect" id="node1_27" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#fps" title="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.fps" alt="" coords="17,320,277,340"/>
+<area shape="rect" id="node1" href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html" title="Timeline widget definition to be used in the ControlEventTimeline" alt="" coords="5,6,289,346"/>
+</map>
+  <img src="uml_class_diagram_for_pyforms__18.gif" alt='' usemap="#uml_class_diagram_for_pyforms__18" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Timeline widget definition to be used in the ControlEventTimeline</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="x2frame"></a><span class="summary-sig-name">x2frame</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.x2frame">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="frame2x"></a><span class="summary-sig-name">frame2x</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">frame</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.frame2x">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="removeSelected"></a><span class="summary-sig-name">removeSelected</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.removeSelected">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="lockSelected"></a><span class="summary-sig-name">lockSelected</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.lockSelected">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="selectDelta"></a><span class="summary-sig-name">selectDelta</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.selectDelta">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__drawTrackLines"></a><span class="summary-sig-name">__drawTrackLines</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">painter</span>,
+        <span class="summary-sig-arg">start</span>,
+        <span class="summary-sig-arg">end</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.__drawTrackLines">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__drawTrackLabels"></a><span class="summary-sig-name">__drawTrackLabels</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">painter</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.__drawTrackLabels">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="importchart_csv"></a><span class="summary-sig-name">importchart_csv</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">csvfileobject</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.importchart_csv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#import_csv" class="summary-sig-name">import_csv</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">csvfileobject</span>)</span><br />
+      Extracts info from a file object and stores it in memory in order to 
+      display it on the timeline.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.import_csv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#export_csv" class="summary-sig-name">export_csv</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">csvfileobject</span>)</span><br />
+      Processes all timeline data in an arranged format to be written in a 
+      CSV file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.export_csv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cleanCharts"></a><span class="summary-sig-name">cleanCharts</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.cleanCharts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clean"></a><span class="summary-sig-name">clean</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.clean">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cleanLine"></a><span class="summary-sig-name">cleanLine</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.cleanLine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPeriod"></a><span class="summary-sig-name">addPeriod</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">track</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">color</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Adds an annotated interval.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.addPeriod">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#_update_tracks_info" class="summary-sig-name" onclick="show_private();">_update_tracks_info</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method updates the dict `_tracks_info` which contains all
+info stored in the timeline.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget._update_tracks_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__print_tracks_info"></a><span class="summary-sig-name">__print_tracks_info</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Prints tracks info on screen.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.__print_tracks_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="paintEvent"></a><span class="summary-sig-name">paintEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">e</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.paintEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseDoubleClickEvent"></a><span class="summary-sig-name">mouseDoubleClickEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.mouseDoubleClickEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="keyReleaseEvent"></a><span class="summary-sig-name">keyReleaseEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.keyReleaseEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mousePressEvent"></a><span class="summary-sig-name">mousePressEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.mousePressEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseMoveEvent"></a><span class="summary-sig-name">mouseMoveEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.mouseMoveEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mouseReleaseEvent"></a><span class="summary-sig-name">mouseReleaseEvent</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.mouseReleaseEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="trackInPosition"></a><span class="summary-sig-name">trackInPosition</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.trackInPosition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="playVideoEvent"></a><span class="summary-sig-name">playVideoEvent</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.playVideoEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fpsChangeEvent"></a><span class="summary-sig-name">fpsChangeEvent</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.fpsChangeEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__checkPositionIsVisible"></a><span class="summary-sig-name">__checkPositionIsVisible</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.__checkPositionIsVisible">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#scroll" class="summary-sig-name">scroll</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.scroll">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#position" class="summary-sig-name">position</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.position">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#scale" class="summary-sig-name">scale</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.scale">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#color" class="summary-sig-name">color</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.color">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#numberoftracks" class="summary-sig-name">numberoftracks</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.numberoftracks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#isPlaying" class="summary-sig-name">isPlaying</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.isPlaying">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#fps" class="summary-sig-name">fps</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.fps">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_defautcolor"></a><span class="summary-name">_defautcolor</span> = <code title="QtGui.QColor(100, 100, 255)">QtGui.QColor(100, 100, 255)</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="import_csv"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">import_csv</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">csvfileobject</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.import_csv">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Extracts info from a file object and stores it in memory in order to 
+  display it on the timeline.</p>
+  <p>Refer to the `export` method to learn about input file format and 
+  structure.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="export_csv"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">export_csv</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">csvfileobject</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.export_csv">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Processes all timeline data in an arranged format to be written in a 
+  CSV file.</p>
+  <h1 class="heading">Current file structure:</h1>
+    <p>--- CSV FILE BEGIN --- Track info line Event info line Event info 
+    line ... Empty line Track info line Event info line Event info line ...
+    Empty line Track info line Event info line Event info line ... Empty 
+    line --- CSV FILE END ---</p>
+  <h1 class="heading">Track info line format:</h1>
+    <p>| Id | Total # of events in this track |  |  | Color | Label |</p>
+  <h1 class="heading">Event info line format:</h1>
+    <p>| Lock status | Begin frame | End frame | Comment | Color |  |</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_update_tracks_info"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_update_tracks_info</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget._update_tracks_info">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+This method updates the dict `_tracks_info` which contains all
+info stored in the timeline.
+
+Currently, this method is called is the following situations:
+- Class initialization
+- Event added by double clicking the timeline
+- Everything is cleaned
+- A line is cleaned
+- After an event is removed/locked/unlocked
+#TODO- After editing a timeline line entry
+#TODO- After editing an event (TimelineDelta object)
+- After importing from a file
+- Before exporting to a file
+
+This dictionary stores info in the format shown below:
+{line_numer : [ line_label, line_color, [data] ] }
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="scroll"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">scroll</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.scroll">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="position"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">position</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.position">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@position.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="scale"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">scale</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.scale">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@scale.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="color"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">color</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.color">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@color.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="numberoftracks"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">numberoftracks</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.numberoftracks">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@numberoftracks.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="isPlaying"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isPlaying</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.isPlaying">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="fps"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fps</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyforms.gui.Controls.ControlEventTimeline.TimelineWidget-pysrc.html#TimelineWidget.fps">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@fps.setter</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Sep  3 21:46:31 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

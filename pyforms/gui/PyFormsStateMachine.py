@@ -25,10 +25,12 @@ class PyFormsState(State):
 
 	def init(self): pass
 
-	def run(self, inVar, currentState={}):
-		res = super(PyFormsState, self).run(inVar)
-		if self.app: self.app.execute()
-		return res
+	def enter(self, inVar, currentState={}): return inVar
+
+	def leave(self, inVar, currentState={}): return inVar
+
+	def execute(self): 
+		if self.app!=None and hasattr(self.app, 'execute'): self.app.execute()
 
 	@property
 	def app(self): return self._app if hasattr(self, '_app') else None
@@ -88,14 +90,19 @@ class PyFormsStateMachine(StatesController, BaseWidget):
 		"""
 		if len(self._waitingStates)>0:
 			statesOutputs = []
+			print self._waitingStates
 
 			#First run all the pending states
 			for fromStateName, toStateName, inputParam in self._waitingStates:
 				state 				= self._states[toStateName]
 				copyOfCurrentState 	= dict(self._currentState)
 
-				if isinstance(state, EndState): executionDetails = (toStateName, state, state.run(inputParam ) )
-				else: 							executionDetails = (toStateName, state, state.run(inputParam, copyOfCurrentState ) )
+				if isinstance(state, EndState): executionDetails = (toStateName, state, inputParam )
+				else:
+					p = state.enter(inputParam, copyOfCurrentState)
+					state.execute()
+					outParam = state.leave(p, copyOfCurrentState)
+					executionDetails = (toStateName, state, outParam )
 				
 				statesOutputs.append( executionDetails )
 

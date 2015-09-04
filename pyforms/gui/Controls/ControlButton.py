@@ -54,20 +54,14 @@ class ControlButton(ControlBase):
     def value(self, value):
         self._form.pushButton.clicked[bool].connect(value)
 
+   
     @property
-    def tooltip(self):
-        return self._form.getToolTip()
-
-    @tooltip.setter
-    def tooltip(self, value):
-        if value is not None:
-            self._form.setToolTip(value)
-
-    def setChecked(self, value):
-        self._form.pushButton.setChecked(value)
-
-    def isChecked(self):
+    def checked(self):
         return self._form.pushButton.isChecked()
+
+    @checked.setter
+    def checked(self, value):
+        self._form.pushButton.setChecked(value)
 
     def click(self):
         self._form.pushButton.click()

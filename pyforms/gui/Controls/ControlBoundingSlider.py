@@ -255,12 +255,6 @@ class ControlBoundingSlider(ControlBase):
         self.value = minval, maxval
         
 
-    def load(self, data):
-        if 'value' in data: self.value = data['value']
-
-    def save(self, data):
-        if self.value: data['value'] = self.value
-
     @property
     def value(self): 
         return self._form._minVal, self._form._maxVal

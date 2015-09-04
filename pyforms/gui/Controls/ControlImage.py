@@ -13,6 +13,7 @@ __status__      = "Development"
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
 from PyQt4 import uic
+import cv2
 
 try:
 	import OpenGL.GL  as GL
@@ -279,7 +280,10 @@ class ControlImage(ControlBase):
 	@value.setter
 	def value(self, value):
 		#ControlBase.value.fset(self, value)
-		self._value = value
+		if isinstance(value, str):
+			self._value = cv2.imread(value, 1)
+		else:
+			self._value = value
 
 		if isinstance(self._value, list) or isinstance(self._value, tuple):
 			self._imageWidget.paint( self._value )

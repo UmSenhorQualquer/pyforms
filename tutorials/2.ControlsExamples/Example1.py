@@ -23,14 +23,16 @@ class Example1(BaseWidget):
 		self._directory 	= ControlDir('Choose a directory')
 		self._file 			= ControlFile('Choose a file')
 		self._filetree 		= ControlFilesTree('Choose a file')
+		self._image			= ControlImage('Image')
 		self._boundaries	= ControlBoundingSlider('Bounding', horizontal=True)
 
-		self._formset = ['_directory', '_file', '_boundaries', '_filetree' ]
+		self._formset = ['_directory', '_file', '_boundaries', '_filetree', '_image' ]
 
 
 		self._filetree.value = '/'
 
 
+	
 
 
 

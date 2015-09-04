@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyforms.gui.standaloneManager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyforms-module.html">Package&nbsp;pyforms</a> ::
+        <a href="pyforms.gui-module.html">Package&nbsp;gui</a> ::
+        Module&nbsp;standaloneManager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyforms.gui.standaloneManager-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pyforms.gui.standaloneManager-module.html">Module pyforms.gui.standaloneManager</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@author: Ricardo Ribeiro</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@credits: Ricardo Ribeiro</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">@license: MIT</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">@version: 0.0</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">@maintainer: Ricardo Ribeiro</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">@email: ricardojvr@gmail.com</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">@status: Development</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">@lastEditedBy: Carlos M&#227;o de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PyQt4</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QtGui</tt><tt class="py-op">,</tt> <tt class="py-name">QtCore</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package pyforms=pyforms-module.html,Module pyforms.web.django.templatetags.pyforms=pyforms.web.django.templatetags.pyforms-module.html"><a title="pyforms
+pyforms.web.django.templatetags.pyforms" class="py-name" href="#" onclick="return doclink('link-0', 'pyforms', 'link-0');">pyforms</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package pyforms.gui=pyforms.gui-module.html"><a title="pyforms.gui" class="py-name" href="#" onclick="return doclink('link-1', 'gui', 'link-1');">gui</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module pyforms.Controls=pyforms.Controls-module.html,Package pyforms.gui.Controls=pyforms.gui.Controls-module.html,Package pyforms.terminal.Controls=pyforms.terminal.Controls-module.html,Package pyforms.web.Controls=pyforms.web.Controls-module.html"><a title="pyforms.Controls
+pyforms.gui.Controls
+pyforms.terminal.Controls
+pyforms.web.Controls" class="py-name" href="#" onclick="return doclink('link-2', 'Controls', 'link-2');">Controls</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module pyforms.gui.Controls.ControlDockWidget=pyforms.gui.Controls.ControlDockWidget-module.html,Class pyforms.gui.Controls.ControlDockWidget.ControlDockWidget=pyforms.gui.Controls.ControlDockWidget.ControlDockWidget-class.html"><a title="pyforms.gui.Controls.ControlDockWidget
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget" class="py-name" href="#" onclick="return doclink('link-3', 'ControlDockWidget', 'link-3');">ControlDockWidget</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="pyforms.gui.Controls.ControlDockWidget
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget" class="py-name" href="#" onclick="return doclink('link-4', 'ControlDockWidget', 'link-3');">ControlDockWidget</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="StandAloneContainer"></a><div id="StandAloneContainer-def"><a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="StandAloneContainer-toggle" onclick="return toggle('StandAloneContainer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pyforms.gui.standaloneManager.StandAloneContainer-class.html">StandAloneContainer</a><tt class="py-op">(</tt><tt class="py-base-class">QtGui</tt><tt class="py-op">.</tt><tt class="py-base-class">QMainWindow</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StandAloneContainer-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="StandAloneContainer-expanded"><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="StandAloneContainer.__init__"></a><div id="StandAloneContainer.__init__-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="StandAloneContainer.__init__-toggle" onclick="return toggle('StandAloneContainer.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.standaloneManager.StandAloneContainer-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ClassObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StandAloneContainer.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StandAloneContainer.__init__-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QMainWindow</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.__init__()=pyforms.gui.BaseWidget.BaseWidget-class.html#__init__,Method pyforms.gui.Controls.ControlBase.ControlBase.__init__()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.gui.Controls.ControlBase.ControlBase.__init__()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.__init__()=pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider-class.html#__init__,Method pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetHorizontal.__init__()=pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetHorizontal-class.html#__init__,Method pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetVertical.__init__()=pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetVertical-class.html#__init__,Method pyforms.gui.Controls.ControlButton.ControlButton.__init__()=pyforms.gui.Controls.ControlButton.ControlButton-class.html#__init__,Method pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.__init__()=pyforms.gui.Controls.ControlDockWidget.ControlDockWidget-class.html#__init__,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.__init__()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__init__()=pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.TimelineChart.TimelineChart.__init__()=pyforms.gui.Controls.ControlEventTimeline.TimelineChart.TimelineChart-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.TimelineDelta.TimelineDelta.__init__()=pyforms.gui.Controls.ControlEventTimeline.TimelineDelta.TimelineDelta-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.TimelinePointer.TimelinePointer.__init__()=pyforms.gui.Controls.ControlEventTimeline.TimelinePointer.TimelinePointer-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow.TimelinePopupWindow.__init__()=pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow.TimelinePopupWindow-class.html#__init__,Method pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.__init__()=pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget-class.html#__init__,Method pyforms.gui.Controls.ControlImage.ImageGLWidget.__init__()=pyforms.gui.Controls.ControlImage.ImageGLWidget-class.html#__init__,Method pyforms.gui.Controls.ControlLabel.ControlLabel.__init__()=pyforms.gui.Controls.ControlLabel.ControlLabel-class.html#__init__,Method pyforms.gui.Controls.ControlList.ControlList.__init__()=pyforms.gui.Controls.ControlList.ControlList-class.html#__init__,Method pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.__init__()=pyforms.gui.Controls.ControlMdiArea.ControlMdiArea-class.html#__init__,Method pyforms.gui.Controls.ControlNumber.ControlNumber.__init__()=pyforms.gui.Controls.ControlNumber.ControlNumber-class.html#__init__,Method pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.__init__()=pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget-class.html#__init__,Method pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.__init__()=pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer-class.html#__init__,Method pyforms.gui.Controls.ControlPlayer.VideoGLWidget.VideoGLWidget.__init__()=pyforms.gui.Controls.ControlPlayer.VideoGLWidget.VideoGLWidget-class.html#__init__,Method pyforms.gui.Controls.ControlProgress.ControlProgress.__init__()=pyforms.gui.Controls.ControlProgress.ControlProgress-class.html#__init__,Method pyforms.gui.Controls.ControlSlider.ControlSlider.__init__()=pyforms.gui.Controls.ControlSlider.ControlSlider-class.html#__init__,Method pyforms.gui.Controls.ControlTree.ControlTree.__init__()=pyforms.gui.Controls.ControlTree.ControlTree-class.html#__init__,Method pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__init__()=pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__,Method pyforms.gui.appmanager.Container.__init__()=pyforms.gui.appmanager.Container-class.html#__init__,Method pyforms.gui.standaloneManager.StandAloneContainer.__init__()=pyforms.gui.standaloneManager.StandAloneContainer-class.html#__init__,Method pyforms.terminal.BaseWidget.BaseWidget.__init__()=pyforms.terminal.BaseWidget.BaseWidget-class.html#__init__,Method pyforms.terminal.Controls.ControlBase.ControlBase.__init__()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.terminal.Controls.ControlBase.ControlBase.__init__()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.terminal.Controls.ControlProgress.ControlProgress.__init__()=pyforms.terminal.Controls.ControlProgress.ControlProgress-class.html#__init__,Method pyforms.terminal.Controls.ControlSlider.ControlSlider.__init__()=pyforms.terminal.Controls.ControlSlider.ControlSlider-class.html#__init__,Method pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.__init__()=pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__,Method pyforms.web.BaseWidget.BaseWidget.__init__()=pyforms.web.BaseWidget.BaseWidget-class.html#__init__,Method pyforms.web.Controls.ControlBase.ControlBase.__init__()=pyforms.web.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.web.Controls.ControlBase.ControlBase.__init__()=pyforms.web.Controls.ControlBase.ControlBase-class.html#__init__,Method pyforms.web.Controls.ControlBoundingSlider.ControlBoundingSlider.__init__()=pyforms.web.Controls.ControlBoundingSlider.ControlBoundingSlider-class.html#__init__,Method pyforms.web.Controls.ControlCombo.ControlCombo.__init__()=pyforms.web.Controls.ControlCombo.ControlCombo-class.html#__init__,Method pyforms.web.Controls.ControlProgress.ControlProgress.__init__()=pyforms.web.Controls.ControlProgress.ControlProgress-class.html#__init__,Method pyforms.web.Controls.ControlSlider.ControlSlider.__init__()=pyforms.web.Controls.ControlSlider.ControlSlider-class.html#__init__,Method pyforms.web.PyFormsStateMachine.PyFormsStateMachine.__init__()=pyforms.web.PyFormsStateMachine.PyFormsStateMachine-class.html#__init__,Method pyforms.web.django.Applications.ApplicationsLoader.__init__()=pyforms.web.django.Applications.ApplicationsLoader-class.html#__init__"><a title="pyforms.gui.BaseWidget.BaseWidget.__init__
+pyforms.gui.Controls.ControlBase.ControlBase.__init__
+pyforms.gui.Controls.ControlBase.ControlBase.__init__
+pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.__init__
+pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetHorizontal.__init__
+pyforms.gui.Controls.ControlBoundingSlider.GaugeWidgetVertical.__init__
+pyforms.gui.Controls.ControlButton.ControlButton.__init__
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.__init__
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.__init__
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.__init__
+pyforms.gui.Controls.ControlEventTimeline.TimelineChart.TimelineChart.__init__
+pyforms.gui.Controls.ControlEventTimeline.TimelineDelta.TimelineDelta.__init__
+pyforms.gui.Controls.ControlEventTimeline.TimelinePointer.TimelinePointer.__init__
+pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow.TimelinePopupWindow.__init__
+pyforms.gui.Controls.ControlEventTimeline.TimelineWidget.TimelineWidget.__init__
+pyforms.gui.Controls.ControlImage.ImageGLWidget.__init__
+pyforms.gui.Controls.ControlLabel.ControlLabel.__init__
+pyforms.gui.Controls.ControlList.ControlList.__init__
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.__init__
+pyforms.gui.Controls.ControlNumber.ControlNumber.__init__
+pyforms.gui.Controls.ControlOpenGL.OpenglGLWidget.__init__
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.__init__
+pyforms.gui.Controls.ControlPlayer.VideoGLWidget.VideoGLWidget.__init__
+pyforms.gui.Controls.ControlProgress.ControlProgress.__init__
+pyforms.gui.Controls.ControlSlider.ControlSlider.__init__
+pyforms.gui.Controls.ControlTree.ControlTree.__init__
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.__init__
+pyforms.gui.appmanager.Container.__init__
+pyforms.gui.standaloneManager.StandAloneContainer.__init__
+pyforms.terminal.BaseWidget.BaseWidget.__init__
+pyforms.terminal.Controls.ControlBase.ControlBase.__init__
+pyforms.terminal.Controls.ControlBase.ControlBase.__init__
+pyforms.terminal.Controls.ControlProgress.ControlProgress.__init__
+pyforms.terminal.Controls.ControlSlider.ControlSlider.__init__
+pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.__init__
+pyforms.web.BaseWidget.BaseWidget.__init__
+pyforms.web.Controls.ControlBase.ControlBase.__init__
+pyforms.web.Controls.ControlBase.ControlBase.__init__
+pyforms.web.Controls.ControlBoundingSlider.ControlBoundingSlider.__init__
+pyforms.web.Controls.ControlCombo.ControlCombo.__init__
+pyforms.web.Controls.ControlProgress.ControlProgress.__init__
+pyforms.web.Controls.ControlSlider.ControlSlider.__init__
+pyforms.web.PyFormsStateMachine.PyFormsStateMachine.__init__
+pyforms.web.django.Applications.ApplicationsLoader.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">ClassObject</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">w</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.initForm()=pyforms.gui.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.gui.Controls.ControlBase.ControlBase.initForm()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#initForm,Method pyforms.gui.Controls.ControlBase.ControlBase.initForm()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#initForm,Method pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.initForm()=pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider-class.html#initForm,Method pyforms.gui.Controls.ControlButton.ControlButton.initForm()=pyforms.gui.Controls.ControlButton.ControlButton-class.html#initForm,Method pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.initForm()=pyforms.gui.Controls.ControlCheckBox.ControlCheckBox-class.html#initForm,Method pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList.initForm()=pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList-class.html#initForm,Method pyforms.gui.Controls.ControlCombo.ControlCombo.initForm()=pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#initForm,Method pyforms.gui.Controls.ControlDir.ControlDir.initForm()=pyforms.gui.Controls.ControlDir.ControlDir-class.html#initForm,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#initForm,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#initForm,Method pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.initForm()=pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#initForm,Method pyforms.gui.Controls.ControlFile.ControlFile.initForm()=pyforms.gui.Controls.ControlFile.ControlFile-class.html#initForm,Method pyforms.gui.Controls.ControlFilesTree.ControlFilesTree.initForm()=pyforms.gui.Controls.ControlFilesTree.ControlFilesTree-class.html#initForm,Method pyforms.gui.Controls.ControlImage.ControlImage.initForm()=pyforms.gui.Controls.ControlImage.ControlImage-class.html#initForm,Method pyforms.gui.Controls.ControlLabel.ControlLabel.initForm()=pyforms.gui.Controls.ControlLabel.ControlLabel-class.html#initForm,Method pyforms.gui.Controls.ControlList.ControlList.initForm()=pyforms.gui.Controls.ControlList.ControlList-class.html#initForm,Method pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.initForm()=pyforms.gui.Controls.ControlMdiArea.ControlMdiArea-class.html#initForm,Method pyforms.gui.Controls.ControlNumber.ControlNumber.initForm()=pyforms.gui.Controls.ControlNumber.ControlNumber-class.html#initForm,Method pyforms.gui.Controls.ControlOpenGL.ControlOpenGL.initForm()=pyforms.gui.Controls.ControlOpenGL.ControlOpenGL-class.html#initForm,Method pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.initForm()=pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer-class.html#initForm,Method pyforms.gui.Controls.ControlProgress.ControlProgress.initForm()=pyforms.gui.Controls.ControlProgress.ControlProgress-class.html#initForm,Method pyforms.gui.Controls.ControlSlider.ControlSlider.initForm()=pyforms.gui.Controls.ControlSlider.ControlSlider-class.html#initForm,Method pyforms.gui.Controls.ControlText.ControlText.initForm()=pyforms.gui.Controls.ControlText.ControlText-class.html#initForm,Method pyforms.gui.Controls.ControlTextArea.ControlTextArea.initForm()=pyforms.gui.Controls.ControlTextArea.ControlTextArea-class.html#initForm,Method pyforms.gui.Controls.ControlToolBox.ControlToolBox.initForm()=pyforms.gui.Controls.ControlToolBox.ControlToolBox-class.html#initForm,Method pyforms.gui.Controls.ControlTree.ControlTree.initForm()=pyforms.gui.Controls.ControlTree.ControlTree-class.html#initForm,Method pyforms.gui.Controls.ControlTreeView.ControlTreeView.initForm()=pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#initForm,Method pyforms.gui.Controls.ControlVisVis.ControlVisVis.initForm()=pyforms.gui.Controls.ControlVisVis.ControlVisVis-class.html#initForm,Method pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume.initForm()=pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume-class.html#initForm,Method pyforms.gui.PyFormsStateMachine.PyFormsState.initForm()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.gui.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm,Method pyforms.terminal.BaseWidget.BaseWidget.initForm()=pyforms.terminal.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.initForm()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm,Method pyforms.web.BaseWidget.BaseWidget.initForm()=pyforms.web.BaseWidget.BaseWidget-class.html#initForm,Method pyforms.web.PyFormsStateMachine.PyFormsState.initForm()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#initForm,Method pyforms.web.PyFormsStateMachine.PyFormsStateMachine.initForm()=pyforms.web.PyFormsStateMachine.PyFormsStateMachine-class.html#initForm"><a title="pyforms.gui.BaseWidget.BaseWidget.initForm
+pyforms.gui.Controls.ControlBase.ControlBase.initForm
+pyforms.gui.Controls.ControlBase.ControlBase.initForm
+pyforms.gui.Controls.ControlBoundingSlider.ControlBoundingSlider.initForm
+pyforms.gui.Controls.ControlButton.ControlButton.initForm
+pyforms.gui.Controls.ControlCheckBox.ControlCheckBox.initForm
+pyforms.gui.Controls.ControlCheckBoxList.ControlCheckBoxList.initForm
+pyforms.gui.Controls.ControlCombo.ControlCombo.initForm
+pyforms.gui.Controls.ControlDir.ControlDir.initForm
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.initForm
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.initForm
+pyforms.gui.Controls.ControlFile.ControlFile.initForm
+pyforms.gui.Controls.ControlFilesTree.ControlFilesTree.initForm
+pyforms.gui.Controls.ControlImage.ControlImage.initForm
+pyforms.gui.Controls.ControlLabel.ControlLabel.initForm
+pyforms.gui.Controls.ControlList.ControlList.initForm
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.initForm
+pyforms.gui.Controls.ControlNumber.ControlNumber.initForm
+pyforms.gui.Controls.ControlOpenGL.ControlOpenGL.initForm
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.initForm
+pyforms.gui.Controls.ControlProgress.ControlProgress.initForm
+pyforms.gui.Controls.ControlSlider.ControlSlider.initForm
+pyforms.gui.Controls.ControlText.ControlText.initForm
+pyforms.gui.Controls.ControlTextArea.ControlTextArea.initForm
+pyforms.gui.Controls.ControlToolBox.ControlToolBox.initForm
+pyforms.gui.Controls.ControlTree.ControlTree.initForm
+pyforms.gui.Controls.ControlTreeView.ControlTreeView.initForm
+pyforms.gui.Controls.ControlVisVis.ControlVisVis.initForm
+pyforms.gui.Controls.ControlVisVisVolume.ControlVisVisVolume.initForm
+pyforms.gui.PyFormsStateMachine.PyFormsState.initForm
+pyforms.gui.PyFormsStateMachine.PyFormsStateMachine.initForm
+pyforms.terminal.BaseWidget.BaseWidget.initForm
+pyforms.terminal.PyFormsStateMachine.PyFormsState.initForm
+pyforms.terminal.PyFormsStateMachine.PyFormsStateMachine.initForm
+pyforms.web.BaseWidget.BaseWidget.initForm
+pyforms.web.PyFormsStateMachine.PyFormsState.initForm
+pyforms.web.PyFormsStateMachine.PyFormsStateMachine.initForm" class="py-name" href="#" onclick="return doclink('link-6', 'initForm', 'link-6');">initForm</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setCentralWidget</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setWindowTitle</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.title()=pyforms.gui.BaseWidget.BaseWidget-class.html#title,Method pyforms.gui.BaseWidget.BaseWidget.title()=pyforms.gui.BaseWidget.BaseWidget-class.html#title,Method pyforms.web.BaseWidget.BaseWidget.title()=pyforms.web.BaseWidget.BaseWidget-class.html#title,Method pyforms.web.BaseWidget.BaseWidget.title()=pyforms.web.BaseWidget.BaseWidget-class.html#title"><a title="pyforms.gui.BaseWidget.BaseWidget.title
+pyforms.gui.BaseWidget.BaseWidget.title
+pyforms.web.BaseWidget.BaseWidget.title
+pyforms.web.BaseWidget.BaseWidget.title" class="py-name" href="#" onclick="return doclink('link-7', 'title', 'link-7');">title</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">docks</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-8" class="py-name" targets="Method pyforms.gui.Controls.ControlBase.ControlBase.name()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#name,Method pyforms.gui.Controls.ControlBase.ControlBase.name()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.name
+pyforms.gui.Controls.ControlBase.ControlBase.name" class="py-name" href="#" onclick="return doclink('link-8', 'name', 'link-8');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">w</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.formControls()=pyforms.gui.BaseWidget.BaseWidget-class.html#formControls,Method pyforms.gui.BaseWidget.BaseWidget.formControls()=pyforms.gui.BaseWidget.BaseWidget-class.html#formControls,Method pyforms.terminal.BaseWidget.BaseWidget.formControls()=pyforms.terminal.BaseWidget.BaseWidget-class.html#formControls,Method pyforms.terminal.BaseWidget.BaseWidget.formControls()=pyforms.terminal.BaseWidget.BaseWidget-class.html#formControls,Method pyforms.web.BaseWidget.BaseWidget.formControls()=pyforms.web.BaseWidget.BaseWidget-class.html#formControls,Method pyforms.web.BaseWidget.BaseWidget.formControls()=pyforms.web.BaseWidget.BaseWidget-class.html#formControls"><a title="pyforms.gui.BaseWidget.BaseWidget.formControls
+pyforms.gui.BaseWidget.BaseWidget.formControls
+pyforms.terminal.BaseWidget.BaseWidget.formControls
+pyforms.terminal.BaseWidget.BaseWidget.formControls
+pyforms.web.BaseWidget.BaseWidget.formControls
+pyforms.web.BaseWidget.BaseWidget.formControls" class="py-name" href="#" onclick="return doclink('link-9', 'formControls', 'link-9');">formControls</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method pyforms.gui.Controls.ControlCombo.ControlCombo.items()=pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#items,Method pyforms.terminal.Controls.ControlCombo.ControlCombo.items()=pyforms.terminal.Controls.ControlCombo.ControlCombo-class.html#items,Method pyforms.web.Controls.ControlCombo.ControlCombo.items()=pyforms.web.Controls.ControlCombo.ControlCombo-class.html#items"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.items
+pyforms.terminal.Controls.ControlCombo.ControlCombo.items
+pyforms.web.Controls.ControlCombo.ControlCombo.items" class="py-name" href="#" onclick="return doclink('link-10', 'items', 'link-10');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name"><a title="pyforms.gui.Controls.ControlDockWidget
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget" class="py-name" href="#" onclick="return doclink('link-11', 'ControlDockWidget', 'link-3');">ControlDockWidget</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">item</tt><tt class="py-op">.</tt><tt class="py-name">side</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">docks</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                    <tt class="py-name">docks</tt><tt class="py-op">[</tt><tt class="py-name">item</tt><tt class="py-op">.</tt><tt class="py-name">side</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                <tt class="py-name">docks</tt><tt class="py-op">[</tt><tt class="py-name">item</tt><tt class="py-op">.</tt><tt class="py-name">side</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.name
+pyforms.gui.Controls.ControlBase.ControlBase.name" class="py-name" href="#" onclick="return doclink('link-12', 'name', 'link-8');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">widgets</tt> <tt class="py-keyword">in</tt> <tt class="py-name">docks</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.items
+pyforms.terminal.Controls.ControlCombo.ControlCombo.items
+pyforms.web.Controls.ControlCombo.ControlCombo.items" class="py-name" href="#" onclick="return doclink('link-13', 'items', 'link-10');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">            <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">RightDockWidgetArea</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-op">==</tt> <tt class="py-string">'left'</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">LeftDockWidgetArea</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">key</tt> <tt class="py-op">==</tt> <tt class="py-string">'right'</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">RightDockWidgetArea</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">key</tt> <tt class="py-op">==</tt> <tt class="py-string">'top'</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">TopDockWidgetArea</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">key</tt> <tt class="py-op">==</tt> <tt class="py-string">'bottom'</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">BottomDockWidgetArea</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">side</tt> <tt class="py-op">=</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">LeftDockWidgetArea</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">widgets</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt id="link-14" class="py-name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.name
+pyforms.gui.Controls.ControlBase.ControlBase.name" class="py-name" href="#" onclick="return doclink('link-14', 'name', 'link-8');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">widget</tt> <tt class="py-keyword">in</tt> <tt class="py-name">widgets</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                    <tt class="py-name">dock</tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                    <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setFeatures</tt><tt class="py-op">(</tt><tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetFloatable</tt> <tt class="py-op">|</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                                     <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetClosable</tt> <tt class="py-op">|</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetMovable</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                    <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setObjectName</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.name
+pyforms.gui.Controls.ControlBase.ControlBase.name" class="py-name" href="#" onclick="return doclink('link-15', 'name', 'link-8');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                    <tt class="py-comment"># print dock.objectName(),1</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                    <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setWidget</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.form()=pyforms.gui.BaseWidget.BaseWidget-class.html#form,Method pyforms.gui.BaseWidget.BaseWidget.form()=pyforms.gui.BaseWidget.BaseWidget-class.html#form,Method pyforms.gui.Controls.ControlBase.ControlBase.form()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#form,Method pyforms.gui.Controls.ControlBase.ControlBase.form()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#form,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#form,Method pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form()=pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget-class.html#form,Method pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.form()=pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline-class.html#form,Method pyforms.gui.Controls.ControlLabel.ControlLabel.form()=pyforms.gui.Controls.ControlLabel.ControlLabel-class.html#form,Method pyforms.gui.Controls.ControlList.ControlList.form()=pyforms.gui.Controls.ControlList.ControlList-class.html#form,Method pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.form()=pyforms.gui.Controls.ControlMdiArea.ControlMdiArea-class.html#form,Method pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.form()=pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer-class.html#form,Method pyforms.gui.Controls.ControlTree.ControlTree.form()=pyforms.gui.Controls.ControlTree.ControlTree-class.html#form,Method pyforms.gui.PyFormsStateMachine.PyFormsState.form()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#form,Method pyforms.terminal.Controls.ControlBase.ControlBase.form()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#form,Method pyforms.terminal.Controls.ControlBase.ControlBase.form()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#form,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.form()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#form,Method pyforms.web.BaseWidget.BaseWidget.form()=pyforms.web.BaseWidget.BaseWidget-class.html#form,Method pyforms.web.BaseWidget.BaseWidget.form()=pyforms.web.BaseWidget.BaseWidget-class.html#form,Method pyforms.web.PyFormsStateMachine.PyFormsState.form()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#form"><a title="pyforms.gui.BaseWidget.BaseWidget.form
+pyforms.gui.BaseWidget.BaseWidget.form
+pyforms.gui.Controls.ControlBase.ControlBase.form
+pyforms.gui.Controls.ControlBase.ControlBase.form
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.form
+pyforms.gui.Controls.ControlLabel.ControlLabel.form
+pyforms.gui.Controls.ControlList.ControlList.form
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.form
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.form
+pyforms.gui.Controls.ControlTree.ControlTree.form
+pyforms.gui.PyFormsStateMachine.PyFormsState.form
+pyforms.terminal.Controls.ControlBase.ControlBase.form
+pyforms.terminal.Controls.ControlBase.ControlBase.form
+pyforms.terminal.PyFormsStateMachine.PyFormsState.form
+pyforms.web.BaseWidget.BaseWidget.form
+pyforms.web.BaseWidget.BaseWidget.form
+pyforms.web.PyFormsStateMachine.PyFormsState.form" class="py-name" href="#" onclick="return doclink('link-16', 'form', 'link-16');">form</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                    <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setWindowTitle</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method pyforms.gui.Controls.ControlBase.ControlBase.label()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#label,Method pyforms.gui.Controls.ControlBase.ControlBase.label()=pyforms.gui.Controls.ControlBase.ControlBase-class.html#label,Method pyforms.gui.Controls.ControlButton.ControlButton.label()=pyforms.gui.Controls.ControlButton.ControlButton-class.html#label,Method pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.label()=pyforms.gui.Controls.ControlDockWidget.ControlDockWidget-class.html#label,Method pyforms.gui.Controls.ControlList.ControlList.label()=pyforms.gui.Controls.ControlList.ControlList-class.html#label,Method pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.label()=pyforms.gui.Controls.ControlMdiArea.ControlMdiArea-class.html#label,Method pyforms.gui.Controls.ControlNumber.ControlNumber.label()=pyforms.gui.Controls.ControlNumber.ControlNumber-class.html#label,Method pyforms.gui.Controls.ControlProgress.ControlProgress.label()=pyforms.gui.Controls.ControlProgress.ControlProgress-class.html#label,Method pyforms.gui.Controls.ControlText.ControlText.label()=pyforms.gui.Controls.ControlText.ControlText-class.html#label,Method pyforms.gui.Controls.ControlText.ControlText.label()=pyforms.gui.Controls.ControlText.ControlText-class.html#label,Method pyforms.terminal.Controls.ControlBase.ControlBase.label()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#label,Method pyforms.terminal.Controls.ControlBase.ControlBase.label()=pyforms.terminal.Controls.ControlBase.ControlBase-class.html#label,Method pyforms.terminal.Controls.ControlButton.ControlButton.label()=pyforms.terminal.Controls.ControlButton.ControlButton-class.html#label,Method pyforms.terminal.Controls.ControlDir.ControlDir.label()=pyforms.terminal.Controls.ControlDir.ControlDir-class.html#label,Method pyforms.terminal.Controls.ControlFile.ControlFile.label()=pyforms.terminal.Controls.ControlFile.ControlFile-class.html#label,Method pyforms.web.Controls.ControlBase.ControlBase.label()=pyforms.web.Controls.ControlBase.ControlBase-class.html#label,Method pyforms.web.Controls.ControlBase.ControlBase.label()=pyforms.web.Controls.ControlBase.ControlBase-class.html#label"><a title="pyforms.gui.Controls.ControlBase.ControlBase.label
+pyforms.gui.Controls.ControlBase.ControlBase.label
+pyforms.gui.Controls.ControlButton.ControlButton.label
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.label
+pyforms.gui.Controls.ControlList.ControlList.label
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.label
+pyforms.gui.Controls.ControlNumber.ControlNumber.label
+pyforms.gui.Controls.ControlProgress.ControlProgress.label
+pyforms.gui.Controls.ControlText.ControlText.label
+pyforms.gui.Controls.ControlText.ControlText.label
+pyforms.terminal.Controls.ControlBase.ControlBase.label
+pyforms.terminal.Controls.ControlBase.ControlBase.label
+pyforms.terminal.Controls.ControlButton.ControlButton.label
+pyforms.terminal.Controls.ControlDir.ControlDir.label
+pyforms.terminal.Controls.ControlFile.ControlFile.label
+pyforms.web.Controls.ControlBase.ControlBase.label
+pyforms.web.Controls.ControlBase.ControlBase.label" class="py-name" href="#" onclick="return doclink('link-17', 'label', 'link-17');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                    <tt class="py-name">widget</tt><tt class="py-op">.</tt><tt class="py-name">dock</tt> <tt class="py-op">=</tt> <tt class="py-name">dock</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addDockWidget</tt><tt class="py-op">(</tt><tt class="py-name">side</tt><tt class="py-op">,</tt> <tt class="py-name">dock</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-name">dock</tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setFeatures</tt><tt class="py-op">(</tt><tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetFloatable</tt> <tt class="py-op">|</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                                 <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetClosable</tt> <tt class="py-op">|</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QDockWidget</tt><tt class="py-op">.</tt><tt class="py-name">DockWidgetMovable</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                <tt class="py-comment"># dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-comment"># dock.layout().setMargin(0)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-comment"># print dock.objectName(), 2</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setObjectName</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.name
+pyforms.gui.Controls.ControlBase.ControlBase.name" class="py-name" href="#" onclick="return doclink('link-18', 'name', 'link-8');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setWidget</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="pyforms.gui.BaseWidget.BaseWidget.form
+pyforms.gui.BaseWidget.BaseWidget.form
+pyforms.gui.Controls.ControlBase.ControlBase.form
+pyforms.gui.Controls.ControlBase.ControlBase.form
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form
+pyforms.gui.Controls.ControlEmptyWidget.ControlEmptyWidget.form
+pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline.ControlEventTimeline.form
+pyforms.gui.Controls.ControlLabel.ControlLabel.form
+pyforms.gui.Controls.ControlList.ControlList.form
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.form
+pyforms.gui.Controls.ControlPlayer.ControlPlayer.ControlPlayer.form
+pyforms.gui.Controls.ControlTree.ControlTree.form
+pyforms.gui.PyFormsStateMachine.PyFormsState.form
+pyforms.terminal.Controls.ControlBase.ControlBase.form
+pyforms.terminal.Controls.ControlBase.ControlBase.form
+pyforms.terminal.PyFormsStateMachine.PyFormsState.form
+pyforms.web.BaseWidget.BaseWidget.form
+pyforms.web.BaseWidget.BaseWidget.form
+pyforms.web.PyFormsStateMachine.PyFormsState.form" class="py-name" href="#" onclick="return doclink('link-19', 'form', 'link-16');">form</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addDockWidget</tt><tt class="py-op">(</tt><tt class="py-name">side</tt><tt class="py-op">,</tt> <tt class="py-name">dock</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                <tt class="py-name">dock</tt><tt class="py-op">.</tt><tt class="py-name">setWindowTitle</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="pyforms.gui.Controls.ControlBase.ControlBase.label
+pyforms.gui.Controls.ControlBase.ControlBase.label
+pyforms.gui.Controls.ControlButton.ControlButton.label
+pyforms.gui.Controls.ControlDockWidget.ControlDockWidget.label
+pyforms.gui.Controls.ControlList.ControlList.label
+pyforms.gui.Controls.ControlMdiArea.ControlMdiArea.label
+pyforms.gui.Controls.ControlNumber.ControlNumber.label
+pyforms.gui.Controls.ControlProgress.ControlProgress.label
+pyforms.gui.Controls.ControlText.ControlText.label
+pyforms.gui.Controls.ControlText.ControlText.label
+pyforms.terminal.Controls.ControlBase.ControlBase.label
+pyforms.terminal.Controls.ControlBase.ControlBase.label
+pyforms.terminal.Controls.ControlButton.ControlButton.label
+pyforms.terminal.Controls.ControlDir.ControlDir.label
+pyforms.terminal.Controls.ControlFile.ControlFile.label
+pyforms.web.Controls.ControlBase.ControlBase.label
+pyforms.web.Controls.ControlBase.ControlBase.label" class="py-name" href="#" onclick="return doclink('link-20', 'label', 'link-17');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                <tt class="py-name">widget</tt><tt class="py-op">.</tt><tt class="py-name">dock</tt> <tt class="py-op">=</tt> <tt class="py-name">dock</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method pyforms.gui.BaseWidget.BaseWidget.mainmenu()=pyforms.gui.BaseWidget.BaseWidget-class.html#mainmenu,Method pyforms.gui.BaseWidget.BaseWidget.mainmenu()=pyforms.gui.BaseWidget.BaseWidget-class.html#mainmenu"><a title="pyforms.gui.BaseWidget.BaseWidget.mainmenu
+pyforms.gui.BaseWidget.BaseWidget.mainmenu" class="py-name" href="#" onclick="return doclink('link-21', 'mainmenu', 'link-21');">mainmenu</a></tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method pyforms.gui.standaloneManager.StandAloneContainer.__initMainMenu()=pyforms.gui.standaloneManager.StandAloneContainer-class.html#__initMainMenu"><a title="pyforms.gui.standaloneManager.StandAloneContainer.__initMainMenu" class="py-name" href="#" onclick="return doclink('link-22', '__initMainMenu', 'link-22');">__initMainMenu</a></tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="pyforms.gui.BaseWidget.BaseWidget.mainmenu
+pyforms.gui.BaseWidget.BaseWidget.mainmenu" class="py-name" href="#" onclick="return doclink('link-23', 'mainmenu', 'link-21');">mainmenu</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method pyforms.gui.standaloneManager.StandAloneContainer.loadStyleSheetFile()=pyforms.gui.standaloneManager.StandAloneContainer-class.html#loadStyleSheetFile"><a title="pyforms.gui.standaloneManager.StandAloneContainer.loadStyleSheetFile" class="py-name" href="#" onclick="return doclink('link-24', 'loadStyleSheetFile', 'link-24');">loadStyleSheetFile</a></tt><tt class="py-op">(</tt><tt class="py-string">'style.css'</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="StandAloneContainer.__initMainMenu"></a><div id="StandAloneContainer.__initMainMenu-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="StandAloneContainer.__initMainMenu-toggle" onclick="return toggle('StandAloneContainer.__initMainMenu');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.standaloneManager.StandAloneContainer-class.html#__initMainMenu">__initMainMenu</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">options</tt><tt class="py-op">,</tt> <tt class="py-param">keys</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StandAloneContainer.__initMainMenu-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StandAloneContainer.__initMainMenu-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">menubar</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuBar</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">m</tt> <tt class="py-keyword">in</tt> <tt class="py-name">options</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">menus</tt> <tt class="py-keyword">in</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.items
+pyforms.terminal.Controls.ControlCombo.ControlCombo.items
+pyforms.web.Controls.ControlCombo.ControlCombo.items" class="py-name" href="#" onclick="return doclink('link-25', 'items', 'link-10');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">menu</tt> <tt class="py-op">=</tt> <tt class="py-name">menubar</tt><tt class="py-op">.</tt><tt class="py-name">addMenu</tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">m1</tt> <tt class="py-keyword">in</tt> <tt class="py-name">menus</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">m1</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">m1</tt> <tt class="py-op">==</tt> <tt class="py-string">"-"</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                        <tt class="py-name">menu</tt><tt class="py-op">.</tt><tt class="py-name">addSeparator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt id="link-26" class="py-name" targets="Method pyforms.gui.Controls.ControlCombo.ControlCombo.text()=pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#text,Method pyforms.terminal.Controls.ControlCombo.ControlCombo.text()=pyforms.terminal.Controls.ControlCombo.ControlCombo-class.html#text,Method pyforms.web.Controls.ControlCombo.ControlCombo.text()=pyforms.web.Controls.ControlCombo.ControlCombo-class.html#text"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.text
+pyforms.terminal.Controls.ControlCombo.ControlCombo.text
+pyforms.web.Controls.ControlCombo.ControlCombo.text" class="py-name" href="#" onclick="return doclink('link-26', 'text', 'link-26');">text</a></tt><tt class="py-op">,</tt> <tt class="py-name">func</tt> <tt class="py-keyword">in</tt> <tt class="py-name">m1</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.items
+pyforms.terminal.Controls.ControlCombo.ControlCombo.items
+pyforms.web.Controls.ControlCombo.ControlCombo.items" class="py-name" href="#" onclick="return doclink('link-27', 'items', 'link-10');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                            <tt class="py-name">action</tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QAction</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.text
+pyforms.terminal.Controls.ControlCombo.ControlCombo.text
+pyforms.web.Controls.ControlCombo.ControlCombo.text" class="py-name" href="#" onclick="return doclink('link-28', 'text', 'link-26');">text</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                            <tt class="py-keyword">if</tt> <tt class="py-name">func</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                                <tt class="py-name">action</tt><tt class="py-op">.</tt><tt class="py-name">triggered</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">func</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                                <tt class="py-name">menu</tt><tt class="py-op">.</tt><tt class="py-name">addAction</tt><tt class="py-op">(</tt><tt class="py-name">action</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="StandAloneContainer.loadStyleSheetFile"></a><div id="StandAloneContainer.loadStyleSheetFile-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="StandAloneContainer.loadStyleSheetFile-toggle" onclick="return toggle('StandAloneContainer.loadStyleSheetFile');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.standaloneManager.StandAloneContainer-class.html#loadStyleSheetFile">loadStyleSheetFile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StandAloneContainer.loadStyleSheetFile-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StandAloneContainer.loadStyleSheetFile-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">infile</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt id="link-29" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.text
+pyforms.terminal.Controls.ControlCombo.ControlCombo.text
+pyforms.web.Controls.ControlCombo.ControlCombo.text" class="py-name" href="#" onclick="return doclink('link-29', 'text', 'link-26');">text</a></tt> <tt class="py-op">=</tt> <tt class="py-name">infile</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">infile</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setStyleSheet</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="pyforms.gui.Controls.ControlCombo.ControlCombo.text
+pyforms.terminal.Controls.ControlCombo.ControlCombo.text
+pyforms.web.Controls.ControlCombo.ControlCombo.text" class="py-name" href="#" onclick="return doclink('link-30', 'text', 'link-26');">text</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="startApp"></a><div id="startApp-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="startApp-toggle" onclick="return toggle('startApp');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="pyforms.gui.standaloneManager-module.html#startApp">startApp</a><tt class="py-op">(</tt><tt class="py-param">ClassObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="startApp-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="startApp-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt id="link-31" class="py-name" targets="Method pyforms.gui.PyFormsStateMachine.PyFormsState.app()=pyforms.gui.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.terminal.PyFormsStateMachine.PyFormsState.app()=pyforms.terminal.PyFormsStateMachine.PyFormsState-class.html#app,Method pyforms.web.PyFormsStateMachine.PyFormsState.app()=pyforms.web.PyFormsStateMachine.PyFormsState-class.html#app"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-31', 'app', 'link-31');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QApplication</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name" targets="Class pyforms.gui.standaloneManager.StandAloneContainer=pyforms.gui.standaloneManager.StandAloneContainer-class.html"><a title="pyforms.gui.standaloneManager.StandAloneContainer" class="py-name" href="#" onclick="return doclink('link-32', 'StandAloneContainer', 'link-32');">StandAloneContainer</a></tt><tt class="py-op">(</tt><tt class="py-name">ClassObject</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-name">w</tt><tt class="py-op">.</tt><tt class="py-name">showMaximized</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt id="link-33" class="py-name"><a title="pyforms.gui.PyFormsStateMachine.PyFormsState.app
+pyforms.terminal.PyFormsStateMachine.PyFormsState.app
+pyforms.web.PyFormsStateMachine.PyFormsState.app" class="py-name" href="#" onclick="return doclink('link-33', 'app', 'link-31');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">exec_</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyforms-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >PyForms</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Sep  3 21:46:36 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
