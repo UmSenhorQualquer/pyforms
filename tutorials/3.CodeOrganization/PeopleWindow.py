@@ -21,16 +21,27 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 
 	def addPerson(self, person):
 		"""
-		Redifines the addPerson function from People class to update the GUI everytime a new person is added.
+		Redefines the addPerson function from People class to update the GUI 
+		everytime a new person is added.
 		"""
 		super(PeopleWindow, self).addPerson(person)
 		self._peopleList += [person._firstName, person._middleName, person._lastName]
 
+	def removePerson(self, index):
+		"""
+		Redefines the addPerson function from People class to update the GUI 
+		everytime a person is removed.
+		"""
+		super(PeopleWindow, self).removePerson(index)
+		self._peopleList -= index
+
+
 	def __addPersonBtnAction(self):
 		"""
-		Add person button event
+		Add person button event. 
 		"""
-		win = PersonWindow()
+		# A new instance of the PersonWindow is opened and shown to the user.
+		win = PersonWindow() 
 		win.parent = self
 		win.show()
 
@@ -38,8 +49,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		Remove person button event
 		"""
-		self.removePerson( self._peopleList.mouseSelectedRowIndex )
-		self._peopleList -= self._peopleList.mouseSelectedRowIndex
+		self.removePerson( self._peopleList.mouseSelectedRowIndex ) 
 
 #Execute the application
 if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
