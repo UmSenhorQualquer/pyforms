@@ -13,18 +13,11 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		BaseWidget.__init__(self,'People window')
 
 		#Definition of the forms fields
-		self._peopleList 	= ControlList('People')
-		self._addPersonBtn  = ControlButton('Add person')
-		self._rmPersonBtn   = ControlButton('Remove person')
-
-		self._peopleList.selectEntireRow = True
-
-		self._formset = ['_peopleList', (' ','_rmPersonBtn','_addPersonBtn') ]
-
-		#Define the button action
-		self._addPersonBtn.value = self.__addPersonBtnAction
-		self._rmPersonBtn.value  = self.__rmPersonBtnAction
+		self._peopleList	= ControlList('People', 
+			plusFunction	= self.__addPersonBtnAction, 
+			minusFunction	= self.__rmPersonBtnAction)
 		
+		self._peopleList.selectEntireRow = True
 
 	def addPerson(self, person):
 		"""
@@ -32,7 +25,6 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		super(PeopleWindow, self).addPerson(person)
 		self._peopleList += [person._firstName, person._middleName, person._lastName]
-
 
 	def __addPersonBtnAction(self):
 		"""
@@ -48,14 +40,6 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		self.removePerson( self._peopleList.mouseSelectedRowIndex )
 		self._peopleList -= self._peopleList.mouseSelectedRowIndex
-		
-
-
-
-
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
 
 #Execute the application
 if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )

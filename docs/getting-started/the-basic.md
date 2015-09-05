@@ -1,4 +1,4 @@
-# Getting started
+# The basic
 
 This page was based in the examples available on the github folder: [Tutorial - SimpleExamples](https://github.com/UmSenhorQualquer/pyforms/tree/master/tutorials/1.SimpleExamples)
 
