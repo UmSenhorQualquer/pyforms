@@ -53,7 +53,7 @@ class People(object):
 		self._people = pickle.load(pkl_file)
 ```
 
-### Implement the GUI to manage ther Person model.
+### Implement the GUI to manage the Person Model.
 
 Create the file PersonWindow.py and implement the window that will allow us the edit the Person Model.
 
@@ -94,10 +94,9 @@ class PersonWindow(Person, BaseWidget):
 if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
 ```
 
-**Note**: This window can be run as standalone application. 
-If we is being developed by a team of developers we can distribute the windows implementation and test them indevidualy.
+**Note**: *Test the window by executing the file.*
 
-## Implement the GUI to manage ther People model.
+### Implement the GUI to manage the People model.
 
 Create the file PeopleWindow.py and implement the window that will allow us the manager the People Model.
 
@@ -122,8 +121,8 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		self._peopleList	= ControlList('People', 
 			plusFunction	= self.__addPersonBtnAction, 
 			minusFunction	= self.__rmPersonBtnAction)
-		
-		self._peopleList.selectEntireRow = True
+
+		self._peopleList.horizontalHeaders = ['First name', 'Middle name', 'Last name']
 
 	def addPerson(self, person):
 		"""
@@ -151,18 +150,6 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
 ```
 
-## 4. Implement the module that will give the Main Menu and the options save and load to the application.
+The application will look like:
 
-AddMenuFuntionality.py
-```python
-class AddMenuFuntionality(object):
-	...
-```
-
-## 5. Add the AddMenuFuntionality module to the PeopleWindow application, and the new functionalities will be added.
-
-PeopleWindow.py
-```python
-class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
-	...
-```
+![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-5.png?raw=true "Screen")

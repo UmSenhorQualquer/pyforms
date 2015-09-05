@@ -24,8 +24,7 @@ class PersonWindow(Person, BaseWidget):
 	...
 ```
 
-**Note**: This window can be run as standalone application. 
-If we is being developed by a team of developers we can distribute the windows implementation and test them indevidualy.
+**Note**: *Test the window by executing the file.*
 
 ## 3. Implement the GUI to manage ther People model.
 

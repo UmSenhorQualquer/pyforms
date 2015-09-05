@@ -17,7 +17,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 			plusFunction	= self.__addPersonBtnAction, 
 			minusFunction	= self.__rmPersonBtnAction)
 		
-		self._peopleList.selectEntireRow = True
+		self._peopleList.horizontalHeaders = ['First name', 'Middle name', 'Last name']
 
 	def addPerson(self, person):
 		"""
