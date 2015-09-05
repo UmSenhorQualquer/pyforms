@@ -53,6 +53,9 @@ class People(object):
 		self._people = pickle.load(pkl_file)
 ```
 
+## **Go for the GUI**
+***************************
+
 ### Implement the GUI to manage the Person Model.
 
 Create the file PersonWindow.py and implement the window that will allow us the edit the Person Model.
