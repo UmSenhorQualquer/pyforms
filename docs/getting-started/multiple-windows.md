@@ -1,19 +1,19 @@
 # Multiple windows
 
-This page was based in the examples available on the github folder: [Tutorial - Code Organization](https://github.com/UmSenhorQualquer/pyforms/tree/master/tutorials/3.CodeOrganization)
+*This page was based on the examples available at the github folder: [Tutorial - Code Organization](https://github.com/UmSenhorQualquer/pyforms/tree/master/tutorials/3.CodeOrganization)*
 
+The application that we will create on this page will allow us to add People details to a list.
 
 ## **Create the Model**
 ***************************
 
-This application will allow us to store and edit People information in a list.
-Instead of showing you right a way how to develop the GUI I will suggest you how we can modularize our code in a in Model View Control (MVC) way.
+Instead of starting by showing you how to develop the GUI I will suggest how to modularize the code in a Model View Control (MVC) style.
 
-First we will create our data model, which may be used outside the GUI.
+First we will create our data model which may be used outside the GUI.
 
-### Start with the models
+### Data models
 
-Lets start by creating the file Person.py where we will implement the model that will store the information about one single person.
+Start by creating the file Person.py where we will implement the model responsible by storing the a person information.
 
 ```python
 class Person(object):
@@ -28,7 +28,7 @@ class Person(object):
 		return "{0} {1} {2}".format(self._firstName, self._middleName, self._lastName)
 ```
 
-After lets create the file People.py and implement the People class which will keep and manage the list of people.
+After, create the file People.py and implement the People class which will keep and manage the list of people.
 
 ```python
 import pickle
@@ -54,10 +54,10 @@ class People(object):
 ```
   
 
-## **Go for the GUI**
+## **Let's go for the GUI**
 ***************************
 
-To make our code modular and easy to navigate we will split the edition of the 2 Models in 2 diferent windows.
+To make our code modular and easy to navigate we will split the edition of the 2 Models in 2 different windows.
 
 ### Implement the GUI to manage the Person Model.
 
@@ -118,7 +118,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	"""
 	This applications is a GUI implementation of the People class
 	"""
-	
+
 	def __init__(self):
 		People.__init__(self)
 		BaseWidget.__init__(self,'People window')
@@ -132,15 +132,16 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 
 	def addPerson(self, person):
 		"""
-		Redefines the addPerson function from People class to update the GUI 
+		Reimplement the addPerson function from People class to update the GUI 
 		everytime a new person is added.
 		"""
 		super(PeopleWindow, self).addPerson(person)
 		self._peopleList += [person._firstName, person._middleName, person._lastName]
+		person.close() #After adding the person close the window
 
 	def removePerson(self, index):
 		"""
-		Redefines the addPerson function from People class to update the GUI 
+		Reimplement the removePerson function from People class to update the GUI 
 		everytime a person is removed.
 		"""
 		super(PeopleWindow, self).removePerson(index)
@@ -160,7 +161,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		Remove person button event
 		"""
 		self.removePerson( self._peopleList.mouseSelectedRowIndex ) 
-		
+	
 #Execute the application
 if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
 ```
@@ -168,3 +169,51 @@ if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
 The application will look like:
 
 ![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-5.png?raw=true "Screen")
+
+
+## **EmptyWidget Control**
+***************************
+
+Instead of opening a new window everytime we want to add a new Person, we will make Application to open the PersonWindow inside the PeopleWindow. For this we will use the ControlEmptyWidget.
+
+```python
+from pyforms.Controls		import ControlEmptyWidget
+...
+
+	def __init__(self):
+		...
+		self._panel	= ControlEmptyWidget()
+
+	def __addPersonBtnAction(self):
+		"""
+		Add person button event. 
+		"""
+		# A new instance of the PersonWindow is opened and shown to the user.
+		win = PersonWindow() 
+		win.parent = self
+		self._panel.value = win
+
+...
+
+```
+
+## **DockWidget Control**
+***************************
+
+A DockWidget can be detached or moved around the sides of the main Window.
+
+```python
+from pyforms.Controls		import ControlDockWidget
+...
+
+	def __init__(self):
+		...
+		self._panel	= ControlDockWidget()
+
+...
+
+```
+
+![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-6.png?raw=true "Screen")
+
+![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-7.png?raw=true "Screen")

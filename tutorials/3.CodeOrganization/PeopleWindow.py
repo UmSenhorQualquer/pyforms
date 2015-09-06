@@ -3,6 +3,9 @@ from People import People
 from PersonWindow import PersonWindow
 from AddMenuFuntionality import AddMenuFuntionality
 
+from pyforms.Controls		import ControlDockWidget
+
+
 class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	"""
 	This applications is a GUI implementation of the People class
@@ -11,6 +14,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	def __init__(self):
 		People.__init__(self)
 		BaseWidget.__init__(self,'People window')
+		self._panel	= ControlDockWidget()
 
 		#Definition of the forms fields
 		self._peopleList	= ControlList('People', 
@@ -26,6 +30,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		super(PeopleWindow, self).addPerson(person)
 		self._peopleList += [person._firstName, person._middleName, person._lastName]
+		person.close()
 
 	def removePerson(self, index):
 		"""
@@ -43,7 +48,8 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		# A new instance of the PersonWindow is opened and shown to the user.
 		win = PersonWindow() 
 		win.parent = self
-		win.show()
+		#win.show()
+		self._panel.value = win
 
 	def __rmPersonBtnAction(self):
 		"""
