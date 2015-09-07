@@ -1,6 +1,6 @@
 # Convert the application to run in the terminal
 
-The next code produces this Window:
+The next code produces this Window:  
 ![Person applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-10.png?raw=true "Screen")
 
 ```python
@@ -57,8 +57,8 @@ The application will behaviour as a terminal application where the parameters ar
 
 Type the next code in the terminal: *python PersonWindow.py --help*
 
-You will obtain the next screen:
-![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-10.png?raw=true "Screen")
+You will obtain the next screen:  
+![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-11.png?raw=true "Screen")
 
 
 Now we can set the parameters and use the parameter exec to define the functions and the execution order we want:
@@ -67,5 +67,5 @@ On this case: *python PersonWindow.py --_firstnameField "Jonh" --_middlenameFiel
 
 The function **buttonAction** is called first and the function **printFullName** is called after.
 
-Check out the result:
+Check out the result:  
 ![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-9.png?raw=true "Screen")
