@@ -5,8 +5,7 @@ pages:
     - 'The basic': 'getting-started/the-basic.md'
     - 'Multiple windows': 'getting-started/multiple-windows.md'
     - 'Style and layout with CSS': 'getting-started/style-layout.md'
-    - 'Run in the terminal': 'getting-started/run-terminal.md'
-    - 'Mdi applications': 'getting-started/mdi-applications.md'
+    - 'Run the App in the Terminal': 'getting-started/run-terminal.md'
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
