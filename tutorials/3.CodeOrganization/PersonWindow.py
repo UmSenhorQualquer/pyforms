@@ -18,6 +18,10 @@ class PersonWindow(Person, BaseWidget):
 		#Define the button action
 		self._buttonField.value = self.__buttonAction
 
+		self._formset = ['_firstnameField', '_middlenameField', '_lastnameField', 
+			'_fullnameField', 
+			(' ','_buttonField', ' '), ' ']
+
 
 	def __buttonAction(self):
 		self._firstName  = self._firstnameField.value

@@ -4,6 +4,7 @@ pages:
 - Getting started:
     - 'The basic': 'getting-started/the-basic.md'
     - 'Multiple windows': 'getting-started/multiple-windows.md'
+    - 'Style and layout with CSS': 'getting-started/style-layout.md'
     - 'Mdi applications': 'getting-started/mdi-applications.md'
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
