@@ -8,7 +8,7 @@
 
 ### Create the Python file that will store your applications. 
 
-Example: SimpleExample.py
+Example: **SimpleExample.py**
 
 ### Import the library.
 
@@ -97,7 +97,7 @@ class SimpleExample1(BaseWidget):
 if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
 ```
 
-This previews code will produce the next window, after you press the button:
+The previous code produces the next window, after you had pressed the button:
 
 ![SimpleExample1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-2.png?raw=true "Screen")
 
@@ -168,7 +168,7 @@ class SimpleExample1(BaseWidget):
 		...
 ```
 
-After you just need to set the BaseWidget.mainmenu property inside the your application class constructor as the example bellow.
+After you just need to set the BaseWidget.mainmenu property inside your application class constructor as the example bellow.
 
 ```python
 ...
@@ -195,10 +195,10 @@ class SimpleExample1(BaseWidget):
 	...
 ```
 
-## **Add popup menus to the forms Controls**
+## **Add popup menu to the Controls**
 ***************************
 
-Create the functions that will work as the popup menu options actions, as you have than in the main menu chapter, after use the functions **addPopupMenuOption** or **addPopupSubMenuOption** to add a popup menu or a popup submenu to your Control.
+Create the functions that will work as the popup menu options actions, as you have than in the main menu chapter. After use the functions **addPopupMenuOption** or **addPopupSubMenuOption** to add a popup menu or a popup submenu to your Control.
 
 [Find here more details about the functions addPopupMenuOption and addPopupSubMenuOption.](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
 
@@ -227,10 +227,10 @@ Result:
 ## **What next?**
 ***************************
 
-### Move to the [next chapter](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/#controlbase)
+### Move to the [next chapter](http://pyforms.readthedocs.org/en/latest/getting-started/multiple-windows/)
 
 
-### Find out what you can do with other form Controls [here](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/)
+### Find out what you can do with other Controls [here](http://pyforms.readthedocs.org/en/latest/api-documentation/controls/)
 
 
 ![Example 1](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/2.ControlsExamples/Example1.png?raw=true "Screen")

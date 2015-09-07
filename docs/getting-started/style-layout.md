@@ -2,7 +2,7 @@
 
 *This page was based on the examples available at the github folder: [Tutorial - Code Organization](https://github.com/UmSenhorQualquer/pyforms/tree/master/tutorials/3.CodeOrganization)*
 
-By joining to to same folder of the application the CSS file style.css, we can change the layout of the Application.
+By adding to same folder of the application the CSS file style.css, we can change the layout of the Application.
 
 **Check the example:** style.css
 ```css

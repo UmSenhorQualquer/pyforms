@@ -1,6 +1,7 @@
 # Convert the application to run in the terminal
 
-The next code produces this Window:  
+The next code produces this Window:
+
 ![Person applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-10.png?raw=true "Screen")
 
 ```python
@@ -46,12 +47,12 @@ class PersonWindow(Person, BaseWidget):
 if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
 ```
 
-But if we create the file **settings.py** on the root directory of the application, and we add to it the next code:
+But if we create the file **settings.py** in the same directory of the application, and we add to it the next code:
 ```python
 PYFORMS_MODE = 'TERMINAL'
 ```
 
-The application will behaviour as a terminal application where the parameters are the names of the variables in the application class.
+The application will behave as a terminal application where the parameters are the names of the variables in the application class.
 
 Type the next code in the terminal: *python PersonWindow.py --help*
 

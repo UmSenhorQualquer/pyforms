@@ -27,7 +27,7 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 
 ## Documentation
 
-The documentation is still in development, but you can find a preview in [pyforms.readthedocs.org](http://pyforms.readthedocs.org)
+The documentation is still in development, but you can find a preview on [pyforms.readthedocs.org](http://pyforms.readthedocs.org)
 
 ## Installation
 

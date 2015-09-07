@@ -2,18 +2,18 @@
 
 *This page was based on the examples available at the github folder: [Tutorial - Code Organization](https://github.com/UmSenhorQualquer/pyforms/tree/master/tutorials/3.CodeOrganization)*
 
-The application that we will create on this page will allow us to add People details to a list.
+The application described on this page will allow us to add People details to a list.
 
 ## **Create the Model**
 ***************************
 
-Instead of starting by showing you how to develop the GUI I will suggest how to modularize the code in a Model View Control (MVC) style.
+Instead of starting by showing you how to develop the GUI I will suggest first how to modularize the code in a Model View Control (MVC) style.
 
 First we will create our data model which may be used outside the GUI.
 
-### Data models
+### Data model
 
-Start by creating the file Person.py where we will implement the model responsible by storing the a person information.
+Start by creating the file Person.py where we will implement the model responsible for storing the a person information.
 
 ```python
 class Person(object):
@@ -61,7 +61,8 @@ To make our code modular and easy to navigate we will split the edition of the 2
 
 ### Implement the GUI to manage the Person Model.
 
-Create the file PersonWindow.py and implement the window that will allow us the edit the Person Model.
+Create the file PersonWindow.py and implement the window that will allow us the edit the Person Model.  
+This window should inherit from the BaseWidget and Person classes.
 
 ```python
 import pyforms
@@ -104,7 +105,8 @@ if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
 
 ### Implement the GUI to manage the People model.
 
-Create the file PeopleWindow.py and implement the window that will allow us the manager the People Model.
+Create the file PeopleWindow.py and implement the window that will allow us the manager the People Model.  
+This window should inherit from the BaseWidget and People classes.
 
 ```python
 import pyforms
@@ -174,7 +176,7 @@ The application will look like:
 ## **EmptyWidget Control**
 ***************************
 
-Instead of opening a new window everytime we want to add a new Person, we will make Application to open the PersonWindow inside the PeopleWindow. For this we will use the ControlEmptyWidget.
+Instead of opening a new window everytime we want to add a new Person, we will change the Application to open the PersonWindow inside the PeopleWindow. For this we will use the ControlEmptyWidget.
 
 ```python
 from pyforms.Controls		import ControlEmptyWidget
@@ -200,7 +202,7 @@ from pyforms.Controls		import ControlEmptyWidget
 ## **DockWidget Control**
 ***************************
 
-A DockWidget can be detached or moved around the sides of the main Window.
+A DockWidget works like the EmptyWidget but can be detached or moved around the sides of the main Window.
 
 ```python
 from pyforms.Controls		import ControlDockWidget
