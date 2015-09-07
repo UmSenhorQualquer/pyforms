@@ -1,5 +1,11 @@
 # Pyforms
 
+<!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Posicione esta tag onde você deseja que o widget apareça. -->
+<div class="g-follow" data-annotation="bubble" data-height="24" data-rel="publisher"></div>
+
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
 ### It offers:
