@@ -48,7 +48,7 @@ if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
 
 But if we create the file **settings.py** on the root directory of the application, and we add to it the next code:
 ```python
-PYFORMS_MODE = 'WEB'
+PYFORMS_MODE = 'TERMINAL'
 ```
 
 The application will behaviour as a terminal application where the parameters are the names of the variables in the application class.

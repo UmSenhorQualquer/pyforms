@@ -9,4 +9,4 @@ pages:
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
-- About: 'about/license.md'
+- About: 'about/about.md'

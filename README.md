@@ -1,6 +1,5 @@
 # Pyforms
 
-
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
 ### It offers:
@@ -26,6 +25,9 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 ## Examples of applications developed in Pyforms
 * [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
 
+## Documentation
+
+The documentation is still in development, but you can find a preview in [pyforms.readthedocs.org](http://pyforms.readthedocs.org)
 
 ## Installation
 
@@ -61,7 +63,6 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 ## License
 
 Pyforms is open-source library under the MIT license.
-
 
 ## Rationale behind the framework
 
