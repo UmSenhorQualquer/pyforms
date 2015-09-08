@@ -1,8 +1,8 @@
 # BaseWidget
 
-The BaseWidget is used to create a set of forms Controls. It can works as a main window or a panel that can be included in others BaseWidgets.
+The BaseWidget is used to create a set of forms Controls. It can be used as a main window, or as a panel that can be included inside others BaseWidgets.
 
-This class inherit from the Qt QWidget.
+This class inherit from the PyQt QWidget.
 
 Usage example:
 ```python
@@ -45,41 +45,11 @@ The constructer receives the title of the window.
 ### _formset
 
 This variable is used to define the organization of the forms Controls in the BaseWidget.  
-When not defined it BaseWidget will assume generate this variable automatically.
+When is not defined the BaseWidget will generate this variable automatically.
 
-
-## **Functions**
-***************************
- 	
-### initForm() 
-
-Initialize the QWidget and its events with the set of form Controls.
- 	
-### generateTabs(formsetDict)
-
-Used when a dictionary is present in the the BaseWidget._formset variable.  
-Returns a QTabWidget with the forms Controls organization described in the parameter formsetDict.
 Example:
 ```python
-{
-	"a:Player": ['_threshold', "_player", "=", "_results", "_query"], 
-	"b:Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
-}
-```
-
-**Note:** Because a Python dictionary does not support order, we may use the format '[some characters]:[Tab name]' to order tabs. The generateTabs function will use the component [some characters] to order alfabetically the tabs.  
-Only the component [Tab name] will be shown in the tab.
-
-	
-### generatePanel(formset) 
-
-Used to construct a panel with forms Controls organization described in the BaseWidget._formset variable.  
-Returns a QWidget with the forms Controls organization described in the parameter formset.
-
-**formset** - variable describing the organization of the forms Controls in the BaseWidget.  
-Example:
-```python
-[
+self._formset = [
 	'info:Some title',
 	'h1:Some title',
 	'h2:Some title',
@@ -105,6 +75,57 @@ Example:
 **info:, h1:, h2:, h3:, h4:, h5:**: Is used to write some text in the interface with diferent sizes.  
 **free text** - It is possible also to write some free text.
  	
+
+## **Functions**
+***************************
+ 	
+### initForm() 
+
+Initialize the QWidget and its events with the set of form Controls.
+ 	
+### generateTabs(formsetDict)
+
+Used when a dictionary is present in the the BaseWidget._formset variable.  
+Returns a QTabWidget with the forms Controls organization described in the parameter formsetDict.
+
+Example:
+```python
+{
+	"a:Player": ['_threshold', "_player", "=", "_results", "_query"], 
+	"b:Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
+}
+```
+
+**Note:** To sort the dictionary elements, we can use the format '[some characters]:[Tab name]' to order the tabs. The generateTabs function will use the component [some characters] to order alphabetically the tabs.
+Only the component [Tab name] will be shown in the tab.
+
+	
+### generatePanel(formset) 
+
+Used to construct a panel with the organization of the Controls described in the BaseWidget._formset variable.  
+Returns a QWidget with the forms Controls organization described in the parameter formset.  
+
+**formset** - variable describing the organization of the forms Controls in the BaseWidget.
+
+Example:
+```python
+[
+	'info:Some title',
+	'h1:Some title',
+	'h2:Some title',
+	'h3:Some title',
+	'h4:Some title',
+	'h5:Some title',
+	(' ','free text', ' '),
+	('_video', '_arenas', '_run'), 
+	{
+		"Player": ['_threshold', "_player", "=", "_results", "_query"], 
+		"Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
+	}, 
+	"_progress"
+] 
+```
+
 ### show()
 
 Calls the initForm() function and shows the BaseWidget.
@@ -136,7 +157,7 @@ Load the Window Controls data from a dictionary.
 
 ### formControls
 
-Returns a dictionary of all Controls in the Window.
+Returns a dictionary of all the Controls in the Window.
  	
 ### form
 
@@ -163,3 +184,5 @@ self.mainmenu = [
 		}
 	]
 ``` 
+
+**'-'**: Use the minus sign to create a split bar in the menu.

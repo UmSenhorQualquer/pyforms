@@ -1,5 +1,10 @@
 # Pyforms
 
+<!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Posicione esta tag onde você deseja que o widget apareça. -->
+<div class="g-follow" data-annotation="bubble" data-height="24" data-rel="publisher"></div>
 
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
@@ -26,6 +31,9 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 ## Examples of applications developed in Pyforms
 * [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
 
+## Documentation
+
+The documentation is still in development, but you can find a preview on [pyforms.readthedocs.org](http://pyforms.readthedocs.org)
 
 ## Installation
 
@@ -61,7 +69,6 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 ## License
 
 Pyforms is open-source library under the MIT license.
-
 
 ## Rationale behind the framework
 

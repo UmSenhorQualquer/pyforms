@@ -1,8 +1,12 @@
 site_name: PyForms
 pages:
 - Home: 'index.md'
-- Getting started: 'getting-started.md'
+- Getting started:
+    - 'The basic': 'getting-started/the-basic.md'
+    - 'Multiple windows': 'getting-started/multiple-windows.md'
+    - 'Style and layout with CSS': 'getting-started/style-layout.md'
+    - 'Run the App in the Terminal': 'getting-started/run-terminal.md'
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
-- About: 'about/license.md'
+- About: 'about/about.md'

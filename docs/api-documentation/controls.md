@@ -1,26 +1,21 @@
 # Controls
 
-Controls implements UI interfaces for the user to interact with the applications.  
-A BaseWidget is formed by a set of forms.
+A form Control is a UI interface for the user to interact with the application.  
 
 Bellow we can find the description of all the Controls implemented in the PyForms library.
-
-
-
-
 
 
 
 ## ControlBase
 ***************************
 
-All the Controls inherit from this Control, therefore you can find its functions and properties in all the other controls listed bellow.
+All the Controls inherit from this Control, therefore you can find its functions and properties in all the other controls listed below.
 
 ### **Constructer**
 ***************************
 
 #### \_\_init\_\_(label='', defaultValue='', helptext='')  
-Control constructer.  
+
 **label** - Control label.  
 **defaultValue** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
@@ -30,27 +25,33 @@ Control constructer.
 ***************************
 
 #### initForm()  
+
 Load the control UI and initiate all the events.
  	
 #### load(data)  
-Function used to load the value of the control.  
-**data** - Contains a dictionary with the required information to load the control.
+Loads the value of the control.  
+**data** - Is a dictionary with the required information to load the control.
  	
 #### save(data)  
-Save a value of the control to a dictionary variable.  
+
+Save a value of the control to a dictionary.  
 **data** - Dictionary where the control value should be saved.
  	
 #### show()  
-Show the control
+
+Show the control.
  	
 #### hide()  
-Hide the control
+
+Hide the control.
  	
 #### addPopupMenuOption(label, functionAction=None, key=None)  
-Add an option to the Control popup menu
+
+Add an option to the Control popup menu.
  	
 #### addPopupSubMenuOption(label, options, keys={})  
-Add submenu options to the Control popup menu
+
+Add submenu options to the Control popup menu.
  	
 	
 
@@ -58,35 +59,37 @@ Add submenu options to the Control popup menu
 ***************************
 
 #### changed()  
-Function called when ever the Control value is changed
+
+Function called when ever the Control value is changed.
  	
 #### aboutToShowContextMenuEvent()  
-Function called before open the Control popup menu
+
+Function called before the Control popup menu is opened.
  
 
 ### **Properties**
 ***************************
 
 #### value  
-This property return and set what the control should manage or store.
+This property returns or set what the control should manage or store.
  	
 #### name  
-This property return and set the name of the control
+This property returns or set the name of the control.
  	
 #### label  
-Label of the control, if applies
+Returns or sets the label of the control.
  	
 #### form  
-Returns the Widget of the control.
+Returns the QWidget of the control.
  	
 #### parent  
-Returns or set the parent basewidget where the Control is
+Returns or set the parent basewidget where the Control is.
  	
 #### help  
-Return and set the tip box of the control
+Returns or set the tip box of the control.
 
 #### enabled  
-Returns and set the control to enable or disable state.
+Returns or set if the control is enable or disable.
 
 
 
