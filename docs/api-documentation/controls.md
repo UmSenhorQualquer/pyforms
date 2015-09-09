@@ -138,10 +138,9 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 ## ControlButton
 ***************************
 
-![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
-
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlButton.png?raw=true "Screen")
 
@@ -188,10 +187,10 @@ In case the button was initiated with the flag checkable=True, it will get and s
 ## ControlCheckBox
 ***************************
 
-![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
-
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBox.png?raw=true "Screen")
 
@@ -262,9 +261,9 @@ controlVar.value = [('item1',True), ('item2',False), 'item3']
 ## ControlCombo
 ***************************
 
-![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCombo.png?raw=true "Screen")
 
