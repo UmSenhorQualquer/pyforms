@@ -138,8 +138,8 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 ## ControlButton
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlButton.png?raw=true "Screen")
 
@@ -186,8 +186,8 @@ In case the button was initiated with the flag checkable=True, it will get and s
 ## ControlCheckBox
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBox.png?raw=true "Screen")
 
@@ -254,8 +254,8 @@ It gets and sets all the List values. This property receives a list where each e
 ## ControlCombo
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCombo.png?raw=true "Screen")
 
@@ -316,8 +316,8 @@ Gets and set the current selected item text.
 ## ControlDir
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlDir.png?raw=true "Screen")
 
@@ -420,8 +420,8 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 ## ControlFile
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFile.png?raw=true "Screen")
 
@@ -466,8 +466,8 @@ Gets and sets a directory path.
 ## ControlImage
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlImage.png?raw=true "Screen")
@@ -740,8 +740,8 @@ Gets and sets the GL window height
 ## ControlPlayer
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlPlayer.png?raw=true "Screen")
 
@@ -754,7 +754,7 @@ Gets and sets the GL window height
 ## ControlProgress
 ***************************
 
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlProgress.png?raw=true "Screen")
 
@@ -785,8 +785,8 @@ Defines the maximum value that can be selected.
 ## ControlSlider
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlSlider.png?raw=true "Screen")
 
@@ -819,8 +819,8 @@ Defines the maximum value that can be selected.
 ## ControlText
 ***************************
 
-![Web ready](https://img.shields.io/badge/READY-WEB-green.svg "Screen")
-![Terminal ready](https://img.shields.io/badge/READY-TERMINAL-green.svg "Screen")
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlText.png?raw=true "Screen")
 
