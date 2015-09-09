@@ -25,7 +25,7 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 
 ## Installation
 
-Run in the terminal: 
+Run in the terminal:
 ```bash
 pip install pyforms
 ```
