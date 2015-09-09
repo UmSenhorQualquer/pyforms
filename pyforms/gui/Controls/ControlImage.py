@@ -279,7 +279,7 @@ class ControlImage(ControlBase):
 
 	@value.setter
 	def value(self, value):
-		#ControlBase.value.fset(self, value)
+		ControlBase.value.fset(self, value)
 		if isinstance(value, str):
 			self._value = cv2.imread(value, 1)
 		else:
