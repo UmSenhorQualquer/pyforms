@@ -864,6 +864,7 @@ Return and set the help text that should be rendered in the video.
 ***************************
 
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlProgress.png?raw=true "Screen")
 
@@ -873,8 +874,10 @@ Return and set the help text that should be rendered in the video.
 
 #### \_\_init\_\_(label="%p%", defaultValue=0, min=0, max=100)
 
+**label** - This is the text that will be shown in the ProgressBar.
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
+
 
 ### **Properties**
 ***************************
@@ -886,9 +889,10 @@ Defines the minimum value that can be selected.
 #### max
 
 Defines the maximum value that can be selected.  
+ 	
+#### value
 
-
-
+Current position.
 
 
 ## ControlSlider
@@ -896,6 +900,7 @@ Defines the maximum value that can be selected.
 
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlSlider.png?raw=true "Screen")
 
@@ -930,6 +935,7 @@ Defines the maximum value that can be selected.
 
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlText.png?raw=true "Screen")
 
@@ -950,8 +956,7 @@ Event called when the user ends the control edition.
 
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
-
-
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 
 
@@ -959,8 +964,14 @@ Event called when the user ends the control edition.
 ***************************
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
+### **Properties**
+***************************
 
+#### value
+
+It returns and receives a list of BaseWidgets.
 
 
 
@@ -989,6 +1000,7 @@ Event called when the user ends the control edition.
 ***************************
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 
 ### **Functions**
@@ -1012,6 +1024,7 @@ Gets and sets a list of 2D or 3D points to display.
 ***************************
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVisVolume.png?raw=true "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 
 ### **Functions**
@@ -1030,4 +1043,5 @@ Gets and sets an numpy array image with volume.
 
 #### colorMap
 
-Gets and sets the color map to display.
+Gets and sets the color map to display.  
+It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER. Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).
