@@ -954,17 +954,18 @@ Event called when the user ends the control edition.
 ## ControlTextArea
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
-![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 
 
 ## ControlToolBox
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
 
 ### **Properties**
 ***************************
@@ -999,8 +1000,10 @@ It returns and receives a list of BaseWidgets.
 ## ControlVisVis
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
 
 
 ### **Functions**
@@ -1023,8 +1026,10 @@ Gets and sets a list of 2D or 3D points to display.
 ## ControlVisVisVolume
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVisVolume.png?raw=true "Screen")
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVisVolume.png?raw=true "Screen")
 
 
 ### **Functions**
@@ -1044,4 +1049,5 @@ Gets and sets an numpy array image with volume.
 #### colorMap
 
 Gets and sets the color map to display.  
-It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER. Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).
+It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER.  
+Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).
