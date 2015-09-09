@@ -69,4 +69,4 @@ The function **buttonAction** is called first and the function **printFullName**
 Check out the result:  
 ![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-9.png?raw=true "Screen")
 
-**Note:** Not all the Controls are implemented for the TERMINAL mode. Please check the API to know which ones are.
+**Note:** Not all the Controls are implemented for the TERMINAL mode. Please check the sign ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen") in the API to know which ones are.
