@@ -1,3 +1,8 @@
+![New version available](https://img.shields.io/badge/New%20version%20available-0.1-green.svg "Screen")
+
+![Important](https://img.shields.io/badge/Note-Important-red.svg "Screen")  
+If you find this project useful, please ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/startit.png?raw=true "Screen"). It will motivate me to continue improving it.
+
 # Pyforms
 
 <!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->

@@ -16,7 +16,7 @@ setup(
 
 	name				='PyForms',
 	version 			='0.1',
-	description 		="""Pyforms is a Python 2.7 framework to develop GUI application, 
+	description 		="""Pyforms is a Python 2.7 and 3.0 framework to develop GUI application, 
 		which promotes modular software design and code reusability with minimal effort.""",
 	author  			='Ricardo Ribeiro',
 	author_email		='ricardojvr@gmail.com',
