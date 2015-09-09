@@ -138,6 +138,8 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 ## ControlButton
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY TESTS-OK-green.svg "Screen")
+
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
@@ -164,7 +166,7 @@ Because the value of this Control is a function, nothing is saved
 
 #### click()
 
-This function simulates a click in the button.
+This function simulates a click of a button.
 
 ### **Properties**
 ***************************
@@ -185,6 +187,8 @@ In case the button was initiated with the flag checkable=True, it will get and s
 
 ## ControlCheckBox
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY TESTS-OK-green.svg "Screen")
 
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
@@ -207,6 +211,8 @@ Gets and sets a boolean indicating the state of the checkbox.
 
 ## ControlCheckBoxList
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBoxList.png?raw=true "Screen")
 
@@ -244,7 +250,9 @@ Returns the Elements with which have the checkboxes checked.
 
 It gets and sets all the List values. This property receives a list where each element is a Row in the list.
 
-
+```python
+controlVar.value = [('item1',True), ('item2',False), 'item3']
+``` 
 
 
 
@@ -254,6 +262,7 @@ It gets and sets all the List values. This property receives a list where each e
 ## ControlCombo
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY TESTS-OK-green.svg "Screen")
 ![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
 ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
 
@@ -262,9 +271,17 @@ It gets and sets all the List values. This property receives a list where each e
 ### **Functions**
 ***************************
  	
-#### addItem(label, value=None)
+#### addItem(text, value=None)
 
 Add an item to the ComboBox. Items may have a value associated to it.
+
+```python
+controlVar.addItem('Portugal', 	 'pt')
+controlVar.addItem('Angola', 	 'ao')
+controlVar.addItem('Moçambique', 'mz')
+controlVar.addItem('Brazil', 	 'br')
+controlVar.addItem('Cabo Verde', 'cv')
+``` 
  	
 #### clearItems()
 
@@ -272,19 +289,15 @@ Clear all the items of the ComboBox.
 
 ### **Events**
 ***************************
-
-#### currentIndexChanged(index) 
-
-Called when the user chooses an item in the combobox and the selected choice is different from the last one selected.
  	
 #### activated(index) 
 
-Called when the user chooses an item in the combobox.
+Called when the user selectes an item in the combobox.  
 **index** - Activated item's index.
  	
 #### highlighted(index)
 
-Called when an item in the combobox popup list is highlighted by the user.  
+Called when the user passes with the mouse over an item in the combobox.  
 **index** - highlighted item's index.
 
 ### **Properties**
@@ -292,15 +305,11 @@ Called when an item in the combobox popup list is highlighted by the user.
 
 #### items
 
-gets all the items of the combobox.
- 	
-#### values
-
-gets all the values of the combobox.
+Returns all the items of the combobox.
  	
 #### value
 
-It returns the selected value of the combo box
+It returns the selected value of the combo box.
  	
 #### text(value)
 
