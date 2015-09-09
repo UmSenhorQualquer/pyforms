@@ -349,7 +349,6 @@ pyforms.gui.Controls.ControlCombo.ControlCombo.initForm	pyforms.gui.Controls.Con
 pyforms.gui.Controls.ControlCombo.ControlCombo._items	pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#_items
 pyforms.gui.Controls.ControlCombo.ControlCombo.items	pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#items
 pyforms.gui.Controls.ControlCombo.ControlCombo.value	pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#value
-pyforms.gui.Controls.ControlCombo.ControlCombo.values	pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#values
 pyforms.gui.Controls.ControlCombo.ControlCombo._activated	pyforms.gui.Controls.ControlCombo.ControlCombo-class.html#_activated
 pyforms.gui.Controls.ControlDir.ControlDir	pyforms.gui.Controls.ControlDir.ControlDir-class.html
 pyforms.gui.Controls.ControlDir.ControlDir.parent	pyforms.gui.Controls.ControlDir.ControlDir-class.html#parent
