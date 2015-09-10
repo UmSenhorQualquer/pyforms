@@ -21,7 +21,7 @@ class ControlDockWidget(ControlEmptyWidget):
     @label.setter
     def label(self, value):
         self._label = value
-        self.dock.setWindowTitle(value)
+        self.setWindowTitle(value)
 
     def save(self, data):
         data['side'] = self.side
@@ -36,10 +36,10 @@ class ControlDockWidget(ControlEmptyWidget):
         """
         Show the control
         """
-        self.dock.show()
+        self.show()
 
     def hide(self):
         """
         Hide the control
         """
-        self.dock.hide()
+        self.hide()
