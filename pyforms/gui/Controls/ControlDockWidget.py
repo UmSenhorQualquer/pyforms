@@ -36,10 +36,10 @@ class ControlDockWidget(ControlEmptyWidget):
         """
         Show the control
         """
-        self.show()
+        super(ControlDockWidget, self).show()
 
     def hide(self):
         """
         Hide the control
         """
-        self.hide()
+        super(ControlDockWidget, self).hide()
