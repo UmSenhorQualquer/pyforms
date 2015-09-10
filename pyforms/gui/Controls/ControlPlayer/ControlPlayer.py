@@ -36,7 +36,9 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
     _currentFrame = None
 
     def __init__(self, *args):
-        super(ControlPlayer, self).__init__(*args)
+        QtGui.QFrame.__init__(self)
+        ControlBase.__init__(self, *args)
+
 
     def initForm(self):
         # Get the current path of the file

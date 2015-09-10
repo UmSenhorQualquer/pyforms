@@ -21,8 +21,9 @@ class ControlTree(ControlBase, QTreeWidget):
     """This class represents a wrapper to the QTreeWidget"""
 
     def __init__(self, label='', default=''):
-        ControlBase.__init__(self, label, default)
         QTreeWidget.__init__(self)
+        ControlBase.__init__(self, label, default)
+        
 
     def initForm(self):
         self.setSelectionBehavior(QAbstractItemView.SelectRows)
