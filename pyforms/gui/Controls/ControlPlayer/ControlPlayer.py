@@ -146,7 +146,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
     def updateFrame(self):
         (success, frame) = self.value.read()
 
-        if frame != None:
+        if frame is not None:
             self._currentFrame = frame
 
         frame = self.processFrame(self._currentFrame.copy())
