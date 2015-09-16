@@ -7,6 +7,7 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 from PyQt4.QtGui import QTreeWidget, QTreeWidgetItem, QTreeView, QStandardItem
 from PyQt4.QtGui import QAbstractItemView
 from PyQt4.QtCore import QSize
+from PyQt4 import QtGui
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
@@ -19,6 +20,7 @@ __status__ = "Development"
 
 
 class ControlTree(ControlBase, QTreeWidget):
+	
 	"""This class represents a wrapper to the QTreeWidget"""
 
 	def __init__(self, label='', default=''):
@@ -36,6 +38,7 @@ class ControlTree(ControlBase, QTreeWidget):
 		self.model().dataChanged.connect(self.__itemChangedEvent)
 
 		self.selectionChanged = self.selectionChanged
+		self._items = {}
 
 	def __repr__(self): return QTreeWidget.__repr__(self)
 
@@ -161,4 +164,49 @@ class ControlTree(ControlBase, QTreeWidget):
 	def iconsize(self, value): 
 		self.setIconSize( QSize(*value) )
 
-	
+	def addPopupMenuOption(self, label='', functionAction=None, key=None, item=None):
+		"""
+		Add an option to the Control popup menu
+		@param label:           label of the option.
+		@param functionAction:  function called when the option is selected.
+		@param key:             shortcut key
+		@param key:             shortcut key
+		"""
+		action = super(ControlTree, self).addPopupMenuOption(label,functionAction,key)
+
+		if item is not None:
+			action = QtGui.QAction(label, self.form)
+			if key is not None: action.setShortcut(QtGui.QKeySequence(key))
+			if functionAction:
+				action.triggered.connect(functionAction)
+				#Associate action to the item.
+				if item not in self._items.keys(): self._items.update({item: []})
+				self._items[item].append(action)
+				##########################
+			return action
+		return action
+
+	def aboutToShowContextMenuEvent(self):
+		"""
+		Function called before open the Control popup menu
+		"""
+		if len(self._items)>0: #Reset the menu and construct a new one only if there are actions for the items.
+			self._popupMenu.clear()
+			itemSelected = self.selectedItems()[0].text(0)
+			if itemSelected in self._items:
+				for action in self._items[itemSelected]:
+					self._popupMenu.addAction(action)
+					print("Adding action {action} to {item}".format(action=action.text(), item=itemSelected))
+
+
+	def clear(self):
+		super(ControlTree, self).clear()
+		self._popupMenu.clear()
+		self._items = {}
+
+	def createChild(self, name, parent=None):
+		"""
+		Create a new child for to the parent item.
+		If the parent is None it add to the root.
+		"""
+		return QTreeWidgetItem(self, [name]) if(parent is None) else QTreeWidgetItem(parent, [name])

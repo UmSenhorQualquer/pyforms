@@ -983,8 +983,7 @@ It returns and receives a list of BaseWidgets.
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTree.png?raw=true "Screen")
 
 
-iconsize
-
+### iconsize
 
 
 ## ControlTreeView

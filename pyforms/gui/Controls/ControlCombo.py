@@ -27,7 +27,7 @@ class ControlCombo(ControlBase):
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
         self._form.comboBox.currentIndexChanged.connect(
-            self.currentIndexChanged)
+            self._currentIndexChanged)
         self._form.comboBox.activated.connect(
             self._activated)
         self._form.comboBox.highlighted.connect(
@@ -37,15 +37,19 @@ class ControlCombo(ControlBase):
 
         self._addingItem = False
 
+    def _currentIndexChanged(self, index):
+        if not self._addingItem:
+            item = self._form.comboBox.currentText()
+            if len(item) >= 1:
+                ControlBase.value.fset(self, self._items[str(item)])
+                self.currentIndexChanged(index)
+
     def currentIndexChanged(self, index):
         """Called when the user chooses an item in the combobox and 
         the selected choice is different from the last one selected.
         @index: item's index
         """
-        if not self._addingItem:
-            item = self._form.comboBox.currentText()
-            if len(item) >= 1:
-                ControlBase.value.fset(self, self._items[str(item)])
+        pass
 
     def _activated(self, index):
         self.activated(index)
@@ -91,6 +95,15 @@ class ControlCombo(ControlBase):
         self._items = {}
         self._value = None
         self._form.comboBox.clear()
+
+    def setCurrentIndex(self, index):
+        self._form.comboBox.setCurrentIndex(index)
+
+    def currentIndex(self):
+        return self._form.comboBox.currentIndex()
+
+    def count(self):
+        return self._form.comboBox.count()
 
     @property
     def items(self): return self._items.items()

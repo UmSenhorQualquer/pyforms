@@ -54,7 +54,6 @@ class ControlButton(ControlBase):
     def value(self, value):
         self._form.pushButton.clicked[bool].connect(value)
 
-   
     @property
     def checked(self):
         return self._form.pushButton.isChecked()
