@@ -732,6 +732,8 @@ pyforms.gui.Controls.ControlTree.ControlTree.cells	pyforms.gui.Controls.ControlT
 pyforms.gui.Controls.ControlTreeView.ControlTreeView	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.mouseSelectedRowIndex	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#mouseSelectedRowIndex
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.selectionChanged	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#selectionChanged
+pyforms.gui.Controls.ControlTreeView.ControlTreeView.__init__	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#__init__
+pyforms.gui.Controls.ControlTreeView.ControlTreeView.form	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#form
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.mouseSelectedRowsIndexes	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#mouseSelectedRowsIndexes
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.__itemChangedEvent	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#__itemChangedEvent
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.itemChangedEvent	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#itemChangedEvent
@@ -742,7 +744,6 @@ pyforms.gui.Controls.ControlTreeView.ControlTreeView.selectedItem	pyforms.gui.Co
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.getAllSceneObjects	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#getAllSceneObjects
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.value	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#value
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.__sub__	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#__sub__
-pyforms.gui.Controls.ControlTreeView.ControlTreeView.model	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#model
 pyforms.gui.Controls.ControlTreeView.ControlTreeView.cells	pyforms.gui.Controls.ControlTreeView.ControlTreeView-class.html#cells
 pyforms.gui.Controls.ControlVisVis.ControlVisVis	pyforms.gui.Controls.ControlVisVis.ControlVisVis-class.html
 pyforms.gui.Controls.ControlVisVis.ControlVisVis.refresh	pyforms.gui.Controls.ControlVisVis.ControlVisVis-class.html#refresh

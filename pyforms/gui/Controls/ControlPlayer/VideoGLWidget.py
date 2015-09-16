@@ -29,22 +29,7 @@ __status__ = "Development"
 
 class VideoGLWidget(QGLWidget):
 
-    image2Display = []
-    texture = []
-    _x = 0.0
-    _y = 0.0
-    zoom = 1.0
-    _width = 1.0
-    _height = 1.0
-    _mouseX = 0.0
-    _mouseY = 0.0
-    _mouseDown = False
-    _glX = 0.0
-    _glY = 0.0
-    _glZ = 0.0
-    _lastGlX = 0.0
-    _lastGlY = 0.0
-
+    
     def __init__(self, parent=None):
         QGLWidget.__init__(self, parent)
         self.image2Display = []
@@ -61,6 +46,12 @@ class VideoGLWidget(QGLWidget):
         self._mouseDown = False
         self._mouseLeftDown = False
         self._mouseRightDown = False
+        self._width = 1.0
+        self._height = 1.0
+        self._x = 0
+        self._y = 0
+        self.imgWidth = 1
+        self.imgHeight = 1
 
         self._rotateZ = 0
         self._rotateX = 0
@@ -72,6 +63,7 @@ class VideoGLWidget(QGLWidget):
         self.setMinimumHeight(100)
 
         self._point = None
+        self._pendingFrames = None
 
     def initializeGL(self):
         GL.glClearDepth(1.0)
@@ -122,6 +114,29 @@ class VideoGLWidget(QGLWidget):
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
+
+        #Currect a bug related with the overlap of contexts between simulatanious OpenGL windows.
+        if self._pendingFrames!=None:
+            for index, frame in enumerate(self._pendingFrames):
+                if len(frame.shape) == 2:
+                    color = GL.GL_LUMINANCE
+                else:
+                    color = GL.GL_BGR
+
+                if len(self.texture) < len(self.image2Display): self.texture.append(GL.glGenTextures(1))
+
+                w = len(frame[0])
+                h = len(frame)
+
+                GL.glEnable(GL.GL_TEXTURE_2D)
+                GL.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1)
+                GL.glBindTexture(GL.GL_TEXTURE_2D, self.texture[index])
+                GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_BORDER)
+                GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_BORDER)
+                GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
+                GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
+                GL.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, w, h, 0, color, GL.GL_UNSIGNED_BYTE, frame)
+            self._pendingFrames = None
 
         translateX = (len(self.texture) * self._width) / 2
 
@@ -209,32 +224,7 @@ class VideoGLWidget(QGLWidget):
                 GL.glDeleteTextures(self.texture.pop())
 
         self.image2Display = frames
-
-        for index, frame in enumerate(frames):
-            if len(frame.shape) == 2:
-                color = GL.GL_LUMINANCE
-            else:
-                color = GL.GL_BGR
-
-            if len(self.texture) < len(self.image2Display):
-                self.texture.append(GL.glGenTextures(1))
-
-            w = len(frame[0])
-            h = len(frame)
-
-            GL.glEnable(GL.GL_TEXTURE_2D)
-            GL.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1)
-            GL.glBindTexture(GL.GL_TEXTURE_2D, self.texture[index])
-            GL.glTexParameterf(
-                GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_BORDER)
-            GL.glTexParameterf(
-                GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_BORDER)
-            GL.glTexParameterf(
-                GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
-            GL.glTexParameterf(
-                GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
-            GL.glTexImage2D(
-                GL.GL_TEXTURE_2D, 0, GL.GL_RGB, w, h, 0, color, GL.GL_UNSIGNED_BYTE, frame)
+        self._pendingFrames = frames
 
         self.repaint()
 

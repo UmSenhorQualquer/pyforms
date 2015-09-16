@@ -69,8 +69,10 @@ class ControlCombo(ControlBase):
 
     def addItem(self, label, value=None):
         self._addingItem = True
-        if not (label in self._items.keys()):
-            self._form.comboBox.addItem(label)
+        if value!=None:
+            if not (value in self._items.values()): self._form.comboBox.addItem(label)
+        else:
+            if not (label in self._items.keys()): self._form.comboBox.addItem(label)
 
         firstValue = False
         if self._items == {}:
