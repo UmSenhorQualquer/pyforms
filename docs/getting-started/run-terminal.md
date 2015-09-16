@@ -54,7 +54,10 @@ PYFORMS_MODE = 'TERMINAL'
 
 The application will behave as a terminal application where the parameters are the names of the variables in the application class.
 
-Type the next code in the terminal: *python PersonWindow.py --help*
+Type the next code in the terminal: 
+```bash
+python PersonWindow.py --help
+```
 
 You will obtain the next screen:  
 ![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-11.png?raw=true "Screen")
@@ -62,11 +65,14 @@ You will obtain the next screen:
 
 Now we can set the parameters and use the parameter exec to define the functions and the execution order we want:
 
-On this case: *python PersonWindow.py --_firstnameField "Jonh" --_middlenameField "Middle" --_lastnameField "White"  --exec "buttonAction|printFullName"*
+On this case:
+```bash
+python PersonWindow.py --_firstnameField "Jonh" --_middlenameField "Middle" --_lastnameField "White"  --exec "buttonAction|printFullName"
+```
 
 The function **buttonAction** is called first and the function **printFullName** is called after.
 
 Check out the result:  
 ![People applications](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/getting-started-9.png?raw=true "Screen")
 
-**Note:** Not all the Controls are implemented for the TERMINAL mode. Please check the API to know which ones are.
+**Note:** Not all the Controls are implemented for the TERMINAL mode. Please check the sign ![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen") in the API to know which ones are.

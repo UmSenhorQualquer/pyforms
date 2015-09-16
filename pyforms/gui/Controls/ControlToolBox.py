@@ -14,7 +14,7 @@ class ControlToolBox(ControlBase):
         
     
     @property
-    def value(self): return None
+    def value(self): return self._value
 
     @value.setter
     def value(self, value): 
@@ -24,7 +24,10 @@ class ControlToolBox(ControlBase):
         
         for item in value: 
             if isinstance(item, tuple):
-                widget = QtGui.QWidget(); layout = QtGui.QVBoxLayout(); layout.setMargin(0); widget.setLayout( layout )
+                widget = QtGui.QWidget(); 
+                layout = QtGui.QVBoxLayout(); 
+                layout.setMargin(0); 
+                widget.setLayout( layout )
                 for e in item[1:]: widget.layout().addWidget( e.form )
                 self.form.addItem(widget, item[0])
             else:

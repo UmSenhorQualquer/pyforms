@@ -4,10 +4,10 @@
 __author__      = "Ricardo Ribeiro"
 __credits__     = ["Ricardo Ribeiro"]
 __license__     = "MIT"
-__version__     = "0.0"
+__version__     = "0.1"
 __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
+__status__      = "Production"
 
 
 from pyforms import conf

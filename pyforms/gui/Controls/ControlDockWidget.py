@@ -12,8 +12,8 @@ class ControlDockWidget(ControlEmptyWidget):
     def __init__(self, label='', default=None, side='left'):
         super(ControlDockWidget, self).__init__(label)
         self.side = side
-        if default is not None:
-            self.value = default
+        if default is not None: self.value = default
+        self._show = True
 
     @property
     def label(self): return self._label
@@ -21,7 +21,7 @@ class ControlDockWidget(ControlEmptyWidget):
     @label.setter
     def label(self, value):
         self._label = value
-        self.setWindowTitle(value)
+        if hasattr(self, 'dock'): self.dock.setWindowTitle(value)
 
     def save(self, data):
         data['side'] = self.side
@@ -29,17 +29,18 @@ class ControlDockWidget(ControlEmptyWidget):
 
     def load(self, data):
         self.side = data['side']
-        # print(data)
         super(ControlDockWidget, self).load(data)
 
     def show(self):
         """
         Show the control
         """
-        super(ControlDockWidget, self).show()
+        self._show = True
+        if hasattr(self, 'dock'): self.dock.show()
 
     def hide(self):
         """
         Hide the control
         """
-        super(ControlDockWidget, self).hide()
+        self._show = False
+        if hasattr(self, 'dock'): self.dock.hide()

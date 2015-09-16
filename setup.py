@@ -4,10 +4,10 @@
 __author__      = "Ricardo Ribeiro"
 __credits__     = ["Ricardo Ribeiro"]
 __license__     = "MIT"
-__version__     = "0.0"
+__version__     = "0.1"
 __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
-__status__      = "Development"
+__status__      = "Production"
 
 
 from setuptools import setup
@@ -15,8 +15,8 @@ from setuptools import setup
 setup(
 
 	name				='PyForms',
-	version 			='0.0',
-	description 		="""Pyforms is a Python 2.7 framework to develop GUI application, 
+	version 			='0.1.2',
+	description 		="""Pyforms is a Python 2.7 and 3.0 framework to develop GUI application, 
 		which promotes modular software design and code reusability with minimal effort.""",
 	author  			='Ricardo Ribeiro',
 	author_email		='ricardojvr@gmail.com',

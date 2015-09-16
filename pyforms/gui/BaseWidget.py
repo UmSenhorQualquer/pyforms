@@ -51,7 +51,7 @@ class BaseWidget(QtGui.QWidget):
         Generate the module Form
         """
         if not self._formLoaded:
-
+            
             if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
                 self._progress = ControlProgress("Progress", 0, 100)
                 if self._formset != None: self._formset += ['_progress']

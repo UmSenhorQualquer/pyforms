@@ -104,17 +104,14 @@ class ControlCombo(ControlBase):
         return self._form.comboBox.count()
 
     @property
-    def items(self): return self._items.values()
-
-    @property
-    def values(self): return self._items.items()
+    def items(self): return self._items.items()
 
     @property
     def value(self): return self._value
 
     @value.setter
     def value(self, value):
-        for key, val in self._items.items():
+        for key, val in self.items:
             if value == val:
                 index = self._form.comboBox.findText(key)
                 self._form.comboBox.setCurrentIndex(index)
@@ -127,7 +124,7 @@ class ControlCombo(ControlBase):
 
     @text.setter
     def text(self, value):
-        for key, val in self._items.items():
+        for key, val in self.items:
             if value == key:
                 self.value = val
                 break

@@ -1,3 +1,10 @@
+![Important](https://img.shields.io/badge/Important-Note-red.svg "Screen")  
+If you find this project useful, please, do not forget to ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/start.png?raw=true "Screen") it.
+
+![New version available](https://img.shields.io/badge/New%20version%20available-0.1.2-green.svg "Screen")
+
+
+
 # Pyforms
 
 <!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
@@ -37,34 +44,7 @@ The documentation is still in development, but you can find a preview on [pyform
 
 ## Installation
 
-
-##### Requirements
-
-* [setuptools] (https://pypi.python.org/pypi/setuptools)
-* [Python 2.7](https://www.python.org/download/releases/2.7/)
-* [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
-* [PyOpenGL](http://pyopengl.sourceforge.net/) [Optional - Only used by some Controls]
-* [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
-* [Numpy](http://www.numpy.org/) [Optional - Only used by some Controls]
-* [Python opencv](http://opencv.org/) [Optional - Only used by some Controls]
-
-
-##### Ubuntu 14
-
-* setuptools: ```sudo apt-get install python-setuptools```
-* Opengl: ```sudo apt-get install python-opengl```
-* OpenCV: ```sudo apt-get install python-opencv```
-* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```
-* PyQt4 OpenGL Widget [Optional]: ```sudo apt-get install python-qt4-gl```
-* Pyforms: ```sudo pip install pyforms```
-* VisVis: ```sudo pip install visvis```
-
-##### Mac OSx
-
-* Install python and its tools using [Homebrew] (http://brew.sh)
-* [Scientific Python on Mac OS X 10.9+ with homebrew | Jörn's Blog](https://joernhees.de/blog/2014/02/25/scientific-python-on-mac-os-x-10-9-with-homebrew/)
-* [Installing scientific Python on Mac OS X | Lowin Data Company](http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/)
-* run ```sudo python setup.py install```
+Check the documentation [pyforms.readthedocs.org](http://pyforms.readthedocs.org)
 
 ## License
 
@@ -76,9 +56,9 @@ The development of this library started with the necessity of allowing users wit
 The idea was to transform scripts which had already been developed into GUI applications with a low effort and in a short time.
 
 For example in my computer vision applications in the majority of the times there were variables that had to be set manually in the scripts for each video, to adjust the thresholds, blobs sizes, and other parameters to the environment light conditions... To test each set of parameters the script had to be executed.
-With GUI applications, users would be able to set the parameters using an GUI interface and visualize the results instantly without needing to restart the script. That was the idea.
+With GUI applications, users would be able to set the parameters using a GUI interface and visualize the results instantly without the need of restarting the script. That was the idea.
 
-After looking into the several python options for GUI interfaces, PyQt was the one that offered the best tool for a fast development with the QtDesigner, but after a while developing in Qt, switching between the designer and the python IDE was becoming too costly in terms of time, because the interfaces were constantly evolving, and tedious, because GUI controls were repeated too many times.
+After looking into the several python options for GUI interfaces, PyQt was the one that seemed the best tool for a fast development with the QtDesigner, but after a while developing in Qt, switching between the designer and the python IDE was becoming too costly in terms of time, because the interfaces were constantly evolving, and it was tedious, because GUI controls were repeated several times.
 
 Being a Django developer, I did get inspiration on it for this framework. In the [Django](https://www.djangoproject.com/) Models we just need to define the type of variables and their disposition in the form (in ModelAdmin) to generate a HTML form for data edition.
 For the GUIs that I wanted to build for my python scripts, I would like to have the same simplicity, because I did wanted to focus on the algorithms and not on GUIs developing.

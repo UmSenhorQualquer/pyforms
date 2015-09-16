@@ -26,10 +26,12 @@ class SimpleExample(BaseWidget):
 		
 		self._control.addItem('Portugal', 'pt')
 		self._control.addItem('Angola', 'ao')
-		self._control.addItem('Moçambique', 'mz')
+		self._control.addItem('Mocambique', 'mz')
 		self._control.addItem('Brazil', 'br')
 		self._control.addItem('Cabo Verde', 'cv')
 
+		
+		self._control.text = 'Brazil'
 
 ##################################################################################################################
 ##################################################################################################################

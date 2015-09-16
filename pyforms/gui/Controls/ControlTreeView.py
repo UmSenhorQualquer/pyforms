@@ -3,26 +3,25 @@ from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 
 
-class ControlTreeView(ControlBase):
+class ControlTreeView(ControlBase, QtGui.QTreeView):
+
+	def __init__(self, title='untitled'):
+		QtGui.QTreeView.__init__(self)
+		ControlBase.__init__(self, title)
+		
 
 	def initForm(self):
-		self._form = QtGui.QTreeView()
-
-		view = self._form
-		view.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-		view.header().hide()
-		view.setUniformRowHeights(True)
-		view.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
-		view.setDragEnabled(True)
-		view.setAcceptDrops(True)
+		self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+		self.header().hide()
+		self.setUniformRowHeights(True)
+		self.setDragDropMode(QtGui.QAbstractItemView.InternalMove)
+		self.setDragEnabled(True)
+		self.setAcceptDrops(True)
 		
-		view.setModel(QtGui.QStandardItemModel())
-		#self._model = TreeModel()
-		#view.setModel(self._model)
-
-		view.model().itemChanged.connect(self.__itemChangedEvent)
+		self.setModel(QtGui.QStandardItemModel())
+		self.model().itemChanged.connect(self.__itemChangedEvent)
 		
-		view.selectionChanged = self.selectionChanged
+		self.selectionChanged = self.selectionChanged
 
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		# populate data
@@ -39,12 +38,6 @@ class ControlTreeView(ControlBase):
 
 
 
-	@property
-	def model(self): return self._form.model()
-	@model.setter
-	def model(self, value): 
-		self._model = value
-		self._form.setModel(value)
 
 	def __itemChangedEvent(self, item): self.itemChangedEvent(item)
 
@@ -54,13 +47,13 @@ class ControlTreeView(ControlBase):
 	def itemSelectionChanged(self):pass
 
 	def selectionChanged(self, selected, deselected ):
-		super(QtGui.QTreeView, self._form).selectionChanged(selected, deselected)
+		super(QtGui.QTreeView, self.form).selectionChanged(selected, deselected)
 		self.itemSelectionChanged()
 
 	@property
 	def mouseSelectedRowsIndexes(self):
 		result = []
-		for index in self._form.selectedIndexes():
+		for index in self.form.selectedIndexes():
 			result.append( index.row() )
 		return list( set(result) )
 
@@ -73,7 +66,7 @@ class ControlTreeView(ControlBase):
 
 	@property
 	def selectedItem(self):
-		for index in self._form.selectedIndexes():
+		for index in self.form.selectedIndexes():
 			item = index.model().itemFromIndex(index)
 			return item
 		else:
@@ -104,7 +97,7 @@ class ControlTreeView(ControlBase):
 			item = QtGui.QStandardItem( other )
 			self._model.appendRow( item )
 
-		self._form.setFirstColumnSpanned(self._model.rowCount()-1, self._form.rootIndex(), True)
+		self.form.setFirstColumnSpanned(self._model.rowCount()-1, self.form.rootIndex(), True)
 		return self
 
 	def __sub__(self, other):
@@ -120,7 +113,7 @@ class ControlTreeView(ControlBase):
 
 	@property
 	def value(self):  
-		return self._form.model().invisibleRootItem()
+		return self.form.model().invisibleRootItem()
 		return self.recursivelyReadRoot(root)
 
 	@value.setter
@@ -129,3 +122,7 @@ class ControlTreeView(ControlBase):
 
 
 	def getAllSceneObjects(self): return self._model.getChildrens()
+
+
+	@property
+	def form(self): return self

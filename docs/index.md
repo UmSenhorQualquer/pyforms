@@ -1,6 +1,6 @@
 # Pyforms
 
-[Source code](https://github.com/UmSenhorQualquer/pyforms)
+**[ Checkout Github for the source code ](https://github.com/UmSenhorQualquer/pyforms)**
 
 <!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -24,6 +24,11 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 
 
 ## Installation
+
+Run in the terminal:
+```bash
+pip install pyforms
+```
 
 ### Requirements
 

@@ -138,6 +138,10 @@ Gets and sets the the maximum value that can be selected in the bounding slider.
 ## ControlButton
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlButton.png?raw=true "Screen")
 
 ### **Constructer**
@@ -161,7 +165,7 @@ Because the value of this Control is a function, nothing is saved
 
 #### click()
 
-This function simulates a click in the button.
+This function simulates a click of a button.
 
 ### **Properties**
 ***************************
@@ -183,6 +187,11 @@ In case the button was initiated with the flag checkable=True, it will get and s
 ## ControlCheckBox
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBox.png?raw=true "Screen")
 
 ### **Properties**
@@ -201,6 +210,8 @@ Gets and sets a boolean indicating the state of the checkbox.
 
 ## ControlCheckBoxList
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCheckBoxList.png?raw=true "Screen")
 
@@ -238,7 +249,9 @@ Returns the Elements with which have the checkboxes checked.
 
 It gets and sets all the List values. This property receives a list where each element is a Row in the list.
 
-
+```python
+controlVar.value = [('item1',True), ('item2',False), 'item3']
+``` 
 
 
 
@@ -248,14 +261,26 @@ It gets and sets all the List values. This property receives a list where each e
 ## ControlCombo
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCombo.png?raw=true "Screen")
 
 ### **Functions**
 ***************************
  	
-#### addItem(label, value=None)
+#### addItem(text, value=None)
 
 Add an item to the ComboBox. Items may have a value associated to it.
+
+```python
+controlVar.addItem('Portugal', 	 'pt')
+controlVar.addItem('Angola', 	 'ao')
+controlVar.addItem('Moçambique', 'mz')
+controlVar.addItem('Brazil', 	 'br')
+controlVar.addItem('Cabo Verde', 'cv')
+``` 
  	
 #### clearItems()
 
@@ -263,19 +288,15 @@ Clear all the items of the ComboBox.
 
 ### **Events**
 ***************************
-
-#### currentIndexChanged(index) 
-
-Called when the user chooses an item in the combobox and the selected choice is different from the last one selected.
  	
 #### activated(index) 
 
-Called when the user chooses an item in the combobox.
+Called when the user selectes an item in the combobox.  
 **index** - Activated item's index.
  	
 #### highlighted(index)
 
-Called when an item in the combobox popup list is highlighted by the user.  
+Called when the user passes with the mouse over an item in the combobox.  
 **index** - highlighted item's index.
 
 ### **Properties**
@@ -283,17 +304,13 @@ Called when an item in the combobox popup list is highlighted by the user.
 
 #### items
 
-gets all the items of the combobox.
- 	
-#### values
-
-gets all the values of the combobox.
+Returns all the items of the combobox.
  	
 #### value
 
-It returns the selected value of the combo box
+It returns the selected value of the combo box.
  	
-#### text(value)
+#### text
 
 Gets and set the current selected item text.
 
@@ -307,9 +324,13 @@ Gets and set the current selected item text.
 ## ControlDir
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlDir.png?raw=true "Screen")
 
-This control maybe used to select a directory.
+This control is used to select a directory.
 
 
 
@@ -320,6 +341,8 @@ This control maybe used to select a directory.
 ## ControlDockWidget
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlDockWidget.png?raw=true "Screen")
 
 This control is used to create DockWidget.
@@ -329,7 +352,7 @@ This control is used to create DockWidget.
 
 #### \_\_init\_\_(label='', default=None, side='left')
 
-**side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top and bottom.
+**side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top or bottom.
 
 
 
@@ -339,6 +362,8 @@ This control is used to create DockWidget.
 
 ## ControlEmptyWidget
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 This Control may be used to display a BaseWidget or another Control inside.
 
@@ -408,6 +433,10 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 ## ControlFile
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFile.png?raw=true "Screen")
 
 The control may be used to select a file.
@@ -451,6 +480,9 @@ Gets and sets a directory path.
 ## ControlImage
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlImage.png?raw=true "Screen")
 
@@ -471,7 +503,7 @@ Redraw the image or set of images
  	
 #### value
 
-This property receives an image path, a numpy image or a list of numpy images.
+This property receives an image path, a numpy image or a list of numpy images.  
 
 Usage:  
 ```python
@@ -488,10 +520,13 @@ img2 = cv2.imread('lena_color.png', 1)
 controlVar.value = [img1, img2]
 ```  
 
+**Note:** the value can only be set outside the constructor and the initForm function.
 
 
 ## ControlLabel
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlLabel.png?raw=true "Screen")
 
@@ -605,8 +640,9 @@ Gets and sets the icon size.
 ## ControlMdiArea
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlMdiArea.png?raw=true "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlMdiArea.png?raw=true "Screen")
 
 ### **Constructor**
 ***************************
@@ -651,8 +687,9 @@ Sets a BaseWidget or a list of BaseWidgets representing the windows.
 ## ControlNumber
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlNumber.png?raw=true "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlNumber.png?raw=true "Screen")
 
 ### **Constructor**
 ***************************
@@ -673,6 +710,9 @@ Defines the minimum value that can be selected.
 
 Defines the maximum value that can be selected.  
 
+#### value
+
+Returns the selected number.
 
 
 
@@ -683,6 +723,8 @@ Defines the maximum value that can be selected.
 
 ## ControlOpenGL
 ***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlOpenGL.png?raw=true "Screen")
 
@@ -707,11 +749,11 @@ Gets and sets a GL scene.
  	
 #### width
 
-Gets and sets the GL window width
+Gets the GL window width
  	
 #### height
 
-Gets and sets the GL window height
+Gets the GL window height
 
 
 
@@ -722,16 +764,107 @@ Gets and sets the GL window height
 ## ControlPlayer
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlPlayer.png?raw=true "Screen")
 
+### **Functions**
+***************************
 
+#### pausePlay()
 
+Toggle video play.
+ 	
+#### refresh()	
+
+Refresh the last painted frame.
+ 	
+#### isPlaying()
+
+Returns a boolean indicating if the video is playing.
+
+### **Events**
+***************************
+
+#### processFrame(frame)
+
+Function called before the frame is rendered.
+ 	
+### **Properties**
+***************************
+
+#### onDoubleClick
+
+Gets and sets the function called on double click event.  
+The funtion receives the next parameters: onDoubleClick(event, x, y)
+ 	
+#### onClick
+
+Gets and sets the function called on click event.  
+The funtion receives the next parameters: onClick(event, x, y)
+ 	
+#### onDrag
+
+Gets and sets the function called during a drag event.  
+The funtion receives the next parameters: onDrag(startPoint, endPoint)
+ 	
+#### onEndDrag
+
+Gets and sets the function called when a drag event ends.  
+The funtion receives the next parameters: onEndDrag(startPoint, endPoint)
+
+#### value
+
+When not None, it returns a cv2.VideoCapture object.  
+It may receives a video file path, or a cv2.VideoCapture object.
+
+Usage:  
+```python
+controlVar.value = '~/home/ricardo/video.avi'
+```  
+or  
+```python
+controlVar.value = cv2.VideoCapture('~/home/ricardo/video.avi')
+```
+ 	
+#### startFrame
+
+Gets and sets the first frame.
+
+#### endFrame
+
+Gets and sets the last frame.
+ 	
+#### video_index
+
+Returns the current frame index.
+ 	
+#### max
+
+Returns the total number of frames of a video.
+ 	
+#### image
+
+Returns and sets the image beeing rendered.
+ 	
+#### fps
+
+Returns and sets the video FPS.
+ 	
+#### helpText
+
+Return and set the help text that should be rendered in the video.
 
 
 
 
 ## ControlProgress
 ***************************
+
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlProgress.png?raw=true "Screen")
 
@@ -741,8 +874,10 @@ Gets and sets the GL window height
 
 #### \_\_init\_\_(label="%p%", defaultValue=0, min=0, max=100)
 
+**label** - This is the text that will be shown in the ProgressBar.
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
+
 
 ### **Properties**
 ***************************
@@ -754,13 +889,18 @@ Defines the minimum value that can be selected.
 #### max
 
 Defines the maximum value that can be selected.  
+ 	
+#### value
 
-
-
+Current position.
 
 
 ## ControlSlider
 ***************************
+
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlSlider.png?raw=true "Screen")
 
@@ -793,6 +933,10 @@ Defines the maximum value that can be selected.
 ## ControlText
 ***************************
 
+![Web ready](https://img.shields.io/badge/WEB-READY-green.svg "Screen")
+![Terminal ready](https://img.shields.io/badge/TERMINAL-READY-green.svg "Screen")
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlText.png?raw=true "Screen")
 
 
@@ -810,19 +954,25 @@ Event called when the user ends the control edition.
 ## ControlTextArea
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
-
-
 
 
 
 ## ControlToolBox
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
 
+### **Properties**
+***************************
 
+#### value
+
+It returns and receives a list of BaseWidgets.
 
 
 
@@ -850,6 +1000,9 @@ Event called when the user ends the control edition.
 ## ControlVisVis
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
 
 
@@ -873,6 +1026,9 @@ Gets and sets a list of 2D or 3D points to display.
 ## ControlVisVisVolume
 ***************************
 
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVisVolume.png?raw=true "Screen")
 
 
@@ -892,4 +1048,6 @@ Gets and sets an numpy array image with volume.
 
 #### colorMap
 
-Gets and sets the color map to display.
+Gets and sets the color map to display.  
+It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER.  
+Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).

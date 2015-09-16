@@ -27,7 +27,6 @@ class ControlBase(object):
     """
 
     def __init__(self, label='', defaultValue='', helptext=''):
-        super(ControlBase, self).__init__()
         self._help = helptext
         self._value = defaultValue
         self._form = None  # Qt widget

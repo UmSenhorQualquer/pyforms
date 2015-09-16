@@ -32,6 +32,8 @@ class OpenglGLWidget(QGLWidget):
 		self.setMinimumHeight(100)
 		self.setMinimumWidth(100)
 		self.setMouseTracking(True)
+		self.setAcceptDrops(True)
+        
 
 	def initializeGL(self):
 		glClearDepth(1.0)
