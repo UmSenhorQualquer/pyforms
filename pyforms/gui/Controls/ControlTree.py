@@ -203,7 +203,8 @@ class ControlTree(ControlBase, QTreeWidget):
 
     def clear(self):
         super(ControlTree, self).clear()
-        self._popupMenu.clear()
+        if self._popupMenu:
+            self._popupMenu.clear()
         self._items = {}
 
     def createChild(self, name, parent=None):
