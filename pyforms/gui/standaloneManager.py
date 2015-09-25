@@ -107,8 +107,15 @@ class StandAloneContainer(QtGui.QMainWindow):
         self.setStyleSheet(text)
 
 
-def startApp(ClassObject):
+def startApp(ClassObject, geometry=None):
     app = QtGui.QApplication(sys.argv)
     w = StandAloneContainer(ClassObject)
-    w.showMaximized()
+
+    if geometry is not None:
+        w.show()
+        w.setGeometry(*geometry)
+    else:
+        w.showMaximized()
+    
+
     app.exec_()

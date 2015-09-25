@@ -28,6 +28,8 @@ class SimpleExample(BaseWidget):
 
 		self._control += ('Elem5', 'Elem6')
 
+		self._control.horizontalHeaders = ['col1','col2','col3']
+		self._control.horizontalHeaders = ['col4',]
 		
 		
 

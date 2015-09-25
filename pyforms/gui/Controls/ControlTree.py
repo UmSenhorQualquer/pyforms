@@ -207,9 +207,11 @@ class ControlTree(ControlBase, QTreeWidget):
             self._popupMenu.clear()
         self._items = {}
 
-    def createChild(self, name, parent=None):
+    def createChild(self, name, parent=None, icon=None):
         """
         Create a new child for to the parent item.
         If the parent is None it add to the root.
         """
-        return QTreeWidgetItem(self, [name]) if(parent is None) else QTreeWidgetItem(parent, [name])
+        item = QTreeWidgetItem(self, [name]) if(parent is None) else QTreeWidgetItem(parent, [name])
+        if icon is not None: item.setIcon(0, QtGui.QIcon(icon) )
+        return item
