@@ -45,24 +45,25 @@ class ControlMdiArea(ControlBase, QMdiArea):
         return flags
 
     def __add__(self, other):
-        if other.title not in self._openWindows:
+        if other.uid not in self._openWindows:
             if not other._formLoaded:
                 other.initForm()
             other.subwindow = self.addSubWindow(other)
             other.subwindow.overrideWindowFlags(self.__flags())
             other.show()
-            other.closeEvent = self._subWindowClosed
+            other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
 
             self.value.append(other)
-            self._openWindows.append(other.title)
+            self._openWindows.append(other.uid)
         return self
 
-    def _subWindowClosed(self, closeEvent):
+    def _subWindowClosed(self, closeEvent, window=None):
+        window.beforeClose()
         activeWidget = self.activeSubWindow().widget()
         if activeWidget in self._value:
             self._value.remove(activeWidget)
         self.removeSubWindow(self.activeSubWindow())
-        self._openWindows.remove(activeWidget.title)
+        self._openWindows.remove(activeWidget.uid)
         closeEvent.accept()
 
     ##########################################################################

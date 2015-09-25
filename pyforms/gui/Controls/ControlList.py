@@ -32,10 +32,8 @@ class ControlList(ControlBase, QWidget):
         self._plusFunction = plusFunction
         self._minusFunction = minusFunction
         ControlBase.__init__(self, label, defaultValue)
-        
-    def __repr__(self): return "ControlList "+str(self._value)
 
-
+    def __repr__(self): return "ControlList " + str(self._value)
 
     def initForm(self):
         plusFunction = self._plusFunction
@@ -80,7 +78,7 @@ class ControlList(ControlBase, QWidget):
         self.currentCellChanged(nextRow, nextCol, previousRow, previousCol)
         self.changed()
 
-    def tableWidgetItemChanged(self, current, previous): 
+    def tableWidgetItemChanged(self, current, previous):
         self.currentItemChanged(current, previous)
         self.changed()
 
@@ -88,23 +86,28 @@ class ControlList(ControlBase, QWidget):
 
     def itemSelectionChanged(self): pass
 
-    def currentCellChanged(self, nextRow, nextCol, previousRow, previousCol): pass
+    def currentCellChanged(
+        self, nextRow, nextCol, previousRow, previousCol): pass
 
     def currentItemChanged(self, current, previous): pass
 
-    def clear(self):
-        self.tableWidget.clear()
-        self.tableWidget.setColumnCount(3)
-        self.tableWidget.setRowCount(0)
-        
+    def clear(self, headers=False):
+        if headers:
+            self.tableWidget.clear()
+            self.tableWidget.setColumnCount(3)
+            self.tableWidget.setRowCount(0)
+        else:
+            self.tableWidget.clearContents()
+            self.tableWidget.setRowCount(0)
+
     def __add__(self, other):
 
         index = self.tableWidget.rowCount()
 
-        self.tableWidget.insertRow( index )
-        if self.tableWidget.currentColumn()<len(other):
+        self.tableWidget.insertRow(index)
+        if self.tableWidget.currentColumn() < len(other):
             self.tableWidget.setColumnCount(len(other))
- 
+
         for i in range(0, len(other)):
             v = other[i]
             args = [str(v)] if not hasattr(
@@ -163,8 +166,6 @@ class ControlList(ControlBase, QWidget):
 
     @property
     def count(self): return self.tableWidget.rowCount()
-
-
 
     @property
     def value(self):

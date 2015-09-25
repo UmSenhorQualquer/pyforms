@@ -11,9 +11,12 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-from pyforms.gui.Controls.ControlBase       import ControlBase
-from pyforms.gui.Controls.ControlProgress   import ControlProgress
-import os, json, subprocess, time
+from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.Controls.ControlProgress import ControlProgress
+import os
+import json
+import subprocess
+import time
 from datetime import datetime, timedelta
 from PyQt4 import QtGui, QtCore
 from pyforms import conf
@@ -37,24 +40,22 @@ class BaseWidget(QtGui.QWidget):
         self._tabs = []
         self._formset = None
         self._formLoaded = False
-
-        
+        self.uid = id(self)
 
     ##########################################################################
     ############ Module functions  ###########################################
     ##########################################################################
-
-    
 
     def initForm(self):
         """
         Generate the module Form
         """
         if not self._formLoaded:
-            
+
             if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
                 self._progress = ControlProgress("Progress", 0, 100)
-                if self._formset != None: self._formset += ['_progress']
+                if self._formset != None:
+                    self._formset += ['_progress']
 
             if self._formset is not None:
                 control = self.generatePanel(self._formset)
@@ -358,6 +359,11 @@ class BaseWidget(QtGui.QWidget):
     @mainmenu.setter
     def mainmenu(self, value): self._mainmenu = value
 
+    @property
+    def uid(self): return self._uid
+
+    @uid.setter
+    def uid(self, value): self._uid = value
 
     def save(self, data):
         allparams = self.formControls
@@ -391,3 +397,14 @@ class BaseWidget(QtGui.QWidget):
     def loadWindow(self):
         filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
         self.loadWindowData(str(filename[0]))
+
+    def closeEvent(self, event):
+        self.beforeClose()
+        super(BaseWidget, self).closeEvent(event)
+
+    def beforeClose(self):
+        """ 
+        Do something before closing widget 
+        Note that the will be closed anyway    
+        """
+        pass
