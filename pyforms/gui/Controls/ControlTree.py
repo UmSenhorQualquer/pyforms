@@ -163,7 +163,7 @@ class ControlTree(ControlBase, QTreeWidget):
     def iconsize(self, value):
         self.setIconSize(QSize(*value))
 
-    def addPopupMenuOption(self, label='', functionAction=None, key=None, item=None):
+    def addPopupMenuOption(self, label='', functionAction=None, key=None, item=None, icon=None):
         """
         Add an option to the Control popup menu
         @param label:           label of the option.
@@ -176,6 +176,9 @@ class ControlTree(ControlBase, QTreeWidget):
 
         if item is not None:
             action = QtGui.QAction(label, self.form)
+            if icon is not None:
+                action.setIconVisibleInMenu(True)
+                action.setIcon( QtGui.QIcon(icon) )
             if key is not None:
                 action.setShortcut(QtGui.QKeySequence(key))
             if functionAction:

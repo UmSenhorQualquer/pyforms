@@ -95,10 +95,19 @@ class StandAloneContainer(QtGui.QMainWindow):
                         menu.addSeparator()
                     else:
                         for text, func in m1.items():
-                            action = QtGui.QAction(text, self)
-                            if func:
-                                action.triggered.connect(func)
-                                menu.addAction(action)
+                            if text!='icon':
+                                action = QtGui.QAction(text, self)
+                                if 'icon' in m1.keys():
+                                    action.setIconVisibleInMenu(True)
+                                    action.setIcon( QtGui.QIcon(m1['icon']) )
+                                if func:
+                                    action.triggered.connect(func)
+                                    menu.addAction(action)
+                                m1.clear()
+                                m1[text] = action
+                                break
+
+       
 
     def loadStyleSheetFile(self, filename):
         infile = open(filename, 'r')

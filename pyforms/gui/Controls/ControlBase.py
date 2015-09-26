@@ -82,7 +82,7 @@ class ControlBase(object):
 		"""
 		self.form.hide()
 
-	def addPopupMenuOption(self, label, functionAction=None, key=None):
+	def addPopupMenuOption(self, label, functionAction=None, key=None, icon=None):
 		"""
 		Add an option to the Control popup menu
 		@param label:           label of the option.
@@ -98,6 +98,9 @@ class ControlBase(object):
 			return self._popupMenu.addSeparator()
 		else:
 			action = QtGui.QAction(label, self.form)
+			if icon is not None:
+				action.setIconVisibleInMenu(True)
+				action.setIcon( QtGui.QIcon(icon) )
 			if key != None:
 				action.setShortcut(QtGui.QKeySequence(key))
 			if functionAction:
