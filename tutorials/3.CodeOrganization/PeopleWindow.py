@@ -14,6 +14,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 	def __init__(self):
 		People.__init__(self)
 		BaseWidget.__init__(self,'People window')
+		AddMenuFuntionality.__init__(self)
 		self._panel	= ControlDockWidget()
 
 		#Definition of the forms fields
@@ -22,6 +23,14 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 			minusFunction	= self.__rmPersonBtnAction)
 		
 		self._peopleList.horizontalHeaders = ['First name', 'Middle name', 'Last name']
+
+	def closeEvent(self, event):
+		print "called on close"
+
+	def initForm(self):
+		super(PeopleWindow, self).initForm()
+
+		self.mainmenu[0]['File'][0]['Save as'].setEnabled(False)
 
 	def addPerson(self, person):
 		"""

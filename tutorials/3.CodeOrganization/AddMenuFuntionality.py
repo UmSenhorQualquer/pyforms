@@ -7,24 +7,21 @@ class AddMenuFuntionality(object):
 	It adds the Open and Save functionality
 	"""
 
-	def initForm(self):
-		"""
-		This function will be called when the windows is being created
-		"""
-
+	def __init__(self):
 		#It adds the next options to the main menu
 		self.mainmenu.append(
-				{ 'File': [
-						{'Save as': self.__savePeople},
-						{'Open as': self.__loadPeople},
-						'-',
-						{'Exit': self.__exit},
-					]
-				}
-			)
+			{ 'File': [
+					{'Save as': self.__savePeople},
+					{'Open as': self.__loadPeople},
+					'-',
+					{'Exit': self.__exit},
+				]
+			}
+		)
 
-		super(AddMenuFuntionality,self).initForm()
 
+	
+		
 	def __savePeople(self):
 		filename = QtGui.QFileDialog.getSaveFileName(parent=self,
 			caption="Save file",

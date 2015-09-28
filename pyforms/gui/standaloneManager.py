@@ -23,7 +23,10 @@ class StandAloneContainer(QtGui.QMainWindow):
     def __init__(self, ClassObject):
         super(QtGui.QMainWindow, self).__init__()
         w = ClassObject()
+        self._widget = w
 
+        if len(w.mainmenu) > 0: w._mainmenu = self.__initMainMenu(w.mainmenu)
+        
         w.initForm()
         self.setCentralWidget(w)
         self.setWindowTitle(w.title)
@@ -77,20 +80,22 @@ class StandAloneContainer(QtGui.QMainWindow):
                 widget.dock = dock
                 if not widget._show: dock.hide()
 
-        if len(w.mainmenu) > 0:
-            self.__initMainMenu(w.mainmenu)
 
         try:
             self.loadStyleSheetFile('style.css')
         except:
             pass
 
+    def closeEvent(self, event):
+        self._widget.closeEvent(event)
+     
+
     def __initMainMenu(self, options, keys={}):
         menubar = self.menuBar()
-        for m in options:
+        for menuIndex, m in enumerate(options):
             for key, menus in m.items():
                 menu = menubar.addMenu(key)
-                for m1 in menus:
+                for subMenuIndex, m1 in enumerate(menus):
                     if isinstance(m1, str) and m1 == "-":
                         menu.addSeparator()
                     else:
@@ -103,11 +108,10 @@ class StandAloneContainer(QtGui.QMainWindow):
                                 if func:
                                     action.triggered.connect(func)
                                     menu.addAction(action)
-                                m1.clear()
-                                m1[text] = action
+                                options[menuIndex][key][subMenuIndex][text] = action
                                 break
-
-       
+        return options
+    
 
     def loadStyleSheetFile(self, filename):
         infile = open(filename, 'r')
