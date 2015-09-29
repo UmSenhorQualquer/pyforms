@@ -178,7 +178,7 @@ class ControlTree(ControlBase, QTreeWidget):
             action = QtGui.QAction(label, self.form)
             if icon is not None:
                 action.setIconVisibleInMenu(True)
-                action.setIcon( QtGui.QIcon(icon) )
+                action.setIcon(QtGui.QIcon(icon))
             if key is not None:
                 action.setShortcut(QtGui.QKeySequence(key))
             if functionAction:
@@ -197,7 +197,10 @@ class ControlTree(ControlBase, QTreeWidget):
         """
         if len(self._items) > 0:  # Reset the menu and construct a new one only if there are actions for the items.
             self._popupMenu.clear()
-            itemSelected = self.selectedItems()[0].text(0)
+            try:
+                itemSelected = self.selectedItems()[0].window.uid
+            except AttributeError:
+                itemSelected = self.selectedItems()[0].text(0)
             if itemSelected in self._items:
                 for action in self._items[itemSelected]:
                     self._popupMenu.addAction(action)
@@ -215,6 +218,8 @@ class ControlTree(ControlBase, QTreeWidget):
         Create a new child for to the parent item.
         If the parent is None it add to the root.
         """
-        item = QTreeWidgetItem(self, [name]) if(parent is None) else QTreeWidgetItem(parent, [name])
-        if icon is not None: item.setIcon(0, QtGui.QIcon(icon) )
+        item = QTreeWidgetItem(self, [name]) if(
+            parent is None) else QTreeWidgetItem(parent, [name])
+        if icon is not None:
+            item.setIcon(0, QtGui.QIcon(icon))
         return item
