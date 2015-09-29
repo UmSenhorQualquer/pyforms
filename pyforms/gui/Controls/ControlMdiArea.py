@@ -44,6 +44,11 @@ class ControlMdiArea(ControlBase, QMdiArea):
 
         return flags
 
+    def __sub__(self, window):
+        if window.uid in self._openWindows:
+            window.close()
+        return self
+
     def __add__(self, other):
         if other.uid not in self._openWindows:
             if not other._formLoaded:
