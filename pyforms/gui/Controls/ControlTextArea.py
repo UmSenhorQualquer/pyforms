@@ -28,7 +28,7 @@ class ControlTextArea(ControlBase):
 
     @property
     def value(self):
-        return self._form.toPlainText()
+        return self._form.plainTextEdit.toPlainText()
 
     @value.setter
     def value(self, value):
