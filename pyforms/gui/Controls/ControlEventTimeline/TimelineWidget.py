@@ -6,6 +6,7 @@
 """
 
 from PyQt4 import QtGui, QtCore
+from pyforms.gui.Controls.ControlEventTimeline.Track import Track
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePointer import TimelinePointer
 from pyforms.gui.Controls.ControlEventTimeline.TimelineDelta import TimelineDelta
 from pyforms.gui.Controls.ControlEventTimeline.TimelineChart import TimelineChart
@@ -47,7 +48,7 @@ class TimelineWidget(QtGui.QWidget):
             QtGui.QColor(100, 0, 100), QtGui.QColor(0, 100, 100)
         ]
         self._charts = []
-        self._data = []
+        self._tracks = [Track(parent=self)]
 
         self._scale = 1.0
         self._lastMouseY = None
@@ -64,8 +65,6 @@ class TimelineWidget(QtGui.QWidget):
         self._selected_track = 0
         self._pointer = TimelinePointer(0, self)
 
-        # collects all info on the current timeline state
-        self._tracks_info = {}
 
         # Video playback controls
         self._video_playing = False
@@ -74,13 +73,6 @@ class TimelineWidget(QtGui.QWidget):
         self._video_fps_max = None
         self._video_fps_inc = None
 
-        # TESTING
-        # self._data = [
-        #         TimelineDelta(29, 50, 'Teste', top=20, parent=self), TimelineDelta(70, 120, 'Teste', top=20, parent=self),
-        #         TimelineDelta(29, 50, 'Ricardo', top=54, parent=self), TimelineDelta(70, 120, 'Ricardo', top=54, parent=self)
-        #     ]
-
-        self._update_tracks_info()
 
     ##########################################################################
     #### HELPERS/FUNCTIONS ###################################################
@@ -92,15 +84,13 @@ class TimelineWidget(QtGui.QWidget):
 
     def removeSelected(self):
         if self._selected != None and not self._selected.lock:
-            self._data.remove(self._selected)
+            self._selected.remove()
             self._selected = None
-            self._update_tracks_info()
             self.repaint()
 
     def lockSelected(self):
         if self._selected != None:
             self._selected.lock = not self._selected.lock
-            self._update_tracks_info()
             self.repaint()
 
     def selectDelta(self, x, y):
@@ -111,19 +101,23 @@ class TimelineWidget(QtGui.QWidget):
             else:
                 return None
         # Check if the timeline periods were selected
-        for col in self._data:
-            if col.collide(x, y):
-                return col
-        return None
+        i = Track.whichTrack(y)
+        if i>=len(self._tracks): return None
+        
+        return self._tracks[i].selectDelta(x,y)
+
+
 
     def __drawTrackLines(self, painter, start, end):
         # Draw only from pixel start to end
         painter.setPen(QtCore.Qt.DashLine)
         painter.setOpacity(0.3)
         # Draw horizontal lines
-        for track in range(0, self.numberoftracks + 1):
-            y = (track * 34) + 18
-            painter.drawLine(start, y, end, y)
+        #for track in range(0, self.numberoftracks + 1):
+        #    y = (track * 34) + 18
+        #    painter.drawLine(start, y, end, y)
+        for i, track in enumerate(self._tracks): track.draw(painter, start,end, i)
+
 
         # Draw vertical lines
         for x in range(start - (start % 100), end, 100):
@@ -133,20 +127,8 @@ class TimelineWidget(QtGui.QWidget):
             painter.drawText(x - boundtext.width() / 2, 15, string)
         painter.setOpacity(1.0)
 
-    def __drawTrackLabels(self, painter):
-        painter.setPen(QtCore.Qt.black)
-        painter.setOpacity(0.5)
-
-        for key, value in self._tracks_info.items():
-            text = value[0]
-            x0 = self.visibleRegion().boundingRect().x()
-            xmax = self.visibleRegion().boundingRect().width()
-            text_length = painter.fontMetrics().width(text)
-            x = 10
-            y = (key * 34) + 30
-            painter.drawText(x, y, text)
-            # self.update()
-        painter.setOpacity(1.0)
+        for index, track in enumerate(self._tracks): track.drawLabels(painter, index)
+    
 
     def importchart_csv(self, csvfileobject):
         chart = TimelineChart(
@@ -162,36 +144,19 @@ class TimelineWidget(QtGui.QWidget):
         and structure.
         """
         # Clear previously stored info
-        self._tracks_info.clear()
-        del self._data[:]
+        self._tracks = []
+        self._selected = None
 
-        # File flow controls
-        get_track = True
-        get_event = False
         for row in csvfileobject:
-            # Import events files
-            if row[0] == "":
-                # sep line has been found, get ready to get a track line next
-                get_track = True
-                get_event = False
-                continue
-
-            # Get track info from the row
-            if get_track:
-                track_id = int(row[0])
-                track_label = row[5]
-                track_color = QtGui.QColor(row[4])
-                self._tracks_info[track_id] = [track_label, track_color, []]
-                get_track = False
-                get_event = True
-                continue
-            # Get event info from the row
-            if get_event:
-                event = TimelineDelta(0, parent=self)
-                event.properties = row + [track_id]
-                # add to `_data` for compatibility reasons
-                self._data.append(event)
-                self._tracks_info[track_id][2].append(event)
+            if row[0] == "T":
+                track = Track(parent=self)
+                track.properties = row
+                self._tracks.append(track)
+            elif row[0] == "P":
+                period = TimelineDelta(0, parent=self)
+                period.properties = row
+                
+            
 
     def export_csv(self, csvfileobject):
         """
@@ -207,184 +172,66 @@ class TimelineWidget(QtGui.QWidget):
         Event info line
         Event info line
         ...
-        Empty line
         Track info line
         Event info line
         Event info line
         ...
-        Empty line
         Track info line
         Event info line
         Event info line
         ...
-        Empty line
         --- CSV FILE END ---
 
 
         Track info line format:
         =======================
 
-        | Id | Total # of events in this track |  |  | Color | Label |
+        | T | Total # of events in this track |  |  | Color | Label |
 
 
         Event info line format:
         =======================
 
-        | Lock status | Begin frame | End frame | Comment | Color |  |
+        | P | Lock status | Begin frame | End frame | Comment | Color |  |
         """
+        for index, track in enumerate(self._tracks):
+            csvfileobject.writerow(track.properties)
+            for delta in track.periods: 
+                csvfileobject.writerow(delta.properties)
 
-        # Transform the info in the dict to a nested list to be written
-        outputstream = []
-        for key, value in self._tracks_info.items():
-            track_id = key
-            track_label = value[0]
-            track_color = value[1].name()
-            track_events = value[2]
-            track_events_total = len(value[2])
-
-            row_track_info = [track_id,
-                              track_events_total,
-                              "",
-                              "",
-                              track_color,
-                              track_label]
-
-            outputstream.append(row_track_info)
-
-            for event in track_events:
-                row_event = event.properties[:5]  # TODO access individually
-                outputstream.append(row_event)
-
-            row_sep = ["" for item in range(len(row_track_info))]
-            outputstream.append(row_sep)
-
-        # Write outputstream generated above to CSV file object
-        for row in outputstream:
-            csvfileobject.writerow(row)
-
-    # FIXME To be replaced by the functions above
-    # def exportcsv(self, csvspan):
-    #     self._update_tracks_info()
-    #     self._data = sorted(self._data, key = lambda x : (x._begin, x._end) )
-    #     for period in self._data:
-    #         csvspan.writerow(period.row)
-
-    # def importcsv(self, csvspan):
-    #     for row in csvspan:
-    #         time = TimelineDelta(0, parent= self)
-    #         time.row = row
-    #         self._data.append(time)
-    #         self._update_tracks_info()
 
     def cleanCharts(self):
         self._charts = []
         self.repaint()
 
     def clean(self):
-        self._data = []
         self._charts = []
         self._selected = None
-        self._n_tracks = 1
-        self._update_tracks_info()
+        for track in self._tracks: track.clear()
+        del self._tracks[:]
+        self._tracks = []
         self.repaint()
 
     def cleanLine(self):
         if self._selected is not None:
-            track = self._selected.track
-            list2delete = []
-            for x in self._data:
-                if x.track == track:
-                    list2delete.append(x)
-            for x in list2delete:
-                self._data.remove(x)
+            self._tracks[self._selected.track].clear()
             self._selected = None
-            self._update_tracks_info()
         else:
             QtGui.QMessageBox.about(
                 self, "Error", "You must select a timebar first")
             return
 
+    def addTrack(self):
+        t = Track(parent=self)
+        self._tracks.append(t)
+        return t
+
     def addPeriod(self, value, track=0, color=None):
         """Adds an annotated interval."""
         begin, end, title = value
-        period = TimelineDelta(begin, end, title=title, parent=self)
-        period.track = track
-        if color is not None:
-            period.color = color
-        else:
-            period.color = self._tracks_info[track][1]
-        self._data.append(period)
+        period       = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(track))
+        self._tracks[period.track].periods.append(period)
 
-    def _update_tracks_info(self):
-        """
-        This method updates the dict `_tracks_info` which contains all
-        info stored in the timeline.
-
-        Currently, this method is called is the following situations:
-        - Class initialization
-        - Event added by double clicking the timeline
-        - Everything is cleaned
-        - A line is cleaned
-        - After an event is removed/locked/unlocked
-        #TODO- After editing a timeline line entry
-        #TODO- After editing an event (TimelineDelta object)
-        - After importing from a file
-        - Before exporting to a file
-
-        This dictionary stores info in the format shown below:
-        {line_numer : [ line_label, line_color, [data] ] }
-        """
-
-        d = self._tracks_info
-
-        # Initialize a dict entry if a new line gets filled
-        for i in range(self._n_tracks):
-            if i not in d.keys():
-                self._defaulttracklabel = "Right click to attribute a behavior"
-                d[i] = [self._defaulttracklabel, self.color, []]
-
-        # Gets data events track number and stores them accordingly
-        # in the dict.
-        for event in self._data:
-            tracknumber = event.track
-            if event not in d[tracknumber][2]:
-                d[tracknumber][2].append(event)
-
-        # When an event is deleted, it must disappear also from the dict.
-        # We need to look for events in the dict that disappeared from
-        # the data list.
-        for key, value in d.items():
-            value[2] = [event for event in value[2] if event in self._data]
-
-        # self.__print_tracks_info()
-        self.repaint()
-
-    def __print_tracks_info(self):
-        """Prints tracks info on screen."""
-        d = self._tracks_info
-        if d:  # returns True if dict is not empty
-            print("{0:=>79}".format(" TIMELINE INFO"))
-            print("Number of active tracks:", self._n_tracks)
-            print("Total number of events created:", len(self._data))
-            print("Tracks:")
-            print("{0:>8} {1:^50} {2:^7} {3:>11}".format("ID",
-                                                         "Label",
-                                                         "Color",
-                                                         "# of events"))
-            print("{0:-<79}".format("    "))
-            for key, value in d.items():
-                if self._selected_track == key:
-                    sel = ">"
-                else:
-                    sel = ""
-                print("{0:>4}{1:>4}{2:^50}{3:7}{4:^11}".format(sel,
-                                                               key,
-                                                               value[0],
-                                                               value[1].name(),
-                                                               len(value[2])))
-            print()
-        else:
-            print("Nothing here.")
 
     ##########################################################################
     #### EVENTS ##############################################################
@@ -413,13 +260,8 @@ class TimelineWidget(QtGui.QWidget):
         #End draw graph #######################################################
 
         self.__drawTrackLines(painter, start, end)
-        # Draw track labels
-        self.__drawTrackLabels(painter)
-
-        # Draw delta bars
-        for time in self._data:
-            painter.setBrush(time.color)
-            time.draw(painter)
+        
+        for track in self._tracks: track.drawPeriods(painter, start, end)
 
         # Draw the selected element
         if self._selected != None:
@@ -440,10 +282,10 @@ class TimelineWidget(QtGui.QWidget):
             x = event.x() / self._scale
             # time = TimelineDelta(x, x + 50 / self._scale, title='', top=y, parent=self)
             time = TimelineDelta(x, x + 10, title='', top=y, parent=self)
-            self._data.append(time)
+            self._tracks[time.track].periods.append(time)
+            
             self._selected = time
             self._selected_track = self._selected.track
-            self._update_tracks_info()
             self.repaint()
 
     def keyReleaseEvent(self, event):
@@ -572,7 +414,6 @@ class TimelineWidget(QtGui.QWidget):
 
                 if end > start:
                     self.addPeriod((start, end, comment), self._selected_track)
-                    self._update_tracks_info()
                     self.repaint()
                     self._creating_event = False
                 else:
@@ -581,11 +422,8 @@ class TimelineWidget(QtGui.QWidget):
 
     def mousePressEvent(self, event):
         # Select the track
-        track_clicked = (event.y() - 20) // 34
-        if track_clicked in self._tracks_info.keys():
-            self._selected_track = track_clicked
-        else:
-            pass
+        selected_track = Track.whichTrack(event.y())
+        if selected_track<=len(self._tracks): self._selected_track = selected_track
 
         # Select the period bar
         self._selected = self.selectDelta(event.x(), event.y())
@@ -605,7 +443,6 @@ class TimelineWidget(QtGui.QWidget):
         if event.y() <= 20 and not self._moving:
             self._pointer.position = event.x()
 
-        self._update_tracks_info()
         self.repaint()
 
     def mouseMoveEvent(self, event):
@@ -696,11 +533,13 @@ class TimelineWidget(QtGui.QWidget):
     def color(self, value): self._defautcolor = value
 
     @property
-    def numberoftracks(self): return self._n_tracks
+    def numberoftracks(self): return len(self._tracks)#self._n_tracks
 
     @numberoftracks.setter
     def numberoftracks(self, value):
-        self._n_tracks = value
+        #self._n_tracks = value
+        if value<len(self._tracks):
+            for i in range(value, self._tracks+1): self.addTrack()
         y = value * 34 + 20
         if y + 40 > self.height():
             self.setMinimumHeight(y + 40)

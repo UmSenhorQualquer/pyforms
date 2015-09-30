@@ -35,7 +35,7 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlVisVis 		import ControlVisVis
 	from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
-
+	
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
 

@@ -129,22 +129,20 @@ class TimelinePopupWindow(QtGui.QDialog):
         Scans the timeline track labels and sets the comboBox value
         accordingly.
         """
-        d = self._parent._tracks_info
         cb = self._ui.comboBox
 
         # Loop across timeline labels
-        for key, value in d.items():
+        for index, track in enumerate(self._parent._tracks):
             # If there is already an assigned label, append it to the
             # behaviors list and to the comboBox (if not a duplicate)
-            if value[0] != self._parent._defaulttracklabel:
-                self.behavior = value[0]
+            if track.title != '':
+                self.behavior = track.title
                 if self.behavior not in self.behaviors:
                     cb.addItem(self.behavior)
                     self.behaviors.append(self.behavior)
 
                 # Set comboBox value to the one of the selected track
-                if key == self.current_track:
-
+                if index == self.current_track:
                     cb.setCurrentIndex(cb.findText(self.behavior))
 
         # If there are no behaviors assigned yet, just fill the comboBox

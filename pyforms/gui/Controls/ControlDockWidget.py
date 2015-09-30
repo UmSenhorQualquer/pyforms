@@ -9,9 +9,10 @@ class ControlDockWidget(ControlEmptyWidget):
     SIDE_BOTTOM = 'bottom'
     SIDE_DETACHED = 'detached'
 
-    def __init__(self, label='', default=None, side='left'):
+    def __init__(self, label='', default=None, side='left', order=0):
         super(ControlDockWidget, self).__init__(label)
         self.side = side
+        self.order = 0
         if default is not None: self.value = default
         self._show = True
 

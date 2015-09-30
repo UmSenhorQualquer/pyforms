@@ -174,6 +174,7 @@ class ControlTree(ControlBase, QTreeWidget):
         action = super(ControlTree, self).addPopupMenuOption(
             label, functionAction, key)
 
+        
         if item is not None:
             action = QtGui.QAction(label, self.form)
             if icon is not None:
@@ -184,9 +185,8 @@ class ControlTree(ControlBase, QTreeWidget):
             if functionAction:
                 action.triggered.connect(functionAction)
                 # Associate action to the item.
-                if item not in self._items.keys():
-                    self._items.update({item: []})
-                self._items[item].append(action)
+                if id(item) not in self._items.keys(): self._items.update({id(item): []})
+                self._items[id(item)].append(action)
                 ##########################
             return action
         return action
@@ -197,12 +197,10 @@ class ControlTree(ControlBase, QTreeWidget):
         """
         if len(self._items) > 0:  # Reset the menu and construct a new one only if there are actions for the items.
             self._popupMenu.clear()
-            try:
-                itemSelected = self.selectedItems()[0].window.uid
-            except AttributeError:
-                itemSelected = self.selectedItems()[0].text(0)
-            if itemSelected in self._items:
-                for action in self._items[itemSelected]:
+            itemSelected = self.selectedItems()[0]
+                
+            if id(itemSelected) in self._items:
+                for action in self._items[id(itemSelected)]:
                     self._popupMenu.addAction(action)
                     print("Adding action {action} to {item}".format(
                         action=action.text(), item=itemSelected))

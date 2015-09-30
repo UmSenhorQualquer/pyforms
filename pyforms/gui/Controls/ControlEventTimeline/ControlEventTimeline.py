@@ -33,29 +33,27 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         self._max = 100
 
         # Popup menus that only show when clicking on a TIMELINEDELTA object
-        self._deltaLockAction = self.addPopupMenuOption(
-            "Lock", self.__lockSelected, key='L')
-        self._deltaColorAction = self.addPopupMenuOption(
-            "Pick a color", self.__pickColor)
-        self._deltaRemoveAction = self.addPopupMenuOption(
-            "Remove", self.__removeSelected, key='Delete')
-        self._deltaActions = [self._deltaLockAction,
-                              self._deltaColorAction,
-                              self._deltaRemoveAction]
-
-        for action in self._deltaActions:
-            action.setVisible(False)
+        self._deltaLockAction   = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
+        self._deltaColorAction  = self.addPopupMenuOption("Pick a color", self.__pickColor)
+        self._deltaRemoveAction = self.addPopupMenuOption("Remove", self.__removeSelected, key='Delete')
+        self._deltaActions      = [self._deltaLockAction,self._deltaColorAction,self._deltaRemoveAction]
+        for action in self._deltaActions: action.setVisible(False)
+        
         self.addPopupMenuOption("-")
 
         # General righ click popup menus
-        self.addPopupMenuOption(
-            "Set track properties...", self.__setLinePropertiesEvent)
+        self.addPopupMenuOption("Set track properties...", self.__setLinePropertiesEvent)
         self.addPopupMenuOption("-")
-        self.addPopupSubMenuOption(
-            "Import/Export", {'Export to CSV': self.__export, 'Import to CSV': self.__import})
+        self.addPopupSubMenuOption("Import/Export", {
+            'Export to CSV': self.__export, 
+            'Import to CSV': self.__import
+        })
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Clean", {
-                                   'Current line': self.__cleanLine, 'Everything': self.__clean, 'Charts': self.__cleanCharts})
+            'Current line': self.__cleanLine, 
+            'Everything':   self.__clean, 
+            'Charts':       self.__cleanCharts
+        })
 
     def initForm(self):
         # Get the current path of the file
@@ -179,18 +177,17 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         - Track label
         - Track default color
         """
-        current_track = self.mouseOverLine
-        parent = self._time
+        current_track   = self.mouseOverLine
+        parent          = self._time
 
         # Tracks info dict and index
-        d = parent._tracks_info
         i = current_track
 
         # Save current default color to override with selected track color
         timeline_default_color = parent.color
         try:
-            parent.color = d[i][1]
-        except KeyError as e:
+            parent.color = self._time._tracks[current_track].color
+        except Exception as e:
             error_message = ("You tried to edit an empty track.",
                              "\n",
                              "Initialize it by creating an event first.")
@@ -206,22 +203,20 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         if dialog._ui.exec_() == dialog.Accepted:
             # Update label
             if dialog.behavior is not None:
-                d[i][0] = dialog.behavior
+                self._time._tracks[i].title = dialog.behavior
 
             # Update color
-            if d[i][1] != dialog.color:
-                for delta in d[i][2]:
-                    if delta.color == d[i][1]:
-                        delta.color = dialog.color
-            d[i][1] = dialog.color
+            if self._time._tracks[i].color != dialog.color:
+                for delta in self._time._tracks[i].periods:
+                    delta.color = dialog.color
+                self._time._tracks[i].color = dialog.color
         else:
             pass
 
         # Restore timeline default color
         parent.color = timeline_default_color
 
-        # Update track info
-        parent._update_tracks_info()
+       
 
     def __lockSelected(self): self._time.lockSelected()
 
@@ -255,7 +250,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
             # FIXME Get directory from where the video was loaded
 
             # If there are annotation in the timeline, show a warning
-            if self._time._tracks_info:  # dict returns True if not empty
+            if len(self._time._tracks)>0:  # dict returns True if not empty
                 message = ["You are about to import new data. ",
                            "If you proceed, current annotations will be erased. ",
                            "Make sure to export current annotations first to save.",
@@ -274,15 +269,12 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
                 self._time.import_csv(csvfile)
             print("Annotations file imported: {:s}".format(filename))
 
-        # Update info after importing from a file
-        self._time._update_tracks_info()
+        
 
     def __export(self):
         """Export annotations to a file."""
 
-        # Update info right before exporting
-        self._time._update_tracks_info()
-
+  
         filename = QtGui.QFileDialog.getSaveFileName(parent=self,
                                                      caption="Export annotations file",
                                                      directory=self.getExportFilename(),
@@ -290,10 +282,11 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
                                                      options=QtGui.QFileDialog.DontUseNativeDialog)
         if filename != "":
             with open(filename, 'wb') as csvfile:
-                # spamwriter = csv.writer(csvfile, delimiter=';', quotechar='"')
                 spamwriter = csv.writer(csvfile, dialect='excel')
                 self._time.export_csv(spamwriter)
-            print("Annotations file exported: {:s}".format(filename))
+            
+
+
 
     def __cleanLine(self):
         reply = QtGui.QMessageBox.question(self, 'Confirm',
@@ -347,6 +340,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
     #### PROPERTIES ##########################################################
     ##########################################################################
 
+    
+
     @property
     def pointerChanged(self):
         return self._time._pointer.moveEvent
@@ -395,3 +390,4 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     @property
     def form(self): return self
+
