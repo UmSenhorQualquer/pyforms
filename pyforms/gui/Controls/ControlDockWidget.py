@@ -12,7 +12,7 @@ class ControlDockWidget(ControlEmptyWidget):
     def __init__(self, label='', default=None, side='left', order=0):
         super(ControlDockWidget, self).__init__(label)
         self.side = side
-        self.order = 0
+        self.order = order
         if default is not None: self.value = default
         self._show = True
 

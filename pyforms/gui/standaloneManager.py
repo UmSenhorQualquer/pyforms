@@ -52,8 +52,8 @@ class StandAloneContainer(QtGui.QMainWindow):
                 side = QtCore.Qt.LeftDockWidgetArea
 
             if isinstance(widgets, list):
-                widgets = sorted(widgets, key=lambda x: -x[1].order)
-
+                widgets = sorted(widgets, key=lambda x: x[1].order)
+                
                 for name, widget in widgets:
                     dock = QtGui.QDockWidget(self)
                     dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
