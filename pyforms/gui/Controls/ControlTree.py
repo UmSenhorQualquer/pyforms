@@ -174,7 +174,6 @@ class ControlTree(ControlBase, QTreeWidget):
         action = super(ControlTree, self).addPopupMenuOption(
             label, functionAction, key)
 
-        
         if item is not None:
             action = QtGui.QAction(label, self.form)
             if icon is not None:
@@ -185,7 +184,8 @@ class ControlTree(ControlBase, QTreeWidget):
             if functionAction:
                 action.triggered.connect(functionAction)
                 # Associate action to the item.
-                if id(item) not in self._items.keys(): self._items.update({id(item): []})
+                if id(item) not in self._items.keys():
+                    self._items.update({id(item): []})
                 self._items[id(item)].append(action)
                 ##########################
             return action
@@ -198,18 +198,29 @@ class ControlTree(ControlBase, QTreeWidget):
         if len(self._items) > 0:  # Reset the menu and construct a new one only if there are actions for the items.
             self._popupMenu.clear()
             itemSelected = self.selectedItems()[0]
-                
+
             if id(itemSelected) in self._items:
                 for action in self._items[id(itemSelected)]:
                     self._popupMenu.addAction(action)
-                    print("Adding action {action} to {item}".format(
-                        action=action.text(), item=itemSelected))
+                    # print("Adding action {action} to {item}".format(
+                    #    action=action.text(), item=itemSelected))
 
     def clear(self):
         super(ControlTree, self).clear()
         if self._popupMenu:
             self._popupMenu.clear()
         self._items = {}
+
+    def expand_item(self, item, expand=True, parents=True):
+        item.setExpanded(expand)
+        if parents:
+            parent = item.parent()
+            while(True):
+                try:
+                    parent.setExpanded(expand)
+                    parent = parent.parent()
+                except AttributeError:
+                    break
 
     def createChild(self, name, parent=None, icon=None):
         """
