@@ -151,6 +151,9 @@ class ControlList(ControlBase, QWidget):
     def getValue(self, column, row):
         return str(self.tableWidget.item(row, column).text())
 
+    def getCell(self, column, row):
+        return self.tableWidget.item(row, column)
+
     @property
     def selectEntireRow(self):
         return self.tableWidget.selectionBehavior()

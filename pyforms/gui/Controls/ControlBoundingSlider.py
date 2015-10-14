@@ -17,7 +17,9 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 class GaugeWidgetVertical(ControlBase, QtGui.QWidget):
 
     def __init__(self, *args, **kwargs):
-        super(GaugeWidgetVertical, self).__init__(*args, **kwargs)
+        ControlBase.__init__(self, *args, **kwargs)
+        QtGui.QWidget.__init__(self)
+
         self.setMouseTracking(True)
         self.setMinimumWidth(30)
 

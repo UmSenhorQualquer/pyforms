@@ -31,7 +31,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 			for j in range(3):
 				child1 = QtGui.QStandardItem('Child {}'.format(i*3+j))
 				parent1.appendRow(child1)
-			model.appendRow(parent1)
+			model().appendRow(parent1)
 			# span container columns
 			view.setFirstColumnSpanned(i, view.rootIndex(), True)
 		"""
@@ -75,10 +75,10 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 	@property
 	def cells(self): 
 		results = []
-		for row in range(self._model.rowCount()):
+		for row in range(self._model().rowCount()):
 			r = []
-			for col in range(self._model.columnCount()):
-				r.append( self._model.item(row, col) )
+			for col in range(self._model().columnCount()):
+				r.append( self._model().item(row, col) )
 			if len(r)>0: results.append(r)
 			# print r, '---'
 
@@ -87,17 +87,17 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 
 	def __add__(self, other):
 		if isinstance(other, TreeItem):
-			self._model.invisibleRootItem().appendRow( other )
+			self._model().invisibleRootItem().appendRow( other )
 
 		elif isinstance(other, list):
 			for x in other:
 				item = QtGui.QStandardItem( x )
-				self._model.appendRow( item )
+				self._model().appendRow( item )
 		else:
 			item = QtGui.QStandardItem( other )
-			self._model.appendRow( item )
+			self._model().appendRow( item )
 
-		self.form.setFirstColumnSpanned(self._model.rowCount()-1, self.form.rootIndex(), True)
+		self.form.setFirstColumnSpanned(self._model().rowCount()-1, self.form.rootIndex(), True)
 		return self
 
 	def __sub__(self, other):
@@ -106,7 +106,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 				indexToRemove = self.mouseSelectedRowIndex
 			else:
 				indexToRemove = other
-			self.model.removeRow(indexToRemove)
+			self.model().removeRow(indexToRemove)
 		return self
 
 	
@@ -121,7 +121,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 		for row in value: self += row
 
 
-	def getAllSceneObjects(self): return self._model.getChildrens()
+	def getAllSceneObjects(self): return self._model().getChildrens()
 
 
 	@property
