@@ -24,7 +24,7 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 		from pyforms.gui.Controls.ControlImage 			import ControlImage
 		from pyforms.gui.Controls.ControlPlayer.ControlPlayer 	import ControlPlayer
 	except:
-		print("GL widgets not working")
+		print("GL widgets or Opencv not installed")
 
 	from pyforms.gui.Controls.ControlProgress 		import ControlProgress
 	from pyforms.gui.Controls.ControlSlider 		import ControlSlider

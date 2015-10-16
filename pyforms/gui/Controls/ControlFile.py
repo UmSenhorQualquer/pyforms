@@ -21,7 +21,8 @@ class ControlFile(ControlText):
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "fileInput.ui")
         self._form = uic.loadUi(control_path)
-        self._form.label.setText(self._label)
+        self._form.label.setText(self._label)        
+        self._form.pushButton.clicked.connect(self.pushButton_clicked)
 
     def pushButton_clicked(self):
         value = str(QFileDialog.getOpenFileName(
@@ -35,4 +36,3 @@ class ControlFile(ControlText):
     @parent.setter
     def parent(self, value):
         ControlText.parent.fset(self, value)
-        self._form.pushButton.clicked.connect(self.pushButton_clicked)

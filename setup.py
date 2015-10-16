@@ -35,6 +35,7 @@ setup(
 		'pyforms.web.django', 
 		'pyforms.web.django.templatetags', 
 		'pyforms.gui',
+		'pyforms.gui.dialogs',
 		'pyforms.gui.Controls', 
 		'pyforms.gui.Controls.ControlEventTimeline',
 		'pyforms.gui.Controls.ControlPlayer' ],

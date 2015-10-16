@@ -11,6 +11,7 @@ from PyQt4 import QtGui, QtCore
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWidget
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
+from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
 
 
 __author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
@@ -224,50 +225,28 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     def __import(self):
         """Import annotations from a file."""
+        win = ImportWindow(self)
+        win.show()
+    
 
-        filename = QtGui.QFileDialog.getOpenFileName(parent=self,
-                                                     caption="Import annotations file",
-                                                     directory="",
-                                                     filter="*.csv")
-        if filename == '':
-            return
-        separator = ','
+    def import_csv(self, csvfile):
+        # If there are annotation in the timeline, show a warning
+        if len(self._time._tracks)>0:  # dict returns True if not empty
+            message = ["You are about to import new data. ",
+                       "If you proceed, current annotations will be erased. ",
+                       "Make sure to export current annotations first to save.",
+                       "\n",
+                       "Are you sure you want to proceed?"]
+            reply = QtGui.QMessageBox.question(self,
+                "Warning!",
+                "".join(message),
+                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
+                QtGui.QMessageBox.No)
+            
+            if reply != QtGui.QMessageBox.Yes: return
 
-        with open(filename, 'rU') as csvfile:
-            line = csvfile.readline()
-            if ";" in line:
-                separator = ';'
-
-        with open(filename, 'rU') as csvfile:
-            csvfile = csv.reader(csvfile, delimiter=separator)
-            row = next(csvfile)
-
-        if len(row) == 2:
-            with open(filename, 'rU') as csvfile:
-                csvfile = csv.reader(csvfile, delimiter=separator)
-                self._time.importchart_csv(csvfile)
-        else:
-            # FIXME Get directory from where the video was loaded
-
-            # If there are annotation in the timeline, show a warning
-            if len(self._time._tracks)>0:  # dict returns True if not empty
-                message = ["You are about to import new data. ",
-                           "If you proceed, current annotations will be erased. ",
-                           "Make sure to export current annotations first to save.",
-                           "\n",
-                           "Are you sure you want to proceed?"]
-                reply = QtGui.QMessageBox.question(self,
-                                                   "Warning!",
-                                                   "".join(message),
-                                                   QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
-                                                   QtGui.QMessageBox.No)
-                if reply != QtGui.QMessageBox.Yes:
-                    return
-
-            with open(filename, 'rU') as csvfile:
-                csvfile = csv.reader(csvfile, delimiter=separator)
-                self._time.import_csv(csvfile)
-            print("Annotations file imported: {:s}".format(filename))
+        self._time.import_csv(csvfile)
+        print("Annotations file imported: {:s}".format(filename))
 
         
 

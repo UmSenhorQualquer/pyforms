@@ -26,6 +26,8 @@ class TimelineChart(object):
         self._widget = timeLineWidget
         self._color = color
 
+        for row in csvfileobject:
+            print row
         data = [map(float, row) for row in csvfileobject]
 
         self._graphMax = 0

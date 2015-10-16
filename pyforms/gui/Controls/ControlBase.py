@@ -82,6 +82,13 @@ class ControlBase(object):
 		"""
 		self.form.hide()
 
+	@property 
+	def visible(self): return self.form.isVisible()
+	@visible.setter
+	def visible(self, value):
+		if value: self.show()
+		else: self.hide()
+
 	def addPopupMenuOption(self, label, functionAction=None, key=None, icon=None):
 		"""
 		Add an option to the Control popup menu
