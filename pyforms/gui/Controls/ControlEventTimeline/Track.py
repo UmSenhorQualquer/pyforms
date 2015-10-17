@@ -16,6 +16,7 @@ class Track(object):
     @staticmethod
     def whichTop(track): return track * 34 + 20
 
+
     @property
     def periods(self): return self._periods
 

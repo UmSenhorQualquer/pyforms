@@ -77,7 +77,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         # The timeline widget
         widget = TimelineWidget()
         widget._scroll = scrollarea
-        # widget.setMinimumHeight(54)
+        #widget.setMinimumHeight(1000)
         scrollarea.setWidget(widget)
 
         # TODO Options buttons
@@ -99,10 +99,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         slider.setPageStep(1)
         slider.setTickPosition(QtGui.QSlider.NoTicks)  # TicksBothSides
         slider.valueChanged.connect(self.__scaleSliderChange)
-        slider_icon_zoom_in = QtGui.QPixmap(
-            os.path.join(rootPath, "..", "uipics", "zoom_in.png"))
-        slider_icon_zoom_out = QtGui.QPixmap(
-            os.path.join(rootPath, "..", "uipics", "zoom_out.png"))
+        slider_icon_zoom_in = QtGui.QPixmap(os.path.join(rootPath, "..", "uipics", "zoom_in.png"))
+        slider_icon_zoom_out = QtGui.QPixmap(os.path.join(rootPath, "..", "uipics", "zoom_out.png"))
         slider_label_zoom_in = QtGui.QLabel()
         slider_label_zoom_out = QtGui.QLabel()
         slider_label_zoom_in.setPixmap(slider_icon_zoom_in)

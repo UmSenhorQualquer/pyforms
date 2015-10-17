@@ -165,6 +165,7 @@ class TimelineDelta(object):
     def track(self, value): 
         if value!=self.track: self.remove()
         self._top = Track.whichTop(value)
+        if self.track>=len(self._parent._tracks): self._parent.addTrack()
         self._parent._tracks[self.track].periods.append(self)
 
     @property

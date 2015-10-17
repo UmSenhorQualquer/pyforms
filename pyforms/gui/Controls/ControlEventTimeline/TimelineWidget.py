@@ -224,6 +224,7 @@ class TimelineWidget(QtGui.QWidget):
     def addTrack(self):
         t = Track(parent=self)
         self._tracks.append(t)
+        self.setMinimumHeight( Track.whichTop( len(self._tracks) ) )
         return t
 
     def addPeriod(self, value, track=0, color=None):

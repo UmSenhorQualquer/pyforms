@@ -16,7 +16,7 @@ class CsvParserDialog(BaseWidget):
 		self._filename = None
 
 		#Definition of the forms fields
-		self._filename = ControlFile('File')
+		self._filename = ControlFile('CSV File')
 		self._separator = ControlText('Separator', ';')
 		self._frameCol = ControlNumber('Frame column', 0, 0, 100)
 		self._xCol = ControlNumber('X column', 1, 0, 100)
@@ -64,6 +64,8 @@ class CsvParserDialog(BaseWidget):
 	def zColumn(self): return self._zCol.value
 
 
+	@property
+	def loadButton(self): return self._loadButton
 
 	@property
 	def xField(self): return self._xCol
