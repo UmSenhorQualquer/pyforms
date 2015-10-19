@@ -11,7 +11,7 @@ __status__      = "Development"
 
 
 import pyforms.Utils.tools as tools
-from PyQt4 import uic, QtGui
+from PyQt4 import uic, QtGui, QtCore
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlCheckBox(ControlBase):
@@ -21,6 +21,11 @@ class ControlCheckBox(ControlBase):
         self._form = uic.loadUi( control_path )
         self._form.checkBox.setText(self._label)
         self._form.checkBox.stateChanged.connect(self.__checkedToggle)
+
+        if self._value and self._value!='':
+            self._form.checkBox.setCheckState( QtCore.Qt.Checked )
+        else:
+            self._form.checkBox.setCheckState( QtCore.Qt.Unchecked )
 
     def __checkedToggle(self): self.changed()
 

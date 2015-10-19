@@ -57,7 +57,7 @@ class ControlCheckBoxList(ControlBase):
         results = []
         for row in range( self.count ):
             item = self._form.listWidget.item(row)
-            if item!=None and item.checkState()==QtCore.Qt.Checked : results.append( item.text() )
+            if item!=None and item.checkState()==QtCore.Qt.Checked : results.append( str(item.text()) )
         return results
     
     @value.setter

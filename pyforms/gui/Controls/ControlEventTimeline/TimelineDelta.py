@@ -133,6 +133,10 @@ class TimelineDelta(object):
     ##########################################################################
 
     @property
+    def title(self): return self._title
+    
+
+    @property
     def lock(self): return self._lock
 
     @lock.setter

@@ -33,8 +33,7 @@ class ControlVisVis(ControlBase):
 
         layout.addWidget(widget)
 
-    
-
+        
     def refresh(self):
         vv.figure(self._fig.nr)
         self._app = vv.use()
@@ -43,28 +42,46 @@ class ControlVisVis(ControlBase):
         
         
     def paint(self, visvis):
-        visvis.clf()  
-        a = visvis.gca()
-        a.cameraType = '3d'
-        a.daspectAuto = True
-
-        colors = ['r','g','b','c','m','y','k','w']
+        vv.clf()  
+        
+        colors = ['r','g','b','c','m','y','k']
         for index, dataset in enumerate(self._value):
             l = visvis.plot(dataset, ms='o', mc=colors[ index % len(colors) ], mw='3', ls='', mew=0 )
-            #l = visvis.plot(dataset, ms='o', mc=colors[ index % len(colors) ], mw='3', ls='', mew=0 )
             l.alpha = 0.3
 
+        self._a = vv.gca()
+        self._a.daspectAuto = True
 
-        
+
 
     ############################################################################
     ############ Properties ####################################################
     ############################################################################
 
+    @property
+    def legend(self):return self._a.legend
+    @legend.setter
+    def legend(self, value): self._a.legend = value
 
+    @property
+    def showGrid(self):return self._a.axis.showGrid
+    @showGrid.setter
+    def showGrid(self, value): self._a.axis.showGrid = value
 
+    @property
+    def title(self):return ''
+    @title.setter
+    def title(self, value): vv.title(value)
 
+    @property
+    def xlabel(self):return self._a.axis.xlabel
+    @xlabel.setter
+    def xlabel(self, value): self._a.axis.xlabel = value
 
+    @property
+    def ylabel(self):return self._a.axis.ylabel
+    @ylabel.setter
+    def ylabel(self, value): self._a.axis.ylabel = value
 
     @property
     def value(self): return None

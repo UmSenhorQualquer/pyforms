@@ -149,11 +149,10 @@ class TimelineWidget(QtGui.QWidget):
 
         for row in csvfileobject:
             if row[0] == "T":
-                track = Track(parent=self)
+                track = self.addTrack()
                 track.properties = row
-                self._tracks.append(track)
             elif row[0] == "P":
-                period = TimelineDelta(0, parent=self)
+                period = self.addPeriod([0,1,'-'])
                 period.properties = row
                 
             
@@ -232,6 +231,7 @@ class TimelineWidget(QtGui.QWidget):
         begin, end, title = value
         period       = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(track))
         self._tracks[period.track].periods.append(period)
+        return period
 
 
     ##########################################################################
@@ -532,6 +532,10 @@ class TimelineWidget(QtGui.QWidget):
 
     @color.setter
     def color(self, value): self._defautcolor = value
+
+    @property
+    def tracks(self): return self._tracks
+    
 
     @property
     def numberoftracks(self): return len(self._tracks)#self._n_tracks
