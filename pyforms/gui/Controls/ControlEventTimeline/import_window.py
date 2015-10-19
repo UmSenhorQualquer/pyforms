@@ -21,7 +21,7 @@ class BonsaiImportFileDlg(BaseWidget):
 
         self._formset = [('_fps','_file')]
 
-        self._file.value = '/home/ricardo/Desktop/rat1e2.csv'
+        #self._file.value = '/home/ricardo/Desktop/rat1e2.csv'
         
 
 
