@@ -27,7 +27,7 @@ class TimelineChart(object):
         self._color = color
 
         for row in csvfileobject:
-            print row
+            print(row)
         data = [map(float, row) for row in csvfileobject]
 
         self._graphMax = 0
@@ -57,7 +57,7 @@ class TimelineChart(object):
 
             self._data = newData
 
-    def draw(self,  painter, left, right, top, bottom):
+    def draw(self, painter, left, right, top, bottom):
         painter.setPen(self._color)
         painter.setOpacity(0.7)
 

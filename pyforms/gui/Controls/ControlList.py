@@ -155,17 +155,26 @@ class ControlList(ControlBase, QWidget):
         return self.tableWidget.item(row, column)
 
     @property
+    def readOnly(self):
+        return self.tableWidget.editTriggers()
+
+    @readOnly.setter
+    def readOnly(self, value):
+        if value:
+            self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        else:
+            self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
+
+    @property
     def selectEntireRow(self):
         return self.tableWidget.selectionBehavior()
 
     @selectEntireRow.setter
     def selectEntireRow(self, value):
         if value:
-            self.tableWidget.setSelectionBehavior(
-                QAbstractItemView.SelectRows)
+            self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         else:
-            self.tableWidget.setSelectionBehavior(
-                QAbstractItemView.SelectItems)
+            self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
 
     @property
     def count(self): return self.tableWidget.rowCount()
