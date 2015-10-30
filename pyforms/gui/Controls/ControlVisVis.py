@@ -23,7 +23,8 @@ class ControlVisVis(ControlBase):
     def initForm(self):        
         self._form = QtGui.QWidget();layout = QtGui.QVBoxLayout();layout.setMargin(0);self._form.setLayout( layout )
         self._app = vv.use('pyqt4')
-
+        self._app.Create()
+        
         Figure = self._app.GetFigureClass()
         self._fig = Figure(self._form)
 
@@ -36,7 +37,7 @@ class ControlVisVis(ControlBase):
         
     def refresh(self):
         vv.figure(self._fig.nr)
-        self._app = vv.use()
+        #self._app = vv.use()
         self.paint(vv)
 
         
