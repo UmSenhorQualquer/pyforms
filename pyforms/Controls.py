@@ -19,6 +19,8 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlList 			import ControlList
 	from pyforms.gui.Controls.ControlMdiArea 		import ControlMdiArea
 	from pyforms.gui.Controls.ControlNumber 		import ControlNumber
+	from pyforms.gui.Controls.ControlMatplotlib 	import ControlMatplotlib
+	
 	try:
 		from pyforms.gui.Controls.ControlOpenGL 		import ControlOpenGL
 		from pyforms.gui.Controls.ControlImage 			import ControlImage

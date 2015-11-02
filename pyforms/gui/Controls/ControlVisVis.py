@@ -99,4 +99,3 @@ class ControlVisVis(ControlBase):
 
         self.refresh()
         
-        
