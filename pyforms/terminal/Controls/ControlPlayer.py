@@ -82,7 +82,7 @@ class ControlPlayer(ControlBase):
             ControlBase.value.fset(self, cv2.VideoCapture( value['filename'] ) )
             if 'position' in value.keys(): self.video_index = int(value['position'])
             self._filename = value['filename']
-        self._max = int(self._value.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT))
+        self._max = int(self._value.get(7))
         
 
 
