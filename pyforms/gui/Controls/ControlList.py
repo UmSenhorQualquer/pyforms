@@ -151,6 +151,13 @@ class ControlList(ControlBase, QWidget):
     def getValue(self, column, row):
         return str(self.tableWidget.item(row, column).text())
 
+    def getCurrentRowValue(self):
+        currentRow = self.tableWidget.currentRow()
+        if not currentRow < 0:
+            return self.value[currentRow]
+        else:
+            return []
+
     def getCell(self, column, row):
         return self.tableWidget.item(row, column)
 

@@ -26,12 +26,10 @@ class ControlCombo(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "comboInput.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
-        self._form.comboBox.currentIndexChanged.connect(
-            self._currentIndexChanged)
-        self._form.comboBox.activated.connect(
-            self._activated)
-        self._form.comboBox.highlighted.connect(
-            self._highlighted)
+        self._form.comboBox.currentIndexChanged.connect(self._currentIndexChanged)
+        self._form.comboBox.activated.connect(self._activated)
+        self._form.comboBox.highlighted.connect(self._highlighted)
+        self._form.comboBox.editTextChanged.connect(self._editTextChanged)
 
         self._items = {}
 
@@ -73,6 +71,12 @@ class ControlCombo(ControlBase):
         self.highlighted(index)
 
     def highlighted(self, index):
+        pass
+
+    def _editTextChanged(self, text):
+        self.editTextChanged(text)
+
+    def editTextChanged(self, text):
         pass
 
     def addItem(self, label, value=None):
@@ -136,3 +140,11 @@ class ControlCombo(ControlBase):
             if value == key:
                 self.value = val
                 break
+
+    @property
+    def form(self):
+        """
+        Returns the Widget of the control. 
+        This property will be deprecated in a future version.
+        """
+        return self._form.comboBox
