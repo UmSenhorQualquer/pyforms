@@ -38,6 +38,7 @@ setup(
 		'pyforms.gui.dialogs',
 		'pyforms.gui.Controls', 
 		'pyforms.gui.Controls.ControlEventTimeline',
+		'pyforms.gui.Controls.ControlEventsGraph',
 		'pyforms.gui.Controls.ControlPlayer' ],
 	package_data={'pyforms': [
 			'web/django/*.js', 

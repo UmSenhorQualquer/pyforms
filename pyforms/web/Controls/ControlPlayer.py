@@ -92,16 +92,16 @@ class ControlPlayer(ControlBase):
                 self._value = None
 
         if self._value!=None: 
-            self._max = int( self._value.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT) )
+            self._max = int( self._value.get(7) )
         
 
 
     @property
-    def video_index(self): return int(self._value.get(cv2.cv.CV_CAP_PROP_POS_FRAMES)) if self._value else 0
+    def video_index(self): return int(self._value.get(1)) if self._value else 0
 
     @video_index.setter
     def video_index(self, value): 
-        self._value.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, float(value))
+        self._value.set(1, float(value))
         
 
         

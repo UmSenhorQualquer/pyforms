@@ -23,6 +23,7 @@ class ControlVisVisVolume(ControlBase):
     def initForm(self):
         self._form = QtGui.QWidget();layout = QtGui.QVBoxLayout();layout.setMargin(0);self._form.setLayout( layout )
         self._app = vv.use('pyqt4')
+        self._app.Create()
         self._first=True
 
         Figure = self._app.GetFigureClass()
@@ -53,6 +54,8 @@ class ControlVisVisVolume(ControlBase):
 
     def refresh(self):
         if len(self._value)>1:
+            vv.figure(self._fig.nr)
+        
             a = vv.gca()
             view = a.GetView()
             a.Clear()

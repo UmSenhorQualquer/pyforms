@@ -209,7 +209,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 				self._videoWidget.paint([frame])
 
 	def convertFrameToTime(self, totalMilliseconds):
-		# totalMilliseconds = totalMilliseconds*(1000.0/self._value.get(cv2.CAP_PROP_FPS))
+		# totalMilliseconds = totalMilliseconds*(1000.0/self._value.get(5))
 		if math.isnan(totalMilliseconds): return 0, 0, 0
 		totalseconds = int(totalMilliseconds / 1000)
 		minutes = int(totalseconds / 60)
@@ -218,8 +218,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		return (minutes, seconds, milliseconds)
 
 	def videoProgress_valueChanged(self):
-		milli = self._value.get(cv2.CAP_PROP_POS_MSEC)
-		milli -= 1000.0 / self._value.get(cv2.CAP_PROP_FPS)
+		milli = self._value.get(0)
+		milli -= 1000.0 / self._value.get(5)
 		(minutes, seconds, milliseconds) = self.convertFrameToTime(milli)
 		self.videoTime.setText(
 			"%02d:%02d:%03d" % (minutes, seconds, milliseconds))
@@ -228,10 +228,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	def videoProgress_sliderReleased(self):
 		jump2Frame = self.videoProgress.value()
-		self._value.set(cv2.CAP_PROP_POS_FRAMES, jump2Frame)
+		self._value.set(1, jump2Frame)
 		self._updateVideoFrame = False
 		self.videoFrames.setValue(jump2Frame)
-		self._value.set(cv2.CAP_PROP_POS_FRAMES, jump2Frame)
+		self._value.set(1, jump2Frame)
 		self._updateVideoFrame = True
 
 	def videoFrames_valueChanged(self, i):
@@ -239,7 +239,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 			jump2Frame = self.videoProgress.value()
 			diff = jump2Frame - i
 
-			self._value.set(cv2.CAP_PROP_POS_FRAMES, jump2Frame - diff)
+			self._value.set(1, jump2Frame - diff)
 			self._updateVideoFrame = False
 			self.updateFrame()
 			self._updateVideoFrame = True
@@ -252,10 +252,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 			self.videoControl.setEnabled(True)
 			self.videoProgress.setMinimum(0)
 			self.videoProgress.setValue(0)
-			self.videoProgress.setMaximum(self._value.get(cv2.CAP_PROP_FRAME_COUNT))
+			self.videoProgress.setMaximum(self._value.get(7))
 			self.videoFrames.setMinimum(0)
 			self.videoFrames.setValue(0)
-			self.videoFrames.setMaximum(self._value.get(cv2.CAP_PROP_FRAME_COUNT))
+			self.videoFrames.setMaximum(self._value.get(7))
 
 	@property
 	def value(self): return ControlBase.value.fget(self)
@@ -271,19 +271,19 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		else:
 			self._value = value
 
-		self.fps = self._value.get(cv2.CAP_PROP_FPS)
-		print("Open video with", self._value.get( cv2.CAP_PROP_FPS), 'fps')
+		self.fps = self._value.get(5)
+		print("Open video with", self._value.get( 5), 'fps')
 
 
 		if self._value and value != 0:
 			self.videoProgress.setMinimum(0)
 			self.videoProgress.setValue(0)
 			self.videoProgress.setMaximum(
-				self._value.get(cv2.CAP_PROP_FRAME_COUNT))
+				self._value.get(7))
 			self.videoFrames.setMinimum(0)
 			self.videoFrames.setValue(0)
 			self.videoFrames.setMaximum(
-				self._value.get(cv2.CAP_PROP_FRAME_COUNT))
+				self._value.get(7))
 
 		if self._value:
 			self.videoControl.setEnabled(True)
@@ -320,14 +320,14 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@property
 	def video_index(self): return int(
-		self._value.get(cv2.CAP_PROP_POS_FRAMES)) - 1
+		self._value.get(1)) - 1
 
 	@video_index.setter
 	def video_index(self, value): self._value.set(
-		cv2.CAP_PROP_POS_FRAMES, value)
+		1, value)
 
 	@property
-	def max(self): return int(self._value.get(cv2.CAP_PROP_FRAME_COUNT))
+	def max(self): return int(self._value.get(7))
 
 	@property
 	def image(self): return self._currentFrame
