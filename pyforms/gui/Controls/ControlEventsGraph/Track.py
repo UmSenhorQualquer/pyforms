@@ -13,13 +13,16 @@ class Track(object):
 
     #Functions needed for the bisect module
     def __len__(self):              return len(self._periods)
-    def __getitem__(self, index):   return self._periods[index].end
+    def __getitem__(self, index):
+        if isinstance(index, slice):
+            return [self._periods[x].end for x in range(*index.indices(len(self)))]
+        return self._periods[index].end
 
     def add_period(self, period ):
         """
         The periods are added in a sorted way for rendering optimization
         """
-        start_index = bisect.bisect(self, period)
+        start_index = bisect.bisect(self, period.end)
         insert_index = start_index
         for index in range(start_index, len(self._periods)):
             p = self._periods[index]

@@ -10,8 +10,6 @@ import os
 from PyQt4 import QtGui, QtCore
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlEventsGraph.EventsWidget import EventsWidget
-from pyforms.gui.Controls.ControlEventsGraph.TimelinePopupWindow import TimelinePopupWindow
-from pyforms.gui.Controls.ControlEventsGraph.import_window import ImportWindow
 
 
 __author__      = ["Ricardo Ribeiro", "Hugo Cachitas"]

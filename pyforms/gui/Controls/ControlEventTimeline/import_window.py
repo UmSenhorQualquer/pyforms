@@ -6,7 +6,7 @@ from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlEmptyWidget
 from pyforms.Controls import ControlFile
 from pyforms.Controls import ControlNumber
-from pyforms.dialogs import CsvParserDialog
+
 
 import time
 import datetime
@@ -51,6 +51,7 @@ class ImportWindow(BaseWidget):
         self._filetype.changed = self.__fileTypeChanged
         self._importButton.value = self.__importData
 
+        from pyforms.dialogs import CsvParserDialog
         self._graphCsvParserDlg = CsvParserDialog()
         self._graphCsvParserDlg.xField.label = "Value column"
         self._graphCsvParserDlg.yField.hide()

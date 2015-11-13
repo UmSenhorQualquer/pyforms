@@ -87,8 +87,10 @@ class ControlTree(ControlBase, QTreeWidget):
 
     @property
     def selectedItem(self):
+
         for index in self.selectedIndexes():
             item = index.model().itemFromIndex(index)
+
             return item
         else:
             return None
