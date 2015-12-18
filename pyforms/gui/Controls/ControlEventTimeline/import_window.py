@@ -122,7 +122,11 @@ class ImportWindow(BaseWidget):
                     else:
                         track = eventsTypes[row0[0]]
 
-                    self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
+                    if row0[0] == 'EndTrial':  # special type of event that only delimits start and end of experiment (there is only one tuple)
+                        self._timeline.addPeriod([row0[1], row0[1] + 50, "START"], track=track)
+                        self._timeline.addPeriod([row1[1], row1[1] + 50, "END"], track=track)
+                    else:
+                        self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
 
         self.close()
 
