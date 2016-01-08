@@ -87,8 +87,9 @@ class ImportWindow(BaseWidget):
         elif self._filetype.value == 2:
             with open(self._bonsaiImportDlg._file.value, 'rU') as csvfile:
                 values = []
+                pointEventValues = []
                 csvfile = csv.reader(csvfile, delimiter=' ')
-                for row in csvfile:
+                for row in csvfile:  # strip Start/End word from all events names which are not PointEven
                     try:
                         timestr = row[1].rstrip('0')
                         cvttime = datetime.datetime.strptime(timestr, "%H:%M:%S.%f")
@@ -98,19 +99,32 @@ class ImportWindow(BaseWidget):
 
                     seconds = (cvttime - datetime.datetime(1900, 1, 1)).total_seconds()
                     frame = int(round(self._bonsaiImportDlg._fps.value * seconds))
-                    if row[0].startswith('Start'):
-                        eventtype = row[0][5:]
+
+                    if row[2] == "PointEvent":
+                        eventtype = row[0]
+                        pointEventValues.append([eventtype, frame, row[2]])
                     else:
-                        eventtype = row[0][3:]
-                    values.append([eventtype, frame, row[2]])
+                        if row[0].startswith('Start'):
+                            eventtype = row[0][len('Start'):]  # strip Start word from the beginning
+                        else:
+                            eventtype = row[0][len('End'):]  # strip End word from the beginning
+                        values.append([eventtype, frame, row[2]])
 
                 values = sorted(values, key=lambda x: (x[0].capitalize(), x[1]))
-                ntracks = len(set([x[0] for x in values]))
+                pointEventValues = sorted(pointEventValues, key=lambda x: (x[0].capitalize(), x[1]))
+                ntracks = len(set([x[0] for x in values])) + 1
 
                 # collapse
                 events = []
-                eventsTypes = {}
+                eventsTypes = {}  # Events names
                 currentTrack = 0
+                for index in range(0, len(pointEventValues)):
+                    pointEventValue = pointEventValues[index]
+                    eventsTypes[pointEventValue[0]] = currentTrack
+                    self._timeline.addPeriod([pointEventValue[1], pointEventValue[1] + 50, pointEventValue[0]], track=currentTrack)
+
+                currentTrack = 1
+
                 for index in range(0, len(values), 2):
                     row0 = values[index]
                     row1 = values[index + 1]
@@ -122,13 +136,9 @@ class ImportWindow(BaseWidget):
                     else:
                         track = eventsTypes[row0[0]]
 
-                    if row0[0] == 'EndTrial':  # special type of event that only delimits start and end of experiment (there is only one tuple)
-                        self._timeline.addPeriod([row0[1], row0[1] + 50, "START"], track=track)
-                        self._timeline.addPeriod([row1[1], row1[1] + 50, "END"], track=track)
-                    else:
-                        self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
+                    self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
 
-        self.close()
+        self.close()  # pylint: disable=no-member
 
 
 ##################################################################################################################
