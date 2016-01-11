@@ -12,7 +12,7 @@ __status__      = "Development"
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
-from PyQt4 import uic
+from PyQt4 import uic, QtGui
 
 class ControlProgress(ControlBase):
 
@@ -46,7 +46,9 @@ class ControlProgress(ControlBase):
     def value(self): return self._value
 
     @value.setter
-    def value(self, value): self._form.horizontalSlider.setValue( value )
+    def value(self, value): 
+        self._form.horizontalSlider.setValue( value )
+        QtGui.QApplication.processEvents()
 
 
     @property

@@ -12,7 +12,7 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-import sys
+import sys, os, inspect
 from PyQt4 import QtGui, QtCore
 
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
@@ -84,7 +84,8 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 
         try:
-            self.loadStyleSheetFile('style.css')
+            directory = os.path.dirname(inspect.getfile(w.__class__))
+            self.loadStyleSheetFile( os.path.join( directory, 'style.css') )
         except:
             pass
 

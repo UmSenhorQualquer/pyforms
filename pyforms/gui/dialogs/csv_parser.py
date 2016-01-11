@@ -25,7 +25,7 @@ class CsvParserDialog(BaseWidget):
 
         self._formset = ['_filename', ('_separator', '_frameCol', '_xCol', '_yCol', '_zCol', '_loadButton'), '_filePreview']
         self._separator.changed = self.__refreshPreview
-        self._filename.changed = self.__refreshPreview
+        self._filename.changed  = self.__refreshPreview
 
         #self._filename.value = '/home/ricardo/Downloads/2012.12.01_13.48_3D_POSITIONS_version_03.06.2015.csv'
 
@@ -77,7 +77,6 @@ class CsvParserDialog(BaseWidget):
             self._spamreader = csv.reader(csvfile, delimiter=self._separator.value)
 
             self._cols = [self.frameColumn]
-            print(self.xField.visible)
             if self.xField.visible:
                 self._cols.append(self.xColumn)
             if self.yField.visible:
@@ -94,7 +93,6 @@ class CsvParserDialog(BaseWidget):
     def next(self):
         if self._spamreader != None:
             row = self._spamreader.next()
-            print([row[col] for col in self._cols])
             return [row[col] for col in self._cols]
         else:
             raise StopIteration()

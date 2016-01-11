@@ -5,12 +5,7 @@ class ControlToolBox(ControlBase):
 
     def initForm(self):
         self._form = QtGui.QToolBox()
-        #self._form.setStyleSheet("""font-width: bold;border-radius: 3px;""")
-        #self._form.setStyleSheet("""QWidget{background-color:black;}""")
         self.form.layout().setMargin(0)
-        try:
-            self.loadStyleSheetFile('style.css')
-        except:pass
         
     
     @property
@@ -24,11 +19,17 @@ class ControlToolBox(ControlBase):
         
         for item in value: 
             if isinstance(item, tuple):
-                widget = QtGui.QWidget(); 
-                layout = QtGui.QVBoxLayout(); 
-                layout.setMargin(0); 
-                widget.setLayout( layout )
-                for e in item[1:]: widget.layout().addWidget( e.form )
+                widget = QtGui.QWidget(); layout = QtGui.QVBoxLayout(); 
+                layout.setMargin(0); widget.setLayout( layout )
+
+                for e in item[1]:
+                    if isinstance(e, tuple):
+                        hwidget = QtGui.QWidget(); hlayout = QtGui.QHBoxLayout(); 
+                        hlayout.setMargin(0); hwidget.setLayout( hlayout )
+                        for ee in e: hlayout.addWidget( ee.form )
+                        widget.layout().addWidget( hwidget )
+                    else:
+                        widget.layout().addWidget( e.form )
                 self.form.addItem(widget, item[0])
             else:
                 self.form.addItem(item.form, item.label)

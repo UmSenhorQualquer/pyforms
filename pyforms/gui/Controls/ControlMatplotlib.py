@@ -41,8 +41,6 @@ class ControlMatplotlib(ControlBase, QtGui.QWidget):
     def on_draw(self):
         """ Redraws the figure
         """
-        self.data =[1,2,3,4]
-        
         x = range(len(self.data))
 
         #self._axes = self._fig.add_subplot(111)

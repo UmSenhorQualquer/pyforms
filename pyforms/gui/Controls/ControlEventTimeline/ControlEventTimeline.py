@@ -370,4 +370,4 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     @property
     def tracks(self): return self._time.tracks
-    
+

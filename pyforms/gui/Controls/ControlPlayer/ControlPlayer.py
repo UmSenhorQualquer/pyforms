@@ -319,12 +319,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 			self.videoProgress.setMaximum(value)
 
 	@property
-	def video_index(self): return int(
-		self._value.get(1)) - 1
+	def video_index(self): return int(self._value.get(1)) - 1
 
 	@video_index.setter
-	def video_index(self, value): self._value.set(
-		1, value)
+	def video_index(self, value): self._value.set(1, value)
 
 	@property
 	def max(self): return int(self._value.get(7))
