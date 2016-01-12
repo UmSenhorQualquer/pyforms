@@ -44,7 +44,10 @@ class GaugeWidgetVertical(QtGui.QWidget):
 
         window_with = self.width()-1
         diff = (self._higher-self._lower) * self.scale
-        self._step = float(self.height()) / float(diff)
+        try:
+            self._step = float(self.height()) / float(diff)
+        except ZeroDivisionError:
+            self._step = 0
         y_start = self.height()-(self._minVal-self._lower) * self._step * self.scale
         y_end   = self.height()-(self._maxVal-self._lower) * self._step * self.scale
         draw.setBrush(QtGui.QColor(100,100,255))
@@ -159,7 +162,11 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
         
         h = self.height()-1
         diff        = (self._higher-self._lower)*self.scale
-        self._step  = float(self.width()) / float(diff)
+        
+        try:
+            self._step = float(self.width()) / float(diff)
+        except ZeroDivisionError:
+            self._step = 0
         x_start     = (self._minVal-self._lower) * self._step * self.scale
         x_end       = (self._maxVal-self._lower) * self._step * self.scale
         draw.setBrush(QtGui.QColor(100,100,255))
