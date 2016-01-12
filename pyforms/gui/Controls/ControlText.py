@@ -12,11 +12,18 @@
 '''
 
 from pyforms.gui.Controls.ControlBase import ControlBase
-
+import pyforms.Utils.tools as tools
+from PyQt4 import uic
 
 class ControlText(ControlBase):
 
 	def initForm(self):
+		control_path = tools.getFileInSameDirectory(__file__, "textInput.ui")
+		self._form = uic.loadUi(control_path)
+		self.form.label.setText(self._label)
+		self.form.lineEdit.setText(self._value)
+		self.form.setToolTip(self.help)
+
 		super(ControlText, self).initForm()
 		self.form.lineEdit.editingFinished.connect(self.finishEditing)
 

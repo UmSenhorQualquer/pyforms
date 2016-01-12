@@ -33,20 +33,13 @@ class ControlBase(object):
 		self._parent = None  # Parent window
 		self._label = label  # Label
 		self._popupMenu = None
-
 		self.initForm()
 
 	def initForm(self):
 		"""
 		Load Control and initiate the events
 		"""
-		control_path = tools.getFileInSameDirectory(__file__, "textInput.ui")
-		self._form = uic.loadUi(control_path)
-		self.form.label.setText(self._label)
-		self.form.lineEdit.setText(self._value)
-		self.form.setToolTip(self.help)
-
-		# self.form.lineEdit.editingFinished.connect(self.finishEditing)
+		pass
 
 	def __repr__(self): return str(self._value)
 
@@ -74,21 +67,25 @@ class ControlBase(object):
 		"""
 		Show the control
 		"""
+		if self.form is None: return
 		self.form.show()
 
 	def hide(self):
 		"""
 		Hide the control
 		"""
+		if self.form is None: return
 		self.form.hide()
 
 	@property 
 	def visible(self): return self.form.isVisible()
 	@visible.setter
 	def visible(self, value):
-		if value: self.show()
-		else: self.hide()
-
+		if value:
+			self.show()
+		else:
+			self.hide()
+			
 	def addPopupMenuOption(self, label, functionAction=None, key=None, icon=None):
 		"""
 		Add an option to the Control popup menu

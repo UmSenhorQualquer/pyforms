@@ -41,7 +41,8 @@ setup(
 		'pyforms.gui.Controls.ControlEventsGraph',
 		'pyforms.gui.Controls.ControlPlayer' ],
 	package_data={'pyforms': [
-			'web/django/*.js', 
+			'web/django/*.js',
+			'web/django/chartjs/Chart.min.js',
 			'gui/Controls/uipics/*.png', 
 			'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 
 			'gui/Controls/ControlEventTimeline/*.ui']

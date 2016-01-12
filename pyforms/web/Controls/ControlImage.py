@@ -7,7 +7,9 @@ from PIL import Image
 
 class ControlImage(ControlBase):
 
-    _filename = ''
+    def __init__(self, label = "", defaultValue = "", helptext=None):
+        super(ControlImage,self).__init__(label, defaultValue, helptext)
+        self._filename = ''
 
     def initControl(self):
         return "controls.push(new ControlImage('"+self._name+"','%s'));" %  self.help 

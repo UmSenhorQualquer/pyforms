@@ -85,6 +85,11 @@ class ControlVisVis(ControlBase):
     def ylabel(self, value): self._a.axis.ylabel = value
 
     @property
+    def zlabel(self):return self._a.axis.zlabel
+    @ylabel.setter
+    def zlabel(self, value): self._a.axis.zlabel = value
+
+    @property
     def value(self): return None
 
     @value.setter

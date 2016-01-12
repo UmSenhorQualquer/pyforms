@@ -1,3 +1,8 @@
+function sleep(ms) {
+	var unixtime_ms = new Date().getTime();
+	while(new Date().getTime() < unixtime_ms + ms) {}
+}
+
 function ControlButton( label, dom_id, help ){
 
 	this.LABEL = label;
@@ -179,7 +184,7 @@ function ControlImage( dom_id , help ){
 	
 	this.rawValue = function(value){ return $( "#"+this.DOMID ).attr('src'); };
 	this.setValue = function(value){
-		$("#"+this.DOMID + " .viewer" ).zoomer("load", ["data:image/png;base64,"+value.image]);
+		$("#"+this.DOMID + " .image" ).attr("src", "data:image/png;base64,"+value.image);
 		this.FILENAME   = value.filename;
 	};
 	this.getValue = function(){
@@ -187,8 +192,7 @@ function ControlImage( dom_id , help ){
 	};
 	this.load = function(){
 		var html = "<div class='ControlImage' >";
-		html += "<img style='width:100%;' class='image' src=' ' id='"+this.DOMID+"' />";
-		//html += "<div class='viewer' ><img class='image' src='' id='display"+this.DOMID+"' /></div>";
+		html += "<img style='width:100%;' class='image' src='' id='"+this.DOMID+"' />";
 		html += "</div>";
 		$( "#place"+this.DOMID ).replaceWith(html);
 		
@@ -204,7 +208,6 @@ function ControlPlayer( dom_id, help ){
 	this.setValue = function(value){
 		$( "#timeline"+this.DOMID ).slider({min: value.min, max: value.max, value: value.position});
 		this.FILENAME = value.filename;
-		//$("#"+this.DOMID + " .viewer" ).zoomer("load", ["data:image/png;base64,"+value.frame]);
 		$("#display"+this.DOMID ).attr("src", "data:image/png;base64,"+value.frame);
 	};
 	this.getValue = function(){
@@ -213,18 +216,12 @@ function ControlPlayer( dom_id, help ){
 		return res;
 	};
 	this.load = function(){
-		//var html = "<div title='"+help+"'   id='"+this.DOMID+"' >";
-		//html += "<div class='viewer' ><img width='90%' class='image' src='' id='display"+this.DOMID+"' /></div>";
-		//html += "<div class='slider' name='"+this.DOMID+"' id='timeline"+this.DOMID+"' ></div>"
-		//html += "</div>";
 		var html = "<div class='ControlPlayer' >";
 		html += "<img style='width:100%;' class='image' src=' ' id='display"+this.DOMID+"' />";
 		html += "<div class='slider' name='"+this.DOMID+"' id='timeline"+this.DOMID+"' ></div>";
 		html += "</div>";
 		$( "#place"+this.DOMID ).replaceWith(html);
 		$( "#timeline"+this.DOMID ).slider( {stop: UpdateControls });
-		
-		//$("#"+this.DOMID + " .viewer" ).zoomer({customClass: "dark_zoomer"});
 	};
 	
 };
@@ -320,9 +317,107 @@ function ControlText( label, dom_id, value, help ){
 		if(!value) value = '';
 		$( "#place"+this.DOMID ).replaceWith("<div title='"+help+"'   class='ControlText' ><label for='"+this.DOMID+"'>"+this.LABEL+"</label><input class='textfield' type='text' name='"+dom_id+"' id='"+dom_id+"' value=\""+value+"\" /></div>");
 
-		$( "#"+this.DOMID ).focusout(function(){
+		$( "#"+this.DOMID ).change(function(){
 			FireEvent( dom_id, 'changed' );
 		});
+	};
+	
+};
+
+function ControlDate( label, dom_id, value, help ){
+
+	this.LABEL = label;
+	this.DOMID = dom_id;
+
+	this.rawValue = function(value){ return $( "#"+this.DOMID ).val(); };
+	this.setValue = function(value){
+		$( "#"+this.DOMID ).val(value)
+	};
+	this.getValue = function(){ return $( "#"+this.DOMID ).val(); };
+	this.load = function(){
+		if(!value) value = '';
+		$( "#place"+this.DOMID ).replaceWith("<div title='"+help+"' class='ControlDate' ><label for='"+this.DOMID+"'>"+this.LABEL+"</label><input class='textfield' type='text' name='"+dom_id+"' id='"+dom_id+"' value=\""+value+"\" /></div>");
+
+		$( "#"+this.DOMID ).datepicker({dateFormat: "yy-mm-dd"});
+
+		$( "#"+this.DOMID ).change(function(){
+			FireEvent( dom_id, 'changed' );
+		});
+	};
+	
+};
+
+function ControlList( label, dom_id, value, help ){
+
+	this.LABEL = label;
+	this.DOMID = dom_id;
+	var being_edited = false;
+
+
+	this.load_table = function(titles, data){
+		var html = "<table id='"+this.DOMID+"' >";
+		html += "<thead>";
+		html += "<tr>";
+		for(var i=0; i<titles.length; i++){
+			html += "<th>"+titles[i]+"</th>";
+		};
+		html += "</tr>";
+		html += "</thead>";
+		html += "<tbody>";
+		for(var i=0; i<data.length; i++){
+			html += "<tr>";
+			for(var j=0; j<data[i].length; j++)
+				html += "<td>"+data[i][j]+"</td>";
+			if(data[i].length<titles.length)
+				for(var j=data[i].length; j<titles.length; j++) html += "<td></td>";
+			html += "</tr>";
+		};
+		html += "</tbody>";
+		html += "</table>";
+		html += "</div>";
+		$( "#"+this.DOMID ).replaceWith(html);
+
+		$( "#"+this.DOMID+" tbody td" ).dblclick(function(){
+			if( being_edited ) return false;
+
+			being_edited = true;
+			var cell = $(this);
+			var value = cell.html();
+			cell.html('<input type="text" value="'+value+'" />');
+			cell.children('input').focus();
+			cell.children('input').focusout(function(){
+				cell.html($(this).val());
+				being_edited = false;
+				FireEvent( dom_id, 'changed' );
+			});
+		});
+	};
+
+	this.rawValue = function(value){ return undefined; };
+	this.setValue = function(value){ this.load_table(value[0],value[1]); };
+	this.getValue = function(){ 
+		var res=[];
+		$( "#"+this.DOMID+" tbody tr" ).each(function(i, row){
+			var new_row=[]
+			$(this).children('td').each(function(j, col){
+				new_row.push($(col).html());
+			});
+			res.push(new_row);
+		});
+		var titles=[];
+		$( "#"+this.DOMID+" thead th" ).each(function(i, col){
+			titles.push( $(col).html() );
+		});
+		return [titles, res];
+	};
+	this.load = function(){
+
+		var html = 	"<div class='ControlList' title='"+help+"' >";
+		html += "<div id='"+this.DOMID+"' ></div>";
+		html += "</div>";
+		$( "#place"+this.DOMID ).replaceWith(html);
+
+		this.load_table( value[0], value[1] );
 	};
 	
 };
@@ -330,7 +425,133 @@ function ControlText( label, dom_id, value, help ){
 
 
 
+
+function ControlVisVis( label, dom_id, value, help){
+
+	this.LABEL = label;
+	this.DOMID = dom_id;
+
+	this.rawValue = function(value){ return undefined; };
+	this.setValue = function(value){
+		var chart = $('#'+this.DOMID).data('chart');
+		$('#'+this.DOMID).data('chart_data', value);
+
+		var options = {
+			data:value.data,
+			legend: {
+				show: value.legend.length>0,
+				labels: value.legend,
+				showLabels: true,
+				showSwatch: true
+			}
+		};
+		chart.replot(options);
+	};
+	this.getValue = function(){ 
+		return $('#'+this.DOMID).data('chart_data');
+	};
+	this.load = function(){
+		var html = 	"<div class='ControlVisVis' id='chart-container-"+this.DOMID+"' title='"+help+"'   >";
+		html += 	"<div id='"+this.DOMID+"' ></div>";
+		html += 	"</div>";
+		$( "#place"+this.DOMID ).replaceWith(html);
+
+		legend = value.legend;
+		data   = value.data;
+
+		if(data.length==0){ data = [[[0,0]]] }
+		var chart = $.jqplot(this.DOMID, data, {
+			title:this.LABEL,
+			seriesDefaults:{
+				showMarker:true, showLine:true, lineWidth:0.5,
+				markerOptions:{ size: 6 }
+			},
+			legend: {
+				show: legend.length>0,				
+				labels: legend,
+				placement: "outside",
+				location: 'e'
+			},
+			axes:{
+				xaxis:{
+					renderer:$.jqplot.DateAxisRenderer, 
+					labelRenderer: 	$.jqplot.CanvasAxisLabelRenderer,
+					tickRenderer: 	$.jqplot.CanvasAxisTickRenderer,
+					tickOptions: {angle: -45}
+				}
+			},
+			cursor:{
+				show: true, 
+				zoom: true
+			}
+		});
+
+		$('#'+this.DOMID).data('chart', chart);
+		$('#'+this.DOMID).data('chart_data', value);
+
+		//$("#chart-container-"+this.DOMID).resizable({delay:20});
+		//$("#chart-container-"+this.DOMID).bind("resize", function(event, ui) {chart.replot();});
+
+	};
+	
+};
+
+
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 
+var pyforms_events_queue = [];
+
+function FireEvent(dom_in, event){
+	var currentfolder = $('#files-browser-div').dataviewer('path');
+	if(currentfolder==undefined) currentfolder = '/';
+	
+	data = {event: {control:dom_in, event: event}, userpath: currentfolder};
+	pyforms_events_queue.push(data)
+	//SendUpdateData(data);
+
+	SendUpdateData( pyforms_events_queue.pop(0) );
+}
+
+function UpdateControls(){	
+	var currentfolder = $('#files-browser-div').dataviewer('path');
+	if(currentfolder==undefined) currentfolder = '/';
+	
+	SendUpdateData({ userpath: currentfolder }); 
+};
+
+function SendUpdateData(data2send){	
+	loading();
+	for (index = 0; index < controls.length; index++) {
+		var name = controls[index].DOMID;
+		data2send[name] = controls[index].getValue();
+
+	}
+
+	var jsondata =  $.toJSON( data2send);
+	$.ajax({
+		method: 'post',
+		cache: false,
+		dataType: "json",
+		url: '/pyforms/update/'+APPLICATION+'/?nocache='+Math.random(),
+		data: jsondata,
+		contentType: "application/json; charset=utf-8",
+		success: function(res){
+			if( res.result=='error' ){
+				error(res.msg);
+			}else{
+				for (index = 0; index < controls.length; index++) {
+					var name = controls[index].DOMID;
+					if(res[name]) controls[index].setValue( res[name] );
+				}
+			}
+		}
+	}).fail(function(xhr){
+		error(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
+	}).always(function(){
+		not_loading();
+	});
+	
+	if( pyforms_events_queue.length>0 ) SendUpdateData( pyforms_events_queue.pop(0) );
+}

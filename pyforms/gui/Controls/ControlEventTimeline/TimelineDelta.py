@@ -166,11 +166,16 @@ class TimelineDelta(object):
 
 
     @track.setter
-    def track(self, value): 
-        if value!=self.track: self.remove()
+    def track(self, value):
+        #if the object exists in other track remove it
+        if self.track<len(self._parent._tracks) and self in self._parent._tracks[self.track].periods: self.remove()
+
+        #Verify if the new track exists. In case not create it
         self._top = Track.whichTop(value)
         if self.track>=len(self._parent._tracks): self._parent.addTrack()
-        self._parent._tracks[self.track].periods.append(self)
+
+        #if do not exists in the track add it
+        if self not in self._parent._tracks[self.track].periods: self._parent._tracks[self.track].periods.append(self)
 
     @property
     def color(self): return self._defautcolor

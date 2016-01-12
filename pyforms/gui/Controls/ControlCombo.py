@@ -79,6 +79,14 @@ class ControlCombo(ControlBase):
     def editTextChanged(self, text):
         pass
 
+    def __add__(self, val):
+        if isinstance( val, tuple ):
+            self.addItem(val[0], val[1])
+        else:
+            self.addItem(val)
+        
+        return self
+
     def addItem(self, label, value=None):
         self._addingItem = True
         if value is not None:
