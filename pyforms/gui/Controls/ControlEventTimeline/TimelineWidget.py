@@ -149,25 +149,8 @@ class TimelineWidget(QtGui.QWidget):
                 track = self.addTrack()
                 track.properties = row
             elif row[0] == "P":
-                # support old file format with EndTrial as long event
-                if row[4] == "EndTrial":
-                    row_start_trial = row[:]
-                    start_trial_fake_end = int(row_start_trial[2]) + 50
-                    row_start_trial[4] = "Start"
-                    row_start_trial[3] = str(start_trial_fake_end)
-                    period = self.addPeriod([0, 1, '-'])
-                    period.properties = row_start_trial
-
-                    row_end_trial = row[:]
-                    end_trial_fake_end = int(row[3]) + 50
-                    row_end_trial[4] = "End"
-                    row_end_trial[2] = row[3]
-                    row_end_trial[3] = str(end_trial_fake_end)
-                    period = self.addPeriod([0, 1, '-'])
-                    period.properties = row_end_trial
-                else:
-                    period = self.addPeriod([0, 1, '-'])
-                    period.properties = row
+                period = self.addPeriod([0, 1, '-'])
+                period.properties = row
 
     def export_csv(self, csvfileobject):
         """
