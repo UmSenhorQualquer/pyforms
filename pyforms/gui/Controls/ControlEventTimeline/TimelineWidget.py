@@ -154,7 +154,8 @@ class TimelineWidget(QtGui.QWidget):
             elif row[0] == "P":
                 period = self.addPeriod([0,1,'-'])
                 period.properties = row
-                
+
+
             
 
     def export_csv(self, csvfileobject):
