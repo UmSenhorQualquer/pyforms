@@ -254,7 +254,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
                                                      filter="CSV Files (*.csv)",
                                                      options=QtGui.QFileDialog.DontUseNativeDialog)
         if filename != "":
-            with open(filename, 'w') as csvfile:
+            with open(filename, 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, dialect='excel')
                 self._time.export_csv(spamwriter)
 
@@ -361,4 +361,3 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     @property
     def tracks(self): return self._time.tracks
-
