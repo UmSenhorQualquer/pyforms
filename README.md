@@ -37,6 +37,7 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 
 ## Examples of applications developed in Pyforms
 * [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
+* [3D tracking analyser](https://github.com/UmSenhorQualquer/3D-tracking-analyser)
 
 ## Documentation
 
