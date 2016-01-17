@@ -129,7 +129,9 @@ Gets and sets the the minimum value that can be selected in the bounding slider.
 
 Gets and sets the the maximum value that can be selected in the bounding slider.
 
+#### convert_2_int
 
+If True the control works only with Integer values. If False the control will return Float values.
 
 
 
@@ -1019,6 +1021,29 @@ Repaint the points
 
 Gets and sets a list of 2D or 3D points to display.
 
+#### legend
+
+Set the graph legend
+
+#### showGrid
+
+(True or False). Show a grid in the graph
+
+#### title
+
+Set the graph title
+
+#### xlabel
+
+Set the x axis label.
+
+#### ylabel
+
+Set the y axis label.
+
+#### zlabel
+
+Set the z axis label.
 
 
 
