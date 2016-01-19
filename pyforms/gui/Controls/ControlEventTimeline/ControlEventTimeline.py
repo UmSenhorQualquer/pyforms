@@ -34,26 +34,27 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         self._max = 100
 
         # Popup menus that only show when clicking on a TIMELINEDELTA object
-        self._deltaLockAction   = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
-        self._deltaColorAction  = self.addPopupMenuOption("Pick a color", self.__pickColor)
+        self._deltaLockAction = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
+        self._deltaColorAction = self.addPopupMenuOption("Pick a color", self.__pickColor)
         self._deltaRemoveAction = self.addPopupMenuOption("Remove", self.__removeSelected, key='Delete')
-        self._deltaActions      = [self._deltaLockAction,self._deltaColorAction,self._deltaRemoveAction]
-        for action in self._deltaActions: action.setVisible(False)
-        
+        self._deltaActions = [self._deltaLockAction, self._deltaColorAction, self._deltaRemoveAction]
+        for action in self._deltaActions:
+            action.setVisible(False)
+
         self.addPopupMenuOption("-")
 
         # General righ click popup menus
         self.addPopupMenuOption("Set track properties...", self.__setLinePropertiesEvent)
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Import/Export", {
-            'Export to CSV': self.__export, 
+            'Export to CSV': self.__export,
             'Import to CSV': self.__import
         })
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Clean", {
-            'Current line': self.__cleanLine, 
-            'Everything':   self.__clean, 
-            'Charts':       self.__cleanCharts
+            'Current line': self.__cleanLine,
+            'Everything': self.__clean,
+            'Charts': self.__cleanCharts
         })
 
     def initForm(self):
@@ -77,7 +78,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         # The timeline widget
         widget = TimelineWidget()
         widget._scroll = scrollarea
-        #widget.setMinimumHeight(1000)
+        # widget.setMinimumHeight(1000)
         scrollarea.setWidget(widget)
 
         # TODO Options buttons
@@ -176,8 +177,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         - Track label
         - Track default color
         """
-        current_track   = self.mouseOverLine
-        parent          = self._time
+        current_track = self.mouseOverLine
+        parent = self._time
 
         # Tracks info dict and index
         i = current_track
@@ -215,8 +216,6 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         # Restore timeline default color
         parent.color = timeline_default_color
 
-       
-
     def __lockSelected(self): self._time.lockSelected()
 
     def __removeSelected(self): self._time.removeSelected()
@@ -225,33 +224,30 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         """Import annotations from a file."""
         win = ImportWindow(self)
         win.show()
-    
 
     def import_csv(self, csvfile):
         # If there are annotation in the timeline, show a warning
-        if len(self._time._tracks)>0:  # dict returns True if not empty
+        if len(self._time._tracks) > 0:  # dict returns True if not empty
             message = ["You are about to import new data. ",
                        "If you proceed, current annotations will be erased. ",
                        "Make sure to export current annotations first to save.",
                        "\n",
                        "Are you sure you want to proceed?"]
             reply = QtGui.QMessageBox.question(self,
-                "Warning!",
-                "".join(message),
-                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
-                QtGui.QMessageBox.No)
-            
-            if reply != QtGui.QMessageBox.Yes: return
+                                               "Warning!",
+                                               "".join(message),
+                                               QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
+                                               QtGui.QMessageBox.No)
+
+            if reply != QtGui.QMessageBox.Yes:
+                return
 
         self._time.import_csv(csvfile)
         print("Annotations file imported: {:s}".format(filename))
 
-        
-
     def __export(self):
         """Export annotations to a file."""
 
-  
         filename = QtGui.QFileDialog.getSaveFileName(parent=self,
                                                      caption="Export annotations file",
                                                      directory=self.getExportFilename(),
@@ -261,9 +257,6 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
             with open(filename, 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, dialect='excel')
                 self._time.export_csv(spamwriter)
-            
-
-
 
     def __cleanLine(self):
         reply = QtGui.QMessageBox.question(self, 'Confirm',
@@ -317,8 +310,6 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
     #### PROPERTIES ##########################################################
     ##########################################################################
 
-    
-
     @property
     def pointerChanged(self):
         return self._time._pointer.moveEvent
@@ -370,4 +361,3 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
     @property
     def tracks(self): return self._time.tracks
-

@@ -65,14 +65,12 @@ class TimelineWidget(QtGui.QWidget):
         self._selected_track = 0
         self._pointer = TimelinePointer(0, self)
 
-
         # Video playback controls
         self._video_playing = False
         self._video_fps = None
         self._video_fps_min = None
         self._video_fps_max = None
         self._video_fps_inc = None
-
 
     ##########################################################################
     #### HELPERS/FUNCTIONS ###################################################
@@ -102,22 +100,21 @@ class TimelineWidget(QtGui.QWidget):
                 return None
         # Check if the timeline periods were selected
         i = Track.whichTrack(y)
-        if i>=len(self._tracks): return None
-        
-        return self._tracks[i].selectDelta(x,y)
+        if i >= len(self._tracks):
+            return None
 
-
+        return self._tracks[i].selectDelta(x, y)
 
     def __drawTrackLines(self, painter, start, end):
         # Draw only from pixel start to end
         painter.setPen(QtCore.Qt.DashLine)
         painter.setOpacity(0.3)
         # Draw horizontal lines
-        #for track in range(0, self.numberoftracks + 1):
+        # for track in range(0, self.numberoftracks + 1):
         #    y = (track * 34) + 18
         #    painter.drawLine(start, y, end, y)
-        for i, track in enumerate(self._tracks): track.draw(painter, start,end, i)
-
+        for i, track in enumerate(self._tracks):
+            track.draw(painter, start, end, i)
 
         # Draw vertical lines
         for x in range(start - (start % 100), end, 100):
@@ -127,8 +124,8 @@ class TimelineWidget(QtGui.QWidget):
             painter.drawText(x - boundtext.width() / 2, 15, string)
         painter.setOpacity(1.0)
 
-        for index, track in enumerate(self._tracks): track.drawLabels(painter, index)
-    
+        for index, track in enumerate(self._tracks):
+            track.drawLabels(painter, index)
 
     def importchart_csv(self, csvfileobject):
         chart = TimelineChart(
@@ -152,11 +149,8 @@ class TimelineWidget(QtGui.QWidget):
                 track = self.addTrack()
                 track.properties = row
             elif row[0] == "P":
-                period = self.addPeriod([0,1,'-'])
+                period = self.addPeriod([0, 1, '-'])
                 period.properties = row
-
-
-            
 
     def export_csv(self, csvfileobject):
         """
@@ -196,9 +190,8 @@ class TimelineWidget(QtGui.QWidget):
         """
         for index, track in enumerate(self._tracks):
             csvfileobject.writerow(track.properties)
-            for delta in track.periods: 
+            for delta in track.periods:
                 csvfileobject.writerow(delta.properties)
-
 
     def cleanCharts(self):
         self._charts = []
@@ -207,7 +200,8 @@ class TimelineWidget(QtGui.QWidget):
     def clean(self):
         self._charts = []
         self._selected = None
-        for track in self._tracks: track.clear()
+        for track in self._tracks:
+            track.clear()
         del self._tracks[:]
         self._tracks = []
         self.repaint()
@@ -224,16 +218,15 @@ class TimelineWidget(QtGui.QWidget):
     def addTrack(self):
         t = Track(parent=self)
         self._tracks.append(t)
-        self.setMinimumHeight( Track.whichTop( len(self._tracks) ) )
+        self.setMinimumHeight(Track.whichTop(len(self._tracks)))
         return t
 
     def addPeriod(self, value, track=0, color=None):
         """Adds an annotated interval."""
         begin, end, title = value
-        period       = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(track))
+        period = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(track))
         self._tracks[period.track].periods.append(period)
         return period
-
 
     ##########################################################################
     #### EVENTS ##############################################################
@@ -262,8 +255,9 @@ class TimelineWidget(QtGui.QWidget):
         #End draw graph #######################################################
 
         self.__drawTrackLines(painter, start, end)
-        
-        for track in self._tracks: track.drawPeriods(painter, start, end)
+
+        for track in self._tracks:
+            track.drawPeriods(painter, start, end)
 
         # Draw the selected element
         if self._selected != None:
@@ -285,7 +279,7 @@ class TimelineWidget(QtGui.QWidget):
             # time = TimelineDelta(x, x + 50 / self._scale, title='', top=y, parent=self)
             time = TimelineDelta(x, x + 10, title='', top=y, parent=self)
             self._tracks[time.track].periods.append(time)
-            
+
             self._selected = time
             self._selected_track = self._selected.track
             self.repaint()
@@ -425,7 +419,8 @@ class TimelineWidget(QtGui.QWidget):
     def mousePressEvent(self, event):
         # Select the track
         selected_track = Track.whichTrack(event.y())
-        if selected_track<=len(self._tracks): self._selected_track = selected_track
+        if selected_track <= len(self._tracks):
+            self._selected_track = selected_track
 
         # Select the period bar
         self._selected = self.selectDelta(event.x(), event.y())
@@ -536,16 +531,16 @@ class TimelineWidget(QtGui.QWidget):
 
     @property
     def tracks(self): return self._tracks
-    
 
     @property
-    def numberoftracks(self): return len(self._tracks)#self._n_tracks
+    def numberoftracks(self): return len(self._tracks)  # self._n_tracks
 
     @numberoftracks.setter
     def numberoftracks(self, value):
         #self._n_tracks = value
-        if value<len(self._tracks):
-            for i in range(value, self._tracks+1): self.addTrack()
+        if value < len(self._tracks):
+            for i in range(value, self._tracks + 1):
+                self.addTrack()
         y = value * 34 + 20
         if y + 40 > self.height():
             self.setMinimumHeight(y + 40)
