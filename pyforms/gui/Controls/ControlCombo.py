@@ -25,15 +25,16 @@ class ControlCombo(ControlBase):
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "comboInput.ui")
         self._form = uic.loadUi(control_path)
-        self._form.label.setText(self._label)
+       
         self._form.comboBox.currentIndexChanged.connect(self._currentIndexChanged)
         self._form.comboBox.activated.connect(self._activated)
         self._form.comboBox.highlighted.connect(self._highlighted)
         self._form.comboBox.editTextChanged.connect(self._editTextChanged)
 
         self._items = {}
-
         self._addingItem = False
+
+        self.label = self._label
 
     def _currentIndexChanged(self, index):
         if not self._addingItem:
@@ -155,4 +156,17 @@ class ControlCombo(ControlBase):
         Returns the Widget of the control. 
         This property will be deprecated in a future version.
         """
-        return self._form.comboBox
+        return self._form
+
+    @property
+    def label(self):
+        return self._form.comboLabel.text()
+
+    @label.setter
+    def label(self, value):
+        """
+        Label of the control, if applies
+        @type  value: string
+        """
+        self._form.comboLabel.setText(value)
+

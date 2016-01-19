@@ -92,7 +92,8 @@ class GaugeWidgetVertical(QtGui.QWidget):
     def mouseReleaseEvent(self, event):
         self._moving            = False
         self._resizingBottom    = False
-        self._resizingTop       = False        
+        self._resizingTop       = False
+        
 
     def mouseMoveEvent(self, event):
         super(GaugeWidgetVertical, self).mouseMoveEvent(event)

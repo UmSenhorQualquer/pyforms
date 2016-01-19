@@ -12,7 +12,7 @@
 '''
 
 import pyforms.Utils.tools as tools
-from PyQt4 import uic
+from PyQt4 import uic, QtCore, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 
@@ -23,10 +23,15 @@ class ControlButton(ControlBase):
         super(ControlButton, self).__init__(label)
 
     def initForm(self):
-        control_path = tools.getFileInSameDirectory(__file__, "button.ui")
-        self._form = uic.loadUi(control_path)
-        self._form.pushButton.setText(self._label)
-        self._form.pushButton.setCheckable(self._checkable)
+        #control_path = tools.getFileInSameDirectory(__file__, "button.ui")
+        #self._form = uic.loadUi(control_path)
+        #self._form.pushButton.setText(self._label)
+        #self._form.pushButton.setCheckable(self._checkable)
+
+        self._form = QtGui.QPushButton()
+        self._form.setSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        self._form.setCheckable(self._checkable)
+        self.label = self._label
         self.tooltip = None
 
     def load(self, data): pass
@@ -42,7 +47,7 @@ class ControlButton(ControlBase):
     @label.setter
     def label(self, value):
         ControlBase.label.fset(self, value)
-        self._form.pushButton.setText(self._label)
+        self._form.setText(self._label)
 
     ##########################################################################
 
@@ -52,15 +57,15 @@ class ControlButton(ControlBase):
 
     @value.setter
     def value(self, value):
-        self._form.pushButton.clicked[bool].connect(value)
+        self._form.clicked[bool].connect(value)
 
     @property
     def checked(self):
-        return self._form.pushButton.isChecked()
+        return self._form.isChecked()
 
     @checked.setter
     def checked(self, value):
-        self._form.pushButton.setChecked(value)
+        self._form.setChecked(value)
 
     def click(self):
-        self._form.pushButton.click()
+        self._form.click()

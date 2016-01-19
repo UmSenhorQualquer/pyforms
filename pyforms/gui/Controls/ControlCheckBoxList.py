@@ -22,6 +22,13 @@ class ControlCheckBoxList(ControlBase):
 
         self._form.label.setText(self._label)
 
+        self._form.listWidget.itemChanged.connect(self.item_changed)
+
+        self._form.listWidget.itemSelectionChanged.connect(self.__itemSelectionChanged)
+
+    def item_changed(self, item):
+        self.changed()
+
     def __add__(self, val):
         if isinstance( val, tuple ):
             item=QtGui.QListWidgetItem(val[0])
@@ -35,6 +42,16 @@ class ControlCheckBoxList(ControlBase):
 
     def clear(self):
         self._form.listWidget.clear()
+
+
+    ############################################################################
+    ############ Events ########################################################
+    ############################################################################
+
+    def __itemSelectionChanged(self): self.selectionChanged()
+
+    def selectionChanged(self): pass
+
         
 
     ############################################################################
@@ -64,5 +81,10 @@ class ControlCheckBoxList(ControlBase):
     def value(self, value): 
         for row in value: self += row
 
+
+    @property
+    def mouseSelectedRowIndex(self):
+        return self.form.listWidget.currentRow()
+    
             
         

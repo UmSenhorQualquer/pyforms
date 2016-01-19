@@ -38,6 +38,7 @@ class ControlVisVisVolume(ControlBase):
         layout.addWidget(widget)
 
         self._colorMap = vv.CM_AUTUMN
+        self._colors_limits = None
 
     ############################################################################
     ############ Properties ####################################################
@@ -59,7 +60,7 @@ class ControlVisVisVolume(ControlBase):
             a = vv.gca()
             view = a.GetView()
             a.Clear()
-            vv.volshow3(self._value, renderStyle='mip', cm=self._colorMap )
+            vv.volshow3(self._value, renderStyle='mip', cm=self._colorMap, clim=self._colors_limits )
             if not self._first:
                 a = vv.gca()
                 a.SetView(view)
@@ -68,13 +69,17 @@ class ControlVisVisVolume(ControlBase):
 
     @property
     def value(self): return None
-
     @value.setter
     def value(self, value):
-
         self._value = value
-
         self.refresh()
-        
 
-        
+    @property
+    def colors_limits(self): return self._colors_limits
+    @colors_limits.setter
+    def colors_limits(self, value):
+        self._colors_limits = value
+        self.refresh()
+
+    @property
+    def visvis(self): return vv

@@ -1,5 +1,5 @@
 from pyforms.gui.Controls.ControlBase import ControlBase
-
+from PyQt4 import QtGui
 try:
 	from OpenGL.GL  import *
 	from OpenGL.GLU import *
@@ -7,7 +7,7 @@ try:
 except:
 	print ("No OpenGL library available")
 
-
+import itertools
 
 class OpenglGLWidget(QGLWidget):
 
@@ -28,26 +28,32 @@ class OpenglGLWidget(QGLWidget):
 		self._lastMousePosition     = [0,0]  #Last mouse position
 
 		self._mouseStartDragPoint   = None
+		self._clear_color = 0,0,0,1
 		
 		self.setMinimumHeight(100)
 		self.setMinimumWidth(100)
 		self.setMouseTracking(True)
 		self.setAcceptDrops(True)
-        
+
+		self.setSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding);
+
+
 
 	def initializeGL(self):
 		glClearDepth(1.0)
-		glClearColor(0, 0, 0, 1.0)
-		#glDisable(GL_CULL_FACE)
-		#glEnable(GL_DEPTH_TEST)
-		#glDisable(GL_DEPTH_TEST)
-
-		
-		#glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-		#glBlendFunc(GL_ONE_MINUS_DST_ALPHA,GL_DST_ALPHA)
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE)
+		glClearColor(*self._clear_color)		
+		glBlendFunc(GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 		glEnable( GL_BLEND )
-		
+
+
+		glEnable( GL_POINT_SMOOTH );
+		glEnable( GL_LINE_SMOOTH );
+		glEnable( GL_POLYGON_SMOOTH );
+		glHint( GL_POINT_SMOOTH_HINT, GL_NICEST );
+		glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
+		glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
+	
+
 	def resizeGL(self, width, height):
 		glViewport(0, 0, width, height)
 		glMatrixMode(GL_PROJECTION)
@@ -55,14 +61,20 @@ class OpenglGLWidget(QGLWidget):
 		gluPerspective(65.0, float(width)/float(height), 0.01, 800.0)
 
 
-	def paintGL(self):
-		glClearColor(0.0, 0.0, 0.0, 1.0)
+	def paintGL(self):		
+		if self._clear_color: 
+			glBlendFunc(GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+			glClearColor(*self._clear_color)
+		else:
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE)
+			glClearColor(0,0,0,1)
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 		glMatrixMode(GL_MODELVIEW)
 		glLoadIdentity()
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE)
+		
 		glEnable( GL_BLEND )
-
+	
 		glScalef(1,-1,-1)
 
 		glTranslatef( 0, 0, self._zoom)
@@ -70,10 +82,7 @@ class OpenglGLWidget(QGLWidget):
 		glRotatef( self._rotation[1], 0,1,0 )
 		glRotatef( self._rotation[2], 0,0,1 )
 
-
-
 		if self._scene!=None: self._scene.DrawGLScene()
-			
 
 		if self.mouseDown:
 			#Get mouse position
@@ -82,6 +91,8 @@ class OpenglGLWidget(QGLWidget):
 			winX, winY = float(self._mousePosition[0]), float(viewport[3] - self._mousePosition[1])
 			winZ = glReadPixels(winX, winY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)
 			self._mouseGLPosition = gluUnProject( winX, winY, winZ[0][0], modelview, projection, viewport)
+
+		glDisable( GL_BLEND )
 	 
 	def __updateMouse(self, event, pressed = None):
 		self._mousePosition[0] = event.x()
@@ -141,7 +152,6 @@ class OpenglGLWidget(QGLWidget):
 	def onPress(self, button, point, glpoint=None):
 		pass
 
-
 	def onDrag(self, startPoint, endPoint, startGLPoint=None, endGLPoint=None):
 		movX, movY = endPoint[0]-startPoint[0], endPoint[1]-startPoint[1]
 		self._rotation[2] -= float(movX)*0.15
@@ -191,6 +201,14 @@ class ControlOpenGL(ControlBase):
 	def value(self, value):  self._form.scene = value; self._form.repaint()
 
 	def repaint(self): self._form.repaint()
+
+	@property 
+	def clear_color(self): self._form._clear_color
+	@clear_color.setter
+	def clear_color(self, value):  
+		self._form._clear_color = value; 
+		self._form.repaint()
+
 
 
 	def resetZoomAndRotation(self): self._form.resetZoomAndRotation()
