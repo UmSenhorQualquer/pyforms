@@ -38,6 +38,11 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph 	import ControlEventsGraph
+
+	try:
+		from pyforms.gui.Controls.ControlCodeEditor 		import ControlCodeEditor
+	except:
+		print("QScintilla2 not installed")
 	
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
