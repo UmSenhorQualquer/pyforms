@@ -35,20 +35,14 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QsciScintilla" name="code_area">
-     <property name="font">
-      <font>
-       <family>Monaco</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
+    <widget class="QsciScintilla" name="code_editor">
      <property name="toolTip">
       <string/>
      </property>
