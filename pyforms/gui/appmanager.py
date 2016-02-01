@@ -34,6 +34,7 @@ class Container(object):
 		self._form.actionRun.setEnabled(False)
 		self._form.actionStop.setEnabled(True)
 		self._algorithm.execute()
+		self.actionStop_triggered()
 		
 	def actionStop_triggered(self): 
 		self._algorithm.stop = True

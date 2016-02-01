@@ -63,11 +63,19 @@ class ControlMdiArea(ControlBase, QMdiArea):
         return self
 
     def _subWindowClosed(self, closeEvent, window=None):
-        window.beforeClose()
-        activeWidget = self.activeSubWindow().widget()
+
+        if window:
+            window.beforeClose()
+            activeWidget = window
+            window = window.subwindow
+        else:
+            activeWidget = self.activeSubWindow().widget()
+            window = self.activeSubWindow()
+
         if activeWidget in self._value:
             self._value.remove(activeWidget)
-        self.removeSubWindow(self.activeSubWindow())
+
+        self.removeSubWindow(window)
         self._openWindows.remove(activeWidget.uid)
         closeEvent.accept()
 
