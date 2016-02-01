@@ -276,8 +276,8 @@ class VideoGLWidget(QGLWidget):
 
         if event.button() == 1:
             self._mouseLeftDown = True
-            self._mouseStartDragPoint = (
-                self._glX - self._x, self._height - self._glY + self._y)
+            self._mouseStartDragPoint = (self._glX - self._x) * float(self.imgWidth), 
+                                        (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
 
         if event.button() == 4:
             self._mouseRightDown = True
@@ -289,8 +289,11 @@ class VideoGLWidget(QGLWidget):
         self._mouseY = event.y()
         self.repaint()
         if self._mouseLeftDown and self._mouseDown:
-            self.onDrag(self._mouseStartDragPoint, ((self._glX - self._x) * float(self.imgWidth),
-                                                    (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0))
+            p1 = self._mouseStartDragPoint
+            p2 = (self._glX - self._x) * float(self.imgWidth), 
+                 (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
+
+            self.onDrag(p1, p2)
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
