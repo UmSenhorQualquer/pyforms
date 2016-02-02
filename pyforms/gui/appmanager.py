@@ -1,10 +1,15 @@
 import sys, glob, os
+import logging
+import traceback
 from PyQt4 import uic
 from PyQt4 import QtGui, QtCore
 import pyforms.Utils.tools as tools
 
 class Container(object):
 	def __init__(self, ClassObject):
+		
+		self.logger = logging.getLogger('pyforms')
+		
 		self._algorithm = ClassObject()
 		self._algorithm.initForm()
 		form_path = os.path.join(tools.get_object_class_path( Container ), 'mainWindow.ui')
@@ -33,7 +38,12 @@ class Container(object):
 		self._algorithm.stop = False
 		self._form.actionRun.setEnabled(False)
 		self._form.actionStop.setEnabled(True)
-		self._algorithm.execute()
+		try:
+			self._algorithm.execute()
+		except Exception as err:
+			tb = traceback.format_exc()
+			self.logger.debug("Action run failed: \n%s", tb)
+			self.logger.warning("Action run failed: %s", str(err))
 		self.actionStop_triggered()
 		
 	def actionStop_triggered(self): 

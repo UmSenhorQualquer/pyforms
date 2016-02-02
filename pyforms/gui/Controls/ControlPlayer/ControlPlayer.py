@@ -344,6 +344,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@fps.setter
 	def fps(self, value):
+		self.form.videoFPS.setValue(int(round(value)))
 		self._videoFPS = value
 		if math.isnan(self._videoFPS):
 			self._videoFPS = 15.0

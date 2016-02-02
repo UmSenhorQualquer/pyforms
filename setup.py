@@ -15,7 +15,7 @@ from setuptools import setup
 setup(
 
 	name				='PyForms',
-	version 			='0.1.4.dev1',
+	version 			='0.1.4.dev2',
 	description 		="""Pyforms is a Python 2.7 and 3.0 framework to develop GUI application, 
 		which promotes modular software design and code reusability with minimal effort.""",
 	author  			='Ricardo Ribeiro',
