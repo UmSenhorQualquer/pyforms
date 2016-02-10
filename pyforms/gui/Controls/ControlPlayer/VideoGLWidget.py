@@ -293,7 +293,7 @@ class VideoGLWidget(QGLWidget):
     def mouseMoveEvent(self, event):
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.repaint()
+        self.updateGL()
         if self._mouseLeftDown and self._mouseDown:
             p1 = self._mouseStartDragPoint
             p2 = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
