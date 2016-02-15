@@ -12,7 +12,7 @@ class ControlImage(ControlBase):
         self._filename = ''
 
     def initControl(self):
-        return "controls.push(new ControlImage('"+self._name+"','%s'));" %  self.help 
+        return "new ControlImage('"+self._name+"','%s')" %  self.help 
         
     def save(self, data):
         if self.value!=None: data['value'] = self._value

@@ -12,7 +12,7 @@ class ControlPlayer(ControlBase):
     
     def initControl(self):
         self._currentFrame = None
-        return "controls.push(new ControlPlayer('"+self._name+"','%s'));" % self.help
+        return "new ControlPlayer('"+self._name+"','%s')" % self.help
 
     def processFrame(self, frame):  pass
 

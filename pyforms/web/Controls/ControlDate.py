@@ -7,4 +7,4 @@ class ControlDate(ControlBase):
 		super(ControlDate, self).__init__(label, defaultValue, helptext)
 
 	def initControl(self):
-		return """controls.push(new ControlDate('{0}','{1}','{3}','{2}'));""".format(self._label, self._name, self.help, self.value)
+		return """new ControlDate('{0}','{1}','{3}','{2}')""".format(self._label, self._name, self.help, self.value)
