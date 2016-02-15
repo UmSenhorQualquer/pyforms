@@ -93,6 +93,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 		self.view3D = False
 
+
+
 	def __rotateX(self):
 		self._videoWidget.rotateX = self.form.verticalSlider.value()
 		self.refresh()
@@ -290,6 +292,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 		self.refresh()
 
+
 	@property
 	def startFrame(self):
 		if self._value:
@@ -370,3 +373,9 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	def show(self):
 		QtGui.QFrame.show(self)
+
+	@property
+	def image_width(self): return self._value.get(3)
+
+	@property
+	def image_height(self): return self._value.get(4)

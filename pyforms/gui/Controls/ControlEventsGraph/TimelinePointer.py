@@ -18,16 +18,20 @@ __status__ = "Development"
 
 class TimelinePointer(object):
 
-    def __init__(self, position, parent):
+    def __init__(self, position, parent, scroll):
         self._position  = position
         self._parent    = parent
+        self._scroll    = scroll
 
     def draw(self, painter, showvalues=False):
+        x = self.position - self._scroll.sliderPosition()
         painter.setPen(QtGui.QColor(0, 255, 0))
         painter.setBrush(QtGui.QColor(0, 255, 0))
-        painter.drawLine(self.position, 8, self.position, self._parent.height())
-        painter.drawEllipse(QtCore.QPoint(self.position, 8), 5, 5)
-        painter.drawText(self.position + 8, 8 + 4, str(self._position))
+        painter.drawLine(x, 8, x, self._parent.height())
+        painter.drawEllipse(QtCore.QPoint(x, 8), 5, 5)
+        painter.drawText(x + 8, 8 + 4, str(self.position))
+
+     
 
     ##########################################################################
     #### HELPERS/FUNCTIONS ###################################################

@@ -41,6 +41,8 @@ class Container(object):
 		self._form.actionRun.setEnabled(True)
 		self._form.actionStop.setEnabled(False)
 
+	
+
 def startApp(ClassObject):
 	app = QtGui.QApplication(sys.argv)
 	container = Container(ClassObject)

@@ -269,6 +269,7 @@ class VideoGLWidget(QGLWidget):
         self._mouseX = event.x()
         self._mouseY = event.y()
         self.repaint()
+        
 
         if hasattr(self, 'imgWidth'):
             self.onClick(event, (self._glX - self._x) * float(self.imgWidth),
@@ -284,6 +285,7 @@ class VideoGLWidget(QGLWidget):
             self._lastGlY = self._glY
 
     def mouseMoveEvent(self, event):
+
         self._mouseX = event.x()
         self._mouseY = event.y()
         self.repaint()

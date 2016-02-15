@@ -60,6 +60,7 @@ class BaseWidget(QtGui.QWidget):
 
             if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
                 self._progress = ControlProgress("Progress", 0, 100)
+                self._progress.hide()
                 if self._formset != None:
                     self._formset += ['_progress']
 
@@ -304,6 +305,7 @@ class BaseWidget(QtGui.QWidget):
         self._progress.value = 0
         self._processing_count = 0
         self._processing_initial_time = time.time()
+        self._progress.show()
 
     def update_progress(self, progress=1):
         self._progress.value = self._processing_count
@@ -336,6 +338,8 @@ class BaseWidget(QtGui.QWidget):
     def end_progress(self):
         # self.update_progress()
         self._progress.value = self._progress.max
+        self._progress.hide()
+        
 
     def executeCommand(self, cmd, cwd=None):
         if cwd is not None:
@@ -364,6 +368,12 @@ class BaseWidget(QtGui.QWidget):
 
     @mainmenu.setter
     def mainmenu(self, value): self._mainmenu = value
+
+    @property
+    def formset(self): return self._formset
+
+    @formset.setter
+    def formset(self, value): self._formset = value
 
     @property
     def uid(self): return self._uid
