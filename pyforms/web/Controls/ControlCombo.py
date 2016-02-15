@@ -16,7 +16,7 @@ class ControlCombo(ControlBase):
                 values.remove(v)
                 values.insert(0, v)
 
-        return "controls.push(new ControlCombo('%s','%s', %s,'%s'));" % (self._label, self._name, values ,self.help )
+        return "new ControlCombo('%s','%s', %s,'%s')" % (self._label, self._name, values ,self.help )
 
     def currentIndexChanged(self, index):
         if not self._addingItem:

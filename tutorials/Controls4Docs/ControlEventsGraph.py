@@ -40,42 +40,43 @@ class SimpleExample(BaseWidget):
 		self._btn1.value = self.__btn1
 
 		self._start = time.time()
+
+		self.INTERVAL = 1
 		
 
-	def __btn(self):
-		
+	def __btn(self):		
 		for i in range(1000):
 			s = random.randint( 0, 10000 )
 			o = random.randint( 0, 1000  )
-			self._control.add_period( s, s+o, track=random.randint(0,30) )
-			self._control.add_period( random.randint(0, 10000), s+o, track=random.randint(0,30), color="#00FFDD")
+			self._control0.add_period( s, s+o, track=random.randint(0,30) )
+			self._control0.add_period( random.randint(0, 10000), s+o, track=random.randint(0,30), color="#00FFDD")
 
-		self._control.value = 5000
+		self._control0.value = 5000
 
 	def __addEvent0(self):
 		b = self._control0.value
-		e = b+33
+		e = b+self.INTERVAL
 		self._control0.add_period( b, e, track=random.randint(0,10) )
 		self._control0.value = e
 
 	def __addEvent1(self):
 		b = self._control1.value
-		e = b+33
+		e = b+self.INTERVAL
 		self._control1.add_period( b, e, track=random.randint(0,10) )
 		self._control1.value = e
 
 	def __addEvent2(self):
 		b = self._control2.value
-		e = b+33
+		e = b+self.INTERVAL
 		self._control2.add_period( b, e, track=random.randint(0,10) )
 		self._control2.value = e
 
 	def __addEvent3(self):
 		b = self._control3.value
-		e = b+33
+		e = b+self.INTERVAL
 		self._control3.add_period( b, e, track=random.randint(0,10) )
 		self._control3.value = e
-		
+
 		self._txt.value = str(time.time() - self._start)
 
 	def __btn1(self):
@@ -84,19 +85,20 @@ class SimpleExample(BaseWidget):
 		
 		timer = QtCore.QTimer(self.form)
 		timer.timeout.connect(self.__addEvent0)
-		timer.start(33)
-
+		timer.start(self.INTERVAL)
+		
 		timer = QtCore.QTimer(self.form)
 		timer.timeout.connect(self.__addEvent1)
-		timer.start(33)
+		timer.start(self.INTERVAL)
 
 		timer = QtCore.QTimer(self.form)
 		timer.timeout.connect(self.__addEvent2)
-		timer.start(33)
+		timer.start(self.INTERVAL)
 
 		timer = QtCore.QTimer(self.form)
 		timer.timeout.connect(self.__addEvent3)
-		timer.start(33)
+		timer.start(self.INTERVAL)
+
 		
 
 ##################################################################################################################

@@ -9,14 +9,13 @@ class ControlVisVis(ControlBase):
 
 	def initControl(self):
 		values = (self.value if(self.value is not None and self.value!='') else [])
-		return """controls.push(new ControlVisVis('{0}','{1}',{3},'{2}'));""".format(self._label, self._name, self.help, values)
+		return """new ControlVisVis('{0}','{1}',{3},'{2}')""".format(self._label, self._name, self.help, values)
 
 
 	@property
 	def legend(self):return self._legend
 	@legend.setter
 	def legend(self, value): 
-		print "legend", value
 		self._legend = value
 
 

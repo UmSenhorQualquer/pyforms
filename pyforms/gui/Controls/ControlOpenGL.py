@@ -28,7 +28,7 @@ class OpenglGLWidget(QGLWidget):
 		self._lastMousePosition     = [0,0]  #Last mouse position
 
 		self._mouseStartDragPoint   = None
-		self._clear_color = 0,0,0,1
+		self._clear_color = None
 		
 		self.setMinimumHeight(100)
 		self.setMinimumWidth(100)
@@ -41,9 +41,9 @@ class OpenglGLWidget(QGLWidget):
 
 	def initializeGL(self):
 		glClearDepth(1.0)
-		glClearColor(*self._clear_color)		
-		glBlendFunc(GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+		if self._clear_color: glClearColor(*self._clear_color)
 		glEnable( GL_BLEND )
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE)
 
 
 		glEnable( GL_POINT_SMOOTH );

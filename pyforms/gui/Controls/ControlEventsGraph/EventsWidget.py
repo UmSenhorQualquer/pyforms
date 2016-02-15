@@ -37,35 +37,15 @@ class EventsWidget(QtGui.QWidget):
         self.setPalette(palette)
 
         self._tracks        = [Track(parent=self)]      # List of tracks
-        self._pointer       = TimelinePointer(0, self)  # Timeline ( greenline )
+        self._pointer       = TimelinePointer(0, self, scroll)  # Timeline ( greenline )
         self.tracks_height  = 60
         self._first_track   = self._tracks[0]
+        self._break_draw    = False #This variable indicates if should continuing drawing the widget or should move foward
 
 
     ##########################################################################
     #### HELPERS/FUNCTIONS ###################################################
     ##########################################################################
-
-
-    def __drawTrackLines(self, painter, start, end):
-        # Draw only from pixel start to end
-        painter.setPen(QtCore.Qt.DashLine)
-        painter.setOpacity(0.3)
-        # Draw horizontal lines
-        for i, track in enumerate(self._tracks): track.draw(painter, start,end, i)
-
-
-        # Draw vertical lines
-        for x in range(start - (start % 100), end, 100):
-            painter.drawLine(x, 20, x, self.height())
-            string = "%d" % x
-            boundtext = painter.boundingRect(QtCore.QRectF(), string)
-            painter.drawText(x - boundtext.width() / 2, 15, string)
-        painter.setOpacity(1.0)
-
-        for index, track in enumerate(self._tracks): track.drawLabels(painter, index)
-    
-
 
     def import_csv(self, csvfileobject):
         """
@@ -146,8 +126,6 @@ class EventsWidget(QtGui.QWidget):
 
     def add_period(self, begin, end, title='', track=0, color="#FFFF00"):
         """Adds an annotated interval."""
-        if self.width()<end: self.setMinimumWidth(end+100)
-            
         
         period = TimelineDelta(begin, end, 
             title         =   title, 
@@ -158,9 +136,37 @@ class EventsWidget(QtGui.QWidget):
         if len(self._tracks)<=track:
             for i in range( len(self._tracks), track+1 ):  self.addTrack()
         #################################################
+
+        scroll_limit = self._scroll.sliderPosition()+self.width()
+        if end>scroll_limit: self._scroll.setMaximum(end-self.width()+50)
+
         self._tracks[track].add_period(period)
         return period
 
+
+
+    def __drawTrackLines(self, painter, start, end):
+        # Draw only from pixel start to end
+        painter.setPen(QtCore.Qt.DashLine)
+        painter.setOpacity(0.3)
+        # Draw horizontal lines
+        for i, track in enumerate(self._tracks): 
+            if self._break_draw: return
+            track.draw(painter, 0, self.width(), i)
+
+        # Draw vertical lines
+        for x in range(start - (start % 100), end, 100):
+            if self._break_draw: return
+            painter.drawLine(x-start, 20, x-start, self.height())
+            string = str(x)
+            boundtext = painter.boundingRect(QtCore.QRectF(), string)
+            painter.drawText(x-start-boundtext.width()/2,15,  string)
+            
+        painter.setOpacity(1.0)
+        for index, track in enumerate(self._tracks):
+            if self._break_draw: return
+            track.drawLabels(painter, index)
+    
 
     ##########################################################################
     #### EVENTS ##############################################################
@@ -174,13 +180,14 @@ class EventsWidget(QtGui.QWidget):
         painter.setRenderHint(QtGui.QPainter.Antialiasing)
         painter.setFont(QtGui.QFont('Decorative', 8))
 
-        start   = self._scroll.horizontalScrollBar().sliderPosition()-100
-        end     = start+self.parent().width()+100
+        start   = self._scroll.sliderPosition()
+        end     = self._scroll.sliderPosition()+self.width()
 
         self.__drawTrackLines(painter, start, end)
-        
-        for i, track in enumerate(self._tracks): 
-            track.drawPeriods(painter, start, end, track_index=i)
+
+        for i, track in enumerate(self._tracks):
+            if self._break_draw: break
+            track.drawPeriods(painter, start, end, track_index=i, left_shift=-start)
 
         self._pointer.draw(painter) #Draw the time pointer
         painter.end()
@@ -196,16 +203,16 @@ class EventsWidget(QtGui.QWidget):
         """
         This function check if the current_time is visible to the user.
         """
-        scrollLimit = self._scroll.horizontalScrollBar().sliderPosition() + self.parent().width() - 50
+        scrollLimit = self._scroll.sliderPosition() + self.parent().width()
 
         if current_time > scrollLimit:
-            if self.width()<current_time: self.setMinimumWidth(current_time+100)
-            self._scroll.horizontalScrollBar().setSliderPosition(current_time)
-        if current_time < self._scroll.horizontalScrollBar().sliderPosition():
-            self._scroll.horizontalScrollBar().setSliderPosition(current_time)
+            self._scroll.setMaximum(current_time+100)
+            self._scroll.setSliderPosition(current_time-self.parent().width())
+        if current_time < self._scroll.sliderPosition():
+            self._scroll.setSliderPosition(current_time)
 
     @property
-    def scroll(self): return self._scroll.horizontalScrollBar()
+    def scroll(self): return self._scroll
 
     @property
     def position(self): return self._pointer._position

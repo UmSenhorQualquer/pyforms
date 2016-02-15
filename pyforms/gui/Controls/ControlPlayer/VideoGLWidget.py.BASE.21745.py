@@ -5,7 +5,6 @@
 
 """
 
-import logging
 import pyforms.Utils.tools as tools
 import math
 from PyQt4 import uic
@@ -32,7 +31,6 @@ class VideoGLWidget(QGLWidget):
 
     
     def __init__(self, parent=None):
-        self.logger = logging.getLogger('pyforms')
         QGLWidget.__init__(self, parent)
         self.image2Display = []
         self.texture = []
@@ -117,7 +115,7 @@ class VideoGLWidget(QGLWidget):
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
-        # Correct a bug related with the overlap of contexts between simultaneous OpenGL windows.
+        #Currect a bug related with the overlap of contexts between simulatanious OpenGL windows.
         if self._pendingFrames!=None:
             for index, frame in enumerate(self._pendingFrames):
                 if len(frame.shape) == 2:
@@ -143,7 +141,8 @@ class VideoGLWidget(QGLWidget):
         translateX = (len(self.texture) * self._width) / 2
 
         if len(self.texture) > 0:
-            GL.glTranslatef(-translateX, 0, -self.zoom)
+            GL.glTranslatef(-translateX, -self._height / 2, -self.zoom)
+            GL.glTranslatef(0, self._height / 2.0, 0)
 
             if self._point is not None:
                 GL.glColor4f(0, 0, 1, 1.0)
@@ -177,8 +176,6 @@ class VideoGLWidget(QGLWidget):
                     winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
                 self._glX, self._glY, self._glZ = GLU.gluUnProject(
                     winX, winY, winZ[0][0], modelview, projection, viewport)
-                # self.logger.debug("Paint GL mouse down")
-                # self.logger.debug("%s", "GLX: {0} | GLY: {1}".format(self._glX, self._glY))
 
             GL.glEnable(GL.GL_TEXTURE_2D)
             GL.glDisable(GL.GL_DEPTH_TEST)
@@ -269,15 +266,9 @@ class VideoGLWidget(QGLWidget):
         self.setFocus(QtCore.Qt.MouseFocusReason)
 
         self._mouseDown = True
-        # self.logger.debug("%s", "Mouse press (before) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
-        # self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
         self._mouseX = event.x()
         self._mouseY = event.y()
-
-        self.updateGL()
-        # self.logger.debug("%s", "Mouse press (after) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
-        # self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
-
+        self.repaint()
 
         if hasattr(self, 'imgWidth'):
             self.onClick(event, (self._glX - self._x) * float(self.imgWidth),
@@ -286,17 +277,16 @@ class VideoGLWidget(QGLWidget):
         if event.button() == 1:
             self._mouseLeftDown = True
             self._mouseStartDragPoint = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
-            # self.logger.debug("Button 1 pressed")
+
         if event.button() == 4:
             self._mouseRightDown = True
             self._lastGlX = self._glX
             self._lastGlY = self._glY
 
     def mouseMoveEvent(self, event):
-
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.updateGL()
+        self.repaint()
         if self._mouseLeftDown and self._mouseDown:
             p1 = self._mouseStartDragPoint
             p2 = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0

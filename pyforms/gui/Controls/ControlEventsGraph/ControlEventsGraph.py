@@ -35,18 +35,20 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     def initForm(self):
         vlayout = QtGui.QVBoxLayout(); vlayout.setMargin(0); self.setLayout(vlayout)
 
-        # Add scroll area
-        scrollarea = QtGui.QScrollArea()
-        scrollarea.setMinimumHeight(140)
-        scrollarea.setWidgetResizable(True)
-        vlayout.addWidget(scrollarea)
+        scroll      = QtGui.QScrollBar(QtCore.Qt.Horizontal)
+        scrollarea  = QtGui.QScrollArea(); scrollarea.setMinimumHeight(140); scrollarea.setWidgetResizable(True)
+        widget      = EventsWidget(scroll=scroll); scrollarea.setWidget(widget)
 
-        # The timeline widget
-        widget = EventsWidget(scroll=scrollarea)
-        scrollarea.setWidget(widget)
+        scroll.actionTriggered.connect(self.__scroll_changed)
 
-        self._time = widget
-        self._scrollArea = scrollarea
+        vlayout.addWidget(scrollarea)   # The timeline widget
+        vlayout.addWidget(scroll)       # Add scroll
+        
+        scroll.setMaximum(0)
+        scroll.setSliderPosition(0)
+              
+        self._time   = widget
+        self._scroll = scroll
 
     ##########################################################################
     #### HELPERS/PUBLIC FUNCTIONS ############################################
@@ -58,6 +60,9 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     ##########################################################################
     #### EVENTS ##############################################################
     ##########################################################################
+
+    def __scroll_changed(self, change): self.repaint()
+
 
     def getExportFilename(self): return "untitled.csv"
 
@@ -75,6 +80,8 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
         with open(filename, 'wb') as csvfile:
             spamwriter = csv.writer(csvfile, dialect='excel')
             self._time.export_csv(spamwriter)
+
+    def repaint(self): self._time.repaint()
             
 
     ##########################################################################
@@ -96,11 +103,8 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
 
     @property
     def max(self): return self._time.minimumWidth()
-
     @max.setter
-    def max(self, value):
-        self._time.setMinimumWidth(value)
-        self.repaint()
+    def max(self, value): self._time.setMinimumWidth(value); self.repaint()
 
     @property
     def form(self): return self

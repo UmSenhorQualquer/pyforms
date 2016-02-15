@@ -31,21 +31,20 @@ class TimelineDelta(object):
     ##########################################################################
 
     def draw(self, painter, top=20, showvalues=False, left_shift=0):
-        start, end = self.begin, self.end
-        transparency = 0.5
+        start, width = left_shift+self.begin, self.end-self.begin
 
         painter.setPen(QtGui.QColor(0, 0, 0))
-        painter.setOpacity(transparency)
-        #painter.drawRoundedRect(start, self._top, end - start, self._height, 3, 3)
-        painter.drawRect(left_shift+start, top, end - start, self._parentWidget.tracks_height-4)
+        painter.setOpacity(0.5)
+        painter.drawRect(start, top, width, self._parentWidget.tracks_height-4)
         painter.setOpacity(1.0)
 
+        """
         painter.drawText(left_shift+start + 3, top + self._parentWidget.tracks_height/2+2, self._title)
         if showvalues:
             painter.drawText( 
                 left_shift+start, top + self._parentWidget.tracks_height+4, 
                 "[{0};{1}] delta:{2}".format(self._begin, self._end, self._end - self._begin)
-            )
+            )"""
 
     def remove(self):
         try:

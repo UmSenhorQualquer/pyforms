@@ -13,7 +13,7 @@ class ControlProgress(ControlBase):
         self._max = max
         ControlBase.__init__(self, label, defaultValue)
                 
-    def initControl(self): return "controls.push(new ControlProgress('"+self._name+"','%s'));" %  self.help 
+    def initControl(self): return "new ControlProgress('"+self._name+"','%s')" %  self.help 
 
     @property
     def value(self): return self._value

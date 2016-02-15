@@ -9,7 +9,7 @@ class ControlList(ControlBase):
 
 	def initControl(self):
 		values = self.json
-		return """controls.push(new ControlList('{0}','{1}',{3},'{2}'));""".format(self._label, self._name, self.help, values)
+		return """new ControlList('{0}','{1}',{3},'{2}')""".format(self._label, self._name, self.help, values)
 
 
 
