@@ -85,7 +85,8 @@ function ControlDir( label, dom_id, value, help ){
 
 
 	this.FileRowEvent = function(row, dom){
-		var dom_id = $(dom).attr('dom-id');
+		//var trow_id = $(dom).attr('dom-id');
+
 		row.values[0] = "<a class='file2select' href='javascript:selectFile2Control(\""+self.app.control_id(dom_id)+"\",\""+row.file+"\", \""+dom_id+"\")' >"+row.filename+"</a>";
 		row.values.pop();
 		return row;
@@ -103,10 +104,12 @@ function ControlDir( label, dom_id, value, help ){
 		html += "<div id='dialog"+self.app.control_id(dom_id)+"' dom-id='"+self.app.control_id(dom_id)+"' class='dialog' style='display:none;' title='Pick a file'></div>";
 		
 		function reloadFolder(){
-			var folder = $('#files-browser-div').dataviewer('path');
-			if(folder==undefined) folder = '/';
-			$( "#dialog"+self.DOMID).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
-			$( "#dialog"+self.DOMID).dataviewer();
+			if( $('#files-browser-div').size()>0 ){
+				var folder = $('#files-browser-div').dataviewer('path');
+				if(folder==undefined) folder = '/';
+			}else folder = '/'
+			$( "#dialog"+self.app.control_id(dom_id)).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
+			$( "#dialog"+self.app.control_id(dom_id)).dataviewer();
 		}
 		
 		$( "#place-"+self.app.control_id(dom_id) ).replaceWith(html);
@@ -124,7 +127,7 @@ function ControlDir( label, dom_id, value, help ){
 
 		$( "#button"+self.app.control_id(dom_id) ).unbind('click');
 		$( "#button"+self.app.control_id(dom_id) ).click(function(){
-			$( "#dialog"+dom_id ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
+			$( "#dialog"+self.app.control_id(dom_id) ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
 			reloadFolder();
 		});
 	};
@@ -138,7 +141,7 @@ function ControlFile( label, dom_id, value, help ){
 	var self = this;
 
 	this.FileRowEvent = function(row, dom){
-		var dom_id = $(dom).attr('dom-id');
+		//var dom_id = $(dom).attr('dom-id');
 		row.values[0] = "<a class='file2select' href='javascript:selectFile2Control(\""+self.app.control_id(dom_id)+"\",\""+row.file+"\", \""+dom_id+"\")' >"+row.filename+"</a>";
 		row.values.pop();
 		return row;
@@ -156,10 +159,12 @@ function ControlFile( label, dom_id, value, help ){
 		html += "<div id='dialog"+self.app.control_id(dom_id)+"' dom-id='"+self.app.control_id(dom_id)+"' class='dialog' style='display:none;' title='Pick a file'></div>";
 		
 		function reloadFolder(){
-			var folder = $('#files-browser-div').dataviewer('path');
-			if(folder==undefined) folder = '/';
-			$( "#dialog"+self.DOMID).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
-			$( "#dialog"+self.DOMID).dataviewer();
+			if( $('#files-browser-div').size()>0 ){
+				var folder = $('#files-browser-div').dataviewer('path');
+				if(folder==undefined) folder = '/';
+			}else folder = '/'
+			$( "#dialog"+self.app.control_id(dom_id)).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
+			$( "#dialog"+self.app.control_id(dom_id)).dataviewer();
 		}
 		
 		$( "#place-"+self.app.control_id(dom_id) ).replaceWith(html);
@@ -177,7 +182,7 @@ function ControlFile( label, dom_id, value, help ){
 
 		$( "#button"+self.app.control_id(dom_id) ).unbind('click');
 		$( "#button"+self.app.control_id(dom_id) ).click(function(){
-			$( "#dialog"+dom_id ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
+			$( "#dialog"+self.app.control_id(dom_id) ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
 			reloadFolder();
 		});
 	};
