@@ -117,7 +117,7 @@ class VideoGLWidget(QGLWidget):
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
-        #Currect a bug related with the overlap of contexts between simulatanious OpenGL windows.
+        # Correct a bug related with the overlap of contexts between simultaneous OpenGL windows.
         if self._pendingFrames!=None:
             for index, frame in enumerate(self._pendingFrames):
                 if len(frame.shape) == 2:
@@ -143,8 +143,7 @@ class VideoGLWidget(QGLWidget):
         translateX = (len(self.texture) * self._width) / 2
 
         if len(self.texture) > 0:
-            GL.glTranslatef(-translateX, -self._height / 2, -self.zoom)
-            GL.glTranslatef(0, self._height / 2.0, 0)
+            GL.glTranslatef(-translateX, 0, -self.zoom)
 
             if self._point is not None:
                 GL.glColor4f(0, 0, 1, 1.0)
@@ -297,7 +296,7 @@ class VideoGLWidget(QGLWidget):
 
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.repaint()
+        self.updateGL()
         if self._mouseLeftDown and self._mouseDown:
             p1 = self._mouseStartDragPoint
             p2 = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
