@@ -7,6 +7,7 @@
 
 import math
 import os
+import logging
 from PyQt4 import uic
 from PyQt4 import QtCore, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
@@ -38,7 +39,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def __init__(self, *args):
 		QtGui.QFrame.__init__(self)
 		ControlBase.__init__(self, *args)
-
+		
+		self.logger = logging.getLogger('pyforms')
 
 	def initForm(self):
 		# Get the current path of the file
@@ -274,8 +276,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 			self._value = value
 
 		self.fps = self._value.get(5)
-		print("Open video with", self._value.get( 5), 'fps')
-
+		self.logger.debug("Open video with %s fps", '{0}'.format(self._value.get( 5)))
 
 		if self._value and value != 0:
 			self.videoProgress.setMinimum(0)
@@ -346,6 +347,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@fps.setter
 	def fps(self, value):
+		self.form.videoFPS.setValue(int(round(value)))
 		self._videoFPS = value
 		if math.isnan(self._videoFPS):
 			self._videoFPS = 15.0

@@ -21,6 +21,7 @@ class BaseWidget(object):
 		self._controlsPrefix = ''
 		self._html          = ''
 		self._js            = ''
+		self._id 			= str(uuid.uuid4())
 
 	############################################################################
 	############ Module functions  #############################################
@@ -34,24 +35,11 @@ class BaseWidget(object):
 		self._js = ''
 		if self._formset != None: 
 			self._html += self.generatePanel(self._formset)
-			self._js = "\n".join( self._controls )
+			self._js = '[{0}]'.format(",".join(self._controls))
 
 		self._html += """
-		<script type="text/javascript">
-			var APPLICATION = '%s';
-			var controls = [];
-
-			$.ajaxSetup({ cache: false });
-
-			$(function() {
-				%s
-
-				for(var index = 0; index < controls.length; index++) controls[index].load();
-
-				$('.application-tabs').tabs()
-			});
-		</script>
-		""" % (self.__class__.__name__, self._js)
+		<script type="text/javascript">var app = new PyFormsApp('{0}', '{2}', {1});</script>
+		""".format(self.__class__.__name__, self._js, self._id)
 		self._formLoaded = True
 		return { 'code': self._html, 'controls_js': self._js, 'title': self._title }
 
@@ -212,6 +200,7 @@ class BaseWidget(object):
 		result = {}
 		for name, var in vars(self).items():
 			if isinstance(var, ControlBase):
+				var.parent = self
 				var._name = self._controlsPrefix+"-"+name if len(self._controlsPrefix)>0 else name
 				result[name] = var
 
@@ -248,7 +237,7 @@ class BaseWidget(object):
 
 	
 	@property
-	def form(self): return self._html
+	def form(self): return """<span id='app-{1}' >{0}</span>""".format(self._html, self._id)
 
 	@property
 	def js(self): return self._js

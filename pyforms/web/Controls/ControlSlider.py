@@ -15,7 +15,7 @@ class ControlSlider(ControlBase):
         
     def initControl(self):
         values = self._label, self._name, self._value, self._min, self._max , self.help
-        return "controls.push(new ControlSlider('%s', '%s', %d, %d, %d,'%s'));" % values
+        return "new ControlSlider('%s', '%s', %d, %d, %d,'%s')" % values
 
     def valueChanged(self, value):
         self._updateSlider = False

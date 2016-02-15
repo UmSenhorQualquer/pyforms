@@ -15,7 +15,7 @@ from setuptools import setup
 setup(
 
 	name				='PyForms',
-	version 			='0.1.4',
+	version 			='0.1.4.dev2',
 	description 		="""Pyforms is a Python 2.7 and 3.0 framework to develop GUI application, 
 		which promotes modular software design and code reusability with minimal effort.""",
 	author  			='Ricardo Ribeiro',
@@ -51,6 +51,7 @@ setup(
 	install_requires=[
 		"pyopengl >= 3.1.0",
 		"visvis >= 1.9.1",
-		"numpy >= 1.6.1"
+		"numpy >= 1.6.1",
+		#"matplotlib"
 	],
 )

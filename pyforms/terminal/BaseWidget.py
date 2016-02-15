@@ -5,7 +5,7 @@ import argparse, uuid, os, shutil, time, sys, subprocess
 try:
 	import requests
 except:
-	print "No requests lib"
+	print("No requests lib")
 
 
 class BaseWidget(object):
@@ -118,7 +118,7 @@ class BaseWidget(object):
 						(float(self._processing_count)/float(self._total_processing_count))*100.0, self._processing_count, self._total_processing_count, 
 					)
 
-			print "Elapsed: %d:%d:%d:%d; Remaining: %d:%d:%d:%d; Processed %0.2f %%  (%d/%d); |   \r" % values, 
+			print("Elapsed: %d:%d:%d:%d; Remaining: %d:%d:%d:%d; Processed %0.2f %%  (%d/%d); |   \r" % values) 
 			sys.stdout.flush()
 
 		self._processing_count  += 1
@@ -150,7 +150,7 @@ class BaseWidget(object):
 			currentdirectory = os.getcwd()
 			os.chdir(cwd)
 		
-		print " ".join(cmd)
+		print(" ".join(cmd))
 		proc = subprocess.Popen(cmd)
 
 		if cwd!=None: os.chdir(currentdirectory)

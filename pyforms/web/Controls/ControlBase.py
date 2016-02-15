@@ -10,7 +10,7 @@ class ControlBase(object):
         self._name = ""
         self._help = helptext
         self._value = defaultValue
-        self._parent = 1
+        self._parent = None
         self._label = label
         self._popupMenu = None
         self._id = uuid.uuid4()
@@ -114,7 +114,7 @@ class ControlBase(object):
     @minHeight.setter
     def minHeight(self, value): pass
 
-    def __str__(self): return "<span id='place%s' />" % self._name
+    def __str__(self): return "<span id='place-{0}-{1}' />".format(self.parent._id, self._name)
 
 
 

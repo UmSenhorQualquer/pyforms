@@ -4,4 +4,4 @@ class ControlFile(ControlBase):
 
     def initControl(self):
     	values = ( self._label, self._name, self._value, self.help )
-        return "controls.push(new ControlFile('%s', '%s', '%s', '%s'));" % values
+        return "new ControlFile('%s', '%s', '%s', '%s')" % values

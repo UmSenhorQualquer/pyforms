@@ -274,11 +274,9 @@ class VideoGLWidget(QGLWidget):
         # self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
         self._mouseX = event.x()
         self._mouseY = event.y()
-
         self.updateGL()
         # self.logger.debug("%s", "Mouse press (after) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
         # self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
-
 
         if hasattr(self, 'imgWidth'):
             self.onClick(event, (self._glX - self._x) * float(self.imgWidth),
@@ -294,7 +292,6 @@ class VideoGLWidget(QGLWidget):
             self._lastGlY = self._glY
 
     def mouseMoveEvent(self, event):
-
         self._mouseX = event.x()
         self._mouseY = event.y()
         self.repaint()

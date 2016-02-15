@@ -16,7 +16,7 @@ class ControlBoundingSlider(ControlBase):
         
         
     def initControl(self):
-        return "controls.push(new ControlBoundingSlider('{0}', '{1}', [{2}, {3}], {4}, {5}, '{6}','{7}'));".format(
+        return "new ControlBoundingSlider('{0}', '{1}', [{2}, {3}], {4}, {5}, '{6}','{7}')".format(
             self._label, self._name, self.value[0], self.value[1], 
             self._min,  self._max , self._horizontal, self.help)
 
