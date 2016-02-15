@@ -30,8 +30,7 @@ class ControlText(ControlBase):
 	def finishEditing(self):
 		"""Function called when the lineEdit widget is edited"""
 		self.changed()
-		self.form.lineEdit.focusNextChild()
-
+		
 	###################################################################
 	############ Properties ###########################################
 	###################################################################
