@@ -180,7 +180,7 @@ class ControlCodeEditor(ControlBase):
     @value.setter
     def value(self, value):
         ControlBase.value.fset(self, value)
-        if len(self._value)==0:
+        if len(value)>0:
             with open(value, "r") as file:
                 self._code_editor.setText(str(file.read()))            
             self._code_editor.setModified(False)
