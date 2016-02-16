@@ -17,6 +17,9 @@ __status__ = "Development"
 PYFORMS_MODE = 'GUI'
 PYFORMS_LOG_LEVEL = logging.INFO
 
+CONTROL_CODE_EDITOR_DEFAULT_FONT_SIZE = '12'
+
+
 def setup_pyforms_logger():
     """ Setup logger for this app """
     # create logger

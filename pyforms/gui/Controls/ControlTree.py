@@ -35,6 +35,7 @@ class ControlTree(ControlBase, QTreeWidget):
         self.setAcceptDrops(True)
 
         self.model().dataChanged.connect(self.__itemChangedEvent)
+        self.itemDoubleClicked.connect(self.__itemDoubleClicked)
 
         self.selectionChanged = self.selectionChanged
         self._items = {}
@@ -192,6 +193,13 @@ class ControlTree(ControlBase, QTreeWidget):
                 ##########################
             return action
         return action
+
+    def __itemDoubleClicked(self, item, column):
+        if hasattr(item, 'double_clicked'): item.double_clicked()
+        self.item_double_clicked(item)
+
+    def item_double_clicked(self, item): pass
+        
 
     def aboutToShowContextMenuEvent(self):
         """

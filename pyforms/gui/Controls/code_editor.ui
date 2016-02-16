@@ -6,14 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>474</height>
+    <width>556</width>
+    <height>155</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -30,9 +33,32 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Font size</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="font_size">
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="modelColumn">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="save_button">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="text">
         <string>Save</string>
@@ -43,6 +69,12 @@
    </item>
    <item>
     <widget class="QsciScintilla" name="code_editor">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="toolTip">
       <string/>
      </property>
@@ -58,6 +90,7 @@
    <class>QsciScintilla</class>
    <extends>QFrame</extends>
    <header>Qsci/qsciscintilla.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

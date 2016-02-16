@@ -13,12 +13,13 @@
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
-from PyQt4 import uic
+from PyQt4 import uic, QtGui
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython  # pylint: disable=no-name-in-module
 from PyQt4.QtGui import QFontMetrics
 from PyQt4.QtGui import QFont
 from PyQt4.QtGui import QColor
 
+from pyforms import conf
 
 class ControlCodeEditor(ControlBase):
     """
@@ -31,16 +32,41 @@ class ControlCodeEditor(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "code_editor.ui")
         self._form = uic.loadUi(control_path)
 
-        self._code_file_path = ""
-
+        
         self._code_editor = self._form.code_editor
+
 
         self._save_button = self._form.save_button
         self._save_button.clicked[bool].connect(self.on_save_changes)
 
-        self._load_code_editor_settings()
+        self.form.font_size.addItem('9')
+        self.form.font_size.addItem('10')
+        self.form.font_size.addItem('11')
+        self.form.font_size.addItem('12')
+        self.form.font_size.addItem('14')
+        self.form.font_size.addItem('18')
+        self.form.font_size.addItem('24')
+
+        #Set the default font size
+        index = self.form.font_size.findText(conf.CONTROL_CODE_EDITOR_DEFAULT_FONT_SIZE)
+        self.form.font_size.setCurrentIndex(index)
+
+        self.form.font_size.currentIndexChanged.connect(self.__font_size_index_changed)
+        
+        icon = QtGui.QIcon()
+        icon.addPixmap( QtGui.qApp.style().standardPixmap(QtGui.QStyle.SP_DialogSaveButton), mode=QtGui.QIcon.Normal, state=QtGui.QIcon.On)
+        icon.addPixmap( QtGui.qApp.style().standardPixmap(QtGui.QStyle.SP_DialogSaveButton), mode=QtGui.QIcon.Normal, state=QtGui.QIcon.Off)
+        self.form.save_button.setIcon(icon)
+
+        self.lexer = QsciLexerPython
 
         super(ControlCodeEditor, self).initForm()
+
+    def __font_size_index_changed(self, index):
+        item = self.form.font_size.currentText()
+        if len(item) >= 1: self._load_code_editor_settings()
+
+        
 
     def _load_code_editor_settings(self):
         """
@@ -48,11 +74,14 @@ class ControlCodeEditor(ControlBase):
         Based on the example from http://eli.thegreenplace.net/2011/04/01/sample-using-qscintilla-with-pyqt/
         """
 
+        item = self.form.font_size.currentText()
+        size = int(item)
+
         # Set the default font
         font = QFont()
         font.setFamily('Courier')
         font.setFixedPitch(True)
-        font.setPointSize(14)
+        font.setPointSize(size)
         self._code_editor.setFont(font)
         self._code_editor.setMarginsFont(font)
 
@@ -81,9 +110,10 @@ class ControlCodeEditor(ControlBase):
 
         # Set Python lexer
         # Set style for Python comments (style number 1) to a fixed-width Courier.
-        lexer = QsciLexerPython()
+        lexer = self.lexer()
         lexer.setDefaultFont(font)
         self._code_editor.setLexer(lexer)
+        self._code_editor.setIndentationWidth(4)
         # self._code_editor.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1, 'Courier')
         self._code_editor.SendScintilla(QsciScintilla.SCI_STYLESETFONT, 1)
 
@@ -123,8 +153,8 @@ class ControlCodeEditor(ControlBase):
         """
         On button save clicked, save changes made on the code editor to file
         """
-        with open(self.value, "w") as file:
-            file.write(self._code_editor.text())
+        if self.value is None: self._value = QtGui.QFileDialog.getSaveFileName(self.form, "Save file")       
+        with open(self.value, "w") as file: file.write(self._code_editor.text())
 
         self._code_editor.setModified(False)
         self._save_button.setEnabled(False)
@@ -134,13 +164,24 @@ class ControlCodeEditor(ControlBase):
     ###################################################################
 
     @property
+    def lexer(self): return self._lexer
+    @lexer.setter
+    def lexer(self, value): 
+        self._lexer = value
+        self._load_code_editor_settings()
+
+
+    @property
     def value(self):
-        return self._code_file_path
+        if len(self._value)==0: return None
+        return self._value
+
 
     @value.setter
     def value(self, value):
-        with open(value, "r") as file:
-            self._code_editor.setText(str(file.read()))
-        self._code_file_path = value
-        self._code_editor.setModified(False)
-        self._save_button.setEnabled(False)
+        ControlBase.value.fset(self, value)
+        if len(self._value)==0:
+            with open(value, "r") as file:
+                self._code_editor.setText(str(file.read()))            
+            self._code_editor.setModified(False)
+            self._save_button.setEnabled(False)
