@@ -88,13 +88,8 @@ class ControlTree(ControlBase, QTreeWidget):
 
     @property
     def selectedItem(self):
-
-        for index in self.selectedIndexes():
-            item = index.model().itemFromIndex(index)
-
-            return item
-        else:
-            return None
+        if len(self.selectedItems())>0: return self.selectedItems()[0]
+        return None
 
     @property
     def cells(self):
@@ -102,7 +97,7 @@ class ControlTree(ControlBase, QTreeWidget):
         for row in range(self.model().rowCount()):
             r = []
             for col in range(self.model().columnCount()):
-                r.append(self.model.item(row, col))
+                kker.append(self.model.item(row, col))
 
             if len(r) > 0:
                 results.append(r)
@@ -199,6 +194,16 @@ class ControlTree(ControlBase, QTreeWidget):
         self.item_double_clicked(item)
 
     def item_double_clicked(self, item): pass
+
+    def keyPressEvent(self, event):
+        QTreeView.keyPressEvent(self, event)
+        item = self.selectedItem
+        if hasattr(item, 'key_pressed'): item.key_pressed(event)
+        self.key_press_event(event)
+
+
+    def key_press_event(self, event): pass
+
         
 
     def aboutToShowContextMenuEvent(self):
