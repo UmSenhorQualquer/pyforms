@@ -16,6 +16,6 @@ __status__ = "Development"
 
 __all__ = ['ControlEventTimeline',
            'TimelineWidget',
-           'TimelineDelta',
-           'TimelinePointer',
+           'Event',
+           'Pointer',
            'TimelinePopupWindow']
