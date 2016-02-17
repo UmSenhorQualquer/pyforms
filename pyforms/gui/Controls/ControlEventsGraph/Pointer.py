@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventTimeline.TimelinePointer
+""" pyforms.gui.Controls.ControlEventTimeline.Pointer
 
 """
 
@@ -16,15 +16,16 @@ __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
 
-class TimelinePointer(object):
+class Pointer(object):
 
     def __init__(self, position, parent, scroll):
         self._position  = position
         self._parent    = parent
         self._scroll    = scroll
 
-    def draw(self, painter, showvalues=False):
-        x = self.position - self._scroll.sliderPosition()
+    def draw(self, painter, left_shift=0, scale=1):
+        x = self.position/scale+left_shift
+
         painter.setPen(QtGui.QColor(0, 255, 0))
         painter.setBrush(QtGui.QColor(0, 255, 0))
         painter.drawLine(x, 8, x, self._parent.height())

@@ -35,27 +35,24 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     def initForm(self):
         vlayout = QtGui.QVBoxLayout(); vlayout.setMargin(0); self.setLayout(vlayout)
 
-        scroll      = QtGui.QScrollBar(QtCore.Qt.Horizontal)
+        self._scroll      = QtGui.QScrollBar(QtCore.Qt.Horizontal)
         scrollarea  = QtGui.QScrollArea(); scrollarea.setMinimumHeight(140); scrollarea.setWidgetResizable(True)
-        widget      = EventsWidget(scroll=scroll); scrollarea.setWidget(widget)
+        self._events_widget  = EventsWidget(scroll=self._scroll); scrollarea.setWidget(self._events_widget)
 
-        scroll.actionTriggered.connect(self.__scroll_changed)
+        self._scroll.actionTriggered.connect(self.__scroll_changed)
 
         vlayout.addWidget(scrollarea)   # The timeline widget
-        vlayout.addWidget(scroll)       # Add scroll
+        vlayout.addWidget(self._scroll) # Add scroll
         
-        scroll.setMaximum(0)
-        scroll.setSliderPosition(0)
-              
-        self._time   = widget
-        self._scroll = scroll
+        self._scroll.setMaximum(0)
+        self._scroll.setSliderPosition(0)
+        
 
     ##########################################################################
     #### HELPERS/PUBLIC FUNCTIONS ############################################
     ##########################################################################
 
-    def add_period(self, begin, end, title='', track=0, color='#FFFF00'):
-        self._time.add_period(begin, end, title, track, color)
+    def add_event(self, begin, end, title='', track=0, color='#FFFF00'): self._events_widget.add_event(begin, end, title, track, color)
 
     ##########################################################################
     #### EVENTS ##############################################################
@@ -64,13 +61,13 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     def __scroll_changed(self, change): self.repaint()
 
 
-    def getExportFilename(self): return "untitled.csv"
+    def get_export_filename(self): return "untitled.csv"
 
     def __export(self):
         """Export annotations to a file."""
         filename = QtGui.QFileDialog.getSaveFileName(parent=self,
                                                      caption="Export annotations file",
-                                                     directory=self.getExportFilename(),
+                                                     directory=self.get_export_filename(),
                                                      filter="CSV Files (*.csv)",
                                                      options=QtGui.QFileDialog.DontUseNativeDialog)
         if filename!='': self.export_csv(filename)
@@ -79,9 +76,9 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
         """Export annotations to a file."""
         with open(filename, 'wb') as csvfile:
             spamwriter = csv.writer(csvfile, dialect='excel')
-            self._time.export_csv(spamwriter)
+            self._events_widget.export_csv(spamwriter)
 
-    def repaint(self): self._time.repaint()
+    def repaint(self): self._events_widget.repaint()
             
 
     ##########################################################################
@@ -92,28 +89,28 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     Overwrite the changed event from the ControlBase
     """
     @property
-    def changed(self): return self._time._pointer.moveEvent
+    def changed(self): return self._events_widget._pointer.moveEvent
     @changed.setter
-    def changed(self, value): self._time._pointer.moveEvent = value
+    def changed(self, value): self._events_widget._pointer.moveEvent = value
 
     @property
-    def value(self): return self._time.position
+    def value(self): return self._events_widget.position
     @value.setter
-    def value(self, value): self._time.position = value
-
-    @property
-    def max(self): return self._time.minimumWidth()
-    @max.setter
-    def max(self, value): self._time.setMinimumWidth(value); self.repaint()
+    def value(self, value): self._events_widget.position = value
 
     @property
     def form(self): return self
 
     @property
-    def tracks(self): return self._time.tracks
+    def tracks(self): return self._events_widget.tracks
 
     @property
-    def tracks_height(self): return self._time.tracks_height
+    def tracks_height(self): return self._events_widget.tracks_height
     @tracks_height.setter
-    def tracks_height(self, value): self._time.tracks_height = value
+    def tracks_height(self, value): self._events_widget.tracks_height = value
    
+    @property
+    def scale(self): return self._events_widget.scale 
+    @scale.setter
+    def scale(self,value): self._events_widget.scale = value
+    
