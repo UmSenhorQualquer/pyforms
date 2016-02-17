@@ -27,16 +27,17 @@ class EventsWidget(QtGui.QWidget):
 
     _defautcolor = QtGui.QColor(100, 100, 255)
 
-    def __init__(self):
+    def __init__(self, scroll):
         super(EventsWidget, self).__init__()
-        
+        self._scroll    = scroll
+
         # Timeline background color
         palette = self.palette()
         palette.setColor(self.backgroundRole(), QtCore.Qt.white)
         self.setPalette(palette)
 
         self._tracks        = [Track(parent=self)]      # List of tracks
-        
+        self._pointer       = TimelinePointer(0, self, scroll)  # Timeline ( greenline )
         self.tracks_height  = 60
         self._first_track   = self._tracks[0]
         self._break_draw    = False #This variable indicates if should continuing drawing the widget or should move foward
@@ -135,6 +136,10 @@ class EventsWidget(QtGui.QWidget):
         if len(self._tracks)<=track:
             for i in range( len(self._tracks), track+1 ):  self.addTrack()
         #################################################
+
+        scroll_limit = self._scroll.sliderPosition()+self.width()
+        if end>scroll_limit: self._scroll.setMaximum(end-self.width()+50)
+
         self._tracks[track].add_period(period)
         return period
 
@@ -175,6 +180,8 @@ class EventsWidget(QtGui.QWidget):
         painter.setRenderHint(QtGui.QPainter.Antialiasing)
         painter.setFont(QtGui.QFont('Decorative', 8))
 
+        start   = self._scroll.sliderPosition()
+        end     = self._scroll.sliderPosition()+self.width()
 
         self.__drawTrackLines(painter, start, end)
 
@@ -192,7 +199,21 @@ class EventsWidget(QtGui.QWidget):
     #### PROPERTIES ##########################################################
     ##########################################################################
 
-    
+    def __check_current_time_is_visible(self, current_time):
+        """
+        This function check if the current_time is visible to the user.
+        """
+        scrollLimit = self._scroll.sliderPosition() + self.parent().width()
+
+        if current_time > scrollLimit:
+            self._scroll.setMaximum(current_time+100)
+            self._scroll.setSliderPosition(current_time-self.parent().width())
+        if current_time < self._scroll.sliderPosition():
+            self._scroll.setSliderPosition(current_time)
+
+    @property
+    def scroll(self): return self._scroll
+
     @property
     def position(self): return self._pointer._position
 

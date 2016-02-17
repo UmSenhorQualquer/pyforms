@@ -41,7 +41,7 @@ class SimpleExample(BaseWidget):
 
 		self._start = time.time()
 
-		self.INTERVAL = 100
+		self.INTERVAL = 1
 		
 
 	def __btn(self):		
