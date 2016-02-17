@@ -34,11 +34,8 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlToolBox 		import ControlToolBox
 	from pyforms.gui.Controls.ControlTree 			import ControlTree
 	from pyforms.gui.Controls.ControlTreeView 		import ControlTreeView
-	try:
-		from pyforms.gui.Controls.ControlVisVis 		import ControlVisVis
-		from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
-	except:
-		print("VisVis not installed")
+	from pyforms.gui.Controls.ControlVisVis 		import ControlVisVis
+	from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph 	import ControlEventsGraph
 
