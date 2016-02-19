@@ -1,21 +1,42 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__      = "Ricardo Ribeiro"
-__credits__     = ["Ricardo Ribeiro"]
-__license__     = "MIT"
-__version__     = "0.1"
-__maintainer__  = "Ricardo Ribeiro"
-__email__       = "ricardojvr@gmail.com"
-__status__      = "Production"
+__author__ = "Ricardo Ribeiro"
+__credits__ = ["Ricardo Ribeiro"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Ricardo Ribeiro"
+__email__ = "ricardojvr@gmail.com"
+__status__ = "Production"
 
-
+import logging
 from pyforms import conf
 
+# create logger
+logger = logging.getLogger("pyforms")
+logger.setLevel(logging.DEBUG)
+
+# create file handler which logs even debug messages
+fh = logging.FileHandler('{0}.log'.format(conf.LOG_FILENAME))
+fh.setLevel(conf.PYFORMS_LOG_HANDLER_FILE_LEVEL)
+
+# create console handler with a higher log level
+ch = logging.StreamHandler()
+ch.setLevel(conf.PYFORMS_LOG_HANDLER_CONSOLE_LEVEL)
+
+# create formatter and add it to the handlers
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(module)s | %(message)s', datefmt='%d/%m/%Y %I:%M:%S')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+
+# add the handlers to the logger
+logger.addHandler(fh)
+logger.addHandler(ch)
+
+logger.debug("log pyforms is now set up")
 
 
-
-if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
+if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	
 	from pyforms.gui 						import Controls
 	from pyforms.gui.BaseWidget				import BaseWidget

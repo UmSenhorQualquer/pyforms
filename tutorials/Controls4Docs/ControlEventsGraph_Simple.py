@@ -34,15 +34,20 @@ class SimpleExample(BaseWidget):
 			
 		self._btn.value = self.__btn
 
+		self._control.scale = 4
 
+		self._control.add_event( 100, 200, track=0 )
 
 	def __btn(self):
 		#self._control.value = 10
 		
-		for i in range(19):
-			s = random.randint( 0,  10  )
-			o = random.randint( 10, 100 )
-			self._control.add_period( s, s+o, track=random.randint(0,4) )
+		for i in range(1):
+			s = random.randint( 100,  1000 )
+			o = random.randint( 1000, 10000 )
+			self._control.add_event( s, s+o, track=random.randint(0,4) )
+			self._control.value = s+o
+
+			print('Add event', s, s+o)
 		
 		self._control.repaint()
 		#self._control.value = 5013
