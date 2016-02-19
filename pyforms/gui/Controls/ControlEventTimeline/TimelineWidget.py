@@ -60,7 +60,7 @@ class TimelineWidget(QtGui.QWidget):
         self._creating_event_start = None
         self._creating_event_end = None
         self._n_tracks = 1
-
+       
         self._selected = None
         self._selected_track = 0
         self._pointer = TimelinePointer(0, self)
@@ -119,9 +119,17 @@ class TimelineWidget(QtGui.QWidget):
         # Draw vertical lines
         for x in range(start - (start % 100), end, 100):
             painter.drawLine(x, 20, x, self.height())
-            string = "%d" % (x / self._scale)
+            string = "{0}".format( int(round(x/self._scale)) )
             boundtext = painter.boundingRect(QtCore.QRectF(), string)
             painter.drawText(x - boundtext.width() / 2, 15, string)
+
+            if self._video_fps:
+                string = "{0}".format( int(round( (x/self._scale)*(1000.0/self._video_fps)  )) )
+                boundtext = painter.boundingRect(QtCore.QRectF(), string)
+                painter.drawText(x - boundtext.width() / 2, 30, string)
+            
+
+
         painter.setOpacity(1.0)
 
         for index, track in enumerate(self._tracks):
@@ -554,3 +562,4 @@ class TimelineWidget(QtGui.QWidget):
 
     @fps.setter
     def fps(self, value): self._video_fps = value
+
