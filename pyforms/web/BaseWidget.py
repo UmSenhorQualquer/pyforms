@@ -38,7 +38,7 @@ class BaseWidget(object):
 			self._js = '[{0}]'.format(",".join(self._controls))
 
 		self._html += """
-		<script type="text/javascript">var app = new PyFormsApp('{0}', '{2}', {1});</script>
+		<script type="text/javascript">PYFORMS_APP_MANAGER.add_app( new PyFormsApp('{0}', '{2}', {1}) );</script>
 		""".format(self.__class__.__name__, self._js, self._id)
 		self._formLoaded = True
 		return { 'code': self._html, 'controls_js': self._js, 'title': self._title }
@@ -235,6 +235,9 @@ class BaseWidget(object):
 		for control in self.formControls.values(): control.httpRequest = value
 	#######################################################
 
+	@property
+	def app_id(self): return self._id
+	
 	
 	@property
 	def form(self): return """<span id='app-{1}' >{0}</span>""".format(self._html, self._id)
