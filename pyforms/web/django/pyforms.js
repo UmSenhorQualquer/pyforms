@@ -1,7 +1,5 @@
-function sleep(ms) {
-	var unixtime_ms = new Date().getTime();
-	while(new Date().getTime() < unixtime_ms + ms) {}
-}
+
+
 
 function ControlButton( label, dom_id, help ){
 
@@ -371,9 +369,11 @@ function ControlList( label, dom_id, value, help ){
 	this.DOMID = dom_id;
 	var self = this;
 	var being_edited = false;
+	this.selectEntireRow = false;
+	this.readOnly = false;
 
 
-	this.load_table = function(titles, data){
+	this.load_table = function(titles, data, selectEntireRow){
 		var html = "<table id='"+self.app.control_id(dom_id)+"' >";
 		html += "<thead>";
 		html += "<tr>";
@@ -396,27 +396,50 @@ function ControlList( label, dom_id, value, help ){
 		html += "</div>";
 		$( "#"+self.app.control_id(dom_id) ).replaceWith(html);
 
-		$( "#"+self.app.control_id(dom_id)+" tbody td" ).dblclick(function(){
-			if( being_edited ) return false;
+		if(!this.readOnly){
+			$( "#"+self.app.control_id(dom_id)+" tbody td" ).dblclick(function(){
+				if( being_edited ) return false;
 
-			being_edited = true;
-			var cell = $(this);
-			var value = cell.html();
-			cell.html('<input type="text" value="'+value+'" />');
-			cell.children('input').focus();
-			cell.children('input').focusout(function(){
-				cell.html($(this).val());
-				being_edited = false;
-				self.app.FireEvent( dom_id, 'changed' );
+				being_edited = true;
+				var cell = $(this);
+				var value = cell.html();
+				cell.html('<input type="text" value="'+value+'" />');
+				cell.children('input').focus();
+				cell.children('input').focusout(function(){
+					cell.html($(this).val());
+					being_edited = false;
+					self.app.FireEvent( dom_id, 'changed' );
+				});
 			});
+		};
+
+		$("#"+self.app.control_id(dom_id)+" tbody td" ).click(function(){
+			$("#"+self.app.control_id(dom_id)+" tbody td" ).removeClass('selected');
+			$("#"+self.app.control_id(dom_id)+" tbody tr" ).removeClass('selected');			
+
+			if( self.selectEntireRow )
+				$(this).parent().find('td').addClass('selected');
+			else
+				$(this).addClass('selected');
+
+			$(this).parent().addClass('selected');
 		});
 	};
 
 	this.rawValue = function(value){ return undefined; };
-	this.setValue = function(value){ this.load_table(value[0],value[1]); };
+	this.setValue = function(value){ 
+		this.selectEntireRow=value[2];
+		this.readOnly=value[3];
+		this.load_table(value[0],value[1]);
+		if(value[4]>=0){
+			var selected_row = $( "#"+self.app.control_id(dom_id)+" tbody tr:eq("+value[4]+")" );
+			selected_row.addClass('selected');
+			selected_row.find('td').addClass('selected');
+		};
+	};
 	this.getValue = function(){ 
 		var res=[];
-		$(  "#"+self.app.control_id(dom_id)+" tbody tr" ).each(function(i, row){
+		$( "#"+self.app.control_id(dom_id)+" tbody tr" ).each(function(i, row){
 			var new_row=[]
 			$(this).children('td').each(function(j, col){
 				new_row.push($(col).html());
@@ -427,7 +450,9 @@ function ControlList( label, dom_id, value, help ){
 		$(  "#"+self.app.control_id(dom_id)+" thead th" ).each(function(i, col){
 			titles.push( $(col).html() );
 		});
-		return [titles, res];
+
+		var selected_index = $( "#"+self.app.control_id(dom_id)+" tbody tr.selected" ).index();
+		return [titles, res, this.selectEntireRow, this.readOnly, selected_index];
 	};
 	this.load = function(){
 
@@ -436,7 +461,7 @@ function ControlList( label, dom_id, value, help ){
 		html += "</div>";
 		$(  "#place-"+self.app.control_id(dom_id) ).replaceWith(html);
 
-		this.load_table( value[0], value[1] );
+		this.setValue( value );
 	};
 	
 };
@@ -522,6 +547,7 @@ function ControlVisVis( label, dom_id, value, help){
 ////////////////////////////////////////////////////////////
 
 $.ajaxSetup({ cache: false });
+
 function PyFormsApp(app_name, app_id, controls){
 	this.application 	= app_name;
 	this.application_id = app_id;
@@ -571,16 +597,22 @@ PyFormsApp.prototype.UpdateControls = function(){
 
 ////////////////////////////////////////////////////////////
 
-PyFormsApp.prototype.SendUpdateData = function(data2send){	
-	loading();
+PyFormsApp.prototype.serialize_data = function(data){
 	for (index = 0; index <  this.controls.length; index++) {
 		var name = this.controls[index].DOMID;
-		data2send[name] =  this.controls[index].getValue();
-
+		data[name] =  this.controls[index].getValue();
 	}
+	return data;
+};
+
+////////////////////////////////////////////////////////////
+
+PyFormsApp.prototype.SendUpdateData = function(data2send){	
+	loading();
+
+	data2send = this.serialize_data(data2send);
 
 	var self = this;
-
 	var jsondata =  $.toJSON(data2send);
 	$.ajax({
 		method: 'post',
@@ -607,3 +639,4 @@ PyFormsApp.prototype.SendUpdateData = function(data2send){
 	
 	if(  this.events_queue.length>0 )  this.SendUpdateData(  this.events_queue.pop(0) );
 }
+
