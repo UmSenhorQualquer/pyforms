@@ -15,7 +15,7 @@ from setuptools import setup
 setup(
 
 	name				='PyForms',
-	version 			='0.1.4.dev6',
+	version 			='0.1.4.dev5',
 	description 		="""Pyforms is a Python 2.7 and 3.0 framework to develop GUI application, 
 		which promotes modular software design and code reusability with minimal effort.""",
 	author  			='Ricardo Ribeiro',
@@ -42,7 +42,11 @@ setup(
 		'pyforms.gui.Controls.ControlPlayer' ],
 	package_data={'pyforms': [
 			'web/django/*.js',
-			'web/django/chartjs/Chart.min.js',
+			'web/django/static/*.js',
+			'web/django/static/jqplot/*.js',
+			'web/django/static/jqplot/*.css',
+			'web/django/static/jqplot/plugins/*.js',
+			'web/django/static/pyformsjs/*.js',
 			'gui/Controls/uipics/*.png', 
 			'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 
 			'gui/Controls/ControlEventTimeline/*.ui']
