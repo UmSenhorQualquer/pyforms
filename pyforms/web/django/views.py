@@ -18,23 +18,3 @@ def updateapplicationform(request, application):
 	result 				= module.serializeForm()
 
 	return HttpResponse(simplejson.dumps(result), "application/json")
-
-@never_cache
-@csrf_exempt
-def pyformsjs(request): 
-	filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pyforms.js')
-	abspath = open(filename,'r')
-	response = HttpResponse(content=abspath.read())
-	response['Content-Type']= 'text/javascript'
-	response['Content-Disposition'] = 'attachment; filename=pyforms.js'
-	return response
-
-@never_cache
-@csrf_exempt
-def chartjs(request): 
-	filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'chartjs','Chart.min.js')
-	abspath = open(filename,'r')
-	response = HttpResponse(content=abspath.read())
-	response['Content-Type']= 'text/javascript'
-	response['Content-Disposition'] = 'attachment; filename=chart.js'
-	return response

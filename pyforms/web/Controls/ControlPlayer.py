@@ -10,9 +10,7 @@ class ControlPlayer(ControlBase):
     _max = 0
     _filename = ''        
     
-    def initControl(self):
-        self._currentFrame = None
-        return "new ControlPlayer('"+self._name+"','%s')" % self.help
+    def initControl(self): return "new ControlPlayer('{0}', {1})".format( self._name, str(self.serialize()) )
 
     def processFrame(self, frame):  pass
 

@@ -10,9 +10,8 @@ class ControlList(ControlBase):
 		super(ControlList, self).__init__(label, defaultValue, helptext)
 
 
-	def initControl(self):
-		values = self.json
-		return """new ControlList('{0}','{1}',{3},'{2}')""".format(self._label, self._name, self.help, values)
+	def initControl(self): return "new ControlList('{0}', {1})".format( self._name, str(self.serialize()) )
+
 
 
 
