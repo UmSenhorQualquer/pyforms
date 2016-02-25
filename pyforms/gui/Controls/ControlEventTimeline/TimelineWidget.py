@@ -153,6 +153,7 @@ class TimelineWidget(QtGui.QWidget):
         self._selected = None
 
         for row in csvfileobject:
+            if len(row)==0: continue
             if row[0] == "T":
                 track = self.addTrack()
                 track.properties = row
