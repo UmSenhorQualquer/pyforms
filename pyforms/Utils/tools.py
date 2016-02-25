@@ -10,13 +10,41 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-import os,sys
+import os
+import sys
+# import importlib
 import math
 from numpy import *
 import zipfile
 from subprocess import Popen, PIPE
 import subprocess
 
+# THIS DOESN'T WORK BECAUSE CONF IS IMPORTED WITH PYFORMS
+# def load_everything_from(module_names):
+#     """
+#     Load all
+#     :param module_names: modules to be imported
+#     :type module_names: list of strings
+#     """
+#     g = globals()
+#     for module_name in module_names:
+#         m = importlib.import_module(module_name)
+#         names = getattr(m, '__all__', None)
+#         if names is None:
+#             names = [name for name in dir(m) if not name.startswith('_')]
+#         for name in names:
+#             g[name] = getattr(m, name)
+
+# THIS DOESN'T WORK BECAUSE CONF IS IMPORTED WITH PYFORMS
+# def register_settings_module(module):
+#     """
+#     Append another settings module to PYFORMS_APP_SETTINGS
+#     :param module:
+#     :type module:
+#     """
+#     modules = os.getenv('PYFORMS_APP_SETTINGS', '').split(';')
+#     modules.append(module)
+#     os.environ['PYFORMS_APP_SETTINGS'] = ';'.join(modules)
 
 
 def getFileInSameDirectory(file, name):
