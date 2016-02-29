@@ -282,10 +282,11 @@ class VideoGLWidget(QGLWidget):
         if event.button() == 1:
             if hasattr(self, 'imgWidth') and self._mouseLeftDown:
                 if self.DRAG_MODE:
+                    pass
                     #self._x -= self._lastGlX - self._glX
                     #self._y -= self._lastGlY - self._glY
-                    self._lastGlX = self._glX
-                    self._lastGlY = self._glY
+                    #self._lastGlX = self._glX
+                    #self._lastGlY = self._glY
 
                 self.onEndDrag(self._mouseStartDragPoint, self._get_current_mouse_point())
             self._mouseLeftDown = False
