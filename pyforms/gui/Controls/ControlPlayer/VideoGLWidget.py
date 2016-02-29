@@ -326,6 +326,7 @@ class VideoGLWidget(QGLWidget):
             self._lastGlY = self._glY
 
     def mouseMoveEvent(self, event):
+        self.setFocus(QtCore.Qt.MouseFocusReason)
 
         self._mouseX = event.x()
         self._mouseY = event.y()
