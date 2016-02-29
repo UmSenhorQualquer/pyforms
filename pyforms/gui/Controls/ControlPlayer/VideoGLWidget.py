@@ -336,6 +336,13 @@ class VideoGLWidget(QGLWidget):
             p1 = self._mouseStartDragPoint
             p2 = self._get_current_mouse_point()
             self.onDrag(p1, p2)
+
+        if self._mouseRightDown and self._mouseDown:
+            self.updateGL()
+            p1 = self._mouseStartDragPoint
+            p2 = self._get_current_mouse_point()
+            self.onDrag(p1, p2)
+
             
     def keyPressEvent(self, event):
         super(QGLWidget, self).keyPressEvent(event)
