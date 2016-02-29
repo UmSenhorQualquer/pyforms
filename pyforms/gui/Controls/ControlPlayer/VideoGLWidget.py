@@ -330,8 +330,9 @@ class VideoGLWidget(QGLWidget):
 
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.updateGL()
+        # self.updateGL()
         if self._mouseLeftDown and self._mouseDown:
+            self.updateGL()
             p1 = self._mouseStartDragPoint
             p2 = self._get_current_mouse_point()
             self.onDrag(p1, p2)
