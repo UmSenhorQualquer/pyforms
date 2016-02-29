@@ -30,7 +30,7 @@ __status__ = "Development"
 
 
 class VideoGLWidget(QGLWidget):
-    
+
     DRAG_MODE = False
     SHIFT_MODE = False
     ALLOW_ZOOM = True
@@ -240,7 +240,7 @@ class VideoGLWidget(QGLWidget):
                 self._y = 0.5
 
         # self._x = -self._width/2
-        
+
         if len(self.texture) > len(frames):
             for i in range(len(self.texture) - len(frames)):
                 GL.glDeleteTextures(self.texture.pop())
@@ -254,28 +254,17 @@ class VideoGLWidget(QGLWidget):
         if self.ALLOW_ZOOM:
             self._mouseX = event.x()
             self._mouseY = event.y()
-            
-            # adjust zoom factor to scroll speed
-            if abs(event.delta()) < 3:
-                zoom_factor = 0.002
-            elif abs(event.delta()) < 5:
-                zoom_factor = 0.005
-            elif abs(event.delta()) < 10:
-                zoom_factor = 0.02
-            elif abs(event.delta()) < 50:
-                zoom_factor = 0.04
-            else:
-                zoom_factor = 0.06
-                
-            if event.delta() < 0: # zoom in
-                if self.zoom > 0.02: # zoom in limit
-                    self.zoom -= zoom_factor
-                else:
-                    self.zoom = 0.02
-            else: # zoom out
-                if self.zoom <= 7: # zoom out limit 
-                    self.zoom += zoom_factor
-                
+
+            zoom_factor = event.delta() / float(1500)
+
+            self.zoom += zoom_factor
+
+            if self.zoom < 0.02 and event.delta() < 0:
+                self.zoom = 0.02
+
+            if self.zoom > 7 and event.delta() > 0:  # zoom limits
+                self.zoom = 7
+
             self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
             self.updateGL()
 
@@ -329,7 +318,7 @@ class VideoGLWidget(QGLWidget):
             self._mouseLeftDown = True
             # self.logger.debug("glx: %s | x: %s | gly: %s | y: %s | imgWdith: %s | imgHeight: %s | height: %s", self._glX, self._x, self._glY, self._y, self.imgWidth, self.imgHeight, self._height)
             self._mouseStartDragPoint = self._get_current_mouse_point()
-            
+
             if self.DRAG_MODE:
                 #self._x -= self._lastGlX - self._glX
                 #self._y -= self._lastGlY - self._glY
@@ -360,19 +349,17 @@ class VideoGLWidget(QGLWidget):
             p2 = self._get_current_mouse_point()
             self.onDrag(p1, p2)
 
-            
     def keyPressEvent(self, event):
         super(QGLWidget, self).keyPressEvent(event)
         if event.key() == QtCore.Qt.Key_Control:
             self.DRAG_MODE = True
             self.ALLOW_ZOOM = False
             # self.logger.debug("Enabled drag mode")
-            
+
         if event.key() == QtCore.Qt.Key_Shift:
             # self.logger.debug("Enabled shift mode")
             self.SHIFT_MODE = True
             self.ALLOW_ZOOM = False
-
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
@@ -388,7 +375,7 @@ class VideoGLWidget(QGLWidget):
         if event.key() == QtCore.Qt.Key_A:
             self._control.video_index -= 1
             self._control.updateFrame()
-            
+
         if event.key() == QtCore.Qt.Key_Control:
             self.DRAG_MODE = False
             self.ALLOW_ZOOM = True
@@ -428,16 +415,16 @@ class VideoGLWidget(QGLWidget):
     def rotateZ(self, value):
         self._rotateZ = value
         self.updateGL()
-        
+
     def _get_current_mouse_point(self):
         '''
-        
+
         '''
-        return self._get_current_x(), self._get_current_y() 
+        return self._get_current_x(), self._get_current_y()
 
     def _get_current_x(self):
         return (self._glX - self._x) * float(self.imgWidth)
-    
+
     def _get_current_y(self):
         return (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
 
