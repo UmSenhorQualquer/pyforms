@@ -32,6 +32,8 @@ __status__ = "Development"
 class VideoGLWidget(QGLWidget):
     
     DRAG_MODE = False
+    SHIFT_MODE = False
+    ALLOW_ZOOM = True
 
     def __init__(self, parent=None):
         self.logger = logging.getLogger('pyforms')
@@ -249,7 +251,7 @@ class VideoGLWidget(QGLWidget):
         self.updateGL()
 
     def wheelEvent(self, event):
-        if not self.DRAG_MODE:
+        if self.ALLOW_ZOOM:
             self._mouseX = event.x()
             self._mouseY = event.y()
             zoom_factor = 0.03
@@ -348,7 +350,14 @@ class VideoGLWidget(QGLWidget):
         super(QGLWidget, self).keyPressEvent(event)
         if event.key() == QtCore.Qt.Key_Control:
             self.DRAG_MODE = True
+            self.ALLOW_ZOOM = False
             # self.logger.debug("Enabled drag mode")
+            
+        if event.key() == QtCore.Qt.Key_Shift:
+            # self.logger.debug("Enabled shift mode")
+            self.SHIFT_MODE = True
+            self.ALLOW_ZOOM = False
+
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
@@ -367,10 +376,15 @@ class VideoGLWidget(QGLWidget):
             
         if event.key() == QtCore.Qt.Key_Control:
             self.DRAG_MODE = False
+            self.ALLOW_ZOOM = True
             self._x -= self._lastGlX - self._glX
             self._y -= self._lastGlY - self._glY
             # self.logger.debug("Disabled drag mode")
 
+        if event.key() == QtCore.Qt.Key_Shift:
+            self.SHIFT_MODE = False
+            self.ALLOW_ZOOM = True
+            # self.logger.debug("Disabled shift mode")
 
         self.onKeyRelease(event)
 
