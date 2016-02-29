@@ -254,14 +254,29 @@ class VideoGLWidget(QGLWidget):
         if self.ALLOW_ZOOM:
             self._mouseX = event.x()
             self._mouseY = event.y()
-            zoom_factor = 0.03
-            if event.delta() < 0:
-                self.zoom -= zoom_factor
+            
+            # adjust zoom factor to scroll speed
+            if abs(event.delta()) < 3:
+                zoom_factor = 0.002
+            elif abs(event.delta()) < 5:
+                zoom_factor = 0.005
+            elif abs(event.delta()) < 10:
+                zoom_factor = 0.02
+            elif abs(event.delta()) < 50:
+                zoom_factor = 0.04
             else:
-                self.zoom += zoom_factor
-            if self.zoom < 0.01:
-                self.zoom = 0.02
-            # self.logger.debug("Wheel event | Delta: %s | Zoom factor: %s", event.delta(), zoom_factor)
+                zoom_factor = 0.06
+                
+            if event.delta() < 0: # zoom in
+                if self.zoom > 0.02: # zoom in limit
+                    self.zoom -= zoom_factor
+                else:
+                    self.zoom = 0.02
+            else: # zoom out
+                if self.zoom <= 7: # zoom out limit 
+                    self.zoom += zoom_factor
+                
+            self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
             self.updateGL()
 
     def mouseDoubleClickEvent(self, event):
