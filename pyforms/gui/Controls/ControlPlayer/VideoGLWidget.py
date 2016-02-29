@@ -250,17 +250,18 @@ class VideoGLWidget(QGLWidget):
         self.updateGL()
 
     def wheelEvent(self, event):
-        self._mouseX = event.x()
-        self._mouseY = event.y()
-        zoom_factor = 0.03
-        if event.delta() < 0:
-            self.zoom -= zoom_factor
-        else:
-            self.zoom += zoom_factor
-        if self.zoom < 0.01:
-            self.zoom = 0.02
-        # self.logger.debug("Wheel event | Delta: %s | Zoom factor: %s", event.delta(), zoom_factor)
-        self.updateGL()
+        if not self.DRAG_MODE:
+            self._mouseX = event.x()
+            self._mouseY = event.y()
+            zoom_factor = 0.03
+            if event.delta() < 0:
+                self.zoom -= zoom_factor
+            else:
+                self.zoom += zoom_factor
+            if self.zoom < 0.01:
+                self.zoom = 0.02
+            # self.logger.debug("Wheel event | Delta: %s | Zoom factor: %s", event.delta(), zoom_factor)
+            self.updateGL()
 
     def mouseDoubleClickEvent(self, event):
         self._mouseX = event.x()
