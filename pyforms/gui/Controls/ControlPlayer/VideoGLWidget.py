@@ -208,11 +208,10 @@ class VideoGLWidget(QGLWidget):
 
                 if self._mouseRightDown:
                     self.drawVideo(self._width, self._height, self._x - (self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
+                elif self._mouseLeftDown and self.DRAG_MODE:
+                    self.drawVideo(self._width, self._height, self._x - (self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
                 else:
-                    if self.DRAG_MODE:
-                        self.drawVideo(self._width, self._height, self._x - (self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
-                    else:
-                        self.drawVideo(self._width, self._height, self._x, self._y, 0.0)
+                    self.drawVideo(self._width, self._height, self._x, self._y, 0.0)
 
             GL.glEnable(GL.GL_DEPTH_TEST)
 
