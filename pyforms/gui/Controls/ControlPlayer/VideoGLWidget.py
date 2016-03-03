@@ -265,7 +265,7 @@ class VideoGLWidget(QGLWidget):
             if self.zoom > 7 and event.delta() > 0:  # zoom limits
                 self.zoom = 7
 
-            self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
+            # self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
             self.updateGL()
 
     def mouseDoubleClickEvent(self, event):
