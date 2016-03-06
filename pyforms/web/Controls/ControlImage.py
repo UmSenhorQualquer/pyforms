@@ -43,6 +43,7 @@ class ControlImage(ControlBase):
 			image.save(buff, format="PNG")
 			content = buff.getvalue()
 			buff.close()
+			
 			data.update({ 'base64content': base64.b64encode(content) })
 		data.update({ 'filename': self._filename })
 		return data
@@ -50,6 +51,5 @@ class ControlImage(ControlBase):
 
 	def deserialize(self, properties):
 		ControlBase.deserialize(self, properties)
-		data.update({ 'filename': self._filename })
 		self._filename = properties['filename']
 		self.value = self._filename

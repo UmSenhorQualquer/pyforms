@@ -9,11 +9,7 @@ ControlList.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.init_control = function(){
-	var html = 	"<div class='ControlList' title='"+this.properties.help+"' >";
-	html += "<div id='"+this.control_id()+"' ></div>";
-	html += "</div>";
-	this.jquery_place().replaceWith(html);
-	this.setValue( value );
+	this.set_value(this.properties.value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -27,47 +23,41 @@ ControlList.prototype.get_value = function(){
 		});
 		res.push(new_row);
 	});
-	var titles=[];
-	$(  "#"+this.control_id()+" thead th" ).each(function(i, col){
-		titles.push( $(col).html() );
-	});
-
-	var selected_index = $( "#"+this.control_id()+" tbody tr.selected" ).index();
-	return [titles, res, this.select_entire_row, this.read_only, selected_index];
+	return res
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.set_value = function(value){
-	this.select_entire_row 	= value[2];
-	this.read_only 			= value[3];
-	this.load_table(value[0],value[1]);
-	if(value[4]>=0){
-		var selected_row = $( "#"+self.control_id()+" tbody tr:eq("+value[4]+")" );
-		selected_row.addClass('selected');
-		selected_row.find('td').addClass('selected');
-	};
+	this.load_table();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ControlList.prototype.load_table = function(titles, data){
-	var html = "<table id='"+this.control_id()+"' >";
+ControlList.prototype.load_table = function(){
+	var html = "<table class='ControlList' id='"+this.control_id()+"' >";
 	html += "<thead>";
 	html += "<tr>";
+	var titles = this.properties.horizontal_headers;
 	for(var i=0; i<titles.length; i++) html += "<th>"+titles[i]+"</th>";
 	html += "</tr>";
 	html += "</thead>";
 	html += "<tbody>";
+	var data = this.properties.value;
+	
 	for(var i=0; i<data.length; i++){
 		html += "<tr>";
-		for(var j=0; j<data[i].length; j++) html += "<td>"+data[i][j]+"</td>";
-		if(data[i].length<titles.length) for(var j=data[i].length; j<titles.length; j++) html += "<td></td>";
+		var length = 0;
+		if(data[i]) length = data[i].length;
+		for(var j=0; j<length; j++) html += "<td>"+data[i][j]+"</td>";
+		if(length<titles.length) 
+			for(var j=length; j<titles.length; j++) html += "<td></td>";
 		html += "</tr>";
 	};
 	html += "</tbody>";
 	html += "</table>";
 	html += "</div>";
+
 	this.jquery_place().replaceWith(html);
 
 	var self = this;
@@ -83,7 +73,7 @@ ControlList.prototype.load_table = function(titles, data){
 			cell.children('input').focus();
 			cell.children('input').focusout(function(){
 				cell.html($(this).val());
-				this.being_edited = false;
+				self.being_edited = false;
 				self.basewidget.fire_event( self.name, 'changed' );
 			});
 		});
@@ -93,7 +83,7 @@ ControlList.prototype.load_table = function(titles, data){
 		$("#"+self.control_id()+" tbody td" ).removeClass('selected');
 		$("#"+self.control_id()+" tbody tr" ).removeClass('selected');			
 
-		if( self.select_entire_row )
+		if( self.properties.select_entire_row )
 			$(this).parent().find('td').addClass('selected');
 		else
 			$(this).addClass('selected');
@@ -103,3 +93,5 @@ ControlList.prototype.load_table = function(titles, data){
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+
+

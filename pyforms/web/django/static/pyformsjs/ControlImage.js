@@ -14,7 +14,7 @@ ControlImage.prototype.get_value = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlImage.prototype.set_value = function(value){
-	this.jquery().attr("src", "data:image/png;base64,"+value.image);
+	if(value.image) this.jquery().attr("src", "data:image/png;base64,"+value.image);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
