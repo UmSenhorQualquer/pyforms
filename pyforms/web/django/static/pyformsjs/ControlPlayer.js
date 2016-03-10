@@ -9,19 +9,11 @@ ControlPlayer.prototype = Object.create(ControlBase.prototype);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ControlPlayer.prototype.get_value = function(){ 
-	var pos = $( "#timeline"+this.control_id() ).slider("value");
-	var res = { position: pos, filename: this.properties.filename };
-	return res;
-};
+ControlPlayer.prototype.get_value = function(){ return ''; };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ControlPlayer.prototype.set_value = function(value){
-	$( "#timeline"+this.control_id() ).slider({min: value.min, max: value.max, value: value.position});
-	this.properties.filename = value.filename;
-	$( "#display"+this.control_id() ).attr("src", "data:image/png;base64,"+value.frame);
-};
+ControlPlayer.prototype.set_value = function(value){};
 
 ////////////////////////////////////////////////////////////////////////////////
 
