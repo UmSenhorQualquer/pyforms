@@ -38,7 +38,7 @@ class BaseWidget(object):
 			self._js = '[{0}]'.format(",".join(self._controls))
 
 		self._html += """
-		<script type="text/javascript">PYFORMS_APP_MANAGER.add_app( new PyFormsApp('{0}', '{2}', {1}) );</script>
+		<script type="text/javascript">pyforms.add_app( new BaseWidget('{2}', '{0}', {1}) );</script>
 		""".format(self.__class__.__name__, self._js, self._id)
 		self._formLoaded = True
 		return { 'code': self._html, 'controls_js': self._js, 'title': self._title }
@@ -153,11 +153,7 @@ class BaseWidget(object):
 	def loadSerializedForm(self, params):
 		for key, value in params.items():
 			control = self.formControls.get(key, None)
-			if control!=None:
-				if hasattr(control, 'json'):
-					control.json = value
-				else:
-					control.value = value
+			if control!=None: control.deserialize(params[key])
 				
 
 		if 'event' in params.keys():
@@ -171,14 +167,10 @@ class BaseWidget(object):
 		res = {}
 		for key, item in self.formControls.items():
 			if isinstance(item, ControlPlayer ): 
-				res[item._name] = item.value
+				res[item._name] = item.serialize()
 				if item._value!=None and item._value!='': item._value.release() #release any open video
-			elif isinstance(item, ControlButton ):
-				pass
-			elif hasattr(item, 'json'):
-				res[item._name] = item.json
 			else:
-				res[item._name] = item.value
+				res[item._name] = item.serialize()
 
 		return res
 

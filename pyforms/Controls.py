@@ -70,6 +70,7 @@ elif conf.PYFORMS_MODE in ['WEB']:
 
 	from pyforms.web.Controls.ControlBase 			import ControlBase
 	from pyforms.web.Controls.ControlText 			import ControlText
+	from pyforms.web.Controls.ControlBoundingSlider import ControlBoundingSlider
 	from pyforms.web.Controls.ControlDate 			import ControlDate
 	from pyforms.web.Controls.ControlButton 		import ControlButton
 	from pyforms.web.Controls.ControlCheckBox 		import ControlCheckBox

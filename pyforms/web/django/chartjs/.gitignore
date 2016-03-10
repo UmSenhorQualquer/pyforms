@@ -1,9 +1,0 @@
-
-.DS_Store
-
-node_modules/*
-custom/*
-
-docs/index.md
-
-.settings/

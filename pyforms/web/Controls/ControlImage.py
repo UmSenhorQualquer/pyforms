@@ -7,45 +7,49 @@ from PIL import Image
 
 class ControlImage(ControlBase):
 
-    def __init__(self, label = "", defaultValue = "", helptext=None):
-        super(ControlImage,self).__init__(label, defaultValue, helptext)
-        self._filename = ''
+	def __init__(self, label = "", defaultValue = "", helptext=''):
+		self._filename = ''
 
-    def initControl(self):
-        return "new ControlImage('"+self._name+"','%s')" %  self.help 
-        
-    def save(self, data):
-        if self.value!=None: data['value'] = self._value
+		ControlBase.__init__(self, label, defaultValue, helptext)
 
-    def load(self, data):
-        if 'value' in data: self.value = data['value']
+	def initControl(self):
+		return "new ControlImage('{0}', {1})".format( self._name, str(self.serialize()) )
 
-    def repaint(self): pass
+	def save(self, data):
+		if self.value!=None: data['value'] = self._value
 
-    @property
-    def value(self):
-        result = { 'image': '', 'filename': self._filename }
-        image = ControlBase.value.fget(self)
-        if isinstance(image, np.ndarray):
-            if len(image.shape)>2: image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
-            image = Image.fromarray(image)
-            buff = StringIO.StringIO()
-            image.save(buff, format="PNG")
-            content = buff.getvalue()
-            buff.close()
-            result['image'] = base64.b64encode(content)
-        return result
+	def load(self, data):
+		if 'value' in data: self.value = data['value']
+
+	def repaint(self): pass
+
+	@property
+	def value(self): return ControlBase.value.fget(self)
+
+	@value.setter
+	def value(self, value):
+		if len(value)==0: self._value = ''
+		elif isinstance(value, np.ndarray): 			self._value = value
+		elif isinstance( value, (str, unicode) ): 	self._value = cv2.imread(value)
+		
+
+	def serialize(self):
+		data  = ControlBase.serialize(self)
+		image = self.value
+		if isinstance(image, np.ndarray):
+			if len(image.shape)>2: image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+			image = Image.fromarray(image)
+			buff = StringIO.StringIO()
+			image.save(buff, format="PNG")
+			content = buff.getvalue()
+			buff.close()
+			
+			data.update({ 'base64content': base64.b64encode(content) })
+		data.update({ 'filename': self._filename })
+		return data
 
 
-    @value.setter
-    def value(self, value):
-        if isinstance(value, np.ndarray):
-            self._value = value
-            
-        if isinstance( value, (str, unicode) ):
-            self._value = cv2.imread(value) 
-            self._filename = value
-        if isinstance( value, dict ): 
-            self._value =  cv2.imread(value['filename'] )
-            self._filename = value['filename']
-        
+	def deserialize(self, properties):
+		ControlBase.deserialize(self, properties)
+		self._filename = properties['filename']
+		self.value = self._filename

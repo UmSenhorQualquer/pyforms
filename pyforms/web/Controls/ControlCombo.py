@@ -3,20 +3,11 @@ from pyforms.web.Controls.ControlBase import ControlBase
 class ControlCombo(ControlBase):
 
 
-    def __init__(self, label = "", defaultValue = "", helptext=None):
+    def __init__(self, label = "", defaultValue = "", helptext=''):
         super(ControlCombo, self).__init__(label, defaultValue,helptext)
         self._items = {}
 
-    def initControl(self):
-        if self._items==None: self._items={}
-        self._addingItem = False
-        values = [list(x) for x in sorted(self._items.items(), key=lambda x: x[1]) ]
-        for v in values:
-            if v[1]==self._value: 
-                values.remove(v)
-                values.insert(0, v)
-
-        return "new ControlCombo('%s','%s', %s,'%s')" % (self._label, self._name, values ,self.help )
+    def initControl(self): return "new ControlCombo('{0}', {1})".format( self._name, str(self.serialize()) )
 
     def currentIndexChanged(self, index):
         if not self._addingItem:
@@ -37,6 +28,14 @@ class ControlCombo(ControlBase):
         self._addingItem = False
 
         if firstValue: self.value = self._items[label]
+
+    def __add__(self, val):
+        if isinstance( val, tuple ):
+            self.addItem(val[0], val[1])
+        else:
+            self.addItem(val)
+        
+        return self
 
 
     def clearItems(self):
@@ -69,3 +68,20 @@ class ControlCombo(ControlBase):
                 self.value = val
                 break
     
+
+    def serialize(self):
+        data = ControlBase.serialize(self)
+        items = []
+        for key, value in self._items.items():
+            items.append({'label': key, 'value': value}) 
+
+        data.update({ 'items': items })
+        return data
+        
+    def deserialize(self, properties):
+        ControlBase.deserialize(self,properties)
+        self._items = {}
+
+        for item in properties['items']:
+            self.addItem(item['label'], item['value'])
+

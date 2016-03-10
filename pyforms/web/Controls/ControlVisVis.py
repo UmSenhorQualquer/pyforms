@@ -7,9 +7,8 @@ class ControlVisVis(ControlBase):
 		self._legend = []
 		super(ControlVisVis, self).__init__(label, defaultValue, helptext)
 
-	def initControl(self):
-		values = (self.value if(self.value is not None and self.value!='') else [])
-		return """new ControlVisVis('{0}','{1}',{3},'{2}')""".format(self._label, self._name, self.help, values)
+	def initControl(self): return "new ControlVisVis('{0}', {1})".format( self._name, str(self.serialize()) )
+
 
 
 	@property

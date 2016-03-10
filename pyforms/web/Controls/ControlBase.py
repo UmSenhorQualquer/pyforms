@@ -6,20 +6,36 @@ class ControlBase(object):
     _label = None
     _controlHTML = ""
 
-    def __init__(self, label = "", defaultValue = "", helptext=None):
-        self._name = ""
-        self._help = helptext
-        self._value = defaultValue
-        self._parent = None
-        self._label = label
+    def __init__(self, label = "", defaultValue = "", helptext=''):
+        self._name      = ""
+        self._help      = helptext
+        self._value     = defaultValue
+        self._parent    = None
+        self._label     = label
+        self._visible   = True
         self._popupMenu = None
         self._id = uuid.uuid4()
-        self._controlHTML  = ""
+        self._controlHTML = ""
 
 
     def initControl(self):
         self._controlHTML = "<div id='id{0}' ><input type='text' id='{1}' /></div>".format( self._id, self._name )
         return self._controlHTML
+
+    def serialize(self):
+        return { 
+            'name':     self.__class__.__name__, 
+            'value':    self.value, 
+            'label':    self._label,
+            'help':     self._help,
+            'visible':  int(self._visible)
+        }
+
+    def deserialize(self, properties):
+        self.value    = properties.get('value',None)
+        self._label   = properties.get('label','')
+        self._help    = properties.get('help','')
+        self._visible = properties.get('visible',True)
 
     def finishEditing(self): self.updateControl()
 
