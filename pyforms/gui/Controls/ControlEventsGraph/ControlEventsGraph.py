@@ -56,7 +56,8 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     #### HELPERS/PUBLIC FUNCTIONS ############################################
     ##########################################################################
 
-    def add_event(self, begin, end, title='', track=0, color='#FFFF00'): self._events_widget.add_event(begin, end, title, track, color)
+    def add_event(self, begin, end, title='', track=0, color='#FFFF00'): 
+        return self._events_widget.add_event(begin, end, title, track, color)
 
     ##########################################################################
     #### EVENTS ##############################################################

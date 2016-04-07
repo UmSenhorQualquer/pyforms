@@ -88,7 +88,8 @@ class EventsWidget(QtGui.QWidget):
         if end_pixel > self._scroll.maximum():
             self._scroll.setMaximum(end_pixel)
 
-        return self._tracks[track].add_period(period)
+        self._tracks[track].add_period(period)
+        return period
 
     def __check_current_time_is_visible(self, current_time):
         """

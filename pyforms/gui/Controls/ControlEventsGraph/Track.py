@@ -28,6 +28,7 @@ class Track(object):
         The periods are added in a sorted way for rendering optimization
         """
         bisect.insort_right(self, period)
+        return period
 
     def draw(self, painter, start, end, track_index):
         y = (track_index * self._parent.tracks_height) + 18
