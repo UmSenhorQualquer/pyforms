@@ -41,6 +41,12 @@ def load_everything_from(module_names):
             g[name] = getattr(m, name)
 
 try:
+    from settings import *
+except:
+    pass
+
+
+try:
     # print(os.environ.get('PYFORMS_APP_SETTINGS'))
     module_name = os.getenv('PYFORMS_APP_SETTINGS', '')
     if module_name:
@@ -53,7 +59,3 @@ try:
 except Exception as err:
     print(err)
 
-try:
-    from settings import *
-except:
-    pass
