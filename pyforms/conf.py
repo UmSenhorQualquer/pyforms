@@ -50,8 +50,9 @@ try:
     # print(os.environ.get('PYFORMS_APP_SETTINGS'))
     module_name = os.getenv('PYFORMS_APP_SETTINGS', '')
     if module_name:
+        print('loading PYFORMS_APP_SETTINGS',module_name)
         load_everything_from([module_name])
-    # print(APP_NAME)
+        
 
     # user_settings = importlib.import_module(os.environ.get('APP_USER_SETTINGS'))
     # from user_settings import *
