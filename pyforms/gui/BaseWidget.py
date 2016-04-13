@@ -28,12 +28,13 @@ class BaseWidget(QtGui.QWidget):
     """
 
     def __init__(self, title='Untitled', parentWindow=None, flag=None):
-        if parentWindow is not None and flag is None: 
+        if parentWindow is not None and flag is None:
             flag = QtCore.Qt.Dialog
 
-        if parentWindow is None: QtGui.QWidget.__init__(self)
-        else: QtGui.QWidget.__init__(self, parentWindow, flag)
-
+        if parentWindow is None:
+            QtGui.QWidget.__init__(self)
+        else:
+            QtGui.QWidget.__init__(self, parentWindow, flag)
 
         layout = QtGui.QVBoxLayout()
         self.setLayout(layout)
@@ -339,7 +340,6 @@ class BaseWidget(QtGui.QWidget):
         # self.update_progress()
         self._progress.value = self._progress.max
         self._progress.hide()
-        
 
     def executeCommand(self, cmd, cwd=None):
         if cwd is not None:
@@ -421,6 +421,6 @@ class BaseWidget(QtGui.QWidget):
     def beforeClose(self):
         """ 
         Do something before closing widget 
-        Note that the will be closed anyway    
+        Note that the window will be closed anyway    
         """
         pass
