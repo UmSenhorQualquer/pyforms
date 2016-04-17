@@ -13,7 +13,7 @@ class ControlPlayer(ControlBase):
 	def initControl(self): 
 		return "new ControlPlayer('{0}', {1})".format( self._name, str(self.serialize()) )
 
-	def processFrame(self, frame):  pass
+	def processFrame(self, frame):  return frame
 
 	def updateFrame(self):          pass
 
@@ -50,9 +50,11 @@ class ControlPlayer(ControlBase):
 	@value.setter
 	def value(self, value):
 		if isinstance( value, (str, unicode) ):
-			link = self.storage.public_link(value)
-			link = "{1}/index.php/s/{0}/download".format(link.token, settings.OWNCLOUD_LINK)
+			if len(value.strip())==0: return
+			link = self.storage.public_download_link(value)
+
 			ControlBase.value.fset(self, cv2.VideoCapture( link ) )
+
 			self._filename = value
 		else:
 			self._value = value
@@ -66,6 +68,7 @@ class ControlPlayer(ControlBase):
 		if self.value:
 			capture = self.value
 			_, image = capture.read()
+
 			
 			if isinstance(image, np.ndarray):
 				image = self.processFrame(image)
@@ -79,6 +82,7 @@ class ControlPlayer(ControlBase):
 				buff.close()
 				data.update({ 'base64content': base64.b64encode(content) })
 
+		data.update({ 'value':       self._filename      })
 		data.update({ 'filename':       self._filename      })
 		data.update({ 'startFrame':     self.startFrame     })
 		data.update({ 'endFrame':       self.endFrame       })
@@ -89,10 +93,9 @@ class ControlPlayer(ControlBase):
 	def deserialize(self, properties):
 		ControlBase.deserialize(self, properties)
 		self._filename   = properties['filename']
-		self.startFrame  = properties['startFrame']
-		self.endFrame    = properties['endFrame']
-		self.video_index = properties['video_index']
 		self.value       = self._filename
+		self.video_index = properties['video_index']
+		
 
 
 
@@ -100,25 +103,23 @@ class ControlPlayer(ControlBase):
 	def video_index(self): return int(self._value.get(1)) if self._value else 0
 
 	@video_index.setter
-	def video_index(self, value):  self._value.set(1, float(value))
+	def video_index(self, value):
+		if isinstance( value, (str, unicode) ):
+			if len(value.strip())>0:
+				self._value.set(1, float(value))
+		elif not isinstance( self._value, (str, unicode) ):
+			self._value.set(1, float(value))
 		
 
 		
 	@property
 	def startFrame(self): 
-		return self._value.startFrame if self._value else -1
+		return 0 if self._value else -1
 
-	@startFrame.setter
-	def startFrame(self, value):
-		if self._value: self._value.startFrame = value
-			
 	@property
 	def endFrame(self): 
-		return self._value.endFrame if self._value else -1
+		return self._value.get(cv2.CAP_PROP_FRAME_COUNT ) if self._value else -1
 
-	@endFrame.setter
-	def endFrame(self, value):        
-		if self._value: self._value.endFrame = value
 
 	@property
 	def image(self): 

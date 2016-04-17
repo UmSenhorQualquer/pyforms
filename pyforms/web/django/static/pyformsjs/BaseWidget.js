@@ -43,6 +43,7 @@ BaseWidget.prototype.fire_event = function(dom_in, event){
 ////////////////////////////////////////////////////////////
 
 BaseWidget.prototype.update_controls = function(){	
+	
 	this.update_data({ userpath: this.current_folder() }); 
 };
 
