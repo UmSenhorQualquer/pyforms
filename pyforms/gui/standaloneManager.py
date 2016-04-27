@@ -124,7 +124,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 
 def startApp(ClassObject, geometry=None):
-    print( ClassObject.__version__ )
+    
 
     app = QtGui.QApplication(sys.argv)
     w = StandAloneContainer(ClassObject)

@@ -56,6 +56,6 @@ setup(
 		"pyopengl >= 3.1.0",
 		"visvis >= 1.9.1",
 		"numpy >= 1.6.1",
-		"matplotlib"
+		#"matplotlib"
 	],
 )
