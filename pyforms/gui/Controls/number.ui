@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="spinBox"/>
+    <widget class="QDoubleSpinBox" name="spinBox"/>
    </item>
   </layout>
  </widget>
