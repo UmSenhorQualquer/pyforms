@@ -62,7 +62,7 @@ class ControlNumber(ControlBase):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self,value)
-		self.form.spinBox.setValue(int(value))
+		self.form.spinBox.setValue(value)
 
 
 	@property

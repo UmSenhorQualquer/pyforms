@@ -34,20 +34,18 @@ class TimelineChart(object):
         self._graphMax = 0
         self._graphMin = 100000000000
         self._data = []
-        lastX = 0
+        last_x = 0
         for x, y in data:
-            if y > self._graphMax:
-                self._graphMax = y
-            if y < self._graphMin:
-                self._graphMin = y
+            if y > self._graphMax: self._graphMax = y
+            if y < self._graphMin: self._graphMin = y
 
-            if int(x - lastX) > 1:
-                for i in range(0, int(x - lastX) + 1):
-                    self._data.append((lastX + i, y))
-                    # self._data.append( None )
-            self._data.append((x, y))
-            lastX = x
+            if int(x - last_x) > 1:
+                for i in range(0, int(x - last_x) + 1): self._data.append( (last_x + i, y) )
+            else:
+                self._data.append((x, y))
+            last_x = x
 
+        """
         if self._graphMin < 0:
             min2Zero = 0 - self._graphMin
             
@@ -56,38 +54,33 @@ class TimelineChart(object):
                 newData.append((f, y + min2Zero))
 
             self._data = newData
+        """
 
     def draw(self, painter, left, right, top, bottom):
         painter.setPen(self._color)
         painter.setOpacity(0.7)
 
-        maxPixelsHeight = (bottom - top)
-        start = self._widget.x2frame(left)
-        end = self._widget.x2frame(right)
-        end = len(self._data) if end > len(self._data) else end
+        fov_height      = (bottom - top)*self._zoom
+        start           = self._widget.x2frame(left)
+        end             = self._widget.x2frame(right)
+        end             = len(self._data) if end > len(self._data) else end
+        diff_max_min    = (self._graphMax - self._graphMin)
 
-        diffMinMaxValue = (self._graphMax - self._graphMin)
-        if diffMinMaxValue <= 0:
-            diffMinMaxValue = 1
+        top = (-self._graphMin if self._graphMin>0 else abs(self._graphMin))*self._zoom
 
+        if diff_max_min <= 0: diff_max_min = 1
         
-        for pos1, pos2 in zip(self._data[start + 1:end], self._data[start:end]):
-            if pos1 and pos2:
-                x,  y = pos1
-                xx, yy = pos2
+        last_coordenate = None
 
-                y   = self._top + (y * maxPixelsHeight) // diffMinMaxValue
-                yy  = self._top + (yy * maxPixelsHeight) // diffMinMaxValue
+        for pos1 in self._data[start:end]:
+            if pos1:
+                x, y = pos1
 
-                if y>yy: 
-                    y += (y-yy)*self._zoom - (y-yy)
-                    yy-= (y-yy)*self._zoom - (y-yy)
-                   
-                elif y<yy:
-                    y -= (y-yy)*self._zoom - (y-yy)
-                    yy+= (y-yy)*self._zoom - (y-yy)
+                y   = self._top + ((top+y) * fov_height)  // diff_max_min
 
-                painter.drawLine( self._widget.frame2x(xx), yy, self._widget.frame2x(x), y)
+                if last_coordenate: painter.drawLine( last_coordenate[0], last_coordenate[1], self._widget.frame2x(x), fov_height-y)
+
+                last_coordenate = self._widget.frame2x(x), fov_height-y
 
        
 

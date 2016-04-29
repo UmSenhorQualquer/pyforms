@@ -19,8 +19,8 @@ class GraphsProperties(BaseWidget):
 		self._name        = ControlText('Name')
 		self._min_value   = ControlNumber('Min')
 		self._max_value   = ControlNumber('Max')
-		self._values_zoom = ControlSlider('Zoom', 100, 60, 400)
-		self._values_top  = ControlNumber('Top position', 0, -300, 300)
+		self._values_zoom = ControlSlider('Amplitude', 100, 60, 400)
+		self._values_top  = ControlNumber('Top position', 0, -1000, 1000)
 		self._remove_graph_btn = ControlButton('Remove graph')
 
 		self._formset = [
@@ -82,7 +82,7 @@ class GraphsProperties(BaseWidget):
 		if self._loaded and index is not None:
 			graph = self._timeline._charts[index]
 
-			graph.name      = self._name.value        
+			graph.name      = self._name.value; self._graphs_list.setValue(0, index, self._name.value)
 			graph._graphMin = self._min_value.value   
 			graph._graphMax = self._max_value.value   
 			graph._zoom     = self._values_zoom.value / 100.0
