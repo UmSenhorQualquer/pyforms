@@ -1,8 +1,14 @@
-function selectFile2Control(dom_id,filename, name){
-	$( "#dialog"+dom_id ).dialog('destroy');
-	$(  "#"+dom_id).val(filename);
-	self.app.FireEvent( name, 'changed' )
+function add_dir2control(control_id, filename, name){
+	$( "#dialog"+control_id ).dialog('destroy');
+	$( "#"+control_id ).val(filename);
+	
+	var ids 			= pyforms.split_id(control_id);
+	var widget_id 		= ids[0];
+	var control_name 	= ids[1];
+
+	pyforms.find_app(widget_id).fire_event( control_name, 'changed' )
 }
+
 
 
 function ControlDir(name, properties){
@@ -13,7 +19,8 @@ ControlDir.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlDir.prototype.file_row_event = function(row, dom){
-	row.values[0] = "<a class='file2select' href='javascript:selectFile2Control(\""+this.control_id()+"\",\""+row.file+"\", \""+this.name+"\")' >"+row.filename+"</a>";
+	var control = pyforms.find_control( (""+dom[0].id).substring(6)) ;
+	row.values[0] = "<a class='file2select' href='javascript:add_dir2control(\""+control.control_id()+"\",\""+row.file+"\")' >"+row.filename+"</a>";
 	row.values.pop();
 	return row;
 };

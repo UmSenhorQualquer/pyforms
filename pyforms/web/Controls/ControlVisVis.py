@@ -1,4 +1,4 @@
-import datetime
+import datetime, numpy as np
 from pyforms.web.Controls.ControlBase import ControlBase
 
 class ControlVisVis(ControlBase):
@@ -46,21 +46,10 @@ class ControlVisVis(ControlBase):
 
 	def serialize(self):
 		data  = ControlBase.serialize(self)
-		image = self.value
-		if isinstance(image, np.ndarray):
-			if len(image.shape)>2: image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
-			image = Image.fromarray(image)
-			buff = StringIO.StringIO()
-			image.save(buff, format="PNG")
-			content = buff.getvalue()
-			buff.close()
-			
-			data.update({ 'base64content': base64.b64encode(content) })
-		data.update({ 'filename': self._filename })
+		
 		return data
 
 
 	def deserialize(self, properties):
 		ControlBase.deserialize(self, properties)
-		self._filename = properties['filename']
-		self.value = self._filename
+		
