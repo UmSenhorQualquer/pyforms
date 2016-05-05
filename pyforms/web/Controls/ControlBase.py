@@ -61,7 +61,7 @@ class ControlBase(object):
 
     def addPopupMenuOption(self, label, functionAction = None): pass
 
-    def __repr__(self): return self.value
+    def __repr__(self): return str(self.value)
 
     ############################################################################
     ############ Properties ####################################################
@@ -90,7 +90,7 @@ class ControlBase(object):
     ############################################################################
 
     @property
-    def label(self): return self._label
+    def label(self): return str(self._label)
 
     @label.setter
     def label(self, value): self._label = value
