@@ -145,13 +145,14 @@ class BaseWidget(object):
 		except (IOError) as e:
 			raise e
 
-	def executeCommand(self, cmd, cwd=None):
+	def executeCommand(self, cmd, cwd=None, env=None):
 		if cwd!=None: 
 			currentdirectory = os.getcwd()
 			os.chdir(cwd)
 		
 		print(" ".join(cmd))
-		proc = subprocess.Popen(cmd)
+		sys.stdout.flush()
+		proc = subprocess.Popen(cmd, env=env)
 
 		if cwd!=None: os.chdir(currentdirectory)
 		self.__savePID(proc.pid)
