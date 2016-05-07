@@ -54,7 +54,9 @@ class ControlCombo(ControlBase):
     @value.setter
     def value(self, value):
         for key, val in self._items.items():
+            print "----", value, val
             if value == val:
+                print "----", val
                 if self._value!=value: self.valueUpdated(value)
                 self._value = val
 
@@ -75,7 +77,7 @@ class ControlCombo(ControlBase):
         for key, value in self._items.items():
             items.append({'label': key, 'value': value}) 
 
-        data.update({ 'items': items })
+        data.update({ 'items': items, 'value': self._value })
         return data
         
     def deserialize(self, properties):
@@ -84,4 +86,6 @@ class ControlCombo(ControlBase):
 
         for item in properties['items']:
             self.addItem(item['label'], item['value'])
+
+        self.value = properties['value']
 
