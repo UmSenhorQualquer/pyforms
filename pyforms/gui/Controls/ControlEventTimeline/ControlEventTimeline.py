@@ -12,7 +12,7 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWidget
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
 from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
-
+from pyforms.gui.Controls.ControlEventTimeline.GraphsProperties import GraphsProperties
 
 __author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
 __credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
@@ -32,6 +32,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         QtGui.QWidget.__init__(self)
         ControlBase.__init__(self, label, defaultValue, **kwargs)
         self._max = 100
+        self._graphs_properties_win = None
 
         # Popup menus that only show when clicking on a TIMELINEDELTA object
         self._deltaLockAction = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
@@ -45,6 +46,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
         # General righ click popup menus
         self.addPopupMenuOption("Set track properties...", self.__setLinePropertiesEvent)
+        self.addPopupMenuOption("Set graphs properties", self.__set_graphs_properties)
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Import/Export", {
             'Export to CSV': self.__export,
@@ -145,6 +147,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         self._time = widget
         self._scrollArea = scrollarea
 
+        
+
     ##########################################################################
     #### HELPERS/PUBLIC FUNCTIONS ############################################
     ##########################################################################
@@ -167,6 +171,11 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
         for action in self._deltaActions:
             action.setVisible(
                 True) if self._time._selected is not None else action.setVisible(False)
+
+    def __set_graphs_properties(self):
+        if self._graphs_properties_win is None: self._graphs_properties_win = GraphsProperties(self._time)
+
+        self._graphs_properties_win.show()
 
     def __setLinePropertiesEvent(self):
         """

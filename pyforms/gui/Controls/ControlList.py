@@ -149,7 +149,13 @@ class ControlList(ControlBase, QWidget):
         self.tableWidget.item(row, column).setText(str(value))
 
     def getValue(self, column, row):
-        return str(self.tableWidget.item(row, column).text())
+        cell_value = ""
+        try:
+            cell_value = str(self.tableWidget.item(row, column).text())
+        except AttributeError as err:
+            pass
+        return cell_value
+            
 
     def getCurrentRowValue(self):
         currentRow = self.tableWidget.currentRow()

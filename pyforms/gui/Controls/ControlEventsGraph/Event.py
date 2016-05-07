@@ -75,10 +75,9 @@ class Event(object):
 	def end(self): return self._end
 
 	@end.setter
-	def end(self, value):
+	def end(self, value): 
 		self._end = value
-		if self._end > (self._parentWidget.width()):
-			self._end = (self._parentWidget.width())
+		#if self._end > (self._parentWidget.width()): self._end = (self._parentWidget.width())
 
 	@property
 	def color(self): return self._defautcolor

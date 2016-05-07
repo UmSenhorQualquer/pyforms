@@ -9,6 +9,7 @@ import logging
 import pyforms.Utils.tools as tools
 import math
 from PyQt4 import uic
+from PyQt4 import QtGui
 from PyQt4.QtOpenGL import QGLWidget
 from PyQt4 import QtCore
 import OpenGL.GL as GL
@@ -30,7 +31,10 @@ __status__ = "Development"
 
 class VideoGLWidget(QGLWidget):
 
-    
+    DRAG_MODE = False
+    SHIFT_MODE = False
+    ALLOW_ZOOM = True
+
     def __init__(self, parent=None):
         self.logger = logging.getLogger('pyforms')
         QGLWidget.__init__(self, parent)
@@ -68,19 +72,30 @@ class VideoGLWidget(QGLWidget):
         self._pendingFrames = None
 
     def initializeGL(self):
+        '''
+         Sets up the OpenGL rendering context, defines display lists, etc. 
+         Gets called once before the first time resizeGL() or paintGL() is called.
+        '''
         GL.glClearDepth(1.0)
         GL.glClearColor(0, 0, 0, 1.0)
         GL.glEnable(GL.GL_DEPTH_TEST)
 
     def resizeGL(self, width, height):
+        '''
+        Sets up the OpenGL viewport, projection, etc. 
+        Gets called whenever the widget has been resized (and also when it is shown for 
+        the first time because all newly created widgets get a resize event automatically).
+        :param width:
+        :param height:
+        '''
         GL.glViewport(0, 0, width, height)
         GL.glMatrixMode(GL.GL_PROJECTION)
         GL.glLoadIdentity()
         GLU.gluPerspective(40.0, float(width) / float(height), 0.01, 10.0)
 
     def drawVideo(self, _width, _height, x, y, z):
+        # self.logger.debug("x: %s | y: %s | z: %s", x, y, z)
         GL.glPushMatrix()
-
         GL.glTranslatef(x, y, z)
         GL.glBegin(GL.GL_QUADS)
         GL.glTexCoord2f(0.0, 1.0)
@@ -112,20 +127,24 @@ class VideoGLWidget(QGLWidget):
         GL.glEnd()
 
     def paintGL(self):
+        '''
+        Renders the OpenGL scene. Gets called whenever the widget needs to be updated.
+        '''
         GL.glClearColor(0.5, 0.5, 0.5, 1.0)
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
         # Correct a bug related with the overlap of contexts between simultaneous OpenGL windows.
-        if self._pendingFrames!=None:
+        if self._pendingFrames != None:
             for index, frame in enumerate(self._pendingFrames):
                 if len(frame.shape) == 2:
                     color = GL.GL_LUMINANCE
                 else:
                     color = GL.GL_BGR
 
-                if len(self.texture) < len(self.image2Display): self.texture.append(GL.glGenTextures(1))
+                if len(self.texture) < len(self.image2Display):
+                    self.texture.append(GL.glGenTextures(1))
 
                 w = len(frame[0])
                 h = len(frame)
@@ -185,16 +204,16 @@ class VideoGLWidget(QGLWidget):
 
             for texture_index in range(0, len(self.texture)):
                 if texture_index > 0:
-                    GL.glTranslatef(self._width,  0, 0)
+                    GL.glTranslatef(self._width, 0, 0)
 
                 GL.glBindTexture(GL.GL_TEXTURE_2D, self.texture[texture_index])
 
                 if self._mouseRightDown:
-                    self.drawVideo(self._width, self._height, self._x - (
-                        self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
+                    self.drawVideo(self._width, self._height, self._x - (self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
+                elif self._mouseLeftDown and self.DRAG_MODE:
+                    self.drawVideo(self._width, self._height, self._x - (self._lastGlX - self._glX), self._y - (self._lastGlY - self._glY), 0.0)
                 else:
-                    self.drawVideo(
-                        self._width, self._height, self._x, self._y, 0.0)
+                    self.drawVideo(self._width, self._height, self._x, self._y, 0.0)
 
             GL.glEnable(GL.GL_DEPTH_TEST)
 
@@ -229,24 +248,32 @@ class VideoGLWidget(QGLWidget):
         self.image2Display = frames
         self._pendingFrames = frames
 
-        self.repaint()
+        self.updateGL()
 
     def wheelEvent(self, event):
-        if event.delta() < 0:
-            self.zoom += 0.1
-        else:
-            self.zoom -= 0.1
-        if self.zoom < 0.01:
-            self.zoom = 0.02
-        self.repaint()
+        if self.ALLOW_ZOOM:
+            self._mouseX = event.x()
+            self._mouseY = event.y()
+
+            zoom_factor = event.delta() / float(1500)
+
+            self.zoom += zoom_factor
+
+            if self.zoom < 0.02 and event.delta() < 0:
+                self.zoom = 0.02
+
+            if self.zoom > 7 and event.delta() > 0:  # zoom limits
+                self.zoom = 7
+
+            # self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
+            self.updateGL()
 
     def mouseDoubleClickEvent(self, event):
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.repaint()
+        self.updateGL()
         if hasattr(self, 'imgWidth'):
-            self.onDoubleClick(event, (self._glX - self._x) * float(self.imgWidth),
-                               (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0)
+            self.onDoubleClick(event, self._get_current_x(), self._get_current_y())
 
     def mouseReleaseEvent(self, event):
         self._mouseDown = False
@@ -260,8 +287,14 @@ class VideoGLWidget(QGLWidget):
 
         if event.button() == 1:
             if hasattr(self, 'imgWidth') and self._mouseLeftDown:
-                self.onEndDrag(self._mouseStartDragPoint, ((self._glX - self._x) * float(self.imgWidth),
-                                                           (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0))
+                if self.DRAG_MODE:
+                    pass
+                    #self._x -= self._lastGlX - self._glX
+                    #self._y -= self._lastGlY - self._glY
+                    #self._lastGlX = self._glX
+                    #self._lastGlY = self._glY
+
+                self.onEndDrag(self._mouseStartDragPoint, self._get_current_mouse_point())
             self._mouseLeftDown = False
 
     def mousePressEvent(self, event):
@@ -278,14 +311,20 @@ class VideoGLWidget(QGLWidget):
         # self.logger.debug("%s", "Mouse press (after) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
         # self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
 
-
         if hasattr(self, 'imgWidth'):
-            self.onClick(event, (self._glX - self._x) * float(self.imgWidth),
-                         (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0)
+            self.onClick(event, self._get_current_x(), self._get_current_y())
 
         if event.button() == 1:
             self._mouseLeftDown = True
-            self._mouseStartDragPoint = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
+            # self.logger.debug("glx: %s | x: %s | gly: %s | y: %s | imgWdith: %s | imgHeight: %s | height: %s", self._glX, self._x, self._glY, self._y, self.imgWidth, self.imgHeight, self._height)
+            self._mouseStartDragPoint = self._get_current_mouse_point()
+
+            if self.DRAG_MODE:
+                #self._x -= self._lastGlX - self._glX
+                #self._y -= self._lastGlY - self._glY
+                self._lastGlX = self._glX
+                self._lastGlY = self._glY
+
             # self.logger.debug("Button 1 pressed")
         if event.button() == 4:
             self._mouseRightDown = True
@@ -293,15 +332,34 @@ class VideoGLWidget(QGLWidget):
             self._lastGlY = self._glY
 
     def mouseMoveEvent(self, event):
+        self.setFocus(QtCore.Qt.MouseFocusReason)
 
         self._mouseX = event.x()
         self._mouseY = event.y()
-        self.updateGL()
+        # self.updateGL()
         if self._mouseLeftDown and self._mouseDown:
+            self.updateGL()
             p1 = self._mouseStartDragPoint
-            p2 = (self._glX - self._x) * float(self.imgWidth), (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
-
+            p2 = self._get_current_mouse_point()
             self.onDrag(p1, p2)
+
+        if self._mouseRightDown and self._mouseDown:
+            self.updateGL()
+            p1 = self._mouseStartDragPoint
+            p2 = self._get_current_mouse_point()
+            self.onDrag(p1, p2)
+
+    def keyPressEvent(self, event):
+        super(QGLWidget, self).keyPressEvent(event)
+        if event.key() == QtCore.Qt.Key_Control:
+            self.DRAG_MODE = True
+            self.ALLOW_ZOOM = False
+            # self.logger.debug("Enabled drag mode")
+
+        if event.key() == QtCore.Qt.Key_Shift:
+            # self.logger.debug("Enabled shift mode")
+            self.SHIFT_MODE = True
+            self.ALLOW_ZOOM = False
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
@@ -317,6 +375,18 @@ class VideoGLWidget(QGLWidget):
         if event.key() == QtCore.Qt.Key_A:
             self._control.video_index -= 1
             self._control.updateFrame()
+
+        if event.key() == QtCore.Qt.Key_Control:
+            self.DRAG_MODE = False
+            self.ALLOW_ZOOM = True
+            self._x -= self._lastGlX - self._glX
+            self._y -= self._lastGlY - self._glY
+            # self.logger.debug("Disabled drag mode")
+
+        if event.key() == QtCore.Qt.Key_Shift:
+            self.SHIFT_MODE = False
+            self.ALLOW_ZOOM = True
+            # self.logger.debug("Disabled shift mode")
 
         self.onKeyRelease(event)
 
@@ -336,7 +406,7 @@ class VideoGLWidget(QGLWidget):
     @rotateX.setter
     def rotateX(self, value):
         self._rotateX = value
-        self.repaint()
+        self.updateGL()
 
     @property
     def rotateZ(self): return self._rotateZ
@@ -344,7 +414,19 @@ class VideoGLWidget(QGLWidget):
     @rotateZ.setter
     def rotateZ(self, value):
         self._rotateZ = value
-        self.repaint()
+        self.updateGL()
+
+    def _get_current_mouse_point(self):
+        '''
+
+        '''
+        return self._get_current_x(), self._get_current_y()
+
+    def _get_current_x(self):
+        return (self._glX - self._x) * float(self.imgWidth)
+
+    def _get_current_y(self):
+        return (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
 
     @property
     def point(self): return self._point

@@ -63,6 +63,7 @@ class TimelinePointer(object):
     def position(self, value):
         self._position = int(round(value / self._parent._scale))
         self.moveEvent()
+        
 
     @property
     def frame(self): return self._position
