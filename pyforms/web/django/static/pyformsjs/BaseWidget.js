@@ -12,6 +12,15 @@ function BaseWidget(widget_id, widget_name, controls){
 	};
 	$('.application-tabs').tabs()
 }
+////////////////////////////////////////////////////////////
+
+BaseWidget.prototype.find_control = function(name){
+	for(var index = 0; index < this.controls.length; index++)
+		if(this.controls[index].name==name)
+			return this.controls[index];
+	
+	return undefined;
+}
 
 ////////////////////////////////////////////////////////////
 
@@ -43,6 +52,7 @@ BaseWidget.prototype.fire_event = function(dom_in, event){
 ////////////////////////////////////////////////////////////
 
 BaseWidget.prototype.update_controls = function(){	
+	
 	this.update_data({ userpath: this.current_folder() }); 
 };
 

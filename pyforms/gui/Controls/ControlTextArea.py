@@ -22,9 +22,17 @@ class ControlTextArea(ControlBase):
         self._form.label.setText(self._label)
         self._form.plainTextEdit.setPlainText(str(self._value))
 
+        super(ControlTextArea, self).initForm()
+        self.form.plainTextEdit.textChanged.connect(self.finishEditing)
+
     def __add__(self, other):
         self._form.plainTextEdit.appendPlainText(str(other))
         return self
+
+    def finishEditing(self):
+        """Function called when the lineEdit widget is edited"""
+        self.changed()
+        
 
     @property
     def value(self):

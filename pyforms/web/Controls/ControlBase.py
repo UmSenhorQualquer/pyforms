@@ -24,10 +24,10 @@ class ControlBase(object):
 
     def serialize(self):
         return { 
-            'name':     self.__class__.__name__, 
-            'value':    self.value, 
-            'label':    self._label,
-            'help':     self._help,
+            'name':     str(self.__class__.__name__), 
+            'value':    str(self.value),
+            'label':    str(self._label if self._label else ''),
+            'help':     str(self._help if self._help else ''),
             'visible':  int(self._visible)
         }
 
@@ -61,7 +61,7 @@ class ControlBase(object):
 
     def addPopupMenuOption(self, label, functionAction = None): pass
 
-    def __repr__(self): return self.value
+    def __repr__(self): return str(self.value)
 
     ############################################################################
     ############ Properties ####################################################
@@ -90,7 +90,7 @@ class ControlBase(object):
     ############################################################################
 
     @property
-    def label(self): return self._label
+    def label(self): return str(self._label)
 
     @label.setter
     def label(self, value): self._label = value

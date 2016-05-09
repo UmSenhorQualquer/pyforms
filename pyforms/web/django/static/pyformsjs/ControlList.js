@@ -63,6 +63,8 @@ ControlList.prototype.load_table = function(){
 	var self = this;
 		
 	if(!this.properties.read_only){
+
+	
 		$( "#"+this.control_id()+" tbody td" ).dblclick(function(){
 			if( self.being_edited ) return false;
 

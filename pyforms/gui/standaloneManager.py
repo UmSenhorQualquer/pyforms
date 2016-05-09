@@ -141,6 +141,8 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 
 def startApp(ClassObject, geometry=None):
+    
+
     app = QtGui.QApplication(sys.argv)
     w = StandAloneContainer(ClassObject)
 

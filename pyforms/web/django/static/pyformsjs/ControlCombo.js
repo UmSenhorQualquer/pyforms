@@ -20,3 +20,15 @@ ControlCombo.prototype.init_control = function(){
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+
+ControlCombo.prototype.set_value = function(value){
+	console.log("set: "+value);
+	this.jquery().val(value); 
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+ControlCombo.prototype.get_value = function(){ 
+	console.log('get: '+ this.jquery().find('option:selected').val());
+	return this.jquery().find('option:selected').val(); 
+};

@@ -1,7 +1,4 @@
 
-
-
-
 function ControlPlayer(name, properties){
 	ControlBase.call(this, name, properties);
 };
@@ -10,17 +7,17 @@ ControlPlayer.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlPlayer.prototype.get_value = function(){ 
-	var pos = $( "#timeline"+this.control_id() ).slider("value");
-	var res = { position: pos, filename: this.properties.filename };
-	return res;
+	this.properties.video_index = $( "#timeline"+this.control_id()).slider("value");
+	return this.properties.value; 
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlPlayer.prototype.set_value = function(value){
-	$( "#timeline"+this.control_id() ).slider({min: value.min, max: value.max, value: value.position});
-	this.properties.filename = value.filename;
-	$( "#display"+this.control_id() ).attr("src", "data:image/png;base64,"+value.frame);
+	if(this.properties.base64content){
+		$("#display"+this.control_id()).attr("src", "data:image/png;base64,"+this.properties.base64content);
+		$( "#timeline"+this.control_id()).slider("option", "max", this.properties.endFrame);
+	}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +28,11 @@ ControlPlayer.prototype.init_control = function(){
 	html += "<div class='slider' name='"+this.name+"' id='timeline"+this.control_id()+"' ></div>";
 	html += "</div>";
 	this.jquery_place().replaceWith(html);
-	$( "#timeline"+this.control_id() ).slider( {stop: this.basewidget.update_controls() });
+	var self = this;
+	$( "#timeline"+this.control_id() ).slider({
+		stop: function(){ self.basewidget.fire_event( self.name, 'refresh' ); } ,
+		max: self.properties.endFrame
+	});
 };
 
 ////////////////////////////////////////////////////////////////////////////////

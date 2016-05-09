@@ -1,4 +1,4 @@
-import datetime
+import datetime, numpy as np
 from pyforms.web.Controls.ControlBase import ControlBase
 
 class ControlVisVis(ControlBase):
@@ -31,14 +31,23 @@ class ControlVisVis(ControlBase):
 				if isinstance(value[1], unicode): value[1] = str(value[1])
 				new_row.append(value)
 			rows.append(new_row)
-
-		return {'legend': self.legend, 'data': rows}
+		return rows
 
 	@value.setter
-	def value(self, value): 
-		if isinstance(value, dict):
-			self.legend = value['legend']
-			data   	    = value['data']
-		else:
-			data = value
-		ControlBase.value.fset(self, data)
+	def value(self, value): ControlBase.value.fset(self, value)
+
+
+	def serialize(self):
+		data  = ControlBase.serialize(self)
+		data.update({ 
+			'legend': 	self.legend, 
+			'value': 	self._value 
+		})
+		return data
+
+
+	def deserialize(self, properties):
+		ControlBase.deserialize(self, properties)
+		self.legend = properties[u'legend']
+		self.value 	= properties[u'value']
+		

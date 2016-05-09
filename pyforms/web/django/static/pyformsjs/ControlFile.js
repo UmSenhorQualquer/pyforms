@@ -1,9 +1,12 @@
-function selectFile2Control(dom_id,filename, name, widget_id){
-	$( "#dialog"+dom_id ).dialog('destroy');
-	$(  "#"+dom_id).val(filename);
-	console.log(widget_id);
-	console.log(pyforms.find_app(widget_id));
-	pyforms.find_app(widget_id).fire_event( name, 'changed' )
+function add_file2control(control_id, filename, name){
+	$( "#dialog"+control_id ).dialog('destroy');
+	$( "#"+control_id ).val(filename);
+	
+	var ids 			= pyforms.split_id(control_id);
+	var widget_id 		= ids[0];
+	var control_name 	= ids[1];
+
+	pyforms.find_app(widget_id).fire_event( control_name, 'changed' )
 }
 
 
@@ -15,10 +18,8 @@ ControlFile.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlFile.prototype.file_row_event = function(row, dom){
-	var control_id = $(this).attr('id');
-	var name = $(this).attr('name');
-	var widget_id = $(this).attr('basewidget');
-	row.values[0] = "<a class='file2select' href='javascript:selectFile2Control(\""+control_id+"\",\""+row.file+"\", \""+name+"\", \""+widget_id+"\")' >"+row.filename+"</a>";
+	var control = pyforms.find_control( (""+dom[0].id).substring(6)) ;
+	row.values[0] = "<a class='file2select' href='javascript:add_file2control(\""+control.control_id()+"\",\""+row.file+"\")' >"+row.filename+"</a>";
 	row.values.pop();
 	return row;
 };

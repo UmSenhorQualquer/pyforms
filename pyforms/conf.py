@@ -25,6 +25,9 @@ LOG_FILENAME = "pyforms"
 CONTROL_CODE_EDITOR_DEFAULT_FONT_SIZE = '12'
 CONTROL_EVENTS_GRAPH_DEFAULT_SCALE = 1
 
+WINDOWS_SIZE = 100,100
+
+
 def load_everything_from(module_names):
     """
     Load all
@@ -39,6 +42,7 @@ def load_everything_from(module_names):
             names = [name for name in dir(m) if not name.startswith('_')]
         for name in names:
             g[name] = getattr(m, name)
+
 
 try:
     from settings import *
