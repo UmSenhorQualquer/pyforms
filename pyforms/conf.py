@@ -4,7 +4,10 @@
 """ pyForms
 
 """
+
 import logging
+import importlib
+import os
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = "Copyright 2016 Champalimaud Foundation"
@@ -24,8 +27,40 @@ CONTROL_EVENTS_GRAPH_DEFAULT_SCALE = 1
 
 WINDOWS_SIZE = 100,100
 
+
+def load_everything_from(module_names):
+    """
+    Load all
+    :param module_names: modules to be imported
+    :type module_names: list of strings
+    """
+    g = globals()
+    for module_name in module_names:
+        m = importlib.import_module(module_name)
+        names = getattr(m, '__all__', None)
+        if names is None:
+            names = [name for name in dir(m) if not name.startswith('_')]
+        for name in names:
+            g[name] = getattr(m, name)
+
+
 try:
-	from settings import *
+    from settings import *
 except:
-	pass
+    pass
+
+
+try:
+    # print(os.environ.get('PYFORMS_APP_SETTINGS'))
+    module_name = os.getenv('PYFORMS_APP_SETTINGS', '')
+    if module_name:
+        print('loading PYFORMS_APP_SETTINGS',module_name)
+        load_everything_from([module_name])
+        
+
+    # user_settings = importlib.import_module(os.environ.get('APP_USER_SETTINGS'))
+    # from user_settings import *
+    # from pythonvideoannotator.settings import *
+except Exception as err:
+    print(err)
 

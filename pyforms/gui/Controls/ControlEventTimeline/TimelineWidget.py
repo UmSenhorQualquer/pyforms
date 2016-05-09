@@ -140,6 +140,8 @@ class TimelineWidget(QtGui.QWidget):
             self, csvfileobject, color=self._chartsColors[len(self._charts)])
         self._charts.append(chart)
 
+        chart.name = "undefined name {0}".format(str(len(self._charts)))
+
     def import_csv(self, csvfileobject):
         """
         Extracts info from a file object and stores it in memory in
@@ -153,6 +155,7 @@ class TimelineWidget(QtGui.QWidget):
         self._selected = None
 
         for row in csvfileobject:
+            if len(row)==0: continue
             if row[0] == "T":
                 track = self.addTrack()
                 track.properties = row
@@ -261,6 +264,7 @@ class TimelineWidget(QtGui.QWidget):
         for chart in self._charts:
             chart.draw(painter, start, end, 0, self.height())
         #End draw graph #######################################################
+
 
         self.__drawTrackLines(painter, start, end)
 
@@ -515,7 +519,7 @@ class TimelineWidget(QtGui.QWidget):
 
     @position.setter
     def position(self, value):
-        self._pointer._position = value
+        self._pointer.position = value
         #######################################################################
         # Check if the player position is inside the scroll
         # if is not in, update the scroll position

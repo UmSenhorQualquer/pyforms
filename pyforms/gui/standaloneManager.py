@@ -12,25 +12,43 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-import sys, os, inspect
+import sys
+import os
+import inspect
+import logging
 from PyQt4 import QtGui, QtCore
 
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
+
+__author__ = "Ricardo Ribeiro"
+__copyright__ = ""
+__credits__ = "Ricardo Ribeiro"
+__license__ = "MIT"
+__version__ = "0.0"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
+__status__ = "Development"
 
 
 class StandAloneContainer(QtGui.QMainWindow):
 
     def __init__(self, ClassObject):
         super(QtGui.QMainWindow, self).__init__()
+
+        self.logger = logging.getLogger(__name__)
+
+        self.logger.debug("Loading window as standalone container...")
+
         w = ClassObject()
         self._widget = w
 
-        if len(w.mainmenu) > 0: w._mainmenu = self.__initMainMenu(w.mainmenu)
-        
+        if len(w.mainmenu) > 0:
+            w._mainmenu = self.__initMainMenu(w.mainmenu)
+
         w.initForm()
         self.setCentralWidget(w)
         self.setWindowTitle(w.title)
-       
+
         docks = {}
         for name, item in w.formControls.items():
             if isinstance(item, ControlDockWidget):
@@ -53,7 +71,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 
             if isinstance(widgets, list):
                 widgets = sorted(widgets, key=lambda x: x[1].order)
-                
+
                 for name, widget in widgets:
                     dock = QtGui.QDockWidget(self)
                     dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
@@ -64,7 +82,8 @@ class StandAloneContainer(QtGui.QMainWindow):
                     dock.setWidget(widget.form)
                     dock.setWindowTitle(widget.label)
                     widget.dock = dock
-                    if not widget._show: dock.hide()
+                    if not widget._show:
+                        dock.hide()
 
                     self.addDockWidget(side, dock)
             else:
@@ -80,18 +99,17 @@ class StandAloneContainer(QtGui.QMainWindow):
                 self.addDockWidget(side, dock)
                 dock.setWindowTitle(widget.label)
                 widget.dock = dock
-                if not widget._show: dock.hide()
-
+                if not widget._show:
+                    dock.hide()
 
         try:
             directory = os.path.dirname(inspect.getfile(w.__class__))
-            self.loadStyleSheetFile( os.path.join( directory, 'style.css') )
+            self.loadStyleSheetFile(os.path.join(directory, 'style.css'))
         except:
             pass
 
     def closeEvent(self, event):
         self._widget.closeEvent(event)
-     
 
     def __initMainMenu(self, options, keys={}):
         menubar = self.menuBar()
@@ -103,18 +121,17 @@ class StandAloneContainer(QtGui.QMainWindow):
                         menu.addSeparator()
                     else:
                         for text, func in m1.items():
-                            if text!='icon':
+                            if text != 'icon':
                                 action = QtGui.QAction(text, self)
                                 if 'icon' in m1.keys():
                                     action.setIconVisibleInMenu(True)
-                                    action.setIcon( QtGui.QIcon(m1['icon']) )
+                                    action.setIcon(QtGui.QIcon(m1['icon']))
                                 if func:
                                     action.triggered.connect(func)
                                     menu.addAction(action)
                                 options[menuIndex][key][subMenuIndex][text] = action
                                 break
         return options
-    
 
     def loadStyleSheetFile(self, filename):
         infile = open(filename, 'r')
@@ -134,6 +151,5 @@ def startApp(ClassObject, geometry=None):
         w.setGeometry(*geometry)
     else:
         w.showMaximized()
-    
 
     app.exec_()

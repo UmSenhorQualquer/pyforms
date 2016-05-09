@@ -1,5 +1,6 @@
 from pyforms import conf
-
+import logging, traceback
+logger = logging.getLogger(__file__)
 
 if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 
@@ -27,6 +28,7 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 		from pyforms.gui.Controls.ControlPlayer.ControlPlayer 	import ControlPlayer
 	except:
 		print("GL widgets or Opencv not installed")
+		logger.debug(traceback.format_exc())
 
 	from pyforms.gui.Controls.ControlProgress 		import ControlProgress
 	from pyforms.gui.Controls.ControlSlider 		import ControlSlider
@@ -39,6 +41,7 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 		from pyforms.gui.Controls.ControlVisVisVolume 	import ControlVisVisVolume
 	except:
 		print("VisVis not installed")
+		logger.debug(traceback.format_exc())
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline 	import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph 	import ControlEventsGraph
 
@@ -46,6 +49,7 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 		from pyforms.gui.Controls.ControlCodeEditor 		import ControlCodeEditor
 	except:
 		print("QScintilla2 not installed")
+		logger.debug(traceback.format_exc())
 	
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:

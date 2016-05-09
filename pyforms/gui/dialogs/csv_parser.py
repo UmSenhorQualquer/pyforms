@@ -93,7 +93,7 @@ class CsvParserDialog(BaseWidget):
     def next(self):
         if self._spamreader != None:
             row = self._spamreader.next()
-            return [row[col] for col in self._cols]
+            return [row[int(col)] for col in self._cols]
         else:
             raise StopIteration()
 
