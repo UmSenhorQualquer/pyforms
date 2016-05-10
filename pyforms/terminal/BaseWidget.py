@@ -146,20 +146,17 @@ class BaseWidget(object):
 			raise e
 
 	def executeCommand(self, cmd, cwd=None):
-		if cwd!=None: 
+		if cwd is not None:
 			currentdirectory = os.getcwd()
 			os.chdir(cwd)
-		
-		print(" ".join(cmd))
-		proc = subprocess.Popen(cmd)
-
-		if cwd!=None: os.chdir(currentdirectory)
-		self.__savePID(proc.pid)
-		proc.wait()
-		#(output, error) = proc.communicate()
-		#if error: print 'error: ', error
-		#print 'output: ', output
-		return ''#output
+		proc = subprocess.Popen(
+			cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		(output, error) = proc.communicate()
+		if cwd is not None:
+			os.chdir(currentdirectory)
+		if error:
+			print('Error: ' + error)
+		return output
 
 
 
