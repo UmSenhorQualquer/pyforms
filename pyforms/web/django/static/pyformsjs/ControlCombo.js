@@ -8,7 +8,10 @@ ControlCombo.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCombo.prototype.init_control = function(){
-	this.jquery_place().replaceWith("<div title='"+this.properties.help+"' class='ControlCombo' ><label title='"+this.properties.help+"' for='"+this.control_id()+"'>"+this.properties.label+"</label><select type='button' id='"+this.control_id()+"' ></select></div>")
+	var html = "<div id='"+this.place_id()+"' class='ui labeled input ControlCombo' ><div class='ui label'>"+this.properties.label+"</div>";
+	html += "<select class='ui dropdown' id='"+this.control_id()+"' ></select></div>";
+
+	this.jquery_place().replaceWith(html);
 	var select = document.getElementById(this.control_id());
 	var index;
 	for (var index = 0; index < this.properties.items.length; ++index) {

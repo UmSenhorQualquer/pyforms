@@ -27,10 +27,12 @@ ControlFile.prototype.file_row_event = function(row, dom){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlFile.prototype.init_control = function(){
-	var html = "<div class='ControlFile' ><label for='"+this.control_id()+"' title='"+this.properties.help+"' >"+this.properties.label+"</label>";
-	html += "<input type='text' class='filename' basewidget='"+this.basewidget.widget_id+"' name='"+this.name+"' id='"+this.control_id()+"' value='"+this.properties.value+"' />";
-	html += '<button id="button'+this.control_id()+'" class="btn "><i class="glyphicon glyphicon-folder-open icon-white"></i></button>';
+	var html = "<div class='ui labeled action input ControlFile' id='"+this.place_id()+"' ><div class='ui label'>"+this.properties.label+"</div>";
+	html += "<input type='text' class='filename' basewidget='"+this.basewidget.widget_id+"' name='"+this.name+"' id='"+this.control_id()+"' value='"+this.properties.value+"'  placeholder='"+this.properties.label+"' />";
+	html += '<button id="button'+this.control_id()+'" class="ui icon button"><i class="file icon"></i></button>';
 	html += "<div id='dialog"+this.control_id()+"' dom-id='"+this.control_id()+"' class='dialog' style='display:none;' title='Pick a file'></div>";
+	
+	
 	this.jquery_place().replaceWith(html);
 
 	var self = this;

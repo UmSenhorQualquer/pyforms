@@ -28,10 +28,13 @@ ControlDir.prototype.file_row_event = function(row, dom){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlDir.prototype.init_control = function(){
-	var html = "<div class='ControlDir' ><label for='"+this.control_id()+"' title='"+this.properties.help+"' >"+this.properties.label+"</label>";
-	html += "<input type='text' class='filename' name='"+this.name+"' id='"+this.control_id()+"' value='"+this.properties.value+"' />";
-	html += '<button id="button'+this.control_id()+'" class="btn "><i class="glyphicon glyphicon-folder-open icon-white"></i></button>';
-	html += "<div id='dialog"+this.control_id()+"' dom-id='"+this.control_id()+"' class='dialog' style='display:none;' title='Pick a file'></div>";
+
+	var html = "<div class='ui labeled action input ControlDir' id='"+this.place_id()+"' ><div class='ui label'>"+this.properties.label+"</div>";
+	html += "<input type='text' class='filename' basewidget='"+this.basewidget.widget_id+"' name='"+this.name+"' id='"+this.control_id()+"' value='"+this.properties.value+"'  placeholder='"+this.properties.label+"' />";
+	html += '<button id="button'+this.control_id()+'" class="ui icon button"><i class="folder icon"></i></button>';
+	html += "<div id='dialog"+this.control_id()+"' dom-id='"+this.control_id()+"' class='dialog' style='display:none;' title='Pick a directory'></div>";
+	
+
 	this.jquery_place().replaceWith(html);
 
 	var self = this;

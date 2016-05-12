@@ -10,8 +10,8 @@ ControlButton.prototype = Object.create(ControlBase.prototype);
 
 ControlButton.prototype.init_control = function(){
 	var html = "<div class='ControlButton' >";
-	html +="<button title='"+this.properties.help+"'  value='"+this.properties.label+"' id='"+this.control_id()+"' class='btn' >";
-	html += '<i class="glyphicon glyphicon-cog"></i> '+ this.properties.label;
+	html +="<button title='"+this.properties.help+"' id='"+this.control_id()+"' class='ui button' >";
+	html += this.properties.label;
 	html += '</button>';
 	html += '</div>';
 	
