@@ -26,6 +26,7 @@ ControlList.prototype.get_value = function(){
 	return res
 };
 
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.set_value = function(value){
@@ -35,7 +36,7 @@ ControlList.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.load_table = function(){
-	var html = "<table class='ControlList' id='"+this.control_id()+"' >";
+	var html = "<div id='"+this.place_id()+"' class='field'><table class='ui selectable celled table ControlList' id='"+this.control_id()+"' >";
 	html += "<thead>";
 	html += "<tr>";
 	var titles = this.properties.horizontal_headers;
@@ -71,9 +72,9 @@ ControlList.prototype.load_table = function(){
 			self.being_edited = true;
 			var cell = $(this);
 			var value = cell.html();
-			cell.html('<input type="text" value="'+value+'" />');
-			cell.children('input').focus();
-			cell.children('input').focusout(function(){
+			cell.html('<div class="ui input"><input type="text" value="'+value+'" /></div>');
+			cell.find('input').focus();
+			cell.find('input').focusout(function(){
 				cell.html($(this).val());
 				self.being_edited = false;
 				self.basewidget.fire_event( self.name, 'changed' );

@@ -15,7 +15,7 @@ class ControlList(ControlBase):
 
 
 	@property
-	def horizontalHeaders(self): return self._titles
+	def horizontalHeaders(self): return map(str, self._titles)
 
 	@horizontalHeaders.setter
 	def horizontalHeaders(self, value): self._titles = value
@@ -36,11 +36,17 @@ class ControlList(ControlBase):
 	def mouseSelectedRowIndex(self): return self._selected_index
 
 
+	@property
+	def value(self): return [map(str, row) for row in ControlBase.value.fget(self)]
+
+	@value.setter
+	def value(self, value): ControlBase.value.fset(self, value)
+
 	def serialize(self):
 		data 	= ControlBase.serialize(self)
 		
 		data.update({ 
-			'horizontal_headers': 	self._titles,
+			'horizontal_headers': 	self.horizontalHeaders,
 			'read_only':			1 if self._read_only else 0,
 			'selected_index':		self._selected_index,
 			'select_entire_row': 	1 if self._selectEntireRow else 0,

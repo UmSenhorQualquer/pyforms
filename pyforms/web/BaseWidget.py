@@ -56,10 +56,11 @@ class BaseWidget(object):
 		tab_id = uuid.uuid4()
 
 		for index, (key, item) in enumerate( sorted(formsetDict.items()) ):
-			tabs_body += "<div id='%s-tab%d' >%s</div>\n" % (tab_id, index, self.generatePanel(item))
-			tabs_head += "<li><a href='#%s-tab%d' >%s</a></li>\n" % (tab_id, index, key[key.find(':')+1:])
-		return """<div id='%s' class='application-tabs' ><ul>%s</ul> %s</div>""" % (tab_id, tabs_head, tabs_body)
+			active = 'active' if index==0 else ''
+			tabs_body += "<div class='ui bottom attached {3} tab segment' data-tab='{4}-{5}'  id='{0}-tab{1}' >{2}</div>".format(tab_id, index, self.generatePanel(item), active, tab_id, index)
+			tabs_head += "<div class='{1} item' data-tab='{2}-{3}' >{0}</div>".format(key[key.find(':')+1:], active, tab_id, index)
 
+		return """<div id='{0}' class='ui top attached tabular menu' >{1}</div>{2}<script type='text/javascript'>$('#{0}.menu .item').tab();</script>""".format(tab_id, tabs_head, tabs_body)
 
 
 	def generatePanel(self, formset):
@@ -117,12 +118,12 @@ class BaseWidget(object):
 						else: layout += "<span class='info' >%s</span>" % row
 					else:
 						self._controls.append( control.initControl() )
-						layout += "<div class='control' >%s</div>" % control
+						layout += "%s" % control
 		elif type(formset) is list:
 			for row in formset:
 				if isinstance(row, (list, tuple)):
 					panel = self.generatePanel( row )
-					layout += "<div class='columns' >%s</div>" % panel
+					layout += "<div class='fields' >%s</div>" % panel
 				elif row == " ":
 					layout += "<div class='space' ></div>"
 				elif type(row) is dict:
@@ -232,7 +233,7 @@ class BaseWidget(object):
 	
 	
 	@property
-	def form(self): return """<span id='app-{1}' >{0}</span>""".format(self._html, self._id)
+	def form(self): return """<form class='ui form' id='app-{1}' >{0}</form>""".format(self._html, self._id)
 
 	@property
 	def js(self): return self._js
