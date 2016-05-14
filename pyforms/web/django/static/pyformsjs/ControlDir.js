@@ -1,5 +1,5 @@
 function add_dir2control(control_id, filename, name){
-	$( "#dialog"+control_id ).dialog('destroy');
+	$( "#dialog"+control_id ).modal('hide');
 	$( "#"+control_id ).val(filename);
 	
 	var ids 			= pyforms.split_id(control_id);
@@ -19,7 +19,7 @@ ControlDir.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlDir.prototype.file_row_event = function(row, dom){
-	var control = pyforms.find_control( (""+dom[0].id).substring(6)) ;
+	var control = pyforms.find_control( (""+dom[0].id).substring(15)) ;
 	row.values[0] = "<a class='file2select' href='javascript:add_dir2control(\""+control.control_id()+"\",\""+row.file+"\")' >"+row.filename+"</a>";
 	row.values.pop();
 	return row;
@@ -29,12 +29,10 @@ ControlDir.prototype.file_row_event = function(row, dom){
 
 ControlDir.prototype.init_control = function(){
 
-	var html = "<div class='ui labeled action input ControlDir' id='"+this.place_id()+"' ><div class='ui label'>"+this.properties.label+"</div>";
+	var html = "<div class='field ControlDir' id='"+this.place_id()+"' ><label>"+this.properties.label+"</label>";
 	html += "<input type='text' class='filename' basewidget='"+this.basewidget.widget_id+"' name='"+this.name+"' id='"+this.control_id()+"' value='"+this.properties.value+"'  placeholder='"+this.properties.label+"' />";
-	html += '<button id="button'+this.control_id()+'" class="ui icon button"><i class="folder icon"></i></button>';
-	html += "<div id='dialog"+this.control_id()+"' dom-id='"+this.control_id()+"' class='dialog' style='display:none;' title='Pick a directory'></div>";
+	html += "<div class='ui modal' id='dialog"+this.control_id()+"' ><i class='close icon'></i><div class='header'>"+this.properties.label+"</div><div class='content' id='dialog-content-"+this.control_id()+"'  dom-id='"+this.control_id()+"' ></div></div>";
 	
-
 	this.jquery_place().replaceWith(html);
 
 	var self = this;
@@ -43,11 +41,11 @@ ControlDir.prototype.init_control = function(){
 			var folder = $('#files-browser-div').dataviewer('path');
 			if(folder==undefined) folder = '/';
 		}else folder = '/'
-		$( "#dialog"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
-		$( "#dialog"+self.control_id()).dataviewer();
+		$( "#dialog-content-"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
+		$( "#dialog-content-"+self.control_id()).dataviewer();
 	}
 	
-	$( "#dialog"+this.control_id()).dataviewer({ 
+	$("#dialog-content-"+this.control_id()).dataviewer({ 
 		titles: ['File name','Size', 'Created on',''],
 		sizes: 	['auto','120px','220px','50px'],
 		sortingColumns: [0,1,2],
@@ -59,9 +57,9 @@ ControlDir.prototype.init_control = function(){
 		}]
 	});
 
-	$( "#button"+this.control_id() ).unbind('click');
-	$( "#button"+this.control_id() ).click(function(){
-		$( "#dialog"+self.control_id() ).dialog({ show: 'slideDown',width: 900, height: 600, position: { at: "top" }, draggable: false });
+	this.jquery().unbind('click');
+	this.jquery().click(function(){
+		$( "#dialog"+self.control_id() ).modal('show');
 		reload_folder();
 	});
 };

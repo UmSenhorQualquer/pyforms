@@ -36,7 +36,7 @@ ControlList.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.load_table = function(){
-	var html = "<table class='ui selectable celled table ControlList' id='"+this.control_id()+"' >";
+	var html = "<div id='"+this.place_id()+"' class='field'><table class='ui selectable celled table ControlList' id='"+this.control_id()+"' >";
 	html += "<thead>";
 	html += "<tr>";
 	var titles = this.properties.horizontal_headers;

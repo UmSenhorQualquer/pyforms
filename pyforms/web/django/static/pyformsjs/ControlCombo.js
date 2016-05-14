@@ -8,7 +8,7 @@ ControlCombo.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCombo.prototype.init_control = function(){
-	var html = "<div id='"+this.place_id()+"' class='ui labeled input ControlCombo' ><div class='ui label'>"+this.properties.label+"</div>";
+	var html = "<div id='"+this.place_id()+"' class='field ControlCombo' ><label>"+this.properties.label+"</label>";
 	html += "<select class='ui dropdown' id='"+this.control_id()+"' ></select></div>";
 
 	this.jquery_place().replaceWith(html);
@@ -25,13 +25,14 @@ ControlCombo.prototype.init_control = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCombo.prototype.set_value = function(value){
-	console.log("set: "+value);
 	this.jquery().val(value); 
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCombo.prototype.get_value = function(){ 
-	console.log('get: '+ this.jquery().find('option:selected').val());
-	return this.jquery().find('option:selected').val(); 
+	if(this.jquery().find('option:selected').size()>0 )
+		return this.jquery().find('option:selected').val();
+	else
+		return ""; 
 };

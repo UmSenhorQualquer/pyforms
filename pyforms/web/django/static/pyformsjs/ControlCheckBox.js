@@ -24,10 +24,11 @@ ControlCheckBox.prototype.get_value = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCheckBox.prototype.init_control = function(){
-	var html = "<div class='ui toggle checkbox ControlCheckBox' title='"+this.properties.help+"' >";
-	html += "<input name='"+this.name+"' id='"+this.control_id()+"' type='checkbox' value='true' />";
+	var html = "<div class='field ControlCheckBox'>";
+	html += "<div class='ui toggle checkbox' title='"+this.properties.help+"' >";
+	html += "<input name='"+this.name+"' id='"+this.control_id()+"' type='checkbox' value='true' class='hidden' />";
 	html += "<label for='"+this.control_id()+"'>"+this.properties.label+"</label>";
-	html += "</div>";
+	html += "</div></div>";
 	this.jquery_place().replaceWith(html);
 	
 	if( this.properties.value=='True')
