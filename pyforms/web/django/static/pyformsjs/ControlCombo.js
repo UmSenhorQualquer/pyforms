@@ -36,3 +36,24 @@ ControlCombo.prototype.get_value = function(){
 	else
 		return ""; 
 };
+
+////////////////////////////////////////////////////////////////////////////////
+
+ControlCombo.prototype.deserialize = function(data){
+	this.properties = $.extend(this.properties, data);
+
+	if( this.jquery().size()>0 ){
+		this.jquery().empty();
+		var select = document.getElementById(this.control_id());
+		for (var index = 0; index < this.properties.items.length; ++index) {
+			var option = document.createElement("option");
+			option.text  = this.properties.items[index].label;
+			option.value = this.properties.items[index].value;
+			select.add( option );
+		}
+	}
+
+	this.set_value(this.properties.value);
+};
+
+////////////////////////////////////////////////////////////////////////////////
