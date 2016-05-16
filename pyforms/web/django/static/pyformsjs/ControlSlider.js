@@ -21,7 +21,7 @@ ControlSlider.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlSlider.prototype.init_control = function(){
-	var html = 	"<div class='field ControlSlider' title='"+this.properties.help+"' >";
+	var html = 	"<div id='"+this.place_id()+"' class='field ControlSlider' title='"+this.properties.help+"' >";
 	html += 	"<label>"+this.properties.label;
 	html += 	" <div id='value"+this.control_id()+"' class='ui basic label'>"+this.properties.value+"</div>";
 	html += 	"</label>";
@@ -35,6 +35,11 @@ ControlSlider.prototype.init_control = function(){
 		$( "#value"+self.control_id() ).html( $(this).val() ); 
 		self.basewidget.fire_event( self.name, 'changed' );
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

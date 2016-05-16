@@ -34,6 +34,11 @@ ControlBoundingSlider.prototype.init_control = function(){
 		stop:  function(){ self.basewidget.fire_event( self.name, 'changed' )}, 
 		min: this.properties.min, max: this.properties.max, values: this.properties.value 
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

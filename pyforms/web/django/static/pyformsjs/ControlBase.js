@@ -49,6 +49,10 @@ ControlBase.prototype.set_value = function(value){
 ControlBase.prototype.deserialize = function(data){
 	$.extend(this.properties, data);
 	this.set_value(this.properties.value);
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,5 +65,8 @@ ControlBase.prototype.serialize = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlBase.prototype.init_control = function(){
-	
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };

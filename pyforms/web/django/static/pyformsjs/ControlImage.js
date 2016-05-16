@@ -24,14 +24,19 @@ ControlImage.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlImage.prototype.init_control = function(){
-	var html = "<div class='field ControlImage' >";
+	var html = "<div id='"+this.place_id()+"' class='field ControlImage' >";
 	html += "<div class='ui card' id='card"+this.control_id()+"' >";
 	html += "<div class='image'>";
 	html += "<img style='width:100%;' class='image' src='' id='"+this.control_id()+"' />";
 	html += "</div>";
 	html += "</div>";
 	html += "</div>";
-	$( "#place-"+this.control_id() ).replaceWith(html);
+	this.jquery_place().replaceWith(html);
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

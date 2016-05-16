@@ -60,6 +60,11 @@ ControlFile.prototype.init_control = function(){
 		$( "#dialog"+self.control_id() ).modal('show');
 		reload_folder();
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
