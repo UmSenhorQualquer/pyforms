@@ -104,6 +104,7 @@ class ControlPlayer(ControlBase):
 
 	@video_index.setter
 	def video_index(self, value):
+		if isinstance(self._value, (str, unicode)): return
 		if isinstance( value, (str, unicode) ):
 			if len(value.strip())>0:
 				self._value.set(1, float(value))

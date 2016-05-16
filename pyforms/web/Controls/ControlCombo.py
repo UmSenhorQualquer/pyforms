@@ -75,9 +75,9 @@ class ControlCombo(ControlBase):
         data = ControlBase.serialize(self)
         items = []
         for key, value in self._items.items():
-            items.append({'label': key, 'value': value}) 
+            items.append({'label': str(key), 'value': str(value)}) 
 
-        data.update({ 'items': items, 'value': self._value })
+        data.update({ 'items': items, 'value': str(self._value) })
         return data
         
     def deserialize(self, properties):
