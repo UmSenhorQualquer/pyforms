@@ -87,19 +87,21 @@ ControlList.prototype.load_table = function(){
 	};
 
 	$("#"+this.control_id()+" tbody td" ).click(function(){
-		$("#"+self.control_id()+" tbody td" ).removeClass('selected');
-		$("#"+self.control_id()+" tbody tr" ).removeClass('selected');			
+		if( !$(this).hasClass('selected') ){
+			$("#"+self.control_id()+" tbody td" ).removeClass('selected');
+			$("#"+self.control_id()+" tbody tr" ).removeClass('selected');			
 
-		if( self.properties.select_entire_row )
-			$(this).parent().find('td').addClass('selected');
-		else
-			$(this).addClass('selected');
+			if( self.properties.select_entire_row )
+				$(this).parent().find('td').addClass('selected');
+			else
+				$(this).addClass('selected');
 
-		$(this).parent().addClass('selected');
+			$(this).parent().addClass('selected');
 
-		self.properties.selected_index = $("#"+self.control_id()+" tbody tr" ).index($(this).parent());
+			self.properties.selected_index = $("#"+self.control_id()+" tbody tr" ).index($(this).parent());
 
-		self.basewidget.fire_event( self.name, 'itemSelectionChanged' );
+			self.basewidget.fire_event( self.name, 'itemSelectionChanged' );
+		}
 	});
 };
 
