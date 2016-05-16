@@ -12,7 +12,7 @@ class ControlList(ControlBase):
 
 	def initControl(self): return "new ControlList('{0}', {1})".format( self._name, str(self.serialize()) )
 
-
+	def itemSelectionChanged(self): pass
 
 	@property
 	def horizontalHeaders(self): return map(str, self._titles)
@@ -40,7 +40,9 @@ class ControlList(ControlBase):
 	def value(self): return [map(str, row) for row in ControlBase.value.fget(self)]
 
 	@value.setter
-	def value(self, value): ControlBase.value.fset(self, value)
+	def value(self, value): 
+		self._selected_index = -1
+		ControlBase.value.fset(self, value)
 
 	def serialize(self):
 		data 	= ControlBase.serialize(self)

@@ -47,12 +47,16 @@ ControlList.prototype.load_table = function(){
 	var data = this.properties.value;
 	
 	for(var i=0; i<data.length; i++){
-		html += "<tr>";
+		var selected = this.properties.selected_index==i;
+
+		html += selected?"<tr class='selected' >":"<tr>";
 		var length = 0;
 		if(data[i]) length = data[i].length;
-		for(var j=0; j<length; j++) html += "<td>"+data[i][j]+"</td>";
+		for(var j=0; j<length; j++) 
+			html += selected?"<td class='selected' >"+data[i][j]+"</td>":"<td>"+data[i][j]+"</td>";
 		if(length<titles.length) 
-			for(var j=length; j<titles.length; j++) html += "<td></td>";
+			for(var j=length; j<titles.length; j++) 
+				html += selected?"<td class='selected' ></td>":"<td></td>";
 		html += "</tr>";
 	};
 	html += "</tbody>";
@@ -92,6 +96,10 @@ ControlList.prototype.load_table = function(){
 			$(this).addClass('selected');
 
 		$(this).parent().addClass('selected');
+
+		self.properties.selected_index = $("#"+self.control_id()+" tbody tr" ).index($(this).parent());
+
+		self.basewidget.fire_event( self.name, 'itemSelectionChanged' );
 	});
 };
 
