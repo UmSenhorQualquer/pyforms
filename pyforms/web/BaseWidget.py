@@ -141,7 +141,7 @@ class BaseWidget(object):
 						else: layout += "<span class='info' >%s</span>" % row
 					else:
 						self._controls.append( control.initControl() )
-						layout += "<div class='control' >%s</div>" % control
+						layout += str(control)
 		
 		return layout
 

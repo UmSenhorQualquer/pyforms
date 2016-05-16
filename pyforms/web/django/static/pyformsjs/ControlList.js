@@ -103,6 +103,11 @@ ControlList.prototype.load_table = function(){
 			self.basewidget.fire_event( self.name, 'itemSelectionChanged' );
 		}
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

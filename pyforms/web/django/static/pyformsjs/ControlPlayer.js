@@ -30,7 +30,7 @@ ControlPlayer.prototype.set_value = function(value){
 
 ControlPlayer.prototype.init_control = function(){
 
-	var html = "<div class='field ControlPlayer' >";
+	var html = "<div id='"+this.place_id()+"' class='field ControlPlayer' >";
 	html += "<div class='ui card' id='card"+this.control_id()+"' >";
 	html += "<div class='image'>";
 	html += "<img style='width:100%;' class='image' src='' id='display"+this.control_id()+"' />";
@@ -48,6 +48,11 @@ ControlPlayer.prototype.init_control = function(){
 	$( "#timeline"+this.control_id() ).change(
 		function(){ self.basewidget.fire_event( self.name, 'refresh' ); }
 	);
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -8,8 +8,10 @@ ControlVisVis.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlVisVis.prototype.init_control = function(){
-	var html = 	"<div class='ControlVisVis' id='chart-container-"+this.control_id()+"' title='"+this.properties.help+"'   >";
+	var html =  "<div id='"+this.place_id()+"' class='field ControlVisVis' >";
+	html += 	"<div id='chart-container-"+this.control_id()+"' title='"+this.properties.help+"'   >";
 	html += 	"<div id='"+this.control_id()+"' ></div>";
+	html += 	"</div>";
 	html += 	"</div>";
 	this.jquery_place().replaceWith(html);
 	var self = this;
@@ -44,6 +46,11 @@ ControlVisVis.prototype.init_control = function(){
 	});
 
 	this.chart = chart;
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 
