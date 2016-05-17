@@ -14,6 +14,8 @@ class ControlList(ControlBase):
 
 	def itemSelectionChanged(self): pass
 
+	def dbl_click(self): pass
+
 	@property
 	def horizontalHeaders(self): return map(str, self._titles)
 
