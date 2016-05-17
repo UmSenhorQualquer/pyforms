@@ -49,14 +49,14 @@ ControlList.prototype.load_table = function(){
 	for(var i=0; i<data.length; i++){
 		var selected = this.properties.selected_index==i;
 
-		html += selected?"<tr class='selected' >":"<tr>";
+		html += selected?"<tr>":"<tr>";
 		var length = 0;
 		if(data[i]) length = data[i].length;
 		for(var j=0; j<length; j++) 
-			html += selected?"<td class='selected' >"+data[i][j]+"</td>":"<td>"+data[i][j]+"</td>";
+			html += selected?"<td class='active' >"+data[i][j]+"</td>":"<td>"+data[i][j]+"</td>";
 		if(length<titles.length) 
 			for(var j=length; j<titles.length; j++) 
-				html += selected?"<td class='selected' ></td>":"<td></td>";
+				html += selected?"<td class='active' ></td>":"<td></td>";
 		html += "</tr>";
 	};
 	html += "</tbody>";
@@ -89,16 +89,14 @@ ControlList.prototype.load_table = function(){
 	};
 
 	$("#"+this.control_id()+" tbody td" ).click(function(){
-		if( !$(this).hasClass('selected') ){
-			$("#"+self.control_id()+" tbody td" ).removeClass('selected');
-			$("#"+self.control_id()+" tbody tr" ).removeClass('selected');			
+		if( !$(this).hasClass('active') ){
+			$("#"+self.control_id()+" tbody td" ).removeClass('active');
+			$("#"+self.control_id()+" tbody tr" ).removeClass('active');			
 
 			if( self.properties.select_entire_row )
-				$(this).parent().find('td').addClass('selected');
+				$(this).parent().find('td').addClass('active');
 			else
-				$(this).addClass('selected');
-
-			$(this).parent().addClass('selected');
+				$(this).addClass('active');
 
 			self.properties.selected_index = $("#"+self.control_id()+" tbody tr" ).index($(this).parent());
 
