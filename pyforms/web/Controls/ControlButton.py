@@ -14,9 +14,9 @@ class ControlButton(ControlBase):
 
     def serialize(self):
         return { 
-            'name':     self.__class__.__name__, 
-            'label':    self._label,
-            'help':     self._help,
+            'name':     str(self.__class__.__name__), 
+            'label':    str(self._label),
+            'help':     str(self._help),
             'visible':  int(self._visible)
         }
 
