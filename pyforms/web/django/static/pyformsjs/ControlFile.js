@@ -36,7 +36,7 @@ ControlFile.prototype.init_control = function(){
 	var self = this;
 	function reload_folder(){
 		if( $('#files-browser-div').size()>0 ){
-			var folder = $('#files-browser-div').dataviewer('path');
+			var folder = get_current_folder();
 			if(folder==undefined) folder = '/';
 		}else folder = '/'
 		$( "#dialog-content-"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
