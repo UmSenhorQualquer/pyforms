@@ -37,7 +37,8 @@ ControlDir.prototype.init_control = function(){
 
 	var self = this;
 	function reload_folder(){
-		$( "#dialog-content-"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:get_current_folder() } );
+		var folder = get_current_folder();
+		$( "#dialog-content-"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
 		$( "#dialog-content-"+self.control_id()).dataviewer();
 	}
 	
