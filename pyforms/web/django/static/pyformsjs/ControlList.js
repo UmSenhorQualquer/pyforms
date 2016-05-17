@@ -68,8 +68,6 @@ ControlList.prototype.load_table = function(){
 	var self = this;
 		
 	if(!this.properties.read_only){
-
-	
 		$( "#"+this.control_id()+" tbody td" ).dblclick(function(){
 			if( self.being_edited ) return false;
 
@@ -83,6 +81,10 @@ ControlList.prototype.load_table = function(){
 				self.being_edited = false;
 				self.basewidget.fire_event( self.name, 'changed' );
 			});
+		});
+	}else{
+		$("#"+this.control_id()+" tbody td" ).dblclick(function(){
+			self.basewidget.fire_event( self.name, 'dbl_click' );
 		});
 	};
 

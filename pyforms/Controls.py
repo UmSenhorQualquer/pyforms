@@ -84,3 +84,4 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms.web.Controls.ControlVisVis			import ControlVisVis
 	from pyforms.web.Controls.ControlList 			import ControlList	
 	from pyforms.web.Controls.ControlLabel 			import ControlLabel
+	from pyforms.web.Controls.ControlTimeout 		import ControlTimeout
