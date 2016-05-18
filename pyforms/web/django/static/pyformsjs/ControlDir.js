@@ -1,29 +1,7 @@
-function add_dir2control(control_id, filename, name){
-	$( "#dialog"+control_id ).modal('hide');
-	$( "#"+control_id ).val(filename);
-	
-	var ids 			= pyforms.split_id(control_id);
-	var widget_id 		= ids[0];
-	var control_name 	= ids[1];
-
-	pyforms.find_app(widget_id).fire_event( control_name, 'changed' )
-}
-
-
-
 function ControlDir(name, properties){
 	ControlBase.call(this, name, properties);
 };
 ControlDir.prototype = Object.create(ControlBase.prototype);
-
-////////////////////////////////////////////////////////////////////////////////
-
-ControlDir.prototype.file_row_event = function(row, dom){
-	var control = pyforms.find_control( (""+dom[0].id).substring(15)) ;
-	row.values[0] = "<a class='file2select' href='javascript:add_dir2control(\""+control.control_id()+"\",\""+row.file+"\")' >"+row.filename+"</a>";
-	row.values.pop();
-	return row;
-};
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,27 +16,16 @@ ControlDir.prototype.init_control = function(){
 	var self = this;
 	function reload_folder(){
 		var folder = get_current_folder();
-		$( "#dialog-content-"+self.control_id()).dataviewer( {url: '/browsefiles/?backfolder=false&p='+folder, path:folder } );
-		$( "#dialog-content-"+self.control_id()).dataviewer();
+		$( "#dialog-content-"+self.control_id()).load(
+			'/plugins/myarea/browse/?filter-folders=true&p='+folder+'&control-id='+self.control_id(),
+			function(){
+				$( "#dialog"+self.control_id() ).modal('show');
+			}
+		);
 	}
-	
-	$("#dialog-content-"+this.control_id()).dataviewer({ 
-		titles: ['File name','Size', 'Created on',''],
-		sizes: 	['auto','120px','220px','50px'],
-		sortingColumns: [0,1,2],
-		updateRowFunction: this.file_row_event,
-		extra_buttons: [{
-			btnId:'reload-folder', 
-			btnLabel:'Reload', 
-			btnAction: reload_folder
-		}]
-	});
 
 	this.jquery().unbind('click');
-	this.jquery().click(function(){
-		$( "#dialog"+self.control_id() ).modal('show');
-		reload_folder();
-	});
+	this.jquery().click(reload_folder);
 
 	if(this.properties.visible) 
 		this.jquery_place().show();
