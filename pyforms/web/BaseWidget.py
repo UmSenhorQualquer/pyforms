@@ -137,7 +137,7 @@ class BaseWidget(object):
 				if isinstance(row, tuple):
 					panel 	= self.generatePanel( row )
 					layout += "<div class='fields {1}' >{0}</div>".format(panel, self.__get_fields_class(row))
-				if isinstance(row, list):
+				elif isinstance(row, list):
 					panel 	= self.generatePanel( row )
 					layout += "<div class='fields' >{0}</div>".format(panel)
 				elif row == " ":
