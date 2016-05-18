@@ -19,13 +19,22 @@ ControlButton.prototype.init_control = function(){
 
 	var self = this;
 	this.jquery().click(function(){
-		self.basewidget.fire_event( self.name, 'pressed' )
+		if( self.properties.value.length>0 )
+			eval(self.properties.value);
+		else
+			self.basewidget.fire_event( self.name, 'pressed' );
 	});
 
 	if(this.properties.visible) 
 		this.jquery_place().show();
 	else 
 		this.jquery_place().hide();
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+ControlButton.prototype.get_value = function(){ 
+	return this.properties.value;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
