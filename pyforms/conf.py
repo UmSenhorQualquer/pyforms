@@ -50,7 +50,7 @@ try:
     # print(os.environ.get('PYFORMS_APP_SETTINGS'))
     module_name = os.getenv('PYFORMS_APP_SETTINGS', '')
     if module_name:
-        print('loading PYFORMS_APP_SETTINGS',module_name)
+        # print('loading PYFORMS_APP_SETTINGS',module_name)
         load_everything_from([module_name])
         
 
