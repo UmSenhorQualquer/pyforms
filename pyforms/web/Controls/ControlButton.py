@@ -29,6 +29,6 @@ class ControlButton(ControlBase):
     def deserialize(self, properties):
         self._label   = properties.get('label','')
         self._help    = properties.get('help','')
-        self.value    = properties.get('value',None)
+        if properties.get('value',None):
+            self.value    = properties.get('value',None)
         self._visible = properties.get('visible',True)
-        print self.value, isinstance(self.value, (str, unicode)) and len(self.value)>0

@@ -171,13 +171,17 @@ class BaseWidget(object):
 		for key, value in params.items():
 			control = self.formControls.get(key, None)
 			if control!=None: control.deserialize(params[key])
-				
-
+			
 		if 'event' in params.keys():
-			for key, item in self.formControls.items():
-				if key==params['event']['control']:
-					func = getattr(item, params['event']['event'])
-					func()
+			control = params['event']['control']
+			if control in self.formControls.keys():
+				item = self.formControls[control]
+				func = getattr(item, params['event']['event'])
+				func()
+			elif control=='self':
+				func = getattr(self, params['event']['event'])
+				func()					
+
 					
 
 	def serializeForm(self):

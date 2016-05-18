@@ -37,6 +37,9 @@ class ControlList(ControlBase):
 	@property
 	def mouseSelectedRowIndex(self): return self._selected_index
 
+	@mouseSelectedRowIndex.setter
+	def mouseSelectedRowIndex(self, value): self._selected_index = value
+
 
 	@property
 	def value(self): return [map(str, row) for row in ControlBase.value.fget(self)]
