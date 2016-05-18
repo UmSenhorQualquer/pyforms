@@ -63,6 +63,19 @@ class BaseWidget(object):
 		return """<div id='{0}' class='ui top attached tabular menu' >{1}</div>{2}<script type='text/javascript'>$('#{0}.menu .item').tab();</script>""".format(tab_id, tabs_head, tabs_body)
 
 
+	def __get_fields_class(self, row):
+		if 	 len(row)==2: return 'two'
+		elif len(row)==3: return 'three'
+		elif len(row)==4: return 'four'
+		elif len(row)==5: return 'five'
+		elif len(row)==6: return 'six'
+		elif len(row)==7: return 'seven'
+		elif len(row)==8: return 'eight'
+		elif len(row)==9: return 'nine'
+		elif len(row)==10: return 'ten'
+		elif len(row)==11: return 'eleven'
+		else: return ''
+
 	def generatePanel(self, formset):
 		"""
 		Generate a panel for the module form with all the controls
@@ -121,13 +134,16 @@ class BaseWidget(object):
 						layout += "%s" % control
 		elif type(formset) is list:
 			for row in formset:
-				if isinstance(row, (list, tuple)):
-					panel = self.generatePanel( row )
-					layout += "<div class='fields' >%s</div>" % panel
+				if isinstance(row, tuple):
+					panel 	= self.generatePanel( row )
+					layout += "<div class='fields {1}' >{0}</div>".format(panel, self.__get_fields_class(row))
+				if isinstance(row, list):
+					panel 	= self.generatePanel( row )
+					layout += "<div class='fields' >{0}</div>".format(panel)
 				elif row == " ":
 					layout += "<div class='space' ></div>"
 				elif type(row) is dict:
-					tabs = self.generateTabs(row)
+					tabs 	= self.generateTabs(row)
 					layout += tabs
 				else:
 					control = self.formControls.get(row, None)
