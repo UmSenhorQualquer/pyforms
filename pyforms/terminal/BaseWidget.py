@@ -145,7 +145,8 @@ class BaseWidget(object):
 		except (IOError) as e:
 			raise e
 
-	def executeCommand(self, cmd, cwd=None):
+
+	def executeCommand(self, cmd, cwd=None, env=None):
 		if cwd is not None:
 			currentdirectory = os.getcwd()
 			os.chdir(cwd)
@@ -157,8 +158,6 @@ class BaseWidget(object):
 		if error:
 			print('Error: ' + error)
 		return output
-
-
 
 	@property
 	def formControls(self):

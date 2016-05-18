@@ -9,9 +9,9 @@ ControlButton.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlButton.prototype.init_control = function(){
-	var html = "<div class='ControlButton' >";
-	html +="<button title='"+this.properties.help+"'  value='"+this.properties.label+"' id='"+this.control_id()+"' class='btn' >";
-	html += '<i class="glyphicon glyphicon-cog"></i> '+ this.properties.label;
+	var html = "<div class='field ControlButton' id='"+this.place_id()+"' ><label>&nbsp;</label>";
+	html +="<button type='button' title='"+this.properties.help+"' id='"+this.control_id()+"' class='ui button' >";
+	html += this.properties.label;
 	html += '</button>';
 	html += '</div>';
 	
@@ -19,8 +19,22 @@ ControlButton.prototype.init_control = function(){
 
 	var self = this;
 	this.jquery().click(function(){
-		self.basewidget.fire_event( self.name, 'pressed' )
+		if( self.properties.value.length>0 )
+			eval(self.properties.value);
+		else
+			self.basewidget.fire_event( self.name, 'pressed' );
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+ControlButton.prototype.get_value = function(){ 
+	return this.properties.value;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

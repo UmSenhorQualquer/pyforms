@@ -8,7 +8,11 @@ ControlCheckBox.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCheckBox.prototype.set_value = function(value){
-	this.jquery().prop('checked', value);
+	if(value=='True')
+		this.jquery().prop('checked', true);
+	else
+		this.jquery().prop('checked', false);
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -20,11 +24,25 @@ ControlCheckBox.prototype.get_value = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCheckBox.prototype.init_control = function(){
-	this.jquery_place().replaceWith("<div title='"+this.properties.help+"' class='ControlCheckBox' ><label for='"+this.control_id()+"'>"+this.properties.label+"</label><input class='textfield' type='checkbox' name='"+this.name+"' id='"+this.control_id()+"' value='true' /></div>");
-	if( this.properties.value=='True') this.jquery().prop('checked', true);
+	var html = "<div class='field ControlCheckBox' id='"+this.place_id()+"' >";
+	html += "<div class='ui toggle checkbox' title='"+this.properties.help+"' >";
+	html += "<input name='"+this.name+"' id='"+this.control_id()+"' type='checkbox' value='true' class='hidden' />";
+	html += "<label for='"+this.control_id()+"'>"+this.properties.label+"</label>";
+	html += "</div></div>";
+	this.jquery_place().replaceWith(html);
+	
+	if( this.properties.value=='True')
+		this.jquery().prop('checked', true);
+	else
+		this.jquery().prop('checked', false);
 
 	var self = this;
 	this.jquery().click(function(){ self.basewidget.fire_event( self.name, 'changed' ); });
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

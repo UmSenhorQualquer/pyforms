@@ -26,6 +26,7 @@ ControlList.prototype.get_value = function(){
 	return res
 };
 
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.set_value = function(value){
@@ -35,7 +36,7 @@ ControlList.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlList.prototype.load_table = function(){
-	var html = "<table class='ControlList' id='"+this.control_id()+"' >";
+	var html = "<div id='"+this.place_id()+"' class='field'><table class='ui selectable celled table ControlList' id='"+this.control_id()+"' >";
 	html += "<thead>";
 	html += "<tr>";
 	var titles = this.properties.horizontal_headers;
@@ -46,12 +47,16 @@ ControlList.prototype.load_table = function(){
 	var data = this.properties.value;
 	
 	for(var i=0; i<data.length; i++){
-		html += "<tr>";
+		var selected = this.properties.selected_index==i;
+
+		html += selected?"<tr>":"<tr>";
 		var length = 0;
 		if(data[i]) length = data[i].length;
-		for(var j=0; j<length; j++) html += "<td>"+data[i][j]+"</td>";
+		for(var j=0; j<length; j++) 
+			html += selected?"<td class='active' >"+data[i][j]+"</td>":"<td>"+data[i][j]+"</td>";
 		if(length<titles.length) 
-			for(var j=length; j<titles.length; j++) html += "<td></td>";
+			for(var j=length; j<titles.length; j++) 
+				html += selected?"<td class='active' ></td>":"<td></td>";
 		html += "</tr>";
 	};
 	html += "</tbody>";
@@ -63,35 +68,46 @@ ControlList.prototype.load_table = function(){
 	var self = this;
 		
 	if(!this.properties.read_only){
-
-	
 		$( "#"+this.control_id()+" tbody td" ).dblclick(function(){
 			if( self.being_edited ) return false;
 
 			self.being_edited = true;
 			var cell = $(this);
 			var value = cell.html();
-			cell.html('<input type="text" value="'+value+'" />');
-			cell.children('input').focus();
-			cell.children('input').focusout(function(){
+			cell.html('<div class="ui input"><input type="text" value="'+value+'" /></div>');
+			cell.find('input').focus();
+			cell.find('input').focusout(function(){
 				cell.html($(this).val());
 				self.being_edited = false;
 				self.basewidget.fire_event( self.name, 'changed' );
 			});
 		});
+	}else{
+		$("#"+this.control_id()+" tbody td" ).dblclick(function(){
+			self.basewidget.fire_event( self.name, 'dbl_click' );
+		});
 	};
 
 	$("#"+this.control_id()+" tbody td" ).click(function(){
-		$("#"+self.control_id()+" tbody td" ).removeClass('selected');
-		$("#"+self.control_id()+" tbody tr" ).removeClass('selected');			
+		if( !$(this).hasClass('active') ){
+			$("#"+self.control_id()+" tbody td" ).removeClass('active');
+			$("#"+self.control_id()+" tbody tr" ).removeClass('active');			
 
-		if( self.properties.select_entire_row )
-			$(this).parent().find('td').addClass('selected');
-		else
-			$(this).addClass('selected');
+			if( self.properties.select_entire_row )
+				$(this).parent().find('td').addClass('active');
+			else
+				$(this).addClass('active');
 
-		$(this).parent().addClass('selected');
+			self.properties.selected_index = $("#"+self.control_id()+" tbody tr" ).index($(this).parent());
+
+			self.basewidget.fire_event( self.name, 'itemSelectionChanged' );
+		}
 	});
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

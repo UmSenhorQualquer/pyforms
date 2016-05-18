@@ -68,8 +68,20 @@ BaseWidget.prototype.serialize_data = function(data){
 
 ////////////////////////////////////////////////////////////
 
+BaseWidget.prototype.loading = function(){
+	$("#app-"+this.widget_id).addClass('loading');
+};
+
+////////////////////////////////////////////////////////////
+
+BaseWidget.prototype.not_loading = function(){
+	$("#app-"+this.widget_id).removeClass('loading');
+};
+
+////////////////////////////////////////////////////////////
+
 BaseWidget.prototype.update_data = function(data2send){	
-	loading();
+	this.loading();
 	
 	data2send = this.serialize_data(data2send);
 
@@ -95,7 +107,7 @@ BaseWidget.prototype.update_data = function(data2send){
 	}).fail(function(xhr){
 		error(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
 	}).always(function(){
-		not_loading();
+		self.not_loading();
 	});
 	
 	if(  this.events_queue.length>0 )  this.update_data(  this.events_queue.pop(0) );
@@ -106,3 +118,4 @@ BaseWidget.prototype.update_data = function(data2send){
 BaseWidget.prototype.update_controls = function(){	
 	this.update_data({ userpath: this.current_folder() }); 
 };
+

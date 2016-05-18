@@ -9,6 +9,8 @@
     $d.resolve($link);
     return $d.promise();
   };
+
+  
 })(jQuery);
 
 
@@ -40,6 +42,8 @@ function PyformsManager(){
 	$.getScript("/static/pyformsjs/ControlProgress.js");
 	$.getScript("/static/pyformsjs/ControlBoundingSlider.js");
 	$.getScript("/static/pyformsjs/ControlVisVis.js");
+	$.getScript("/static/pyformsjs/ControlLabel.js");
+	$.getScript("/static/pyformsjs/ControlTimeout.js");
 	
 	$.getScript("/static/pyformsjs/BaseWidget.js");
 

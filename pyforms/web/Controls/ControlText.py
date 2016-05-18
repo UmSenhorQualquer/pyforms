@@ -7,3 +7,9 @@ class ControlText(ControlBase):
 			self._name, 
 			str(self.serialize()) 
 		)
+
+	@property
+	def value(self): return str(ControlBase.value.fget(self))
+
+	@value.setter
+	def value(self, value): ControlBase.value.fset(self, value)

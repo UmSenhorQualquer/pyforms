@@ -7,7 +7,7 @@ ControlPlayer.prototype = Object.create(ControlBase.prototype);
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlPlayer.prototype.get_value = function(){ 
-	this.properties.video_index = $( "#timeline"+this.control_id()).slider("value");
+	this.properties.video_index = $( "#timeline"+this.control_id()).val();
 	return this.properties.value; 
 };
 
@@ -16,23 +16,43 @@ ControlPlayer.prototype.get_value = function(){
 ControlPlayer.prototype.set_value = function(value){
 	if(this.properties.base64content){
 		$("#display"+this.control_id()).attr("src", "data:image/png;base64,"+this.properties.base64content);
-		$( "#timeline"+this.control_id()).slider("option", "max", this.properties.endFrame);
+
+		var width = $( "#display"+this.control_id()).width();
+		$( "#card"+this.control_id()).css('width', width+"px");
+
+		$( "#timeline"+this.control_id()).val(this.properties.video_index);
+		$( "#timeline"+this.control_id()).attr("min", 0);
+		$( "#timeline"+this.control_id()).attr("max", this.properties.endFrame);
 	}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlPlayer.prototype.init_control = function(){
-	var html = "<div class='ControlPlayer' >";
-	html += "<img style='width:100%;' class='image' src=' ' id='display"+this.control_id()+"' />";
-	html += "<div class='slider' name='"+this.name+"' id='timeline"+this.control_id()+"' ></div>";
+
+	var html = "<div id='"+this.place_id()+"' class='field ControlPlayer' >";
+	html += "<div class='ui card' id='card"+this.control_id()+"' >";
+	html += "<div class='image'>";
+	html += "<img style='width:100%;' class='image' src='' id='display"+this.control_id()+"' />";
 	html += "</div>";
+	html += "<div class='content'>";
+	html += "<input style='width:100%;' type='range' name='"+this.name+"' value='"+this.properties.value+"' id='timeline"+this.control_id()+"' max='"+this.properties.endFrame+"'>";
+	html += "</div>";
+	html += "</div>";
+	html += "</div>";
+
 	this.jquery_place().replaceWith(html);
+
+	
 	var self = this;
-	$( "#timeline"+this.control_id() ).slider({
-		stop: function(){ self.basewidget.fire_event( self.name, 'refresh' ); } ,
-		max: self.properties.endFrame
-	});
+	$( "#timeline"+this.control_id() ).change(
+		function(){ self.basewidget.fire_event( self.name, 'refresh' ); }
+	);
+
+	if(this.properties.visible) 
+		this.jquery_place().show();
+	else 
+		this.jquery_place().hide();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
