@@ -17,7 +17,7 @@ class ControlCheckBox(ControlBase):
 		}
 
 	def deserialize(self, properties):
-		self.value    = properties.get('value',None)=='True'
+		self.value    = properties.get('value',None)=='True' or properties.get('value',None)=='true' or properties.get('value',None)==True
 		self._label   = properties.get('label','')
 		self._help    = properties.get('help','')
 		self._visible = properties.get('visible',True)
