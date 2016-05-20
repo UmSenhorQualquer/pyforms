@@ -147,17 +147,20 @@ class BaseWidget(object):
 
 
 	def executeCommand(self, cmd, cwd=None, env=None):
-		if cwd is not None:
+		if cwd!=None: 
 			currentdirectory = os.getcwd()
 			os.chdir(cwd)
-		proc = subprocess.Popen(
-			cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		(output, error) = proc.communicate()
-		if cwd is not None:
-			os.chdir(currentdirectory)
-		if error:
-			print('Error: ' + error)
-		return output
+		
+		print(" ".join(cmd))
+		proc = subprocess.Popen(cmd)
+
+		if cwd!=None: os.chdir(currentdirectory)
+		self.__savePID(proc.pid)
+		proc.wait()
+		#(output, error) = proc.communicate()
+		#if error: print 'error: ', error
+		#print 'output: ', output
+		return ''#output
 
 	@property
 	def formControls(self):
