@@ -45,12 +45,12 @@ class ControlMdiArea(ControlBase, QMdiArea):
         return flags
 
     def __sub__(self, window):
-        if window.uid in self._openWindows:
+        if window.title in self._openWindows:
             window.close()
         return self
 
     def __add__(self, other):
-        if other.uid not in self._openWindows:
+        if other.title not in self._openWindows:
             if not other._formLoaded:
                 other.initForm()
             other.subwindow = self.addSubWindow(other)
@@ -59,7 +59,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
             other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
 
             self.value.append(other)
-            self._openWindows.append(other.uid)
+            self._openWindows.append(other.title)
         return self
 
     def _subWindowClosed(self, closeEvent, window=None):
@@ -76,8 +76,12 @@ class ControlMdiArea(ControlBase, QMdiArea):
             self._value.remove(activeWidget)
 
         self.removeSubWindow(window)
-        self._openWindows.remove(activeWidget.uid)
+        self._openWindows.remove(activeWidget.title)
         closeEvent.accept()
+
+    def update_window_title(self, old_title, new_title):
+        self._openWindows.remove(old_title)
+        self._openWindows.append(new_title)
 
     ##########################################################################
     ############ Properties ##################################################
