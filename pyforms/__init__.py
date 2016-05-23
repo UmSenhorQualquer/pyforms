@@ -9,7 +9,7 @@ from pyforms import conf
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Production"
