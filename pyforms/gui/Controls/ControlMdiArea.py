@@ -3,8 +3,11 @@
 
 """ pyforms.gui.Controls.ControlMdiArea"""
 
+import logging
+
 from PyQt4 import QtCore
 from PyQt4.QtGui import QMdiArea
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 __author__ = "Ricardo Ribeiro"
@@ -29,6 +32,8 @@ class ControlMdiArea(ControlBase, QMdiArea):
         self._value = []
         self._showCloseButton = True
         self._openWindows = []
+
+        self.logger = logging.getLogger(__name__)
 
     def initForm(self): pass
 
@@ -60,6 +65,8 @@ class ControlMdiArea(ControlBase, QMdiArea):
 
             self.value.append(other)
             self._openWindows.append(other.title)
+        else:
+            self.logger.warning("Window with same title already opened: %s", other.title)
         return self
 
     def _subWindowClosed(self, closeEvent, window=None):
