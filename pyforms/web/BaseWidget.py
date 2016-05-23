@@ -33,10 +33,12 @@ class BaseWidget(object):
 		"""
 		self._html = ''
 		self._js = ''
+		self._controls = [c.initControl() for c in self.formControls.values()]
 		if self._formset != None: 
 			self._html += self.generatePanel(self._formset)
-			self._js = '[{0}]'.format(",".join(self._controls))
+			#self._js = '[{0}]'.format(",".join(self._controls))
 
+		self._js = '[{0}]'.format(",".join(self._controls))
 		self._html += """
 		<script type="text/javascript">pyforms.add_app( new BaseWidget('{2}', '{0}', {1}) );</script>
 		""".format(self.__class__.__name__, self._js, self._id)
@@ -130,7 +132,7 @@ class BaseWidget(object):
 						elif row.startswith('h5:'): layout += "<h5>%s</h5>" % row[3:]
 						else: layout += "<span class='info' >%s</span>" % row
 					else:
-						self._controls.append( control.initControl() )
+						#self._controls.append( control.initControl() )
 						layout += "%s" % control
 		elif type(formset) is list:
 			for row in formset:
@@ -156,7 +158,7 @@ class BaseWidget(object):
 						elif row.startswith('h5:'): layout += "<h5>%s</h5>" % row[3:]
 						else: layout += "<span class='info' >%s</span>" % row
 					else:
-						self._controls.append( control.initControl() )
+						#self._controls.append( control.initControl() )
 						layout += str(control)
 		
 		return layout
@@ -171,13 +173,17 @@ class BaseWidget(object):
 		for key, value in params.items():
 			control = self.formControls.get(key, None)
 			if control!=None: control.deserialize(params[key])
-				
-
+			
 		if 'event' in params.keys():
-			for key, item in self.formControls.items():
-				if key==params['event']['control']:
-					func = getattr(item, params['event']['event'])
-					func()
+			control = params['event']['control']
+			if control in self.formControls.keys():
+				item = self.formControls[control]
+				func = getattr(item, params['event']['event'])
+				func()
+			elif control=='self':
+				func = getattr(self, params['event']['event'])
+				func()					
+
 					
 
 	def serializeForm(self):

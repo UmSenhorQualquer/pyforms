@@ -10,7 +10,7 @@ function BaseWidget(widget_id, widget_name, controls){
 		controls[index].basewidget = this;
 		controls[index].init_control();
 	};
-	$('.application-tabs').tabs()
+	//$('.application-tabs').tabs()
 }
 ////////////////////////////////////////////////////////////
 

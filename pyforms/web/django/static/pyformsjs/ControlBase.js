@@ -35,13 +35,14 @@ ControlBase.prototype.jquery_place = function(){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlBase.prototype.get_value = function(){ 
+	if(this.jquery().size()==0) return this.properties.value;
 	return this.jquery().val(); 
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlBase.prototype.set_value = function(value){
-	this.jquery().val(value); 
+	if(this.jquery().size()>0) this.jquery().val(value); 
 };
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -18,6 +18,7 @@ ControlCheckBox.prototype.set_value = function(value){
 ////////////////////////////////////////////////////////////////////////////////
 
 ControlCheckBox.prototype.get_value = function(){
+	if(this.jquery().size()==0) return this.properties.value;
 	return this.jquery().is(':checked');
 };
 
