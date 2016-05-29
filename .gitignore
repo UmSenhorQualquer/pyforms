@@ -59,3 +59,4 @@ target/
 .pydevproject
 .settings/org.eclipse.core.resources.prefs
 org.eclipse.mylyn.tasks.ui.prefs
+*.xml

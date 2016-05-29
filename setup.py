@@ -30,10 +30,6 @@ setup(
 		'pyforms.Utils',
 		'pyforms.terminal',
 		'pyforms.terminal.Controls', 
-		'pyforms.web',
-		'pyforms.web.Controls', 
-		'pyforms.web.django', 
-		'pyforms.web.django.templatetags', 
 		'pyforms.gui',
 		'pyforms.gui.dialogs',
 		'pyforms.gui.Controls', 
@@ -41,12 +37,6 @@ setup(
 		'pyforms.gui.Controls.ControlEventsGraph',
 		'pyforms.gui.Controls.ControlPlayer' ],
 	package_data={'pyforms': [
-			'web/django/*.js',
-			'web/django/static/*.js',
-			'web/django/static/jqplot/*.js',
-			'web/django/static/jqplot/*.css',
-			'web/django/static/jqplot/plugins/*.js',
-			'web/django/static/pyformsjs/*.js',
 			'gui/Controls/uipics/*.png', 
 			'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui', 
 			'gui/Controls/ControlEventTimeline/*.ui']

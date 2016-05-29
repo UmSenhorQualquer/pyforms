@@ -58,7 +58,6 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 
 elif conf.PYFORMS_MODE in ['WEB']:
 
-    from pyforms.web import Controls
-    from pyforms.web.BaseWidget import BaseWidget
-
-    from pyforms.web.appmanager import startApp
+    from pyforms_web.web import Controls
+    from pyforms_web.web.BaseWidget import BaseWidget
+    from pyforms_web.web.appmanager import startApp
