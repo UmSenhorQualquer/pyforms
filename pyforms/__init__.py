@@ -19,7 +19,7 @@ logger = logging.getLogger("pyforms")
 logger.setLevel(logging.DEBUG)
 
 # create file handler which logs even debug messages
-fh = logging.FileHandler('{0}.log'.format(conf.LOG_FILENAME))
+fh = logging.FileHandler(conf.LOG_FILENAME)
 fh.setLevel(conf.PYFORMS_LOG_HANDLER_FILE_LEVEL)
 
 # create console handler with a higher log level

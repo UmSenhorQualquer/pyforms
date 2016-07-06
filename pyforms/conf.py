@@ -17,7 +17,7 @@ __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
 
-PYFORMS_MODE = 'GUI'
+PYFORMS_MODE = os.environ.get('PYFORMS_MODE', 'GUI')
 PYFORMS_LOG_HANDLER_FILE_LEVEL = logging.DEBUG
 PYFORMS_LOG_HANDLER_CONSOLE_LEVEL = logging.INFO
 LOG_FILENAME = "pyforms"
