@@ -1,10 +1,28 @@
 from pyforms.terminal.Controls.ControlBase import ControlBase
 import numpy
-import cv2
-import base64
+
+
 import numpy as np 
 import StringIO
-from PIL import Image
+
+
+try:
+    import cv2
+except:
+    print "cv2 not present. ControlPlayer not working"
+
+
+try:
+    from PIL import Image
+except:
+    print "PIL not present. ControlPlayer not working"
+
+
+try:
+   import base64
+except:
+    print "base64 not present. ControlPlayer not working"
+
 
 
 
