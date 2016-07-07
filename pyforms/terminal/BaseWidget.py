@@ -164,7 +164,7 @@ class BaseWidget(object):
 
 	def exec_terminal_cmd(self, args, **kwargs):
 		print('TERMINAL <<',' '.join(args) )
-		proc = subprocess.Popen(args, kwargs)
+		proc = subprocess.Popen(args, **kwargs)
 		self.__savePID(proc.pid)
 		proc.wait()
 
