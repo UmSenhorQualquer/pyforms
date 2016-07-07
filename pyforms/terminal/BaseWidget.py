@@ -164,10 +164,12 @@ class BaseWidget(object):
 
 	def exec_terminal_cmd(self, args, **kwargs):
 		print('TERMINAL <<',' '.join(args) )
+		sys.stdout.flush()
 		proc = subprocess.Popen(args, **kwargs)
 		self.__savePID(proc.pid)
 		proc.wait()
-
+		sys.stdout.flush()
+		
 
 	@property
 	def formControls(self):
