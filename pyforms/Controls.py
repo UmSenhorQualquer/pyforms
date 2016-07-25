@@ -20,7 +20,12 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlList 			import ControlList
 	from pyforms.gui.Controls.ControlMdiArea 		import ControlMdiArea
 	from pyforms.gui.Controls.ControlNumber 		import ControlNumber
-	from pyforms.gui.Controls.ControlMatplotlib 	import ControlMatplotlib
+
+	try:
+		from pyforms.gui.Controls.ControlMatplotlib 	import ControlMatplotlib
+	except:
+		print("Matplot lib not installed or not working properly")
+		logger.debug(traceback.format_exc())
 	
 	try:
 		from pyforms.gui.Controls.ControlOpenGL 		import ControlOpenGL
@@ -86,3 +91,4 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms_web.web.Controls.ControlLabel 			import ControlLabel
 	from pyforms_web.web.Controls.ControlTimeout 		import ControlTimeout
 	from pyforms_web.web.Controls.ControlEmptyWidget	import ControlEmptyWidget
+	from pyforms_web.web.Controls.ControlWorkflow		import ControlWorkflow

@@ -58,5 +58,6 @@ try:
     # from user_settings import *
     # from pythonvideoannotator.settings import *
 except Exception as err:
-    print(err)
+    #print(err)
+    pass
 
