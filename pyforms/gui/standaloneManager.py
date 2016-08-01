@@ -47,7 +47,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 
         w.initForm()
         self.setCentralWidget(w)
-        self.setContentsMargins(10,10,10,10)
         self.setWindowTitle(w.title)
 
         docks = {}
