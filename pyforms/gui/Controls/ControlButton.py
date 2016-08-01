@@ -18,9 +18,9 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlButton(ControlBase):
 
-    def __init__(self, label='', checkable=False):
+    def __init__(self, label='', checkable=False, helptext=''):
         self._checkable = checkable
-        super(ControlButton, self).__init__(label)
+        super(ControlButton, self).__init__(label=label, helptext=helptext)
 
     def initForm(self):
         #control_path = tools.getFileInSameDirectory(__file__, "button.ui")
@@ -32,7 +32,7 @@ class ControlButton(ControlBase):
         self._form.setSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self._form.setCheckable(self._checkable)
         self.label = self._label
-        self.tooltip = None
+        self._form.setToolTip(self.help)
 
     def load(self, data): pass
 

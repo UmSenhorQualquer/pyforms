@@ -25,7 +25,7 @@ class ControlCombo(ControlBase):
     def initForm(self):
         control_path = tools.getFileInSameDirectory(__file__, "comboInput.ui")
         self._form = uic.loadUi(control_path)
-       
+
         self._form.comboBox.currentIndexChanged.connect(self._currentIndexChanged)
         self._form.comboBox.activated.connect(self._activated)
         self._form.comboBox.highlighted.connect(self._highlighted)
@@ -81,11 +81,11 @@ class ControlCombo(ControlBase):
         pass
 
     def __add__(self, val):
-        if isinstance( val, tuple ):
+        if isinstance(val, tuple):
             self.addItem(val[0], val[1])
         else:
             self.addItem(val)
-        
+
         return self
 
     def addItem(self, label, value=None):
@@ -109,6 +109,14 @@ class ControlCombo(ControlBase):
 
         if firstValue:
             self.value = self._items[label]
+
+    def getItemIndexByName(self, item_name):
+        """
+        Returns the index of the item containing the given name
+        :param item_name: item name in combo box
+        :type item_name: string
+        """
+        return self._form.comboBox.findText(item_name)
 
     def clearItems(self):
         self._items = {}
@@ -169,4 +177,3 @@ class ControlCombo(ControlBase):
         @type  value: string
         """
         self._form.comboLabel.setText(value)
-
