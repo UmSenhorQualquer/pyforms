@@ -110,9 +110,12 @@ class ControlList(ControlBase, QWidget):
 
         for i in range(0, len(other)):
             v = other[i]
-            args = [str(v)] if not hasattr(
-                v, 'icon') else [QIcon(v.icon), str(v)]
-            self.tableWidget.setItem(index, i, QTableWidgetItem(*args))
+            if isinstance(v, QWidget):
+                self.tableWidget.setCellWidget(index, i, v)
+            else:
+                args = [str(v)] if not hasattr(v, 'icon') else [QIcon(v.icon), str(v)]
+                self.tableWidget.setItem(index, i, QTableWidgetItem(*args))
+
 
         self.tableWidget.resizeColumnsToContents()
         return self

@@ -30,7 +30,7 @@ class ControlCheckBoxList(ControlBase):
         self.changed()
 
     def __add__(self, val):
-        if isinstance( val, tuple ):
+        if isinstance( val, (tuple, list) ):
             item=QtGui.QListWidgetItem(val[0])
             if val[1]: item.setCheckState( QtCore.Qt.Checked)
             else: item.setCheckState( QtCore.Qt.Unchecked)
