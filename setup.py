@@ -4,7 +4,7 @@
 __author__      = "Ricardo Ribeiro"
 __credits__     = ["Ricardo Ribeiro"]
 __license__     = "MIT"
-__version__     = '0.1.7'
+__version__     = '0.1.7.1'
 __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Production"
@@ -43,9 +43,9 @@ setup(
 		},
 
 	install_requires=[
-		"pyopengl >= 3.1.0",
-		"visvis >= 1.9.1",
-		"numpy >= 1.6.1",
+		#"pyopengl >= 3.1.0",
+		#"visvis >= 1.9.1",
+		#"numpy >= 1.6.1",
 		#"matplotlib"
 	],
 )

@@ -152,12 +152,12 @@ class ControlList(ControlBase, QWidget):
         self.tableWidget.item(row, column).setText(str(value))
 
     def getValue(self, column, row):
-        cell_value = ""
         try:
-            cell_value = str(self.tableWidget.item(row, column).text())
+            return str(self.tableWidget.item(row, column).text())
         except AttributeError as err:
-            pass
-        return cell_value
+            return self.tableWidget.cellWidget(row, column)
+        except AttributeError as err:
+            return ''
             
 
     def getCurrentRowValue(self):

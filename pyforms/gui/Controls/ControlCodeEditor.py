@@ -157,13 +157,10 @@ class ControlCodeEditor(ControlBase):
         """
         On button save clicked, save changes made on the code editor to file
         """
-        if self.value is None:
-            self._value = QtGui.QFileDialog.getSaveFileName(self.form, "Save file")
-        with open(self.value, "w") as file:
-            file.write(self._code_editor.text())
+        if self.changed():
+            self._code_editor.setModified(False)
+            self._save_button.setEnabled(False)
 
-        self._code_editor.setModified(False)
-        self._save_button.setEnabled(False)
 
     def _key_pressed(self, event):
         """
@@ -187,6 +184,7 @@ class ControlCodeEditor(ControlBase):
         """
         pass
 
+    @property    
     def is_modified(self):
         return self._code_editor.isModified()
 
@@ -204,15 +202,12 @@ class ControlCodeEditor(ControlBase):
 
     @property
     def value(self):
-        if len(self._value) == 0:
-            return None
-        return self._value
+        return self._code_editor.text()
 
     @value.setter
     def value(self, value):
         ControlBase.value.fset(self, value)
         if len(value) > 0:
-            with open(value, "r") as file:
-                self._code_editor.setText(str(file.read()))
+            self._code_editor.setText(str(value))
             self._code_editor.setModified(False)
             self._save_button.setEnabled(False)

@@ -148,7 +148,7 @@ class ControlBase(object):
 		"""
 		Function called when ever the Control value is changed
 		"""
-		pass
+		return True
 
 	def aboutToShowContextMenuEvent(self):
 		"""
