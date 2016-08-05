@@ -4,26 +4,33 @@
 """ pyforms.gui.Controls.ControlList
 
 """
-
-from pyforms.gui.Controls.ControlBase import ControlBase
-from PyQt4 import uic, QtCore
-from PyQt4.QtGui import QWidget, QIcon, QTableWidgetItem, QAbstractItemView
+import logging
 import os
 
-__author__ = "Ricardo Ribeiro"
-__copyright__ = ""
-__credits__ = "Ricardo Ribeiro"
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
+from PyQt4 import uic, QtCore
+from PyQt4.QtGui import QWidget, QIcon, QTableWidgetItem, QAbstractItemView
+
+import pyforms
+from pyforms.gui.Controls.ControlBase import ControlBase
+
+__author__ = pyforms.__author__
+__credits__ = pyforms.__credits__
+__license__ = pyforms.__license__
+__version__ = pyforms.__version__
+__maintainer__ = pyforms.__maintainer__
+__email__ = pyforms.__email__
+__status__ = pyforms.__status__
+__updated__ = "2016-08-03"
+
+logger = logging.getLogger(__name__)
 
 
 class ControlList(ControlBase, QWidget):
     """ This class represents a wrapper to the table widget
         It allows to implement a list view
     """
+
+    CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
     def __init__(self, label="", defaultValue="", plusFunction=None,
                  minusFunction=None):
@@ -33,7 +40,8 @@ class ControlList(ControlBase, QWidget):
         self._minusFunction = minusFunction
         ControlBase.__init__(self, label, defaultValue)
 
-    def __repr__(self): return "ControlList " + str(self._value)
+    def __repr__(self):
+        return "ControlList " + str(self._value)
 
     def initForm(self):
         plusFunction = self._plusFunction
@@ -52,6 +60,7 @@ class ControlList(ControlBase, QWidget):
             self.tableWidgetItemChanged)
         self.tableWidget.itemSelectionChanged.connect(
             self.tableWidgetItemSelectionChanged)
+        self.tableWidget.cellDoubleClicked.connect(self.tableWidgetCellDoubleClicked)
         self.tableWidget.model().dataChanged.connect(self._dataChangedEvent)
 
         if plusFunction is None and minusFunction is None:
@@ -66,12 +75,19 @@ class ControlList(ControlBase, QWidget):
             self.plusButton.pressed.connect(plusFunction)
             self.minusButton.pressed.connect(minusFunction)
 
+    def empty_signal(self, *args, **kwargs):
+        """
+        Use this function if you want to disconnect a signal temporarily
+        """
+        pass
+
     def _dataChangedEvent(self, item):
         self.dataChangedEvent(
             item.row(), item.column(), self.tableWidget.model().data(item))
         self.changed()
 
-    def dataChangedEvent(self, row, col, item): pass
+    def dataChangedEvent(self, row, col, item):
+        pass
 
     def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
                                previousCol):
@@ -82,14 +98,35 @@ class ControlList(ControlBase, QWidget):
         self.currentItemChanged(current, previous)
         self.changed()
 
-    def tableWidgetItemSelectionChanged(self): self.itemSelectionChanged()
+    def tableWidgetItemSelectionChanged(self):
+        self.itemSelectionChanged()
 
-    def itemSelectionChanged(self): pass
+    def itemSelectionChanged(self):
+        pass
 
     def currentCellChanged(
-        self, nextRow, nextCol, previousRow, previousCol): pass
+            self, nextRow, nextCol, previousRow, previousCol):
+        pass
 
-    def currentItemChanged(self, current, previous): pass
+    def currentItemChanged(self, current, previous):
+        pass
+
+    def tableWidgetCellDoubleClicked(self, row, column):
+        """
+        (From PyQt) This signal is emitted whenever a cell in the table is double clicked.
+        The row and column specified is the cell that was double clicked.
+
+        Besides firing this signal, we save the current value, in case the user needs to know the old value.
+        :param row:
+        :param column:
+        :return:
+        """
+        self.CELL_VALUE_BEFORE_CHANGE = self.getValue(column, row)
+        logger.debug("Cell double clicked. Stored value: %s", self.CELL_VALUE_BEFORE_CHANGE)
+        self.cellDoubleClicked(row, column)
+
+    def cellDoubleClicked(self, row, column):
+        pass
 
     def clear(self, headers=False):
         if headers:
@@ -115,7 +152,6 @@ class ControlList(ControlBase, QWidget):
             else:
                 args = [str(v)] if not hasattr(v, 'icon') else [QIcon(v.icon), str(v)]
                 self.tableWidget.setItem(index, i, QTableWidgetItem(*args))
-
 
         self.tableWidget.resizeColumnsToContents()
         return self
@@ -158,7 +194,7 @@ class ControlList(ControlBase, QWidget):
             return self.tableWidget.cellWidget(row, column)
         except AttributeError as err:
             return ''
-            
+
 
     def getCurrentRowValue(self):
         currentRow = self.tableWidget.currentRow()
@@ -193,7 +229,8 @@ class ControlList(ControlBase, QWidget):
             self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
 
     @property
-    def count(self): return self.tableWidget.rowCount()
+    def count(self):
+        return self.tableWidget.rowCount()
 
     @property
     def value(self):
@@ -204,7 +241,8 @@ class ControlList(ControlBase, QWidget):
                 for col in range(self.tableWidget.columnCount()):
                     try:
                         r.append(self.getValue(col, row))
-                    except:
+                    except Exception as err:
+                        logger.debug(str(err))
                         r.append("")
                 results.append(r)
             return results
@@ -215,6 +253,7 @@ class ControlList(ControlBase, QWidget):
         self.clear()
         for row in value:
             self += row
+
     # TODO: implement += on self.value? I want to add a list of tuples to
     # self.value
 
@@ -234,7 +273,8 @@ class ControlList(ControlBase, QWidget):
             return None
 
     @property
-    def label(self): return self.labelWidget.getText()
+    def label(self):
+        return self.labelWidget.getText()
 
     @label.setter
     def label(self, value):
@@ -244,10 +284,12 @@ class ControlList(ControlBase, QWidget):
             self.labelWidget.hide()
 
     @property
-    def form(self): return self
+    def form(self):
+        return self
 
     @property
-    def iconSize(self): return self.tableWidget.iconSize()
+    def iconSize(self):
+        return self.tableWidget.iconSize()
 
     @iconSize.setter
     def iconSize(self, value):
