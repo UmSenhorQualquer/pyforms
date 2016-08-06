@@ -65,6 +65,7 @@ class ControlCodeEditor(ControlBase):
 
         self._code_editor.keyPressEvent = self._key_pressed
 
+        self.value = self._value
         super(ControlCodeEditor, self).initForm()
 
     def __font_size_index_changed(self, index):

@@ -22,6 +22,9 @@ class ControlTextArea(ControlBase):
         self._form.label.setText(self._label)
         self._form.plainTextEdit.setPlainText(str(self._value))
 
+        if not self._label or len(self._label)==0: 
+            self.form.label.hide()
+
         super(ControlTextArea, self).initForm()
         self.form.plainTextEdit.textChanged.connect(self.finishEditing)
 

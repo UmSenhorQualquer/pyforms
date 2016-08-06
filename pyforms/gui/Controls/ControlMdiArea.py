@@ -55,9 +55,11 @@ class ControlMdiArea(ControlBase, QMdiArea):
         return self
 
     def __add__(self, other):
+        #check if the window already was added.
+        #If yes, show it again
+        #If not create it
         if other.title not in self._openWindows:
-            if not other._formLoaded:
-                other.initForm()
+            if not other._formLoaded:other.initForm()
             other.subwindow = self.addSubWindow(other)
             other.subwindow.overrideWindowFlags(self.__flags())
             other.show()
@@ -66,25 +68,30 @@ class ControlMdiArea(ControlBase, QMdiArea):
             self.value.append(other)
             self._openWindows.append(other.title)
         else:
-            self.logger.warning("Window with same title already opened: %s", other.title)
+            other.subwindow.show()
+            other.show()
         return self
 
     def _subWindowClosed(self, closeEvent, window=None):
 
         if window:
-            window.beforeClose()
             activeWidget = window
-            window = window.subwindow
+            window       = window.subwindow
         else:
+            window       = self.activeSubWindow()
             activeWidget = self.activeSubWindow().widget()
-            window = self.activeSubWindow()
-
-        if activeWidget in self._value:
-            self._value.remove(activeWidget)
-
-        self.removeSubWindow(window)
-        self._openWindows.remove(activeWidget.title)
-        closeEvent.accept()
+           
+        #If beforeClose return False, will just hide the window.
+        #If return True or None remove it from the mdi area
+        res = activeWidget.beforeClose() 
+        if res is None or res is True:
+            if activeWidget in self._value: self._value.remove(activeWidget)
+            self.removeSubWindow(window)
+            self._openWindows.remove(activeWidget.title)
+            closeEvent.accept()
+        else:
+            closeEvent.ignore()
+            window.hide()
 
     def update_window_title(self, old_title, new_title):
         self._openWindows.remove(old_title)
