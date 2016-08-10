@@ -58,7 +58,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
         #check if the window already was added.
         #If yes, show it again
         #If not create it
-        if other.title not in self._openWindows:
+        if other.title not in self._openWindows and not hasattr(other, 'subwindow'):
             if not other._formLoaded:other.initForm()
             other.subwindow = self.addSubWindow(other)
             other.subwindow.overrideWindowFlags(self.__flags())
@@ -70,6 +70,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
         else:
             other.subwindow.show()
             other.show()
+        other.setFocus()
         return self
 
     def _subWindowClosed(self, closeEvent, window=None):
