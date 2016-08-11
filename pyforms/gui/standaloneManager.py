@@ -139,12 +139,15 @@ class StandAloneContainer(QtGui.QMainWindow):
         infile.close()
         self.setStyleSheet(text)
 
+MAIN_APP = None
 
 def startApp(ClassObject, geometry=None):
-    
+    global MAIN_APP
 
     app = QtGui.QApplication(sys.argv)
     w = StandAloneContainer(ClassObject)
+
+    MAIN_APP = w.centralWidget()
 
     if geometry is not None:
         w.show()
