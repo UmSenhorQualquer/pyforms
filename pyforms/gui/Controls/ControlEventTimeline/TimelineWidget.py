@@ -450,7 +450,7 @@ class TimelineWidget(QtGui.QWidget):
                 elif self._selected.collide(event.x(), event.y()):
                     self._moving = True
         if event.y() <= 20 and not self._moving:
-            self._pointer.position = event.x()
+            self._pointer.position = self.x2frame(event.x())
 
         self.repaint()
 

@@ -26,9 +26,9 @@ class TimelinePointer(object):
         painter.setPen(QtGui.QColor(0, 255, 0))
         painter.setBrush(QtGui.QColor(0, 255, 0))
         painter.drawLine(
-            self.position, 8, self.position, self._parent.height())
-        painter.drawEllipse(QtCore.QPoint(self.position, 8), 5, 5)
-        painter.drawText(self.position + 8, 8 + 4, str(self._position))
+            self.xposition, 8, self.xposition, self._parent.height())
+        painter.drawEllipse(QtCore.QPoint(self.xposition, 8), 5, 5)
+        painter.drawText(self.xposition + 8, 8 + 4, str(self._position))
 
     ##########################################################################
     #### HELPERS/FUNCTIONS ###################################################
@@ -55,13 +55,18 @@ class TimelinePointer(object):
     ##########################################################################
     #### PROPERTIES ##########################################################
     ##########################################################################
+    @property
+    def xposition(self):
+        return self._parent.frame2x(self.position)
+    
 
     @property
-    def position(self): return self._position * self._parent._scale
+    def position(self):
+        return self._position
 
     @position.setter
     def position(self, value):
-        self._position = int(round(value / self._parent._scale))
+        self._position = value
         self.moveEvent()
         
 
