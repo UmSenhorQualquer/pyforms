@@ -29,6 +29,9 @@ __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
 
+MAIN_APP = None
+
+
 
 class StandAloneContainer(QtGui.QMainWindow):
 
@@ -139,7 +142,6 @@ class StandAloneContainer(QtGui.QMainWindow):
         infile.close()
         self.setStyleSheet(text)
 
-MAIN_APP = None
 
 def startApp(ClassObject, geometry=None):
     global MAIN_APP

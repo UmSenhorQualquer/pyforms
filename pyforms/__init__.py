@@ -22,6 +22,7 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
         from pyforms.gui.appmanager import startApp
     else:
         from pyforms.gui.standaloneManager import startApp
+        from pyforms.gui.standaloneManager import MAIN_APP
 
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
