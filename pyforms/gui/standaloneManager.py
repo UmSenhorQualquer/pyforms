@@ -19,6 +19,7 @@ import logging
 from PyQt4 import QtGui, QtCore
 
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
+from pyforms import conf
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
@@ -29,7 +30,7 @@ __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
 
-MAIN_APP = None
+conf.MAIN_APP = None
 
 
 
@@ -142,12 +143,11 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 
 def startApp(ClassObject, geometry=None):
-    global MAIN_APP
 
     app = QtGui.QApplication(sys.argv)
     w = StandAloneContainer(ClassObject)
 
-    MAIN_APP = w.centralWidget()
+    conf.MAIN_APP = w.centralWidget()
 
     if geometry is not None:
         w.show()
