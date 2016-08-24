@@ -306,8 +306,11 @@ class BaseWidget(QtGui.QWidget):
 		"""
 		result = {}
 		for name, var in vars(self).items():
-			if isinstance(var, ControlBase):
-				result[name] = var
+			try:
+				if isinstance(var, ControlBase): 
+					result[name] = var
+			except:
+				pass
 		return result
 
 	def start_progress(self, total=100):

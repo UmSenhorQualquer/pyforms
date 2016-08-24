@@ -21,114 +21,112 @@ __status__ = "Development"
 
 
 class ControlMdiArea(ControlBase, QMdiArea):
-    """
-    The ControlMdiArea wraps a QMdiArea widget which provides
-     an area in which MDI windows are displayed.
-    """
+	"""
+	The ControlMdiArea wraps a QMdiArea widget which provides
+	 an area in which MDI windows are displayed.
+	"""
 
-    def __init__(self, label=""):
-        QMdiArea.__init__(self)
-        ControlBase.__init__(self, label)
-        self._value = []
-        self._showCloseButton = True
-        self._openWindows = []
+	def __init__(self, label=""):
+		QMdiArea.__init__(self)
+		ControlBase.__init__(self, label)
+		self._value = []
+		self._showCloseButton = True
+		self._openWindows = []
 
-        self.logger = logging.getLogger(__name__)
+		self.logger = logging.getLogger(__name__)
 
-    def initForm(self): pass
+	def initForm(self): pass
 
-    def __flags(self):
-        flags = QtCore.Qt.SubWindow
+	def __flags(self):
+		flags = QtCore.Qt.SubWindow
 
-        flags |= QtCore.Qt.WindowTitleHint
-        flags |= QtCore.Qt.WindowMinimizeButtonHint
-        flags |= QtCore.Qt.WindowMaximizeButtonHint
-        if self._showCloseButton:
-            flags |= QtCore.Qt.WindowSystemMenuHint
-            flags |= QtCore.Qt.WindowCloseButtonHint
+		flags |= QtCore.Qt.WindowTitleHint
+		flags |= QtCore.Qt.WindowMinimizeButtonHint
+		flags |= QtCore.Qt.WindowMaximizeButtonHint
+		if self._showCloseButton:
+			flags |= QtCore.Qt.WindowSystemMenuHint
+			flags |= QtCore.Qt.WindowCloseButtonHint
 
-        return flags
+		return flags
 
-    def __sub__(self, window):
-        if window.title in self._openWindows:
-            window.close()
-        return self
+	def __sub__(self, window):
+		if window.uid in self._openWindows:
+			window.close()
+		return self
 
-    def __add__(self, other):
-        #check if the window already was added.
-        #If yes, show it again
-        #If not create it
-        if other.title not in self._openWindows and not hasattr(other, 'subwindow'):
-            if not other._formLoaded:other.initForm()
-            other.subwindow = self.addSubWindow(other)
-            other.subwindow.overrideWindowFlags(self.__flags())
-            other.show()
-            other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
+	def __add__(self, other):
+		#check if the window already was added.
+		#If yes, show it again
+		#If not create it
+		if other.uid not in self._openWindows and not hasattr(other, 'subwindow'):
+			if not other._formLoaded:other.initForm()
+			other.subwindow = self.addSubWindow(other)
+			other.subwindow.overrideWindowFlags(self.__flags())
+			other.show()
+			other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
 
-            self.value.append(other)
-            self._openWindows.append(other.title)
-        else:
-            other.subwindow.show()
-            other.show()
-        other.setFocus()
-        return self
+			self.value.append(other)
+			self._openWindows.append(other.uid)
 
-    def _subWindowClosed(self, closeEvent, window=None):
+		else:
+			other.subwindow.show()
+			other.show()
+		other.setFocus()
+		return self
 
-        if window:
-            activeWidget = window
-            window       = window.subwindow
-        else:
-            window       = self.activeSubWindow()
-            activeWidget = self.activeSubWindow().widget()
-           
-        #If beforeClose return False, will just hide the window.
-        #If return True or None remove it from the mdi area
-        res = activeWidget.beforeClose() 
-        if res is None or res is True:
-            if activeWidget in self._value: self._value.remove(activeWidget)
-            self.removeSubWindow(window)
-            self._openWindows.remove(activeWidget.title)
-            closeEvent.accept()
-        else:
-            closeEvent.ignore()
-            window.hide()
+	def _subWindowClosed(self, closeEvent, window=None):
 
-    def update_window_title(self, old_title, new_title):
-        self._openWindows.remove(old_title)
-        self._openWindows.append(new_title)
+		if window:
+			activeWidget = window
+			window       = window.subwindow
+		else:
+			window       = self.activeSubWindow()
+			activeWidget = self.activeSubWindow().widget()
+		   
+		#If beforeClose return False, will just hide the window.
+		#If return True or None remove it from the mdi area
+		res = activeWidget.beforeClose() 
+		if res is None or res is True:
+			if activeWidget in self._value: self._value.remove(activeWidget)
+			self.removeSubWindow(window)
+			self._openWindows.remove(activeWidget.uid)
+			closeEvent.accept()
+		else:
+			closeEvent.ignore()
+			window.hide()
 
-    ##########################################################################
-    ############ Properties ##################################################
-    ##########################################################################
 
-    @property
-    def showCloseButton(self): return self._showCloseButton
+	##########################################################################
+	############ Properties ##################################################
+	##########################################################################
 
-    @showCloseButton.setter
-    def showCloseButton(self, value): self._showCloseButton = value
+	@property
+	def showCloseButton(self): return self._showCloseButton
 
-    @property
-    def label(self): return self._label
+	@showCloseButton.setter
+	def showCloseButton(self, value): self._showCloseButton = value
 
-    @label.setter
-    def label(self, value): self._label = value
+	@property
+	def label(self): return self._label
 
-    @property
-    def form(self): return self
+	@label.setter
+	def label(self, value): self._label = value
 
-    @property
-    def value(self): return ControlBase.value.fget(self)
+	@property
+	def form(self): return self
 
-    @value.setter
-    def value(self, value):
-        self.closeAllSubWindows()
-        self._value = []
+	@property
+	def value(self): return ControlBase.value.fget(self)
 
-        if isinstance(value, list):
-            for w in value:
-                self += w
-        else:
-            self += value
+	@value.setter
+	def value(self, value):
+		self.closeAllSubWindows()
+		self._value = []
 
-        ControlBase.value.fset(self, self._value)
+		if isinstance(value, list):
+			for w in value:
+				self += w
+		else:
+			self += value
+
+		ControlBase.value.fset(self, self._value)

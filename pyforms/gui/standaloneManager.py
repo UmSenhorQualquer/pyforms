@@ -40,8 +40,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 
         self.logger = logging.getLogger(__name__)
 
-        self.logger.debug("Loading window as standalone container...")
-
         w = ClassObject()
         self._widget = w
 

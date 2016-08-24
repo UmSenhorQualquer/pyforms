@@ -60,10 +60,11 @@ class EventsWidget(QtGui.QWidget):
         self._break_draw = True and self._is_painting
         self.repaint()
 
-    def add_track(self):
+    def add_track(self, title=None):
         # Add a new track
         self._tracks.append(Track(parent=self))
         self.setMinimumHeight(self.which_top(len(self._tracks)))
+        if title: self._tracks[-1].title = title
         return self._tracks[-1]
 
     def add_event(self, begin, end, title='', track=0, color="#FFFF00"):

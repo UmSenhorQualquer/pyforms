@@ -31,6 +31,11 @@ class ControlCodeEditor(ControlBase):
 
     ARROW_MARKER_NUM = 8
 
+    def __init__(self, label='', defaultValue='', helptext=''):
+        super(ControlCodeEditor, self).__init__(label, defaultValue, helptext)
+
+        self._changed_func = None
+
     def initForm(self):
         self.logger = logging.getLogger(__name__)
 
@@ -152,13 +157,13 @@ class ControlCodeEditor(ControlBase):
         """
         On modification change, re-enable save button
         """
-        self._save_button.setEnabled(True)
+        if self._changed_func: self._save_button.setEnabled(True)
 
     def on_save_changes(self):
         """
         On button save clicked, save changes made on the code editor to file
         """
-        if self.changed():
+        if self.changed() and self._changed_func:
             self._code_editor.setModified(False)
             self._save_button.setEnabled(False)
 
@@ -212,3 +217,10 @@ class ControlCodeEditor(ControlBase):
             self._code_editor.setText(str(value))
             self._code_editor.setModified(False)
             self._save_button.setEnabled(False)
+
+
+    @property
+    def changed(self): return self._changed_func if self._changed_func else (lambda : 0)
+
+    @changed.setter
+    def changed(self, value): self._changed_func = value

@@ -249,5 +249,8 @@ class ControlTree(ControlBase, QTreeWidget):
 		item = QTreeWidgetItem(self, [name]) if(
 			parent is None) else QTreeWidgetItem(parent, [name])
 		if icon is not None:
-			item.setIcon(0, QtGui.QIcon(icon))
+			if isinstance(icon, str):
+				item.setIcon(0, QtGui.QIcon(icon))
+			elif isinstance(icon, QtGui.QIcon):
+				item.setIcon(0, icon)
 		return item
