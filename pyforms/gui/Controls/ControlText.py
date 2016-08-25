@@ -13,6 +13,7 @@
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
+from PyQt4 import QtGui
 from PyQt4 import uic
 
 class ControlText(ControlBase):
@@ -26,10 +27,19 @@ class ControlText(ControlBase):
 
 		super(ControlText, self).initForm()
 		self.form.lineEdit.editingFinished.connect(self.finishEditing)
+		self.form.lineEdit.keyPressEvent = self.__key_pressed
 
 	def finishEditing(self):
 		"""Function called when the lineEdit widget is edited"""
 		self.changed()
+
+	def __key_pressed(self, event): 
+		QtGui.QLineEdit.keyPressEvent(self.form.lineEdit, event)
+
+		self.key_pressed(event)
+
+	def key_pressed(self, evt):
+		pass
 		
 	###################################################################
 	############ Properties ###########################################

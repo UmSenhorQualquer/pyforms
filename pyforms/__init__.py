@@ -1,13 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-<<<<<<< HEAD
+import logging
 from pyforms import settings
 from pysettings import conf; conf+= settings
-=======
-import logging
-from pyforms import conf
->>>>>>> 703f59e82e53ac61334453229048d0fa112ed5a2
+
 
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
