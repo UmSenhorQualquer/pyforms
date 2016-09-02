@@ -69,6 +69,7 @@ class ControlCodeEditor(ControlBase):
         self.lexer = QsciLexerPython
 
         self._code_editor.keyPressEvent = self._key_pressed
+        self._changed_func = None
 
         self.value = self._value
         super(ControlCodeEditor, self).initForm()
