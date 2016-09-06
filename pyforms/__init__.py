@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 import logging
 from pyforms import settings
-from pysettings import conf; conf+= settings
+from pysettings import conf;
 
+conf += settings
 
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
-__version__ = '0.1.7'
+__version__ = '0.1.7.2'
 __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Production"
