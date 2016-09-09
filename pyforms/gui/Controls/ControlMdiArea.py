@@ -31,13 +31,10 @@ class ControlMdiArea(ControlBase, QMdiArea):
 	def __init__(self, label=""):
 		QMdiArea.__init__(self)
 		ControlBase.__init__(self, label)
-		self._value = []
+		#		self._value = []
 		self._showCloseButton = True
 
 		self.logger = logging.getLogger(__name__)
-
-	def initForm(self):
-		pass
 
 	def __flags(self):
 		flags = QtCore.Qt.SubWindow
@@ -55,47 +52,46 @@ class ControlMdiArea(ControlBase, QMdiArea):
 		window.close()
 		return self
 
-	def __add__(self, other):
-		# check if the window already was added.
-		# If yes, show it again
-		# If not create it
-		if not hasattr(other, 'subwindow'):
-			if not other._formLoaded:
-				other.initForm()
-			other.subwindow = self.addSubWindow(other)
-			other.subwindow.overrideWindowFlags(self.__flags())
-			other.show()
-			other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
+	def __add__(self, widget):
 
-			self.value.append(other)
+		# if not widget._formLoaded:
+		# 	widget.initForm()
 
+		if not hasattr(widget, 'subwindow'):
+			widget.subwindow = self.addSubWindow(widget)
+			widget.subwindow.overrideWindowFlags(self.__flags())
 		else:
-			other.subwindow.show()
-			other.show()
-		other.setFocus()
+			widget.subwindow.show()
+
+		# self.value.append(other)
+
+		widget.show()
+		widget.closeEvent = lambda x: self._subWindowClosed(x)
+
+		widget.setFocus()
 		logger.debug("Sub window opened. MDI area sub windows: %s", self.subWindowList())
 		return self
 
-	def _subWindowClosed(self, closeEvent, window=None):
+	def _subWindowClosed(self, closeEvent):
 
-		if window:
-			activeWidget = window
-			window = window.subwindow
-		else:
-			window = self.activeSubWindow()
-			activeWidget = self.activeSubWindow().widget()
+		window = self.activeSubWindow()
+		widget = window.widget()
+
+		# self.removeSubWindow(window)
+
+		closeEvent.ignore()
+		widget.beforeClose()
+		window.hide()
 
 		# If beforeClose return False, will just hide the window.
 		# If return True or None remove it from the mdi area
-		res = activeWidget.beforeClose()
+		# res = activeWidget.beforeClose()
 
-		closeEvent.ignore()
-		window.hide()
 
-		if res is None or res is True:
-			if activeWidget in self._value:
-				self._value.remove(activeWidget)
-			# self.removeSubWindow(window)
+
+		# if res is None or res is True:
+		# 	if activeWidget in self._value:
+		# 		self._value.remove(activeWidget)
 
 		logger.debug("Sub window closed. MDI area sub windows: %s", self.subWindowList())
 
@@ -123,19 +119,19 @@ class ControlMdiArea(ControlBase, QMdiArea):
 	def form(self):
 		return self
 
-	@property
-	def value(self):
-		return ControlBase.value.fget(self)
-
-	@value.setter
-	def value(self, value):
-		self.closeAllSubWindows()
-		self._value = []
-
-		if isinstance(value, list):
-			for w in value:
-				self += w
-		else:
-			self += value
-
-		ControlBase.value.fset(self, self._value)
+	# @property
+	# def value(self):
+	# 	return ControlBase.value.fget(self)
+	#
+	# @value.setter
+	# def value(self, value):
+	# 	self.closeAllSubWindows()
+	# 	self._value = []
+	#
+	# 	if isinstance(value, list):
+	# 		for w in value:
+	# 			self += w
+	# 	else:
+	# 		self += value
+	#
+	# 	ControlBase.value.fset(self, self._value)
