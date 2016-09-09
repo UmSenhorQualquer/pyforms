@@ -43,8 +43,12 @@ class ControlMdiArea(ControlBase, QMdiArea):
 		:return:
 		"""
 		widget.close()
+		self += widget  # little tweak to temporarily make this widget as the active subwindow
 		self.removeSubWindow(widget.subwindow)
 		del widget.subwindow
+
+		logger.debug("Widget sub window removed. MDI area sub windows: %s", self.subWindowList())
+
 		return self
 
 	def __add__(self, widget):
