@@ -7,8 +7,11 @@ import logging
 
 from PyQt4 import QtCore
 from PyQt4.QtGui import QMdiArea
+from PyQt4.QtGui import QMdiSubWindow
 
 from pyforms.gui.Controls.ControlBase import ControlBase
+
+logger = logging.getLogger(__name__)
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
@@ -29,104 +32,91 @@ class ControlMdiArea(ControlBase, QMdiArea):
 	def __init__(self, label=""):
 		QMdiArea.__init__(self)
 		ControlBase.__init__(self, label)
-		self._value = []
 		self._showCloseButton = True
-		self._openWindows = []
 
 		self.logger = logging.getLogger(__name__)
 
-	def initForm(self): pass
+	def __sub__(self, widget):
+		"""
+		Remove subwindow and unassigned it from widget
+		:param widget:
+		:return:
+		"""
+		widget.close()
+		self += widget  # little tweak to temporarily make this widget as the active subwindow
+		self.removeSubWindow(widget.subwindow)
+		del widget.subwindow
 
-	def __flags(self):
-		flags = QtCore.Qt.SubWindow
+		logger.debug("Widget sub window removed. MDI area sub windows: %s", self.subWindowList())
 
-		flags |= QtCore.Qt.WindowTitleHint
-		flags |= QtCore.Qt.WindowMinimizeButtonHint
-		flags |= QtCore.Qt.WindowMaximizeButtonHint
-		if self._showCloseButton:
-			flags |= QtCore.Qt.WindowSystemMenuHint
-			flags |= QtCore.Qt.WindowCloseButtonHint
-
-		return flags
-
-	def __sub__(self, window):
-		if window.uid in self._openWindows:
-			window.close()
 		return self
 
-	def __add__(self, other):
-		#check if the window already was added.
-		#If yes, show it again
-		#If not create it
-		if other.uid not in self._openWindows and not hasattr(other, 'subwindow'):
-			if not other._formLoaded:other.initForm()
-			other.subwindow = self.addSubWindow(other)
-			other.subwindow.overrideWindowFlags(self.__flags())
-			other.show()
-			other.closeEvent = lambda x: self._subWindowClosed(x, window=other)
+	def __add__(self, widget):
+		"""
+		Show widget on mdi area.
 
-			self.value.append(other)
-			self._openWindows.append(other.uid)
+		If widget does not have a subwindow assigned, create a new subwindow without enabling the WA_DeleteOnClose event.
+		This will allow subwindow to be hidden instead of destroyed. Otherwise, the closeEvent.accept() will cause
+		the "Internal c++ Object Already Deleted" problem.
 
+		If widget already has a subwindow, just show them (both the subwindow and the widget inside)!
+		:param widget:
+		:return:
+		"""
+
+		if not hasattr(widget, 'subwindow'):
+			subwindow = QMdiSubWindow()
+			subwindow.setWidget(widget)
+			# DO NOT SET ATTRIBUTE WA_DeleteOnClose because we want window not to be destroyed
+			widget.subwindow = self.addSubWindow(subwindow)
 		else:
-			other.subwindow.show()
-			other.show()
-		other.setFocus()
+			widget.subwindow.show()
+
+		widget.show()
+		widget.closeEvent = lambda x: self._subWindowClosed(x)
+		widget.setFocus()
+
+		logger.debug("Sub window opened. MDI area sub windows: %s", self.subWindowList())
+
 		return self
 
-	def _subWindowClosed(self, closeEvent, window=None):
+	def _subWindowClosed(self, closeEvent):
+		"""
+		Perform actions when subwindow is closed.
+		In this case, we don't want subwindow to be removed nor destroyed in order to reutilize later.
+		The closeEvent.accept() will just hide the subwindow.
+		:param closeEvent:
+		:return:
+		"""
 
-		if window:
-			activeWidget = window
-			window       = window.subwindow
-		else:
-			window       = self.activeSubWindow()
-			activeWidget = self.activeSubWindow().widget()
-		   
-		#If beforeClose return False, will just hide the window.
-		#If return True or None remove it from the mdi area
-		res = activeWidget.beforeClose() 
-		if res is None or res is True:
-			if activeWidget in self._value: self._value.remove(activeWidget)
-			self.removeSubWindow(window)
-			self._openWindows.remove(activeWidget.uid)
-			closeEvent.accept()
-		else:
-			closeEvent.ignore()
-			window.hide()
+		window = self.activeSubWindow()
+		widget = window.widget()
+		# self.removeSubWindow(window) DO NOT REMOVE TO KEEP WINDOW POSITION
+		widget.beforeClose()
+		closeEvent.accept()
 
+		logger.debug("Sub window closed. MDI area sub windows: %s", self.subWindowList())
 
 	##########################################################################
 	############ Properties ##################################################
 	##########################################################################
 
 	@property
-	def showCloseButton(self): return self._showCloseButton
+	def showCloseButton(self):
+		return self._showCloseButton
 
 	@showCloseButton.setter
-	def showCloseButton(self, value): self._showCloseButton = value
+	def showCloseButton(self, value):
+		self._showCloseButton = value
 
 	@property
-	def label(self): return self._label
+	def label(self):
+		return self._label
 
 	@label.setter
-	def label(self, value): self._label = value
+	def label(self, value):
+		self._label = value
 
 	@property
-	def form(self): return self
-
-	@property
-	def value(self): return ControlBase.value.fget(self)
-
-	@value.setter
-	def value(self, value):
-		self.closeAllSubWindows()
-		self._value = []
-
-		if isinstance(value, list):
-			for w in value:
-				self += w
-		else:
-			self += value
-
-		ControlBase.value.fset(self, self._value)
+	def form(self):
+		return self
