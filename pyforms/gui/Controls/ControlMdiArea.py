@@ -66,13 +66,14 @@ class ControlMdiArea(ControlBase, QMdiArea):
 
 		if not hasattr(widget, 'subwindow'):
 			subwindow = QMdiSubWindow()
+			widget.show()
 			subwindow.setWidget(widget)
 			# DO NOT SET ATTRIBUTE WA_DeleteOnClose because we want window not to be destroyed
 			widget.subwindow = self.addSubWindow(subwindow)
 		else:
-			widget.subwindow.show()
-
-		widget.show()
+			widget.show()
+		
+		widget.subwindow.show()		
 		widget.closeEvent = lambda x: self._subWindowClosed(x)
 		widget.setFocus()
 
