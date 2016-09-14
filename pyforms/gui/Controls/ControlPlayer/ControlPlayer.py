@@ -49,6 +49,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		# Load the UI for the self instance
 		uic.loadUi(os.path.join(rootPath, "video.ui"), self)
 
+		self.videoFPS.hide()
+
 		# Define the icon for the Play button
 		icon = QtGui.QIcon()
 		pixmapOff = QtGui.qApp.style().standardPixmap(
