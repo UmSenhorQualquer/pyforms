@@ -151,7 +151,7 @@ class EventsWidget(QtGui.QWidget):
 
 		for index, track in enumerate(self._tracks):
 			top = self.which_top(index)
-			print(top)
+			#print(top)
 			painter.drawLine(0, top, self.width(), top)
 			painter.drawText(10, top + 15, track.title)
 		painter.setOpacity(1.0)
