@@ -19,7 +19,7 @@ import subprocess
 import time, sys
 from datetime import datetime, timedelta
 from PyQt4 import QtGui, QtCore
-from pyforms import conf
+from pysettings import conf
 
 
 class FlushFile(object):
@@ -62,6 +62,7 @@ class BaseWidget(QtGui.QWidget):
 	##########################################################################
 	############ Module functions  ###########################################
 	##########################################################################
+
 
 	def initForm(self):
 		"""
@@ -294,6 +295,7 @@ class BaseWidget(QtGui.QWidget):
 		"""
 		self.initForm()
 		super(BaseWidget, self).show()
+
 
 	##########################################################################
 	############ Properties ##################################################

@@ -36,123 +36,161 @@ conf.MAIN_APP = None
 
 class StandAloneContainer(QtGui.QMainWindow):
 
-    def __init__(self, ClassObject):
-        super(QtGui.QMainWindow, self).__init__()
+	def __init__(self, ClassObject):
+		super(QtGui.QMainWindow, self).__init__()
 
-        self.logger = logging.getLogger(__name__)
+		self.logger = logging.getLogger(__name__)
 
-        w = ClassObject()
-        self._widget = w
+		w = ClassObject()
+		self._widget = w
 
-        if len(w.mainmenu) > 0:
-            w._mainmenu = self.__initMainMenu(w.mainmenu)
+		if len(w.mainmenu) > 0:
+			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
-        w.initForm()
-        self.setCentralWidget(w)
-        self.setWindowTitle(w.title)
+		w.initForm()
+		self.setCentralWidget(w)
+		self.setWindowTitle(w.title)
 
-        docks = {}
-        for name, item in w.formControls.items():
-            if isinstance(item, ControlDockWidget):
-                if item.side not in docks:
-                    docks[item.side] = []
-                docks[item.side].append((name, item))
+		docks = {}
+		for name, item in w.formControls.items():
+			if isinstance(item, ControlDockWidget):
+				if item.side not in docks:
+					docks[item.side] = []
+				docks[item.side].append((name, item))
 
-        for key, widgets in docks.items():
-            side = QtCore.Qt.RightDockWidgetArea
-            if key == 'left':
-                side = QtCore.Qt.LeftDockWidgetArea
-            elif key == 'right':
-                side = QtCore.Qt.RightDockWidgetArea
-            elif key == 'top':
-                side = QtCore.Qt.TopDockWidgetArea
-            elif key == 'bottom':
-                side = QtCore.Qt.BottomDockWidgetArea
-            else:
-                side = QtCore.Qt.LeftDockWidgetArea
+		for key, widgets in docks.items():
+			side = QtCore.Qt.RightDockWidgetArea
+			if key == 'left':
+				side = QtCore.Qt.LeftDockWidgetArea
+			elif key == 'right':
+				side = QtCore.Qt.RightDockWidgetArea
+			elif key == 'top':
+				side = QtCore.Qt.TopDockWidgetArea
+			elif key == 'bottom':
+				side = QtCore.Qt.BottomDockWidgetArea
+			else:
+				side = QtCore.Qt.LeftDockWidgetArea
 
-            if isinstance(widgets, list):
-                widgets = sorted(widgets, key=lambda x: x[1].order)
+			if isinstance(widgets, list):
+				widgets = sorted(widgets, key=lambda x: x[1].order)
 
-                for name, widget in widgets:
-                    dock = QtGui.QDockWidget(self)
-                    dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
-                                     QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
-                    dock.setObjectName(name)
+				for name, widget in widgets:
+					dock = QtGui.QDockWidget(self)
+					dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
+									 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
+					dock.setObjectName(name)
 
-                    # print dock.objectName(),1
-                    dock.setWidget(widget.form)
-                    dock.setWindowTitle(widget.label)
-                    widget.dock = dock
-                    if not widget._show:
-                        dock.hide()
+					# print dock.objectName(),1
+					dock.setWidget(widget.form)
+					dock.setWindowTitle(widget.label)
+					widget.dock = dock
+					if not widget._show:
+						dock.hide()
 
-                    self.addDockWidget(side, dock)
-            else:
-                dock = QtGui.QDockWidget(self)
-                dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
-                                 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
-                # dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-                # dock.layout().setMargin(0)
+					self.addDockWidget(side, dock)
+			else:
+				dock = QtGui.QDockWidget(self)
+				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
+								 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
+				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
+				# dock.layout().setMargin(0)
 
-                # print dock.objectName(), 2
-                dock.setObjectName(name)
-                dock.setWidget(widget.form)
-                self.addDockWidget(side, dock)
-                dock.setWindowTitle(widget.label)
-                widget.dock = dock
-                if not widget._show:
-                    dock.hide()
+				# print dock.objectName(), 2
+				dock.setObjectName(name)
+				dock.setWidget(widget.form)
+				self.addDockWidget(side, dock)
+				dock.setWindowTitle(widget.label)
+				widget.dock = dock
+				if not widget._show:
+					dock.hide()
 
-        try:
-            directory = os.path.dirname(inspect.getfile(w.__class__))
-            self.loadStyleSheetFile(os.path.join(directory, 'style.css'))
-        except:
-            pass
+		try:
+			directory = os.path.dirname(inspect.getfile(w.__class__))
+			self.loadStyleSheetFile(os.path.join(directory, 'style.css'))
+		except:
+			pass
 
-    def closeEvent(self, event):
-        self._widget.closeEvent(event)
 
-    def __initMainMenu(self, options, keys={}):
-        menubar = self.menuBar()
-        for menuIndex, m in enumerate(options):
-            for key, menus in m.items():
-                menu = menubar.addMenu(key)
-                for subMenuIndex, m1 in enumerate(menus):
-                    if isinstance(m1, str) and m1 == "-":
-                        menu.addSeparator()
-                    else:
-                        for text, func in m1.items():
-                            if text != 'icon':
-                                action = QtGui.QAction(text, self)
-                                if 'icon' in m1.keys():
-                                    action.setIconVisibleInMenu(True)
-                                    action.setIcon(QtGui.QIcon(m1['icon']))
-                                if func:
-                                    action.triggered.connect(func)
-                                    menu.addAction(action)
-                                options[menuIndex][key][subMenuIndex][text] = action
-                                break
-        return options
+	def closeEvent(self, event):
+		self._widget.closeEvent(event)
 
-    def loadStyleSheetFile(self, filename):
-        infile = open(filename, 'r')
-        text = infile.read()
-        infile.close()
-        self.setStyleSheet(text)
+	def __initMainMenu(self, options, keys={}):
+		menubar = self.menuBar()
+		for menuIndex, m in enumerate(options):
+			for key, menus in m.items():
+				menu = menubar.addMenu(key)
+				for subMenuIndex, m1 in enumerate(menus):
+					if isinstance(m1, str) and m1 == "-":
+						menu.addSeparator()
+					else:
+						for text, func in m1.items():
+							if text != 'icon':
+								action = QtGui.QAction(text, self)
+								if 'icon' in m1.keys():
+									action.setIconVisibleInMenu(True)
+									action.setIcon(QtGui.QIcon(m1['icon']))
+								if func:
+									action.triggered.connect(func)
+									menu.addAction(action)
+								options[menuIndex][key][subMenuIndex][text] = action
+								break
+		return options
 
+	def loadStyleSheetFile(self, filename):
+		infile = open(filename, 'r')
+		text = infile.read()
+		infile.close()
+		self.setStyleSheet(text)
+
+
+
+def execute_test_file(myapp):
+	import argparse
+	parser = argparse.ArgumentParser()
+	parser.add_argument("test_file", help="File with the tests script")
+	args = parser.parse_args()
+	
+	with open(args.test_file) as f:
+		global_vars = globals()
+		local_vars  = locals()
+		code = compile(f.read(), args.test_file, 'exec')
+		exec(code, global_vars, local_vars)
 
 def startApp(ClassObject, geometry=None):
 
-    app = QtGui.QApplication(sys.argv)
-    w = StandAloneContainer(ClassObject)
+	app = QtGui.QApplication(sys.argv)
+	mainwindow = StandAloneContainer(ClassObject)
 
-    conf.MAIN_APP = w.centralWidget()
+	myapp = mainwindow.centralWidget()
 
-    if geometry is not None:
-        w.show()
-        w.setGeometry(*geometry)
-    else:
-        w.showMaximized()
+	conf.MAIN_APP = myapp
 
-    app.exec_()
+	if geometry is not None:
+		mainwindow.show()
+		mainwindow.setGeometry(*geometry)
+	else:
+		mainwindow.showMaximized()
+
+
+	if conf.PYFORMS_QUALITY_TESTS_PATH is not None: 
+		import argparse
+		parser = argparse.ArgumentParser()
+		parser.add_argument("--test", help="File with the tests script")
+		args = parser.parse_args()
+		
+		if args.test:
+			TEST_PATH 				= os.path.join( conf.PYFORMS_QUALITY_TESTS_PATH, args.test )
+			TEST_FILE_PATH 			= os.path.join( TEST_PATH, args.test+'.py')
+			DATA_PATH 				= os.path.join( TEST_PATH, 'data', sys.platform)
+			INPUT_DATA_PATH 		= os.path.join( DATA_PATH, 'input-data')
+			OUTPUT_DATA_PATH 		= os.path.join( DATA_PATH, 'output-data')
+			EXPECTED_DATA_PATH 		= os.path.join( DATA_PATH, 'expected-data')
+
+			with open(TEST_FILE_PATH) as f:
+				global_vars = {} #globals()
+				local_vars  = locals()
+				code 		= compile(f.read(), TEST_FILE_PATH, 'exec')
+
+				exec(code, global_vars, local_vars)
+
+	app.exec_()

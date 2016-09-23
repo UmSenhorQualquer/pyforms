@@ -195,6 +195,15 @@ class ControlList(ControlBase, QWidget):
         except AttributeError as err:
             return ''
 
+    def resizeRowsToContents(self):
+        self.tableWidget.resizeRowsToContents()
+
+    @property
+    def word_wrap(self): return self.tableWidget.wordWrap()
+    @word_wrap.setter
+    def word_wrap(self, value):
+        self.tableWidget.setWordWrap(value)
+
 
     def getCurrentRowValue(self):
         currentRow = self.tableWidget.currentRow()
