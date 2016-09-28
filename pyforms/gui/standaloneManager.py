@@ -31,13 +31,14 @@ __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
 
+logger = logging.getLogger(__name__)
 
 class StandAloneContainer(QtGui.QMainWindow):
 
 	def __init__(self, ClassObject):
 		super(QtGui.QMainWindow, self).__init__()
 
-		self.logger = logging.getLogger(__name__)
+		
 
 		w = ClassObject()
 		self._widget = w
@@ -102,6 +103,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 				if not widget._show: dock.hide()
 	
 		if conf.PYFORMS_STYLESHEET:
+			logger.debug('Import stylesheet: {0}'.format(conf.PYFORMS_STYLESHEET))
 			self.loadStyleSheetFile(conf.PYFORMS_STYLESHEET)
 		
 
