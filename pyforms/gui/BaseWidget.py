@@ -32,7 +32,7 @@ class FlushFile(object):
 
 
 
-class BaseWidget(QtGui.QWidget):
+class BaseWidget(QtGui.QFrame):
 	"""
 	The class implements the most basic widget or window.
 	"""
@@ -42,9 +42,12 @@ class BaseWidget(QtGui.QWidget):
 			flag = QtCore.Qt.Dialog
 
 		if parentWindow is None:
-			QtGui.QWidget.__init__(self)
+			QtGui.QFrame.__init__(self)
 		else:
-			QtGui.QWidget.__init__(self, parentWindow, flag)
+			QtGui.QFrame.__init__(self, parentWindow, flag)
+
+		#self.setObjectName(self.__class__.__name__)
+		
 
 		layout = QtGui.QVBoxLayout()
 		self.setLayout(layout)
@@ -58,6 +61,8 @@ class BaseWidget(QtGui.QWidget):
 		self._formset = None
 		self._formLoaded = False
 		self.uid = id(self)
+
+		self.setAccessibleName('BaseWidget')
 
 	##########################################################################
 	############ Module functions  ###########################################
@@ -142,7 +147,7 @@ class BaseWidget(QtGui.QWidget):
 			control.addWidget(secondPanel)
 			self._splitters.append(control)
 			return control
-		control = QtGui.QWidget()
+		control = QtGui.QFrame(self)
 		layout = None
 		if type(formset) is tuple:
 			layout = QtGui.QHBoxLayout()
@@ -372,7 +377,8 @@ class BaseWidget(QtGui.QWidget):
 		return output
 
 	@property
-	def form(self): return self
+	def form(self):
+		return self
 
 	@property
 	def title(self): return self.windowTitle()

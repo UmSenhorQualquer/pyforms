@@ -26,6 +26,7 @@ class ControlCombo(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "comboInput.ui")
         self._form = uic.loadUi(control_path)
 
+        self._form.comboLabel.setAccessibleName('ControlCombo-label')
         self._form.comboBox.currentIndexChanged.connect(self._currentIndexChanged)
         self._form.comboBox.activated.connect(self._activated)
         self._form.comboBox.highlighted.connect(self._highlighted)

@@ -26,6 +26,8 @@ class ControlText(ControlBase):
 		self.form.setToolTip(self.help)
 
 		super(ControlText, self).initForm()
+
+		self.form.label.setAccessibleName('ControlText-label')
 		self.form.lineEdit.editingFinished.connect(self.finishEditing)
 		self.form.lineEdit.keyPressEvent = self.__key_pressed
 

@@ -17,9 +17,10 @@ import os
 import inspect
 import logging
 from PyQt4 import QtGui, QtCore
+from pysettings import conf
 
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
-from pyforms import conf
+
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""
@@ -29,9 +30,6 @@ __version__ = "0.0"
 __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
-
-conf.MAIN_APP = None
-
 
 
 class StandAloneContainer(QtGui.QMainWindow):
@@ -79,13 +77,13 @@ class StandAloneContainer(QtGui.QMainWindow):
 					dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 									 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
+					#dock.layout().setMargin(5)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)
 					dock.setWindowTitle(widget.label)
 					widget.dock = dock
-					if not widget._show:
-						dock.hide()
+					if not widget._show: dock.hide()
 
 					self.addDockWidget(side, dock)
 			else:
@@ -93,7 +91,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 								 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-				# dock.layout().setMargin(0)
+				#dock.layout().setMargin(5)
 
 				# print dock.objectName(), 2
 				dock.setObjectName(name)
@@ -101,15 +99,11 @@ class StandAloneContainer(QtGui.QMainWindow):
 				self.addDockWidget(side, dock)
 				dock.setWindowTitle(widget.label)
 				widget.dock = dock
-				if not widget._show:
-					dock.hide()
-
-		try:
-			directory = os.path.dirname(inspect.getfile(w.__class__))
-			self.loadStyleSheetFile(os.path.join(directory, 'style.css'))
-		except:
-			pass
-
+				if not widget._show: dock.hide()
+	
+		if conf.PYFORMS_STYLESHEET:
+			self.loadStyleSheetFile(conf.PYFORMS_STYLESHEET)
+		
 
 	def closeEvent(self, event):
 		self._widget.closeEvent(event)
@@ -162,8 +156,6 @@ def startApp(ClassObject, geometry=None):
 	mainwindow = StandAloneContainer(ClassObject)
 
 	myapp = mainwindow.centralWidget()
-
-	conf.MAIN_APP = myapp
 
 	if geometry is not None:
 		mainwindow.show()
