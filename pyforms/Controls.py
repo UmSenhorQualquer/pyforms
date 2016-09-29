@@ -20,11 +20,18 @@ if conf.PYFORMS_MODE in ['GUI','GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlList 			import ControlList
 	from pyforms.gui.Controls.ControlMdiArea 		import ControlMdiArea
 	from pyforms.gui.Controls.ControlNumber 		import ControlNumber
+	
 
 	try:
 		from pyforms.gui.Controls.ControlMatplotlib 	import ControlMatplotlib
 	except:
 		print("Matplot lib not installed or not working properly")
+		logger.debug(traceback.format_exc())
+
+	try:
+		from pyforms.gui.Controls.ControlWeb 			import ControlWeb
+	except:
+		print("QtWebKit lib not installed or not working properly")
 		logger.debug(traceback.format_exc())
 	
 	try:
