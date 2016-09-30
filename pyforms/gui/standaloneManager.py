@@ -14,7 +14,7 @@
 
 import sys
 import os
-import inspect
+import inspect, platform
 import logging
 from PyQt4 import QtGui, QtCore
 from pysettings import conf
@@ -103,8 +103,19 @@ class StandAloneContainer(QtGui.QMainWindow):
 				if not widget._show: dock.hide()
 	
 		if conf.PYFORMS_STYLESHEET:
-			logger.debug('Import stylesheet: {0}'.format(conf.PYFORMS_STYLESHEET))
-			self.loadStyleSheetFile(conf.PYFORMS_STYLESHEET)
+			stylesheet_files = [conf.PYFORMS_STYLESHEET]
+
+			p = platform.system()
+			if p=='Windows' and conf.PYFORMS_STYLESHEET_WINDOWS:
+				stylesheet_files.append(conf.PYFORMS_STYLESHEET_WINDOWS)
+			elif p=='Darwin' and conf.PYFORMS_STYLESHEET_DARWIN:
+				stylesheet_files.append(conf.PYFORMS_STYLESHEET_DARWIN)
+			elif p=='Linux' and conf.PYFORMS_STYLESHEET_LINUX:
+				stylesheet_files.append(conf.PYFORMS_STYLESHEET_LINUX)
+
+			logger.debug('Import stylesheets: {0}'.format(stylesheet_files)	)	
+			self.loadStyleSheetFile(stylesheet_files)
+			
 		
 
 	def closeEvent(self, event):
@@ -132,11 +143,14 @@ class StandAloneContainer(QtGui.QMainWindow):
 								break
 		return options
 
-	def loadStyleSheetFile(self, filename):
-		infile = open(filename, 'r')
-		text = infile.read()
-		infile.close()
-		self.setStyleSheet(text)
+	def loadStyleSheetFile(self, files):
+		content = ''
+		for filename in files:
+			infile = open(filename, 'r')
+			content += infile.read() + '\n'
+			infile.close()
+
+		self.setStyleSheet(content)
 
 
 
