@@ -78,7 +78,7 @@ class BaseWidget(object):
 			if len(function)>0: getattr(self, function)()
 
 		res = {}
-		for controlName, control in self.formControls.items(): res[controlName] = control.value
+		for controlName, control in self.formControls.items(): res[controlName] = {'value': control.value }
 		outfile = open('out-parameters.txt', 'wb')
 		outfile.write( str(res) )
 		outfile.close()
