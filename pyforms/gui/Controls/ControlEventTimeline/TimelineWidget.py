@@ -305,56 +305,12 @@ class TimelineWidget(QtGui.QWidget):
 			self._selected_track = self._selected.track
 			self.repaint()
 
+	def key_release_event(self, event): pass
+
+
 	def keyReleaseEvent(self, event):
 		super(TimelineWidget, self).keyReleaseEvent(event)
-
-		# Control video playback using the space bar to Play/Pause
-		if event.key() == QtCore.Qt.Key_Space:
-			self._video_playing = not self._video_playing
-			self.playVideoEvent()
-			self.repaint()
-
-		# Increase video frame rate (FPS) by 5
-		if event.key() == QtCore.Qt.Key_Plus:
-			if self._video_fps_min <= (self.fps + self._video_fps_inc) <= self._video_fps_max:
-				self.fps += self._video_fps_inc
-			else:
-				pass
-			self.fpsChangeEvent()
-			self.repaint()
-
-		# Decrease video frame rate (FPS) by 5
-		if event.key() == QtCore.Qt.Key_Minus:
-			if self._video_fps_min <= (self.fps - self._video_fps_inc) <= self._video_fps_max:
-				self.fps -= self._video_fps_inc
-			else:
-				pass
-			self.fpsChangeEvent()
-			self.repaint()
-
-		# Jumps 20 seconds forward
-		if event.key() == QtCore.Qt.Key_C:
-			self._pointer.position += 10 * self.fps
-			self.__checkPositionIsVisible(self.position)
-			self.repaint()
-
-		# Jumps 20 seconds backwards
-		if event.key() == QtCore.Qt.Key_Z:
-			self._pointer.position -= 10 * self.fps
-			self.__checkPositionIsVisible(self.position)
-			self.repaint()
-
-		# Jumps 1 frame forward
-		if event.key() == QtCore.Qt.Key_D:
-			self._pointer.position += 1
-			self.__checkPositionIsVisible(self.position)
-			self.repaint()
-
-		# Jumps 1 frame backwards
-		if event.key() == QtCore.Qt.Key_A:
-			self._pointer.position -= 1
-			self.__checkPositionIsVisible(self.position)
-			self.repaint()
+		self.key_release_event(event)
 
 		if self._selected is not None:
 			modifier = int(event.modifiers())
@@ -434,8 +390,8 @@ class TimelineWidget(QtGui.QWidget):
 					self.repaint()
 					self._creating_event = False
 				else:
-					print("Event auto creation aborted.")
 					self._creating_event = False
+		
 
 	def mousePressEvent(self, event):
 		# Select the track
@@ -500,8 +456,6 @@ class TimelineWidget(QtGui.QWidget):
 	def trackInPosition(self, x, y):
 		return (y - 30) // 34
 
-	def playVideoEvent(self):
-		pass
 
 	def fpsChangeEvent(self):
 		pass

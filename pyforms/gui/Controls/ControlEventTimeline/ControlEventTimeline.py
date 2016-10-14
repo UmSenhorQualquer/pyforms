@@ -50,7 +50,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self.addPopupMenuOption("-")
 		self.addPopupSubMenuOption("Import/Export", {
 			'Export to CSV': self.__export,
-			'Import to CSV': self.__import,
+			'Import from CSV': self.__import,
 			'-':None,
 			'Export to CSV Matrix': self.__export_2_csv_matrix,            
 		})
@@ -175,7 +175,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 				True) if self._time._selected is not None else action.setVisible(False)
 
 	def __set_graphs_properties(self):
-		if self._graphs_properties_win is None: self._graphs_properties_win = GraphsProperties(self._time)
+		if self._graphs_properties_win is None: self._graphs_properties_win = GraphsProperties(self._time, self)
 
 		self._graphs_properties_win.show()
 
@@ -259,15 +259,23 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	def __export(self):
 		"""Export annotations to a file."""
 
-		filename = QtGui.QFileDialog.getSaveFileName(parent=self,
+		filename, ffilter = QtGui.QFileDialog.getSaveFileNameAndFilter(parent=self,
 													 caption="Export annotations file",
 													 directory=self.getExportFilename(),
-													 filter="CSV Files (*.csv)",
+													 filter="CSV Files (*.csv);;CSV Matrix Files (*.csv)",
 													 options=QtGui.QFileDialog.DontUseNativeDialog)
+		
+		filename = str(filename)
+		ffilter  = str(ffilter)
 		if filename != "":
-			with open(filename, 'wb') as csvfile:
+			with open(filename, 'w') as csvfile:
 				spamwriter = csv.writer(csvfile, dialect='excel')
-				self._time.export_csv(spamwriter)
+				if ffilter=='CSV Files (*.csv)':
+					self._time.export_csv(spamwriter)
+				elif ffilter=='CSV Matrix Files (*.csv)':
+					self._time.export_2_csv_matrix(spamwriter)
+
+
 
 	def __export_2_csv_matrix(self):
 		QtGui.QMessageBox.warning(
@@ -279,7 +287,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 													 filter="CSV Files (*.csv)",
 													 options=QtGui.QFileDialog.DontUseNativeDialog)
 		if filename != "":
-			with open(filename, 'wb') as csvfile:
+			with open(filename, 'w') as csvfile:
 				spamwriter = csv.writer(csvfile, dialect='excel')
 				self._time.export_2_csv_matrix(spamwriter)
 

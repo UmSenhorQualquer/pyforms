@@ -40,6 +40,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		QtGui.QFrame.__init__(self)
 		ControlBase.__init__(self, *args)
 		
+		self.speed = 1
 		self.logger = logging.getLogger('pyforms')
 
 	def initForm(self):
@@ -49,7 +50,6 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		# Load the UI for the self instance
 		uic.loadUi(os.path.join(rootPath, "video.ui"), self)
 
-		self.videoFPS.hide()
 
 		# Define the icon for the Play button
 		icon = QtGui.QIcon()
@@ -62,30 +62,17 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		icon.addPixmap(pixmapOn, mode=QtGui.QIcon.Normal, state=QtGui.QIcon.On)
 		self.videoPlay.setIcon(icon)
 
-		# Define the icon for the Show/Hide markers button
-		icon = QtGui.QIcon()
-		pixmapOff = QtGui.qApp.style().standardPixmap(
-			QtGui.QStyle.SP_DialogYesButton)
-		pixmapOn = QtGui.qApp.style().standardPixmap(
-			QtGui.QStyle.SP_DialogNoButton)
-		icon.addPixmap(
-			pixmapOff, mode=QtGui.QIcon.Normal, state=QtGui.QIcon.Off)
-		icon.addPixmap(pixmapOn, mode=QtGui.QIcon.Normal, state=QtGui.QIcon.On)
-		self.videoHideMarkers.setIcon(icon)
-
+		
+		
 		self._videoWidget = VideoGLWidget()
 		self._videoWidget._control = self
 		self.videoLayout.addWidget(self._videoWidget)
-		self.videoHideMarkers.clicked.connect(self.videoHideMarkers_clicked)
 		self.videoPlay.clicked.connect(self.videoPlay_clicked)
-		self.videoFPS.valueChanged.connect(self.videoFPS_valueChanged)
 		self.videoFrames.valueChanged.connect(self.videoFrames_valueChanged)
-		self.videoProgress.valueChanged.connect(
-			self.videoProgress_valueChanged)
-		self.videoProgress.sliderReleased.connect(
-			self.videoProgress_sliderReleased)
+		self.videoProgress.valueChanged.connect(self.videoProgress_valueChanged)
+		self.videoProgress.sliderReleased.connect(self.videoProgress_sliderReleased)
 		self._timer = QtCore.QTimer(self)
-		self._timer.timeout.connect(self.updateFrame)
+		self._timer.timeout.connect(self.update_frame)
 
 		self.form.horizontalSlider.valueChanged.connect(self.__rotateZ)
 		self.form.verticalSlider.valueChanged.connect(self.__rotateX)
@@ -93,9 +80,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self._currentFrame = None
 		# Controls if anything is drawn on the video
 		self._draw_on_video = True
-		self._videoFPS = None  # Sets the FPS rate at which the video is played
-
-		self.view3D = False
+	
+		self.view_in_3D = False
 
 
 
@@ -106,6 +92,11 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def __rotateZ(self):
 		self._videoWidget.rotateZ = self.form.horizontalSlider.value()
 		self.refresh()
+
+	@property
+	def speed(self): return self._speed
+	@speed.setter
+	def speed(self, value): self._speed = value
 
 	@property
 	def onDoubleClick(self): return self._videoWidget.onDoubleClick
@@ -132,18 +123,21 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def onEndDrag(self, value): self._videoWidget.onEndDrag = value
 
 	@property
-	def view3D(self): return self._videoWidget.onEndDrag
+	def view_in_3D(self):
+		return self._videoWidget.onEndDrag
 
-	@view3D.setter
-	def view3D(self, value):
+	@view_in_3D.setter
+	def view_in_3D(self, value):
 		self.form.horizontalSlider.setVisible(value)
 		self.form.verticalSlider.setVisible(value)
 
 	@property
-	def onKeyRelease(self): return self._videoWidget.onKeyRelease
+	def on_key_release(self):
+		return self._videoWidget.onKeyRelease
 
-	@onKeyRelease.setter
-	def onKeyRelease(self, value): self._videoWidget.onKeyRelease = value
+	@on_key_release.setter
+	def on_key_release(self, value):
+		self._videoWidget.onKeyRelease = value
 
 	@property
 	def isPainted(self): return self._draw_on_video
@@ -151,7 +145,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def processFrame(self, frame):
 		return frame
 
-	def updateFrame(self):
+	def update_frame(self):
+		if self.speed>1:  self.video_index += self.speed
 		(success, frame) = self.value.read()
 
 		if frame is not None:
@@ -170,41 +165,21 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 			if self._updateVideoFrame:
 				self.videoFrames.setValue(currentFrame)
 
-	def videoHideMarkers_clicked(self):
-		""" Slot to hide or show stuff drawn on the video."""
-		if self.videoHideMarkers.isChecked():
-			self._draw_on_video = True
-		else:
-			self._draw_on_video = False
-		self.refresh()
-		# print "--->", self._draw_on_video
 
 	def videoPlay_clicked(self):
 		"""Slot for Play/Pause functionality."""
-		if self.videoPlay.isChecked():
-			timeout_interval = (1000 / self._videoFPS)
-			self._timer.start(timeout_interval)
+		if self.is_playing:
+			self.stop()
 		else:
-			self._timer.stop()
+			self.play()
 
-	def pausePlay(self):
-		if not self.videoPlay.isChecked():
-			self.videoPlay.setChecked(True)
-			timeout_interval = (1000 / self._videoFPS)
-			self._timer.start(timeout_interval)
-		else:
-			self.videoPlay.setChecked(False)
-			self._timer.stop()
+	def play(self): 
+		self.videoPlay.setChecked(True)
+		self._timer.start( 1000.0/float(self.fps+1) )
 
-	def videoFPS_valueChanged(self):
-		"""Get FPS rate from loaded video."""
-		self._videoFPS = self.videoFPS.value()
-		timeout_interval = (1000 / self._videoFPS)
-		self._timer.setInterval(timeout_interval)
-
-	def save(self, data): pass
-
-	def load(self, data): pass
+	def stop(self):
+		self.videoPlay.setChecked(False)
+		self._timer.stop()
 
 	def refresh(self):
 		if self._currentFrame is not None:
@@ -225,7 +200,6 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	def videoProgress_valueChanged(self):
 		milli = self._value.get(0)
-		milli -= 1000.0 / self._value.get(5)
 		(minutes, seconds, milliseconds) = self.convertFrameToTime(milli)
 		self.videoTime.setText(
 			"%02d:%02d:%03d" % (minutes, seconds, milliseconds))
@@ -241,17 +215,18 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self._updateVideoFrame = True
 
 	def videoFrames_valueChanged(self, i):
-		if not self.isPlaying():
+		if not self.is_playing:
 			jump2Frame = self.videoProgress.value()
 			diff = jump2Frame - i
 
 			self._value.set(1, jump2Frame - diff)
 			self._updateVideoFrame = False
-			self.updateFrame()
+			self.update_frame()
 			self._updateVideoFrame = True
 
-	def isPlaying(self):
-		return self._timer.isActive()
+	@property
+	def is_playing(self): return self._timer.isActive()
+
 
 	def updateControl(self):
 		if self._value:
@@ -277,9 +252,6 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		else:
 			self._value = value
 
-		self.fps = self._value.get(5)
-		self.logger.debug("Open video with %s fps", '{0}'.format(self._value.get( 5)))
-
 		if self._value and value != 0:
 			self.videoProgress.setMinimum(0)
 			self.videoProgress.setValue(0)
@@ -296,33 +268,6 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.refresh()
 
 
-	@property
-	def startFrame(self):
-		if self._value:
-			return self._value.startFrame
-		else:
-			return -1
-
-	@startFrame.setter
-	def startFrame(self, value):
-		if self._value:
-			self._value.startFrame = value
-			self.videoProgress.setMinimum(value)
-
-	@property
-	def endFrame(self):
-		if self._value:
-			return self._value.startFrame
-		else:
-			return -1
-
-	@endFrame.setter
-	def endFrame(self, value):
-
-		if self._value:
-			self._value.endFrame = value
-			self.videoProgress.setValue(self._value.startFrame)
-			self.videoProgress.setMaximum(value)
 
 	@property
 	def video_index(self): return int(self._value.get(1)) - 1
@@ -345,23 +290,17 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		QApplication.processEvents()
 
 	@property
-	def fps(self): return self._videoFPS
-
-	@fps.setter
-	def fps(self, value):
-		self.form.videoFPS.setValue(int(round(value)))
-		self._videoFPS = value
-		if math.isnan(self._videoFPS):
-			self._videoFPS = 15.0
+	def fps(self): 
+		"""
+			Return the video frames per second
+		"""
+		return self._value.get(5)
 
 	@property
-	def show_markers(self): return self._draw_on_video
+	def help_text(self): return self._videoWidget._helpText
 
-	@property
-	def helpText(self): return self._videoWidget._helpText
-
-	@fps.setter
-	def helpText(self, value): self._videoWidget._helpText = value
+	@help_text.setter
+	def help_text(self, value): self._videoWidget._helpText = value
 
 	@property
 	def form(self): return self

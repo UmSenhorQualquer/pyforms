@@ -9,8 +9,8 @@ from pyforms.Controls import ControlText
 
 class GraphsProperties(BaseWidget):
 
-	def __init__(self, timelineWidget=None):
-		super(GraphsProperties, self).__init__('Graphs properties')
+	def __init__(self, timelineWidget=None, parentWindow=None):
+		super(GraphsProperties, self).__init__('Graphs properties', parentWindow=parentWindow)
 		self.setContentsMargins(10, 10, 10, 10)
 		self._timeline = timelineWidget
 
