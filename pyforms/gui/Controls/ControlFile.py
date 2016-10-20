@@ -15,6 +15,7 @@ __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
 
+from pysettings import conf
 
 class ControlFile(ControlText):
 
@@ -23,6 +24,7 @@ class ControlFile(ControlText):
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)        
         self._form.pushButton.clicked.connect(self.pushButton_clicked)
+        self._form.pushButton.setIcon(conf.PYFORMS_ICON_FILE_OPEN)
 
     def pushButton_clicked(self):
         value = str(QFileDialog.getOpenFileName(

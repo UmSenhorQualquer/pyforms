@@ -28,8 +28,10 @@ class TimelineWidget(QtGui.QWidget):
 
 	_defautcolor = QtGui.QColor(100, 100, 255)
 
-	def __init__(self, *args, **kwargs):
-		super(TimelineWidget, self).__init__(*args, **kwargs)
+	def __init__(self, parent_control):
+		super(TimelineWidget, self).__init__()
+
+		self.parent_control = parent_control 
 
 		# self.setFocusPolicy(QtCore.Qt.StrongFocus)
 		# self.grabKeyboard()
@@ -422,6 +424,12 @@ class TimelineWidget(QtGui.QWidget):
 	def mouseMoveEvent(self, event):
 		super(TimelineWidget, self).mouseMoveEvent(event)
 
+		selected_chart = self.graphs_properties.selected_chart
+		if selected_chart: 
+			selected_chart.mouse_move_evt( event, 0, self.height() )
+		else:
+			self.graphs_properties.coordenate_text = None
+
 		# Do nothing if no event bar is selected
 		if self._selected is None:
 			return
@@ -530,3 +538,7 @@ class TimelineWidget(QtGui.QWidget):
 	@fps.setter
 	def fps(self, value): self._video_fps = value
 
+	@property
+	def graphs_properties(self):
+		return self.parent_control._graphs_prop_win
+	

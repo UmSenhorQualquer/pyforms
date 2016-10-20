@@ -48,15 +48,23 @@ class CsvParserDialog(BaseWidget):
 
     @property
     def frameColumn(self): return self._frameCol.value
+    @frameColumn.setter
+    def frameColumn(self, value): self._frameCol.value = value
 
     @property
     def xColumn(self): return self._xCol.value
+    @xColumn.setter
+    def xColumn(self, value): self._xCol.value = value
 
     @property
     def yColumn(self): return self._yCol.value
+    @yColumn.setter
+    def yColumn(self, value): self._yCol.value = value
 
     @property
     def zColumn(self): return self._zCol.value
+    @zColumn.setter
+    def zColumn(self, value): self._zCol.value = value
 
     @property
     def loadButton(self): return self._loadButton
@@ -107,6 +115,10 @@ class CsvParserDialog(BaseWidget):
                     self._filePreview += row
                     if i >= 10:
                         break
+
+    def load(self): 
+        self.__refreshPreview()
+        self._loadButton.value()
 
 ##################################################################################################################
 ##################################################################################################################

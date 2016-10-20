@@ -21,7 +21,7 @@ from PyQt4.QtGui import QFont
 from PyQt4.QtGui import QColor
 from PyQt4.QtCore import Qt
 
-from pyforms import conf
+from pysettings import conf
 
 
 class ControlCodeEditor(ControlBase):
@@ -61,10 +61,7 @@ class ControlCodeEditor(ControlBase):
 
         self.form.font_size.currentIndexChanged.connect(self.__font_size_index_changed)
 
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.qApp.style().standardPixmap(QtGui.QStyle.SP_DialogSaveButton), mode=QtGui.QIcon.Normal, state=QtGui.QIcon.On)
-        icon.addPixmap(QtGui.qApp.style().standardPixmap(QtGui.QStyle.SP_DialogSaveButton), mode=QtGui.QIcon.Normal, state=QtGui.QIcon.Off)
-        self.form.save_button.setIcon(icon)
+        self.form.save_button.setIcon(conf.PYFORMS_ICON_CODEEDITOR_SAVE)
 
         self.lexer = QsciLexerPython
 

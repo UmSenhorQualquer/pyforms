@@ -32,7 +32,7 @@ setup(
 
 	packages=[
 		'pyforms',
-		'pyforms.Utils',
+		'pyforms.utils',
 		'pyforms.terminal',
 		'pyforms.terminal.Controls',
 		'pyforms.gui',

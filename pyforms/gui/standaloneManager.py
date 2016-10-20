@@ -47,6 +47,8 @@ class StandAloneContainer(QtGui.QMainWindow):
 			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
 		w.initForm()
+		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+
 		self.setCentralWidget(w)
 		self.setWindowTitle(w.title)
 
@@ -78,7 +80,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 					dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 									 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
-					#dock.layout().setMargin(5)
+					widget.form.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)
@@ -92,7 +94,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 								 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-				#dock.layout().setMargin(5)
+				widget.form.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 				# print dock.objectName(), 2
 				dock.setObjectName(name)
@@ -167,8 +169,12 @@ def execute_test_file(myapp):
 		exec(code, global_vars, local_vars)
 
 def startApp(ClassObject, geometry=None):
+	from pysettings import conf
 
 	app = QtGui.QApplication(sys.argv)
+
+	conf += 'pyforms.gui.settings'
+
 	mainwindow = StandAloneContainer(ClassObject)
 
 	myapp = mainwindow.centralWidget()

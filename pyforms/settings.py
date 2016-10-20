@@ -1,6 +1,7 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+
 import logging, os
 
 PYFORMS_MODE                        = os.environ.get('PYFORMS_MODE', 'GUI')

@@ -13,6 +13,7 @@ from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWid
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
 from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
 from pyforms.gui.Controls.ControlEventTimeline.GraphsProperties import GraphsProperties
+from pysettings import conf
 
 __author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
 __credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
@@ -32,7 +33,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		QtGui.QWidget.__init__(self)
 		ControlBase.__init__(self, label, defaultValue, **kwargs)
 		self._max = 100
-		self._graphs_properties_win = None
+		self._graphs_prop_win = GraphsProperties(self._time, self)
+
 
 		# Popup menus that only show when clicking on a TIMELINEDELTA object
 		self._deltaLockAction = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
@@ -46,14 +48,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 		# General righ click popup menus
 		self.addPopupMenuOption("Set track properties...", self.__setLinePropertiesEvent)
-		self.addPopupMenuOption("Set graphs properties", self.__set_graphs_properties)
-		self.addPopupMenuOption("-")
-		self.addPopupSubMenuOption("Import/Export", {
-			'Export to CSV': self.__export,
-			'Import from CSV': self.__import,
-			'-':None,
-			'Export to CSV Matrix': self.__export_2_csv_matrix,            
-		})
+		self.addPopupMenuOption("Set graphs properties", self.show_graphs_properties)
 		self.addPopupMenuOption("-")
 		self.addPopupSubMenuOption("Clean", {
 			'Current line': self.__cleanLine,
@@ -78,9 +73,10 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		scrollarea.keyPressEvent = self.__scrollAreaKeyPressEvent
 		scrollarea.keyReleaseEvent = self.__scrollAreaKeyReleaseEvent
 		vlayout.addWidget(scrollarea)
+		#vlayout.setContentsMargins(5, 5, 5, 5)
 
 		# The timeline widget
-		widget = TimelineWidget()
+		widget = TimelineWidget(self)
 		widget._scroll = scrollarea
 		# widget.setMinimumHeight(1000)
 		scrollarea.setWidget(widget)
@@ -104,38 +100,27 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		slider.setPageStep(1)
 		slider.setTickPosition(QtGui.QSlider.NoTicks)  # TicksBothSides
 		slider.valueChanged.connect(self.__scaleSliderChange)
-		slider_icon_zoom_in = QtGui.QPixmap(os.path.join(rootPath, "..", "uipics", "zoom_in.png"))
-		slider_icon_zoom_out = QtGui.QPixmap(os.path.join(rootPath, "..", "uipics", "zoom_out.png"))
-		slider_label_zoom_in = QtGui.QLabel()
-		slider_label_zoom_out = QtGui.QLabel()
-		slider_label_zoom_in.setPixmap(slider_icon_zoom_in)
-		slider_label_zoom_out.setPixmap(slider_icon_zoom_out)
-		# slider_vlayout = QtGui.QVBoxLayout()
-		# slider_hlayout = QtGui.QHBoxLayout()
-		# slider_hlayout.addWidget(slider_label_zoom_out)
-		# slider_hlayout.addStretch()
-		# slider_hlayout.addWidget(QtGui.QLabel("Zoom"))
-		# slider_hlayout.addStretch()
-		# slider_hlayout.addWidget(slider_label_zoom_in)
-		# slider_vlayout.addWidget(slider)
-		# slider_vlayout.addLayout(slider_hlayout)
-		# hlayout.addLayout(slider_vlayout)
+		
+		slider_label_zoom_in 	= QtGui.QLabel()
+		slider_label_zoom_out 	= QtGui.QLabel()
+		slider_label_zoom_in.setPixmap(conf.PYFORMS_PIXMAP_EVENTTIMELINE_ZOOM_IN)
+		slider_label_zoom_out.setPixmap(conf.PYFORMS_PIXMAP_EVENTTIMELINE_ZOOM_OUT)
+		
+
 		self._zoomLabel = QtGui.QLabel("100%")
 		hlayout.addWidget(self._zoomLabel)
 		hlayout.addWidget(slider_label_zoom_out)
 		hlayout.addWidget(slider)
 		hlayout.addWidget(slider_label_zoom_in)
-
+		#hlayout.setContentsMargins(5, 0, 5, 5)
 		# Import/Export Buttons
 		btn_import = QtGui.QPushButton("Import")
-		btn_import_icon = QtGui.QIcon(
-			os.path.join(rootPath, "..", "uipics", "page_white_get.png"))
-		btn_import.setIcon(btn_import_icon)
+		
+		btn_import.setIcon(conf.PYFORMS_ICON_EVENTTIMELINE_IMPORT)
 		btn_import.clicked.connect(self.__import)
 		btn_export = QtGui.QPushButton("Export")
-		btn_export_icon = QtGui.QIcon(
-			os.path.join(rootPath, "..", "uipics", "page_white_put.png"))
-		btn_export.setIcon(btn_export_icon)
+
+		btn_export.setIcon(conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT)
 		btn_export.clicked.connect(self.__export)
 		# importexport_vlayout = QtGui.QVBoxLayout()
 		# importexport_vlayout.addWidget(btn_import)
@@ -165,6 +150,11 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	def addPeriod(self, value, track=0, color=None):
 		self._time.addPeriod(value, track, color)
 
+	def import_chart(self, filename, frame_col=0, val_col=1):
+		self.__import()
+		self._import_window.import_chart(filename, frame_col, val_col)
+		
+
 	##########################################################################
 	#### EVENTS ##############################################################
 	##########################################################################
@@ -174,10 +164,9 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 			action.setVisible(
 				True) if self._time._selected is not None else action.setVisible(False)
 
-	def __set_graphs_properties(self):
-		if self._graphs_properties_win is None: self._graphs_properties_win = GraphsProperties(self._time, self)
-
-		self._graphs_properties_win.show()
+	def show_graphs_properties(self):		
+		self._graphs_prop_win.show()
+		self._time.repaint()
 
 	def __setLinePropertiesEvent(self):
 		"""
@@ -233,8 +222,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 	def __import(self):
 		"""Import annotations from a file."""
-		win = ImportWindow(self)
-		win.show()
+		if not hasattr(self, '_import_window'): self._import_window = ImportWindow(self)
+		self._import_window.show()
 
 	def import_csv(self, csvfile):
 		# If there are annotation in the timeline, show a warning
@@ -255,6 +244,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 		self._time.import_csv(csvfile)
 		print("Annotations file imported: {:s}".format(filename))
+
 
 	def __export(self):
 		"""Export annotations to a file."""

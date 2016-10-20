@@ -12,6 +12,7 @@ from PyQt4 import uic
 from PyQt4 import QtCore, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.Utils.tools as tools
+from pysettings import conf
 
 try:
 	import cv2
@@ -52,15 +53,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 
 		# Define the icon for the Play button
-		icon = QtGui.QIcon()
-		pixmapOff = QtGui.qApp.style().standardPixmap(
-			QtGui.QStyle.SP_MediaPlay)
-		pixmapOn = QtGui.qApp.style().standardPixmap(
-			QtGui.QStyle.SP_MediaPause)
-		icon.addPixmap(
-			pixmapOff, mode=QtGui.QIcon.Normal, state=QtGui.QIcon.Off)
-		icon.addPixmap(pixmapOn, mode=QtGui.QIcon.Normal, state=QtGui.QIcon.On)
-		self.videoPlay.setIcon(icon)
+		
+		self.videoPlay.setIcon(conf.PYFORMS_ICON_VIDEOPLAYER_PAUSE_PLAY)
 
 		
 		
