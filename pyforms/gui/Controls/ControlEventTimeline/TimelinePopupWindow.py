@@ -7,7 +7,7 @@
 
 from PyQt4 import uic
 from PyQt4 import QtCore, QtGui
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 # from pyforms.gui.BaseWidget import BaseWidget
 # from pyforms.gui.Controls.ControlButton import ControlButton
 # from pyforms.gui.Controls.ControlCombo import ControlCombo

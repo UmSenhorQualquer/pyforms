@@ -13,7 +13,7 @@
 
 import logging
 from pyforms.gui.Controls.ControlBase import ControlBase
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 from PyQt4 import uic, QtGui
 from PyQt4.Qsci import QsciScintilla, QsciLexerPython  # pylint: disable=no-name-in-module
 from PyQt4.QtGui import QFontMetrics

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 from PyQt4 import uic
 from pyforms.gui.Controls.ControlBase import ControlBase
 

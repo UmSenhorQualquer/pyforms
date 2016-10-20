@@ -6,7 +6,7 @@
 """
 
 from PyQt4 import uic, QtGui, QtCore
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 
 __author__ = "Ricardo Ribeiro"
 __copyright__ = ""

@@ -11,7 +11,7 @@ import logging
 from PyQt4 import uic
 from PyQt4 import QtCore, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 from pysettings import conf
 
 try:

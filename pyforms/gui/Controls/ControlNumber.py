@@ -12,7 +12,7 @@ __status__      = "Development"
 
 import os
 import pickle
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 from PyQt4 import uic, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
 

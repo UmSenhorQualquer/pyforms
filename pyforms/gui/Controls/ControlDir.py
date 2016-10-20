@@ -11,7 +11,7 @@ __status__      = "Development"
 
 
 from pyforms.gui.Controls.ControlText import ControlText
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 from PyQt4 import uic
 from PyQt4 import QtGui
 

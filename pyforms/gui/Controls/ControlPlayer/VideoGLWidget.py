@@ -6,7 +6,7 @@
 """
 
 import logging
-import pyforms.Utils.tools as tools
+import pyforms.utils.tools as tools
 import math
 from PyQt4 import uic
 from PyQt4 import QtGui
