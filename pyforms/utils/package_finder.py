@@ -1,6 +1,6 @@
 import importlib, re
 
-#import logging; logger = logging.getLogger(__name__)
+import logging; logger = logging.getLogger(__name__)
 
 def get_module_and_class(plugin_info):
 	"""

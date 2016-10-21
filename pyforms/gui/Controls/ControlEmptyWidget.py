@@ -27,6 +27,8 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 		layout = QtGui.QVBoxLayout(); layout.setMargin(0)
 		self.form.setLayout( layout )
 
+
+
 	def initForm(self):
 		pass
 
@@ -40,8 +42,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self, value)		
-		self.__clearLayout()
-			
+		self.__clearLayout()			
 
 		if value is None or value=='':  return 
 		
