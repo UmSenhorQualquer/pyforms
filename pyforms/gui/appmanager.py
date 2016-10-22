@@ -9,7 +9,7 @@ class Container(object):
 	def __init__(self, ClassObject):
 		
 		self.logger = logging.getLogger('pyforms')
-		
+
 		self._algorithm = ClassObject()
 		self._algorithm.initForm()
 		form_path = os.path.join(tools.get_object_class_path( Container ), 'mainWindow.ui')

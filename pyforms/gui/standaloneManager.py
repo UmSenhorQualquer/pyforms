@@ -13,7 +13,7 @@
 '''
 
 import sys
-import os
+import os, types
 import inspect, platform
 import logging
 from PyQt4 import QtGui, QtCore
@@ -37,8 +37,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 	def __init__(self, ClassObject):
 		super(QtGui.QMainWindow, self).__init__()
-
-		
 
 		w = ClassObject()
 		self._widget = w
@@ -208,3 +206,4 @@ def startApp(ClassObject, geometry=None):
 				exec(code, global_vars, local_vars)
 
 	app.exec_()
+	return myapp
