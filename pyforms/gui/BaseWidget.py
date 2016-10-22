@@ -11,8 +11,7 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-from pyforms.gui.Controls.ControlBase import ControlBase
-from pyforms.gui.Controls.ControlProgress import ControlProgress
+
 import os
 import json
 import subprocess
@@ -20,7 +19,8 @@ import time, sys
 from datetime import datetime, timedelta
 from PyQt4 import QtGui, QtCore
 from pysettings import conf
-
+from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.Controls.ControlProgress import ControlProgress
 
 class FlushFile(object):
 	"""Write-only flushing wrapper for file-type objects."""

@@ -11,7 +11,6 @@
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
 
-import pyforms.utils.tools as tools
 from PyQt4 import uic, QtCore, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
 

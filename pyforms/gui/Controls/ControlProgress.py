@@ -11,7 +11,6 @@ __status__      = "Development"
 
 
 from pyforms.gui.Controls.ControlBase import ControlBase
-import pyforms.utils.tools as tools
 from PyQt4 import uic, QtGui
 
 class ControlProgress(ControlBase):
@@ -27,7 +26,9 @@ class ControlProgress(ControlBase):
 		ControlBase.__init__(self, label, defaultValue)
 		
 	def initForm(self):
-		control_path = tools.getFileInSameDirectory(__file__,"progressInput.ui")
+
+		module_path = os.path.abspath(os.path.dirname(__file__))
+		control_path = os.path.join(module_path, "progressInput.ui")
 		self._form = uic.loadUi( control_path )
 		self._form.horizontalSlider.setMinimum(self._min)
 		self._form.horizontalSlider.setMaximum(self._max)
