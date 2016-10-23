@@ -9,7 +9,7 @@ __maintainer__  = "Ricardo Ribeiro"
 __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
-
+import os
 from pyforms.gui.Controls.ControlBase import ControlBase
 from PyQt4 import uic, QtGui
 

@@ -268,6 +268,10 @@ class ControlBoundingSlider(ControlBase):
     def __init__(self, label = "", defaultValue = [20,40], min = 0, max = 100, horizontal=False, **kwargs):
         self._horizontal = horizontal
         ControlBase.__init__(self, label, defaultValue, **kwargs)
+        self.min = min
+        self.max = max
+        self.value = defaultValue
+        
         
     def initForm(self):
         self._form = GaugeWidgetHorizontal() if self._horizontal else GaugeWidgetVertical()

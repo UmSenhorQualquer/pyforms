@@ -19,12 +19,12 @@ class ControlToolBox(ControlBase):
         
         for item in value: 
             if isinstance(item, tuple):
-                widget = QtGui.QWidget(); layout = QtGui.QVBoxLayout(); 
+                widget = QtGui.QWidget(self.form); layout = QtGui.QVBoxLayout(); 
                 layout.setMargin(0); widget.setLayout( layout )
 
                 for e in item[1]:
                     if isinstance(e, tuple):
-                        hwidget = QtGui.QWidget(); hlayout = QtGui.QHBoxLayout(); 
+                        hwidget = QtGui.QWidget(self.form); hlayout = QtGui.QHBoxLayout(); 
                         hlayout.setMargin(0); hwidget.setLayout( hlayout )
                         for ee in e: hlayout.addWidget( ee.form )
                         widget.layout().addWidget( hwidget )

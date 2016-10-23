@@ -148,8 +148,8 @@ class ControlList(ControlBase, QWidget):
         for i in range(0, len(other)):
             v = other[i]
             if isinstance(v, QWidget):
-                v.show()
                 self.tableWidget.setCellWidget(index, i, v)
+                v.show()
                 self.tableWidget.setRowHeight(index,v.height())             
             else:
                 args = [str(v)] if not hasattr(v, 'icon') else [QIcon(v.icon), str(v)]
