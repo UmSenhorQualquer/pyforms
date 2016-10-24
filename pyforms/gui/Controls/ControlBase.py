@@ -47,21 +47,20 @@ class ControlBase(object):
 	############ Funcions ####################################################
 	##########################################################################
 
-	def load_control(self, data):
+	def load(self, data):
 		"""
 		Load a value from the dict variable
 		@param data: dictionary with the value of the Control
 		"""
-		if 'value' in data:
-			self.value = data['value']
+		if 'value' in data: self.value = data['value']
 
-	def save_control(self, data):
+	def save(self, data):
 		"""
 		Save a value to dict variable
 		@param data: dictionary with to where the value of the Control will be added
 		"""
-		if self.value:
-			data['value'] = self.value
+		if self.value: data['value'] = self.value
+		return data
 
 	def show(self):
 		"""

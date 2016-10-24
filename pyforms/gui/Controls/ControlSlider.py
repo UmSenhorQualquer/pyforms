@@ -42,7 +42,7 @@ class ControlSlider(ControlBase):
 		self._updateSlider = True
 
 	def load(self, data):
-		if 'value' in data: self.value = data['value']
+		if 'value' in data: self.value = int(data['value'])
 		
 
 	def save(self, data):

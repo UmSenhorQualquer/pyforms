@@ -316,3 +316,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@property
 	def image_height(self): return self._value.get(4)
+
+
+	def save(self, data={}): return data
+
+	def load(self, data): pass

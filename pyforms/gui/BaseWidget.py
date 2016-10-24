@@ -418,11 +418,12 @@ class BaseWidget(QtGui.QFrame):
 	@uid.setter
 	def uid(self, value): self._uid = value
 
-	def save(self, data):
+	def save(self, data={}):
 		allparams = self.formControls
 		for name, param in allparams.items():
 			data[name] = {}
 			param.save(data[name])
+		return data
 
 	def saveWindow(self):
 		allparams = self.formControls

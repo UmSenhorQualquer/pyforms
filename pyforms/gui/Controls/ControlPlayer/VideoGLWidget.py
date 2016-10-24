@@ -169,14 +169,14 @@ class VideoGLWidget(QGLWidget):
 
 			self._pending_frames = None
 
-		if len(self.textures) > 0:
+		if len(self.image_2_display) > 0:
 			
 			GL.glTranslatef(0, 0, -1)
 			GL.glTranslatef(0, 0, -self.zoom)
 			
-			if len(self.textures)>1: 
+			if len(self.image_2_display)>1: 
 				#in case of having more images to display, it centers the images
-				translate_x = float( (len(self.textures)-1) * self._width) / 2.0
+				translate_x = float( (len(self.image_2_display)-1) * self._width) / 2.0
 				GL.glTranslatef(-translate_x, 0, 0)
 
 			if self._point is not None:
@@ -222,7 +222,7 @@ class VideoGLWidget(QGLWidget):
 				self._x -= (self._last_mouse_gl_pos[0]-self._glX)
 				self._y -= (self._last_mouse_gl_pos[1]-self._glY)
 
-			for texture_index in range(0, len(self.textures)):
+			for texture_index in range(0, len(self.image_2_display)):
 				if texture_index>0: GL.glTranslatef(self._width, 0, 0)
 				GL.glBindTexture(GL.GL_TEXTURE_2D, self.textures[texture_index])
 
@@ -245,6 +245,8 @@ class VideoGLWidget(QGLWidget):
 
 		if self._move_img: 
 			self._last_mouse_gl_pos = self._glX, self._glY, self._glZ
+
+		
 
 	def reset(self):
 		self.textures = []
@@ -272,9 +274,7 @@ class VideoGLWidget(QGLWidget):
 
 		# self._x = -self._width/2
 
-		if len(self.textures) > len(frames):
-			for i in range(len(self.textures) - len(frames)):
-				GL.glDeleteTextures(self.textures.pop())
+		
 
 		self.image_2_display = frames
 		self._pending_frames = frames
