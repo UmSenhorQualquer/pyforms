@@ -154,6 +154,13 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self.__import()
 		self._import_window.import_chart(filename, frame_col, val_col)
 		
+	def import_chart_file(self, filename, separator=';', ignore_rows=0):
+		csvfile = open(filename, 'U')
+		spamreader = csv.reader(csvfile, delimiter=separator)
+		for i in range(ignore_rows): next(spamreader, None)
+		self._time.importchart_csv(spamreader)
+		csvfile.close()
+			
 
 	##########################################################################
 	#### EVENTS ##############################################################
@@ -386,3 +393,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 	@property
 	def tracks(self): return self._time.tracks
+
+	@property 
+	def charts(self):
+		return self._graphs_prop_win.charts

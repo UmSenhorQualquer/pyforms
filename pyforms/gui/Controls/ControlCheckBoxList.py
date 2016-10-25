@@ -40,6 +40,16 @@ class ControlCheckBoxList(ControlBase):
         self._form.listWidget.addItem(item)        
         return self
 
+    def __sub__(self, other):
+
+        if isinstance(other, int):
+            if other < 0:
+                indexToRemove = self._form.listWidget.currentRow()
+            else:
+                indexToRemove = other
+            self._form.listWidget.takeItem(indexToRemove)
+        return self
+
     def clear(self):
         self._form.listWidget.clear()
 

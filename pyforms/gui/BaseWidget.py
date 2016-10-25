@@ -443,10 +443,17 @@ class BaseWidget(QtGui.QFrame):
 
 	def load(self, data):
 		allparams = self.formControls
-		for name, param in allparams.items():
-			if name in data:
-				param.load(data[name])
-		self.initForm()
+
+		if hasattr(self,'load_order'):
+			for name in self.load_order:
+				param = allparams[name]
+				if name in data:
+					param.load(data[name])
+		else:
+			for name, param in allparams.items():
+				if name in data:
+					param.load(data[name])
+		#self.initForm()
 
 	def loadWindow(self):
 		filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')

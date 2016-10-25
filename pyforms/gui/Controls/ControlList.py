@@ -268,9 +268,8 @@ class ControlList(ControlBase, QWidget):
 	@value.setter
 	def value(self, value):
 		self.clear()
-		for row in value:
-			self += row
-
+		for row in value: self += row
+		
 	# TODO: implement += on self.value? I want to add a list of tuples to
 	# self.value
 

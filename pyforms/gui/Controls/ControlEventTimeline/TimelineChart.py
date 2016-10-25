@@ -133,3 +133,9 @@ class TimelineChart(object):
 		else:
 			self._widget.graphs_properties.coordenate_text = None
 		
+
+	def export_2_file(self, filename):
+		with open(filename, 'w') as outfile:
+			outfile.write(';'.join(['frame','value'])+'\n' )
+			for x,y in self._data:
+				outfile.write(';'.join([str(x),str(y)])+'\n' )

@@ -16,6 +16,7 @@ class CsvParserDialog(BaseWidget):
         # Definition of the forms fields
         self._filename = ControlFile('CSV File')
         self._separator = ControlText('Separator', ';')
+        self._startingrow = ControlNumber('Starting row', 0)
         self._frameCol = ControlNumber('Frame column', 0, 0, 100)
         self._xCol = ControlNumber('X column', 1, 0, 100)
         self._yCol = ControlNumber('Y column', 2, 0, 100)
@@ -23,9 +24,10 @@ class CsvParserDialog(BaseWidget):
         self._filePreview = ControlList('Preview')
         self._loadButton = ControlButton('Load')
 
-        self._formset = ['_filename', ('_separator', '_frameCol', '_xCol', '_yCol', '_zCol', '_loadButton'), '_filePreview']
+        self._formset = [('_filename','_startingrow'), ('_separator', '_frameCol', '_xCol', '_yCol', '_zCol', '_loadButton'), '_filePreview']
         self._separator.changed = self.__refreshPreview
         self._filename.changed  = self.__refreshPreview
+        self._startingrow.changed = self.__refreshPreview
 
         #self._filename.value = '/home/ricardo/Downloads/2012.12.01_13.48_3D_POSITIONS_version_03.06.2015.csv'
 
@@ -45,6 +47,11 @@ class CsvParserDialog(BaseWidget):
 
     @property
     def separator(self): return self._separator.value
+
+    @property
+    def starting_row(self): return self._startingrow.value
+    @starting_row.setter
+    def starting_row(self, value): self._startingrow.value = value
 
     @property
     def frameColumn(self): return self._frameCol.value
@@ -83,7 +90,7 @@ class CsvParserDialog(BaseWidget):
 
             csvfile = open(self._filename.value, 'U')
             self._spamreader = csv.reader(csvfile, delimiter=self._separator.value)
-
+            for i in range(int(self._startingrow.value)): next(self._spamreader, None)  # skip the headers
             self._cols = [self.frameColumn]
             if self.xField.visible:
                 self._cols.append(self.xColumn)
@@ -109,6 +116,7 @@ class CsvParserDialog(BaseWidget):
         if self._filename.value != None and self._filename.value != '':
             with open(self._filename.value, 'U') as csvfile:
                 spamreader = csv.reader(csvfile, delimiter=self._separator.value)
+                for i in range(int(self._startingrow.value)): next(spamreader, None)  # skip the headers
                 self._filePreview.value = []
                 self._filePreview.horizontalHeaders = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", ]
                 for i, row in enumerate(spamreader):
