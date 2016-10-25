@@ -142,7 +142,8 @@ class ControlTree(ControlBase, QTreeWidget):
 
 	@property
 	def value(self):
-		return [self.child(i) for i in range(self.invisibleRootItem().childCount())]
+		root = self.invisibleRootItem()
+		return [root.child(i) for i in range(root.childCount())]
 
 	@value.setter
 	def value(self, value):
@@ -159,7 +160,7 @@ class ControlTree(ControlBase, QTreeWidget):
 	@property
 	def iconsize(self):
 		size = self.iconSize()
-		return size.width(), self.height()
+		return size.width(), size.height()
 
 	@iconsize.setter
 	def iconsize(self, value):
