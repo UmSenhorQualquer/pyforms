@@ -59,7 +59,6 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 		#The initForm should be called only for the BaseWidget
 
 		if isinstance(value, BaseWidget) and not value._formLoaded: 
-			print "passou aqui", value.title
 			value.initForm()
 		
 		

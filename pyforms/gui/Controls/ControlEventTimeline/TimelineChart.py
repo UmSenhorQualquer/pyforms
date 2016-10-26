@@ -18,7 +18,7 @@ __status__ = "Development"
 
 class TimelineChart(object):
 
-	def __init__(self, timeLineWidget, csvfileobject, color=QtGui.QColor(255, 0, 0)):
+	def __init__(self, timeLineWidget, color=QtGui.QColor(255, 0, 0), name='undefined'):
 		self._data = []
 		self._firstFrame    = None
 		self._graphMax      = None
@@ -27,10 +27,26 @@ class TimelineChart(object):
 		self._color         = color
 		self._zoom          = 1.0
 		self._top           = 0
-		self._name          = 'undefined'
+		self._name          = name
+
+	def import_data(self,data):
+		self._graphMax = 0
+		self._graphMin = 100000000000
+		self._data = []
+		last_x = 0
+		for x, y in data:
+			if y > self._graphMax: self._graphMax = y
+			if y < self._graphMin: self._graphMin = y
+
+			if int(x - last_x) > 1:
+				for i in range(0, int(x - last_x) + 1): self._data.append( (last_x + i, y) )
+			else:
+				self._data.append((x, y))
+			last_x = x	
+
+	def import_csv(self,csvfileobject):
 
 		data = [map(float, row) for row in csvfileobject]
-
 		self._graphMax = 0
 		self._graphMin = 100000000000
 		self._data = []
@@ -44,17 +60,6 @@ class TimelineChart(object):
 			else:
 				self._data.append((x, y))
 			last_x = x
-
-		"""
-		if self._graphMin < 0:
-			min2Zero = 0 - self._graphMin
-			
-			newData = []
-			for f, y in self._data:
-				newData.append((f, y + min2Zero))
-
-			self._data = newData
-		"""
 
 	#####################################################################################
 	###### PROPERTIES ###################################################################

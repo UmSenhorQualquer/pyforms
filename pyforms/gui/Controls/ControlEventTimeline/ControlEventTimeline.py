@@ -150,6 +150,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	def addPeriod(self, value, track=0, color=None):
 		self._time.addPeriod(value, track, color)
 
+	def add_chart(self, name, data): self._time.add_chart(name, data)
+
 	def import_chart(self, filename, frame_col=0, val_col=1):
 		self.__import()
 		self._import_window.import_chart(filename, frame_col, val_col)

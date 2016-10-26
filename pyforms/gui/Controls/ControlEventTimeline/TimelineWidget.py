@@ -137,12 +137,19 @@ class TimelineWidget(QtGui.QWidget):
 		for index, track in enumerate(self._tracks):
 			track.drawLabels(painter, index)
 
+	def add_chart(self, name, data):
+		chart = TimelineChart(self, color=self._chartsColors[len(self._charts)], name=name)
+		chart.import_data(data)
+		self._charts.append(chart)
+		self.repaint()
+		
 	def importchart_csv(self, csvfileobject):
-		chart = TimelineChart(
-			self, csvfileobject, color=self._chartsColors[len(self._charts)])
+		chart = TimelineChart(self, color=self._chartsColors[len(self._charts)])
+		chart.import_csv(csvfileobject)
 		self._charts.append(chart)
 
 		chart.name = "undefined name {0}".format(str(len(self._charts)))
+		self.repaint()
 
 	def import_csv(self, csvfileobject):
 		"""

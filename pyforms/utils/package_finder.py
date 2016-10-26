@@ -40,7 +40,7 @@ class PackageFinder(object):
 				class_def 	= getattr(module, class_name)
 				res.append(class_def)
 			except:
-				logger.error('Error importing model',exc_info=True)
+				logger.error('Error importing model {0}'.format(str(plugin)),exc_info=True)
 				pass
 
 		return res
