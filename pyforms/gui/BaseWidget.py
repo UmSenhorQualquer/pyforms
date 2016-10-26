@@ -420,9 +420,16 @@ class BaseWidget(QtGui.QFrame):
 
 	def save(self, data={}):
 		allparams = self.formControls
-		for name, param in allparams.items():
-			data[name] = {}
-			param.save(data[name])
+		
+		if hasattr(self,'load_order'):
+			for name in self.load_order:
+				param = allparams[name]
+				data[name] = {}
+				param.save(data[name])
+		else:
+			for name, param in allparams.items():
+				data[name] = {}
+				param.save(data[name])
 		return data
 
 	def saveWindow(self):

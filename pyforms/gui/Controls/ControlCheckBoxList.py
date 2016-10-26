@@ -31,23 +31,31 @@ class ControlCheckBoxList(ControlBase):
 
     def __add__(self, val):
         if isinstance( val, (tuple, list) ):
-            item=QtGui.QListWidgetItem(val[0])
-            if val[1]: item.setCheckState( QtCore.Qt.Checked)
-            else: item.setCheckState( QtCore.Qt.Unchecked)
+            item=QtGui.QListWidgetItem(str(val[0]))
+            item.value = val[0]
+            if val[1]: 
+                item.setCheckState( QtCore.Qt.Checked)
+            else: 
+                item.setCheckState( QtCore.Qt.Unchecked)
         else:
-            item=QtGui.QListWidgetItem(val )
+            item=QtGui.QListWidgetItem(str(val))
+            item.value = val
         
         self._form.listWidget.addItem(item)        
         return self
 
     def __sub__(self, other):
-
         if isinstance(other, int):
             if other < 0:
                 indexToRemove = self._form.listWidget.currentRow()
             else:
                 indexToRemove = other
             self._form.listWidget.takeItem(indexToRemove)
+        else:
+            for row in range( self.count ):
+                item = self._form.listWidget.item(row)
+                if item!=None and hasattr(item, 'value') and item.value==other:
+                    self._form.listWidget.takeItem(row)
         return self
 
     def clear(self):
@@ -84,7 +92,8 @@ class ControlCheckBoxList(ControlBase):
         results = []
         for row in range( self.count ):
             item = self._form.listWidget.item(row)
-            if item!=None and item.checkState()==QtCore.Qt.Checked : results.append( str(item.text()) )
+            if item!=None and item.checkState()==QtCore.Qt.Checked : 
+                results.append( item.value if hasattr(item, 'value') else str(item.text()) )
         return results
     
     @value.setter

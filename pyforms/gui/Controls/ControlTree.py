@@ -30,9 +30,9 @@ class ControlTree(ControlBase, QTreeWidget):
 	def initForm(self):
 		self.setSelectionBehavior(QAbstractItemView.SelectRows)
 		self.setUniformRowHeights(True)
-		self.setDragDropMode(QAbstractItemView.InternalMove)
-		self.setDragEnabled(True)
-		self.setAcceptDrops(True)
+		self.setDragDropMode(QAbstractItemView.NoDragDrop)
+		self.setDragEnabled(False)
+		self.setAcceptDrops(False)
 
 		self.model().dataChanged.connect(self.__itemChangedEvent)
 		self.itemDoubleClicked.connect(self.__itemDoubleClicked)
