@@ -78,7 +78,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 					dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 									 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
-					widget.form.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+					widget.form.layout().setMargin(widget.margin)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)
@@ -92,7 +92,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
 								 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
 				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-				widget.form.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+				widget.form.layout().setMargin(widget.margin)
 
 				# print dock.objectName(), 2
 				dock.setObjectName(name)

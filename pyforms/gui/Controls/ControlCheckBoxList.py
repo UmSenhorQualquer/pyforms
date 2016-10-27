@@ -16,94 +16,102 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlCheckBoxList(ControlBase):
 
-    def initForm(self):
-        control_path = tools.getFileInSameDirectory(__file__,"tree.ui")
-        self._form = uic.loadUi( control_path )
+	def initForm(self):
+		control_path = tools.getFileInSameDirectory(__file__,"tree.ui")
+		self._form = uic.loadUi( control_path )
 
-        self._form.label.setText(self._label)
+		self._form.label.setText(self._label)
 
-        self._form.listWidget.itemChanged.connect(self.item_changed)
+		self._form.listWidget.itemChanged.connect(self.item_changed)
 
-        self._form.listWidget.itemSelectionChanged.connect(self.__itemSelectionChanged)
+		self._form.listWidget.itemSelectionChanged.connect(self.__itemSelectionChanged)
 
-    def item_changed(self, item):
-        self.changed()
+	def item_changed(self, item):
+		self.changed()
 
-    def __add__(self, val):
-        if isinstance( val, (tuple, list) ):
-            item=QtGui.QListWidgetItem(str(val[0]))
-            item.value = val[0]
-            if val[1]: 
-                item.setCheckState( QtCore.Qt.Checked)
-            else: 
-                item.setCheckState( QtCore.Qt.Unchecked)
-        else:
-            item=QtGui.QListWidgetItem(str(val))
-            item.value = val
-        
-        self._form.listWidget.addItem(item)        
-        return self
+	def __add__(self, val):
+		if isinstance( val, (tuple, list) ):
+			item=QtGui.QListWidgetItem(str(val[0]))
+			item.value = val[0]
+			if val[1]: 
+				item.setCheckState( QtCore.Qt.Checked)
+			else: 
+				item.setCheckState( QtCore.Qt.Unchecked)
+		else:
+			item=QtGui.QListWidgetItem(str(val))
+			item.value = val
+		
+		self._form.listWidget.addItem(item)        
+		return self
 
-    def __sub__(self, other):
-        if isinstance(other, int):
-            if other < 0:
-                indexToRemove = self._form.listWidget.currentRow()
-            else:
-                indexToRemove = other
-            self._form.listWidget.takeItem(indexToRemove)
-        else:
-            for row in range( self.count ):
-                item = self._form.listWidget.item(row)
-                if item!=None and hasattr(item, 'value') and item.value==other:
-                    self._form.listWidget.takeItem(row)
-        return self
+	def __sub__(self, other):
+		if isinstance(other, int):
+			if other < 0:
+				indexToRemove = self._form.listWidget.currentRow()
+			else:
+				indexToRemove = other
+			self._form.listWidget.takeItem(indexToRemove)
+		else:
+			for row in range( self.count ):
+				item = self._form.listWidget.item(row)
+				if item!=None and hasattr(item, 'value') and item.value==other:
+					self._form.listWidget.takeItem(row)
+		return self
 
-    def clear(self):
-        self._form.listWidget.clear()
-
-
-    ############################################################################
-    ############ Events ########################################################
-    ############################################################################
-
-    def __itemSelectionChanged(self): self.selectionChanged()
-
-    def selectionChanged(self): pass
-
-        
-
-    ############################################################################
-    ############ Properties ####################################################
-    ############################################################################
-
-    @property
-    def count(self): return self._form.listWidget.count()
-
-    @property
-    def checkedIndexes(self): 
-        results = []
-        for row in range( self.count ):
-            item = self._form.listWidget.item(row)
-            if item!=None and item.checkState()==QtCore.Qt.Checked : results.append( row )
-        return results
-
-    @property
-    def value(self):
-        results = []
-        for row in range( self.count ):
-            item = self._form.listWidget.item(row)
-            if item!=None and item.checkState()==QtCore.Qt.Checked : 
-                results.append( item.value if hasattr(item, 'value') else str(item.text()) )
-        return results
-    
-    @value.setter
-    def value(self, value): 
-        for row in value: self += row
+	def clear(self): self._form.listWidget.clear()
 
 
-    @property
-    def mouseSelectedRowIndex(self):
-        return self.form.listWidget.currentRow()
-    
-            
-        
+	############################################################################
+	############ Events ########################################################
+	############################################################################
+
+	def __itemSelectionChanged(self): self.selectionChanged()
+
+	def selectionChanged(self): pass
+
+		
+
+	############################################################################
+	############ Properties ####################################################
+	############################################################################
+
+	@property
+	def count(self): return self._form.listWidget.count()
+
+	@property
+	def checkedIndexes(self): 
+		results = []
+		for row in range( self.count ):
+			item = self._form.listWidget.item(row)
+			if item!=None and item.checkState()==QtCore.Qt.Checked : results.append( row )
+		return results
+
+	@property
+	def value(self):
+		results = []
+		for row in range( self.count ):
+			item = self._form.listWidget.item(row)
+			if item!=None and item.checkState()==QtCore.Qt.Checked : 
+				results.append( item.value if hasattr(item, 'value') else str(item.text()) )
+		return results
+	
+	@value.setter
+	def value(self, value): 
+		for row in value: self += row
+
+
+	@property
+	def mouseSelectedRowIndex(self):
+		return self.form.listWidget.currentRow()
+
+
+	@property
+	def items(self):
+		results = []
+		for row in range( self.count ):
+			item = self._form.listWidget.item(row)
+			results.append( [item.value if hasattr(item, 'value') else str(item.text()),  item.checkState()==QtCore.Qt.Checked] )
+		return results
+	
+			
+		

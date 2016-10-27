@@ -49,7 +49,7 @@ class PackageFinder(object):
 			except ImportError:
 				pass
 			except:
-				logger.error('Error importing model {0}'.format(str(plugin)),exc_info=True)
+				logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
 				pass
 
 		return res
