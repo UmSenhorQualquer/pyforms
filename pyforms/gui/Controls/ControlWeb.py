@@ -31,7 +31,7 @@ class ControlWeb(ControlBase, QWebView):
     @value.setter
     def value(self, value):
         ControlBase.value.fset(self, value)
-        self.load( QUrl(value) )
+        QWebView.load(self, QUrl(value) )
 
     @property
     def form(self): return self
