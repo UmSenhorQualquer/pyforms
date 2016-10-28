@@ -55,7 +55,7 @@ class ControlList(ControlBase, QWidget):
 		uic.loadUi(os.path.join(rootPath, "list.ui"), self)
 
 		self.label = self._label
-
+		self.tableWidget._selectionChangedFname = None
 		self.tableWidget.currentCellChanged.connect(
 			self.tableWidgetCellChanged)
 		self.tableWidget.currentItemChanged.connect(
@@ -64,6 +64,9 @@ class ControlList(ControlBase, QWidget):
 			self.tableWidgetItemSelectionChanged)
 		self.tableWidget.cellDoubleClicked.connect(self.tableWidgetCellDoubleClicked)
 		self.tableWidget.model().dataChanged.connect(self._dataChangedEvent)
+
+		self.tableWidget.originalKeyPressEvent = self.tableWidget.keyPressEvent
+		self.tableWidget.keyPressEvent = self.new_keyPressEvent
 
 		if plusFunction is None and minusFunction is None:
 			self.bottomBar.hide()
@@ -76,6 +79,33 @@ class ControlList(ControlBase, QWidget):
 		else:
 			self.plusButton.pressed.connect(plusFunction)
 			self.minusButton.pressed.connect(minusFunction)
+
+
+	    def new_keyPressEvent(self, event):
+		if event.matches(PyQt4.QtGui.QKeySequence.Copy):
+			if len(self.tableWidget.selectedIndexes()) == 0:
+				self.tableWidget.originalKeyPressEvent(event)
+				return
+			tableArray = {}
+			for item in self.tableWidget.selectedIndexes():
+				cellItem = self.tableWidget.itemFromIndex(item)
+				point = str(item.row())+','+str(item.column())
+				cell = str(cellItem.text())
+				tableArray[point] = cell
+			pointKeys = tableArray.keys()
+			pointKeys.sort()
+			last_row = pointKeys[0].split(',')[0]
+			selection = ''
+			for p in pointKeys:
+				r = p.split(',')[0]
+				if last_row != r:
+					selection = selection[:-1] + '\n'
+				selection += tableArray[p] + '\t'
+				last_row = r
+			selection = selection[:-1] + '\n'
+			PyQt4.QtGui.QApplication.clipboard().setText(selection)
+		else:
+			self.tableWidget.originalKeyPressEvent(event)
 
 	def empty_signal(self, *args, **kwargs):
 		"""
@@ -341,3 +371,12 @@ class ControlList(ControlBase, QWidget):
 					else:
 						self.set_value(column, row, rows[row][column])
 		
+
+	@property
+	def selectionChangedFname(self): return self.tableWidget._selectionChangedFname
+
+
+	@selectionChangedFname.setter
+	def selectionChangedFname(self, value):
+		self.tableWidget._selectionChangedFname = value
+
