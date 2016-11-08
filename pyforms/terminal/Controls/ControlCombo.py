@@ -51,7 +51,7 @@ class ControlCombo(ControlBase):
     def value(self, value):
         for key, val in self._items.items():
             if value == val:
-                if self._value!=value: self.valueUpdated(value)
+                if self._value!=value: self.value_updated(value)
                 self._value = val
 
     @property

@@ -21,9 +21,9 @@ class ControlBase(object):
         self._controlHTML = "<div id='id%s' ><input type='text' id='%s' /></div>" % ( self._id, self._name )
         return self._controlHTML
 
-    def finishEditing(self): self.updateControl()
+    def finishEditing(self): self.update_control()
 
-    def updateControl(self): pass
+    def update_control(self): pass
 
     def load(self, data):
         if 'value' in data: self.value = data['value']
@@ -31,19 +31,19 @@ class ControlBase(object):
     def save(self, data):
         if self.value: data['value'] = self.value
 
-    def valueUpdated(self, value): pass
+    def value_updated(self, value): pass
 
     def show(self):pass
 
     def hide(self):pass
 
-    def openPopupMenu(self, position): pass
+    def open_popup_menu(self, position): pass
         
 
-    def addPopupSubMenuOption(self, label, options): pass
+    def add_popup_submenu_option(self, label, options): pass
         
 
-    def addPopupMenuOption(self, label, functionAction = None): pass
+    def add_popup_menu_option(self, label, functionAction = None): pass
 
     def __repr__(self):
         return self.value
@@ -66,7 +66,7 @@ class ControlBase(object):
     def value(self, value):
         oldvalue = self._value
         self._value = value
-        if oldvalue!=value: self.valueUpdated(value)
+        if oldvalue!=value: self.value_updated(value)
 
     ############################################################################
 

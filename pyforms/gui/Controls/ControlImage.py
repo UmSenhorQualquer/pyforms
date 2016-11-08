@@ -259,7 +259,7 @@ class ControlImage(ControlBase):
 
 	_imageWidget = None
 
-	def initForm(self):
+	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__,"image.ui")
 		self._form = uic.loadUi( control_path )
 		self._imageWidget = ImageGLWidget()

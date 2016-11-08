@@ -44,7 +44,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.speed = 1
 		self.logger = logging.getLogger('pyforms')
 
-	def initForm(self):
+	def init_form(self):
 		# Get the current path of the file
 		rootPath = os.path.dirname(__file__)
 
@@ -222,7 +222,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def is_playing(self): return self._timer.isActive()
 
 
-	def updateControl(self):
+	def update_control(self):
 		if self._value:
 			self.videoControl.setEnabled(True)
 			self.videoProgress.setMinimum(0)

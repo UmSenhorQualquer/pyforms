@@ -18,14 +18,14 @@ from PyQt4 import uic
 
 class ControlText(ControlBase):
 
-	def initForm(self):
+	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__, "textInput.ui")
 		self._form = uic.loadUi(control_path)
 		self.form.label.setText(self._label)
 		self.form.lineEdit.setText(self._value)
 		self.form.setToolTip(self.help)
 
-		super(ControlText, self).initForm()
+		super(ControlText, self).init_form()
 
 		self.form.label.setAccessibleName('ControlText-label')
 		self.form.lineEdit.editingFinished.connect(self.finishEditing)

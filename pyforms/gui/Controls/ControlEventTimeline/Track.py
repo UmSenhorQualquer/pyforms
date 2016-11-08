@@ -73,3 +73,10 @@ class Track(object):
     def properties(self,value):
         self.title = value[1]
         self.color = QtGui.QColor(value[2])
+
+    @property
+    def track_index(self):
+        for i, track in enumerate(self._parent._tracks):
+            if track==self: return i
+        return -1
+    

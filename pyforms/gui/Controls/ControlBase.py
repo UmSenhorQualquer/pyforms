@@ -26,16 +26,16 @@ class ControlBase(object):
 	@undocumented: __repr__
 	"""
 
-	def __init__(self, label='', defaultValue='', helptext=''):
-		self._help = helptext
-		self._value = defaultValue
-		self._form = None  # Qt widget
-		self._parent = None  # Parent window
-		self._label = label  # Label
-		self._popupMenu = None
-		self.initForm()
+	def __init__(self, label='', defaultvalue='', helptext=''):
+		self._help      = helptext
+		self._value     = defaultvalue
+		self._form      = None  # Qt widget
+		self._parent    = None  # Parent window
+		self._label     = label # Label
+		self._popup_menu = None
 
-	def initForm(self):
+
+	def init_form(self):
 		"""
 		Load Control and initiate the events
 		"""
@@ -47,85 +47,81 @@ class ControlBase(object):
 	############ Funcions ####################################################
 	##########################################################################
 
-	def load(self, data):
+	def load_form(self, data, path=None):
 		"""
 		Load a value from the dict variable
 		@param data: dictionary with the value of the Control
 		"""
-		if 'value' in data: self.value = data['value']
+		if 'value' in data:
+			self.value = data['value']
 
-	def save(self, data):
+	def save_form(self, data, path=None):
 		"""
 		Save a value to dict variable
 		@param data: dictionary with to where the value of the Control will be added
 		"""
-		if self.value: data['value'] = self.value
+		if self.value:
+			data['value'] = self.value
 		return data
 
 	def show(self):
 		"""
 		Show the control
 		"""
-		if self.form is None: return
+		if self.form is None:
+			return
 		self.form.show()
 
 	def hide(self):
 		"""
 		Hide the control
 		"""
-		if self.form is None: return
+		if self.form is None:
+			return
 		self.form.hide()
 
-	@property 
-	def visible(self): return self.form.isVisible()
-	@visible.setter
-	def visible(self, value):
-		if value:
-			self.show()
-		else:
-			self.hide()
-			
-	def addPopupMenuOption(self, label, functionAction=None, key=None, icon=None):
+	def add_popup_menu_option(self, label, function_action=None, key=None, icon=None):
 		"""
 		Add an option to the Control popup menu
 		@param label:           label of the option.
-		@param functionAction:  function called when the option is selected.
+		@param function_action:  function called when the option is selected.
 		@param key:             shortcut key
 		"""
-		if not self._popupMenu:
+		if not self._popup_menu:
 			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-			self.form.customContextMenuRequested.connect(self._openPopupMenu)
-			self._popupMenu = QtGui.QMenu()
-			self._popupMenu.aboutToShow.connect( self.aboutToShowContextMenuEvent )
+			self.form.customContextMenuRequested.connect(self._open_popup_menu)
+			self._popup_menu = QtGui.QMenu()
+			self._popup_menu.aboutToShow.connect(
+				self.about_to_show_contextmenu_event)
 		if label == "-":
-			return self._popupMenu.addSeparator()
+			return self._popup_menu.addSeparator()
 		else:
 			action = QtGui.QAction(label, self.form)
 			if icon is not None:
 				action.setIconVisibleInMenu(True)
-				action.setIcon( QtGui.QIcon(icon) )
+				action.setIcon(QtGui.QIcon(icon))
 			if key != None:
 				action.setShortcut(QtGui.QKeySequence(key))
-			if functionAction:
-				action.triggered.connect(functionAction)
-				self._popupMenu.addAction(action)
+			if function_action:
+				action.triggered.connect(function_action)
+				self._popup_menu.addAction(action)
 			return action
 
-	def addPopupSubMenuOption(self, label, options, keys={}):
+	def add_popup_submenu_option(self, label, options, keys={}):
 		"""
 		Add submenu options to the Control popup menu
 		@param label:   submenu label of the option.
 		@param options: dictionary representing the submenu. ex: { 'Example': event function, ... }. 
 		@param keys:    shortcut keys. ex: { 'Example': shortcut key, ... }. 
 		"""
-		if not self._popupMenu:
+		if not self._popup_menu:
 			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-			self.form.customContextMenuRequested.connect(self._openPopupMenu)
-			self._popupMenu = QtGui.QMenu()
-			self._popupMenu.aboutToShow.connect(
-				self.aboutToShowContextMenuEvent)
+			self.form.customContextMenuRequested.connect(self._open_popup_menu)
+			self._popup_menu = QtGui.QMenu()
+			self._popup_menu.aboutToShow.connect(
+				self.about_to_show_contextmenu_event)
 
-		submenu = QtGui.QMenu(label, self._popupMenu)
+		submenu = QtGui.QMenu(label, self._popup_menu)
 		for text, func in options.items():
 			if text == "-":
 				submenu.addSeparator()
@@ -137,27 +133,27 @@ class ControlBase(object):
 				if func:
 					action.triggered.connect(func)
 					submenu.addAction(action)
-		self._popupMenu.addMenu(submenu)
+		self._popup_menu.addMenu(submenu)
 
 	##########################################################################
 	############ Events ######################################################
 	##########################################################################
 
-	def changed(self):
+	def changed_event(self):
 		"""
 		Function called when ever the Control value is changed
 		"""
 		return True
 
-	def aboutToShowContextMenuEvent(self):
+	def about_to_show_contextmenu_event(self):
 		"""
 		Function called before open the Control popup menu
 		"""
 		pass
 
-	def _openPopupMenu(self, position):
-		if self._popupMenu:
-			self._popupMenu.exec_(self.form.mapToGlobal(position))
+	def _open_popup_menu(self, position):
+		if self._popup_menu:
+			self._popup_menu.exec_(self.form.mapToGlobal(position))
 
 	##########################################################################
 	############ Properties ##################################################
@@ -191,11 +187,17 @@ class ControlBase(object):
 		oldvalue = self._value
 		self._value = value
 		if oldvalue != value:
-			self.changed()
+			self.changed_event()
 
 	@property
-	def name(self):
-		return self.form.objectName()
+	def visible(self): return self.form.isVisible()
+
+	@visible.setter
+	def visible(self, value):
+		self.show() if value else self.hide()
+
+	@property
+	def name(self): return self.form.objectName()
 
 	@name.setter
 	def name(self, value):
@@ -244,7 +246,6 @@ class ControlBase(object):
 		@type  value: BaseWidget
 		"""
 		self._parent = value
-
 
 	@property
 	def help(self): return self._help if self._help else ''

@@ -25,7 +25,7 @@ class ControlProgress(ControlBase):
 		
 		ControlBase.__init__(self, label, defaultValue)
 		
-	def initForm(self):
+	def init_form(self):
 
 		module_path = os.path.abspath(os.path.dirname(__file__))
 		control_path = os.path.join(module_path, "progressInput.ui")

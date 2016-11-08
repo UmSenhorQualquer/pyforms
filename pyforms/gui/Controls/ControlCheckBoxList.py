@@ -16,7 +16,7 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlCheckBoxList(ControlBase):
 
-	def initForm(self):
+	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__,"tree.ui")
 		self._form = uic.loadUi( control_path )
 
@@ -27,7 +27,7 @@ class ControlCheckBoxList(ControlBase):
 		self._form.listWidget.itemSelectionChanged.connect(self.__itemSelectionChanged)
 
 	def item_changed(self, item):
-		self.changed()
+		self.changed_event()
 
 	def __add__(self, val):
 		if isinstance( val, (tuple, list) ):
@@ -65,9 +65,9 @@ class ControlCheckBoxList(ControlBase):
 	############ Events ########################################################
 	############################################################################
 
-	def __itemSelectionChanged(self): self.selectionChanged()
+	def __itemSelectionChanged(self): self.selection_changed_event()
 
-	def selectionChanged(self): pass
+	def selection_changed_event(self): pass
 
 		
 
@@ -79,7 +79,7 @@ class ControlCheckBoxList(ControlBase):
 	def count(self): return self._form.listWidget.count()
 
 	@property
-	def checkedIndexes(self): 
+	def checked_indexes(self): 
 		results = []
 		for row in range( self.count ):
 			item = self._form.listWidget.item(row)
@@ -101,7 +101,7 @@ class ControlCheckBoxList(ControlBase):
 
 
 	@property
-	def mouseSelectedRowIndex(self):
+	def selected_row_index(self):
 		return self.form.listWidget.currentRow()
 
 

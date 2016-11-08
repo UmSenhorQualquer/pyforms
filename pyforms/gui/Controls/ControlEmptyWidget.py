@@ -29,7 +29,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
 
 
-	def initForm(self):
+	def init_form(self):
 		pass
 
 	############################################################################
@@ -56,10 +56,10 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 		else:
 			self.form.layout().addWidget( value.form )
 
-		#The initForm should be called only for the BaseWidget
+		#The init_form should be called only for the BaseWidget
 
 		if isinstance(value, BaseWidget) and not value._formLoaded: 
-			value.initForm()
+			value.init_form()
 		
 		
 	@property

@@ -134,7 +134,10 @@ class GraphsProperties(BaseWidget):
 			logger.debug('Before: Min: {0} | Max: {1} Zoom: {2}'.format(graph.graph_min, graph.graph_max,graph.zoom ) )
 
 
-			graph.name      = self._name.value; self._graphs_list.setValue(0, index, self._name.value)
+			graph.name = self._name.value; 
+			data = self._graphs_list.value
+			data[index]= [self._name.value]
+			self._graphs_list.value = data
 			graph.graph_min = self._min_value.value
 			graph.graph_max = self._max_value.value
 

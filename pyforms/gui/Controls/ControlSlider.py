@@ -28,7 +28,7 @@ class ControlSlider(ControlBase):
 		self._form.value.setText( str(defaultValue) )
 		self._form.horizontalSlider.valueChanged.connect( self.valueChanged )
 		
-	def initForm(self):
+	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__,"sliderInput.ui")
 		self._form = uic.loadUi( control_path )
 		self._form.label.setText(self._label)

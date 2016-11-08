@@ -45,7 +45,7 @@ class ControlList(ControlBase, QWidget):
 	def __repr__(self):
 		return "ControlList " + str(self._value)
 
-	def initForm(self):
+	def init_form(self):
 		plusFunction = self._plusFunction
 		minusFunction = self._minusFunction
 
@@ -340,4 +340,6 @@ class ControlList(ControlBase, QWidget):
 						v.load(rows[row][column])
 					else:
 						self.set_value(column, row, rows[row][column])
+		elif 'value' in data.keys():
+			self.value = data['value']
 		

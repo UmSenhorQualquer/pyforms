@@ -10,7 +10,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 		ControlBase.__init__(self, title)
 		
 
-	def initForm(self):
+	def init_form(self):
 		self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
 		self.header().hide()
 		self.setUniformRowHeights(True)

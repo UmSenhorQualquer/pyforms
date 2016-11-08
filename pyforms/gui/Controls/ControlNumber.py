@@ -28,7 +28,7 @@ class ControlNumber(ControlBase):
 		self._value = defaultValue
 	 
 
-	def initForm(self):
+	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__,"number.ui")
 		self._form = uic.loadUi( control_path )
 		self.label = self._label

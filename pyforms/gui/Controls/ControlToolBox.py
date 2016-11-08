@@ -3,7 +3,7 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlToolBox(ControlBase):
 
-    def initForm(self):
+    def init_form(self):
         self._form = QtGui.QToolBox()
         self.form.layout().setMargin(0)
         

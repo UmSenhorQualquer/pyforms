@@ -44,7 +44,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 		if len(w.mainmenu) > 0:
 			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
-		w.initForm()
+		w.init_form()
 		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 		self.setCentralWidget(w)

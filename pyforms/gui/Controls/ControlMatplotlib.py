@@ -26,7 +26,7 @@ class ControlMatplotlib(ControlBase, QtGui.QWidget):
         QtGui.QWidget.__init__(self)
         ControlBase.__init__(self, label)
 
-    def initForm(self):
+    def init_form(self):
 
         self._fig = Figure((5.0, 4.0), dpi=100)
         self.canvas = FigureCanvas(self._fig)

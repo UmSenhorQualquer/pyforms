@@ -27,7 +27,7 @@ class ControlTree(ControlBase, QTreeWidget):
 		QTreeWidget.__init__(self)
 		ControlBase.__init__(self, label, default)
 
-	def initForm(self):
+	def init_form(self):
 		self.setSelectionBehavior(QAbstractItemView.SelectRows)
 		self.setUniformRowHeights(True)
 		self.setDragDropMode(QAbstractItemView.NoDragDrop)
@@ -166,7 +166,7 @@ class ControlTree(ControlBase, QTreeWidget):
 	def iconsize(self, value):
 		self.setIconSize(QSize(*value))
 
-	def addPopupMenuOption(self, label='', functionAction=None, key=None, item=None, icon=None):
+	def add_popup_menu_option(self, label='', functionAction=None, key=None, item=None, icon=None):
 		"""
 		Add an option to the Control popup menu
 		@param label:           label of the option.
@@ -174,7 +174,7 @@ class ControlTree(ControlBase, QTreeWidget):
 		@param key:             shortcut key
 		@param key:             shortcut key
 		"""
-		action = super(ControlTree, self).addPopupMenuOption(
+		action = super(ControlTree, self).add_popup_menu_option(
 			label, functionAction, key)
 
 		if item is not None:
@@ -211,24 +211,24 @@ class ControlTree(ControlBase, QTreeWidget):
 
 		
 
-	def aboutToShowContextMenuEvent(self):
+	def about_to_show_contextmenu_event(self):
 		"""
 		Function called before open the Control popup menu
 		"""
 		if len(self._items) > 0:  # Reset the menu and construct a new one only if there are actions for the items.
-			self._popupMenu.clear()
+			self._popup_menu.clear()
 			itemSelected = self.selectedItems()[0]
 
 			if id(itemSelected) in self._items:
 				for action in self._items[id(itemSelected)]:
-					self._popupMenu.addAction(action)
+					self._popup_menu.addAction(action)
 					# print("Adding action {action} to {item}".format(
 					#    action=action.text(), item=itemSelected))
 
 	def clear(self):
 		super(ControlTree, self).clear()
-		if self._popupMenu:
-			self._popupMenu.clear()
+		if self._popup_menu:
+			self._popup_menu.clear()
 		self._items = {}
 
 	def expand_item(self, item, expand=True, parents=True):

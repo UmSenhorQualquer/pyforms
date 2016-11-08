@@ -31,12 +31,12 @@ class ControlCodeEditor(ControlBase):
 
     ARROW_MARKER_NUM = 8
 
-    def __init__(self, label='', defaultValue='', helptext=''):
-        super(ControlCodeEditor, self).__init__(label, defaultValue, helptext)
+    def __init__(self, label='', defaultvalue='', helptext=''):
+        super(ControlCodeEditor, self).__init__(label, defaultvalue, helptext)
 
         self._changed_func = None
 
-    def initForm(self):
+    def init_form(self):
         self.logger = logging.getLogger(__name__)
 
         control_path = tools.getFileInSameDirectory(__file__, "code_editor.ui")
@@ -69,7 +69,7 @@ class ControlCodeEditor(ControlBase):
         self._changed_func = None
 
         self.value = self._value
-        super(ControlCodeEditor, self).initForm()
+        super(ControlCodeEditor, self).init_form()
 
     def __font_size_index_changed(self, index):
         item = self.form.font_size.currentText()
@@ -161,7 +161,7 @@ class ControlCodeEditor(ControlBase):
         """
         On button save clicked, save changes made on the code editor to file
         """
-        if self.changed() and self._changed_func:
+        if self.changed_event() and self._changed_func:
             self._code_editor.setModified(False)
             self._save_button.setEnabled(False)
 
@@ -179,9 +179,9 @@ class ControlCodeEditor(ControlBase):
                 self.logger.debug("Saving...")
                 self.on_save_changes()
 
-        self.key_pressed(event)
+        self.key_pressed_event(event)
 
-    def key_pressed(self, event):
+    def key_pressed_event(self, event):
         """
         Override KeyPressed event as you like
         :param event: key event
@@ -218,7 +218,7 @@ class ControlCodeEditor(ControlBase):
 
 
     @property
-    def changed(self): return self._changed_func if self._changed_func else (lambda : 0)
+    def changed_event(self): return self._changed_func if self._changed_func else (lambda : 0)
 
-    @changed.setter
-    def changed(self, value): self._changed_func = value
+    @changed_event.setter
+    def changed_event(self, value): self._changed_func = value

@@ -69,7 +69,7 @@ class BaseWidget(QtGui.QFrame):
 	##########################################################################
 
 
-	def initForm(self):
+	def init_form(self):
 		"""
 		Generate the module Form
 		"""
@@ -312,7 +312,7 @@ class BaseWidget(QtGui.QFrame):
 		"""
 		It shows the 
 		"""
-		self.initForm()
+		self.init_form()
 		super(BaseWidget, self).show()
 
 
@@ -460,7 +460,7 @@ class BaseWidget(QtGui.QFrame):
 			for name, param in allparams.items():
 				if name in data:
 					param.load(data[name])
-		#self.initForm()
+		#self.init_form()
 
 	def loadWindow(self):
 		filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')

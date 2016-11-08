@@ -26,7 +26,7 @@ class BaseWidget(object):
 	############ Module functions  #############################################
 	############################################################################
 
-	def initForm(self, parse=True):
+	def init_form(self, parse=True):
 		result = {}
 		for fieldname, var in self.formControls.items():
 			name = var._name

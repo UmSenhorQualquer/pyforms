@@ -192,7 +192,7 @@ class OpenglGLWidget(QGLWidget):
 class ControlOpenGL(ControlBase):
 
 
-	def initForm(self): self._form = OpenglGLWidget()
+	def init_form(self): self._form = OpenglGLWidget()
 
 	@property
 	def value(self): return self._form.scene

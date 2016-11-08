@@ -11,7 +11,7 @@ class Container(object):
 		self.logger = logging.getLogger('pyforms')
 
 		self._algorithm = ClassObject()
-		self._algorithm.initForm()
+		self._algorithm.init_form()
 		form_path = os.path.join(tools.get_object_class_path( Container ), 'mainWindow.ui')
 		self._form = uic.loadUi( form_path )
 		self._form.verticalLayout.addWidget( self._algorithm )

@@ -16,7 +16,7 @@ __status__ = "Development"
 
 class ControlTextArea(ControlBase):
 
-    def initForm(self):
+    def init_form(self):
         control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
@@ -25,7 +25,7 @@ class ControlTextArea(ControlBase):
         if not self._label or len(self._label)==0: 
             self.form.label.hide()
 
-        super(ControlTextArea, self).initForm()
+        super(ControlTextArea, self).init_form()
         self.form.plainTextEdit.textChanged.connect(self.finishEditing)
 
     def __add__(self, other):

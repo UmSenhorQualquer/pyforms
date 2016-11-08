@@ -37,26 +37,26 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 
 		# Popup menus that only show when clicking on a TIMELINEDELTA object
-		self._deltaLockAction = self.addPopupMenuOption("Lock", self.__lockSelected, key='L')
-		self._deltaColorAction = self.addPopupMenuOption("Pick a color", self.__pickColor)
-		self._deltaRemoveAction = self.addPopupMenuOption("Remove", self.__removeSelected, key='Delete')
+		self._deltaLockAction = self.add_popup_menu_option("Lock", self.__lockSelected, key='L')
+		self._deltaColorAction = self.add_popup_menu_option("Pick a color", self.__pickColor)
+		self._deltaRemoveAction = self.add_popup_menu_option("Remove", self.__removeSelected, key='Delete')
 		self._deltaActions = [self._deltaLockAction, self._deltaColorAction, self._deltaRemoveAction]
 		for action in self._deltaActions:
 			action.setVisible(False)
 
-		self.addPopupMenuOption("-")
+		self.add_popup_menu_option("-")
 
 		# General righ click popup menus
-		self.addPopupMenuOption("Set track properties...", self.__setLinePropertiesEvent)
-		self.addPopupMenuOption("Set graphs properties", self.show_graphs_properties)
-		self.addPopupMenuOption("-")
-		self.addPopupSubMenuOption("Clean", {
+		self.add_popup_menu_option("Set track properties...", self.__setLinePropertiesEvent)
+		self.add_popup_menu_option("Set graphs properties", self.show_graphs_properties)
+		self.add_popup_menu_option("-")
+		self.add_popup_submenu_option("Clean", {
 			'Current line': self.__cleanLine,
 			'Everything': self.__clean,
 			'Charts': self.__cleanCharts
 		})
 
-	def initForm(self):
+	def init_form(self):
 		# Get the current path of the file
 		rootPath = os.path.dirname(__file__)
 
@@ -149,6 +149,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 	def addPeriod(self, value, track=0, color=None):
 		self._time.addPeriod(value, track, color)
+		self._time.repaint()
 
 	def add_chart(self, name, data): self._time.add_chart(name, data)
 
@@ -162,13 +163,15 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		for i in range(ignore_rows): next(spamreader, None)
 		self._time.importchart_csv(spamreader)
 		csvfile.close()
+
+
 			
 
 	##########################################################################
 	#### EVENTS ##############################################################
 	##########################################################################
 
-	def aboutToShowContextMenuEvent(self):
+	def about_to_show_contextmenu_event(self):
 		for action in self._deltaActions:
 			action.setVisible(
 				True) if self._time._selected is not None else action.setVisible(False)
@@ -219,6 +222,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 				for delta in self._time._tracks[i].periods:
 					delta.color = dialog.color
 				self._time._tracks[i].color = dialog.color
+			self._time.repaint()
 		else:
 			pass
 

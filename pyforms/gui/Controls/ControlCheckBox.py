@@ -16,7 +16,7 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlCheckBox(ControlBase):
 
-    def initForm(self):
+    def init_form(self):
         control_path = tools.getFileInSameDirectory(__file__,"checkbox.ui")
         self._form = uic.loadUi( control_path )
         self._form.checkBox.setText(self._label)
@@ -29,12 +29,12 @@ class ControlCheckBox(ControlBase):
 
     def __checkedToggle(self): self.changed()
 
-    def load(self, data):
+    def load_form(self, data, path=None):
         if 'value' in data: 
             self._form.checkBox.setChecked( data['value']=='True' )
 
-    def save(self, data):
-        data['value'] = str( self.isChecked() )
+    def save_form(self, data, path=None):
+        data['value'] = str( self._form.checkBox.isChecked() )
 
  
     @property

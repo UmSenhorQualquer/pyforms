@@ -17,7 +17,7 @@ from PyQt4 import QtGui, QtCore
 
 class ControlFilesTree(ControlBase):
 
-    def initForm(self):
+    def init_form(self):
         self._form = QtGui.QTreeView()
 
     @property

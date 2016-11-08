@@ -28,9 +28,9 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     def __init__(self, label="", defaultValue=0, min=0, max=100, **kwargs):
         QtGui.QWidget.__init__(self)
         ControlBase.__init__(self, label, defaultValue, **kwargs)
-        self.addPopupMenuOption('Export to CSV', self.__export)
+        self.add_popup_menu_option('Export to CSV', self.__export)
 
-    def initForm(self):
+    def init_form(self):
         vlayout = QtGui.QVBoxLayout()
         vlayout.setMargin(0)
         self.setLayout(vlayout)

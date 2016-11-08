@@ -14,28 +14,30 @@ All the Controls inherit from this Control, therefore you can find its functions
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultValue='', helptext='')  
+#### \_\_init\_\_(label='', defaultvalue='', helptext='')  
 
 **label** - Control label.  
-**defaultValue** - Initial value of the control.  
+**defaultvalue** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
 
 
 ### **Functions**
 ***************************
 
-#### initForm()  
+#### init_form()  
 
 Load the control UI and initiate all the events.
  	
-#### load(data)  
+#### load_form(data, path=None)  
 Loads the value of the control.  
-**data** - Is a dictionary with the required information to load the control.
+**data** - It is a dictionary with the required information to load the control.
+**path** - Optional parameter that can be used to save the data.
  	
-#### save(data)  
+#### save_form(data, path=None)  
 
 Save a value of the control to a dictionary.  
 **data** - Dictionary where the control value should be saved.
+**path** - Optional parameter that can be used to load the data.
  	
 #### show()  
 
@@ -45,11 +47,11 @@ Show the control.
 
 Hide the control.
  	
-#### addPopupMenuOption(label, functionAction=None, key=None)  
+#### add_popup_menu_option(label, function_action=None, key=None)  
 
 Add an option to the Control popup menu.
  	
-#### addPopupSubMenuOption(label, options, keys={})  
+#### add_popup_submenu_option(label, options, keys={})  
 
 Add submenu options to the Control popup menu.
  	
@@ -57,39 +59,42 @@ Add submenu options to the Control popup menu.
 
 ### **Events**
 ***************************
-
-#### changed()  
-
-Function called when ever the Control value is changed.
  	
-#### aboutToShowContextMenuEvent()  
+#### about_to_show_contextmenu_event()  
 
 Function called before the Control popup menu is opened.
- 
+
+#### changed_event()  
+
+Function called when ever the Control value is changed.
+
 
 ### **Properties**
 ***************************
 
-#### value  
-This property returns or set what the control should manage or store.
- 	
-#### name  
-This property returns or set the name of the control.
- 	
-#### label  
-Returns or sets the label of the control.
+#### enabled  
+Returns or set if the control is enable or disable.
  	
 #### form  
 Returns the QWidget of the control.
  	
-#### parent  
-Returns or set the parent basewidget where the Control is.
- 	
 #### help  
 Returns or set the tip box of the control.
+ 	
+#### label  
+Returns or sets the label of the control.
+ 	
+#### name  
+This property returns or set the name of the control.
+ 	
+#### parent  
+Returns or set the parent basewidget where the Control is.
 
-#### enabled  
-Returns or set if the control is enable or disable.
+#### visible
+Set and return the control visibility.
+
+#### value  
+This property returns or set what the control should manage or store.
 
 
 
@@ -107,9 +112,9 @@ Returns or set if the control is enable or disable.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=[20,40], min=0, max=100, horizontal=False, **kwargs) 
+#### \_\_init\_\_(label="", defaultvalue=[20,40], min=0, max=100, horizontal=False) 
 
-**defaultValue** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
+**defaultvalue** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected.  
 **horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.  
@@ -149,7 +154,7 @@ If True the control works only with Integer values. If False the control will re
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultValue='', checkable=False)
+#### \_\_init\_\_(label='', checkable=False, helptext='')
 
 **checkable** - Flag indicating if the button is checkable or not.
  	 	
@@ -157,29 +162,32 @@ If True the control works only with Integer values. If False the control will re
 ### **Functions**
 ***************************
 
-#### load(data)
+#### load_form(data, path=None)
 
 Because the value of this Control is a function, nothing is loaded
  	
-#### save(data)
+#### save_form(data, path=None)
 
 Because the value of this Control is a function, nothing is saved
 
 #### click()
 
-This function simulates a click of a button.
+This function simulates a click of the button.
 
 ### **Properties**
 ***************************
-
-#### value
-
-The value should be a pointer to function, that will be called everytime the button is pressed.
 
 #### checked
 
 In case the button was initiated with the flag checkable=True, it will get and set the checked state of the button.
 
+#### icon
+
+Return or set the button icon. The value should be a path to the icon or a QtGui.QIcon object.
+
+#### value
+
+The value should be a pointer to function, that will be called everytime the button is pressed.
 
 
 
@@ -236,6 +244,13 @@ controlVar += 'Element'
 
 Clear all the elements from the list.
 
+### **Events**
+***************************
+ 	
+#### selection_changed_event()  
+
+Function called when the selection changed.
+
 ### **Properties**
 ***************************
  	
@@ -243,9 +258,17 @@ Clear all the elements from the list.
 
 Return how many elements the list have.
  	
-#### checkedIndexes
+#### checked_indexes
 
 Returns the Elements with which have the checkboxes checked.
+
+#### items
+
+Returns a list of tuples with the format [(element, check boolean flag)]
+
+#### selected_row_index
+
+Returns the selected row index.
 
 #### value
 
@@ -253,7 +276,46 @@ It gets and sets all the List values. This property receives a list where each e
 
 ```python
 controlVar.value = [('item1',True), ('item2',False), 'item3']
-``` 
+```
+
+
+
+
+
+
+
+## ControlCodeEditor
+***************************
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
+
+### **Events**
+***************************
+
+### key_pressed_event(event)
+
+Function called when a key is pressed.
+
+**event** - Qt event variable.  
+
+### **Properties**
+***************************
+
+#### changed
+
+Returns and sets the pointer to the function that is called when the button save is pressed.
+
+#### lexer
+
+Returns and sets the Scintilla lexer. By default the lexer is the QsciLexerPython.
+
+#### value
+
+Returns and sets the code text.
+
+
+
 
 
 
@@ -272,37 +334,71 @@ controlVar.value = [('item1',True), ('item2',False), 'item3']
 ### **Functions**
 ***************************
  	
-#### addItem(text, value=None)
+#### add_item(text, value=None)
 
 Add an item to the ComboBox. Items may have a value associated to it.
 
 ```python
-controlVar.addItem('Portugal', 	 'pt')
-controlVar.addItem('Angola', 	 'ao')
-controlVar.addItem('Moçambique', 'mz')
-controlVar.addItem('Brazil', 	 'br')
-controlVar.addItem('Cabo Verde', 'cv')
+controlVar.add_item('Portugal', 'pt')
+controlVar.add_item('Angola', 'ao')
+controlVar.add_item('Moçambique', 'mz')
+controlVar.add_item('Brazil')
+controlVar.add_item('Cabo Verde')
 ``` 
- 	
-#### clearItems()
+
+#### clear()
 
 Clear all the items of the ComboBox.
 
+#### count()
+
+Return the number o items in the combobox.
+
+#### get_item_index_by_name(item_name)
+
+Search the index of an item by the name.
+
+#### \_\_add\_\_(value)
+
+The same of add_item function.
+
+```python
+controlVar += ('Portugal', 'pt')
+controlVar += ('Angola', 'ao')
+controlVar += ('Moçambique', 'mz')
+controlVar += 'Brazil'
+controlVar += 'Cabo Verde'
+``` 
+
 ### **Events**
 ***************************
- 	
-#### activated(index) 
 
-Called when the user selectes an item in the combobox.  
+#### activated_event(index) 
+
+Called when the user select an item in the combobox.
 **index** - Activated item's index.
- 	
-#### highlighted(index)
 
-Called when the user passes with the mouse over an item in the combobox.  
+#### current_index_changed_event(index)
+
+Called when the current combobox index is changed.
+**index** - current selected index.
+
+#### edittext_changed_event(text)
+
+Called when the text is changed.
+**text** - changed text.
+
+#### highlighted_event(index)
+
+Called when the user passes with the mouse over an item in the combobox.
 **index** - highlighted item's index.
 
 ### **Properties**
 ***************************
+
+#### current_index
+
+Returns and sets the selected index.
 
 #### items
 
