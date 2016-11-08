@@ -265,14 +265,13 @@ class ControlImage(ControlBase):
 		self._imageWidget = ImageGLWidget()
 		self._form.imageLayout.addWidget( self._imageWidget )
 		
-	def save(self, data):
+	def save_form(self, data, path=None):
 		if self.value!=None: data['value'] = self._value
 
-	def load(self, data):
+	def load_form(self, data, path=None):
 		if 'value' in data: self.value = data['value']
 
-	def repaint(self):
-		self._imageWidget.repaint()
+	def repaint(self): self._imageWidget.repaint()
 
 	@property
 	def value(self): return ControlBase.value.fget(self)

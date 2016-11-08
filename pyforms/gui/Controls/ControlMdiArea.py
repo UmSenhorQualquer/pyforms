@@ -104,21 +104,16 @@ class ControlMdiArea(ControlBase, QMdiArea):
 	##########################################################################
 
 	@property
-	def showCloseButton(self):
-		return self._showCloseButton
+	def show_subwin_close_button(self): return self._showCloseButton
 
-	@showCloseButton.setter
-	def showCloseButton(self, value):
-		self._showCloseButton = value
+	@show_subwin_close_button.setter
+	def show_subwin_close_button(self, value): self._showCloseButton = value
 
 	@property
-	def label(self):
-		return self._label
+	def label(self): return self._label
 
 	@label.setter
-	def label(self, value):
-		self._label = value
+	def label(self, value): self._label = value
 
 	@property
-	def form(self):
-		return self
+	def form(self): return self

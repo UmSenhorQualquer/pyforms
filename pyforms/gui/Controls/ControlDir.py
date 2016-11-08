@@ -22,7 +22,7 @@ class ControlDir(ControlText):
         self._form = uic.loadUi( control_path )
         self._form.label.setText(self._label)
 
-    def pushButton_clicked(self):
+    def open_button_clicked(self):
         value = str(QtGui.QFileDialog.getExistingDirectory(self._form, 'Choose a directory', self.value) )
         if value: self.value = value
 
@@ -32,4 +32,4 @@ class ControlDir(ControlText):
     @parent.setter
     def parent(self, value):
         ControlText.parent.fset(self, value)
-        self._form.pushButton.clicked.connect(self.pushButton_clicked)
+        self._form.pushButton.clicked.connect(self.open_button_clicked)

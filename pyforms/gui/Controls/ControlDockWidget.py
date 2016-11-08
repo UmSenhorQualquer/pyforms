@@ -25,13 +25,13 @@ class ControlDockWidget(ControlEmptyWidget):
 		self._label = value
 		if hasattr(self, 'dock'): self.dock.setWindowTitle(value)
 
-	def save(self, data):
+	def save_form(self, data, path=None):
 		data['side'] = self.side
-		super(ControlDockWidget, self).save(data)
+		super(ControlDockWidget, self).save_form(data, path=None)
 
-	def load(self, data):
+	def load_form(self, data):
 		self.side = data['side']
-		super(ControlDockWidget, self).load(data)
+		super(ControlDockWidget, self).load_form(data, path=None)
 
 	def show(self):
 		"""

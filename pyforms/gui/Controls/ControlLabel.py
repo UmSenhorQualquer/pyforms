@@ -27,12 +27,20 @@ class ControlLabel(ControlBase):
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
 
-    def load(self, data): pass
+    def load_form(self, data, path=None): pass
 
-    def save(self, data): pass
+    def save_form(self, data, path=None): pass
 
-    def changed(self):
-        self._form.label.setText(self._value)
 
     @property
     def form(self): return self._form
+
+
+    @property
+    def value(self): return super(ControlLabel, self).value.fget()
+
+    @value.setter
+    def value(self, value):
+        self._form.label.setText(value)
+        super(ControlLabel, self).value.fset(value)
+

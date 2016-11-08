@@ -23,10 +23,10 @@ class ControlFile(ControlText):
         control_path = tools.getFileInSameDirectory(__file__, "fileInput.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)        
-        self._form.pushButton.clicked.connect(self.pushButton_clicked)
+        self._form.pushButton.clicked.connect(self.open_button_clicked)
         self._form.pushButton.setIcon(conf.PYFORMS_ICON_FILE_OPEN)
 
-    def pushButton_clicked(self):
+    def open_button_clicked(self):
         value = str(QFileDialog.getOpenFileName(
             self._form, self._label, self.value))
         if value:

@@ -430,7 +430,12 @@ Gets and set the current selected item text.
 
 This control is used to select a directory.
 
+### **Functions**
+***************************
 
+#### open_button_clicked()
+
+Simulates the push of the button.
 
 
 
@@ -448,9 +453,11 @@ This control is used to create DockWidget.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', default=None, side='left')
+#### \_\_init\_\_(label='', default=None, side='left', order=0, margin=0)
 
 **side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top or bottom.
+**order** - Top-left order that the dock will assume in the application window.
+**margin** - Margin of the dock.
 
 
 
@@ -511,7 +518,7 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 #### playVideoEvent()
 
 #### fpsChanged()
-
+Simulates the click of the open button.
 #### pointerChanged()
  	
 ### **Properties**
@@ -539,6 +546,13 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 
 The control may be used to select a file.
 
+### **Functions**
+***************************
+
+#### open_button_clicked()
+
+Simulates the push of the button.
+
 ### **Properties**
 ***************************
 
@@ -559,7 +573,7 @@ Gets and sets a file path.
 
 Show the directory files in a tree view
 
-⋅⋅⋅Note Is not fully developed yet.⋅⋅
+**Note:** It is not fully developed yet.
 
 ### **Properties**
 ***************************
@@ -584,10 +598,7 @@ Gets and sets a directory path.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlImage.png?raw=true "Screen")
 
-
 Displays an image or a list of images.
-
-	
 
 ### **Functions**
 ***************************
@@ -618,7 +629,7 @@ img2 = cv2.imread('lena_color.png', 1)
 controlVar.value = [img1, img2]
 ```  
 
-**Note:** the value can only be set outside the constructor and the initForm function.
+**Note:** the value can only be set outside the constructor and the init_form function.
 
 
 ## ControlLabel
@@ -649,11 +660,10 @@ Displays a list of values.
 ### **Constructer**
 ***************************
  	
-#### \_\_init\_\_(label="", defaultValue="", plusFunction=None, minusFunction=None)
+#### \_\_init\_\_(label="", defaultvalue="", add_function=None, remove_function=None)
 
-**defaultValue** - 
-**plusFunction** - 
-**minusFunction** - 
+**add_function** - Function called when the add button is pressed.
+**remove_function** - Function called when the remove button is pressed.
 
 
 ### **Functions**
@@ -665,65 +675,90 @@ Clear all the values from the list.
  	
 #### \_\_add\_\_(values)	source code
 
-Inserts a new row with the list of values.
+Inserts a new row with the list of values. 
+**Notes:**
+- It is possible to use a QWidget value.
+- If the value has the attribute icon, this icon will be displayed.
  	
 #### \_\_sub\_\_(index)
 
 Removes the row with the index.
 
-#### setValue(column, row, value)
+#### set_value(column, row, value)
 
 Set the value of a specific cell.
  	
-#### getValue(column, row)	source code
+#### get_value(column, row)	source code
 
 Get the value of a specific cell.
+
+#### resize_rows_contents()
+
+Auto resize the rows acording to the content.
+
+#### get_currentrow_value()
+
+Get the current row values.
+
+#### get_cell(column, row)
+
+Returns the a specific cell from the QTableWidget.
 
 ### **Events**
 ***************************
  	
-#### dataChangedEvent(row, col, item)  
+#### data_changed_event(row, col, item)
+
+Called when any of list the content is updated.
  	
-#### tableWidgetCellChanged(nextRow, nextCol, previousRow, previousCol) 
+#### item_selection_changed_event()
+
+Called when ever the selection changes.
  	
-#### tableWidgetItemChanged(current, previous) 
+#### current_cell_changed_event(next_row, next_col, previous_row, previous_col)
+
+Called when a new cell is selected.
  	
-#### tableWidgetItemSelectionChanged() 
- 	
-#### itemSelectionChanged() 
- 	
-#### currentCellChanged(nextRow, nextCol, previousRow, previousCol) 
- 	
-#### currentItemChanged(current, previous)
+#### current_item_changed_event(current, previous)
+
+Called when the item select changed.
 
 ### **Properties**
 ***************************
 
-#### horizontalHeaders
+#### horizontal_headers
 
 Get and set the horizontal headers in the table list.
+
+#### word_wrap
+
+Get and set the word wrap.
+
+#### rows_count
+
+Returns the number of rows.
+
+#### columns_count
+
+Returns the number of columns.
  	
-#### selectEntireRow
+#### select_entire_row
 
 Accepts a boolean indicating if should allow only the selection of the entire row or not.
  	
-#### count
-
-Return the number of rows.
- 	
 #### value
 
-Get and set the list values.
+Get and set a list of values.
  	
-#### mouseSelectedRowsIndexes
+#### selected_rows_indexes
 
 Return the selected indexes.
  	
-#### mouseSelectedRowIndex
+#### selected_row_index
 
 Return the selected index.
  	
-#### iconSize
+#### icon_size
 
 Gets and sets the icon size.
 
@@ -755,29 +790,28 @@ The constructer receives only a label.
 
 #### \_\_add\_\_(other)
 
+Add a basewidget to the mdi area.
+
 Usage:  
 ```python
 controlVar += baseWidget
-```  
-or  
+```
+
+#### \_\_sub\_\_(other)
+
+Remove a basewidget from the mdi area.
+
+Usage:  
 ```python
-controlVar += [baseWidget1 , baseWidget2]
-```  
+controlVar -= baseWidget
+```
 
 ### **Properties**
 ***************************
 
-#### showCloseButton
+#### show_subwin_close_button
 
 Boolean flag, indicating if should show the subwindows close button or not.
- 	
-#### value
-
-Sets a BaseWidget or a list of BaseWidgets representing the windows.
-
-
-
-
 
 
 
@@ -811,6 +845,11 @@ Defines the maximum value that can be selected.
 #### value
 
 Returns the selected number.
+
+#### decimals
+
+Returns and sets the number of allowed decimals.
+
 
 
 

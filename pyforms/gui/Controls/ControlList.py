@@ -34,16 +34,17 @@ class ControlList(ControlBase, QWidget):
 
 	CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
-	def __init__(self, label="", defaultValue="", plusFunction=None,
-				 minusFunction=None):
+	def __init__(self, label="", defaultvalue="", add_function=None,
+				 remove_function=None):
 		QWidget.__init__(self)
 
-		self._plusFunction = plusFunction
-		self._minusFunction = minusFunction
-		ControlBase.__init__(self, label, defaultValue)
+		self._plusFunction = add_function
+		self._minusFunction = remove_function
+		ControlBase.__init__(self, label, defaultvalue)
 
-	def __repr__(self):
-		return "ControlList " + str(self._value)
+	##########################################################################
+	############ FUNCTIONS ###################################################
+	##########################################################################
 
 	def init_form(self):
 		plusFunction = self._plusFunction
@@ -77,58 +78,8 @@ class ControlList(ControlBase, QWidget):
 			self.plusButton.pressed.connect(plusFunction)
 			self.minusButton.pressed.connect(minusFunction)
 
-	def empty_signal(self, *args, **kwargs):
-		"""
-		Use this function if you want to disconnect a signal temporarily
-		"""
-		pass
+	def __repr__(self): return "ControlList " + str(self._value)
 
-	def _dataChangedEvent(self, item):
-		self.dataChangedEvent(
-			item.row(), item.column(), self.tableWidget.model().data(item))
-		self.changed()
-
-	def dataChangedEvent(self, row, col, item):
-		pass
-
-	def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
-							   previousCol):
-		self.currentCellChanged(nextRow, nextCol, previousRow, previousCol)
-		self.changed()
-
-	def tableWidgetItemChanged(self, current, previous):
-		self.currentItemChanged(current, previous)
-		self.changed()
-
-	def tableWidgetItemSelectionChanged(self):
-		self.itemSelectionChanged()
-
-	def itemSelectionChanged(self):
-		pass
-
-	def currentCellChanged(
-			self, nextRow, nextCol, previousRow, previousCol):
-		pass
-
-	def currentItemChanged(self, current, previous):
-		pass
-
-	def tableWidgetCellDoubleClicked(self, row, column):
-		"""
-		(From PyQt) This signal is emitted whenever a cell in the table is double clicked.
-		The row and column specified is the cell that was double clicked.
-
-		Besides firing this signal, we save the current value, in case the user needs to know the old value.
-		:param row:
-		:param column:
-		:return:
-		"""
-		self.CELL_VALUE_BEFORE_CHANGE = self.get_value(column, row)
-		logger.debug("Cell double clicked. Stored value: %s", self.CELL_VALUE_BEFORE_CHANGE)
-		self.cellDoubleClicked(row, column)
-
-	def cellDoubleClicked(self, row, column):
-		pass
 
 	def clear(self, headers=False):
 		if headers:
@@ -138,6 +89,35 @@ class ControlList(ControlBase, QWidget):
 		else:
 			self.tableWidget.clearContents()
 			self.tableWidget.setRowCount(0)
+
+	def save_form(self, data, path=None):
+		if self.value:
+			rows = []
+			for row in range(self.rows_count):
+				columns = []
+				for column in range(self.columns_count):
+					v = self.get_value(column, row)
+					if isinstance(v, BaseWidget):
+						columns.append(v.save({}))
+					else:
+						columns.append(str(v))
+				rows.append(columns)				
+			data['value'] = rows
+		return data
+
+	def load_form(self, data, path=None):
+		if self.value:
+			rows = data['value']
+			for row in range(len(rows)):
+				for column in range(len(rows[row])):
+					v = self.get_value(column, row)
+					if isinstance(v, BaseWidget): 
+						v.load(rows[row][column])
+					else:
+						self.set_value(column, row, rows[row][column])
+		elif 'value' in data.keys():
+			self.value = data['value']
+		
 
 	def __add__(self, other):
 
@@ -162,24 +142,6 @@ class ControlList(ControlBase, QWidget):
 			self.tableWidget.removeRow(indexToRemove)
 		return self
 
-	@property
-	def horizontalHeaders(self):
-		return self._horizontalHeaders
-
-	@horizontalHeaders.setter
-	def horizontalHeaders(self, horizontalHeaders):
-		"""Set horizontal headers in the table list."""
-
-		self._horizontalHeaders = horizontalHeaders
-
-		self.tableWidget.setColumnCount(len(horizontalHeaders))
-		self.tableWidget.horizontalHeader().setVisible(True)
-
-		for idx, header in enumerate(horizontalHeaders):
-			item = QTableWidgetItem()
-			item.setText(header)
-			self.tableWidget.setHorizontalHeaderItem(idx, item)
-
 	def set_value(self, column, row, value):
 		if isinstance(value, QWidget):
 			self.tableWidget.setCellWidget(row, column, value)
@@ -197,8 +159,56 @@ class ControlList(ControlBase, QWidget):
 		except AttributeError as err:
 			return ''
 
-	def resizeRowsToContents(self):
+	def resize_rows_contents(self):
 		self.tableWidget.resizeRowsToContents()
+
+	def get_currentrow_value(self):
+		currentRow = self.tableWidget.currentRow()
+		if not currentRow < 0:
+			return self.value[currentRow]
+		else:
+			return []
+
+	def get_cell(self, column, row):
+		return self.tableWidget.item(row, column)
+
+	##########################################################################
+	############ EVENTS ######################################################
+	##########################################################################
+
+	def data_changed_event(self, row, col, item): pass
+
+	def item_selection_changed_event(self): pass
+
+	def current_cell_changed_event( self, next_row, next_col, previous_row, previous_col): pass
+
+	def current_item_changed_event(self, current, previous): pass
+
+	def cell_double_clicked(self, row, column): pass
+
+	##########################################################################
+	############ PROPERTIES ##################################################
+	##########################################################################
+
+	@property
+	def horizontal_headers(self):
+		return self._horizontalHeaders
+
+	@horizontal_headers.setter
+	def horizontal_headers(self, horizontal_headers):
+		"""Set horizontal headers in the table list."""
+
+		self._horizontalHeaders = horizontal_headers
+
+		self.tableWidget.setColumnCount(len(horizontal_headers))
+		self.tableWidget.horizontalHeader().setVisible(True)
+
+		for idx, header in enumerate(horizontal_headers):
+			item = QTableWidgetItem()
+			item.setText(header)
+			self.tableWidget.setHorizontalHeaderItem(idx, item)
+
+	
 
 	@property
 	def word_wrap(self): return self.tableWidget.wordWrap()
@@ -207,33 +217,25 @@ class ControlList(ControlBase, QWidget):
 		self.tableWidget.setWordWrap(value)
 
 
-	def getCurrentRowValue(self):
-		currentRow = self.tableWidget.currentRow()
-		if not currentRow < 0:
-			return self.value[currentRow]
-		else:
-			return []
-
-	def getCell(self, column, row):
-		return self.tableWidget.item(row, column)
+	
 
 	@property
-	def readOnly(self):
+	def readonly(self):
 		return self.tableWidget.editTriggers()
 
-	@readOnly.setter
-	def readOnly(self, value):
+	@readonly.setter
+	def readonly(self, value):
 		if value:
 			self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		else:
 			self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
 
 	@property
-	def selectEntireRow(self):
+	def select_entire_row(self):
 		return self.tableWidget.selectionBehavior()
 
-	@selectEntireRow.setter
-	def selectEntireRow(self, value):
+	@select_entire_row.setter
+	def select_entire_row(self, value):
 		if value:
 			self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
 		else:
@@ -243,8 +245,7 @@ class ControlList(ControlBase, QWidget):
 	def rows_count(self): return self.tableWidget.rowCount()
 
 	@property
-	def columns_count(self): 
-		return self.tableWidget.columnCount()
+	def columns_count(self):  return self.tableWidget.columnCount()
 
 
 	def __len__(self): return self.rows_count()
@@ -274,23 +275,22 @@ class ControlList(ControlBase, QWidget):
 	# self.value
 
 	@property
-	def mouseSelectedRowsIndexes(self):
+	def selected_rows_indexes(self):
 		result = []
 		for index in self.tableWidget.selectedIndexes():
 			result.append(index.row())
 		return list(set(result))
 
 	@property
-	def mouseSelectedRowIndex(self):
-		indexes = self.mouseSelectedRowsIndexes
+	def selected_row_index(self):
+		indexes = self.selected_rows_indexes
 		if len(indexes) > 0:
 			return indexes[0]
 		else:
 			return None
 
 	@property
-	def label(self):
-		return self.labelWidget.getText()
+	def label(self): return self.labelWidget.getText()
 
 	@label.setter
 	def label(self, value):
@@ -300,46 +300,58 @@ class ControlList(ControlBase, QWidget):
 			self.labelWidget.hide()
 
 	@property
-	def form(self):
-		return self
+	def form(self): return self
 
 	@property
-	def iconSize(self):
-		return self.tableWidget.iconSize()
+	def icon_size(self): return self.tableWidget.iconSize()
 
-	@iconSize.setter
-	def iconSize(self, value):
+	@icon_size.setter
+	def icon_size(self, value):
 		if isinstance(value, (tuple, list)):
 			self.tableWidget.setIconSize(QtCore.QSize(*value))
 		else:
 			self.tableWidget.setIconSize(QtCore.QSize(value, value))
 
 
-	def save(self, data={}):
-		if self.value:
-			rows = []
-			for row in range(self.rows_count):
-				columns = []
-				for column in range(self.columns_count):
-					v = self.get_value(column, row)
-					if isinstance(v, BaseWidget):
-						columns.append(v.save({}))
-					else:
-						columns.append(str(v))
-				rows.append(columns)				
-			data['value'] = rows
-		return data
+	
 
-	def load(self, data):
-		if self.value:
-			rows = data['value']
-			for row in range(len(rows)):
-				for column in range(len(rows[row])):
-					v = self.get_value(column, row)
-					if isinstance(v, BaseWidget): 
-						v.load(rows[row][column])
-					else:
-						self.set_value(column, row, rows[row][column])
-		elif 'value' in data.keys():
-			self.value = data['value']
-		
+	##########################################################################
+	############ PRIVATE FUNCTIONS ###########################################
+	##########################################################################
+
+	def _dataChangedEvent(self, item):
+		self.data_changed_event(item.row(), item.column(), self.tableWidget.model().data(item))
+		self.changed_event()
+	
+	def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
+							   previousCol):
+		self.current_cell_changed_event(nextRow, nextCol, previousRow, previousCol)
+		self.changed_event()
+
+	def tableWidgetItemChanged(self, current, previous):
+		self.current_item_changed_event(current, previous)
+		self.changed_event()
+
+	def tableWidgetItemSelectionChanged(self):self.item_selection_changed_event()
+
+	
+	def tableWidgetCellDoubleClicked(self, row, column):
+		"""
+		(From PyQt) This signal is emitted whenever a cell in the table is double clicked.
+		The row and column specified is the cell that was double clicked.
+
+		Besides firing this signal, we save the current value, in case the user needs to know the old value.
+		:param row:
+		:param column:
+		:return:
+		"""
+		self.CELL_VALUE_BEFORE_CHANGE = self.get_value(column, row)
+		logger.debug("Cell double clicked. Stored value: %s", self.CELL_VALUE_BEFORE_CHANGE)
+		self.cell_double_clicked(row, column)
+
+	def empty_signal(self, *args, **kwargs):
+		"""
+		Use this function if you want to disconnect a signal temporarily
+		"""
+		pass
+	
