@@ -93,7 +93,7 @@ class ControlList(ControlBase, QWidget):
 				cell = str(cellItem.text())
 				tableArray[point] = cell
 			pointKeys = tableArray.keys()
-			pointKeys.sort()
+			pointKeys.sort( key=lambda x: ( int(x.split(',')[0]), int(x.split(',')[1]) ) )
 			last_row = pointKeys[0].split(',')[0]
 			selection = ''
 			for p in pointKeys:
@@ -373,10 +373,10 @@ class ControlList(ControlBase, QWidget):
 		
 
 	@property
-	def selectionChangedFname(self): return self.tableWidget._selectionChangedFname
+	def selectionChangedFunction(self): return self.tableWidget._selectionChangedFname
 
 
-	@selectionChangedFname.setter
-	def selectionChangedFname(self, value):
+	@selectionChangedFunction.setter
+	def selectionChangedFunction(self, value):
 		self.tableWidget._selectionChangedFname = value
 
