@@ -30,15 +30,15 @@ Load the control UI and initiate all the events.
  	
 #### load_form(data, path=None)  
 Loads the value of the control.  
-**data** - It is a dictionary with the required information to load the control.
-**path** - Optional parameter that can be used to save the data.
+**data** - It is a dictionary with the required information to load the control.  
+**path** - Optional parameter that can be used to save the data.  
  	
 #### save_form(data, path=None)  
 
 Save a value of the control to a dictionary.  
 
-**data** - Dictionary where the control value should be saved.
-**path** - Optional parameter that can be used to load the data.
+**data** - Dictionary where the control value should be saved.  
+**path** - Optional parameter that can be used to load the data.  
  	
 #### show()  
 
@@ -56,10 +56,11 @@ Add an option to the Control popup menu.
 **function_action** - Optional parameter that can be used to load the data.
 **key** - Dictionary where the control value should be saved.
 **icon** - Optional parameter that can be used to load the data.
+**submenu** - Parent submenu to which the option should be added. If no value is set, then the option will be added to the main popup menu.
  	
 #### add_popup_submenu(label, submenu=None)
 
-Add submenu options to the Control popup menu.
+It returns a new sub popup menu. If submenu is open the menu is added to the main popup menu.
  	
 	
 
