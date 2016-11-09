@@ -163,7 +163,7 @@ If True the control works only with Integer values. If False the control will re
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', checkable=False, helptext='')
+#### \_\_init\_\_(label='', default=None, checkable=False, helptext='')
 
 **checkable** - Flag indicating if the button is checkable or not.
  	 	

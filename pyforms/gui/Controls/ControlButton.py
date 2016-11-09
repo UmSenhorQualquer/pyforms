@@ -17,9 +17,9 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlButton(ControlBase):
 
-	def __init__(self, label='', checkable=False, helptext=''):
+	def __init__(self, label='', default=None, checkable=False, helptext=None):
 		self._checkable = checkable
-		super(ControlButton, self).__init__(label=label, helptext=helptext)
+		super(ControlButton, self).__init__(label=label, default=default, helptext=helptext)
 
 	def init_form(self):
 		self._form = QtGui.QPushButton()
