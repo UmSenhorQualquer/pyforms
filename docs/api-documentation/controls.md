@@ -48,7 +48,7 @@ Show the control.
 
 Hide the control.
  	
-#### add_popup_menu_option(label, function_action=None, key=None, icon=None)  
+#### add_popup_menu_option(label, function_action=None, key=None, icon=None, submenu=None)  
 
 Add an option to the Control popup menu.
 
@@ -57,7 +57,7 @@ Add an option to the Control popup menu.
 **key** - Dictionary where the control value should be saved.
 **icon** - Optional parameter that can be used to load the data.
  	
-#### add_popup_submenu_option(label, options, keys={})  
+#### add_popup_submenu(label, submenu=None)
 
 Add submenu options to the Control popup menu.
  	

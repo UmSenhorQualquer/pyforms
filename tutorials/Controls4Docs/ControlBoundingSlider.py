@@ -20,7 +20,8 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', default=[80, 255], min=0, max=255, horizontal=True, helptext='help text example')
+		self._control 	= ControlBoundingSlider('Threshold', default=[80, 255], min=0, max=255, 
+			horizontal=True, helptext='help text example')
 		
 		self._formset = [' ','_control',' ']
 
@@ -35,9 +36,14 @@ class SimpleExample(BaseWidget):
 		self._control.hide()
 		self._control.show()
 		
-		self._control.add_popup_menu_option('option 1', function_action=lambda x: x, key=None)
+		self._control.add_popup_menu_option('option 0', function_action=lambda x: x)
 
-		#self._control.add_popup_submenu_option(label, options, keys={})
+		submenu1 = self._control.add_popup_submenu('menu 1')
+		submenu2 = self._control.add_popup_submenu('menu 2', submenu=submenu1)
+
+		self._control.add_popup_menu_option('option 1', function_action=lambda x: x, key='Control+Q', submenu=submenu2)
+
+
 
 
 

@@ -40,8 +40,9 @@ class ControlBase(object):
 	def init_form(self):
 		"""
 		Load Control and initiate the events
-		"""
-		pass
+		"""		
+		if self.help: self.form.setToolTip(self.help)
+
 
 	def __repr__(self): return str(self._value)
 
@@ -82,6 +83,21 @@ class ControlBase(object):
 			return
 		self.form.hide()
 
+
+	def __create_popup_menu(self):
+		if not self._popup_menu:
+			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+			self.form.customContextMenuRequested.connect(self._open_popup_menu)
+			self._popup_menu = QtGui.QMenu()
+			self._popup_menu.aboutToShow.connect( self.about_to_show_contextmenu_event)
+
+	def add_popup_submenu(self, label, submenu=None):
+		self.__create_popup_menu()
+		menu = submenu if submenu else self._popup_menu
+		submenu = QtGui.QMenu(label, menu)
+		menu.addMenu(submenu)
+		return submenu
+
 	def add_popup_menu_option(self, label, function_action=None, key=None, icon=None, submenu=None):
 		"""
 		Add an option to the Control popup menu
@@ -90,11 +106,7 @@ class ControlBase(object):
 		@param key:             shortcut key
 		@param icon:            icon
 		"""
-		if not self._popup_menu:
-			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-			self.form.customContextMenuRequested.connect(self._open_popup_menu)
-			self._popup_menu = QtGui.QMenu()
-			self._popup_menu.aboutToShow.connect( self.about_to_show_contextmenu_event)
+		self.__create_popup_menu()
 
 		menu = submenu if submenu else self._popup_menu
 
@@ -112,33 +124,6 @@ class ControlBase(object):
 				menu.addAction(action)
 			return action
 
-	def add_popup_submenu_option(self, label, options, keys={}):
-		"""
-		Add submenu options to the Control popup menu
-		@param label:   submenu label of the option.
-		@param options: dictionary representing the submenu. ex: { 'Example': event function, ... }. 
-		@param keys:    shortcut keys. ex: { 'Example': shortcut key, ... }. 
-		"""
-		if not self._popup_menu:
-			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-			self.form.customContextMenuRequested.connect(self._open_popup_menu)
-			self._popup_menu = QtGui.QMenu()
-			self._popup_menu.aboutToShow.connect(
-				self.about_to_show_contextmenu_event)
-
-		submenu = QtGui.QMenu(label, self._popup_menu)
-		for text, func in options.items():
-			if text == "-":
-				submenu.addSeparator()
-			else:
-				action = QtGui.QAction(text, self.form)
-				if text in keys:
-					action.setShortcut(QtGui.QKeySequence(keys[text]))
-
-				if func:
-					action.triggered.connect(func)
-					submenu.addAction(action)
-		self._popup_menu.addMenu(submenu)
 
 	##########################################################################
 	############ Events ######################################################
