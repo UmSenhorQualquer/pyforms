@@ -29,7 +29,9 @@ All the Controls inherit from this Control, therefore you can find its functions
 Load the control UI and initiate all the events.
  	
 #### load_form(data, path=None)  
+
 Loads the value of the control.  
+
 **data** - It is a dictionary with the required information to load the control.  
 **path** - Optional parameter that can be used to save the data.  
  	
@@ -50,13 +52,13 @@ Hide the control.
  	
 #### add_popup_menu_option(label, function_action=None, key=None, icon=None, submenu=None)  
 
-Add an option to the Control popup menu.
+Add an option to the Control popup menu.  
 
-**label** - Label of the opti
-**function_action** - Optional parameter that can be used to load the data.
-**key** - Dictionary where the control value should be saved.
-**icon** - Optional parameter that can be used to load the data.
-**submenu** - Parent submenu to which the option should be added. If no value is set, then the option will be added to the main popup menu.
+**label** - Label of the option  
+**function_action** - Optional parameter that can be used to load the data.  
+**key** - Dictionary where the control value should be saved.  
+**icon** - Optional parameter that can be used to load the data.  
+**submenu** - Parent submenu to which the option should be added. If no value is set, then the option will be added to the main popup menu.  
  	
 #### add_popup_submenu(label, submenu=None)
 

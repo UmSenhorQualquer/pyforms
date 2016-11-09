@@ -43,6 +43,10 @@ class SimpleExample(BaseWidget):
 
 		self._control.add_popup_menu_option('option 1', function_action=lambda x: x, key='Control+Q', submenu=submenu2)
 
+		self._control.changed_event = self.__control_changed_event
+
+	def __control_changed_event(self):
+		print self._control.value
 
 
 

@@ -301,10 +301,10 @@ class ControlBoundingSlider(ControlBase):
 		self._form.repaint()
 
 	@property
-	def changed(self):  return self._form.changed
+	def changed_event(self):  return self._form.changed
 
-	@changed.setter
-	def changed(self, value): self._form.changed = value        
+	@changed_event.setter
+	def changed_event(self, value): self._form.changed = value        
 
 	@property
 	def min(self): return self.form._lower
