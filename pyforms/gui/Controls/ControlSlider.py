@@ -16,16 +16,13 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlSlider(ControlBase):
 
-	_min = 0
-	_max = 100
-
-	def __init__(self, label = "", defaultValue = 0, min = 0, max = 100):
+	def __init__(self, label = "", default = 0, min = 0, max = 100):
 		self._updateSlider = True
 		self._min = min
 		self._max = max
 		
-		ControlBase.__init__(self, label, defaultValue)
-		self._form.value.setText( str(defaultValue) )
+		ControlBase.__init__(self, label, default)
+		self._form.value.setText( str(default) )
 		self._form.horizontalSlider.valueChanged.connect( self.valueChanged )
 		
 	def init_form(self):
@@ -41,11 +38,11 @@ class ControlSlider(ControlBase):
 		self.value = value
 		self._updateSlider = True
 
-	def load(self, data):
+	def load_form(self, data, path=None):
 		if 'value' in data: self.value = int(data['value'])
 		
 
-	def save(self, data):
+	def save_form(self, data, path=None):
 		if self.value: data['value'] = self.value        
 
 	@property

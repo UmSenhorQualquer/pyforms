@@ -14,10 +14,10 @@ All the Controls inherit from this Control, therefore you can find its functions
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultvalue='', helptext='')  
+#### \_\_init\_\_(label='', default='', helptext='')  
 
 **label** - Control label.  
-**defaultvalue** - Initial value of the control.  
+**default** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
 
 
@@ -112,9 +112,9 @@ This property returns or set what the control should manage or store.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label="", defaultvalue=[20,40], min=0, max=100, horizontal=False) 
+#### \_\_init\_\_(label="", default=[20,40], min=0, max=100, horizontal=False) 
 
-**defaultvalue** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
+**default** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected.  
 **horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.  
@@ -501,7 +501,7 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100, **kwargs)
+#### \_\_init\_\_(label="", default=0, min=0, max=100, **kwargs)
 
 ### **Functions**
 ***************************
@@ -660,7 +660,7 @@ Displays a list of values.
 ### **Constructer**
 ***************************
  	
-#### \_\_init\_\_(label="", defaultvalue="", add_function=None, remove_function=None)
+#### \_\_init\_\_(label="", default="", add_function=None, remove_function=None)
 
 **add_function** - Function called when the add button is pressed.
 **remove_function** - Function called when the remove button is pressed.
@@ -762,6 +762,10 @@ Return the selected index.
 
 Gets and sets the icon size.
 
+#### readonly
+
+Returns and sets the readonly flag for the control.
+
 
 
 
@@ -826,7 +830,7 @@ Boolean flag, indicating if should show the subwindows close button or not.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="", default=0, min=0, max=100)
 
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
@@ -873,7 +877,7 @@ Returns and sets the number of allowed decimals.
 
 Refresh the GL scene.
  	
-#### resetZoomAndRotation()
+#### reset_zoom_and_rotation()
 
 Reset all the zoom and scene rotations.
 
@@ -886,12 +890,15 @@ Gets and sets a GL scene.
  	
 #### width
 
-Gets the GL window width
+Gets the GL window width.
  	
 #### height
 
-Gets the GL window height
+Gets the GL window height.
 
+#### clear_color
+
+Returns and sets the background color.
 
 
 
@@ -1009,12 +1016,22 @@ Return and set the help text that should be rendered in the video.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="%p%", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="%p%", default=0, min=0, max=100)
 
 **label** - This is the text that will be shown in the ProgressBar.
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
 
+### **Functions**
+***************************
+
+#### \_\_add\_\_(other)
+
+Increments the progress.
+
+#### \_\_sub\_\_(other)
+
+Reduce the progress.
 
 ### **Properties**
 ***************************
@@ -1045,7 +1062,7 @@ Current position.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="", default=0, min=0, max=100)
 
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
@@ -1080,9 +1097,9 @@ Defines the maximum value that can be selected.
 ### **Events**
 ***************************
 
-#### finishEditing() 
+#### key_pressed_event(event)
 
-Event called when the user ends the control edition.
+Event called everytime a key is pressed.
 
 
 
@@ -1095,6 +1112,19 @@ Event called when the user ends the control edition.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
 
+### **Functions**
+***************************
+
+#### \_\_add\_\_(other)
+
+Append text to the bottom.
+
+### **Properties**
+***************************
+
+#### readonly
+
+Returns and sets the readonly flag for the control.
 
 
 ## ControlToolBox
@@ -1119,16 +1149,103 @@ It returns and receives a list of BaseWidgets.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTree.png?raw=true "Screen")
 
-
-### iconsize
-
-
-## ControlTreeView
+### **Functions**
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTreeView.png?raw=true "Screen")
+#### \_\_add\_\_(other)
+
+Add an item to the root node.
+
+#### \_\_sub\_\_(other)
+
+Remove an item from the root node.
+
+#### add_popup_menu_option(label='', function_action=None, key=None, item=None, icon=None)
+
+Add a popup menu option to all the items, or a specific item.
+
+**label** - Label of the menu option.
+**function_action** - Function to be called when the option is selected.
+**key** - Option hotkey.
+**item** - Item to which the popup menu option should be applied.
+**icon** - Icon of the popup menu option.
+
+#### clear()
+
+Clear all the items from the ControlTree.
+
+#### expand_item(item, expand=True, parents=True)
+
+Expand or close an item and their parents.
+
+**item** - Option hotkey.
+**expand** - Flag indicating if the item should be expanded or closed.
+**parents** - Flag indicating if the parents of the item should be expanded or closed.
+
+#### create_child(name, parent=None, icon=None)
+
+Create a new child item.
+
+**name** - Name of the new item.
+**parent** - Parent item of the new item.
+**icon** - Icon of the new item.
+
+### **Events**
+***************************
+
+#### item_changed_event(item)
+
+Called everytime an item is updated.
+
+**item** - Updated item.
+
+#### item_selection_changed_event
+
+Called when ever a new item is selected.
+
+#### item_double_clicked_event(item)
+
+Called an item is double clicked by the mouse.
+
+**item** - The item that was double clicked.
+
+#### key_press_event(event)
+
+Called when a key is pressed.
+
+**event** - Qt event.
+
+#### rows_inserted_event(parent, start, end	)
+
+Called when new items are inserted.
+
+**parent** - Parent to which the rows were inserted.
+**start** - Insertion starting row.
+**end** - Insertion ending row.
 
 
+### **Properties**
+***************************
+
+#### show_header
+
+Flag that shows or hide the header.
+
+#### selected_rows_indexes
+
+Retrieve and set the selected rows.
+
+#### selected_row_index
+
+Retrive and set the selected row.
+
+#### selected_item
+
+Retrive and set the selected item.
+
+#### icon_size
+
+Returns and sets the items icons size.
 
 
 
@@ -1138,9 +1255,7 @@ It returns and receives a list of BaseWidgets.
 
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
-
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
-
 
 ### **Functions**
 ***************************
@@ -1160,7 +1275,7 @@ Gets and sets a list of 2D or 3D points to display.
 
 Set the graph legend
 
-#### showGrid
+#### show_grid
 
 (True or False). Show a grid in the graph
 
@@ -1205,8 +1320,35 @@ Repaint the image.
 
 Gets and sets an numpy array image with volume.
 
-#### colorMap
+#### colors_limits
+
+Gets and sets the colors limits.
+
+#### visvis
+
+Return the visvis object.
+
+#### color_map
 
 Gets and sets the color map to display.  
 It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER.  
 Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).
+
+
+
+
+
+
+## ControlWeb
+***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
+
+Displays a web-browser.
+
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets the URL of the page to load.

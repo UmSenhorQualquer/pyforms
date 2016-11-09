@@ -33,15 +33,14 @@ class ControlText(ControlBase):
 
 	def finishEditing(self):
 		"""Function called when the lineEdit widget is edited"""
-		self.changed()
+		self.changed_event()
 
 	def __key_pressed(self, event): 
 		QtGui.QLineEdit.keyPressEvent(self.form.lineEdit, event)
 
-		self.key_pressed(event)
+		self.key_pressed_event(event)
 
-	def key_pressed(self, evt):
-		pass
+	def key_pressed_event(self, evt): pass
 		
 	###################################################################
 	############ Properties ###########################################

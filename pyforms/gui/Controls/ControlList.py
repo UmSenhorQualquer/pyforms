@@ -34,13 +34,13 @@ class ControlList(ControlBase, QWidget):
 
 	CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
-	def __init__(self, label="", defaultvalue="", add_function=None,
+	def __init__(self, label="", default="", add_function=None,
 				 remove_function=None):
 		QWidget.__init__(self)
 
 		self._plusFunction = add_function
 		self._minusFunction = remove_function
-		ControlBase.__init__(self, label, defaultvalue)
+		ControlBase.__init__(self, label, default)
 
 	##########################################################################
 	############ FUNCTIONS ###################################################

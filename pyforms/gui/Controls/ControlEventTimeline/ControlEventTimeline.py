@@ -29,9 +29,9 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		Timeline events editor
 	"""
 
-	def __init__(self, label="", defaultValue=0, min=0, max=100, **kwargs):
+	def __init__(self, label="", default=0, min=0, max=100, **kwargs):
 		QtGui.QWidget.__init__(self)
-		ControlBase.__init__(self, label, defaultValue, **kwargs)
+		ControlBase.__init__(self, label, default, **kwargs)
 		self._max = 100
 		self._graphs_prop_win = GraphsProperties(self._time, self)
 

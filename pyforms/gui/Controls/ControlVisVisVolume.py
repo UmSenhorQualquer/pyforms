@@ -45,11 +45,11 @@ class ControlVisVisVolume(ControlBase):
     ############################################################################
 
     @property
-    def colorMap(self):
+    def color_map(self):
         return self._colorMap
     
-    @colorMap.setter
-    def colorMap(self, value): 
+    @color_map.setter
+    def color_map(self, value): 
         self._colorMap=value
         self.refresh()
 

@@ -25,9 +25,9 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
         Timeline events editor
     """
 
-    def __init__(self, label="", defaultValue=0, min=0, max=100, **kwargs):
+    def __init__(self, label="", default=0, min=0, max=100, **kwargs):
         QtGui.QWidget.__init__(self)
-        ControlBase.__init__(self, label, defaultValue, **kwargs)
+        ControlBase.__init__(self, label, default, **kwargs)
         self.add_popup_menu_option('Export to CSV', self.__export)
 
     def init_form(self):

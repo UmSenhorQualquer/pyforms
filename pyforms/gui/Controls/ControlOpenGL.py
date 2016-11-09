@@ -14,12 +14,12 @@ class OpenglGLWidget(QGLWidget):
 	def __init__(self, parent=None):
 		QGLWidget.__init__(self, parent)
 
-		self._zoom = 1.0
+		self._zoom  = 1.0
 		self._scene = None
 		self._rotation = [0, 0, 0]
 		
-		self._mouseLeftDown     = False
-		self._mouseRightDown    = False
+		self._mouseLeftDown  = False
+		self._mouseRightDown = False
 
 		self._mouseGLPosition       = [0,0,0]
 		self._lastMouseGLPosition   = [0,0,0]
@@ -28,7 +28,7 @@ class OpenglGLWidget(QGLWidget):
 		self._lastMousePosition     = [0,0]  #Last mouse position
 
 		self._mouseStartDragPoint   = None
-		self._clear_color = None
+		self._clear_color 			= None
 		
 		self.setMinimumHeight(100)
 		self.setMinimumWidth(100)
@@ -191,8 +191,12 @@ class OpenglGLWidget(QGLWidget):
 
 class ControlOpenGL(ControlBase):
 
-
 	def init_form(self): self._form = OpenglGLWidget()
+
+	def repaint(self): self._form.repaint()
+
+	def reset_zoom_and_rotation(self): self._form.resetZoomAndRotation()
+
 
 	@property
 	def value(self): return self._form.scene
@@ -200,19 +204,12 @@ class ControlOpenGL(ControlBase):
 	@value.setter
 	def value(self, value):  self._form.scene = value; self._form.repaint()
 
-	def repaint(self): self._form.repaint()
-
 	@property 
 	def clear_color(self): self._form._clear_color
 	@clear_color.setter
 	def clear_color(self, value):  
 		self._form._clear_color = value; 
 		self._form.repaint()
-
-
-
-	def resetZoomAndRotation(self): self._form.resetZoomAndRotation()
-
 
 	@property
 	def width(self): return self._form.width()

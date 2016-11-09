@@ -15,15 +15,12 @@ from PyQt4 import uic, QtGui
 
 class ControlProgress(ControlBase):
 
-	_min = 0
-	_max = 100
-
-	def __init__(self, label = "%p%", defaultValue = 0, min = 0, max = 100):
+	def __init__(self, label = "%p%", default=0, min=0, max=100):
 		self._updateSlider = True
 		self._min = min
 		self._max = max
 		
-		ControlBase.__init__(self, label, defaultValue)
+		ControlBase.__init__(self, label, default)
 		
 	def init_form(self):
 
@@ -58,7 +55,6 @@ class ControlProgress(ControlBase):
 	def __sub__(self, other):
 		self.value = self.value - other
 		return self
-
 
 	@property
 	def min(self): return self._form.horizontalSlider.minimum()

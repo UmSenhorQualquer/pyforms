@@ -34,7 +34,7 @@ class ControlTextArea(ControlBase):
 
     def finishEditing(self):
         """Function called when the lineEdit widget is edited"""
-        self.changed()
+        self.changed_event()
         
 
     @property
@@ -46,9 +46,9 @@ class ControlTextArea(ControlBase):
         self._form.plainTextEdit.setPlainText(str(value))
 
     @property
-    def readOnly(self):
+    def readonly(self):
         return self._form.plainTextEdit.isReadOnly()
 
-    @readOnly.setter
-    def readOnly(self, value):
+    @readonly.setter
+    def readonly(self, value):
         self._form.plainTextEdit.setReadOnly(value)

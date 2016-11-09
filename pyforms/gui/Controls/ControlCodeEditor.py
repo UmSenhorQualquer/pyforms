@@ -31,8 +31,8 @@ class ControlCodeEditor(ControlBase):
 
     ARROW_MARKER_NUM = 8
 
-    def __init__(self, label='', defaultvalue='', helptext=''):
-        super(ControlCodeEditor, self).__init__(label, defaultvalue, helptext)
+    def __init__(self, label='', default='', helptext=''):
+        super(ControlCodeEditor, self).__init__(label, default, helptext)
 
         self._changed_func = None
 

@@ -65,9 +65,9 @@ class ControlVisVis(ControlBase):
     def legend(self, value): self._a.legend = value
 
     @property
-    def showGrid(self):return self._a.axis.showGrid
-    @showGrid.setter
-    def showGrid(self, value): self._a.axis.showGrid = value
+    def show_grid(self):return self._a.axis.showGrid
+    @show_grid.setter
+    def show_grid(self, value): self._a.axis.showGrid = value
 
     @property
     def title(self):return ''
