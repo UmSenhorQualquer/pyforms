@@ -29,9 +29,9 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		Timeline events editor
 	"""
 
-	def __init__(self, label="", default=0, min=0, max=100, **kwargs):
+	def __init__(self, label="", default=0, max=100):
 		QtGui.QWidget.__init__(self)
-		ControlBase.__init__(self, label, default, **kwargs)
+		ControlBase.__init__(self, label, default)
 		self._max = 100
 		self._graphs_prop_win = GraphsProperties(self._time, self)
 
@@ -140,30 +140,46 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	#### HELPERS/PUBLIC FUNCTIONS ############################################
 	##########################################################################
 
-	def getExportFilename(self):
-		return "untitled.csv"
-
-	def addRow(self, values):
-		for v in values:
-			self.addPeriod(v, track=0)
-
-	def addPeriod(self, value, track=0, color=None):
+	def add_period(self, value, row=0, color=None):
 		self._time.addPeriod(value, track, color)
 		self._time.repaint()
 
-	def add_chart(self, name, data): self._time.add_chart(name, data)
+	def add_graph(self, name, data): self._time.add_chart(name, data)
 
-	def import_chart(self, filename, frame_col=0, val_col=1):
+	def import_graph(self, filename, frame_col=0, val_col=1):
 		self.__import()
 		self._import_window.import_chart(filename, frame_col, val_col)
 		
-	def import_chart_file(self, filename, separator=';', ignore_rows=0):
+	def import_graph_file(self, filename, separator=';', ignore_rows=0):
 		csvfile = open(filename, 'U')
 		spamreader = csv.reader(csvfile, delimiter=separator)
 		for i in range(ignore_rows): next(spamreader, None)
 		self._time.importchart_csv(spamreader)
 		csvfile.close()
 
+	def show_graphs_properties(self):		
+		self._graphs_prop_win.show()
+		self._time.repaint()
+
+	def import_csv(self, csvfile):
+		# If there are annotation in the timeline, show a warning
+		if len(self._time._tracks) > 0:  # dict returns True if not empty
+			message = ["You are about to import new data. ",
+					   "If you proceed, current annotations will be erased. ",
+					   "Make sure to export current annotations first to save.",
+					   "\n",
+					   "Are you sure you want to proceed?"]
+			reply = QtGui.QMessageBox.question(self,
+											   "Warning!",
+											   "".join(message),
+											   QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
+											   QtGui.QMessageBox.No)
+
+			if reply != QtGui.QMessageBox.Yes:
+				return
+
+		self._time.import_csv(csvfile)
+		print("Annotations file imported: {:s}".format(filename))
 
 			
 
@@ -171,14 +187,56 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	#### EVENTS ##############################################################
 	##########################################################################
 
+
+
+	##########################################################################
+	#### PROPERTIES ##########################################################
+	##########################################################################
+
+	@property
+	def value(self): return self._time.position
+
+	@value.setter
+	def value(self, value):
+		ControlBase.value.fset(self, value)
+		self._time.position = value
+
+	@property
+	def max(self): return self._time.minimumWidth()
+
+	@max.setter
+	def max(self, value):
+		self._max = value
+		self._time.setMinimumWidth(value)
+		self.repaint()
+
+	@property
+	def mouse_over_row_index(self):
+		globalPos = QtGui.QCursor.pos()
+		widgetPos = self._time.mapFromGlobal(globalPos)
+		return self._time.trackInPosition(widgetPos.x(), widgetPos.y())
+
+	@property
+	def form(self): return self
+
+	@property
+	def rows(self): return self._time.tracks
+
+	@property 
+	def graphs(self):
+		return self._graphs_prop_win.charts
+
+
+	##########################################################################
+	#### PRIVATE FUNCTIONS ###################################################
+	##########################################################################
+
+
 	def about_to_show_contextmenu_event(self):
 		for action in self._deltaActions:
 			action.setVisible(
 				True) if self._time._selected is not None else action.setVisible(False)
 
-	def show_graphs_properties(self):		
-		self._graphs_prop_win.show()
-		self._time.repaint()
 
 	def __setLinePropertiesEvent(self):
 		"""
@@ -238,33 +296,13 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		if not hasattr(self, '_import_window'): self._import_window = ImportWindow(self)
 		self._import_window.show()
 
-	def import_csv(self, csvfile):
-		# If there are annotation in the timeline, show a warning
-		if len(self._time._tracks) > 0:  # dict returns True if not empty
-			message = ["You are about to import new data. ",
-					   "If you proceed, current annotations will be erased. ",
-					   "Make sure to export current annotations first to save.",
-					   "\n",
-					   "Are you sure you want to proceed?"]
-			reply = QtGui.QMessageBox.question(self,
-											   "Warning!",
-											   "".join(message),
-											   QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
-											   QtGui.QMessageBox.No)
-
-			if reply != QtGui.QMessageBox.Yes:
-				return
-
-		self._time.import_csv(csvfile)
-		print("Annotations file imported: {:s}".format(filename))
-
 
 	def __export(self):
 		"""Export annotations to a file."""
 
 		filename, ffilter = QtGui.QFileDialog.getSaveFileNameAndFilter(parent=self,
 													 caption="Export annotations file",
-													 directory=self.getExportFilename(),
+													 directory="untitled.csv",
 													 filter="CSV Files (*.csv);;CSV Matrix Files (*.csv)",
 													 options=QtGui.QFileDialog.DontUseNativeDialog)
 		
@@ -286,7 +324,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 		filename = QtGui.QFileDialog.getSaveFileName(parent=self,
 													 caption="Export matrix file",
-													 directory=self.getExportFilename(),
+													 directory="untitled.csv",
 													 filter="CSV Files (*.csv)",
 													 options=QtGui.QFileDialog.DontUseNativeDialog)
 		if filename != "":
@@ -343,63 +381,3 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 				modifiers is not int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and \
 				modifiers is not QtCore.Qt.ShiftModifier:
 			QtGui.QScrollArea.keyPressEvent(self._scrollArea, event)
-
-	##########################################################################
-	#### PROPERTIES ##########################################################
-	##########################################################################
-
-	@property
-	def pointerChanged(self):
-		return self._time._pointer.moveEvent
-
-	@pointerChanged.setter
-	def pointerChanged(self, value):
-		self._time._pointer.moveEvent = value
-
-	@property
-	def value(self): return self._time.position
-
-	@value.setter
-	def value(self, value):
-		ControlBase.value.fset(self, value)
-		self._time.position = value
-
-	@property
-	def max(self): return self._time.minimumWidth()
-
-	@max.setter
-	def max(self, value):
-		self._max = value
-		self._time.setMinimumWidth(value)
-		self.repaint()
-
-	@property
-	def mouseOverLine(self):
-		globalPos = QtGui.QCursor.pos()
-		widgetPos = self._time.mapFromGlobal(globalPos)
-		return self._time.trackInPosition(widgetPos.x(), widgetPos.y())
-
-	# Video playback properties
-	@property
-	def playVideoEvent(self):
-		return self._time.playVideoEvent
-
-	@playVideoEvent.setter
-	def playVideoEvent(self, value):
-		self._time.playVideoEvent = value
-
-	@property
-	def fpsChanged(self): return self._time.fpsChangeEvent
-
-	@fpsChanged.setter
-	def fpsChanged(self, value): self._time.fpsChangeEvent = value
-
-	@property
-	def form(self): return self
-
-	@property
-	def tracks(self): return self._time.tracks
-
-	@property 
-	def charts(self):
-		return self._graphs_prop_win.charts

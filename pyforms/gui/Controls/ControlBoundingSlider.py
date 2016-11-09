@@ -262,7 +262,7 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
 
 class ControlBoundingSlider(ControlBase):
 
-	def __init__(self, label = "", default = [20,40], min = 0, max = 100, horizontal=False):
+	def __init__(self, label="", default = [20,40], min=0, max=100, horizontal=False):
 		self._horizontal = horizontal
 		ControlBase.__init__(self, label, default)
 		self.min = min
@@ -307,20 +307,20 @@ class ControlBoundingSlider(ControlBase):
 	def changed(self, value): self._form.changed = value        
 
 	@property
-	def min(self): return self._form._lower
+	def min(self): return self.form._lower
 
 	@min.setter
 	def min(self, value): 
-		self._form._lower = value
-		self._form.repaint()
+		self.form._lower = value
+		self.form.repaint()
 
 	@property
-	def max(self): return self._form._higher
+	def max(self): return self.form._higher
 
 	@max.setter
 	def max(self, value): 
-		self._form._higher = value
-		self._form.repaint()
+		self.form._higher = value
+		self.form.repaint()
 
 	@property
 	def scale(self): return self.form.scale

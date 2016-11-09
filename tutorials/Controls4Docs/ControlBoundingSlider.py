@@ -20,10 +20,24 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', 0, 255, horizontal=True)
+		self._control 	= ControlBoundingSlider('Threshold', default=[80, 255], min=0, max=255, horizontal=True, helptext='help text example')
 		
 		self._formset = [' ','_control',' ']
+
+
+
+
+		# IO test
+		data = self._control.save_form({})
+		data['value'] = 200, 255
+		self._control.load_form(data)
+
+		self._control.hide()
+		self._control.show()
 		
+		self._control.add_popup_menu_option('option 1', function_action=lambda x: x, key=None)
+
+		#self._control.add_popup_submenu_option(label, options, keys={})
 
 
 

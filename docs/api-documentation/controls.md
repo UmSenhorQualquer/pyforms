@@ -36,6 +36,7 @@ Loads the value of the control.
 #### save_form(data, path=None)  
 
 Save a value of the control to a dictionary.  
+
 **data** - Dictionary where the control value should be saved.
 **path** - Optional parameter that can be used to load the data.
  	
@@ -47,9 +48,14 @@ Show the control.
 
 Hide the control.
  	
-#### add_popup_menu_option(label, function_action=None, key=None)  
+#### add_popup_menu_option(label, function_action=None, key=None, icon=None)  
 
 Add an option to the Control popup menu.
+
+**label** - Label of the opti
+**function_action** - Optional parameter that can be used to load the data.
+**key** - Dictionary where the control value should be saved.
+**icon** - Optional parameter that can be used to load the data.
  	
 #### add_popup_submenu_option(label, options, keys={})  
 
@@ -288,7 +294,7 @@ controlVar.value = [('item1',True), ('item2',False), 'item3']
 ***************************
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v2.0/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
 
 ### **Events**
 ***************************
@@ -497,41 +503,84 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlEventTimeline.png?raw=true "Screen")
 
+This control implements a timeline where it is possible to display events and graphs.
 
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", default=0, min=0, max=100, **kwargs)
+#### \_\_init\_\_(label="", default=0, max=100)
+
+**default** - Default position of the pointer.
+**min** - Timeline start.
+**max** - Timeline end.
 
 ### **Functions**
 ***************************
- 	 	
-#### getExportFilename()
- 	
-#### addRow(values)
- 	
-#### addPeriod(value, track=0, color=None)	source code
 
-### **Events**
-***************************
+#### add_event(value, row=0, color=None)
 
-#### playVideoEvent()
+Add a new a new event.
 
-#### fpsChanged()
-Simulates the click of the open button.
-#### pointerChanged()
- 	
+**value** - Event description. The format is a tuple: ('event name', start, end)
+**row** - Row where the event will be display.
+**color** - Color of the event.
+
+#### add_graph(name, data)
+
+Add a new graph.
+
+**name** - Graph name.
+**data** - [(frame index, value), ...] list.
+
+#### import_graph_file(filename, separator=';', ignore_rows=0)
+
+Import a graph csv file.
+
+**filename** - Filename to load.
+**separator** - CSV separator character.
+**ignore_rows** - Ignore the first n lines when loading the file.
+
+#### import_csv(csvfile)
+
+Import an event file from a csv.reader cursor. 
+
+**csvfile** - csv.reader cursor.
+
+```python
+csvfile = open(filename, 'U')
+spamreader = csv.reader(csvfile)
+
+control.import_csv(spamreader)
+```  
+
+#### show_graphs_properties()
+
+Shows the graphs properties window.
+
 ### **Properties**
 ***************************
 
 #### value
 
-#### max
- 	
-#### mouseOverLine
+Returns the events list.
 
+#### max
+
+Returns or sets the maximum of time that the control will handle.
  	
- 	
+#### mouse_over_row_index
+
+Returns the index of the row which the mouse is over.
+
+#### rows
+
+Returns a list of rows objects.
+
+#### graphs
+
+Returns a list of graphs objects.
+
+
 
 
 
@@ -566,28 +615,6 @@ Gets and sets a file path.
 
 
 
-## ControlFilesTree
-***************************
-
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFilesTree.png?raw=true "Screen")
-
-Show the directory files in a tree view
-
-**Note:** It is not fully developed yet.
-
-### **Properties**
-***************************
-
-#### value
-
-Gets and sets a directory path.
-
-
-
-
-
-
-
 
 ## ControlImage
 ***************************
@@ -609,7 +636,7 @@ Redraw the image or set of images
 
 ### **Properties**
 ***************************
- 	
+
 #### value
 
 This property receives an image path, a numpy image or a list of numpy images.  
@@ -832,19 +859,19 @@ Boolean flag, indicating if should show the subwindows close button or not.
 
 #### \_\_init\_\_(label="", default=0, min=0, max=100)
 
-**min** - Defines the minimum value that can be selected.  
-**max** - Defines the maximum value that can be selected. 
+**min** - Defines the minimum value that can be selected.
+**max** - Defines the maximum value that can be selected.
 
 ### **Properties**
 ***************************
 
 #### min
 
-Defines the minimum value that can be selected.  
+Defines the minimum value that can be selected.
  	
 #### max
 
-Defines the maximum value that can be selected.  
+Defines the maximum value that can be selected.
 
 #### value
 
@@ -917,47 +944,67 @@ Returns and sets the background color.
 ### **Functions**
 ***************************
 
-#### pausePlay()
+#### play()
 
-Toggle video play.
+Plays the video.
+
+#### stop()
+
+Stops the video.
  	
 #### refresh()	
 
 Refresh the last painted frame.
- 	
-#### isPlaying()
-
-Returns a boolean indicating if the video is playing.
 
 ### **Events**
 ***************************
 
-#### processFrame(frame)
+#### on_double_click_event(event, x, y)
 
-Function called before the frame is rendered.
+Called on double click
+
+**event** - Qt event.
+**x** - Mouse x coordenate in the video.
+**y** - Mouse y coordenate in the video.
+
+#### on_click_event(event, x, y)
+
+Called on when the mouse click is activated.
+
+**event** - Qt event.
+**x** - Mouse x coordenate in the video.
+**y** - Mouse y coordenate in the video.
+
+#### on_drag_event(start_point, end_point)
+
+Called everytime the mouse is dragging in the video.
+
+**start_point** - Drag starting point.
+**end_point** - Drag end point.
+
+#### on_end_drag_event(start_point, end_point)
+
+Called when the mouse ends dragging the video.
+
+**start_point** - Drag starting point.
+**end_point** - Drag end point.
+
+#### on_key_release_event(event)
+
+Called everytime a key is pressed.
+
+**event** - Qt key event.
+
+#### process_frame_event(frame)
+
+Function called before the frame is rendered. It should return a frame or a list of frames.
+
+**frame** - Numpy array representing the image.
+
+
  	
 ### **Properties**
 ***************************
-
-#### onDoubleClick
-
-Gets and sets the function called on double click event.  
-The funtion receives the next parameters: onDoubleClick(event, x, y)
- 	
-#### onClick
-
-Gets and sets the function called on click event.  
-The funtion receives the next parameters: onClick(event, x, y)
- 	
-#### onDrag
-
-Gets and sets the function called during a drag event.  
-The funtion receives the next parameters: onDrag(startPoint, endPoint)
- 	
-#### onEndDrag
-
-Gets and sets the function called when a drag event ends.  
-The funtion receives the next parameters: onEndDrag(startPoint, endPoint)
 
 #### value
 
@@ -972,15 +1019,14 @@ or
 ```python
 controlVar.value = cv2.VideoCapture('~/home/ricardo/video.avi')
 ```
- 	
-#### startFrame
+#### next_frame_step
 
-Gets and sets the first frame.
+Sets and gets the number of flags that should be jumped on the next cycle.
 
-#### endFrame
+#### view_in_3D
 
-Gets and sets the last frame.
- 	
+Activates the 3D visualization mode. It can be usefull to produce some 3D data visualization.
+
 #### video_index
 
 Returns the current frame index.
@@ -989,18 +1035,29 @@ Returns the current frame index.
 
 Returns the total number of frames of a video.
  	
-#### image
+#### frame
 
-Returns and sets the image beeing rendered.
+Returns and sets the frame image that is beeing rendered.
  	
 #### fps
 
 Returns and sets the video FPS.
  	
-#### helpText
+#### help_text
 
 Return and set the help text that should be rendered in the video.
 
+#### frame_width
+
+Width of the frame that is being displayed
+
+#### frame_height
+
+Height of the frame that is being displayed
+
+#### is_playing
+
+Returns True if the player is playing.
 
 
 
@@ -1342,7 +1399,7 @@ Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps
 ## ControlWeb
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v2.0/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
 
 Displays a web-browser.
 

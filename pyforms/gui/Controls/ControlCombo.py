@@ -116,7 +116,7 @@ class ControlCombo(ControlBase):
 	
 	@property	
 	def current_index(self): return self._form.comboBox.currentIndex()
-	@current_index
+	@current_index.setter
 	def current_index(self, value): self._form.comboBox.setCurrentIndex(value)
 
 	

@@ -33,6 +33,8 @@ class ControlBase(object):
 		self._parent    = None  # Parent window
 		self._label     = label # Label
 		self._popup_menu = None
+		
+		self.init_form()
 
 
 	def init_form(self):
@@ -80,31 +82,34 @@ class ControlBase(object):
 			return
 		self.form.hide()
 
-	def add_popup_menu_option(self, label, function_action=None, key=None, icon=None):
+	def add_popup_menu_option(self, label, function_action=None, key=None, icon=None, submenu=None):
 		"""
 		Add an option to the Control popup menu
 		@param label:           label of the option.
 		@param function_action:  function called when the option is selected.
 		@param key:             shortcut key
+		@param icon:            icon
 		"""
 		if not self._popup_menu:
 			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 			self.form.customContextMenuRequested.connect(self._open_popup_menu)
 			self._popup_menu = QtGui.QMenu()
-			self._popup_menu.aboutToShow.connect(
-				self.about_to_show_contextmenu_event)
+			self._popup_menu.aboutToShow.connect( self.about_to_show_contextmenu_event)
+
+		menu = submenu if submenu else self._popup_menu
+
 		if label == "-":
-			return self._popup_menu.addSeparator()
+			return menu.addSeparator()
 		else:
 			action = QtGui.QAction(label, self.form)
 			if icon is not None:
 				action.setIconVisibleInMenu(True)
-				action.setIcon(QtGui.QIcon(icon))
+				action.setIcon(icon if isinstance(icon, QtGui.QIcon) else QtGui.QIcon(icon) )
 			if key != None:
 				action.setShortcut(QtGui.QKeySequence(key))
 			if function_action:
 				action.triggered.connect(function_action)
-				self._popup_menu.addAction(action)
+				menu.addAction(action)
 			return action
 
 	def add_popup_submenu_option(self, label, options, keys={}):
