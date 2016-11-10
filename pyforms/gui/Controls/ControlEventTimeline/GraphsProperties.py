@@ -63,7 +63,7 @@ class GraphsProperties(BaseWidget):
 
 	@property
 	def selected_chart(self):
-		index = self._graphs_list.mouseSelectedRowIndex
+		index = self._graphs_list.selected_row_index
 		return self._timeline._charts[0] if (index is not None) else None
 	
 	@property
@@ -82,7 +82,7 @@ class GraphsProperties(BaseWidget):
 			self._graphs_list += [graph.name]
 
 	def __remove_chart(self):
-		index = self._graphs_list.mouseSelectedRowIndex
+		index = self._graphs_list.selected_row_index
 		if index is not None:
 			self._graphs_list -= -1
 			self._timeline._charts.pop(index)
@@ -90,7 +90,7 @@ class GraphsProperties(BaseWidget):
 
 
 	def __graphs_list_selection_changed(self):        
-		index = self._graphs_list.mouseSelectedRowIndex
+		index = self._graphs_list.selected_row_index
 		if index is not None:
 			graph = self._timeline._charts[index]
 
@@ -126,7 +126,7 @@ class GraphsProperties(BaseWidget):
 
 
 	def __save_graphs_changes(self):
-		index = self._graphs_list.mouseSelectedRowIndex
+		index = self._graphs_list.selected_row_index
 			
 		if self._loaded and index is not None:
 			graph = self._timeline._charts[index]

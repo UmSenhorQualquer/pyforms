@@ -24,14 +24,19 @@ class SimpleExample(BaseWidget):
 		
 		self._formset = [' ',(' ', '_control', ' '),' ']
 		
-		self._control.addItem('Portugal', 'pt')
-		self._control.addItem('Angola', 'ao')
-		self._control.addItem('Mocambique', 'mz')
-		self._control.addItem('Brazil', 'br')
-		self._control.addItem('Cabo Verde', 'cv')
+		self._control.add_item('Portugal', 'pt')
+		self._control.add_item('Angola', 'ao')
+		self._control.add_item('Mocambique', 'mz')
+		self._control.add_item('Brazil', 'br')
+		self._control.add_item('Cabo Verde', 'cv')
 
 		
 		self._control.text = 'Brazil'
+
+		self._control.changed_event = self.__print_value
+
+	def __print_value(self):
+		print self._control.value
 
 ##################################################################################################################
 ##################################################################################################################

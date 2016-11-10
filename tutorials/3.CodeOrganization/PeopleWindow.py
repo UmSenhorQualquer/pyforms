@@ -64,7 +64,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		Remove person button event
 		"""
-		self.removePerson( self._peopleList.mouseSelectedRowIndex ) 
+		self.removePerson( self._peopleList.selected_row_index ) 
 
 #Execute the application
 if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )

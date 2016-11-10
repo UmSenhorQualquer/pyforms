@@ -50,11 +50,13 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self.add_popup_menu_option("Set track properties...", self.__setLinePropertiesEvent)
 		self.add_popup_menu_option("Set graphs properties", self.show_graphs_properties)
 		self.add_popup_menu_option("-")
-		self.add_popup_submenu_option("Clean", {
-			'Current line': self.__cleanLine,
-			'Everything': self.__clean,
-			'Charts': self.__cleanCharts
-		})
+
+		clean_menu = self.add_popup_submenu('Clean')
+
+		self.add_popup_menu_option('Current line',function_action=self.__cleanLine, submenu=clean_menu)
+		self.add_popup_menu_option('Everything',function_action=self.__clean, submenu=clean_menu)
+		self.add_popup_menu_option('Charts',function_action=self.__cleanCharts, submenu=clean_menu)
+
 
 	def init_form(self):
 		# Get the current path of the file
@@ -187,6 +189,11 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	#### EVENTS ##############################################################
 	##########################################################################
 
+	@property
+	def pointer_changed_event(self): return self._time._pointer.moveEvent
+
+	@pointer_changed_event.setter
+	def pointer_changed_event(self, value): self._time._pointer.moveEvent = value
 
 
 	##########################################################################

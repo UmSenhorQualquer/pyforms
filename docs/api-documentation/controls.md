@@ -63,8 +63,14 @@ Add an option to the Control popup menu.
 #### add_popup_submenu(label, submenu=None)
 
 It returns a new sub popup menu. If submenu is open the menu is added to the main popup menu.
- 	
-	
+
+```python
+control.add_popup_menu_option('option 0', function_action=self._do_something)
+submenu1 = self._control.add_popup_submenu('menu 1')
+submenu2 = self._control.add_popup_submenu('menu 2', submenu=submenu1)
+control.add_popup_menu_option('option 1', function_action=self._do_something, key='Control+Q', submenu=submenu2)
+
+```  
 
 ### **Events**
 ***************************
@@ -75,7 +81,7 @@ Function called before the Control popup menu is opened.
 
 #### changed_event()  
 
-Function called when ever the Control value is changed.
+Function called when ever the Control value is changed. The event function should return True if the data was saved with success.
 
 
 ### **Properties**
@@ -99,7 +105,7 @@ This property returns or set the name of the control.
 #### parent  
 Returns or set the parent basewidget where the Control is.
 
-#### visible
+#### visible  
 Set and return the control visibility.
 
 #### value  
@@ -560,6 +566,14 @@ control.import_csv(spamreader)
 
 Shows the graphs properties window.
 
+### **Events**
+***************************
+
+#### pointer_changed_event()
+
+Shows the graphs properties window.
+
+
 ### **Properties**
 ***************************
 
@@ -959,10 +973,14 @@ Stops the video.
 
 Refresh the last painted frame.
 
+#### update_frame()
+
+Read the next frame and display it.
+
 ### **Events**
 ***************************
 
-#### on_double_click_event(event, x, y)
+#### double_click_event(event, x, y)
 
 Called on double click
 
@@ -970,7 +988,7 @@ Called on double click
 **x** - Mouse x coordenate in the video.
 **y** - Mouse y coordenate in the video.
 
-#### on_click_event(event, x, y)
+#### click_event(event, x, y)
 
 Called on when the mouse click is activated.
 
@@ -978,21 +996,21 @@ Called on when the mouse click is activated.
 **x** - Mouse x coordenate in the video.
 **y** - Mouse y coordenate in the video.
 
-#### on_drag_event(start_point, end_point)
+#### drag_event(start_point, end_point)
 
 Called everytime the mouse is dragging in the video.
 
 **start_point** - Drag starting point.
 **end_point** - Drag end point.
 
-#### on_end_drag_event(start_point, end_point)
+#### end_drag_event(start_point, end_point)
 
 Called when the mouse ends dragging the video.
 
 **start_point** - Drag starting point.
 **end_point** - Drag end point.
 
-#### on_key_release_event(event)
+#### key_release_event(event)
 
 Called everytime a key is pressed.
 
@@ -1220,7 +1238,7 @@ Add an item to the root node.
 
 Remove an item from the root node.
 
-#### add_popup_menu_option(label='', function_action=None, key=None, item=None, icon=None)
+#### add_popup_menu_option(label='', function_action=None, key=None, item=None, icon=None, submenu=None)
 
 Add a popup menu option to all the items, or a specific item.
 
@@ -1229,6 +1247,7 @@ Add a popup menu option to all the items, or a specific item.
 **key** - Option hotkey.
 **item** - Item to which the popup menu option should be applied.
 **icon** - Icon of the popup menu option.
+**submenu** - Submenu where the option will be added.
 
 #### clear()
 

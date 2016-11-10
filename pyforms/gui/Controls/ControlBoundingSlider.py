@@ -35,8 +35,6 @@ class GaugeWidgetVertical(QtGui.QWidget):
 		self._use_float     = False
 
 
-	def changed(self): pass
-
 	def paintEvent(self,e):
 		# call the base implementation to paint normal interface
 		super(GaugeWidgetVertical, self).paintEvent(e)

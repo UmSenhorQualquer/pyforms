@@ -45,6 +45,10 @@ class SimpleExample(BaseWidget):
 
 		self._control.changed_event = self.__control_changed_event
 
+		self._control.value = [10,100]
+		self._control.enabled = False
+		#self._control.label = 'Some label'
+
 	def __control_changed_event(self):
 		print self._control.value
 

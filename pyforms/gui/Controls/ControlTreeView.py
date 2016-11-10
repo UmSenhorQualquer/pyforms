@@ -59,7 +59,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 
 
 	@property
-	def mouseSelectedRowIndex(self):
+	def selected_row_index(self):
 		indexes = self.mouseSelectedRowsIndexes
 		if len(indexes)>0: return indexes[0]
 		else: return None
@@ -103,7 +103,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 	def __sub__(self, other):
 		if isinstance(other, int):
 			if other < 0:
-				indexToRemove = self.mouseSelectedRowIndex
+				indexToRemove = self.selected_row_index
 			else:
 				indexToRemove = other
 			self.model().removeRow(indexToRemove)

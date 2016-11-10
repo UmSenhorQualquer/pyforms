@@ -85,16 +85,15 @@ class ControlTree(ControlBase, QTreeWidget):
 
 	
 
-	def add_popup_menu_option(self, label='', function_action=None, key=None, item=None, icon=None):
+	def add_popup_menu_option(self, label='', function_action=None, key=None, item=None, icon=None, submenu=None):
 		"""
 		Add an option to the Control popup menu
 		@param label:           label of the option.
-		@param functionAction:  function called when the option is selected.
+		@param function_action:  function called when the option is selected.
 		@param key:             shortcut key
 		@param key:             shortcut key
 		"""
-		action = super(ControlTree, self).add_popup_menu_option(
-			label, functionAction, key)
+		action = super(ControlTree, self).add_popup_menu_option(label, function_action, key, submenu)
 
 		if item is not None:
 			action = QtGui.QAction(label, self.form)
@@ -103,7 +102,7 @@ class ControlTree(ControlBase, QTreeWidget):
 				action.setIcon(QtGui.QIcon(icon))
 			if key is not None:
 				action.setShortcut(QtGui.QKeySequence(key))
-			if functionAction:
+			if function_action:
 				action.triggered.connect(function_action)
 				# Associate action to the item.
 				if id(item) not in self._items.keys():
@@ -180,7 +179,7 @@ class ControlTree(ControlBase, QTreeWidget):
 
 	@property
 	def selected_row_index(self):
-		indexes = self.mouseSelectedRowsIndexes
+		indexes = self.selected_rows_indexes
 		if len(indexes) > 0:
 			return indexes[0]
 		else:

@@ -49,10 +49,10 @@ class ControlCombo(ControlBase):
 		self._addingItem = True
 		if value is not None:
 			if not (value in self._items.values()):
-				self._form.comboBox.add_item(label)
+				self._form.comboBox.addItem(label)
 		else:
 			if not (label in self._items.keys()):
-				self._form.comboBox.add_item(label)
+				self._form.comboBox.addItem(label)
 
 		firstValue = False
 		if self._items == {}:
@@ -134,7 +134,7 @@ class ControlCombo(ControlBase):
 				index = self._form.comboBox.findText(key)
 				self._form.comboBox.setCurrentIndex(index)
 				if self._value != value:
-					self.changed()
+					self.changed_event()
 				self._value = val
 
 	@property

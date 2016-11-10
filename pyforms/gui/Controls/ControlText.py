@@ -22,7 +22,9 @@ class ControlText(ControlBase):
 		control_path = tools.getFileInSameDirectory(__file__, "textInput.ui")
 		self._form = uic.loadUi(control_path)
 		self.form.label.setText(self._label)
-		self.form.lineEdit.setText(self._value)
+
+		if self._value is not None: self.form.lineEdit.setText(self._value)
+		
 		self.form.setToolTip(self.help)
 
 		super(ControlText, self).init_form()

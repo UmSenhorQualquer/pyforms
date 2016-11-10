@@ -37,10 +37,10 @@ class ControlLabel(ControlBase):
 
 
     @property
-    def value(self): return super(ControlLabel, self).value.fget()
+    def value(self): return ControlBase.value.fget(self)
 
     @value.setter
     def value(self, value):
         self._form.label.setText(value)
-        super(ControlLabel, self).value.fset(value)
+        ControlBase.value.fset(self, value)
 

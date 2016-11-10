@@ -41,7 +41,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		QtGui.QFrame.__init__(self)
 		ControlBase.__init__(self, *args)
 		
-		self.speed = 1
+		self._speed = 1
 		self.logger = logging.getLogger('pyforms')
 
 		self._updateVideoFrame = True
@@ -113,29 +113,29 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def process_frame_event(self, frame): return frame
 
 	@property
-	def on_double_click_event(self): return self._videoWidget.onDoubleClick
-	@on_double_click_event.setter
-	def on_double_click_event(self, value): self._videoWidget.onDoubleClick = value
+	def double_click_event(self): return self._videoWidget.onDoubleClick
+	@double_click_event.setter
+	def double_click_event(self, value): self._videoWidget.onDoubleClick = value
 
 	@property
-	def on_click_event(self): return self._videoWidget.onClick
-	@on_click_event.setter
-	def on_click_event(self, value):  self._videoWidget.onClick = value
+	def click_event(self): return self._videoWidget.onClick
+	@click_event.setter
+	def click_event(self, value):  self._videoWidget.onClick = value
 
 	@property
-	def on_drag_event(self): return self._videoWidget.onDrag
-	@on_drag_event.setter
-	def on_drag_event(self, value): self._videoWidget.onDrag = value
+	def drag_event(self): return self._videoWidget.onDrag
+	@drag_event.setter
+	def drag_event(self, value): self._videoWidget.onDrag = value
 
 	@property
-	def on_end_drag_event(self): return self._videoWidget.onEndDrag
-	@on_end_drag_event.setter
-	def on_end_drag_event(self, value): self._videoWidget.onEndDrag = value
+	def end_drag_event(self): return self._videoWidget.onEndDrag
+	@end_drag_event.setter
+	def end_drag_event(self, value): self._videoWidget.onEndDrag = value
 
 	@property
-	def on_key_release_event(self): return self._videoWidget.onKeyRelease
-	@on_key_release_event.setter
-	def on_key_release_event(self, value): self._videoWidget.onKeyRelease = value
+	def key_release_event(self): return self._videoWidget.onKeyRelease
+	@key_release_event.setter
+	def key_release_event(self, value): self._videoWidget.onKeyRelease = value
 
 	##########################################################################
 	############ PROPERTIES ##################################################
