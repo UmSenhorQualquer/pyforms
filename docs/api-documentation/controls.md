@@ -448,7 +448,7 @@ This control is used to select a directory.
 ### **Functions**
 ***************************
 
-#### open_button_clicked()
+#### click()
 
 Simulates the push of the button.
 
@@ -615,7 +615,7 @@ The control may be used to select a file.
 ### **Functions**
 ***************************
 
-#### open_button_clicked()
+#### click()
 
 Simulates the push of the button.
 
@@ -1268,6 +1268,26 @@ Create a new child item.
 **name** - Name of the new item.
 **parent** - Parent item of the new item.
 **icon** - Icon of the new item.
+
+##### To the return item it is possible to associate the events:
+
+```python
+item = control.create_child('new item')
+item.key_pressed_event = self.__key_pressed_event
+item.double_clicked_event = self.__double_clicked_event
+
+def __key_pressed_event(self, event): pass
+def __double_clicked_event(self): pass
+```
+
+#### item.key_pressed_event(event)
+
+Called when the item is selected and a key is pressed.
+
+#### item.double_clicked_event()
+
+Called when an item is double clicked.
+
 
 ### **Events**
 ***************************

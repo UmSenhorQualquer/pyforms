@@ -13,6 +13,8 @@ __status__      = "Development"
 from __init__ import *
 
 
+
+
 class SimpleExample(BaseWidget):
 	
 	
@@ -24,7 +26,7 @@ class SimpleExample(BaseWidget):
 		
 		self._formset = [' ',(' ','_control', ' '),' ']
 		
-
+		
 
 
 ##################################################################################################################

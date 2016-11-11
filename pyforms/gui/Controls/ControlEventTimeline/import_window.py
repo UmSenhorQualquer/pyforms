@@ -28,7 +28,7 @@ class BonsaiImportFileDlg(BaseWidget):
 class ImportWindow(BaseWidget):
 
 	def __init__(self, timeline=None):
-		super(ImportWindow, self).__init__('Import file', parentWindow=timeline)
+		super(ImportWindow, self).__init__('Import file', parent_win=timeline)
 		self.setContentsMargins(10, 10, 10, 10)
 		self._timeline = timeline
 

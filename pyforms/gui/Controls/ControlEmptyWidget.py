@@ -68,12 +68,12 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 	def save_form(self, data, path=None): 
 		if self.value is not None and self.value!='':
 			data['value'] = {}
-			self.value.save(data['value'], path)
+			self.value.save_form(data['value'], path)
 		return data
 
 	def load_form(self, data, path=None):
 		if 'value' in data and self.value is not None and self.value!='': 
-			self.value.load(data['value'], path)
+			self.value.load_form(data['value'], path)
 
 	def __clearLayout(self):
 		if self.form.layout() is not None:

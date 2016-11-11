@@ -12,7 +12,6 @@ __status__      = "Development"
 
 from __init__ import *
 
-
 class SimpleExample(BaseWidget):
 	
 	
@@ -24,8 +23,11 @@ class SimpleExample(BaseWidget):
 		
 		self._formset = [' ',(' ','_control', ' '),' ']
 		
+		#self._control.changed_event = self.__control_changed_event
 
-
+	@pyforms_event('_control','changed_event')
+	def __control_changed_event(self):
+		print self._control.value
 
 ##################################################################################################################
 ##################################################################################################################

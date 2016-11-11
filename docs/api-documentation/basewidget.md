@@ -19,7 +19,7 @@ class SimpleExample(BaseWidget):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
+		self.formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
 		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
 		#If you remove the ' ' the forms will occupy the entire window
 
@@ -35,14 +35,102 @@ class SimpleExample(BaseWidget):
 ## **Constructor**
 ***************************
 
-### \_\_init\_\_(title='Untitled')
+### \_\_init\_\_(title='Untitled', parent_win=None, win_flag=None)
 
 The constructer receives the title of the window.
 
-## **Important variables**
+**title** - Title of the window.
+**parent_win** - Parent widget. If the win_flag is None and the parent parameters is set, then the flag_win will be QtCore.Qt.Dialog.
+**win_flag** - Window type flag. Type of Qt.WindowType.
+
+## **Functions**
+***************************
+ 	
+### init_form() 
+
+Initialize the QWidget and its events with the set of form Controls.
+ 	
+### generate_tabs(formsetdict)
+
+Used when a dictionary is present in the the BaseWidget._formset variable.  
+Returns a QTabWidget with the forms Controls organization described in the parameter formsetDict.
+
+Example:
+```python
+{
+	"a:Player": ['_threshold', "_player", "=", "_results", "_query"], 
+	"b:Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
+}
+```
+
+**Note:** To sort the dictionary elements, we can use the format '[some characters]:[Tab name]' to order the tabs. The generateTabs function will use the component [some characters] to order alphabetically the tabs.
+Only the component [Tab name] will be shown in the tab.
+
+	
+### generate_panel(formset) 
+
+Used to construct a panel with the organization of the Controls described in the BaseWidget.formset property.  
+Returns a QWidget with the forms Controls organization described in the parameter formset.  
+
+**formset** - variable describing the organization of the forms Controls in the BaseWidget.
+
+Example:
+```python
+[
+	'info:Some title',
+	'h1:Some title',
+	'h2:Some title',
+	'h3:Some title',
+	'h4:Some title',
+	'h5:Some title',
+	(' ','free text', ' '),
+	('_video', '_arenas', '_run'), 
+	{
+		"Player": ['_threshold', "_player", "=", "_results", "_query"], 
+		"Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
+	}, 
+	"_progress"
+] 
+```
+
+### show()
+
+Calls the initForm() function and shows the BaseWidget.
+
+### save_window()
+
+Open a Save file dialog, and saves the Window Controls data to the selected file in the JSON format.
+
+### load_window()
+
+Opens a Open file dialog, and calls the function load_form_filename() 
+
+### load_form_filename(filename)
+
+Load the window data from a filename
+
+### save_form(data, path=None)
+
+Receives a dictionary, and stores all the Window Controls data on it.
+
+### load_form(data, path=None)
+ 	
+Load the Window Controls data from a dictionary.
+
+**data** - dict where the data will be stored.
+
+
+## **Events**
 ***************************
 
-### _formset
+## before_close_event()  
+
+Event called before the window is closed.
+
+## **Properties**
+***************************
+
+### formset
 
 This variable is used to define the organization of the forms Controls in the BaseWidget.  
 When is not defined the BaseWidget will generate this variable automatically.
@@ -76,86 +164,7 @@ self._formset = [
 **free text** - It is possible also to write some free text.
  	
 
-## **Functions**
-***************************
- 	
-### initForm() 
-
-Initialize the QWidget and its events with the set of form Controls.
- 	
-### generateTabs(formsetDict)
-
-Used when a dictionary is present in the the BaseWidget._formset variable.  
-Returns a QTabWidget with the forms Controls organization described in the parameter formsetDict.
-
-Example:
-```python
-{
-	"a:Player": ['_threshold', "_player", "=", "_results", "_query"], 
-	"b:Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
-}
-```
-
-**Note:** To sort the dictionary elements, we can use the format '[some characters]:[Tab name]' to order the tabs. The generateTabs function will use the component [some characters] to order alphabetically the tabs.
-Only the component [Tab name] will be shown in the tab.
-
-	
-### generatePanel(formset) 
-
-Used to construct a panel with the organization of the Controls described in the BaseWidget._formset variable.  
-Returns a QWidget with the forms Controls organization described in the parameter formset.  
-
-**formset** - variable describing the organization of the forms Controls in the BaseWidget.
-
-Example:
-```python
-[
-	'info:Some title',
-	'h1:Some title',
-	'h2:Some title',
-	'h3:Some title',
-	'h4:Some title',
-	'h5:Some title',
-	(' ','free text', ' '),
-	('_video', '_arenas', '_run'), 
-	{
-		"Player": ['_threshold', "_player", "=", "_results", "_query"], 
-		"Background image": [(' ', '_selectBackground', '_paintBackground'), '_image']
-	}, 
-	"_progress"
-] 
-```
-
-### show()
-
-Calls the initForm() function and shows the BaseWidget.
-
-### saveWindow()
-
-Open a Save file dialog, and saves the Window Controls data to the selected file in the JSON format.
-
-### save(data)
-
-Receives a dictionary, and stores all the Window Controls data on it.
-
-**data** - dict where the data will be stored.
-
-### loadWindow()
-
-Opens a Open file dialog, and calls the function loadWindowData() 
-
-### loadWindowData(filename)
-
-Loads the json data from a file and calls the function load()
- 	
-### load(data)
- 	
-Load the Window Controls data from a dictionary.
-
-## **Properties**
-***************************
-
-### formControls
+### controls
 
 Returns a dictionary of all the Controls in the Window.
  	
@@ -186,3 +195,11 @@ self.mainmenu = [
 ``` 
 
 **'-'**: Use the minus sign to create a split bar in the menu.
+
+### formset
+
+Gets or sets the controls' organizaton inside the window.
+
+### uid
+
+Gets or sets a unique id for the window.

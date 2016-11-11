@@ -36,17 +36,11 @@ class PackageFinder(object):
 		res = []
 		for plugin in self._plugins:
 			try:
-				"""
-				package_relative_path 	= os.path.join( *package_name.split('.') )
-				plugin_path 			= os.path.dirname(plugin.__file__)
-				filepath 				= os.path.join(plugin_path, package_relative_path)+'.py'
-				print('checking file:', filepath)
-				"""
-				#if os.path.isfile(filepath):
 				module 		= importlib.import_module("."+package_name, plugin)
 				class_def 	= getattr(module, class_name)
 				res.append(class_def)
 			except ImportError:
+				logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
 				pass
 			except:
 				logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)

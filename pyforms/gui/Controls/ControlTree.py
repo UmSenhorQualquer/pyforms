@@ -230,15 +230,14 @@ class ControlTree(ControlBase, QTreeWidget):
 		self.item_selection_changed_event()
 
 	def __itemDoubleClicked(self, item, column):
-		if hasattr(item, 'double_clicked'): item.double_clicked()
+		if hasattr(item, 'double_clicked_event'): item.double_clicked_event()
 		self.item_double_clicked_event(item)
-
 	
 
 	def keyPressEvent(self, event):
 		QTreeView.keyPressEvent(self, event)
 		item = self.selectedItem
-		if hasattr(item, 'key_pressed'): item.key_pressed(event)
+		if hasattr(item, 'key_pressed_event'): item.key_pressed_event(event)
 		self.key_press_event(event)
 
 

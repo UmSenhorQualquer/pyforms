@@ -10,7 +10,7 @@ from pyforms.Controls import ControlNumber
 class CsvParserDialog(BaseWidget):
 
     def __init__(self, parent=None):
-        super(CsvParserDialog, self).__init__('CSV Choose the columns', parentWindow = parent)
+        super(CsvParserDialog, self).__init__('CSV Choose the columns', parent_win = parent)
         self._filename = None
 
         # Definition of the forms fields

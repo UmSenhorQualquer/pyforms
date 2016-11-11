@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 class GraphsProperties(BaseWidget):
 
-	def __init__(self, timelineWidget=None, parentWindow=None):
-		super(GraphsProperties, self).__init__('Graphs properties', parentWindow=parentWindow)
+	def __init__(self, timelineWidget=None, parent_win=None):
+		super(GraphsProperties, self).__init__('Graphs properties', parent_win=parent_win)
 		self.setContentsMargins(10, 10, 10, 10)
 		self._timeline = timelineWidget
 
