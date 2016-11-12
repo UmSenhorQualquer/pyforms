@@ -34,6 +34,7 @@ pip install pyforms
 
 * [setuptools] (https://pypi.python.org/pypi/setuptools)
 * [Python 2.7](https://www.python.org/download/releases/2.7/)
+* [pysettings](https://github.com/UmSenhorQualquer/pysettings.git)
 * [PyQt4](http://www.riverbankcomputing.co.uk/software/pyqt/download)
 * [PyOpenGL](http://pyopengl.sourceforge.net/) [Optional - Only used by some Controls]
 * [VisVis](https://code.google.com/p/visvis/) [Optional - Only used by some Controls]
@@ -44,6 +45,7 @@ pip install pyforms
 ### Ubuntu 14
 
 * setuptools: ```sudo apt-get install python-setuptools```
+* pysettings: ```sudo pip install git+https://github.com/UmSenhorQualquer/pysettings.git```
 * Opengl: ```sudo apt-get install python-opengl```
 * OpenCV: ```sudo apt-get install python-opencv```
 * PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4```

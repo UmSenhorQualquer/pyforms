@@ -56,7 +56,7 @@ class ControlCodeEditor(ControlBase):
         self.form.font_size.addItem('24')
 
         # Set the default font size
-        index = self.form.font_size.findText(conf.CONTROL_CODE_EDITOR_DEFAULT_FONT_SIZE)
+        index = self.form.font_size.findText(conf.PYFORMS_CONTROL_CODE_EDITOR_DEFAULT_FONT_SIZE)
         self.form.font_size.setCurrentIndex(index)
 
         self.form.font_size.currentIndexChanged.connect(self.__font_size_index_changed)

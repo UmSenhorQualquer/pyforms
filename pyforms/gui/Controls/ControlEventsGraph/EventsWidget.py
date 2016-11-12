@@ -45,7 +45,7 @@ class EventsWidget(QtGui.QWidget):
 		self._tracks = []      # List of tracks
 		self._pointer = Pointer(0, self, scroll)  # Timeline ( greenline )
 		self.tracks_height = 30                        # Height in pixels
-		self.scale = conf.CONTROL_EVENTS_GRAPH_DEFAULT_SCALE
+		self.scale = conf.PYFORMS_CONTROL_EVENTS_GRAPH_DEFAULT_SCALE
 
 	##########################################################################
 	#### HELPERS/FUNCTIONS ###################################################
