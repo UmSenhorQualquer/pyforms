@@ -29,15 +29,20 @@ class SimpleExample(BaseWidget):
 
 		self._btn = ControlButton('Click')
 		self._btn1 = ControlButton('Click 1')
+		self._save = ControlButton('Save button')
+		self._load = ControlButton('Load button')
 		
 		self._formset = [
 			('_btn','_btn1'),
 			('_control0','_control1'),
 			('_control2','_control3'),
-			'_txt']
+			'_txt',
+			('_save','_load')]
 			
 		self._btn.value = self.__btn
 		self._btn1.value = self.__btn1
+		self._save.value = self.save_window
+		self._load.value = self.load_window
 
 		self._start = time.time()
 

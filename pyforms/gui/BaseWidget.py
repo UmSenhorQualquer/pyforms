@@ -339,7 +339,7 @@ class BaseWidget(QtGui.QFrame):
 
 	def load_form_filename(self, filename):
 		with open(filename, 'r') as pkl_file:
-			project_data = json.load_form(pkl_file)
+			project_data = json.load(pkl_file)
 		data = dict(project_data)
 		self.load_form(data)
 
