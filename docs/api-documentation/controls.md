@@ -303,7 +303,7 @@ controlVar.value = [('item1',True), ('item2',False), 'item3']
 ***************************
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v2.0/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
 
 ### **Events**
 ***************************
@@ -1441,7 +1441,7 @@ Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps
 ## ControlWeb
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v2.0/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
 
 Displays a web-browser.
 

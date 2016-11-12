@@ -2,20 +2,8 @@ from pyforms.terminal.Controls.ControlBase import ControlBase
 
 class ControlCombo(ControlBase):
 
-    _items = None
-
-    def initControl(self):
-        self._items = {}
-        self._addingItem = False
-        return "controls.push(new ControlCombo('%s','%s', []));" % (self._label, self._name)
-
-    def currentIndexChanged(self, index):
-        #if not self._addingItem:
-            #item = self._form.comboBox.currentText()
-        #    if len(item)>=1: OTControlBase.value.fset(self, self._items[str(item)])
-        return 0
             
-    def addItem(self, label, value = None):
+    def add_item(self, label, value = None):
         if self._items==None: self._items={}
         self._addingItem = True
         #if not (label in self._items.keys()):
@@ -33,7 +21,7 @@ class ControlCombo(ControlBase):
         if firstValue: self.value = self._items[label]
 
 
-    def clearItems(self):
+    def clear(self):
         self._items = {}
         self._value = None
         #self._form.comboBox.clear()
@@ -55,7 +43,7 @@ class ControlCombo(ControlBase):
                 self._value = val
 
     @property
-    def text(self): return "";#str(self._form.comboBox.currentText())
+    def text(self): return "";
 
     @text.setter
     def text(self, value):

@@ -8,27 +8,17 @@ class ControlBase(object):
     _controlHTML    = ""
 
     def __init__(self, label = "", defaultValue = "", helptext=None):
-        self._name = ""
         self._id = uuid.uuid4()
         self._value = defaultValue
         self._parent = 1
         self._label = label
-        self._popupMenu = None
-        self._controlHTML  = ""
 
+    def init_form(self): pass
 
-    def initControl(self):
-        self._controlHTML = "<div id='id%s' ><input type='text' id='%s' /></div>" % ( self._id, self._name )
-        return self._controlHTML
-
-    def finishEditing(self): self.update_control()
-
-    def update_control(self): pass
-
-    def load(self, data):
+    def load_form(self, data, path=None):
         if 'value' in data: self.value = data['value']
 
-    def save(self, data):
+    def save_form(self, data, path=None):
         if self.value: data['value'] = self.value
 
     def value_updated(self, value): pass
@@ -45,8 +35,7 @@ class ControlBase(object):
 
     def add_popup_menu_option(self, label, functionAction = None): pass
 
-    def __repr__(self):
-        return self.value
+    def __repr__(self): return self.value
     ############################################################################
     ############ Properties ####################################################
     ############################################################################
@@ -115,6 +104,3 @@ class ControlBase(object):
 
     @minHeight.setter
     def minHeight(self, value): pass
-
-
-    def __str__(self): return "<span id='place%s' />" % self._name

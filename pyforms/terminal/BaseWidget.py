@@ -10,13 +10,10 @@ except:
 
 class BaseWidget(object):
 
-	
-	
 	def __init__(self, title):
 		self._parser = argparse.ArgumentParser()
-		f = open('pid.txt', 'w')
-		f.write(str(os.getpid()))
-		f.close()
+		with open('pid.txt', 'w') as f:
+			f.write(str(os.getpid()))
 		
 		self._controlsPrefix 	= ''
 		self._title 			= title
@@ -28,9 +25,13 @@ class BaseWidget(object):
 
 	def init_form(self, parse=True):
 		result = {}
-		for fieldname, var in self.formControls.items():
+		for fieldname, var in self.controls.items():
 			name = var._name
-			if isinstance(var, (ControlFile,ControlSlider,ControlText, ControlCombo,ControlCheckBox, ControlDir) ):
+			if isinstance(var, (
+					ControlFile,ControlSlider,ControlText, 
+					ControlCombo,ControlCheckBox, ControlDir
+				) 
+			):
 				self._parser.add_argument("--%s" % name, help=var.label)
 
 		if parse:
@@ -41,12 +42,12 @@ class BaseWidget(object):
 				help='Function from the application that should be executed. Use | to separate a list of functions.')
 			self._args = self._parser.parse_args()
 
-			self.parseTerminalParameters()
-			self.executeEvents()
+			self.__parse_terminal_parameters()
+			self.__execute_events()
 
 
-	def parseTerminalParameters(self):
-		for fieldname, var in self.formControls.items():
+	def __parse_terminal_parameters(self):
+		for fieldname, var in self.controls.items():
 			name = var._name
 			if self._args.__dict__.get(name, None):
 
@@ -63,7 +64,6 @@ class BaseWidget(object):
 				if isinstance(var, ControlDir):
 					value = self._args.__dict__[name]
 					var.value = value
-
 				elif isinstance(var,  (ControlText, ControlCombo)):
 					var.value = self._args.__dict__[name]
 				elif isinstance(var, ControlCheckBox):
@@ -73,15 +73,16 @@ class BaseWidget(object):
 
 			
 			
-	def executeEvents(self):
+	def __execute_events(self):
 		for function in self._args.__dict__.get("exec{0}".format(self._controlsPrefix), []).split('|'):
-			if len(function)>0: getattr(self, function)()
+			if len(function)>0: 
+				getattr(self, function)()
 
 		res = {}
-		for controlName, control in self.formControls.items(): res[controlName] = {'value': control.value }
-		outfile = open('out-parameters.txt', 'wb')
-		outfile.write( str(res) )
-		outfile.close()
+		for controlName, control in self.controls.items(): 
+			res[controlName] = {'value': control.value }
+		with open('out-parameters.txt', 'wb') as outfile:
+			outfile.write( str(res) )
 
 
 	def __downloadFile(self, url, outFilepath):
@@ -172,7 +173,7 @@ class BaseWidget(object):
 		
 
 	@property
-	def formControls(self):
+	def controls(self):
 		"""
 		Return all the form controls from the the module
 		"""

@@ -83,7 +83,7 @@ Load the Window Controls data from a dictionary.
 ## **User interface functions**
 ***************************
 
-You will probably never use these functions directly, but they are here just for you to understand how the BaseWidgets layout is generated.
+You will probably never use these functions directly, but they are here so you can understand how the BaseWidgets layout is generated.
  	
 ### generate_tabs(formsetdict)
 
@@ -134,7 +134,7 @@ Example:
 ## **Events**
 ***************************
 
-## before_close_event()  
+### before_close_event()  
 
 Event called before the window is closed.
 

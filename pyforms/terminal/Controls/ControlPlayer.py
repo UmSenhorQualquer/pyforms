@@ -33,40 +33,31 @@ class ControlPlayer(ControlBase):
     _filename = ''        
     _position = 0
     
-    def initControl(self):
-        self._currentFrame = None
-        return "controls.push(new ControlPlayer('"+self._name+"'));"
+    def process_frame_event(self, frame): pass
 
-    def processFrame(self, frame): pass
+    def play(): pass
 
-    def updateFrame(self): pass
+    def stop(): pass
 
-    def videoPlay_clicked(self): pass
+    def refresh(): pass
 
-    def save(self, data): pass
+    def update_frame(): pass
 
-    def load(self, data): pass
+    def double_click_event(event, x, y): pass
 
-    def refresh(self): pass
-            
-    def convertFrameToTime(self, frame):
-        currentMilliseconds = (frame / self.value.videoFrameRate) * 1000
-        totalseconds = int(currentMilliseconds/1000)
-        minutes = int(totalseconds / 60)
-        seconds = totalseconds - (minutes*60)
-        milliseconds = currentMilliseconds - (totalseconds*1000)
-        return ( minutes, seconds, milliseconds )
+    def click_event(event, x, y): pass
 
-    def videoProgress_valueChanged(self): pass
+    def drag_event(start_point, end_point): pass
 
-    def videoProgress_sliderReleased(self): pass
+    def end_drag_event(start_point, end_point): pass
 
-    def videoFrames_valueChanged(self): pass
+    def key_release_event(event): pass
 
-    def isPlaying(self): pass
+    def process_frame_event(frame): pass
 
-    def changed(self): pass
+    def save_Form(self, data): pass
 
+    def load_form(self, data): pass
     
     @property
     def value(self): 
@@ -111,24 +102,7 @@ class ControlPlayer(ControlBase):
     def video_index(self, value): self._position = value
 
 
-        
-    @property
-    def startFrame(self): 
-        if self._value: return self._value.startFrame
-        else: return -1
-
-    @startFrame.setter
-    def startFrame(self, value): pass
-            
-    @property
-    def endFrame(self): 
-        if self._value: return self._value.startFrame
-        else: return -1
-
-    @endFrame.setter
-    def endFrame(self, value): pass
-
-
+ 
 
     @property
     def image(self): return self._currentFrame
