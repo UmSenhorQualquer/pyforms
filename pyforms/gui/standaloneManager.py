@@ -166,7 +166,7 @@ def execute_test_file(myapp):
 		code = compile(f.read(), args.test_file, 'exec')
 		exec(code, global_vars, local_vars)
 
-def startApp(ClassObject, geometry=None):
+def start_app(ClassObject, geometry=None):
 	from pysettings import conf
 
 	app = QtGui.QApplication(sys.argv)

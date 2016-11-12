@@ -32,7 +32,7 @@ class SimpleExample(BaseWidget):
 		self._save = ControlButton('Save button')
 		self._load = ControlButton('Load button')
 		
-		self._formset = [
+		self.formset = [
 			('_btn','_btn1'),
 			('_control0','_control1'),
 			('_control2','_control3'),
@@ -116,5 +116,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

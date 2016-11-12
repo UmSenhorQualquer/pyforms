@@ -38,7 +38,7 @@ class SimpleExample1(BaseWidget):
 
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 ```
 
 If you run this file, it will produce the next window.
@@ -94,7 +94,7 @@ class SimpleExample1(BaseWidget):
 		" "+ self._lastname.value
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 ```
 
 The previous code produces the next window, after you had pressed the button:

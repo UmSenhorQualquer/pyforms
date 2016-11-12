@@ -1,5 +1,5 @@
 from pyforms import BaseWidget
 
-def startApp(ClassObject):	
+def start_app(ClassObject):	
 	app = ClassObject()
 	app.init_form()

@@ -44,7 +44,7 @@ class PersonWindow(Person, BaseWidget):
 
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
+if __name__ == "__main__":	 pyforms.start_app( PersonWindow )
 ```
 
 But if we create the file **settings.py** in the same directory of the application, and we add to it the next code:

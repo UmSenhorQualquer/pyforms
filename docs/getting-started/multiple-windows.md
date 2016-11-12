@@ -98,7 +98,7 @@ class PersonWindow(Person, BaseWidget):
 		if self.parent!=None: self.parent.addPerson(self)
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
+if __name__ == "__main__":	 pyforms.start_app( PersonWindow )
 ```
 
 **Note**: *Test the window by executing the file.*
@@ -165,7 +165,7 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		self.removePerson( self._peopleList.selected_row_index ) 
 	
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
+if __name__ == "__main__":	 pyforms.start_app( PeopleWindow )
 ```
 
 The application will look like:

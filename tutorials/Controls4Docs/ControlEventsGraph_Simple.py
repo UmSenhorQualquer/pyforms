@@ -27,7 +27,7 @@ class SimpleExample(BaseWidget):
 		self._btn = ControlButton('Click')
 		self._btn1 = ControlButton('Click 1')
 		
-		self._formset = [
+		self.formset = [
 			'_btn',
 			'_control',
 			'_txt']
@@ -59,5 +59,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

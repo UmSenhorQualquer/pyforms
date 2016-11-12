@@ -135,4 +135,4 @@ class CsvParserDialog(BaseWidget):
 # Execute the application
 if __name__ == "__main__":
     import pyforms
-    pyforms.startApp(CsvParserDialog, geometry=(0, 0, 600, 400))
+    pyforms.start_app(CsvParserDialog, geometry=(0, 0, 600, 400))

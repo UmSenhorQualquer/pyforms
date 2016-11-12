@@ -160,4 +160,4 @@ class GraphsProperties(BaseWidget):
 # Execute the application
 if __name__ == "__main__":
 	import pyforms
-	pyforms.startApp(GraphsProperties, geometry=(0, 0, 600, 400))
+	pyforms.start_app(GraphsProperties, geometry=(0, 0, 600, 400))

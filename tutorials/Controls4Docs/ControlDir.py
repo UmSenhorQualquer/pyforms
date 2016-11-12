@@ -22,7 +22,7 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlDir('Files')
 		
-		self._formset = [' ',(' ', '_control', ' '),' ']
+		self.formset = [' ',(' ', '_control', ' '),' ']
 
 		self._control.changed_event = self.__print_value
 
@@ -37,5 +37,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

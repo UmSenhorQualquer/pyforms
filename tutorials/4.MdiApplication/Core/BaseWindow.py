@@ -23,7 +23,7 @@ class BaseWindow(BaseWidget):
 		self._details  			= ControlDockWidget('Details', 		side=ControlDockWidget.SIDE_RIGHT)
 		self._addWindow 		= ControlButton('Add window')
 
-		self._formset = [ '_addWindow','_textField', '_mdiArea']
+		self.formset = [ '_addWindow','_textField', '_mdiArea']
 
 		self._details.value = SimpleExample1()
 
@@ -56,4 +56,4 @@ class BaseWindow(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( BaseWindow )
+if __name__ == "__main__":	 pyforms.start_app( BaseWindow )

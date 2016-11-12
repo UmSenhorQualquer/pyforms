@@ -23,7 +23,7 @@ class SimpleExample(BaseWidget):
 		self._control 	= ControlBoundingSlider('Threshold', default=[80, 255], min=0, max=255, 
 			horizontal=True, helptext='help text example')
 		
-		self._formset = [' ','_control',' ']
+		self.formset = [' ','_control',' ']
 
 
 
@@ -46,7 +46,7 @@ class SimpleExample(BaseWidget):
 		self._control.changed_event = self.__control_changed_event
 
 		self._control.value = [10,100]
-		self._control.enabled = False
+		#self._control.enabled = False
 		#self._control.label = 'Some label'
 
 	def __control_changed_event(self):
@@ -60,5 +60,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

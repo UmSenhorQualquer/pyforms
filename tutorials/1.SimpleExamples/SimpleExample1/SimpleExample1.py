@@ -47,5 +47,5 @@ class SimpleExample1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 	

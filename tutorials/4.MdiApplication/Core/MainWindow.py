@@ -16,4 +16,4 @@ class MainWindow(BaseWindow):
 #Execute the application
 if __name__ == "__main__":	 
 	import pyforms
-	pyforms.startApp( MainWindow )
+	pyforms.start_app( MainWindow )

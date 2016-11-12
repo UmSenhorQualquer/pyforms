@@ -21,11 +21,10 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlCheckBox('Check me')
 		
-		self._formset = [' ',(' ','_control', ' '),' ']
+		self.formset = [' ',(' ','_control', ' '),' ']
 		
-		#self._control.changed_event = self.__control_changed_event
+		self._control.changed_event = self.__control_changed_event
 
-	@pyforms_event('_control','changed_event')
 	def __control_changed_event(self):
 		print self._control.value
 
@@ -34,5 +33,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

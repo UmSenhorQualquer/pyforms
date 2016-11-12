@@ -25,7 +25,7 @@ class ProjectTree(BaseWidget):
 		self._projectTree.showHeader = False
 		
 
-		self._formset = [ (' ','_addButton'), '_projectTree']
+		self.formset = [ (' ','_addButton'), '_projectTree']
 
 		
 ##################################################################################################################
@@ -33,4 +33,4 @@ class ProjectTree(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( ProjectTree )
+if __name__ == "__main__":	 pyforms.start_app( ProjectTree )

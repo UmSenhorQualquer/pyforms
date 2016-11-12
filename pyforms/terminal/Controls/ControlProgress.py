@@ -19,13 +19,13 @@ class ControlProgress(ControlBase):
     def value(self, value): self._value = value
 
     @property
-    def min(self): return pass
+    def min(self): return
 
     @min.setter
     def min(self, value): pass
 
     @property
-    def max(self): return pass
+    def max(self): return
 
     @max.setter
     def max(self, value): pass

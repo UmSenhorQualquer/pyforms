@@ -53,7 +53,7 @@ class Container(object):
 
 	
 
-def startApp(ClassObject):
+def start_app(ClassObject):
 	#print( sys.modules[sys.modules[ClassObject.__module__].__package__].__version__ )
 
 	app = QtGui.QApplication(sys.argv)

@@ -34,6 +34,7 @@ class GaugeWidgetVertical(QtGui.QWidget):
 		self._scale         = 1.0
 		self._use_float     = False
 
+	def changed_event(self): pass
 
 	def paintEvent(self,e):
 		# call the base implementation to paint normal interface
@@ -124,7 +125,7 @@ class GaugeWidgetVertical(QtGui.QWidget):
 
 					self.repaint()
 
-					self.changed()
+					self.changed_event()
 
 			self._lastMouseY = event.y()
 
@@ -237,7 +238,7 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
 						if (new_min/self.scale)<self._maxVal: self._minVal = new_min / self.scale
 
 					self.repaint()
-					self.changed()
+					self.changed_event()
 
 			self._lastMouseY = event.x()
 
@@ -299,10 +300,10 @@ class ControlBoundingSlider(ControlBase):
 		self._form.repaint()
 
 	@property
-	def changed_event(self):  return self._form.changed
+	def changed_event(self):  return self._form.changed_event
 
 	@changed_event.setter
-	def changed_event(self, value): self._form.changed = value        
+	def changed_event(self, value): self._form.changed_event = value        
 
 	@property
 	def min(self): return self.form._lower

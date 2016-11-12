@@ -21,19 +21,19 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	from pyforms.gui.BaseWidget import BaseWidget
 
 	if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
-		from pyforms.gui.appmanager import startApp
+		from pyforms.gui.appmanager import start_app
 	else:
-		from pyforms.gui.standaloneManager import startApp
+		from pyforms.gui.standaloneManager import start_app
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
 
 	from pyforms.terminal import Controls
 	from pyforms.terminal.BaseWidget import BaseWidget
-	from pyforms.terminal.appmanager import startApp
+	from pyforms.terminal.appmanager import start_app
 
 
 elif conf.PYFORMS_MODE in ['WEB']:
 
 	from pyforms_web.web import Controls
 	from pyforms_web.web.BaseWidget import BaseWidget
-	from pyforms_web.web.appmanager import startApp
+	from pyforms_web.web.appmanager import start_app

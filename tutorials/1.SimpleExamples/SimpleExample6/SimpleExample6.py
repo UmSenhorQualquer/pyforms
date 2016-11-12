@@ -26,19 +26,17 @@ class SimpleExample6(BaseWidget):
 		self._fullname 		= ControlText('Full name')
 		self._button 		= ControlButton('Press this button')
 
-		self._formset = [ {
+		self.formset = [ {
 						  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
 						  	'Tab2': ['_fullname']
 						  },
 						  '=',(' ','_button', ' ') ]
 
 
-		self._fullname.addPopupSubMenuOption('Path', 
-			{
-				'Delete':           self.__dummyEvent, 
-				'Edit':             self.__dummyEvent,
-				'Interpolate':      self.__dummyEvent
-			})
+		submenu = self._fullname.add_popup_submenu('Path')
+		self._fullname.add_popup_menu_option('Delete', function_action=self.__dummyEvent, submenu=submenu)
+		self._fullname.add_popup_menu_option('Edit', function_action=self.__dummyEvent, submenu=submenu)
+		self._fullname.add_popup_menu_option('Interpolate', function_action=self.__dummyEvent, submenu=submenu)
 		
 		#Define the window main menu using the property main menu
 		self.mainmenu = [
@@ -65,5 +63,5 @@ class SimpleExample6(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample6 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample6 )
 	

@@ -15,7 +15,7 @@ class SimpleExample3(BaseWidget):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = [ ('_firstname','_middlename', '_lastname'), 
+		self.formset = [ ('_firstname','_middlename', '_lastname'), 
 			'_fullname', (' ' ,'_button', ' '), ' ']
 
 		#Define the button action
@@ -35,5 +35,5 @@ class SimpleExample3(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample3 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample3 )
 	

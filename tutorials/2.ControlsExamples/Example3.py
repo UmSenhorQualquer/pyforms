@@ -27,7 +27,7 @@ class Example3(BaseWidget):
 		self._timeline 		= ControlEventTimeline('Timeline')
 		
 
-		self._formset = [ ('_combobox',' '), '_progress', '=',('_visvisVolume', '||','_list'), '_timeline']
+		self.formset = [ ('_combobox',' '), '_progress', '=',('_visvisVolume', '||','_list'), '_timeline']
 
 		
 		self._combobox.addItem('Item 1', 'Value 1')
@@ -50,4 +50,4 @@ class Example3(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( Example3 )
+if __name__ == "__main__":	 pyforms.start_app( Example3 )

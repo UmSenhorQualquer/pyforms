@@ -26,14 +26,14 @@ class ComputerVisionAlgorithm(BaseWidget):
 		self._runbutton  = ControlButton('Run')
 
 		#Define the function that will be called when a file is selected
-		self._videofile.changed   = self.__videoFileSelectionEvent
+		self._videofile.changed_event   = self.__videoFileSelectionEvent
 		#Define the event that will be called when the run button is processed
 		self._runbutton.value 	  = self.__runEvent
 		#Define the event called before showing the image in the player
 		self._player.processFrame = self.__processFrame
 
 		#Define the organization of the Form Controls
-		self._formset = [ 
+		self.formset = [ 
 			('_videofile', '_outputfile'), 
 			'_threshold', 
 			('_blobsize', '_runbutton'), 
@@ -66,4 +66,4 @@ class ComputerVisionAlgorithm(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( ComputerVisionAlgorithm )
+if __name__ == "__main__":	 pyforms.start_app( ComputerVisionAlgorithm )

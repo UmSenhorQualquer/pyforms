@@ -19,8 +19,8 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 
 		#Definition of the forms fields
 		self._peopleList	= ControlList('People', 
-			plusFunction	= self.__addPersonBtnAction, 
-			minusFunction	= self.__rmPersonBtnAction)
+			add_function	= self.__addPersonBtnAction, 
+			remove_function	= self.__rmPersonBtnAction)
 		
 		self._peopleList.horizontalHeaders = ['First name', 'Middle name', 'Last name']
 
@@ -66,5 +66,6 @@ class PeopleWindow(AddMenuFuntionality, People, BaseWidget):
 		"""
 		self.removePerson( self._peopleList.selected_row_index ) 
 
+
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( PeopleWindow )
+if __name__ == "__main__":	 pyforms.start_app( PeopleWindow )

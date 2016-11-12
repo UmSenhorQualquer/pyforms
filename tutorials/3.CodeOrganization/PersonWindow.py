@@ -22,7 +22,7 @@ class PersonWindow(Person, BaseWidget):
 		#Define the button action
 		self._buttonField.value = self.buttonAction
 
-		self._formset = ['_firstnameField', '_middlenameField', '_lastnameField', 
+		self.formset = ['_firstnameField', '_middlenameField', '_lastnameField', 
 			'_fullnameField', 
 			(' ','_buttonField', ' '), ' ']
 
@@ -44,4 +44,4 @@ class PersonWindow(Person, BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( PersonWindow )
+if __name__ == "__main__":	 pyforms.start_app( PersonWindow )
