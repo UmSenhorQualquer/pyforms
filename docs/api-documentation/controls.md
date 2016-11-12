@@ -1298,7 +1298,7 @@ Called everytime an item is updated.
 
 **item** - Updated item.
 
-#### item_selection_changed_event
+#### item_selection_changed_event()
 
 Called when ever a new item is selected.
 
