@@ -154,7 +154,7 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.form.verticalSlider.setVisible(value)
 
 	@property
-	def video_index(self): return int(self._value.get(1)) - 1
+	def video_index(self): return int(self._value.get(1)-1) if self._value else None
 
 	@video_index.setter
 	def video_index(self, value): self._value.set(1, value)
@@ -203,6 +203,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@value.setter
 	def value(self, value):
+		if value is None: self.stop()
+
 		self._videoWidget.reset()
 
 		if value == 0:

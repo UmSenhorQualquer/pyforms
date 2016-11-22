@@ -20,17 +20,15 @@ from pyforms.gui.BaseWidget import BaseWidget
 class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
 
-	def __init__(self, label=''):
-		ControlBase.__init__(self, label)
+	def __init__(self, label='', default=None):
 		QtGui.QWidget.__init__(self)
-
 		layout = QtGui.QVBoxLayout(); layout.setMargin(0)
 		self.form.setLayout( layout )
+		
+		ControlBase.__init__(self, label)
+		self.value = default
 
-
-
-	def init_form(self):
-		pass
+	def init_form(self): pass
 
 	############################################################################
 	############ Properties ####################################################
@@ -42,7 +40,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self, value)		
-		self.__clearLayout()			
+		self.__clear_layout()			
 
 		if value is None or value=='':  return 
 		
@@ -75,7 +73,7 @@ class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 		if 'value' in data and self.value is not None and self.value!='': 
 			self.value.load_form(data['value'], path)
 
-	def __clearLayout(self):
+	def __clear_layout(self):
 		if self.form.layout() is not None:
 			old_layout = self.form.layout()
 			for i in reversed(range(old_layout.count())):

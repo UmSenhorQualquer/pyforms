@@ -60,6 +60,10 @@ class ControlCheckBoxList(ControlBase):
 
 	def clear(self): self._form.listWidget.clear()
 
+	def refresh(self):
+		for row in range( self.count ):
+			item = self._form.listWidget.item(row)
+			if hasattr(item, 'value'): item.setText(str(item.value))
 
 	############################################################################
 	############ Events ########################################################
