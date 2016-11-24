@@ -20,10 +20,11 @@ from pyforms.gui.BaseWidget import BaseWidget
 class ControlEmptyWidget(ControlBase, QtGui.QWidget):
 
 
-	def __init__(self, label=''):
+	def __init__(self, label='', tabbed=False):
 		ControlBase.__init__(self, label)
 		QtGui.QWidget.__init__(self)
 
+		self.tabbed = tabbed
 		layout = QtGui.QVBoxLayout(); layout.setMargin(0)
 		self.form.setLayout( layout )
 
