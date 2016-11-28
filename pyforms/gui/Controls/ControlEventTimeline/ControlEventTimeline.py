@@ -181,9 +181,18 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 				return
 
 		self._time.import_csv(csvfile)
-		print("Annotations file imported: {:s}".format(filename))
+		
 
-			
+	def export_csv_file(self, filename):
+		with open(filename, 'w') as csvfile:
+			spamwriter = csv.writer(csvfile, dialect='excel')				
+			self._time.export_csv(spamwriter)
+				
+
+	def import_csv_file(self, filename):
+		with open(filename, 'r') as csvfile:
+			spamreader = csv.reader(csvfile, dialect='excel')				
+			self._time.import_csv(spamreader)	
 
 	##########################################################################
 	#### EVENTS ##############################################################

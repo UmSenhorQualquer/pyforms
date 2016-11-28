@@ -184,11 +184,14 @@ class ControlTree(ControlBase, QTreeWidget):
 			return indexes[0]
 		else:
 			return None
+	@selected_row_index.setter
+	def selected_row_index(self, value): self.setCurrentCell(value)
 
 	@property
 	def selected_item(self):
-		if len(self.selectedItems())>0: return self.selectedItems()[0]
-		return None
+		return self.selectedItems()[0] if len(self.selectedItems())>0 else None
+	@selected_item.setter
+	def selected_item(self, value): self.setCurrentItem(value)
 
 	@property
 	def form(self): return self

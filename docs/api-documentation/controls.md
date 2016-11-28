@@ -1332,7 +1332,7 @@ Flag that shows or hide the header.
 
 #### selected_rows_indexes
 
-Retrieve and set the selected rows.
+Retrieve the selected rows.
 
 #### selected_row_index
 
