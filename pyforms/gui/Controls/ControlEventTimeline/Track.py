@@ -10,6 +10,8 @@ class Track(object):
         self._parent  = parent
         self._periods = []
 
+    def __len__(self): return len(self._periods)
+
     @staticmethod
     def whichTrack(y): return (y - 20) // 34
 

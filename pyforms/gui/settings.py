@@ -14,7 +14,11 @@ PYFORMS_PIXMAP_EVENTTIMELINE_ZOOM_OUT = QtGui.QPixmap(path(os.path.join("Control
 
 PYFORMS_ICON_EVENTTIMELINE_IMPORT = QtGui.QIcon(path(os.path.join("Controls", "uipics", "page_white_get.png")))
 PYFORMS_ICON_EVENTTIMELINE_EXPORT = QtGui.QIcon(path(os.path.join("Controls", "uipics", "page_white_put.png")))
-
+PYFORMS_ICON_EVENTTIMELINE_GRAPH = QtGui.QIcon(path(os.path.join("Controls", "uipics", "graph.png")))
+PYFORMS_ICON_EVENTTIMELINE_TIMELINE = QtGui.QIcon(path(os.path.join("Controls", "uipics", "timeline.png")))
+PYFORMS_ICON_EVENTTIMELINE_REFRESH = QtGui.QIcon(path(os.path.join("Controls", "uipics", "refresh.png")))
+PYFORMS_ICON_EVENTTIMELINE_ADD = QtGui.QIcon(path(os.path.join("Controls", "uipics", "add.png")))
+PYFORMS_ICON_EVENTTIMELINE_REMOVE = QtGui.QIcon(path(os.path.join("Controls", "uipics", "remove.png")))
 
 PYFORMS_ICON_FILE_OPEN = QtGui.QIcon()
 

@@ -34,11 +34,14 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
      <property name="title">
-      <string>Choose corresponding behavior</string>
+      <string>Choose the corresponding label</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>

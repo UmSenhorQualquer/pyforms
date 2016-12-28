@@ -75,7 +75,7 @@ class VideoGLWidget(QGLWidget):
 		self.setMinimumHeight(100)
 
 		self._point = None
-		self._pending_frames = None
+		self._pending_frames = []
 
 		self._tmp_msg = None
 
@@ -146,89 +146,86 @@ class VideoGLWidget(QGLWidget):
 		GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
 		GL.glMatrixMode(GL.GL_MODELVIEW)
 		GL.glLoadIdentity()
-
+		
 		# Correct a bug related with the overlap of contexts between simultaneous OpenGL windows.
-		if self._pending_frames != None:
+		for index, frame in enumerate(self._pending_frames):
 
-			for index, frame in enumerate(self._pending_frames):
+			color = GL.GL_LUMINANCE if len(frame.shape) == 2 else GL.GL_BGR
+			w, h = len(frame[0]), len(frame) #Size of the image
 
-				color = GL.GL_LUMINANCE if len(frame.shape) == 2 else GL.GL_BGR
-				w, h = len(frame[0]), len(frame) #Size of the image
+			if len(self.textures)<len(self.image_2_display): self.textures.append(GL.glGenTextures(1))
 
-				if len(self.textures)<len(self.image_2_display): self.textures.append(GL.glGenTextures(1))
+			#Load the textures to opengl
+			GL.glEnable(GL.GL_TEXTURE_2D)
+			GL.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, self.textures[index])
+			GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_BORDER)
+			GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_BORDER)
+			GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
+			GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
+			GL.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, w, h, 0, color, GL.GL_UNSIGNED_BYTE, frame)
 
-				#Load the textures to opengl
-				GL.glEnable(GL.GL_TEXTURE_2D)
-				GL.glPixelStorei(GL.GL_UNPACK_ALIGNMENT, 1)
-				GL.glBindTexture(GL.GL_TEXTURE_2D, self.textures[index])
-				GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_BORDER)
-				GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_CLAMP_TO_BORDER)
-				GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
-				GL.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
-				GL.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, w, h, 0, color, GL.GL_UNSIGNED_BYTE, frame)
+		self._pending_frames = []
+		
+		
+		GL.glTranslatef(0, 0, -1)
+		GL.glTranslatef(0, 0, -self.zoom)
+		
+		if len(self.image_2_display)>1: 
+			#in case of having more images to display, it centers the images
+			translate_x = float( (len(self.image_2_display)-1) * self._width) / 2.0
+			GL.glTranslatef(-translate_x, 0, 0)
 
-			self._pending_frames = None
-
-		if len(self.image_2_display) > 0:
-			
-			GL.glTranslatef(0, 0, -1)
-			GL.glTranslatef(0, 0, -self.zoom)
-			
-			if len(self.image_2_display)>1: 
-				#in case of having more images to display, it centers the images
-				translate_x = float( (len(self.image_2_display)-1) * self._width) / 2.0
-				GL.glTranslatef(-translate_x, 0, 0)
-
-			if self._point is not None:
-				GL.glColor4f(0, 0, 1, 1.0)
-				GL.glPushMatrix()
-				GL.glTranslatef(self._point[0], self._point[1], self._point[2])
-				self.draw_pyramid()
-				GL.glPopMatrix()
-				GL.glColor4f(1, 1, 1, 1.0)
-
-			GL.glRotatef(self._rotateX, -1, 0, 0)
-			GL.glRotatef(self._rotateZ, 0, 0, 1)
-
-			GL.glDisable(GL.GL_TEXTURE_2D)
-			GL.glColor4f(0.5, 0.5, 0.5, 1.0)
-			GL.glBegin(GL.GL_QUADS)
-			GL.glVertex3f(20, -20, -.01)
-			GL.glVertex3f(20, 20, -.001)
-			GL.glVertex3f(-20, 20, -.001)
-			GL.glVertex3f(-20, -20, -.001)
-			GL.glEnd()
-
+		if self._point is not None:
+			GL.glColor4f(0, 0, 1, 1.0)
+			GL.glPushMatrix()
+			GL.glTranslatef(self._point[0], self._point[1], self._point[2])
+			self.draw_pyramid()
+			GL.glPopMatrix()
 			GL.glColor4f(1, 1, 1, 1.0)
 
-			if self._mouseDown:
-				modelview 	= GL.glGetDoublev(GL.GL_MODELVIEW_MATRIX)
-				projection	= GL.glGetDoublev(GL.GL_PROJECTION_MATRIX)
-				viewport 	= GL.glGetIntegerv(GL.GL_VIEWPORT)
-				
-				winX 		= float(self._mouseX)
-				winY 		= float(viewport[3] - self._mouseY)
-				winZ 		= GL.glReadPixels( winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
+		GL.glRotatef(self._rotateX, -1, 0, 0)
+		GL.glRotatef(self._rotateZ, 0, 0, 1)
 
-				self._glX, self._glY, self._glZ = GLU.gluUnProject( winX, winY, winZ[0][0], modelview, projection, viewport)
-				
-				if not self._last_mouse_gl_pos: self._last_mouse_gl_pos = self._glX, self._glY, self._glZ
-				
+		GL.glDisable(GL.GL_TEXTURE_2D)
+		GL.glColor4f(0, 0, 0, .0)
+		GL.glBegin(GL.GL_QUADS)
+		GL.glVertex3f(20, -20, -.01)
+		GL.glVertex3f(20, 20, -.001)
+		GL.glVertex3f(-20, 20, -.001)
+		GL.glVertex3f(-20, -20, -.001)
+		GL.glEnd()
 
-			GL.glEnable(GL.GL_TEXTURE_2D)
-			GL.glDisable(GL.GL_DEPTH_TEST)
+		GL.glColor4f(1, 1, 1, 1.0)
 
-			if self._move_img:
-				self._x -= (self._last_mouse_gl_pos[0]-self._glX)
-				self._y -= (self._last_mouse_gl_pos[1]-self._glY)
+		if self._mouseDown:
+			modelview 	= GL.glGetDoublev(GL.GL_MODELVIEW_MATRIX)
+			projection	= GL.glGetDoublev(GL.GL_PROJECTION_MATRIX)
+			viewport 	= GL.glGetIntegerv(GL.GL_VIEWPORT)
+			
+			winX 		= float(self._mouseX)
+			winY 		= float(viewport[3] - self._mouseY)
+			winZ 		= GL.glReadPixels( winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
 
-			for texture_index in range(0, len(self.image_2_display)):
-				if texture_index>0: GL.glTranslatef(self._width, 0, 0)
-				GL.glBindTexture(GL.GL_TEXTURE_2D, self.textures[texture_index])
+			self._glX, self._glY, self._glZ = GLU.gluUnProject( winX, winY, winZ[0][0], modelview, projection, viewport)
+			
+			if not self._last_mouse_gl_pos: self._last_mouse_gl_pos = self._glX, self._glY, self._glZ
+			
 
-				self.draw_video(self._width, self._height, self._x, self._y, 0.0)
+		GL.glEnable(GL.GL_TEXTURE_2D)
+		GL.glDisable(GL.GL_DEPTH_TEST)
 
-			GL.glEnable(GL.GL_DEPTH_TEST)
+		if self._move_img:
+			self._x -= (self._last_mouse_gl_pos[0]-self._glX)
+			self._y -= (self._last_mouse_gl_pos[1]-self._glY)
+
+		for texture_index in range(0, len(self.image_2_display)):
+			if texture_index>0: GL.glTranslatef(self._width, 0, 0)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, self.textures[texture_index])
+
+			self.draw_video(self._width, self._height, self._x, self._y, 0.0)
+
+		GL.glEnable(GL.GL_DEPTH_TEST)
 
 		if self._helpText is not None:
 			self.qglColor(QtCore.Qt.black)
@@ -250,6 +247,7 @@ class VideoGLWidget(QGLWidget):
 
 	def reset(self):
 		self.textures = []
+		self._pending_frames = []
 		self.image_2_display = []
 
 	def show_tmp_msg(self, msg, timeout=2000):
@@ -259,8 +257,11 @@ class VideoGLWidget(QGLWidget):
 
 
 	def paint(self, frames):
-
-		if len(self.image_2_display) == 0:
+		if frames is None:
+			self.reset()
+			self.updateGL()
+			return
+		elif self.image_2_display is None or len(self.image_2_display) == 0:
 			self.imgHeight, self.imgWidth = frames[0].shape[:2]
 			if self.imgWidth > self.imgHeight:
 				self._width = 1
@@ -272,13 +273,8 @@ class VideoGLWidget(QGLWidget):
 				self._width = float(self.imgWidth) / float(self.imgHeight)
 				self._y = 0.5
 
-		# self._x = -self._width/2
-
-		
-
 		self.image_2_display = frames
 		self._pending_frames = frames
-
 		self.updateGL()
 
 	def wheelEvent(self, event):

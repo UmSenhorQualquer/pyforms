@@ -44,7 +44,7 @@ class TimelinePopupWindow(QtGui.QDialog):
         self.color = self._parent.color
         self.current_track = track_id
 
-        self._default_comboBox_text = "Add a new behavior"
+        self._default_comboBox_text = "Add a new label"
         self.__get_existing_tracklabels()
 
         # Set default color display

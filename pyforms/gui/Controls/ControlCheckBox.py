@@ -27,6 +27,8 @@ class ControlCheckBox(ControlBase):
         else:
             self._form.checkBox.setCheckState( QtCore.Qt.Unchecked )
 
+        if self.help: self.form.setToolTip(self.help)
+
     def __checkedToggle(self): self.changed_event()
 
     def load_form(self, data, path=None):

@@ -29,6 +29,8 @@ class ControlSlider(ControlBase):
 		control_path = tools.getFileInSameDirectory(__file__,"sliderInput.ui")
 		self._form = uic.loadUi( control_path )
 		self._form.label.setText(self._label)
+		self.form.label.setAccessibleName('ControlSlider-label')
+		
 		self._form.horizontalSlider.setMinimum(self._min)
 		self._form.horizontalSlider.setMaximum(self._max)
 		self._form.horizontalSlider.setValue( self._value )
@@ -66,3 +68,4 @@ class ControlSlider(ControlBase):
 
 	@max.setter
 	def max(self, value): self._form.horizontalSlider.setMaximum(value)
+

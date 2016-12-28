@@ -29,6 +29,9 @@ class TimelineChart(object):
 		self._top           = 0
 		self._name          = name
 
+	def __unicode__(self): return self._name
+	def __str__(self): return self._name
+
 	def import_data(self,data):
 		self._graphMax = 0
 		self._graphMin = 100000000000
@@ -56,7 +59,7 @@ class TimelineChart(object):
 			if y < self._graphMin: self._graphMin = y
 
 			if int(x - last_x) > 1:
-				for i in range(0, int(x - last_x) + 1): self._data.append( (last_x + i, y) )
+				for i in range(0, int(x - last_x) + 1): self._data.append( (last_x + i, None) )
 			else:
 				self._data.append((x, y))
 			last_x = x
@@ -104,14 +107,22 @@ class TimelineChart(object):
 		if diff_max_min <= 0: diff_max_min = 1
 		
 		last_coordenate = None
+		last_real_x_coord = None
 
 		for pos1 in self._data[start:end]:
 			if pos1:
 				x, y = pos1
+				if y==None: continue
 				y   = self._top + ((top+y) * fov_height)  // diff_max_min
-				if last_coordenate: painter.drawLine( last_coordenate[0], last_coordenate[1], self._widget.frame2x(x), fov_height-y)
+				if last_coordenate:
+					diff_frames = abs(x-last_real_x_coord)
+					draw_from_coord = last_coordenate if diff_frames==1 else (self._widget.frame2x(x), fov_height-y)
+					painter.drawLine( draw_from_coord[0], draw_from_coord[1], self._widget.frame2x(x), fov_height-y)
 
 				last_coordenate = self._widget.frame2x(x), fov_height-y
+				last_real_x_coord = x
+
+
 
 		painter.setOpacity(1.0)
 
@@ -131,9 +142,11 @@ class TimelineChart(object):
 
 		video_coord    		= self._data[frame]
 
+		if video_coord[1] is None: return
+
 		y_video_widget_coord      = self._top + ((top+video_coord[1]) * fov_height)  // diff_max_min
 
-		if abs( (fov_height-y_video_widget_coord) -event.y())<=3:
+		if abs( (fov_height-y_video_widget_coord) -event.y())<=10:
 			self._widget.graphs_properties.coordenate_text = "Frame: {0} Value: {1}".format(*video_coord)
 		else:
 			self._widget.graphs_properties.coordenate_text = None

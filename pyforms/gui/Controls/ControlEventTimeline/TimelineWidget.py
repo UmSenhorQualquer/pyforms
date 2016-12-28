@@ -45,15 +45,25 @@ class TimelineWidget(QtGui.QWidget):
 		self.setPalette(palette)
 
 		self._chartsColors = [
-			QtGui.QColor(255, 0, 0), QtGui.QColor(0, 100, 0),
-			QtGui.QColor(0, 0, 255), QtGui.QColor(100, 100, 0),
-			QtGui.QColor(100, 0, 100), QtGui.QColor(0, 100, 100)
+			QtGui.QColor(240,163,255),QtGui.QColor(0,117,220),
+			QtGui.QColor(153,63,0),QtGui.QColor(76,0,92),
+			QtGui.QColor(25,25,25),QtGui.QColor(0,92,49),
+			QtGui.QColor(43,206,72),QtGui.QColor(255,204,153),
+			QtGui.QColor(128,128,128),QtGui.QColor(148,255,181),
+			QtGui.QColor(143,124,0),QtGui.QColor(157,204,0),
+			QtGui.QColor(194,0,136),QtGui.QColor(0,51,128),
+			QtGui.QColor(255,164,5),QtGui.QColor(255,168,187),
+			QtGui.QColor(66,102,0),QtGui.QColor(255,0,16),
+			QtGui.QColor(94,241,242),QtGui.QColor(0,153,143),
+			QtGui.QColor(116,10,255),QtGui.QColor(153,0,0),
+			QtGui.QColor(255,255,0),QtGui.QColor(255,80,5)
 		]
 		self._charts = []
 		self._tracks = [Track(parent=self)]
 
 		self._scale = 1.0
 		self._lastMouseY = None
+		self._mouse_current_pos = None
 
 		self._moving = False
 		self._resizingBegin = False
@@ -81,6 +91,11 @@ class TimelineWidget(QtGui.QWidget):
 	def x2frame(self, x): return int(x / self._scale)
 
 	def frame2x(self, frame): return int(frame * self._scale)
+
+	def remove_track(self, track):
+		self._tracks.remove(track)
+		self.setMinimumHeight(Track.whichTop(len(self._tracks)))
+		#self.repaint()
 
 	def removeSelected(self):
 		if self._selected != None and not self._selected.lock:
@@ -150,6 +165,7 @@ class TimelineWidget(QtGui.QWidget):
 
 		chart.name = "undefined name {0}".format(str(len(self._charts)))
 		self.repaint()
+		return chart
 
 	def import_csv(self, csvfileobject):
 		"""
@@ -235,10 +251,12 @@ class TimelineWidget(QtGui.QWidget):
 		self._tracks = []
 		self.repaint()
 
-	def cleanLine(self):
-		if self._selected is not None:
-			self._tracks[self._selected.track].clear()
+	def cleanLine(self, track_index=None):			
+		if track_index is not None or self._selected is not None:
+			track_index = track_index if track_index is not None else self._selected.track
+			self._tracks[track_index].clear()
 			self._selected = None
+			self.repaint()
 		else:
 			QtGui.QMessageBox.about(
 				self, "Error", "You must select a timebar first")
@@ -431,6 +449,8 @@ class TimelineWidget(QtGui.QWidget):
 	def mouseMoveEvent(self, event):
 		super(TimelineWidget, self).mouseMoveEvent(event)
 
+		self._mouse_current_pos = event.x(), event.y()
+
 		selected_chart = self.graphs_properties.selected_chart
 		if selected_chart: 
 			selected_chart.mouse_move_evt( event, 0, self.height() )
@@ -548,4 +568,10 @@ class TimelineWidget(QtGui.QWidget):
 	@property
 	def graphs_properties(self):
 		return self.parent_control._graphs_prop_win
+
+	@property
+	def current_mouseover_track(self):
+		if self._mouse_current_pos is None: return None
+		return self.trackInPosition(*self._mouse_current_pos)
+	
 	

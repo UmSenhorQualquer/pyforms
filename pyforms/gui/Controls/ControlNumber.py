@@ -28,6 +28,7 @@ class ControlNumber(ControlBase):
 		self._form = uic.loadUi( control_path )
 		self.label = self._label
 		self.value = self._value 
+		self.form.label.setAccessibleName('ControlNumber-label')
 		self.form.spinBox.valueChanged.connect( self.value_changed )
 		self.form.spinBox.setDecimals(0)
 		self.min = self._min

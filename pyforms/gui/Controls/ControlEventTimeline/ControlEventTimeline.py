@@ -46,16 +46,24 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 		self.add_popup_menu_option("-")
 
+		self.add_popup_menu_option("Graphs", self.show_graphs_properties, icon=conf.PYFORMS_ICON_EVENTTIMELINE_GRAPH)
+		
 		# General righ click popup menus
-		self.add_popup_menu_option("Set track properties...", self.__setLinePropertiesEvent)
-		self.add_popup_menu_option("Set graphs properties", self.show_graphs_properties)
+		self.add_popup_menu_option("Track properties", self.__setLinePropertiesEvent, icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
+		self.add_popup_menu_option("-")
+
+		self.add_popup_menu_option("Auto adjust the number of tracks", self.__auto_adjust_tracks_evt, 			icon=conf.PYFORMS_ICON_EVENTTIMELINE_REFRESH)
+		self.add_popup_menu_option("Add a new track to the bottom", self.__add_track_2_bottom_evt, 				icon=conf.PYFORMS_ICON_EVENTTIMELINE_ADD)
+		self.add_popup_menu_option("Remove the bottom track, if empty", self.__remove_track_from_bottom_evt, 	icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
+		
+
 		self.add_popup_menu_option("-")
 
 		clean_menu = self.add_popup_submenu('Clean')
 
-		self.add_popup_menu_option('Current line',function_action=self.__cleanLine, submenu=clean_menu)
-		self.add_popup_menu_option('Everything',function_action=self.__clean, submenu=clean_menu)
-		self.add_popup_menu_option('Charts',function_action=self.__cleanCharts, submenu=clean_menu)
+		self.add_popup_menu_option('Clean current track',function_action=self.__cleanLine, submenu=clean_menu)
+		self.add_popup_menu_option('Clean all graphs',function_action=self.__cleanCharts, 	submenu=clean_menu)
+		self.add_popup_menu_option('Clean everything',function_action=self.clean, 	submenu=clean_menu)
 
 
 	def init_form(self):
@@ -156,7 +164,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		csvfile = open(filename, 'U')
 		spamreader = csv.reader(csvfile, delimiter=separator)
 		for i in range(ignore_rows): next(spamreader, None)
-		self._time.importchart_csv(spamreader)
+		chart = self._time.importchart_csv(spamreader)
+		chart.name = os.path.basename(filename).replace('.csv', '').replace('.CSV', '')
 		csvfile.close()
 
 	def show_graphs_properties(self):		
@@ -204,6 +213,25 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	@pointer_changed_event.setter
 	def pointer_changed_event(self, value): self._time._pointer.moveEvent = value
 
+	def __auto_adjust_tracks_evt(self):
+		for i in range(len(self._time.tracks)-1, -1, -1):
+			track = self._time.tracks[i]
+			if len(track)==0: 
+				self._time.remove_track(track)
+			else:
+				break
+
+
+	def __add_track_2_bottom_evt(self):
+		self._time.addTrack()
+
+	def __remove_track_from_bottom_evt(self):
+		if len(self._time.tracks)>0:
+			track = self._time.tracks[-1]
+			if len(track)==0: 
+				self._time.remove_track(track)
+
+
 
 	##########################################################################
 	#### PROPERTIES ##########################################################
@@ -226,11 +254,6 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self._time.setMinimumWidth(value)
 		self.repaint()
 
-	@property
-	def mouse_over_row_index(self):
-		globalPos = QtGui.QCursor.pos()
-		widgetPos = self._time.mapFromGlobal(globalPos)
-		return self._time.trackInPosition(widgetPos.x(), widgetPos.y())
 
 	@property
 	def form(self): return self
@@ -263,7 +286,7 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		- Track label
 		- Track default color
 		"""
-		current_track = self.mouseOverLine
+		current_track = self._time.current_mouseover_track
 		parent = self._time
 
 		# Tracks info dict and index
@@ -352,10 +375,10 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 
 	def __cleanLine(self):
 		reply = QtGui.QMessageBox.question(self, 'Confirm',
-										   "Are you sure you want to clean all the events?", QtGui.QMessageBox.Yes |
+										   "Are you sure you want to clean all the events on this track?", QtGui.QMessageBox.Yes |
 										   QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 		if reply == QtGui.QMessageBox.Yes:
-			self._time.cleanLine()
+			self._time.cleanLine(self._time.current_mouseover_track)
 
 	def __cleanCharts(self):
 		reply = QtGui.QMessageBox.question(self, 'Confirm',
@@ -364,12 +387,13 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		if reply == QtGui.QMessageBox.Yes:
 			self._time.cleanCharts()
 
-	def __clean(self):
+	def clean(self):
 		reply = QtGui.QMessageBox.question(self, 'Confirm',
-										   "Are you sure you want to clean all the events?", QtGui.QMessageBox.Yes |
+										   "Are you sure you want to clean everything?", QtGui.QMessageBox.Yes |
 										   QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 		if reply == QtGui.QMessageBox.Yes:
 			self._time.clean()
+			self.__cleanCharts()
 
 	def __pickColor(self):
 		self._time.color = QtGui.QColorDialog.getColor(self._time.color)

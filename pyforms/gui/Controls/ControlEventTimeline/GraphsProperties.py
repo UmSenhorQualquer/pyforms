@@ -17,6 +17,9 @@ class GraphsProperties(BaseWidget):
 		self.setContentsMargins(10, 10, 10, 10)
 		self._timeline = timelineWidget
 
+		#self.setMaximumWidth(300)
+
+
 		# Definition of the forms fields
 		self._graphs_list = ControlList('Datasets')
 		self._name        = ControlText('Name')
@@ -34,23 +37,25 @@ class GraphsProperties(BaseWidget):
 				[
 					' ',
 					'_name',
-					('_min_value', '_max_value'),
-					('_values_top',' '),
+					('_min_value', '_max_value', ' '),
+					('_values_top', ' '),
 					'_values_zoom',
-					'info:Choose one dataset and move the mouse over the graph line to visualize the coordenates.',
+					'info:Choose one dataset and move the mouse over\nthe graph line to visualize the coordenates.',
 					'_value'
 				]),
 			]
 
-		self._graphs_list.itemSelectionChanged = self.__graphs_list_selection_changed
+		self._graphs_list.select_entire_row = True
+		self._graphs_list.item_selection_changed_event = self.__graphs_list_selection_changed
 
 		self._loaded = False
+		self._current_selected_graph = None
 
-		self._name.changed          = self.__save_graphs_changes
-		self._min_value.changed     = self.__save_graphs_changes
-		self._max_value.changed     = self.__save_graphs_changes
-		self._values_zoom.changed   = self.__save_graphs_changes
-		self._values_top.changed    = self.__save_graphs_changes
+		self._name.changed_event          = self.__save_graphs_changes
+		self._min_value.changed_event     = self.__save_graphs_changes
+		self._max_value.changed_event     = self.__save_graphs_changes
+		self._values_zoom.changed_event   = self.__save_graphs_changes
+		self._values_top.changed_event    = self.__save_graphs_changes
 
 		self._name.enabled          = False
 		self._min_value.enabled     = False
@@ -85,12 +90,21 @@ class GraphsProperties(BaseWidget):
 		index = self._graphs_list.selected_row_index
 		if index is not None:
 			self._graphs_list -= -1
+			self._current_selected_graph = None
 			self._timeline._charts.pop(index)
+			self._loaded 					= False
+			self._name.enabled          	= False
+			self._min_value.enabled     	= False
+			self._max_value.enabled     	= False
+			self._values_zoom.enabled   	= False
+			self._values_top.enabled    	= False
+			self._remove_graph_btn.enabled 	= False
 			self._timeline.repaint()
 
 
 	def __graphs_list_selection_changed(self):        
 		index = self._graphs_list.selected_row_index
+
 		if index is not None:
 			graph = self._timeline._charts[index]
 
@@ -108,36 +122,30 @@ class GraphsProperties(BaseWidget):
 			self._values_zoom.value = graph._zoom * 100.0
 			self._values_top.value  = graph._top
 
-			self._loaded = True
-
-			self._name.enabled          = True
-			self._min_value.enabled     = True
-			self._max_value.enabled     = True
-			self._values_zoom.enabled   = True
-			self._values_top.enabled    = True
-			self._remove_graph_btn.enabled = True
-		else:
-			self._name.enabled          = False
-			self._min_value.enabled     = False
-			self._max_value.enabled     = False
-			self._values_zoom.enabled   = False
-			self._values_top.enabled    = False
-			self._remove_graph_btn.enabled = False
+			self._loaded 					= True
+			self._name.enabled          	= True
+			self._min_value.enabled     	= True
+			self._max_value.enabled     	= True
+			self._values_zoom.enabled   	= True
+			self._values_top.enabled    	= True
+			self._remove_graph_btn.enabled 	= True
+			self._current_selected_graph 	= graph
+		
 
 
 	def __save_graphs_changes(self):
-		index = self._graphs_list.selected_row_index
-			
-		if self._loaded and index is not None:
-			graph = self._timeline._charts[index]
+		if self._loaded and self._current_selected_graph is not None:
+			graph = self._current_selected_graph
 
 			logger.debug('Before: Min: {0} | Max: {1} Zoom: {2}'.format(graph.graph_min, graph.graph_max,graph.zoom ) )
 
 
 			graph.name = self._name.value; 
 			data = self._graphs_list.value
-			data[index]= [self._name.value]
-			self._graphs_list.value = data
+			for index, g in enumerate(self._timeline._charts):
+				if g==graph: 
+					data[index] = self._name.value; break
+			self._graphs_list.value =  [data]
 			graph.graph_min = self._min_value.value
 			graph.graph_max = self._max_value.value
 

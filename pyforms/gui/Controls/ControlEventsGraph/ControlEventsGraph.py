@@ -94,10 +94,10 @@ class ControlEventsGraph(ControlBase, QtGui.QWidget):
     Overwrite the changed event from the ControlBase
     """
     @property
-    def changed(self): return self._events_widget._pointer.moveEvent
+    def changed_event(self): return self._events_widget._pointer.moveEvent
 
-    @changed.setter
-    def changed(self, value): self._events_widget._pointer.moveEvent = value
+    @changed_event.setter
+    def changed_event(self, value): self._events_widget._pointer.moveEvent = value
 
     @property
     def value(self): return self._events_widget.position

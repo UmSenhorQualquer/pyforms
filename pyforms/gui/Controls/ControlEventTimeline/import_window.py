@@ -48,7 +48,7 @@ class ImportWindow(BaseWidget):
 			'_panel',
 			(' ', '_importButton'), ' ']
 
-		self._filetype.changed = self.__fileTypeChanged
+		self._filetype.changed_event = self.__fileTypeChanged
 		self._importButton.value = self.__importData
 
 		from pyforms.gui.dialogs.csv_parser import CsvParserDialog

@@ -100,6 +100,8 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 				self._videoWidget.paint(frame)
 			else:
 				self._videoWidget.paint([frame])
+		else:
+			self._videoWidget.paint(None)
 
 	def save_form(self, data, path=None): return data
 
@@ -169,8 +171,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	def frame(self, value):
 		if isinstance(value, list) or isinstance(value, tuple):
 			self._videoWidget.paint(value)
-		else:
+		elif value is not None:
 			self._videoWidget.paint([value])
+		else:
+			self._videoWidget.paint(None)
 		QApplication.processEvents()
 
 	@property
@@ -203,8 +207,10 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 
 	@value.setter
 	def value(self, value):
-		if value is None: self.stop()
-
+		if value is None: 
+			self.stop()
+			self.videoControl.setEnabled(False)
+			self.refresh()
 		self._videoWidget.reset()
 
 		if value == 0:
@@ -247,6 +253,9 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 	
 
 	def update_frame(self):
+		if self.value is None: 
+			self._currentFrame = None
+			return
 		if self.next_frame_step>1:  self.video_index += self.next_frame_step
 		(success, frame) = self.value.read()
 

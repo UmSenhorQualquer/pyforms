@@ -39,6 +39,7 @@ class StandAloneContainer(QtGui.QMainWindow):
 		super(QtGui.QMainWindow, self).__init__()
 
 		w = ClassObject()
+		w.app_main_window = self
 		self._widget = w
 
 		if len(w.mainmenu) > 0:
