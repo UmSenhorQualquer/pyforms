@@ -36,6 +36,7 @@ class PackageFinder(object):
 		res = []
 		for plugin in self._plugins:
 			try:
+				logger.debug("Importing plugin: package: {0}: plugin: {1}".format( package_name, plugin) )
 				module 		= importlib.import_module("."+package_name, plugin)
 				class_def 	= getattr(module, class_name)
 				res.append(class_def)
