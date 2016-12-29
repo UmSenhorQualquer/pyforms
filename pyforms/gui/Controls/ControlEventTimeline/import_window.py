@@ -39,9 +39,9 @@ class ImportWindow(BaseWidget):
 		self._file = ControlFile('File to import')
 
 		self._panel.value = self._file
-		self._filetype.addItem('Events file', 0)
-		self._filetype.addItem('Graph file', 1)
-		self._filetype.addItem('Bonsai events file', 2)
+		self._filetype.add_item('Events file', 0)
+		self._filetype.add_item('Graph file', 1)
+		self._filetype.add_item('Bonsai events file', 2)
 
 		self._formset = [
 			('_filetype', ' '),
