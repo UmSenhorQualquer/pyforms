@@ -278,16 +278,17 @@ class ControlImage(ControlBase):
 
 	@value.setter
 	def value(self, value):
-		ControlBase.value.fset(self, value)
+
+
 		if isinstance(value, str):
 			self._value = cv2.imread(value, 1)
 		else:
 			self._value = value
 
-		if isinstance(self._value, list) or isinstance(self._value, tuple):
-			self._imageWidget.paint( self._value )
-		else:
-			self._imageWidget.paint( [self._value] )
+		if value is not None:
+			if isinstance(self._value, list) or isinstance(self._value, tuple):
+				self._imageWidget.paint( self._value )
+			else:
+				self._imageWidget.paint( [self._value] )
 
-		
-		self._imageWidget.repaint()
+		self.changed_event()

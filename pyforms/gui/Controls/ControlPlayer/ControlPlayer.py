@@ -259,21 +259,21 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		if self.next_frame_step>1:  self.video_index += self.next_frame_step
 		(success, frame) = self.value.read()
 
-		if frame is not None:
-			self._currentFrame = frame
+		if frame is not None: self._currentFrame = frame
 
-		frame = self.process_frame_event(self._currentFrame.copy())
-		if isinstance(frame, list) or isinstance(frame, tuple):
-			self._videoWidget.paint(frame)
-		else:
-			self._videoWidget.paint([frame])
+		if self._currentFrame is not None:
+			frame = self.process_frame_event(self._currentFrame.copy())
+			if isinstance(frame, list) or isinstance(frame, tuple):
+				self._videoWidget.paint(frame)
+			else:
+				self._videoWidget.paint([frame])
 
-		if not self.videoProgress.isSliderDown():
-			currentFrame = self.video_index
+			if not self.videoProgress.isSliderDown():
+				currentFrame = self.video_index
 
-			self.videoProgress.setValue(currentFrame)
-			if self._updateVideoFrame:
-				self.videoFrames.setValue(currentFrame)
+				self.videoProgress.setValue(currentFrame)
+				if self._updateVideoFrame:
+					self.videoFrames.setValue(currentFrame)
 
 
 	def videoPlay_clicked(self):

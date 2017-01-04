@@ -30,6 +30,8 @@ class GraphsProperties(BaseWidget):
 		self._remove_graph_btn = ControlButton('Remove graph')
 		self._value 	  = ControlLabel()
 
+		self._graphs_list.readonly = True
+
 		self._formset = [
 			(
 				['_graphs_list','_remove_graph_btn'],
@@ -104,6 +106,7 @@ class GraphsProperties(BaseWidget):
 
 	def __graphs_list_selection_changed(self):        
 		index = self._graphs_list.selected_row_index
+		self._updating_properties = True
 
 		if index is not None:
 			graph = self._timeline._charts[index]
@@ -130,10 +133,15 @@ class GraphsProperties(BaseWidget):
 			self._values_top.enabled    	= True
 			self._remove_graph_btn.enabled 	= True
 			self._current_selected_graph 	= graph
+
+		del self._updating_properties
 		
 
 
 	def __save_graphs_changes(self):
+		if hasattr(self, '_updating_properties'):  return
+
+
 		if self._loaded and self._current_selected_graph is not None:
 			graph = self._current_selected_graph
 
@@ -144,8 +152,8 @@ class GraphsProperties(BaseWidget):
 			data = self._graphs_list.value
 			for index, g in enumerate(self._timeline._charts):
 				if g==graph: 
-					data[index] = self._name.value; break
-			self._graphs_list.value =  [data]
+					data[index] = [self._name.value]; break
+			self._graphs_list.value =  data
 			graph.graph_min = self._min_value.value
 			graph.graph_max = self._max_value.value
 

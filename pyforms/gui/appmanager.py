@@ -54,8 +54,11 @@ class Container(object):
 	
 
 def start_app(ClassObject):
-	#print( sys.modules[sys.modules[ClassObject.__module__].__package__].__version__ )
+	from pysettings import conf
 
 	app = QtGui.QApplication(sys.argv)
+
+	conf += 'pyforms.gui.settings'
+
 	container = Container(ClassObject)
 	app.exec_()

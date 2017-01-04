@@ -239,7 +239,7 @@ class ControlTree(ControlBase, QTreeWidget):
 
 	def keyPressEvent(self, event):
 		QTreeView.keyPressEvent(self, event)
-		item = self.selectedItem
+		item = self.selected_item
 		if hasattr(item, 'key_pressed_event'): item.key_pressed_event(event)
 		self.key_press_event(event)
 

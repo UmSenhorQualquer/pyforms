@@ -13,6 +13,7 @@ __status__      = "Development"
 import pyforms.utils.tools as tools
 from PyQt4 import uic, QtGui, QtCore
 from pyforms.gui.Controls.ControlBase import ControlBase
+from PyQt4.QtGui import QAbstractItemView
 
 class ControlCheckBoxList(ControlBase):
 
@@ -71,8 +72,10 @@ class ControlCheckBoxList(ControlBase):
 	############ Events ########################################################
 	############################################################################
 
-	def __itemSelectionChanged(self): self.selection_changed_event()
-
+	def __itemSelectionChanged(self): 
+		self.selection_changed_event()
+		
+    
 	def selection_changed_event(self): pass
 
 		
@@ -118,6 +121,7 @@ class ControlCheckBoxList(ControlBase):
 			item = self._form.listWidget.item(row)
 			results.append( [item.value if hasattr(item, 'value') else str(item.text()),  item.checkState()==QtCore.Qt.Checked] )
 		return results
+
 	
 			
 		

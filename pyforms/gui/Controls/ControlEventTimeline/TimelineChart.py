@@ -156,4 +156,4 @@ class TimelineChart(object):
 		with open(filename, 'w') as outfile:
 			outfile.write(';'.join(['frame','value'])+'\n' )
 			for x,y in self._data:
-				outfile.write(';'.join([str(x),str(y)])+'\n' )
+				if y is not None: outfile.write(';'.join([str(x),str(y)])+'\n' )

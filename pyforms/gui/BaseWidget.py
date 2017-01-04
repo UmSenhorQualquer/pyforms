@@ -40,6 +40,7 @@ class BaseWidget(QtGui.QFrame):
 		self.layout().setMargin(0)
 
 		self.title = title
+		self.has_progress = False
 
 		self._mainmenu = []
 		self._splitters = []
@@ -61,7 +62,7 @@ class BaseWidget(QtGui.QFrame):
 		"""
 		if not self._formLoaded:
 
-			if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
+			if self.has_progress:
 				self._progress = ControlProgress("Progress", 0, 100)
 				self._progress.hide()
 				if self._formset != None:
@@ -406,6 +407,25 @@ class BaseWidget(QtGui.QFrame):
 
 	
 
+	@property
+	def max_progress(self): return self._progress.max
+	@max_progress.setter
+	def max_progress(self, value): self._progress.max = value
+
+	@property
+	def min_progress(self): return self._progress.min
+	@min_progress.setter
+	def min_progress(self, value): self._progress.min = value
+
+	@property
+	def progress(self): return self._progress.value
+	@progress.setter
+	def progress(self, value): 
+		self._progress.value = value
+		QtGui.QApplication.processEvents()
+
+		if value == self.max_progress: self._progress.hide()
+		if value == self.min_progress: self._progress.show()
 	
 	
 

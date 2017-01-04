@@ -24,7 +24,12 @@ class ControlFile(ControlText):
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)        
         self._form.pushButton.clicked.connect(self.click)
+        self.form.lineEdit.editingFinished.connect(self.finishEditing)
         self._form.pushButton.setIcon(conf.PYFORMS_ICON_FILE_OPEN)
+
+    def finishEditing(self):
+        """Function called when the lineEdit widget is edited"""
+        self.changed_event()
 
     def click(self):
         value = str(QFileDialog.getOpenFileName(

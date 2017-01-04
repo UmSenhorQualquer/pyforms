@@ -190,6 +190,7 @@ class ControlList(ControlBase, QWidget):
 	############ PROPERTIES ##################################################
 	##########################################################################
 
+	
 	@property
 	def horizontal_headers(self):
 		return self._horizontalHeaders
