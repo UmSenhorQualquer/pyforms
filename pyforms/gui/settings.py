@@ -1,6 +1,7 @@
 import os
 from PyQt4 import QtGui
 
+
 def path(filename): return os.path.join(os.path.dirname(__file__),filename)
 
 PYFORMS_ICON_VIDEOPLAYER_PAUSE_PLAY = QtGui.QIcon()

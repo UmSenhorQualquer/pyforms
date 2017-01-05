@@ -205,7 +205,7 @@ class BaseWidget(QtGui.QFrame):
 							font.setPointSize(10)
 							label.setFont(font)
 							label.setAccessibleName('msg')
-
+						label.setToolTip(label.text())
 						layout.addWidget(label)
 					else:
 						param.parent = self
@@ -282,6 +282,8 @@ class BaseWidget(QtGui.QFrame):
 							label.setFont(font)
 							label.setAccessibleName('msg')
 
+						label.setToolTip(label.text())
+						
 						layout.addWidget(label)
 					else:
 						param.parent = self
@@ -363,6 +365,9 @@ class BaseWidget(QtGui.QFrame):
 	##########################################################################
 	############ Properties ##################################################
 	##########################################################################
+
+	@property
+	def form_has_loaded(self): return self._formLoaded
 
 	@property
 	def controls(self):

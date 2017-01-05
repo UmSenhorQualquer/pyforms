@@ -141,6 +141,10 @@ Event called before the window is closed.
 ## **Properties**
 ***************************
 
+### form_has_loaded
+
+Returns a boolean indicating if the form has called the init_form() function or not.
+
 ### formset
 
 This property is used to define the organization of the controls in the BaseWidget.  
