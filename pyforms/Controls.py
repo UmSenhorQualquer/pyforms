@@ -76,6 +76,7 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 	from pyforms.terminal.Controls.ControlImage 		import ControlImage
 	from pyforms.terminal.Controls.ControlSlider 		import ControlSlider
 	from pyforms.terminal.Controls.ControlPlayer 		import ControlPlayer
+	from pyforms.terminal.Controls.ControlNumber 		import ControlNumber
 	from pyforms.terminal.Controls.ControlProgress 		import ControlProgress
 
 elif conf.PYFORMS_MODE in ['WEB']:
