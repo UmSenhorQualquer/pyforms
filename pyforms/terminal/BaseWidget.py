@@ -1,4 +1,4 @@
-from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir
+from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir, ControlNumber
 from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 
@@ -29,7 +29,7 @@ class BaseWidget(object):
 			name = var._name
 			if isinstance(var, (
 					ControlFile,ControlSlider,ControlText, 
-					ControlCombo,ControlCheckBox, ControlDir
+					ControlCombo,ControlCheckBox, ControlDir, ControlNumber
 				) 
 			):
 				self._parser.add_argument("--%s" % name, help=var.label)
@@ -68,7 +68,7 @@ class BaseWidget(object):
 					var.value = self._args.__dict__[name]
 				elif isinstance(var, ControlCheckBox):
 					var.value = self._args.__dict__[name]=='True'
-				elif isinstance(var, ControlSlider):
+				elif isinstance(var, (ControlSlider, ControlNumber) ):
 					var.value = int(self._args.__dict__[name])
 
 			
