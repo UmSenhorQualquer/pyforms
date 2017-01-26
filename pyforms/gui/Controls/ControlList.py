@@ -82,6 +82,14 @@ class ControlList(ControlBase, QWidget):
 
 
 	def clear(self, headers=False):
+
+		for row in range(self.rows_count):
+			columns = []
+			for column in range(self.columns_count):
+				v = self.get_value(column, row)
+				if isinstance(v, BaseWidget): 
+					v.destroy()
+
 		if headers:
 			self.tableWidget.clear()
 			self.tableWidget.setColumnCount(3)
@@ -139,6 +147,7 @@ class ControlList(ControlBase, QWidget):
 				indexToRemove = self.tableWidget.currentRow()
 			else:
 				indexToRemove = other
+
 			self.tableWidget.removeRow(indexToRemove)
 		return self
 

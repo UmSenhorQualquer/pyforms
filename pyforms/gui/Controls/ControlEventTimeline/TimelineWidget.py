@@ -254,7 +254,8 @@ class TimelineWidget(QtGui.QWidget):
 	def cleanLine(self, track_index=None):			
 		if track_index is not None or self._selected is not None:
 			track_index = track_index if track_index is not None else self._selected.track
-			self._tracks[track_index].clear()
+			if len(self._tracks)>track_index:
+				self._tracks[track_index].clear()
 			self._selected = None
 			self.repaint()
 		else:

@@ -19,12 +19,12 @@ class ControlToolBox(ControlBase):
         
         for item in value: 
             if isinstance(item, tuple):
-                widget = QtGui.QWidget(self.form); layout = QtGui.QVBoxLayout(); 
+                widget = QtGui.QFrame(self.form); layout = QtGui.QVBoxLayout(); 
                 layout.setMargin(0); widget.setLayout( layout )
 
                 for e in item[1]:
                     if isinstance(e, tuple):
-                        hwidget = QtGui.QWidget(self.form); hlayout = QtGui.QHBoxLayout(); 
+                        hwidget = QtGui.QFrame(self.form); hlayout = QtGui.QHBoxLayout(); 
                         hlayout.setMargin(0); hwidget.setLayout( hlayout )
                         for ee in e: hlayout.addWidget( ee.form )
                         widget.layout().addWidget( hwidget )
@@ -33,5 +33,6 @@ class ControlToolBox(ControlBase):
                 self.form.addItem(widget, item[0])
             else:
                 self.form.addItem(item.form, item.label)
+
 
 

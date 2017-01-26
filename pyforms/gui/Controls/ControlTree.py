@@ -66,6 +66,17 @@ class ControlTree(ControlBase, QTreeWidget):
 		#self.setFirstColumnSpanned( self.model().rowCount() - 1, self.rootIndex(), True)
 		return self
 
+	def __remove_recursively(self, parent, item_2_remove):
+		if parent is None: return
+
+		for i in range(parent.childCount()):
+			child = parent.child(i)
+			if child==item_2_remove: 
+				parent.removeChild(child)
+			else:
+				self.__remove_recursively(child, item_2_remove)
+
+
 	def __sub__(self, other):
 		if isinstance(other, int):
 			if other < 0:
@@ -74,9 +85,7 @@ class ControlTree(ControlBase, QTreeWidget):
 				indexToRemove = other
 			self.model().removeRow(indexToRemove)
 		else:
-			try:
-				self.invisibleRootItem().removeChild(other)
-			except: pass
+			self.__remove_recursively(self.invisibleRootItem(), other)			
 		return self
 
 	def save_form(self, data, path=None): pass
@@ -94,22 +103,26 @@ class ControlTree(ControlBase, QTreeWidget):
 		@param key:             shortcut key
 		"""
 		action = super(ControlTree, self).add_popup_menu_option(label, function_action, key, submenu)
-
+		
 		if item is not None:
-			action = QtGui.QAction(label, self.form)
-			if icon is not None:
-				action.setIconVisibleInMenu(True)
-				action.setIcon(QtGui.QIcon(icon))
-			if key is not None:
-				action.setShortcut(QtGui.QKeySequence(key))
-			if function_action:
-				action.triggered.connect(function_action)
-				# Associate action to the item.
-				if id(item) not in self._items.keys():
-					self._items.update({id(item): []})
-				self._items[id(item)].append(action)
-				##########################
-			return action
+
+			if label == "-":
+				self._items[id(item)].append(label) 
+			else:
+				action = QtGui.QAction(label, self.form)
+				if icon is not None:
+					action.setIconVisibleInMenu(True)
+					action.setIcon(QtGui.QIcon(icon))
+				if key is not None:
+					action.setShortcut(QtGui.QKeySequence(key))
+				if function_action:
+					action.triggered.connect(function_action)
+					# Associate action to the item.
+					if id(item) not in self._items.keys():
+						self._items.update({id(item): []})
+					self._items[id(item)].append(action)
+					##########################
+				return action
 		return action
 
 
@@ -255,6 +268,28 @@ class ControlTree(ControlBase, QTreeWidget):
 
 			if id(itemSelected) in self._items:
 				for action in self._items[id(itemSelected)]:
-					self._popup_menu.addAction(action)
+					if action=='-':
+						self._popup_menu.addSeparator()
+					else:
+						self._popup_menu.addAction(action)
 					# print("Adding action {action} to {item}".format(
 					#    action=action.text(), item=itemSelected))
+
+
+
+
+	def clone_item(self, parent, item, copy_function=None):
+		new_item = QTreeWidgetItem()
+		for col_index in range(item.columnCount()): 
+			new_item.setText(col_index, item.text(col_index))
+			new_item.setIcon(col_index, item.icon(col_index))
+		if copy_function is not None: copy_function(item, new_item)
+		parent.addChild(new_item)
+		for child_index in range(item.childCount()):
+			child_item = item.child(child_index)
+			self.clone_item(new_item, child_item, copy_function)
+
+	def clone_tree(self, tree, copy_function=None):
+
+		for item in tree.value:
+			self.clone_item( self.invisibleRootItem(), item, copy_function )

@@ -222,3 +222,7 @@ self.load_order = ['_control1', '_control2']
 ### uid
 
 Gets or sets a unique id of the window.
+
+### visible
+
+Gets or sets the window visibility.

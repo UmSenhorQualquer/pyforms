@@ -150,6 +150,9 @@ class VideoGLWidget(QGLWidget):
 		# Correct a bug related with the overlap of contexts between simultaneous OpenGL windows.
 		for index, frame in enumerate(self._pending_frames):
 
+			#if self.zoom>=0:
+			#	frame = cv2.resize(frame, (int(frame.shape[0]/(2*(1-self.zoom))),int( frame.shape[1]/(2*(1-self.zoom))) ))
+			
 			color = GL.GL_LUMINANCE if len(frame.shape) == 2 else GL.GL_BGR
 			w, h = len(frame[0]), len(frame) #Size of the image
 

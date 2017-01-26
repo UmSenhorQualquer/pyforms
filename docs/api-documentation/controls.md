@@ -1280,6 +1280,22 @@ def __key_pressed_event(self, event): pass
 def __double_clicked_event(self): pass
 ```
 
+#### clone_tree(tree, copy_function=None)
+
+Clone the items of a ControlTree.
+
+**tree** - ControlTree to clone.
+**copy_function** - Function with the arguments "copy_function(item, new_item)" and will be called everytime a new tree item is created.
+
+#### clone_item(parent, item, copy_function=None)
+
+Clone an item.
+
+**parent** - Parent to add the clone.
+**item** - QTreeWidgetItem to clone.
+**copy_function** - Function with the arguments "copy_function(item, new_item)" and will be called everytime a new tree item is created.
+
+
 #### item.key_pressed_event(event)
 
 Called when the item is selected and a key is pressed.

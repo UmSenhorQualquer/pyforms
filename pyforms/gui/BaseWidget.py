@@ -433,7 +433,12 @@ class BaseWidget(QtGui.QFrame):
 		if value == self.min_progress: self._progress.show()
 	
 	
+	@property
+	def visible(self): return self.isVisible()
 
+	@visible.setter
+	def visible(self, value):
+		self.show() if value else self.hide()
 
 	##########################################################################
 	############ PRIVATE FUNCTIONS ###########################################
