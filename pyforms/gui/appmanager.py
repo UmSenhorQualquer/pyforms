@@ -41,9 +41,7 @@ class Container(object):
 		try:
 			self._algorithm.execute()
 		except Exception as err:
-			tb = traceback.format_exc()
-			self.logger.debug("Action run failed: \n%s", tb)
-			self.logger.warning("Action run failed: %s", str(err))
+			self.logger.warning("Error", exc_info=True)
 		self.actionStop_triggered()
 		
 	def actionStop_triggered(self): 
