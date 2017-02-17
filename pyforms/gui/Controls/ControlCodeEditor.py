@@ -175,7 +175,7 @@ class ControlCodeEditor(ControlBase):
         QsciScintilla.keyPressEvent(self._code_editor, event)
         if event.key() in [Qt.Key_S, Qt.Key_Save]:
             modifiers = QtGui.QApplication.keyboardModifiers()
-            if modifiers == Qt.ControlModifier and self.is_modified():
+            if modifiers == Qt.ControlModifier and self.is_modified:
                 self.logger.debug("Saving...")
                 self.on_save_changes()
 
