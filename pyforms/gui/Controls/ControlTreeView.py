@@ -19,7 +19,7 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 		self.setAcceptDrops(True)
 		
 		self.setModel(QtGui.QStandardItemModel())
-		self.model().itemChanged.connect(self.__itemChangedEvent)
+		self.model().itemChanged.connect(self.__item_changed_event)
 		
 		self.selectionChanged = self.selectionChanged
 
@@ -39,16 +39,16 @@ class ControlTreeView(ControlBase, QtGui.QTreeView):
 
 
 
-	def __itemChangedEvent(self, item): self.itemChangedEvent(item)
+	def __item_changed_event(self, item): self.item_changed_event(item)
 
-	def itemChangedEvent(self, item): pass
+	def item_changed_event(self, item): pass
 		
 
-	def itemSelectionChanged(self):pass
+	def item_selection_changed_event(self):pass
 
 	def selectionChanged(self, selected, deselected ):
 		super(QtGui.QTreeView, self.form).selectionChanged(selected, deselected)
-		self.itemSelectionChanged()
+		self.item_selection_changed_event()
 
 	@property
 	def mouseSelectedRowsIndexes(self):
