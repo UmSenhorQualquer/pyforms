@@ -20,7 +20,8 @@ class ControlTextArea(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
-        self._form.plainTextEdit.setPlainText(str(self._value))
+        if self._value:
+            self._form.plainTextEdit.setPlainText(str(self._value))
 
         if not self._label or len(self._label)==0: 
             self.form.label.hide()
