@@ -65,6 +65,11 @@ class ControlButton(ControlBase):
 
 	@value.setter
 	def value(self, value):
+		try:
+			self._form.clicked.disconnect() # ignore previous signals if any
+		except TypeError as err:
+			#http://stackoverflow.com/questions/21586643/pyqt-widget-connect-and-disconnect
+			pass
 		self._form.clicked[bool].connect(value)
 
 	@property
