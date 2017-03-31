@@ -61,7 +61,7 @@ class ControlCodeEditor(ControlBase):
 
         self.form.font_size.currentIndexChanged.connect(self.__font_size_index_changed)
 
-        self.form.save_button.setIcon(conf.PYFORMS_ICON_CODEEDITOR_SAVE)
+        self.form.save_button.setIcon(QtGui.QIcon(conf.PYFORMS_ICON_CODEEDITOR_SAVE))
 
         self.lexer = QsciLexerPython
 
