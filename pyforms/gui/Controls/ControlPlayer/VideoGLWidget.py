@@ -57,9 +57,9 @@ class VideoGLWidget(QGLWidget):
 		self._lastGlY = 0.0
 		self._mouseDown = False
 		self._mouseLeftDown = False
-		self._move_img = False
-		self._width = 1.0
-		self._height = 1.0
+		self._move_img 	= False
+		self._width 	= 1.0
+		self._height 	= 1.0
 		self._x = 0
 		self._y = 0
 		self.imgWidth = 1
@@ -109,6 +109,7 @@ class VideoGLWidget(QGLWidget):
 		# self.logger.debug("x: %s | y: %s | z: %s", x, y, z)
 		GL.glPushMatrix()
 		GL.glTranslatef(x, y, z)
+
 		GL.glBegin(GL.GL_QUADS)
 		GL.glTexCoord2f(0.0, 1.0)
 		GL.glVertex3f(0, -height / 2.0, 0)  # top left
@@ -266,7 +267,7 @@ class VideoGLWidget(QGLWidget):
 			return
 		elif self.image_2_display is None or len(self.image_2_display) == 0:
 			self.imgHeight, self.imgWidth = frames[0].shape[:2]
-			if self.imgWidth > self.imgHeight:
+			if self.imgWidth >= self.imgHeight:
 				self._width = 1
 				self._height = float(self.imgHeight) / float(self.imgWidth)
 				self._x = -float(self._width) / 2
@@ -346,6 +347,7 @@ class VideoGLWidget(QGLWidget):
 			# self.logger.debug("Button 1 pressed")
 		if event.button() == 4:
 			self._move_img = True
+			self._last_mouse_gl_pos = None
 			self._lastGlX = self._glX
 			self._lastGlY = self._glY
 
@@ -486,6 +488,7 @@ class VideoGLWidget(QGLWidget):
 		return (self._glX - self._x) * float(self.imgWidth)
 
 	def _get_current_y(self):
+
 		return (self._height - self._glY + self._y) * float(self.imgWidth) - self.imgHeight / 2.0
 
 	@property
