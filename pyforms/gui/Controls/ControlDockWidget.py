@@ -1,8 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from pyforms.gui.Controls.ControlEmptyWidget import ControlEmptyWidget
 
 
 class ControlDockWidget(ControlEmptyWidget):
-
 	SIDE_LEFT = 'left'
 	SIDE_RIGHT = 'right'
 	SIDE_TOP = 'top'
@@ -10,7 +12,7 @@ class ControlDockWidget(ControlEmptyWidget):
 	SIDE_DETACHED = 'detached'
 
 	def __init__(self, label='', default=None, side='left', order=0, margin=0):
-		ControlEmptyWidget.__init__(self,label)
+		ControlEmptyWidget.__init__(self, label)
 		self.side = side
 		self.order = order
 		self.margin = margin
@@ -18,7 +20,8 @@ class ControlDockWidget(ControlEmptyWidget):
 		self._show = True
 
 	@property
-	def label(self): return self._label
+	def label(self):
+		return self._label
 
 	@label.setter
 	def label(self, value):

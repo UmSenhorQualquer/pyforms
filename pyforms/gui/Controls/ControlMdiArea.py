@@ -1,26 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlMdiArea"""
-
 import logging
 
-from PyQt4 import QtCore
-from PyQt4.QtGui import QMdiArea
-from PyQt4.QtGui import QMdiSubWindow
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QMdiArea
+	from PyQt5.QtWidgets import QMdiSubWindow
+
+else:
+	from PyQt4.QtGui import QMdiArea
+	from PyQt4.QtGui import QMdiSubWindow
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 logger = logging.getLogger(__name__)
-
-__author__ = "Ricardo Ribeiro"
-__copyright__ = ""
-__credits__ = "Carlos Mão de Ferro"
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
 
 
 class ControlMdiArea(ControlBase, QMdiArea):
@@ -72,7 +67,6 @@ class ControlMdiArea(ControlBase, QMdiArea):
 			widget.subwindow = self.addSubWindow(subwindow)
 			subwindow.setGeometry(rect)
 
-		
 		widget.subwindow.show()
 		widget.show()
 		widget.closeEvent = lambda x: self._subWindowClosed(x)

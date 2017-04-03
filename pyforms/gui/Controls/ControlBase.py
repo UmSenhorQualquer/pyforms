@@ -1,21 +1,23 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" Control Base
+from pysettings import conf
 
-"""
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QMenu
+	from PyQt5.QtWidgets import QAction
+	from PyQt5.QtGui import QIcon
+	from PyQt5.QtGui import QKeySequence
+	from PyQt5 import QtCore
+	from PyQt5 import uic
+else:
+	from PyQt4.QtGui import Qmenu
+	from PyQt4.QtGui import QAction
+	from PyQt4.QtGui import QIcon
+	from PyQt4.QtGui import QKeySequence
+	from PyQt4 import QtCore
+	from PyQt4 import uic
 
-from PyQt4 import uic, QtGui, QtCore
-
-
-__author__ = "Ricardo Ribeiro"
-__copyright__ = ""
-__credits__ = "Ricardo Ribeiro"
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
 
 
 class ControlBase(object):
@@ -88,13 +90,13 @@ class ControlBase(object):
 		if not self._popup_menu:
 			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 			self.form.customContextMenuRequested.connect(self._open_popup_menu)
-			self._popup_menu = QtGui.QMenu()
+			self._popup_menu = QMenu()
 			self._popup_menu.aboutToShow.connect( self.about_to_show_contextmenu_event)
 
 	def add_popup_submenu(self, label, submenu=None):
 		self.__create_popup_menu()
 		menu = submenu if submenu else self._popup_menu
-		submenu = QtGui.QMenu(label, menu)
+		submenu = QMenu(label, menu)
 		menu.addMenu(submenu)
 		return submenu
 
@@ -113,12 +115,12 @@ class ControlBase(object):
 		if label == "-":
 			return menu.addSeparator()
 		else:
-			action = QtGui.QAction(label, self.form)
+			action = QAction(label, self.form)
 			if icon is not None:
 				action.setIconVisibleInMenu(True)
-				action.setIcon(icon if isinstance(icon, QtGui.QIcon) else QtGui.QIcon(icon) )
+				action.setIcon(icon if isinstance(icon, QIcon) else QIcon(icon) )
 			if key != None:
-				action.setShortcut(QtGui.QKeySequence(key))
+				action.setShortcut(QKeySequence(key))
 			if function_action:
 				action.triggered.connect(function_action)
 				menu.addAction(action)

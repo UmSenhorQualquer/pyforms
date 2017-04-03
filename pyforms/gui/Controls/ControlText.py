@@ -13,8 +13,15 @@
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
-from PyQt4 import QtGui
-from PyQt4 import uic
+
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QLineEdit
+	from PyQt5 import uic
+else:
+	from PyQt4.QtGui import QLineEdit
+	from PyQt4 import uic
 
 class ControlText(ControlBase):
 
@@ -38,7 +45,7 @@ class ControlText(ControlBase):
 		self.changed_event()
 
 	def __key_pressed(self, event): 
-		QtGui.QLineEdit.keyPressEvent(self.form.lineEdit, event)
+		QLineEdit.keyPressEvent(self.form.lineEdit, event)
 
 		self.key_pressed_event(event)
 

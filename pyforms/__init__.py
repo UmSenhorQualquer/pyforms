@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import loggingbootstrap
-from pysettings import conf;
+from pysettings import conf
 
 conf += 'pyforms.settings'
 
@@ -10,8 +10,8 @@ __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
 __version__ = 'v1.0.beta'
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
+__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
+__email__ = ["ricardojvr@gmail.com", "cajomferro@gmail.com"]
 __status__ = "Production"
 
 logger = logging.getLogger(__name__)

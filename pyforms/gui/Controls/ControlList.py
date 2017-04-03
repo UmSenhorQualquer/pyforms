@@ -7,22 +7,26 @@
 import logging
 import os
 
-from PyQt4 import uic, QtCore
-from PyQt4.QtGui import QWidget, QIcon, QTableWidgetItem, QAbstractItemView
+from pysettings import conf
 
-import pyforms
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QWidget
+	from PyQt5.QtWidgets import QTableWidgetItem
+	from PyQt5.QtWidgets import QAbstractItemView
+	from PyQt5.QtGui import QIcon
+	from PyQt5 import uic
+	from PyQt5 import QtCore
+
+else:
+	from PyQt4.QtGui import QWidget
+	from PyQt4.QtGui import QTableWidgetItem
+	from PyQt4.QtGui import QAbstractItemView
+	from PyQt4.QtGui import QIcon
+	from PyQt4 import uic
+	from PyQt4 import QtCore
 
 from pyforms.gui.BaseWidget import BaseWidget
 from pyforms.gui.Controls.ControlBase import ControlBase
-
-__author__ = pyforms.__author__
-__credits__ = pyforms.__credits__
-__license__ = pyforms.__license__
-__version__ = pyforms.__version__
-__maintainer__ = pyforms.__maintainer__
-__email__ = pyforms.__email__
-__status__ = pyforms.__status__
-__updated__ = "2016-08-03"
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +39,7 @@ class ControlList(ControlBase, QWidget):
 	CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
 	def __init__(self, label="", default="", add_function=None,
-				 remove_function=None):
+	             remove_function=None):
 		QWidget.__init__(self)
 
 		self._plusFunction = add_function
@@ -78,8 +82,8 @@ class ControlList(ControlBase, QWidget):
 			self.plusButton.pressed.connect(plusFunction)
 			self.minusButton.pressed.connect(minusFunction)
 
-	def __repr__(self): return "ControlList " + str(self._value)
-
+	def __repr__(self):
+		return "ControlList " + str(self._value)
 
 	def clear(self, headers=False):
 
@@ -87,7 +91,7 @@ class ControlList(ControlBase, QWidget):
 			columns = []
 			for column in range(self.columns_count):
 				v = self.get_value(column, row)
-				if isinstance(v, BaseWidget): 
+				if isinstance(v, BaseWidget):
 					v.destroy()
 
 		if headers:
@@ -109,7 +113,7 @@ class ControlList(ControlBase, QWidget):
 						columns.append(v.save({}))
 					else:
 						columns.append(str(v))
-				rows.append(columns)				
+				rows.append(columns)
 			data['value'] = rows
 		return data
 
@@ -119,13 +123,12 @@ class ControlList(ControlBase, QWidget):
 			for row in range(len(rows)):
 				for column in range(len(rows[row])):
 					v = self.get_value(column, row)
-					if isinstance(v, BaseWidget): 
+					if isinstance(v, BaseWidget):
 						v.load(rows[row][column])
 					else:
 						self.set_value(column, row, rows[row][column])
 		elif 'value' in data.keys():
 			self.value = data['value']
-		
 
 	def __add__(self, other):
 
@@ -155,7 +158,7 @@ class ControlList(ControlBase, QWidget):
 		if isinstance(value, QWidget):
 			self.tableWidget.setCellWidget(row, column, value)
 			value.show()
-			self.tableWidget.setRowHeight(row,value.height()) 
+			self.tableWidget.setRowHeight(row, value.height())
 		else:
 			args = [str(value)] if not hasattr(value, 'icon') else [QIcon(value.icon), str(value)]
 			self.tableWidget.setItem(row, column, QTableWidgetItem(*args))
@@ -185,21 +188,26 @@ class ControlList(ControlBase, QWidget):
 	############ EVENTS ######################################################
 	##########################################################################
 
-	def data_changed_event(self, row, col, item): pass
+	def data_changed_event(self, row, col, item):
+		pass
 
-	def item_selection_changed_event(self): pass
+	def item_selection_changed_event(self):
+		pass
 
-	def current_cell_changed_event( self, next_row, next_col, previous_row, previous_col): pass
+	def current_cell_changed_event(self, next_row, next_col, previous_row, previous_col):
+		pass
 
-	def current_item_changed_event(self, current, previous): pass
+	def current_item_changed_event(self, current, previous):
+		pass
 
-	def cell_double_clicked(self, row, column): pass
+	def cell_double_clicked(self, row, column):
+		pass
 
 	##########################################################################
 	############ PROPERTIES ##################################################
 	##########################################################################
 
-	
+
 	@property
 	def horizontal_headers(self):
 		return self._horizontalHeaders
@@ -218,16 +226,13 @@ class ControlList(ControlBase, QWidget):
 			item.setText(header)
 			self.tableWidget.setHorizontalHeaderItem(idx, item)
 
-	
-
 	@property
-	def word_wrap(self): return self.tableWidget.wordWrap()
+	def word_wrap(self):
+		return self.tableWidget.wordWrap()
+
 	@word_wrap.setter
 	def word_wrap(self, value):
 		self.tableWidget.setWordWrap(value)
-
-
-	
 
 	@property
 	def readonly(self):
@@ -252,13 +257,15 @@ class ControlList(ControlBase, QWidget):
 			self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
 
 	@property
-	def rows_count(self): return self.tableWidget.rowCount()
+	def rows_count(self):
+		return self.tableWidget.rowCount()
 
 	@property
-	def columns_count(self):  return self.tableWidget.columnCount()
+	def columns_count(self):
+		return self.tableWidget.columnCount()
 
-
-	def __len__(self): return self.rows_count()
+	def __len__(self):
+		return self.rows_count()
 
 	@property
 	def value(self):
@@ -280,7 +287,7 @@ class ControlList(ControlBase, QWidget):
 	def value(self, value):
 		self.clear()
 		for row in value: self += row
-		
+
 	# TODO: implement += on self.value? I want to add a list of tuples to
 	# self.value
 
@@ -300,7 +307,8 @@ class ControlList(ControlBase, QWidget):
 			return None
 
 	@property
-	def label(self): return self.labelWidget.getText()
+	def label(self):
+		return self.labelWidget.getText()
 
 	@label.setter
 	def label(self, value):
@@ -310,10 +318,12 @@ class ControlList(ControlBase, QWidget):
 			self.labelWidget.hide()
 
 	@property
-	def form(self): return self
+	def form(self):
+		return self
 
 	@property
-	def icon_size(self): return self.tableWidget.iconSize()
+	def icon_size(self):
+		return self.tableWidget.iconSize()
 
 	@icon_size.setter
 	def icon_size(self, value):
@@ -322,9 +332,6 @@ class ControlList(ControlBase, QWidget):
 		else:
 			self.tableWidget.setIconSize(QtCore.QSize(value, value))
 
-
-	
-
 	##########################################################################
 	############ PRIVATE FUNCTIONS ###########################################
 	##########################################################################
@@ -332,9 +339,9 @@ class ControlList(ControlBase, QWidget):
 	def _dataChangedEvent(self, item):
 		self.data_changed_event(item.row(), item.column(), self.tableWidget.model().data(item))
 		self.changed_event()
-	
+
 	def tableWidgetCellChanged(self, nextRow, nextCol, previousRow,
-							   previousCol):
+	                           previousCol):
 		self.current_cell_changed_event(nextRow, nextCol, previousRow, previousCol)
 		self.changed_event()
 
@@ -342,9 +349,9 @@ class ControlList(ControlBase, QWidget):
 		self.current_item_changed_event(current, previous)
 		self.changed_event()
 
-	def tableWidgetItemSelectionChanged(self):self.item_selection_changed_event()
+	def tableWidgetItemSelectionChanged(self):
+		self.item_selection_changed_event()
 
-	
 	def tableWidgetCellDoubleClicked(self, row, column):
 		"""
 		(From PyQt) This signal is emitted whenever a cell in the table is double clicked.
@@ -364,4 +371,3 @@ class ControlList(ControlBase, QWidget):
 		Use this function if you want to disconnect a signal temporarily
 		"""
 		pass
-	
