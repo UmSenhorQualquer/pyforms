@@ -59,7 +59,7 @@ class BaseWidget(QFrame):
 
 		layout = QVBoxLayout()
 		self.setLayout(layout)
-		self.layout().setMargin(0)
+		#self.layout().setMargin(0)
 
 		self.title = title
 		self.has_progress = False
@@ -308,7 +308,7 @@ class BaseWidget(QFrame):
 						param.parent = self
 						param.name = row
 						layout.addWidget(param.form)
-		layout.setMargin(0)
+#		layout.setMargin(0)
 		control.setLayout(layout)
 		return control
 

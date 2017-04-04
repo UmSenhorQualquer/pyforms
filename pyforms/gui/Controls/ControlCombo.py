@@ -1,26 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlCombo """
 
 import pyforms.utils.tools as tools
-from PyQt4 import uic
-from pyforms.gui.Controls.ControlBase import ControlBase
 
-__author__ = "Ricardo Ribeiro"
-__copyright__ = ""
-__credits__ = "Ricardo Ribeiro"
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import uic
+else:
+	from PyQt4 import uic
+
+from pyforms.gui.Controls.ControlBase import ControlBase
 
 
 class ControlCombo(ControlBase):
 	"""This class represents a wrapper to the combo box"""
 
-	
 	##########################################################################
 	############ Functions ###################################################
 	##########################################################################
@@ -67,7 +63,6 @@ class ControlCombo(ControlBase):
 		if firstValue:
 			self.value = self._items[label]
 
-
 	def __add__(self, val):
 		if isinstance(val, tuple):
 			self.add_item(val[0], val[1])
@@ -75,7 +70,6 @@ class ControlCombo(ControlBase):
 			self.add_item(val)
 
 		return self
-	
 
 	def get_item_index_by_name(self, item_name):
 		"""
@@ -85,8 +79,8 @@ class ControlCombo(ControlBase):
 		"""
 		return self._form.comboBox.findText(item_name)
 
-	def count(self): return self._form.comboBox.count()
-
+	def count(self):
+		return self._form.comboBox.count()
 
 	##########################################################################
 	############ Events ######################################################
@@ -106,26 +100,31 @@ class ControlCombo(ControlBase):
 		"""
 		pass
 
-	def highlighted_event(self, index): pass
+	def highlighted_event(self, index):
+		pass
 
-	def edittext_changed_event(self, text): pass
+	def edittext_changed_event(self, text):
+		pass
 
 	##########################################################################
 	############ PROPERTIES ##################################################
 	##########################################################################
-	
-	@property	
-	def current_index(self): return self._form.comboBox.currentIndex()
+
+	@property
+	def current_index(self):
+		return self._form.comboBox.currentIndex()
+
 	@current_index.setter
-	def current_index(self, value): self._form.comboBox.setCurrentIndex(value)
-
-	
-
-	@property
-	def items(self): return self._items.items()
+	def current_index(self, value):
+		self._form.comboBox.setCurrentIndex(value)
 
 	@property
-	def value(self): return self._value
+	def items(self):
+		return self._items.items()
+
+	@property
+	def value(self):
+		return self._value
 
 	@value.setter
 	def value(self, value):
@@ -138,7 +137,8 @@ class ControlCombo(ControlBase):
 				self._value = val
 
 	@property
-	def text(self): return str(self._form.comboBox.currentText())
+	def text(self):
+		return str(self._form.comboBox.currentText())
 
 	@text.setter
 	def text(self, value):
@@ -148,7 +148,8 @@ class ControlCombo(ControlBase):
 				break
 
 	@property
-	def label(self): return self._form.comboLabel.text()
+	def label(self):
+		return self._form.comboLabel.text()
 
 	@label.setter
 	def label(self, value):
@@ -158,7 +159,6 @@ class ControlCombo(ControlBase):
 		"""
 		self._form.comboLabel.setText(value)
 
-
 	##########################################################################
 	############ Private functions ###########################################
 	##########################################################################
@@ -167,7 +167,7 @@ class ControlCombo(ControlBase):
 		if not self._addingItem:
 			item = self._form.comboBox.currentText()
 			if len(item) >= 1:
-				ControlBase.value.fset(self, self._items[ str(item) ])
+				ControlBase.value.fset(self, self._items[str(item)])
 				self.activated_event(index)
 
 	def _highlighted(self, index):
@@ -177,11 +177,12 @@ class ControlCombo(ControlBase):
 		"""
 		self.highlighted_event(index)
 
-	def _editTextChanged(self, text): self.edittext_changed_event(text)
+	def _editTextChanged(self, text):
+		self.edittext_changed_event(text)
 
 	def _currentIndexChanged(self, index):
 		if not self._addingItem:
 			item = self._form.comboBox.currentText()
 			if len(item) >= 1:
-				ControlBase.value.fset(self, self._items[ str(item) ])
+				ControlBase.value.fset(self, self._items[str(item)])
 				self.current_index_changed_event(index)

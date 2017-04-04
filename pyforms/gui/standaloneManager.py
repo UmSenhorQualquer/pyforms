@@ -43,7 +43,7 @@ class StandAloneContainer(QMainWindow):
 			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
 		w.init_form()
-		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+#		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 		self.setCentralWidget(w)
 		self.setWindowTitle(w.title)
@@ -76,7 +76,7 @@ class StandAloneContainer(QMainWindow):
 					dock.setFeatures(
 						QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
-					widget.form.layout().setMargin(widget.margin)
+#					widget.form.layout().setMargin(widget.margin)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)

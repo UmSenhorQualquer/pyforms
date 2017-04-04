@@ -289,7 +289,7 @@ class ControlBoundingSlider(ControlBase):
 				hlayout = QHBoxLayout()
 			else:
 				hlayout = QVBoxLayout()
-			hlayout.setMargin(0)
+			# hlayout.setMargin(0)
 			hwidget.setLayout(hlayout)
 			self._min_spinbox = QSpinBox()
 			self._min_spinbox.valueChanged.connect(self.__min_spinbox_changed)

@@ -73,7 +73,7 @@ class ControlEventTimeline(ControlBase, QWidget):
 		vlayout = QVBoxLayout()
 		hlayout = QHBoxLayout()
 		# hlayout.setMargin(0)
-		vlayout.setMargin(0)
+		# vlayout.setMargin(0)
 		self.setLayout(vlayout)
 
 		# Add scroll area

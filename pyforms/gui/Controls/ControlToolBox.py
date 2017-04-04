@@ -21,7 +21,8 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 class ControlToolBox(ControlBase):
 	def init_form(self):
 		self._form = QToolBox()
-		self.form.layout().setMargin(0)
+
+	# self.form.layout().setMargin(0)
 
 	@property
 	def value(self):
@@ -37,16 +38,17 @@ class ControlToolBox(ControlBase):
 			if isinstance(item, tuple):
 				widget = QFrame(self.form);
 				layout = QVBoxLayout();
-				layout.setMargin(0);
+				# layout.setMargin(0);
 				widget.setLayout(layout)
 
 				for e in item[1]:
 					if isinstance(e, tuple):
 						hwidget = QFrame(self.form);
 						hlayout = QHBoxLayout();
-						hlayout.setMargin(0);
+						# hlayout.setMargin(0);
 						hwidget.setLayout(hlayout)
-						for ee in e: hlayout.addWidget(ee.form)
+						for ee in e:
+							hlayout.addWidget(ee.form)
 						widget.layout().addWidget(hwidget)
 					else:
 						widget.layout().addWidget(e.form)

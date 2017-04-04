@@ -18,7 +18,7 @@ class ControlEmptyWidget(ControlBase, QWidget):
 	def __init__(self, label='', default=None):
 		QWidget.__init__(self)
 		layout = QVBoxLayout()
-		layout.setMargin(0)
+#		layout.setMargin(0)
 		self.form.setLayout(layout)
 
 		ControlBase.__init__(self, label)
