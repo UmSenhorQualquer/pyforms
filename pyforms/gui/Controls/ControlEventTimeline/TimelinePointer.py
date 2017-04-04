@@ -1,74 +1,106 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventTimeline.TimelinePointer
+from pysettings import conf
 
-"""
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtGui import QColor
+	from PyQt5 import QtCore
 
-from PyQt4 import QtGui, QtCore
-
-__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
-__status__ = "Development"
+else:
+	from PyQt4.QtGui import QColor
+	from PyQt4 import QtCore
 
 
 class TimelinePointer(object):
+	def __init__(self, position, parent):
+		"""
+        		
+		:param position: 
+		:param parent: 
+		"""
+		self._position = position
+		self._parent = parent
 
-    def __init__(self, position, parent):
-        self._position = position
-        self._parent = parent
+	def draw(self, painter, showvalues=False):
+		"""
+		
+		:param painter: 
+		:param showvalues: 
+		:return: 
+		"""
+		painter.setPen(QColor(0, 255, 0))
+		painter.setBrush(QColor(0, 255, 0))
+		painter.drawLine(
+			self.xposition, 8, self.xposition, self._parent.height())
+		painter.drawEllipse(QtCore.QPoint(self.xposition, 8), 5, 5)
+		painter.drawText(self.xposition + 8, 8 + 4, str(self._position))
 
-    def draw(self, painter, showvalues=False):
-        painter.setPen(QtGui.QColor(0, 255, 0))
-        painter.setBrush(QtGui.QColor(0, 255, 0))
-        painter.drawLine(
-            self.xposition, 8, self.xposition, self._parent.height())
-        painter.drawEllipse(QtCore.QPoint(self.xposition, 8), 5, 5)
-        painter.drawText(self.xposition + 8, 8 + 4, str(self._position))
+	##########################################################################
+	#### HELPERS/FUNCTIONS ###################################################
+	##########################################################################
 
-    ##########################################################################
-    #### HELPERS/FUNCTIONS ###################################################
-    ##########################################################################
+	def moveEvent(self):
+		"""
+		
+		:return: 
+		"""
+		pass
 
-    def moveEvent(self):
-        pass
+	def collide(self, x, y):
+		"""
+		
+		:param x: 
+		:param y: 
+		:return: 
+		"""
+		return (self.position - 5) <= x <= (self.position + 5) and 3 <= y <= 11
 
-    def collide(self, x, y):
-        return (self.position - 5) <= x <= (self.position + 5) and 3 <= y <= 11
+	def canSlideBegin(self, x, y):
+		"""
+		
+		:param x: 
+		:param y: 
+		:return: 
+		"""
+		return False
 
-    def canSlideBegin(self, x, y):
-        return False
+	def canSlideEnd(self, x, y):
+		"""
+		
+		:param x: 
+		:param y: 
+		:return: 
+		"""
+		return False
 
-    def canSlideEnd(self, x, y):
-        return False
+	def move(self, x, y):
+		"""
+		
+		:param x: 
+		:param y: 
+		:return: 
+		"""
+		x = int(round(x / self._parent._scale))
+		if (self._position - x) >= 0 and (self._position - x) <= (self._parent.width() / self._parent._scale):
+			self._position += x
+			self.moveEvent()
 
-    def move(self, x, y):
-        x = int(round(x / self._parent._scale))
-        if (self._position - x) >= 0 and (self._position - x) <= (self._parent.width() / self._parent._scale):
-            self._position += x
-            self.moveEvent()
+	##########################################################################
+	#### PROPERTIES ##########################################################
+	##########################################################################
+	@property
+	def xposition(self):
+		return self._parent.frame2x(self.position)
 
-    ##########################################################################
-    #### PROPERTIES ##########################################################
-    ##########################################################################
-    @property
-    def xposition(self):
-        return self._parent.frame2x(self.position)
-    
+	@property
+	def position(self):
+		return self._position
 
-    @property
-    def position(self):
-        return self._position
+	@position.setter
+	def position(self, value):
+		self._position = value
+		self.moveEvent()
 
-    @position.setter
-    def position(self, value):
-        self._position = value
-        self.moveEvent()
-        
-
-    @property
-    def frame(self): return self._position
+	@property
+	def frame(self): return self._position

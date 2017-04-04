@@ -1,40 +1,38 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline
-
-"""
-
 import csv
 import os
-from PyQt4 import QtGui, QtCore
+
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox, QPushButton, QLabel, \
+		QSlider, QHBoxLayout, QVBoxLayout
+	from PyQt5 import QtCore
+
+else:
+	from PyQt4.QtGui import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox, QPushButton, QLabel, QSlider, \
+		QHBoxLayout, QVBoxLayout
+	from PyQt4 import QtCore
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWidget
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
 from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
 from pyforms.gui.Controls.ControlEventTimeline.GraphsProperties import GraphsProperties
-from pysettings import conf
-
-__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
-__status__ = "Development"
 
 
-class ControlEventTimeline(ControlBase, QtGui.QWidget):
+class ControlEventTimeline(ControlBase, QWidget):
 	"""
 		Timeline events editor
 	"""
 
 	def __init__(self, label="", default=0, max=100):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		ControlBase.__init__(self, label, default)
 		self._max = 100
 		self._graphs_prop_win = GraphsProperties(self._time, self)
-
 
 		# Popup menus that only show when clicking on a TIMELINEDELTA object
 		self._deltaLockAction = self.add_popup_menu_option("Lock", self.__lockSelected, key='L')
@@ -47,43 +45,45 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self.add_popup_menu_option("-")
 
 		self.add_popup_menu_option("Graphs", self.show_graphs_properties, icon=conf.PYFORMS_ICON_EVENTTIMELINE_GRAPH)
-		
+
 		# General righ click popup menus
-		self.add_popup_menu_option("Track properties", self.__setLinePropertiesEvent, icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
+		self.add_popup_menu_option("Track properties", self.__setLinePropertiesEvent,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
 		self.add_popup_menu_option("-")
 
-		self.add_popup_menu_option("Auto adjust the number of tracks", self.__auto_adjust_tracks_evt, 			icon=conf.PYFORMS_ICON_EVENTTIMELINE_REFRESH)
-		self.add_popup_menu_option("Add a new track to the bottom", self.__add_track_2_bottom_evt, 				icon=conf.PYFORMS_ICON_EVENTTIMELINE_ADD)
-		self.add_popup_menu_option("Remove the bottom track, if empty", self.__remove_track_from_bottom_evt, 	icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
-		
+		self.add_popup_menu_option("Auto adjust the number of tracks", self.__auto_adjust_tracks_evt,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REFRESH)
+		self.add_popup_menu_option("Add a new track to the bottom", self.__add_track_2_bottom_evt,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_ADD)
+		self.add_popup_menu_option("Remove the bottom track, if empty", self.__remove_track_from_bottom_evt,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
 
 		self.add_popup_menu_option("-")
 
 		clean_menu = self.add_popup_submenu('Clean')
 
-		self.add_popup_menu_option('Clean current track',function_action=self.__cleanLine, submenu=clean_menu)
-		self.add_popup_menu_option('Clean all graphs',function_action=self.__cleanCharts, 	submenu=clean_menu)
-		self.add_popup_menu_option('Clean everything',function_action=self.clean, 	submenu=clean_menu)
-
+		self.add_popup_menu_option('Clean current track', function_action=self.__cleanLine, submenu=clean_menu)
+		self.add_popup_menu_option('Clean all graphs', function_action=self.__cleanCharts, submenu=clean_menu)
+		self.add_popup_menu_option('Clean everything', function_action=self.clean, submenu=clean_menu)
 
 	def init_form(self):
 		# Get the current path of the file
 		rootPath = os.path.dirname(__file__)
 
-		vlayout = QtGui.QVBoxLayout()
-		hlayout = QtGui.QHBoxLayout()
+		vlayout = QVBoxLayout()
+		hlayout = QHBoxLayout()
 		# hlayout.setMargin(0)
 		vlayout.setMargin(0)
 		self.setLayout(vlayout)
 
 		# Add scroll area
-		scrollarea = QtGui.QScrollArea()
+		scrollarea = QScrollArea()
 		scrollarea.setMinimumHeight(140)
 		scrollarea.setWidgetResizable(True)
 		scrollarea.keyPressEvent = self.__scrollAreaKeyPressEvent
 		scrollarea.keyReleaseEvent = self.__scrollAreaKeyReleaseEvent
 		vlayout.addWidget(scrollarea)
-		#vlayout.setContentsMargins(5, 5, 5, 5)
+		# vlayout.setContentsMargins(5, 5, 5, 5)
 
 		# The timeline widget
 		widget = TimelineWidget(self)
@@ -102,33 +102,32 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		# hlayout.addWidget(btn_2)
 
 		# Timeline zoom slider
-		slider = QtGui.QSlider(QtCore.Qt.Horizontal)
+		slider = QSlider(QtCore.Qt.Horizontal)
 		slider.setFocusPolicy(QtCore.Qt.NoFocus)
 		slider.setMinimum(1)
 		slider.setMaximum(100)
 		slider.setValue(10)
 		slider.setPageStep(1)
-		slider.setTickPosition(QtGui.QSlider.NoTicks)  # TicksBothSides
+		slider.setTickPosition(QSlider.NoTicks)  # TicksBothSides
 		slider.valueChanged.connect(self.__scaleSliderChange)
-		
-		slider_label_zoom_in 	= QtGui.QLabel()
-		slider_label_zoom_out 	= QtGui.QLabel()
+
+		slider_label_zoom_in = QLabel()
+		slider_label_zoom_out = QLabel()
 		slider_label_zoom_in.setPixmap(conf.PYFORMS_PIXMAP_EVENTTIMELINE_ZOOM_IN)
 		slider_label_zoom_out.setPixmap(conf.PYFORMS_PIXMAP_EVENTTIMELINE_ZOOM_OUT)
-		
 
-		self._zoomLabel = QtGui.QLabel("100%")
+		self._zoomLabel = QLabel("100%")
 		hlayout.addWidget(self._zoomLabel)
 		hlayout.addWidget(slider_label_zoom_out)
 		hlayout.addWidget(slider)
 		hlayout.addWidget(slider_label_zoom_in)
-		#hlayout.setContentsMargins(5, 0, 5, 5)
+		# hlayout.setContentsMargins(5, 0, 5, 5)
 		# Import/Export Buttons
-		btn_import = QtGui.QPushButton("Import")
-		
+		btn_import = QPushButton("Import")
+
 		btn_import.setIcon(conf.PYFORMS_ICON_EVENTTIMELINE_IMPORT)
 		btn_import.clicked.connect(self.__import)
-		btn_export = QtGui.QPushButton("Export")
+		btn_export = QPushButton("Export")
 
 		btn_export.setIcon(conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT)
 		btn_export.clicked.connect(self.__export)
@@ -144,23 +143,49 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self._time = widget
 		self._scrollArea = scrollarea
 
-		
-
 	##########################################################################
 	#### HELPERS/PUBLIC FUNCTIONS ############################################
 	##########################################################################
 
 	def add_period(self, value, row=0, color=None):
+		"""
+		
+		:param value: 
+		:param row: 
+		:param color: 
+		:return: 
+		"""
 		self._time.addPeriod(value, track, color)
 		self._time.repaint()
 
-	def add_graph(self, name, data): self._time.add_chart(name, data)
+	def add_graph(self, name, data):
+		"""
+		
+		:param name: 
+		:param data: 
+		:return: 
+		"""
+		self._time.add_chart(name, data)
 
 	def import_graph(self, filename, frame_col=0, val_col=1):
+		"""
+		
+		:param filename: 
+		:param frame_col: 
+		:param val_col: 
+		:return: 
+		"""
 		self.__import()
 		self._import_window.import_chart(filename, frame_col, val_col)
-		
+
 	def import_graph_file(self, filename, separator=';', ignore_rows=0):
+		"""
+		
+		:param filename: 
+		:param separator: 
+		:param ignore_rows: 
+		:return: 
+		"""
 		csvfile = open(filename, 'U')
 		spamreader = csv.reader(csvfile, delimiter=separator)
 		for i in range(ignore_rows): next(spamreader, None)
@@ -168,77 +193,82 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		chart.name = os.path.basename(filename).replace('.csv', '').replace('.CSV', '')
 		csvfile.close()
 
-	def show_graphs_properties(self):		
+	def show_graphs_properties(self):
+		"""
+		
+		"""
 		self._graphs_prop_win.show()
 		self._time.repaint()
 
 	def import_csv(self, csvfile):
+		"""
+		
+		:param csvfile: 
+		"""
 		# If there are annotation in the timeline, show a warning
 		if len(self._time._tracks) > 0:  # dict returns True if not empty
 			message = ["You are about to import new data. ",
-					   "If you proceed, current annotations will be erased. ",
-					   "Make sure to export current annotations first to save.",
-					   "\n",
-					   "Are you sure you want to proceed?"]
-			reply = QtGui.QMessageBox.question(self,
-											   "Warning!",
-											   "".join(message),
-											   QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
-											   QtGui.QMessageBox.No)
+			           "If you proceed, current annotations will be erased. ",
+			           "Make sure to export current annotations first to save.",
+			           "\n",
+			           "Are you sure you want to proceed?"]
+			reply = QMessageBox.question(self,
+			                             "Warning!",
+			                             "".join(message),
+			                             QMessageBox.Yes | QMessageBox.No,
+			                             QMessageBox.No)
 
-			if reply != QtGui.QMessageBox.Yes:
+			if reply != QMessageBox.Yes:
 				return
 
 		self._time.import_csv(csvfile)
-		
 
 	def export_csv_file(self, filename):
 		with open(filename, 'w') as csvfile:
-			spamwriter = csv.writer(csvfile, dialect='excel')				
+			spamwriter = csv.writer(csvfile, dialect='excel')
 			self._time.export_csv(spamwriter)
-				
 
 	def import_csv_file(self, filename):
 		with open(filename, 'r') as csvfile:
-			spamreader = csv.reader(csvfile, dialect='excel')				
-			self._time.import_csv(spamreader)	
+			spamreader = csv.reader(csvfile, dialect='excel')
+			self._time.import_csv(spamreader)
 
 	##########################################################################
 	#### EVENTS ##############################################################
 	##########################################################################
 
 	@property
-	def pointer_changed_event(self): return self._time._pointer.moveEvent
+	def pointer_changed_event(self):
+		return self._time._pointer.moveEvent
 
 	@pointer_changed_event.setter
-	def pointer_changed_event(self, value): self._time._pointer.moveEvent = value
+	def pointer_changed_event(self, value):
+		self._time._pointer.moveEvent = value
 
 	def __auto_adjust_tracks_evt(self):
-		for i in range(len(self._time.tracks)-1, -1, -1):
+		for i in range(len(self._time.tracks) - 1, -1, -1):
 			track = self._time.tracks[i]
-			if len(track)==0: 
+			if len(track) == 0:
 				self._time.remove_track(track)
 			else:
 				break
-
 
 	def __add_track_2_bottom_evt(self):
 		self._time.addTrack()
 
 	def __remove_track_from_bottom_evt(self):
-		if len(self._time.tracks)>0:
+		if len(self._time.tracks) > 0:
 			track = self._time.tracks[-1]
-			if len(track)==0: 
+			if len(track) == 0:
 				self._time.remove_track(track)
-
-
 
 	##########################################################################
 	#### PROPERTIES ##########################################################
 	##########################################################################
 
 	@property
-	def value(self): return self._time.position
+	def value(self):
+		return self._time.position
 
 	@value.setter
 	def value(self, value):
@@ -246,7 +276,8 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self._time.position = value
 
 	@property
-	def max(self): return self._time.minimumWidth()
+	def max(self):
+		return self._time.minimumWidth()
 
 	@max.setter
 	def max(self, value):
@@ -254,28 +285,26 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		self._time.setMinimumWidth(value)
 		self.repaint()
 
+	@property
+	def form(self):
+		return self
 
 	@property
-	def form(self): return self
+	def rows(self):
+		return self._time.tracks
 
 	@property
-	def rows(self): return self._time.tracks
-
-	@property 
 	def graphs(self):
 		return self._graphs_prop_win.charts
-
 
 	##########################################################################
 	#### PRIVATE FUNCTIONS ###################################################
 	##########################################################################
 
-
 	def about_to_show_contextmenu_event(self):
 		for action in self._deltaActions:
 			action.setVisible(
 				True) if self._time._selected is not None else action.setVisible(False)
-
 
 	def __setLinePropertiesEvent(self):
 		"""
@@ -298,9 +327,9 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 			parent.color = self._time._tracks[current_track].color
 		except Exception as e:
 			error_message = ("You tried to edit an empty track.",
-							 "\n",
-							 "Initialize it by creating an event first.")
-			QtGui.QMessageBox.warning(
+			                 "\n",
+			                 "Initialize it by creating an event first.")
+			QMessageBox.warning(
 				parent, "Attention!", "".join(error_message))
 			return e
 
@@ -326,77 +355,75 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 		# Restore timeline default color
 		parent.color = timeline_default_color
 
-	def __lockSelected(self): self._time.lockSelected()
+	def __lockSelected(self):
+		self._time.lockSelected()
 
-	def __removeSelected(self): self._time.removeSelected()
+	def __removeSelected(self):
+		self._time.removeSelected()
 
 	def __import(self):
 		"""Import annotations from a file."""
 		if not hasattr(self, '_import_window'): self._import_window = ImportWindow(self)
 		self._import_window.show()
 
-
 	def __export(self):
 		"""Export annotations to a file."""
 
-		filename, ffilter = QtGui.QFileDialog.getSaveFileNameAndFilter(parent=self,
-													 caption="Export annotations file",
-													 directory="untitled.csv",
-													 filter="CSV Files (*.csv);;CSV Matrix Files (*.csv)",
-													 options=QtGui.QFileDialog.DontUseNativeDialog)
-		
+		filename, ffilter = QFileDialog.getSaveFileNameAndFilter(parent=self,
+		                                                         caption="Export annotations file",
+		                                                         directory="untitled.csv",
+		                                                         filter="CSV Files (*.csv);;CSV Matrix Files (*.csv)",
+		                                                         options=QtGui.QFileDialog.DontUseNativeDialog)
+
 		filename = str(filename)
-		ffilter  = str(ffilter)
+		ffilter = str(ffilter)
 		if filename != "":
 			with open(filename, 'w') as csvfile:
 				spamwriter = csv.writer(csvfile, dialect='excel')
-				if ffilter=='CSV Files (*.csv)':
+				if ffilter == 'CSV Files (*.csv)':
 					self._time.export_csv(spamwriter)
-				elif ffilter=='CSV Matrix Files (*.csv)':
+				elif ffilter == 'CSV Matrix Files (*.csv)':
 					self._time.export_2_csv_matrix(spamwriter)
 
-
-
 	def __export_2_csv_matrix(self):
-		QtGui.QMessageBox.warning(
-				self, "Important!",'Please note that this file cannot be imported after.')
+		QMessageBox.warning(
+			self, "Important!", 'Please note that this file cannot be imported after.')
 
-		filename = QtGui.QFileDialog.getSaveFileName(parent=self,
-													 caption="Export matrix file",
-													 directory="untitled.csv",
-													 filter="CSV Files (*.csv)",
-													 options=QtGui.QFileDialog.DontUseNativeDialog)
+		filename = QFileDialog.getSaveFileName(parent=self,
+		                                       caption="Export matrix file",
+		                                       directory="untitled.csv",
+		                                       filter="CSV Files (*.csv)",
+		                                       options=QFileDialog.DontUseNativeDialog)
 		if filename != "":
 			with open(filename, 'w') as csvfile:
 				spamwriter = csv.writer(csvfile, dialect='excel')
 				self._time.export_2_csv_matrix(spamwriter)
 
-
-
 	def __cleanLine(self):
-		reply = QtGui.QMessageBox.question(self, 'Confirm',
-										   "Are you sure you want to clean all the events on this track?", QtGui.QMessageBox.Yes |
-										   QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-		if reply == QtGui.QMessageBox.Yes:
+		reply = QMessageBox.question(self, 'Confirm',
+		                             "Are you sure you want to clean all the events on this track?",
+		                             QMessageBox.Yes |
+		                             QMessageBox.No, QMessageBox.No)
+		if reply == QMessageBox.Yes:
 			self._time.cleanLine(self._time.current_mouseover_track)
 
 	def __cleanCharts(self):
-		reply = QtGui.QMessageBox.question(self, 'Confirm',
-										   "Are you sure you want to clean all the charts?", QtGui.QMessageBox.Yes |
-										   QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-		if reply == QtGui.QMessageBox.Yes:
+		reply = QMessageBox.question(self, 'Confirm',
+		                             "Are you sure you want to clean all the charts?", QMessageBox.Yes |
+		                             QMessageBox.No, QMessageBox.No)
+		if reply == QMessageBox.Yes:
 			self._time.cleanCharts()
 
 	def clean(self):
-		reply = QtGui.QMessageBox.question(self, 'Confirm',
-										   "Are you sure you want to clean everything?", QtGui.QMessageBox.Yes |
-										   QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-		if reply == QtGui.QMessageBox.Yes:
+		reply = QMessageBox.question(self, 'Confirm',
+		                             "Are you sure you want to clean everything?", QMessageBox.Yes |
+		                             QMessageBox.No, QMessageBox.No)
+		if reply == QMessageBox.Yes:
 			self._time.clean()
 			self.__cleanCharts()
 
 	def __pickColor(self):
-		self._time.color = QtGui.QColorDialog.getColor(self._time.color)
+		self._time.color = QColorDialog.getColor(self._time.color)
 		if self._time._selected != None:
 			self._time._selected.color = self._time.color
 			self._time.repaint()
@@ -410,14 +437,14 @@ class ControlEventTimeline(ControlBase, QtGui.QWidget):
 	def __scrollAreaKeyReleaseEvent(self, event):
 		modifiers = int(event.modifiers())
 		self._time.keyReleaseEvent(event)
-		if  modifiers is not QtCore.Qt.ControlModifier and \
-				modifiers is not int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and \
-				modifiers is not QtCore.Qt.ShiftModifier:
-			QtGui.QScrollArea.keyReleaseEvent(self._scrollArea, event)
+		if modifiers is not QtCore.Qt.ControlModifier and \
+						modifiers is not int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and \
+						modifiers is not QtCore.Qt.ShiftModifier:
+			QScrollArea.keyReleaseEvent(self._scrollArea, event)
 
 	def __scrollAreaKeyPressEvent(self, event):
 		modifiers = int(event.modifiers())
-		if  modifiers is not QtCore.Qt.ControlModifier and \
-				modifiers is not int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and \
-				modifiers is not QtCore.Qt.ShiftModifier:
-			QtGui.QScrollArea.keyPressEvent(self._scrollArea, event)
+		if modifiers is not QtCore.Qt.ControlModifier and \
+						modifiers is not int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and \
+						modifiers is not QtCore.Qt.ShiftModifier:
+			QScrollArea.keyPressEvent(self._scrollArea, event)
