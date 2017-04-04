@@ -7,9 +7,6 @@ If you find this project useful, please, do not forget to ![star it](https://raw
 
 # Pyforms
 
-<!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
 <!-- Posicione esta tag onde você deseja que o widget apareça. -->
 <div class="g-follow" data-annotation="bubble" data-height="24" data-rel="publisher"></div>
 
