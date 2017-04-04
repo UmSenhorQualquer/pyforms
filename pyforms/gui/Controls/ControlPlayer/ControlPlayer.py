@@ -8,8 +8,19 @@
 import math
 import os
 import logging
-from PyQt4 import uic
-from PyQt4 import QtCore, QtGui
+
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import uic
+	from PyQt5 import QtCore
+	from PyQt5.QtWidgets import QFrame	
+	from PyQt5.QtWidgets import QApplication
+else:	
+	from PyQt4.QtGui import QFrame
+	from PyQt4 import uic
+	from PyQt4 import QtCore
+	from PyQt4.QtGui import QApplication
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
 from pysettings import conf
@@ -19,7 +30,7 @@ try:
 except:
 	print("Warning: was not possible to import cv2 in ControlPlayer")
 
-from PyQt4.QtGui import QApplication
+
 from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 
@@ -32,13 +43,13 @@ __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
 
-class ControlPlayer(ControlBase, QtGui.QFrame):
+class ControlPlayer(ControlBase, QFrame):
 
 	_videoWidget = None
 	_currentFrame = None
 
 	def __init__(self, *args):
-		QtGui.QFrame.__init__(self)
+		QFrame.__init__(self)
 		ControlBase.__init__(self, *args)
 		
 		self._speed = 1
@@ -89,9 +100,9 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.videoPlay.setChecked(False)
 		self._timer.stop()
 
-	def hide(self): QtGui.QFrame.hide(self)
+	def hide(self): QFrame.hide(self)
 
-	def show(self): QtGui.QFrame.show(self)
+	def show(self): QFrame.show(self)
 
 	def refresh(self):
 		if self._currentFrame is not None:

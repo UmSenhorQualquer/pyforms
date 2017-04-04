@@ -8,10 +8,18 @@
 import logging
 import pyforms.utils.tools as tools
 import math
-from PyQt4 import uic
-from PyQt4 import QtGui
-from PyQt4.QtOpenGL import QGLWidget
-from PyQt4 import QtCore
+
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import QtGui
+	from PyQt5.QtOpenGL import QGLWidget
+	from PyQt5 import QtCore
+else:
+	from PyQt4 import QtGui
+	from PyQt4.QtOpenGL import QGLWidget
+	from PyQt4 import QtCore
+
+
 import OpenGL.GL as GL
 import OpenGL.GLU as GLU
 from pysettings import conf
@@ -19,7 +27,7 @@ try:
 	import cv2
 except:
 	print("Warning: was not possible to import cv2 in ControlPlayer")
-from PyQt4.QtGui import QApplication
+
 
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
