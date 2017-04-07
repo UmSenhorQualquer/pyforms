@@ -25,13 +25,13 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	try:
 		from pyforms.gui.Controls.ControlMatplotlib import ControlMatplotlib
 	except:
-		print("Matplot lib not installed or not working properly")
+		logger.debug("Matplot lib not installed or not working properly")
 		logger.debug(traceback.format_exc())
 
 	try:
 		from pyforms.gui.Controls.ControlWeb import ControlWeb
 	except:
-		print("QtWebKit lib not installed or not working properly")
+		logger.debug("QtWebKit lib not installed or not working properly")
 		logger.debug(traceback.format_exc())
 
 	try:
@@ -53,7 +53,7 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 		from pyforms.gui.Controls.ControlVisVis import ControlVisVis
 		from pyforms.gui.Controls.ControlVisVisVolume import ControlVisVisVolume
 	except:
-		print("VisVis not installed")
+		logger.debug("VisVis not installed")
 		logger.debug(traceback.format_exc())
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph import ControlEventsGraph
@@ -61,7 +61,7 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	try:
 		from pyforms.gui.Controls.ControlCodeEditor import ControlCodeEditor
 	except:
-		print("QScintilla2 not installed")
+		logger.debug("QScintilla2 not installed")
 		logger.debug(traceback.format_exc())
 
 
