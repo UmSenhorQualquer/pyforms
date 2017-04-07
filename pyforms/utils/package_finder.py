@@ -27,7 +27,7 @@ class PackageFinder(object):
 	def __add__(self, other): 			self._plugins.append(other); return self
 	def __sub__(self, other): 			self._plugins.remove(other); return self
 
-	def find_class(self, class_full_name):
+	def find_class(self, class_full_name, silent=True):
 		res = get_module_and_class(class_full_name)
 		if res is None: return []
 
@@ -36,15 +36,21 @@ class PackageFinder(object):
 		res = []
 		for plugin in self._plugins:
 			try:
-				logger.debug("Importing plugin: package: {0}: plugin: {1}".format( package_name, plugin) )
-				module 		= importlib.import_module("."+package_name, plugin)
+				logger.debug("package: {0}: plugin: {1}".format( package_name, plugin) )
+				values = class_full_name.split('.')
+
+				class_name  = values[-1]
+				module_name = ('.'+'.'.join(values[:-1])) if len(values)>1 else ''
+				module = __import__( plugin+module_name, fromlist=[''] )
 				class_def 	= getattr(module, class_name)
 				res.append(class_def)
 			except ImportError:
-				logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
+				if not silent:
+					logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
 				pass
 			except:
-				logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
+				if not silent:
+					logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),exc_info=True)
 				pass
 
 		return res

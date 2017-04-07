@@ -38,14 +38,24 @@ class ControlToolBox(ControlBase):
 			if isinstance(item, tuple):
 				widget = QFrame(self.form);
 				layout = QVBoxLayout();
-				# layout.setMargin(0);
+				
+				if conf.PYFORMS_USE_QT5:
+					layout.setContentsMargins(0,0,0,0)
+				else:
+					layout.setMargin(0)
+
 				widget.setLayout(layout)
 
 				for e in item[1]:
 					if isinstance(e, tuple):
 						hwidget = QFrame(self.form);
 						hlayout = QHBoxLayout();
-						# hlayout.setMargin(0);
+						
+						if conf.PYFORMS_USE_QT5:
+							hlayout.setContentsMargins(0,0,0,0)
+						else:
+							hlayout.setMargin(0)
+							
 						hwidget.setLayout(hlayout)
 						for ee in e:
 							hlayout.addWidget(ee.form)

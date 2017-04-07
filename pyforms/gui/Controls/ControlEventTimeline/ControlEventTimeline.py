@@ -72,8 +72,14 @@ class ControlEventTimeline(ControlBase, QWidget):
 
 		vlayout = QVBoxLayout()
 		hlayout = QHBoxLayout()
-		# hlayout.setMargin(0)
-		# vlayout.setMargin(0)
+		
+		if conf.PYFORMS_USE_QT5:
+			hlayout.setContentsMargins(0,0,0,0)
+			vlayout.setContentsMargins(0,0,0,0)
+		else:
+			hlayout.setMargin(0)
+			vlayout.setMargin(0)
+
 		self.setLayout(vlayout)
 
 		# Add scroll area

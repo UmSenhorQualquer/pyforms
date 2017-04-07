@@ -57,7 +57,7 @@ class ControlButton(ControlBase):
 
 	@icon.setter
 	def icon(self, value):
-		if isinstance(value, (str, unicode)):
+		if isinstance(value, (str, bytes)):
 			self._form.setIcon(QIcon(value))
 		else:
 			self._form.setIcon(value)

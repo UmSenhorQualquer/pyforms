@@ -10,19 +10,30 @@ __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
 import pyforms.utils.tools as tools
-from PyQt4 import uic, QtGui, QtCore
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 from visvis import Point, Pointset
 import visvis as vv
 import numpy as np
 
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
+else:
+	from PyQt4.QtGui import QWidget, QVBoxLayout, QSizePolicy
+
 
 class ControlVisVisVolume(ControlBase):
 	def init_form(self):
-		self._form = QtGui.QWidget()
-		layout = QtGui.QVBoxLayout()
+		self._form = QWidget()
+		layout = QVBoxLayout()
 		layout.setMargin(0)
+
+		if conf.PYFORMS_USE_QT5:
+			layout.setContentsMargins(0,0,0,0)
+		else:
+			layout.setMargin(0)
+
 		self._form.setLayout(layout)
 		self._app = vv.use('pyqt4')
 		self._app.Create()
@@ -32,7 +43,7 @@ class ControlVisVisVolume(ControlBase):
 		self._fig = Figure(self._form)
 		vv.figure(self._fig.nr)
 
-		policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+		policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 		widget = self._fig._widget
 		widget.setSizePolicy(policy)
 		widget.setMinimumSize(100, 100)

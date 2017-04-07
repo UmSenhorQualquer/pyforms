@@ -17,6 +17,12 @@ class Container(object):
 		self._form.verticalLayout.addWidget( self._algorithm )
 		self._form.verticalLayout.setMargin(10)
 		self._form.verticalLayout.setSpacing(0)
+
+		if conf.PYFORMS_USE_QT5:
+			self._form.verticalLayout.setContentsMargins(10,10,10,10)
+		else:
+			self._form.verticalLayout.setMargin(10)
+
 		self._form.actionExit.triggered.connect( self.actionExit_triggered )
 		self._form.show()
 		self._form.setWindowTitle( self._algorithm.title )

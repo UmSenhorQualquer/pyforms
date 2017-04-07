@@ -111,7 +111,7 @@ class VideoGLWidget(QGLWidget):
 		GL.glViewport(0, 0, width, height)
 		GL.glMatrixMode(GL.GL_PROJECTION)
 		GL.glLoadIdentity()
-		GLU.gluPerspective(40.0, float(width) / float(height), 0.01, 10.0)
+		if height>0: GLU.gluPerspective(40.0, float(width) / float(height), 0.01, 10.0)
 
 	def draw_video(self, width, height, x, y, z):
 		# self.logger.debug("x: %s | y: %s | z: %s", x, y, z)
@@ -296,14 +296,20 @@ class VideoGLWidget(QGLWidget):
 			self._mouseX = event.x()
 			self._mouseY = event.y()
 
-			zoom_factor = event.delta() / float(1500)
+			if conf.PYFORMS_USE_QT5:
+				p = event.angleDelta()
+				delta = p.y()
+			else:
+				delta = event.delta()
+		
+			zoom_factor = delta / float(1500)
 
 			self.zoom += zoom_factor
 
-			if self.zoom < -.98 and event.delta() < 0:
+			if self.zoom < -.98 and delta < 0:
 				self.zoom = -0.98
 
-			if self.zoom > 7 and event.delta() > 0: # zoom limits
+			if self.zoom > 7 and delta > 0: # zoom limits
 				self.zoom = 7
 
 			# self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)

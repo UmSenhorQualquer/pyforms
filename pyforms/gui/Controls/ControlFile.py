@@ -30,10 +30,14 @@ class ControlFile(ControlText):
 		self.changed_event()
 
 	def click(self):
-		value = str(QFileDialog.getOpenFileName(
-			self._form, self._label, self.value))
-		if value:
-			self.value = value
+		value = QFileDialog.getOpenFileName(self._form, self._label, self.value)
+		
+		if conf.PYFORMS_USE_QT5:
+			value = value[0]
+		else:
+			value = str(value)
+
+		if value and len(value)>0: self.value = value
 
 	@property
 	def parent(self): return ControlText.parent.fget(self, value)

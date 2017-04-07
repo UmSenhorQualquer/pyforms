@@ -22,12 +22,10 @@ if conf.PYFORMS_USE_QT5:
 	from PyQt5.QtGui import QFont
 	from PyQt5.QtWidgets import QFileDialog
 	from PyQt5.QtWidgets import QApplication
-
 	from PyQt5 import QtCore
 
 else:
 	from PyQt4.QtGui import QFrame
-	from PyQt4.QtCore.Qt import Dialog
 	from PyQt4.QtGui import QVBoxLayout
 	from PyQt4.QtGui import QTabWidget
 	from PyQt4.QtGui import QSplitter
@@ -50,7 +48,7 @@ class BaseWidget(QFrame):
 	"""
 
 	def __init__(self, title='Untitled', parent_win=None, win_flag=None):
-		if parent_win is not None and win_flag is None: win_flag = Dialog
+		if parent_win is not None and win_flag is None: win_flag = QtCore.Qt.Dialog
 
 		QFrame.__init__(self) if parent_win is None else QFrame.__init__(self, parent_win, win_flag)
 
@@ -59,7 +57,11 @@ class BaseWidget(QFrame):
 
 		layout = QVBoxLayout()
 		self.setLayout(layout)
-		#self.layout().setMargin(0)
+		
+		if conf.PYFORMS_USE_QT5:
+			layout.setContentsMargins(0,0,0,0)
+		else:
+			layout.setMargin(0)
 
 		self.title = title
 		self.has_progress = False
@@ -308,7 +310,12 @@ class BaseWidget(QFrame):
 						param.parent = self
 						param.name = row
 						layout.addWidget(param.form)
-#		layout.setMargin(0)
+		
+		if conf.PYFORMS_USE_QT5:
+			layout.setContentsMargins(0,0,0,0)
+		else:
+			layout.setMargin(0)
+			
 		control.setLayout(layout)
 		return control
 

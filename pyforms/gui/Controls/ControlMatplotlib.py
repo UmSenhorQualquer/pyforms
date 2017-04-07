@@ -10,7 +10,14 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-from PyQt4 import QtGui
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+    from PyQt5.QtWidgets import QWidget, QVBoxLayout
+else:
+    from PyQt4.QtGui import QWidget, QVBoxLayout
+
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -20,10 +27,10 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
-class ControlMatplotlib(ControlBase, QtGui.QWidget):
+class ControlMatplotlib(ControlBase, QWidget):
 
     def __init__(self, label = ""):
-        QtGui.QWidget.__init__(self)
+        QWidget.__init__(self)
         ControlBase.__init__(self, label)
 
     def init_form(self):
@@ -33,7 +40,7 @@ class ControlMatplotlib(ControlBase, QtGui.QWidget):
         self.canvas.setParent(self)
         self.mpl_toolbar = NavigationToolbar(self.canvas, self)
      
-        vbox = QtGui.QVBoxLayout()
+        vbox = QVBoxLayout()
         vbox.addWidget(self.canvas)
         vbox.addWidget(self.mpl_toolbar)
         self.setLayout(vbox)

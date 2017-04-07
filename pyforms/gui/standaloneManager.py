@@ -43,7 +43,11 @@ class StandAloneContainer(QMainWindow):
 			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
 		w.init_form()
-#		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+
+		if conf.PYFORMS_USE_QT5:
+			self.layout().setContentsMargins(conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN)
+		else:
+			self.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 		self.setCentralWidget(w)
 		self.setWindowTitle(w.title)
@@ -76,7 +80,13 @@ class StandAloneContainer(QMainWindow):
 					dock.setFeatures(
 						QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
-#					widget.form.layout().setMargin(widget.margin)
+						
+					if conf.PYFORMS_USE_QT5:
+						dock.setContentsMargins(0,0,0,0)
+						widget.form.layout().setContentsMargins(widget.margin,widget.margin,widget.margin,widget.margin)
+					else:
+						dock.setMargin(0)
+						widget.form.layout().setMargin(widget.margin)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)
@@ -90,7 +100,11 @@ class StandAloneContainer(QMainWindow):
 				dock.setFeatures(
 					QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetMovable)
 				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-				widget.form.layout().setMargin(widget.margin)
+				
+				if conf.PYFORMS_USE_QT5:
+					widget.form.layout().setContentsMargins(widget.margin,widget.margin,widget.margin,widget.margin)
+				else:
+					widget.form.layout().setMargin(widget.margin)
 
 				# print dock.objectName(), 2
 				dock.setObjectName(name)

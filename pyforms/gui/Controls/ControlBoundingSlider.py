@@ -183,8 +183,8 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
 		draw.setBrush(QtCore.Qt.NoBrush)
 		draw.setPen(QColor(200, 200, 255))
 
-		for i in range(self.width() / 5, (self.width() - self.width() / 5) + 1, self.width() / 5): draw.drawLine(i, 0,
-		                                                                                                         i, h)
+		for i in range( int(self.width()/5), int(self.width()-self.width()/5) + 1, int(self.width()/5) ): 
+			draw.drawLine(i, 0, i, h)
 
 		draw.setBrush(QColor(238, 238, 238))
 		draw.setPen(QColor(238, 238, 238))
@@ -289,7 +289,14 @@ class ControlBoundingSlider(ControlBase):
 				hlayout = QHBoxLayout()
 			else:
 				hlayout = QVBoxLayout()
-			# hlayout.setMargin(0)
+			
+
+			if conf.PYFORMS_USE_QT5:
+				hlayout.setContentsMargins(0,0,0,0)
+			else:
+				hlayout.setMargin(0)
+
+
 			hwidget.setLayout(hlayout)
 			self._min_spinbox = QSpinBox()
 			self._min_spinbox.valueChanged.connect(self.__min_spinbox_changed)

@@ -90,7 +90,7 @@ class ImageGLWidget(QGLWidget):
 		GL.glViewport(0, 0, width, height)
 		GL.glMatrixMode(GL.GL_PROJECTION)
 		GL.glLoadIdentity()
-		GLU.gluPerspective(40.0, float(width) / float(height), 0.01, 10.0)
+		if height>0: GLU.gluPerspective(40.0, float(width) / float(height), 0.01, 10.0)
 
 	def drawVideo(self, width, height, x, y, z):
 		GL.glPushMatrix()

@@ -37,7 +37,12 @@ class ControlEventsGraph(ControlBase, QWidget):
 
 	def init_form(self):
 		vlayout = QVBoxLayout()
-		# vlayout.setMargin(0)
+
+		if conf.PYFORMS_USE_QT5:
+			vlayout.setContentsMargins(0,0,0,0)
+		else:
+			vlayout.setMargin(0)
+
 		self.setLayout(vlayout)
 
 		self._scroll = QScrollBar(QtCore.Qt.Horizontal)
