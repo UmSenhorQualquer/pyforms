@@ -3,25 +3,28 @@ import numpy
 
 
 import numpy as np 
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 
 try:
     import cv2
 except:
-    print "cv2 not present. ControlPlayer not working"
+    print( "cv2 not present. ControlPlayer not working")
 
 
 try:
     from PIL import Image
 except:
-    print "PIL not present. ControlPlayer not working"
+    print( "PIL not present. ControlPlayer not working")
 
 
 try:
    import base64
 except:
-    print "base64 not present. ControlPlayer not working"
+    print( "base64 not present. ControlPlayer not working")
 
 
 

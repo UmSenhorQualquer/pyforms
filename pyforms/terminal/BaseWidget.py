@@ -13,7 +13,7 @@ class BaseWidget(object):
 	def __init__(self, title):
 		self._parser = argparse.ArgumentParser()
 		with open('pid.txt', 'w') as f:
-			f.write(str(os.getpid()))
+			f.write( str(os.getpid()) )
 		
 		self._controlsPrefix 	= ''
 		self._title 			= title
@@ -81,14 +81,14 @@ class BaseWidget(object):
 		res = {}
 		for controlName, control in self.controls.items(): 
 			res[controlName] = {'value': control.value }
-		with open('out-parameters.txt', 'wb') as outfile:
+		with open('out-parameters.txt', 'w') as outfile:
 			outfile.write( str(res) )
 
 
 	def __downloadFile(self, url, outFilepath):
 		chunksize = 512*1024
 		r = requests.get(url, stream=True)
-		with open(outFilepath, 'wb') as f:
+		with open(outFilepath, 'w') as f:
 			for chunk in r.iter_content(chunk_size=chunksize): 
 				if chunk: f.write(chunk); f.flush(); 
 		

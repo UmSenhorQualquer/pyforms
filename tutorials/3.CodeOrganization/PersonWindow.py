@@ -1,8 +1,15 @@
+from pysettings import conf;
+import settings
+conf+=settings
+
 import pyforms
 from pyforms 			import BaseWidget
 from pyforms.Controls 	import ControlText
 from pyforms.Controls 	import ControlButton
 from Person 			import Person
+
+
+
 
 class PersonWindow(Person, BaseWidget):
 
@@ -12,6 +19,7 @@ class PersonWindow(Person, BaseWidget):
 		BaseWidget.__init__(self,'Person window')
 		self.parent = None
 
+		
 		#Definition of the forms fields
 		self._firstnameField 	= ControlText('First name')
 		self._middlenameField  	= ControlText('Middle name')
