@@ -3,6 +3,11 @@
 Pyforms is using the pysettings library to manage it settings.
 Here it is described some of the settings of the library.
 
+
+
+
+
+
 ## General configurations
 
 #### PYFORMS_MODE = os.environ.get('PYFORMS_MODE', 'GUI')
