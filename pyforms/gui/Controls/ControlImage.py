@@ -39,7 +39,7 @@ else:
 class ImageGLWidget(QGLWidget):
 	_image2Display = None
 	_texture = None  #: Opengl texture variable
-	_zoom = 1.0
+	zoom = 1.0
 	_mouseX = 0.0
 	_mouseY = 0.0
 	_width = 1.0
@@ -60,7 +60,7 @@ class ImageGLWidget(QGLWidget):
 
 		self._image2Display = []
 		self._texture = []  #: Opengl texture variable
-		self._zoom = 1.0
+		self.zoom = 1.0
 		self._mouseX = 0.0
 		self._mouseY = 0.0
 		self._width = 1.0
@@ -116,7 +116,7 @@ class ImageGLWidget(QGLWidget):
 		translateX = (len(self._texture) * self._width) / 2
 
 		if len(self._texture) > 0:
-			GL.glTranslatef(-translateX, -self._height / 2, -self._zoom)
+			GL.glTranslatef(-translateX, -self._height / 2, -self.zoom)
 
 			GL.glDisable(GL.GL_TEXTURE_2D)
 			GL.glColor4f(0.5, 0.5, 0.5, 1.0)
@@ -202,11 +202,27 @@ class ImageGLWidget(QGLWidget):
 		self.repaint()
 
 	def wheelEvent(self, event):
-		if event.delta() < 0:
-			self._zoom += 0.1
+		
+		# Zoom the video
+		self._mouseX = event.x()
+		self._mouseY = event.y()
+
+		if conf.PYFORMS_USE_QT5:
+			p = event.angleDelta()
+			delta = p.y()
 		else:
-			self._zoom -= 0.1
-		if self._zoom < 0.01: self._zoom = 0.02
+			delta = event.delta()
+
+		zoom_factor = delta / float(1500)
+		self.zoom += zoom_factor
+
+		if self.zoom < -.98 and delta < 0:
+			self.zoom = -0.98
+
+		if self.zoom > 7 and delta > 0: # zoom limits
+			self.zoom = 7
+
+
 		self.repaint()
 
 	def mouseReleaseEvent(self, event):
