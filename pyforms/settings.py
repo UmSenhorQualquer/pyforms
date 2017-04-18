@@ -22,4 +22,10 @@ PYFORMS_STYLESHEET_WINDOWS = None
 
 PYFORMS_CONTROLPLAYER_FONT = 9
 
+# In a normal loading, there may be errors that show up which are not important.
+# This happens because plugins_finder will search for classes on plugins which are not present because they are not needed.
+# However, if plugin is not loaded at all, this will show all related errors.
+# See pyforms.utils.plugins_finder.find_class()
+PYFORMS_SILENT_PLUGINS_FINDER = True
+
 PYFORMS_USE_QT5 = True
