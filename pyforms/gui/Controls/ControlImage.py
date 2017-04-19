@@ -13,7 +13,7 @@ from pyforms.utils import tools
 try:
 	import cv2
 except:
-	logger.warning("OpenCV not available")
+	logger.debug("OpenCV not available")
 
 if conf.PYFORMS_USE_QT5:
 	from PyQt5 import uic
@@ -23,7 +23,7 @@ if conf.PYFORMS_USE_QT5:
 		import OpenGL.GLU as GLU
 		from PyQt5.QtOpenGL import QGLWidget
 	except:
-		logger.warning("No OpenGL library available")
+		logger.debug("No OpenGL library available")
 
 else:
 	from PyQt4 import uic
@@ -33,7 +33,7 @@ else:
 		import OpenGL.GLU as GLU
 		from PyQt4.QtOpenGL import QGLWidget
 	except:
-		logger.warning("No OpenGL library available")
+		logger.debug("No OpenGL library available")
 
 
 class ImageGLWidget(QGLWidget):
