@@ -1,4 +1,4 @@
-import csv, time, datetime, decimal, logging, sys
+import csv, time, datetime, decimal, logging, sys, numpy as np
 from pyforms import BaseWidget
 from pyforms.Controls import ControlProgress
 from pyforms.Controls import ControlButton
@@ -111,8 +111,11 @@ class GraphsProperties(BaseWidget):
 		if index is not None:
 			graph = self._timeline._charts[index]
 
-			exponent_min = abs(decimal.Decimal(graph._graphMin).as_tuple().exponent)
-			exponent_max = abs(decimal.Decimal(graph._graphMax).as_tuple().exponent)
+			graphmin = np.asscalar(graph._graphMin) if isinstance(graph._graphMin, np.generic) else graph._graphMin
+			graphmax = np.asscalar(graph._graphMax) if isinstance(graph._graphMax, np.generic) else graph._graphMax
+			
+			exponent_min = abs(decimal.Decimal(graphmin).as_tuple().exponent)
+			exponent_max = abs(decimal.Decimal(graphmax).as_tuple().exponent)
 			exponent_min = 4 if exponent_min>4 else exponent_min
 			exponent_max = 4 if exponent_min>4 else exponent_min
 

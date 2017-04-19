@@ -138,7 +138,7 @@ class ControlEventTimeline(ControlBase, QWidget):
 		btn_export.setIcon(conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT)
 		btn_export.clicked.connect(self.__export)
 		# importexport_vlayout = QtGui.QVBoxLayout()
-		# importexport_vlayout.addWidget(btn_import)
+		# importexport_vlayout.adimdWidget(btn_import)
 		# importexport_vlayout.addWidget(btn_export)
 		# hlayout.addLayout(importexport_vlayout)
 		hlayout.addWidget(btn_import)
@@ -375,11 +375,11 @@ class ControlEventTimeline(ControlBase, QWidget):
 	def __export(self):
 		"""Export annotations to a file."""
 
-		filename, ffilter = QFileDialog.getSaveFileNameAndFilter(parent=self,
+		filename, ffilter = QFileDialog.getSaveFileName(parent=self,
 		                                                         caption="Export annotations file",
 		                                                         directory="untitled.csv",
 		                                                         filter="CSV Files (*.csv);;CSV Matrix Files (*.csv)",
-		                                                         options=QtGui.QFileDialog.DontUseNativeDialog)
+		                                                         options=QFileDialog.DontUseNativeDialog)
 
 		filename = str(filename)
 		ffilter = str(ffilter)

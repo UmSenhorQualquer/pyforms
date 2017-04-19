@@ -139,6 +139,8 @@ class ImportWindow(BaseWidget):
 
 					self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
 
+		self._timeline.repaint()
+		self._timeline._time.repaint()
 		self.close()  # pylint: disable=no-member
 
 
