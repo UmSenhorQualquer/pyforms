@@ -30,13 +30,15 @@ class ControlCodeEditor(ControlBase):
 
 	ARROW_MARKER_NUM = 8
 
-	def __init__(self, label='', default='', helptext=''):
+	def __init__(self, label='', default='', helptext='', read_only=True):
 		"""
 		
 		:param label: 
 		:param default: 
 		:param helptext: 
 		"""
+		self._read_only = read_only
+
 		super(ControlCodeEditor, self).__init__(label, default, helptext)
 
 		self._changed_func = None
@@ -53,6 +55,10 @@ class ControlCodeEditor(ControlBase):
 
 		self._save_button = self._form.save_button
 		self._save_button.clicked[bool].connect(self.on_save_changes)
+
+		if not self._read_only:
+			self._code_editor.setReadOnly(True)
+			self._save_button.setVisible(False)
 
 		self.form.font_size.addItem('9')
 		self.form.font_size.addItem('10')
