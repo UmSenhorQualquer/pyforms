@@ -17,7 +17,7 @@ if conf.PYFORMS_USE_QT5:
 		from OpenGL.GLU import *
 		from PyQt5.QtOpenGL import QGLWidget
 	except:
-		logger.warning("No OpenGL library available")
+		logger.debug("No OpenGL library available")
 
 else:
 	from PyQt4.QtGui import QSizePolicy
@@ -27,7 +27,7 @@ else:
 		from OpenGL.GLU import *
 		from PyQt4.QtOpenGL import QGLWidget
 	except:
-		logger.warning("No OpenGL library available")
+		logger.debug("No OpenGL library available")
 
 
 class OpenglGLWidget(QGLWidget):
