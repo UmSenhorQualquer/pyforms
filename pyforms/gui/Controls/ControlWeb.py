@@ -12,7 +12,7 @@ __status__ = "Development"
 from pysettings import conf
 
 if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWebEngineWidgets import QWebEngineView
+	from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView
 	from PyQt5.QtCore import QUrl
 else:
 	from PyQt4.QtCore import QUrl
@@ -21,9 +21,9 @@ else:
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 
-class ControlWeb(ControlBase, QWebEngineView):
+class ControlWeb(ControlBase, QWebView):
 	def __init__(self, label=""):
-		QWebEngineView.__init__(self)
+		QWebView.__init__(self)
 		ControlBase.__init__(self, label)
 
 	############################################################################
@@ -36,7 +36,7 @@ class ControlWeb(ControlBase, QWebEngineView):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self, value)
-		QWebEngineView.load(self, QUrl(value))
+		QWebView.load(self, QUrl(value))
 
 	@property
 	def form(self):
