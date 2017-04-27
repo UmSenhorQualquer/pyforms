@@ -38,10 +38,3 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms_web.web import Controls
 	from pyforms_web.web.BaseWidget import BaseWidget
 	from pyforms_web.web.appmanager import start_app
-
-# loggingbootstrap.create_double_logger(
-# 	"pyforms",
-# 	conf.PYFORMS_LOG_HANDLER_CONSOLE_LEVEL,
-# 	conf.PYFORMS_LOG_FILENAME,
-# 	conf.PYFORMS_LOG_HANDLER_FILE_LEVEL
-# )
