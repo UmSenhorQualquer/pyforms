@@ -188,6 +188,14 @@ class ControlList(ControlBase, QWidget):
 	def get_cell(self, column, row):
 		return self.tableWidget.item(row, column)
 
+	def set_sorting_enabled(self, value):
+		"""
+		Enable or disable columns sorting
+		
+		:param bool value: True to enable sorting, False otherwise 
+		"""
+		self.tableWidget.setSortingEnabled(value)
+
 	##########################################################################
 	############ EVENTS ######################################################
 	##########################################################################
