@@ -33,8 +33,8 @@ class Graph2Event(BaseWidget):
 		self._graphs_list = ControlList('Graphs list (try double click)')
 		self._equation    = ControlTextArea('Equation')
 		self._eventname   = ControlText('Event name', 'New event')
-		self._rownumber   = ControlNumber('Row number')
-		self._mindiff 	  = ControlNumber('Minimum of frames', 0)
+		self._rownumber   = ControlNumber('Row number', 0,0,1000)
+		self._mindiff 	  = ControlNumber('Minimum of frames', 0, 0, 1000000)
 		self._genevts_btn = ControlButton('Generate events')
 		
 		self._formset = [

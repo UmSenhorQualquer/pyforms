@@ -346,8 +346,7 @@ class ControlEventTimeline(ControlBase, QWidget):
 		return self._time.tracks
 
 	@property
-	def graphs(self):
-		return self._graphs_prop_win.charts
+	def graphs(self): return self._time.graphs
 
 	##########################################################################
 	#### PRIVATE FUNCTIONS ###################################################
