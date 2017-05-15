@@ -22,25 +22,28 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlMdiArea import ControlMdiArea
 	from pyforms.gui.Controls.ControlNumber import ControlNumber
 
-	try:
-		from pyforms.gui.Controls.ControlMatplotlib import ControlMatplotlib
-	except:
-		logger.debug("Matplot lib not installed or not working properly")
-		logger.debug(traceback.format_exc())
+	if conf.PYFORMS_MATPLOTLIB_ENABLED:
+		try:
+			from pyforms.gui.Controls.ControlMatplotlib import ControlMatplotlib
+		except:
+			logger.warning("Matplot lib not installed or not working properly")
+			logger.warning(traceback.format_exc())
 
-	try:
-		from pyforms.gui.Controls.ControlWeb import ControlWeb
-	except:
-		logger.debug("QtWebKit lib not installed or not working properly")
-		logger.debug(traceback.format_exc())
+	if conf.PYFORMS_WEB_ENABLED:
+		try:
+			from pyforms.gui.Controls.ControlWeb import ControlWeb
+		except:
+			logger.warning("QtWebKit lib not installed or not working properly")
+			logger.warning(traceback.format_exc())
 
-	try:
-		from pyforms.gui.Controls.ControlOpenGL import ControlOpenGL
-		from pyforms.gui.Controls.ControlImage import ControlImage
-		from pyforms.gui.Controls.ControlPlayer.ControlPlayer import ControlPlayer
-	except:
-		#logger.warning("GL widgets or Opencv not installed")
-		logger.debug(traceback.format_exc())
+	if conf.PYFORMS_GL_ENABLED:
+		try:
+			from pyforms.gui.Controls.ControlOpenGL import ControlOpenGL
+			from pyforms.gui.Controls.ControlImage import ControlImage
+			from pyforms.gui.Controls.ControlPlayer.ControlPlayer import ControlPlayer
+		except:
+			logger.warning("GL widgets or Opencv not installed")
+			logger.warning(traceback.format_exc())
 
 	from pyforms.gui.Controls.ControlProgress import ControlProgress
 	from pyforms.gui.Controls.ControlSlider import ControlSlider
@@ -49,12 +52,14 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	from pyforms.gui.Controls.ControlTree import ControlTree
 	from pyforms.gui.Controls.ControlTreeView import ControlTreeView
 
-	try:
-		from pyforms.gui.Controls.ControlVisVis import ControlVisVis
-		from pyforms.gui.Controls.ControlVisVisVolume import ControlVisVisVolume
-	except:
-		logger.debug("VisVis not installed")
-		logger.debug(traceback.format_exc())
+	if conf.PYFORMS_VISVIS_ENABLED:
+		try:
+			from pyforms.gui.Controls.ControlVisVis import ControlVisVis
+			from pyforms.gui.Controls.ControlVisVisVolume import ControlVisVisVolume
+		except:
+			logger.warning("VisVis not installed")
+			logger.warning(traceback.format_exc())
+
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph import ControlEventsGraph
 

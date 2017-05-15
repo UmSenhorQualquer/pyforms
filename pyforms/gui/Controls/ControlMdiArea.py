@@ -85,13 +85,18 @@ class ControlMdiArea(ControlBase, QMdiArea):
 		:return:
 		"""
 
-		window = self.activeSubWindow()
-		widget = window.widget()
-		# self.removeSubWindow(window) DO NOT REMOVE TO KEEP WINDOW POSITION
-		widget.beforeClose()
-		closeEvent.accept()
+		try:
+			window = self.activeSubWindow()
+			if window:
+				widget = window.widget()
+				# self.removeSubWindow(window) DO NOT REMOVE TO KEEP WINDOW POSITION
+				widget.beforeClose()
+			closeEvent.accept()
 
-		logger.debug("Sub window closed. MDI area sub windows: %s", self.subWindowList())
+			logger.debug("Sub window closed. MDI area sub windows: %s", self.subWindowList())
+		except Exception as err:
+			logger.warning(str(err))
+
 
 	##########################################################################
 	############ Properties ##################################################

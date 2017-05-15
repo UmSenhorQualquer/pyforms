@@ -9,7 +9,7 @@ conf += 'pyforms.settings'
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
-__version__ = '2.0.2.beta'
+__version__ = '2.0.3.beta'
 __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr@gmail.com", "cajomferro@gmail.com"]
 __status__ = "Production"
@@ -38,10 +38,3 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms_web.web import Controls
 	from pyforms_web.web.BaseWidget import BaseWidget
 	from pyforms_web.web.appmanager import start_app
-
-# loggingbootstrap.create_double_logger(
-# 	"pyforms",
-# 	conf.PYFORMS_LOG_HANDLER_CONSOLE_LEVEL,
-# 	conf.PYFORMS_LOG_FILENAME,
-# 	conf.PYFORMS_LOG_HANDLER_FILE_LEVEL
-# )

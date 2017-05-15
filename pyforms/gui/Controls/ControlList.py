@@ -16,6 +16,7 @@ if conf.PYFORMS_USE_QT5:
 	from PyQt5.QtGui import QIcon
 	from PyQt5 import uic
 	from PyQt5 import QtCore
+	from PyQt5.QtCore import Qt
 
 else:
 	from PyQt4.QtGui import QWidget
@@ -24,6 +25,7 @@ else:
 	from PyQt4.QtGui import QIcon
 	from PyQt4 import uic
 	from PyQt4 import QtCore
+	from PyQt4.QtCore import Qt
 
 from pyforms.gui.BaseWidget import BaseWidget
 from pyforms.gui.Controls.ControlBase import ControlBase
@@ -160,8 +162,10 @@ class ControlList(ControlBase, QWidget):
 			value.show()
 			self.tableWidget.setRowHeight(row, value.height())
 		else:
-			args = [str(value)] if not hasattr(value, 'icon') else [QIcon(value.icon), str(value)]
-			self.tableWidget.setItem(row, column, QTableWidgetItem(*args))
+			args = [value] if not hasattr(value, 'icon') else [QIcon(value.icon), value]
+			item = QTableWidgetItem()
+			item.setData(Qt.EditRole, *args)
+			self.tableWidget.setItem(row, column, item)
 
 	def get_value(self, column, row):
 		try:
@@ -183,6 +187,14 @@ class ControlList(ControlBase, QWidget):
 
 	def get_cell(self, column, row):
 		return self.tableWidget.item(row, column)
+
+	def set_sorting_enabled(self, value):
+		"""
+		Enable or disable columns sorting
+		
+		:param bool value: True to enable sorting, False otherwise 
+		"""
+		self.tableWidget.setSortingEnabled(value)
 
 	##########################################################################
 	############ EVENTS ######################################################
