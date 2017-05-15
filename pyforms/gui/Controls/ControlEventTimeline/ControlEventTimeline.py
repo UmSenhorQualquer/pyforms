@@ -16,11 +16,16 @@ else:
 		QHBoxLayout, QVBoxLayout
 	from PyQt4 import QtCore
 
+from pyforms.gui.Controls.ControlEventTimeline.TimelineChart import TimelineChart
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWidget
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
 from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
-from pyforms.gui.Controls.ControlEventTimeline.GraphsProperties import GraphsProperties
+
+from pyforms.gui.Controls.ControlEventTimeline.graphs_graph2event import Graph2Event
+from pyforms.gui.Controls.ControlEventTimeline.graphs_properties  import GraphsProperties
+from pyforms.gui.Controls.ControlEventTimeline.graphs_eventsgenerator import GraphsEventsGenerator
+
 
 
 class ControlEventTimeline(ControlBase, QWidget):
@@ -32,7 +37,9 @@ class ControlEventTimeline(ControlBase, QWidget):
 		QWidget.__init__(self)
 		ControlBase.__init__(self, label, default)
 		self._max = 100
-		self._graphs_prop_win = GraphsProperties(self._time, self)
+		self._graphs_prop_win     = GraphsProperties(self._time, self)
+		self._graphsgenerator_win = GraphsEventsGenerator(self._time)
+		self._graph2event_win     = Graph2Event(self._time)
 
 		# Popup menus that only show when clicking on a TIMELINEDELTA object
 		self._deltaLockAction = self.add_popup_menu_option("Lock", self.__lockSelected, key='L')
@@ -45,26 +52,36 @@ class ControlEventTimeline(ControlBase, QWidget):
 		self.add_popup_menu_option("-")
 
 		self.add_popup_menu_option("Graphs", self.show_graphs_properties, icon=conf.PYFORMS_ICON_EVENTTIMELINE_GRAPH)
+		self.add_popup_menu_option("Apply a function to the graphs", self.__generate_graphs_events,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_GRAPH)
+		self.add_popup_menu_option("Convert graph to events", self.__graph2event_event,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_GRAPH)
+		
+		self.add_popup_menu_option("-")
 
 		# General righ click popup menus
-		self.add_popup_menu_option("Track properties", self.__setLinePropertiesEvent,
+		self.add_popup_menu_option("Rows", self.__setLinePropertiesEvent,
 		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
 		self.add_popup_menu_option("-")
 
-		self.add_popup_menu_option("Auto adjust the number of tracks", self.__auto_adjust_tracks_evt,
-		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REFRESH)
-		self.add_popup_menu_option("Add a new track to the bottom", self.__add_track_2_bottom_evt,
-		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_ADD)
-		self.add_popup_menu_option("Remove the bottom track, if empty", self.__remove_track_from_bottom_evt,
-		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REMOVE)
+		
 
+		self.add_popup_menu_option("-")
+		
+		self.add_popup_menu_option("Auto adjust rows", self.__auto_adjust_tracks_evt,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_REFRESH)
+		self.add_popup_menu_option("Add a row", self.__add_track_2_bottom_evt,
+		                           icon=conf.PYFORMS_ICON_EVENTTIMELINE_ADD)
+		
 		self.add_popup_menu_option("-")
 
 		clean_menu = self.add_popup_submenu('Clean')
 
-		self.add_popup_menu_option('Clean current track', function_action=self.__cleanLine, submenu=clean_menu)
-		self.add_popup_menu_option('Clean all graphs', function_action=self.__cleanCharts, submenu=clean_menu)
-		self.add_popup_menu_option('Clean everything', function_action=self.clean, submenu=clean_menu)
+		self.add_popup_menu_option('The current row', function_action=self.__cleanLine, submenu=clean_menu)
+		self.add_popup_menu_option('-')
+		self.add_popup_menu_option('All graphs', function_action=self.__cleanCharts, submenu=clean_menu)
+		self.add_popup_menu_option('-')
+		self.add_popup_menu_option('Everything', function_action=self.clean, submenu=clean_menu)
 
 	def init_form(self):
 		# Get the current path of the file
@@ -152,6 +169,25 @@ class ControlEventTimeline(ControlBase, QWidget):
 	##########################################################################
 	#### HELPERS/PUBLIC FUNCTIONS ############################################
 	##########################################################################
+
+	def __add__(self, other):
+		if isinstance(other, TimelineChart): 
+			self._graphs_prop_win     += other
+			self._graphsgenerator_win += other
+			self._graph2event_win 	  += other
+		return self
+
+	def __sub__(self, other):
+		if isinstance(other, int): 
+			self._graphs_prop_win     -= other
+			self._graphsgenerator_win -= other
+			self._graph2event_win 	  -= other
+		return self
+
+	def rename_graph(self, graph_index, newname):
+		self._graphs_prop_win.rename_graph(graph_index, newname)
+		self._graphsgenerator_win.rename_graph(graph_index, newname)
+		self._graph2event_win.rename_graph(graph_index, newname)
 
 	def add_period(self, value, row=0, color=None):
 		"""
@@ -243,6 +279,10 @@ class ControlEventTimeline(ControlBase, QWidget):
 	#### EVENTS ##############################################################
 	##########################################################################
 
+	def mouse_moveover_timeline_event(self, event):
+		self._graphs_prop_win.mouse_moveover_timeline_event(event)
+
+
 	@property
 	def pointer_changed_event(self):
 		return self._time._pointer.moveEvent
@@ -267,6 +307,12 @@ class ControlEventTimeline(ControlBase, QWidget):
 			track = self._time.tracks[-1]
 			if len(track) == 0:
 				self._time.remove_track(track)
+
+	def __generate_graphs_events(self):
+		self._graphsgenerator_win.show()
+
+	def __graph2event_event(self):
+		self._graph2event_win.show()
 
 	##########################################################################
 	#### PROPERTIES ##########################################################
@@ -311,6 +357,8 @@ class ControlEventTimeline(ControlBase, QWidget):
 		for action in self._deltaActions:
 			action.setVisible(
 				True) if self._time._selected is not None else action.setVisible(False)
+
+	
 
 	def __setLinePropertiesEvent(self):
 		"""

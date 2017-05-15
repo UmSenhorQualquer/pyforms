@@ -15,13 +15,14 @@ class GraphsProperties(BaseWidget):
 	def __init__(self, timelineWidget=None, parent_win=None):
 		super(GraphsProperties, self).__init__('Graphs properties', parent_win=parent_win)
 		self.setContentsMargins(10, 10, 10, 10)
+		self._mainwindow = parent_win
 		self._timeline = timelineWidget
 
 		#self.setMaximumWidth(300)
 
 
 		# Definition of the forms fields
-		self._graphs_list = ControlList('Datasets')
+		self._graphs_list = ControlList('Graphs list')
 		self._name        = ControlText('Name')
 		self._min_value   = ControlNumber('Min', 0, -sys.float_info.max, sys.float_info.max)
 		self._max_value   = ControlNumber('Max', 0, -sys.float_info.max, sys.float_info.max)
@@ -42,7 +43,7 @@ class GraphsProperties(BaseWidget):
 					('_min_value', '_max_value', ' '),
 					('_values_top', ' '),
 					'_values_zoom',
-					'info:Choose one dataset and move the mouse over\nthe graph line to visualize the coordenates.',
+					'info:Choose one graph and move the mouse over \nthe timeline to visualize the coordenates.',
 					'_value'
 				]),
 			]
@@ -68,10 +69,21 @@ class GraphsProperties(BaseWidget):
 
 		self._remove_graph_btn.value = self.__remove_chart
 
+
+	def __add__(self, other):
+		self._graphs_list += [other.name]
+		return self
+
+	def __sub__(self, other):
+		return self
+
+	def rename_graph(self, graph_index, newname):
+		self._graphs_list.set_value(graph_index, 0, newname)
+
 	@property
-	def selected_chart(self):
+	def selected_graph(self):
 		index = self._graphs_list.selected_row_index
-		return self._timeline._charts[0] if (index is not None) else None
+		return self._timeline._charts[index] if (index is not None) else None
 	
 	@property
 	def coordenate_text(self): return self._value
@@ -84,9 +96,6 @@ class GraphsProperties(BaseWidget):
 		super(GraphsProperties, self).show()
 		self._loaded = False
 
-		self._graphs_list.clear()            
-		for graph in self._timeline._charts:
-			self._graphs_list += [graph.name]
 
 	def __remove_chart(self):
 		index = self._graphs_list.selected_row_index
@@ -102,17 +111,16 @@ class GraphsProperties(BaseWidget):
 			self._values_top.enabled    	= False
 			self._remove_graph_btn.enabled 	= False
 			self._timeline.repaint()
+			self._mainwindow -= index
 
 
 	def __graphs_list_selection_changed(self):        
-		index = self._graphs_list.selected_row_index
+		graph = self.selected_graph
 		self._updating_properties = True
 
-		if index is not None:
-			graph = self._timeline._charts[index]
-
-			graphmin = np.asscalar(graph._graphMin) if isinstance(graph._graphMin, np.generic) else graph._graphMin
-			graphmax = np.asscalar(graph._graphMax) if isinstance(graph._graphMax, np.generic) else graph._graphMax
+		if graph is not None:
+			graphmin = np.asscalar(graph.graph_min) if isinstance(graph.graph_min, np.generic) else graph.graph_min
+			graphmax = np.asscalar(graph.graph_max) if isinstance(graph.graph_max, np.generic) else graph.graph_max
 			
 			exponent_min = abs(decimal.Decimal(graphmin).as_tuple().exponent)
 			exponent_max = abs(decimal.Decimal(graphmax).as_tuple().exponent)
@@ -121,10 +129,10 @@ class GraphsProperties(BaseWidget):
 
 			self._name.value            = graph.name
 			self._min_value.decimals    = exponent_min
-			self._min_value.value       = graph._graphMin
+			self._min_value.value       = graph.graph_min
 			self._max_value.decimals    = exponent_max
 			
-			self._max_value.value   = graph._graphMax
+			self._max_value.value   = graph.graph_max
 			self._values_zoom.value = graph._zoom * 100.0
 			self._values_top.value  = graph._top
 
@@ -144,19 +152,12 @@ class GraphsProperties(BaseWidget):
 	def __save_graphs_changes(self):
 		if hasattr(self, '_updating_properties'):  return
 
-
 		if self._loaded and self._current_selected_graph is not None:
 			graph = self._current_selected_graph
 
-			logger.debug('Before: Min: {0} | Max: {1} Zoom: {2}'.format(graph.graph_min, graph.graph_max,graph.zoom ) )
-
+			#logger.debug('Before: Min: {0} | Max: {1} Zoom: {2}'.format(graph.graph_min, graph.graph_max,graph.zoom ) )
 
 			graph.name = self._name.value; 
-			data = self._graphs_list.value
-			for index, g in enumerate(self._timeline._charts):
-				if g==graph: 
-					data[index] = [self._name.value]; break
-			self._graphs_list.value =  data
 			graph.graph_min = self._min_value.value
 			graph.graph_max = self._max_value.value
 
@@ -168,10 +169,14 @@ class GraphsProperties(BaseWidget):
 			self._timeline.repaint()
 
 	@property
-	def charts(self):
-		return self._timeline._charts
+	def graphs(self):
+		return self._timeline.graphs
 
 
+	def mouse_moveover_timeline_event(self, event):
+		graph = self.selected_graph
+		if graph is not None: graph.mouse_move_evt(event, 0, self.height())
+		
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################

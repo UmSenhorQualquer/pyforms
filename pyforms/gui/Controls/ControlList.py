@@ -200,7 +200,7 @@ class ControlList(ControlBase, QWidget):
 	def current_item_changed_event(self, current, previous):
 		pass
 
-	def cell_double_clicked(self, row, column):
+	def cell_double_clicked_event(self, row, column):
 		pass
 
 	##########################################################################
@@ -364,7 +364,7 @@ class ControlList(ControlBase, QWidget):
 		"""
 		self.CELL_VALUE_BEFORE_CHANGE = self.get_value(column, row)
 		logger.debug("Cell double clicked. Stored value: %s", self.CELL_VALUE_BEFORE_CHANGE)
-		self.cell_double_clicked(row, column)
+		self.cell_double_clicked_event(row, column)
 
 	def empty_signal(self, *args, **kwargs):
 		"""

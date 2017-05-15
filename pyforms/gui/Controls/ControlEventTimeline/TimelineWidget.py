@@ -85,6 +85,14 @@ class TimelineWidget(QWidget):
 	#### HELPERS/FUNCTIONS ###################################################
 	##########################################################################
 
+	def __add__(self, other):
+		self.parent_control.__add__(other)
+		return self
+
+	def __sub__(self, other):
+		self.parent_control.__sub__(other)
+		return self
+
 	def x2frame(self, x):
 		return int(x / self._scale)
 
@@ -96,6 +104,10 @@ class TimelineWidget(QWidget):
 		self.setMinimumHeight(Track.whichTop(len(self._tracks)))
 
 	# self.repaint()
+
+	def rename_graph(self, graph_index, newname):
+		self.parent_control.rename_graph(graph_index, newname)
+		
 
 	def removeSelected(self):
 		if self._selected != None and not self._selected.lock:
@@ -149,6 +161,8 @@ class TimelineWidget(QWidget):
 
 		for index, track in enumerate(self._tracks):
 			track.drawLabels(painter, index)
+
+
 
 	def add_chart(self, name, data):
 		chart = TimelineChart(self, color=self._chartsColors[len(self._charts)], name=name)
@@ -448,14 +462,11 @@ class TimelineWidget(QWidget):
 
 	def mouseMoveEvent(self, event):
 		super(TimelineWidget, self).mouseMoveEvent(event)
-
+		self.parent_control.mouse_moveover_timeline_event(event)
+		
 		self._mouse_current_pos = event.x(), event.y()
 
-		selected_chart = self.graphs_properties.selected_chart
-		if selected_chart:
-			selected_chart.mouse_move_evt(event, 0, self.height())
-		else:
-			self.graphs_properties.coordenate_text = None
+		
 
 		# Do nothing if no event bar is selected
 		if self._selected is None:
@@ -582,3 +593,6 @@ class TimelineWidget(QWidget):
 	def current_mouseover_track(self):
 		if self._mouse_current_pos is None: return None
 		return self.trackInPosition(*self._mouse_current_pos)
+
+	@property
+	def graphs(self): return self._charts

@@ -767,6 +767,10 @@ Called when a new cell is selected.
 
 Called when the item select changed.
 
+#### cell_double_clicked_event(row, column)
+
+Called on item item double click.
+
 ### **Properties**
 ***************************
 
