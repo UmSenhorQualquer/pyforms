@@ -34,7 +34,7 @@ class GraphsEventsGenerator(BaseWidget):
 		self._graphs_list = ControlList('Graphs list (try double click)')
 		self._equation    = ControlTextArea('Equation')
 		self._graphname   = ControlText('Graph name')
-		self._genevts_btn = ControlButton('Generate events')
+		self._genevts_btn = ControlButton('Generate graph')
 
 		
 		self._formset = [

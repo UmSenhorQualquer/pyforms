@@ -251,14 +251,15 @@ class TimelineWidget(QWidget):
 				csvfileobject.writerow(row)
 
 	def cleanCharts(self):
+		for graph in self.graphs: self -= 0
 		self._charts = []
 		self.repaint()
 
 	def clean(self):
+		for graph in self.graphs: self -= 0
 		self._charts = []
 		self._selected = None
-		for track in self._tracks:
-			track.clear()
+		for track in self._tracks: track.clear()
 		del self._tracks[:]
 		self._tracks = []
 		self.repaint()

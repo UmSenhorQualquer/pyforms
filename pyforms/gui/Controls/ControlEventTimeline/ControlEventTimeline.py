@@ -473,7 +473,6 @@ class ControlEventTimeline(ControlBase, QWidget):
 		                             QMessageBox.No, QMessageBox.No)
 		if reply == QMessageBox.Yes:
 			self._time.clean()
-			self.__cleanCharts()
 
 	def __pickColor(self):
 		self._time.color = QColorDialog.getColor(self._time.color)

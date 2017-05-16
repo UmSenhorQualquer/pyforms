@@ -75,6 +75,7 @@ class GraphsProperties(BaseWidget):
 		return self
 
 	def __sub__(self, other):
+		self._graphs_list -= other
 		return self
 
 	def rename_graph(self, graph_index, newname):
@@ -100,7 +101,6 @@ class GraphsProperties(BaseWidget):
 	def __remove_chart(self):
 		index = self._graphs_list.selected_row_index
 		if index is not None:
-			self._graphs_list -= -1
 			self._current_selected_graph = None
 			self._timeline._charts.pop(index)
 			self._loaded 					= False
