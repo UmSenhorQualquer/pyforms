@@ -114,6 +114,10 @@ class Track(object):
 			if delta.collide(x, y): return delta
 		return None
 
+	def periods_in_range(self, begin, end):
+		for delta in self._periods:
+			if delta.collide(x, y): return delta
+
 	def clear(self):
 		"""
 		

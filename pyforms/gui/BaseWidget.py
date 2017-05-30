@@ -103,6 +103,13 @@ class BaseWidget(QFrame):
 					self.layout().addWidget(param.form)
 			self._formLoaded = True
 
+	def set_margin(self, margin):
+		if conf.PYFORMS_USE_QT5:
+			self.layout().setContentsMargins(margin,margin,margin,margin)
+		else:
+			self.layout().setMargin(margin)
+
+
 	def generate_tabs(self, formsetdict):
 		"""
 		Generate QTabWidget for the module form

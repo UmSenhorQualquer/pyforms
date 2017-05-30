@@ -33,6 +33,8 @@ sdist/
 
 # Installer logs
 pip-log.txt
+pid.txt
+out-parameters.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports

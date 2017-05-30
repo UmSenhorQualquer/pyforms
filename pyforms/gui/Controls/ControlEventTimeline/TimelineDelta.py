@@ -62,6 +62,16 @@ class TimelineDelta(object):
 		"""
 		return self.begin <= x <= self.end and self._top <= y <= (self._top + self._height)
 
+	def in_range(self, start, end):
+		"""
+		:param start: 
+		:param end: 
+		:return: 
+		"""
+		return start <= self.begin and end >= self.end or \
+			   self.begin <= start <= self.end or \
+			   self.begin <= end <= self.end
+
 	def canSlideBegin(self, x, y):
 		"""
 		
@@ -150,6 +160,7 @@ class TimelineDelta(object):
 			self._parent, 'Edit event', 'Comment:', text=self._title)
 		if ok:
 			self._title = str(text)
+			self._parent.repaint()
 
 	def draw(self, painter, showvalues=False):
 		"""
@@ -244,6 +255,10 @@ class TimelineDelta(object):
 	@color.setter
 	def color(self, value):
 		self._defautcolor = QColor(value) if (type(value) == str) else value
+
+	@property
+	def bgrcolor(self):
+		return self._defautcolor.blue(), self._defautcolor.green(), self._defautcolor.red()
 
 	@property
 	def properties(self):

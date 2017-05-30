@@ -108,6 +108,7 @@ class ControlCheckBoxList(ControlBase):
 
 	@value.setter
 	def value(self, value):
+		self.clear()
 		for row in value: self += row
 
 	@property

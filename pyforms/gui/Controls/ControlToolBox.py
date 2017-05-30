@@ -65,3 +65,16 @@ class ControlToolBox(ControlBase):
 				self.form.addItem(widget, item[0])
 			else:
 				self.form.addItem(item.form, item.label)
+
+
+	def set_item_enabled(self, index, enabled): 
+		"""
+		Enable or disable an item
+		"""
+		self.form.setItemEnabled(index, enabled)
+
+	def is_item_enabled(self, index): 
+		"""
+		Check if an item is enabled or disabled
+		"""
+		return self.form.isItemEnabled(index)

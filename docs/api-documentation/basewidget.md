@@ -52,6 +52,10 @@ Initialize the QFrame, the Controls and its events.
 
 Calls the init_form() function and shows the BaseWidget.
 
+### set_margin(margin)
+
+The functions sets the window margin.
+
 ### save_window()
 
 Open a save file dialog, and saves the window's controls data into the selected file, in the JSON format.  

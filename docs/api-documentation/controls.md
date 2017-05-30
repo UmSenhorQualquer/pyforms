@@ -259,6 +259,7 @@ controlVar += 'Element'
 
 Clear all the elements from the list.
 
+
 ### **Events**
 ***************************
  	
@@ -1215,6 +1216,14 @@ Returns and sets the readonly flag for the control.
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
+
+#### set_item_enabled(index, enabled)
+
+Enable or disable an item
+
+#### is_item_enabled(index)
+
+Check if an item is enabled or disabled
 
 ### **Properties**
 ***************************
