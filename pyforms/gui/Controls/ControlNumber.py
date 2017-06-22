@@ -18,9 +18,11 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 class ControlNumber(ControlBase):
 
-	def __init__(self, label = "", defaultValue = 0, minimum = 0, maximum = 100):
+	def __init__(self, label = "", defaultValue = 0, minimum = 0, maximum = 100, step = 1, decimals=0):
 		self._min = minimum
 		self._max = maximum
+		self._step = step
+		self._decimals = decimals
 		ControlBase.__init__(self, label, defaultValue)
 		
 		
@@ -34,9 +36,11 @@ class ControlNumber(ControlBase):
 		self.label = self._label
 		self.value = self._value 
 		self.form.spinBox.valueChanged.connect( self.valueChanged )
-		self.form.spinBox.setDecimals(0)
+		self.form.spinBox.setDecimals(self._decimals)
 		self.min = self._min
 		self.max = self._max
+		self.step = self._step
+		self.decimals = self._decimals
 
 	def valueChanged(self, value):
 		self._updateSlider = False
@@ -85,3 +89,10 @@ class ControlNumber(ControlBase):
 	
 	@decimals.setter
 	def decimals(self, value): self.form.spinBox.setDecimals(value)
+
+	@property
+	def step(self):
+		return self.form.spinBox.singleStep()
+
+	@step.setter
+	def step(self, value): self.form.spinBox.setSingleStep(value)
