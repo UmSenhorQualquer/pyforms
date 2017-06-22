@@ -25,15 +25,10 @@ class ControlFile(ControlText):
         self._form.label.setText(self._label)        
         self._form.pushButton.clicked.connect(self.pushButton_clicked)
         self._form.pushButton.setIcon(conf.PYFORMS_ICON_FILE_OPEN)
-        self.file_save_mode = False
 
     def pushButton_clicked(self):
-	if self.file_save_mode:
-		value = str(QFileDialog.getSaveFileName(
-			self._form, self._label, self.value))
-	else:
-		value = str(QFileDialog.getOpenFileName(
-			self._form, self._label, self.value))
+        value = str(QFileDialog.getOpenFileName(
+            self._form, self._label, self.value))
         if value:
             self.value = value
 
@@ -43,19 +38,3 @@ class ControlFile(ControlText):
     @parent.setter
     def parent(self, value):
         ControlText.parent.fset(self, value)
-
-
-    @property
-    def fileSaveMode(self): return self.file_save_mode
-
-    @fileSaveMode.setter
-    def fileSaveMode(self, value):
-	self.file_save_mode = bool(value)
-
-    @property
-    def buttonLabel(self): return self._form.pushButton.text()
-
-    @buttonLabel.setter
-    def buttonLabel(self, value):
-	self._form.pushButton.setText(str(value))
-

@@ -70,7 +70,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 			else:
 				side = QtCore.Qt.LeftDockWidgetArea
 
-			tab_list = []
 			if isinstance(widgets, list):
 				widgets = sorted(widgets, key=lambda x: x[1].order)
 
@@ -88,8 +87,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 					if not widget._show: dock.hide()
 
 					self.addDockWidget(side, dock)
-					if widget.tabbed == True:
-						tab_list.append(dock)
 			else:
 				dock = QtGui.QDockWidget(self)
 				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
@@ -105,10 +102,6 @@ class StandAloneContainer(QtGui.QMainWindow):
 				widget.dock = dock
 				if not widget._show: dock.hide()
 	
-			for i in range(1, len(tab_list)):
-				self.tabifyDockWidget(tab_list[i-1], tab_list[i])
-
-
 		if conf.PYFORMS_STYLESHEET:
 			stylesheet_files = [conf.PYFORMS_STYLESHEET]
 
