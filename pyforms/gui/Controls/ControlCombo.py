@@ -31,7 +31,6 @@ class ControlCombo(ControlBase):
         self._form.comboBox.activated.connect(self._activated)
         self._form.comboBox.highlighted.connect(self._highlighted)
         self._form.comboBox.editTextChanged.connect(self._editTextChanged)
-        self._form.comboBox._dataChangedFname = None
 
         self._items = {}
         self._addingItem = False
@@ -64,13 +63,6 @@ class ControlCombo(ControlBase):
         Note that this signal happens even when the choice is not changed
         @index: item's index
         """
-        func_name = self._form.comboBox._dataChangedFname
-        if callable(func_name):
-                try:
-                        func_name()
-                except:
-                        import sys
-                        print sys.exc_info()[0]
         pass
 
     def _highlighted(self, index):
@@ -186,11 +178,3 @@ class ControlCombo(ControlBase):
         @type  value: string
         """
         self._form.comboLabel.setText(value)
-
-    @property
-    def dataChangedFunction(self): return self._form.comboBox._dataChangedFname
-
-    @dataChangedFunction.setter
-    def dataChangedFunction(self, value):
-        self._form.comboBox._dataChangedFname = value
-

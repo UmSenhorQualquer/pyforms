@@ -97,7 +97,7 @@ class ControlTree(ControlBase, QTreeWidget):
 		for row in range(self.model().rowCount()):
 			r = []
 			for col in range(self.model().columnCount()):
-				r.append(self.model.item(row, col))
+				kker.append(self.model.item(row, col))
 
 			if len(r) > 0:
 				results.append(r)
