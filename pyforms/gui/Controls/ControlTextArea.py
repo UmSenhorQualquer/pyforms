@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import pyforms.utils.tools as tools
-from PyQt4 import uic
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+    from PyQt5 import uic
+else:
+    from PyQt4 import uic
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 __author__ = "Ricardo Ribeiro"
@@ -16,16 +20,17 @@ __status__ = "Development"
 
 class ControlTextArea(ControlBase):
 
-    def initForm(self):
+    def init_form(self):
         control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
-        self._form.plainTextEdit.setPlainText(str(self._value))
+        if self._value:
+            self._form.plainTextEdit.setPlainText(str(self._value))
 
         if not self._label or len(self._label)==0: 
             self.form.label.hide()
 
-        super(ControlTextArea, self).initForm()
+        super(ControlTextArea, self).init_form()
         self.form.plainTextEdit.textChanged.connect(self.finishEditing)
 
     def __add__(self, other):
@@ -34,7 +39,7 @@ class ControlTextArea(ControlBase):
 
     def finishEditing(self):
         """Function called when the lineEdit widget is edited"""
-        self.changed()
+        self.changed_event()
         
 
     @property
@@ -46,9 +51,9 @@ class ControlTextArea(ControlBase):
         self._form.plainTextEdit.setPlainText(str(value))
 
     @property
-    def readOnly(self):
+    def readonly(self):
         return self._form.plainTextEdit.isReadOnly()
 
-    @readOnly.setter
-    def readOnly(self, value):
+    @readonly.setter
+    def readonly(self, value):
         self._form.plainTextEdit.setReadOnly(value)

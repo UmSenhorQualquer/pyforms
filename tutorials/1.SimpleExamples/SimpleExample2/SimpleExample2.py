@@ -27,7 +27,7 @@ class SimpleExample2(BaseWidget):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
+		self.formset = ['_firstname','_middlename','_lastname', '_fullname', '_button', ' ']
 		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
 		#If you remove the ' ' the forms will occupy the entire window
 
@@ -48,5 +48,5 @@ class SimpleExample2(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample2 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample2 )
 	

@@ -22,7 +22,7 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlCheckBoxList('Check list')
 		
-		self._formset = [' ',(' ', '_control', ' '),' ']
+		self.formset = [' ',(' ', '_control', ' '),' ']
 		
 		self._control.value = [('item1',True), ('item2',False), 'item3']
 
@@ -31,5 +31,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

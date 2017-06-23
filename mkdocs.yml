@@ -9,4 +9,5 @@ pages:
 - API: 
     - 'BaseWidget': 'api-documentation/basewidget.md'
     - 'Controls': 'api-documentation/controls.md'
+    - 'Settings': 'api-documentation/settings.md' 
 - About: 'about/about.md'

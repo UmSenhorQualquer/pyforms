@@ -26,7 +26,7 @@ class SimpleExample5(BaseWidget):
 		self._fullname 		= ControlText('Full name')
 		self._button 		= ControlButton('Press this button')
 
-		self._formset = [ {
+		self.formset = [ {
 						  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
 						  	'Tab2': ['_fullname']
 						  },
@@ -58,5 +58,5 @@ class SimpleExample5(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample5 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample5 )
 	

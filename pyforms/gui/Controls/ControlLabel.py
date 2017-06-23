@@ -4,7 +4,13 @@
 """ pyforms.gui.Controls.ControlLabel"""
 
 import pyforms.utils.tools as tools
-from PyQt4 import uic
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+    from PyQt5 import uic
+else:
+    from PyQt4 import uic
+
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 __author__ = "Carlos Mão de Ferro"
@@ -20,19 +26,27 @@ __status__ = "Development"
 class ControlLabel(ControlBase):
 
     def __init__(self, label=''):
-        super(ControlLabel, self).__init__(label=label, defaultValue=label)
+        super(ControlLabel, self).__init__(label=label, default=label)
 
-    def initForm(self):
+    def init_form(self):
         control_path = tools.getFileInSameDirectory(__file__, "label.ui")
         self._form = uic.loadUi(control_path)
         self._form.label.setText(self._label)
 
-    def load(self, data): pass
+    def load_form(self, data, path=None): pass
 
-    def save(self, data): pass
+    def save_form(self, data, path=None): pass
 
-    def changed(self):
-        self._form.label.setText(self._value)
 
     @property
     def form(self): return self._form
+
+
+    @property
+    def value(self): return ControlBase.value.fget(self)
+
+    @value.setter
+    def value(self, value):
+        self._form.label.setText(value)
+        ControlBase.value.fset(self, value)
+

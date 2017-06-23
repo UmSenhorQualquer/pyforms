@@ -1,34 +1,36 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventsGraph.EventsWidget
+import sys
 
-"""
+from pysettings import conf
 
-from PyQt4 import QtGui, QtCore
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QWidget
+	from PyQt5.QtGui import QColor, QPainter, QFont
+	from PyQt5 import QtCore
+
+else:
+	from PyQt4.QtGui import QWidget, QColor, QPainter, QFont
+	from PyQt4 import QtCore
+
 from pyforms.gui.Controls.ControlEventsGraph.Track import Track
 from pyforms.gui.Controls.ControlEventsGraph.Pointer import Pointer
 from pyforms.gui.Controls.ControlEventsGraph.Event import Event
-from pyforms import conf
-import sys
-
-__author__ = ["Ricardo Ribeiro"]
-__credits__ = ["Ricardo Ribeiro"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
-__status__ = "Development"
 
 
-class EventsWidget(QtGui.QWidget):
+class EventsWidget(QWidget):
 	"""
 	Timeline widget definition to be used in the ControlEventTimeline
 	"""
 
-	_defautcolor = QtGui.QColor(100, 100, 255)
+	_defautcolor = QColor(100, 100, 255)
 
 	def __init__(self, scroll):
+		"""
+		
+		:param scroll: 
+		"""
 		self._is_painting = False
 		self._break_draw = False  # This variable indicates if should continuing drawing the widget or should move foward
 
@@ -42,17 +44,19 @@ class EventsWidget(QtGui.QWidget):
 		#################################################################
 
 		self._max_time = 0
-		self._tracks = []      # List of tracks
+		self._tracks = []  # List of tracks
 		self._pointer = Pointer(0, self, scroll)  # Timeline ( greenline )
-		self.tracks_height = 30                        # Height in pixels
-		self.scale = conf.CONTROL_EVENTS_GRAPH_DEFAULT_SCALE
+		self.tracks_height = 30  # Height in pixels
+		self.scale = conf.PYFORMS_CONTROL_EVENTS_GRAPH_DEFAULT_SCALE
 
 	##########################################################################
 	#### HELPERS/FUNCTIONS ###################################################
 	##########################################################################
 
 	def clean(self):
-		# Clean all events
+		"""
+		Clean all events
+		"""
 		for track in self._tracks:
 			track.clear()
 		del self._tracks[:]
@@ -61,20 +65,32 @@ class EventsWidget(QtGui.QWidget):
 		self.repaint()
 
 	def add_track(self, title=None):
-		# Add a new track
+		"""
+		Adds a new track
+		:param title: 
+		:return: track added 
+		"""
 		self._tracks.append(Track(parent=self))
 		self.setMinimumHeight(self.which_top(len(self._tracks)))
 		if title: self._tracks[-1].title = title
 		return self._tracks[-1]
 
 	def add_event(self, begin, end, title='', track=0, color="#FFFF00"):
-		"""Adds an event."""
+		"""
+		Adds an event.		
+		:param begin: 
+		:param end: 
+		:param title: 
+		:param track: 
+		:param color: 
+		:return: 
+		"""
 
 		period = Event(begin, end,
-					   title=title,
-					   parentWidget=self,
-					   color=color
-					   )
+		               title=title,
+		               parentWidget=self,
+		               color=color
+		               )
 
 		if self._max_time < end:
 			self._max_time = end
@@ -95,8 +111,8 @@ class EventsWidget(QtGui.QWidget):
 	def __check_current_time_is_visible(self, current_time):
 		"""
 		This function check if the current_time is visible to the user.
+		:param current_time: 
 		"""
-
 		scroll_limit = (self._scroll.sliderPosition() + self.width()) * self._scale
 
 		if current_time > scroll_limit:
@@ -106,11 +122,19 @@ class EventsWidget(QtGui.QWidget):
 			self._scroll.setSliderPosition(current_time / self._scale)
 
 	def which_track(self, y):
-		# Return the track index which collide with the Y coordenate
+		"""
+		Return the track index which collide with the Y coordenate
+		:param y: 
+		:return: 
+		"""
 		return (y - 20) // self.tracks_height
 
 	def which_top(self, track):
-		# Return the Y coordenate where the track index start
+		"""
+		Return the Y coordenate where the track index start
+		:param track: 
+		:return: 
+		"""
 		return track * self.tracks_height + 20
 
 	##########################################################################
@@ -118,13 +142,18 @@ class EventsWidget(QtGui.QWidget):
 	##########################################################################
 
 	def paintEvent(self, e):
+		"""
+		
+		:param e: 
+		:return: 
+		"""
 		self._is_painting = True
 		super(EventsWidget, self).paintEvent(e)
 
-		painter = QtGui.QPainter()
+		painter = QPainter()
 		painter.begin(self)
-		painter.setRenderHint(QtGui.QPainter.Antialiasing)
-		painter.setFont(QtGui.QFont('Decorative', 8))
+		painter.setRenderHint(QPainter.Antialiasing)
+		painter.setFont(QFont('Decorative', 8))
 
 		slider_pos = self._scroll.sliderPosition()
 		start = slider_pos * self._scale
@@ -133,13 +162,14 @@ class EventsWidget(QtGui.QWidget):
 		for i, track in enumerate(self._tracks):
 			if self._break_draw:
 				break
-			track.draw_periods(painter, start, end, track_index=i, left_shift=-self._scroll.sliderPosition(), scale=self._scale)
+			track.draw_periods(painter, start, end, track_index=i, left_shift=-self._scroll.sliderPosition(),
+			                   scale=self._scale)
 
 		# Draw only from pixel start to end
 		painter.setPen(QtCore.Qt.DashLine)
 		painter.setOpacity(0.3)
 
-		#print('Draw', start, end, self._scale, self._scroll.sliderPosition(), self.width())
+		# print('Draw', start, end, self._scale, self._scroll.sliderPosition(), self.width())
 
 		# Draw vertical lines
 		for x in range(start - (start % (100 * self._scale)), end, 100 * self._scale):
@@ -151,7 +181,7 @@ class EventsWidget(QtGui.QWidget):
 
 		for index, track in enumerate(self._tracks):
 			top = self.which_top(index)
-			#print(top)
+			# print(top)
 			painter.drawLine(0, top, self.width(), top)
 			painter.drawText(10, top + 15, track.title)
 		painter.setOpacity(1.0)
@@ -167,7 +197,8 @@ class EventsWidget(QtGui.QWidget):
 	##########################################################################
 
 	@property
-	def scale(self): return self._scale
+	def scale(self):
+		return self._scale
 
 	@scale.setter
 	def scale(self, value):
@@ -175,10 +206,12 @@ class EventsWidget(QtGui.QWidget):
 		self._scroll.setMaximum(self._max_time / self._scale)
 
 	@property
-	def scroll(self): return self._scroll
+	def scroll(self):
+		return self._scroll
 
 	@property
-	def position(self): return self._pointer._position
+	def position(self):
+		return self._pointer._position
 
 	@position.setter
 	def position(self, position):
@@ -196,13 +229,16 @@ class EventsWidget(QtGui.QWidget):
 		self.repaint()
 
 	@property
-	def color(self): return self._defautcolor
+	def color(self):
+		return self._defautcolor
 
 	@color.setter
-	def color(self, value): self._defautcolor = value
+	def color(self, value):
+		self._defautcolor = value
 
 	@property
-	def tracks_height(self): return self._tracks_height
+	def tracks_height(self):
+		return self._tracks_height
 
 	@tracks_height.setter
 	def tracks_height(self, value):
@@ -214,7 +250,12 @@ class EventsWidget(QtGui.QWidget):
 		self.repaint()
 
 	@property
-	def tracks(self): return self._tracks
+	def tracks(self):
+		"""
+		Get list of tracks
+		:return: 
+		"""
+		return self._tracks
 
 	##########################################################################
 	#### IMPORT AND EXPORT DATA ##############################################
@@ -280,4 +321,3 @@ class EventsWidget(QtGui.QWidget):
 			csvfileobject.writerow(track.properties)
 			for delta in track.periods:
 				csvfileobject.writerow(delta.properties)
-

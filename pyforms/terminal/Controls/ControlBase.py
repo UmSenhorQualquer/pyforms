@@ -8,45 +8,34 @@ class ControlBase(object):
     _controlHTML    = ""
 
     def __init__(self, label = "", defaultValue = "", helptext=None):
-        self._name = ""
         self._id = uuid.uuid4()
         self._value = defaultValue
         self._parent = 1
         self._label = label
-        self._popupMenu = None
-        self._controlHTML  = ""
 
+    def init_form(self): pass
 
-    def initControl(self):
-        self._controlHTML = "<div id='id%s' ><input type='text' id='%s' /></div>" % ( self._id, self._name )
-        return self._controlHTML
-
-    def finishEditing(self): self.updateControl()
-
-    def updateControl(self): pass
-
-    def load(self, data):
+    def load_form(self, data, path=None):
         if 'value' in data: self.value = data['value']
 
-    def save(self, data):
+    def save_form(self, data, path=None):
         if self.value: data['value'] = self.value
 
-    def valueUpdated(self, value): pass
+    def value_updated(self, value): pass
 
     def show(self):pass
 
     def hide(self):pass
 
-    def openPopupMenu(self, position): pass
+    def open_popup_menu(self, position): pass
         
 
-    def addPopupSubMenuOption(self, label, options): pass
+    def add_popup_submenu_option(self, label, options): pass
         
 
-    def addPopupMenuOption(self, label, functionAction = None): pass
+    def add_popup_menu_option(self, label, functionAction = None): pass
 
-    def __repr__(self):
-        return self.value
+    def __repr__(self): return self.value
     ############################################################################
     ############ Properties ####################################################
     ############################################################################
@@ -66,7 +55,7 @@ class ControlBase(object):
     def value(self, value):
         oldvalue = self._value
         self._value = value
-        if oldvalue!=value: self.valueUpdated(value)
+        if oldvalue!=value: self.value_updated(value)
 
     ############################################################################
 
@@ -115,6 +104,3 @@ class ControlBase(object):
 
     @minHeight.setter
     def minHeight(self, value): pass
-
-
-    def __str__(self): return "<span id='place%s' />" % self._name

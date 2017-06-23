@@ -23,7 +23,7 @@ class SimpleExample(BaseWidget):
 		self._control 	= ControlImage('Image')
 		self._open 	= ControlButton('Open')
 		
-		self._formset = [' ',(' ', '_control', ' '),'_open']
+		self.formset = [' ',(' ', '_control', ' '),'_open']
 
 		self._open.value = self.__open
 		
@@ -37,5 +37,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

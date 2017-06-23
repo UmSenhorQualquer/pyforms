@@ -1,15 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-'''
-@author: Ricardo Ribeiro
-@credits: Ricardo Ribeiro
-@license: MIT
-@version: 0.0
-@maintainer: Ricardo Ribeiro
-@email: ricardojvr@gmail.com
-@status: Development
-@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
-'''
 
 
 import os
@@ -17,43 +7,64 @@ import json
 import subprocess
 import time, sys
 from datetime import datetime, timedelta
-from PyQt4 import QtGui, QtCore
+
 from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QFrame
+	from PyQt5.QtWidgets import QVBoxLayout
+	from PyQt5.QtWidgets import QTabWidget
+	from PyQt5.QtWidgets import QSplitter
+	from PyQt5.QtWidgets import QHBoxLayout
+	from PyQt5.QtWidgets import QSpacerItem
+	from PyQt5.QtWidgets import QSizePolicy
+	from PyQt5.QtWidgets import QLabel
+	from PyQt5.QtGui import QFont
+	from PyQt5.QtWidgets import QFileDialog
+	from PyQt5.QtWidgets import QApplication
+	from PyQt5 import QtCore
+
+else:
+	from PyQt4.QtGui import QFrame
+	from PyQt4.QtGui import QVBoxLayout
+	from PyQt4.QtGui import QTabWidget
+	from PyQt4.QtGui import QSplitter
+	from PyQt4.QtGui import QHBoxLayout
+	from PyQt4.QtGui import QSpacerItem
+	from PyQt4.QtGui import QSizePolicy
+	from PyQt4.QtGui import QLabel
+	from PyQt4.QtGui import QFont
+	from PyQt4.QtGui import QFileDialog
+	from PyQt4.QtGui import QApplication
+	from PyQt4 import QtCore
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlProgress import ControlProgress
 
-class FlushFile(object):
-	"""Write-only flushing wrapper for file-type objects."""
-	def __init__(self, f):
-		self.f = f
-	def write(self, x):
-		self.f.write(x)
-		self.f.flush()
 
-
-
-class BaseWidget(QtGui.QFrame):
+class BaseWidget(QFrame):
 	"""
 	The class implements the most basic widget or window.
 	"""
 
-	def __init__(self, title='Untitled', parentWindow=None, flag=None):
-		if parentWindow is not None and flag is None:
-			flag = QtCore.Qt.Dialog
+	def __init__(self, title='Untitled', parent_win=None, win_flag=None):
+		if parent_win is not None and win_flag is None: win_flag = QtCore.Qt.Dialog
 
-		if parentWindow is None:
-			QtGui.QFrame.__init__(self)
-		else:
-			QtGui.QFrame.__init__(self, parentWindow, flag)
+		QFrame.__init__(self) if parent_win is None else QFrame.__init__(self, parent_win, win_flag)
 
-		#self.setObjectName(self.__class__.__name__)
-		
+		# self.setObjectName(self.__class__.__name__)
 
-		layout = QtGui.QVBoxLayout()
+
+		layout = QVBoxLayout()
 		self.setLayout(layout)
-		self.layout().setMargin(0)
+		
+		if conf.PYFORMS_USE_QT5:
+			layout.setContentsMargins(0,0,0,0)
+		else:
+			layout.setMargin(0)
 
 		self.title = title
+		self.has_progress = False
 
 		self._mainmenu = []
 		self._splitters = []
@@ -65,46 +76,53 @@ class BaseWidget(QtGui.QFrame):
 		self.setAccessibleName('BaseWidget')
 
 	##########################################################################
-	############ Module functions  ###########################################
+	############ FUNCTIONS  ##################################################
 	##########################################################################
 
 
-	def initForm(self):
+	def init_form(self):
 		"""
 		Generate the module Form
 		"""
 		if not self._formLoaded:
 
-			if conf.PYFORMS_MODE in ['GUI-OPENCSP']:
+			if self.has_progress:
 				self._progress = ControlProgress("Progress", 0, 100)
 				self._progress.hide()
 				if self._formset != None:
 					self._formset += ['_progress']
 
 			if self._formset is not None:
-				control = self.generatePanel(self._formset)
+				control = self.generate_panel(self._formset)
 				self.layout().addWidget(control)
 			else:
-				allparams = self.formControls
+				allparams = self.controls
 				for key, param in allparams.items():
 					param.parent = self
 					param.name = key
 					self.layout().addWidget(param.form)
 			self._formLoaded = True
 
-	def generateTabs(self, formsetDict):
+	def set_margin(self, margin):
+		if conf.PYFORMS_USE_QT5:
+			self.layout().setContentsMargins(margin,margin,margin,margin)
+		else:
+			self.layout().setMargin(margin)
+
+
+	def generate_tabs(self, formsetdict):
 		"""
 		Generate QTabWidget for the module form
 		@param formset: Tab form configuration
 		@type formset: dict
 		"""
-		tabs = QtGui.QTabWidget(self)
-		for key, item in sorted(formsetDict.items()):
-			ctrl = self.generatePanel(item)
+		tabs = QTabWidget(self)
+		for key, item in sorted(formsetdict.items()):
+			ctrl = self.generate_panel(item)
 			tabs.addTab(ctrl, key[key.find(':') + 1:])
 		return tabs
 
-	def generatePanel(self, formset):
+	def generate_panel(self, formset):
 		"""
 		Generate a panel for the module form with all the controls
 		formset format example: [('_video', '_arenas', '_run'), {"Player":['_threshold', "_player", "=", "_results", "_query"], "Background image":[(' ', '_selectBackground', '_paintBackground'), '_image']}, "_progress"]
@@ -118,17 +136,17 @@ class BaseWidget(QtGui.QFrame):
 		"""
 		control = None
 		if '=' in formset:
-			control = QtGui.QSplitter(QtCore.Qt.Vertical)
+			control = QSplitter(QtCore.Qt.Vertical)
 			tmp = list(formset)
 			index = tmp.index('=')
-			firstPanel = self.generatePanel(formset[0:index])
-			secondPanel = self.generatePanel(formset[index + 1:])
+			firstPanel = self.generate_panel(formset[0:index])
+			secondPanel = self.generate_panel(formset[index + 1:])
 			control.addWidget(firstPanel)
 			control.addWidget(secondPanel)
 			self._splitters.append(control)
 			return control
 		elif '||' in formset:
-			control = QtGui.QSplitter(QtCore.Qt.Horizontal)
+			control = QSplitter(QtCore.Qt.Horizontal)
 			tmp = list(formset)
 			rindex = lindex = index = tmp.index('||')
 			rindex -= 1
@@ -137,8 +155,8 @@ class BaseWidget(QtGui.QFrame):
 				lindex = lindex - 1
 			if len(formset) > rindex and isinstance(formset[index + 1], int):
 				rindex += 1
-			firstPanel = self.generatePanel(formset[0:lindex])
-			secondPanel = self.generatePanel(formset[rindex:])
+			firstPanel = self.generate_panel(formset[0:lindex])
+			secondPanel = self.generate_panel(formset[rindex:])
 			if isinstance(formset[index - 1], int):
 				firstPanel.setMaximumWidth(formset[index - 1])
 			if isinstance(formset[index + 1], int):
@@ -147,332 +165,328 @@ class BaseWidget(QtGui.QFrame):
 			control.addWidget(secondPanel)
 			self._splitters.append(control)
 			return control
-		control = QtGui.QFrame(self)
+		control = QFrame(self)
 		layout = None
 		if type(formset) is tuple:
-			layout = QtGui.QHBoxLayout()
+			layout = QHBoxLayout()
 			for row in formset:
 				if isinstance(row, (list, tuple)):
-					panel = self.generatePanel(row)
+					panel = self.generate_panel(row)
 					layout.addWidget(panel)
 				elif row == " ":
-					spacer = QtGui.QSpacerItem(
-						40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+					spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 					layout.addItem(spacer)
 				elif type(row) is dict:
-					c = self.generateTabs(row)
+					c = self.generate_tabs(row)
 					layout.addWidget(c)
 					self._tabs.append(c)
 				else:
-					param = self.formControls.get(row, None)
+					param = self.controls.get(row, None)
 					if param is None:
-						label = QtGui.QLabel()
-						label.setSizePolicy(
-							QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
-						#layout.addWidget( label )
+						label = QLabel()
+						label.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+						# layout.addWidget( label )
 
 						if row.startswith('info:'):
 							label.setText(row[5:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(10)
 							label.setFont(font)
 							label.setAccessibleName('info')
 						elif row.startswith('h1:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(17)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h1')
 						elif row.startswith('h2:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(16)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h2')
 						elif row.startswith('h3:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(15)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h3')
 						elif row.startswith('h4:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(14)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h4')
 						elif row.startswith('h5:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(12)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h5')
 						else:
 							label.setText(row)
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(10)
 							label.setFont(font)
 							label.setAccessibleName('msg')
-
+						label.setToolTip(label.text())
 						layout.addWidget(label)
 					else:
 						param.parent = self
 						param.name = row
 						layout.addWidget(param.form)
 		elif type(formset) is list:
-			layout = QtGui.QVBoxLayout()
+			layout = QVBoxLayout()
 			for row in formset:
 				if isinstance(row, (list, tuple)):
-					panel = self.generatePanel(row)
+					panel = self.generate_panel(row)
 					layout.addWidget(panel)
 				elif row == " ":
-					spacer = QtGui.QSpacerItem(
-						20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+					spacer = QSpacerItem(
+						20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 					layout.addItem(spacer)
 				elif type(row) is dict:
-					c = self.generateTabs(row)
+					c = self.generate_tabs(row)
 					layout.addWidget(c)
 					self._tabs.append(c)
 				else:
-					param = self.formControls.get(row, None)
+					param = self.controls.get(row, None)
 					if param is None:
-						label = QtGui.QLabel()
-						label.setSizePolicy(
-							QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
+						label = QLabel()
+						label.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
 						label.resize(30, 30)
-						#layout.addWidget( label )
+						# layout.addWidget( label )
 
 						if row.startswith('info:'):
 							label.setText(row[5:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(10)
 							label.setFont(font)
 							label.setAccessibleName('info')
 						elif row.startswith('h1:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(17)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h1')
 						elif row.startswith('h2:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(16)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h2')
 						elif row.startswith('h3:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(15)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h3')
 						elif row.startswith('h4:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(14)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h4')
 						elif row.startswith('h5:'):
 							label.setText(row[3:])
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(12)
 							font.setBold(True)
 							label.setFont(font)
 							label.setAccessibleName('h5')
 						else:
 							label.setText(row)
-							font = QtGui.QFont()
+							font = QFont()
 							font.setPointSize(10)
 							label.setFont(font)
 							label.setAccessibleName('msg')
+
+						label.setToolTip(label.text())
 
 						layout.addWidget(label)
 					else:
 						param.parent = self
 						param.name = row
 						layout.addWidget(param.form)
-		layout.setMargin(0)
+		
+		if conf.PYFORMS_USE_QT5:
+			layout.setContentsMargins(0,0,0,0)
+		else:
+			layout.setMargin(0)
+			
 		control.setLayout(layout)
 		return control
-
-	##########################################################################
-	############ Parent class functions reemplementation #####################
-	##########################################################################
 
 	def show(self):
 		"""
 		It shows the 
 		"""
-		self.initForm()
+		self.init_form()
 		super(BaseWidget, self).show()
 
+	def save_form(self, data={}, path=None):
+		allparams = self.controls
+
+		if hasattr(self, 'load_order'):
+			for name in self.load_order:
+				param = allparams[name]
+				data[name] = {}
+				param.save_form(data[name])
+		else:
+			for name, param in allparams.items():
+				data[name] = {}
+				param.save_form(data[name])
+		return data
+
+	def load_form(self, data, path=None):
+		allparams = self.controls
+
+		if hasattr(self, 'load_order'):
+			for name in self.load_order:
+				param = allparams[name]
+				if name in data:
+					param.load_form(data[name])
+		else:
+			for name, param in allparams.items():
+				if name in data:
+					param.load_form(data[name])
+				# self.init_form()
+
+	def save_window(self):
+		allparams = self.controls
+		data = {}
+		self.save_form(data)
+
+		filename = QFileDialog.getSaveFileName(self, 'Select file')
+		with open(filename, 'w') as output_file: json.dump(data, output_file)
+
+	def load_form_filename(self, filename):
+		with open(filename, 'r') as pkl_file:
+			project_data = json.load(pkl_file)
+		data = dict(project_data)
+		self.load_form(data)
+
+	def load_window(self):
+		filename = QFileDialog.getOpenFileNames(self, 'Select file')
+		self.load_form_filename(str(filename[0]))
+
+	##########################################################################
+	############ EVENTS ######################################################
+	##########################################################################
+
+	def before_close_event(self):
+		""" 
+		Do something before closing widget 
+		Note that the window will be closed anyway    
+		"""
+		pass
 
 	##########################################################################
 	############ Properties ##################################################
 	##########################################################################
 
 	@property
-	def formControls(self):
+	def form_has_loaded(self):
+		return self._formLoaded
+
+	@property
+	def controls(self):
 		"""
 		Return all the form controls from the the module
 		"""
 		result = {}
 		for name, var in vars(self).items():
 			try:
-				if isinstance(var, ControlBase): 
+				if isinstance(var, ControlBase):
 					result[name] = var
 			except:
 				pass
 		return result
-
-	def start_progress(self, total=100):
-		self._progress.max = total
-		self._progress.min = 0
-		self._progress.value = 0
-		self._processing_count = 0
-		self._processing_initial_time = time.time()
-		self._progress.show()
-
-	def update_progress(self, progress=1):
-		self._progress.value = self._processing_count
-		self._processing_count += progress
-
-		div = int(self._progress.max / 400)
-		if div == 0:
-			div = 1
-		if (self._processing_count % div) == 0:
-			self._processing_last_time = time.time()
-			total_passed_time = self._processing_last_time - \
-				self._processing_initial_time
-			remaining_time = (
-				(self._progress.max * total_passed_time) / self._processing_count) - total_passed_time
-			time_remaining = datetime(
-				1, 1, 1) + timedelta(seconds=remaining_time)
-			time_elapsed = datetime(
-				1, 1, 1) + timedelta(seconds=(total_passed_time))
-
-			values = (time_elapsed.day - 1, time_elapsed.hour, time_elapsed.minute, time_elapsed.second,
-					  time_remaining.day -
-					  1, time_remaining.hour, time_remaining.minute, time_remaining.second,
-					  (float(self._processing_count) / float(self._progress.max)
-					   ) * 100.0, self._processing_count, self._progress.max,
-					  self._processing_count / total_passed_time)
-			self._progress.label = "Elapsed: %d:%d:%d:%d; Remaining: %d:%d:%d:%d; Processed %0.2f %%  (%d/%d); Cicles per second: %0.3f" % values
-
-		QtGui.QApplication.processEvents()
-
-	def end_progress(self):
-		# self.update_progress()
-		self._progress.value = self._progress.max
-		self._progress.hide()
-
-	def executeCommand(self, cmd, cwd=None):
-		if cwd is not None:
-			currentdirectory = os.getcwd()
-			os.chdir(cwd)
-
-		out = FlushFile(sys.__stdout__)
-
-		proc = subprocess.Popen(cmd, stdout=out, stderr=out)
-		(output, error) = proc.communicate()
-		if cwd is not None:
-			os.chdir(currentdirectory)
-		if error:
-			print('Error: ' + error)
-		return output
 
 	@property
 	def form(self):
 		return self
 
 	@property
-	def title(self): return self.windowTitle()
+	def title(self):
+		return self.windowTitle()
 
 	@title.setter
-	def title(self, value): self.setWindowTitle(value)
+	def title(self, value):
+		self.setWindowTitle(value)
 
 	@property
-	def mainmenu(self): return self._mainmenu
+	def mainmenu(self):
+		return self._mainmenu
 
 	@mainmenu.setter
-	def mainmenu(self, value): self._mainmenu = value
+	def mainmenu(self, value):
+		self._mainmenu = value
 
 	@property
-	def formset(self): return self._formset
+	def formset(self):
+		return self._formset
 
 	@formset.setter
-	def formset(self, value): self._formset = value
+	def formset(self, value):
+		self._formset = value
 
 	@property
-	def uid(self): return self._uid
+	def uid(self):
+		return self._uid
 
 	@uid.setter
-	def uid(self, value): self._uid = value
+	def uid(self, value):
+		self._uid = value
 
-	def save(self, data={}):
-		allparams = self.formControls
-		
-		if hasattr(self,'load_order'):
-			for name in self.load_order:
-				param = allparams[name]
-				data[name] = {}
-				param.save(data[name])
-		else:
-			for name, param in allparams.items():
-				data[name] = {}
-				param.save(data[name])
-		return data
+	@property
+	def max_progress(self):
+		return self._progress.max
 
-	def saveWindow(self):
-		allparams = self.formControls
-		data = {}
-		self.save(data)
+	@max_progress.setter
+	def max_progress(self, value):
+		self._progress.max = value
 
-		filename = QtGui.QFileDialog.getSaveFileName(self, 'Select file')
+	@property
+	def min_progress(self):
+		return self._progress.min
 
-		with open(filename, 'w') as output_file:
-			json.dump(data, output_file)
+	@min_progress.setter
+	def min_progress(self, value):
+		self._progress.min = value
 
-	def loadWindowData(self, filename):
-		with open(filename, 'r') as pkl_file:
-			project_data = json.load(pkl_file)
-		data = dict(project_data)
-		self.load(data)
+	@property
+	def progress(self):
+		return self._progress.value
 
-	def load(self, data):
-		allparams = self.formControls
+	@progress.setter
+	def progress(self, value):
+		self._progress.value = value
+		QApplication.processEvents()
 
-		if hasattr(self,'load_order'):
-			for name in self.load_order:
-				param = allparams[name]
-				if name in data:
-					param.load(data[name])
-		else:
-			for name, param in allparams.items():
-				if name in data:
-					param.load(data[name])
-		#self.initForm()
+		if value == self.max_progress: self._progress.hide()
+		if value == self.min_progress: self._progress.show()
 
-	def loadWindow(self):
-		filename = QtGui.QFileDialog.getOpenFileNames(self, 'Select file')
-		self.loadWindowData(str(filename[0]))
+	@property
+	def visible(self):
+		return self.isVisible()
 
+	@visible.setter
+	def visible(self, value):
+		self.show() if value else self.hide()
+
+	##########################################################################
+	############ PRIVATE FUNCTIONS ###########################################
+	##########################################################################
 	def closeEvent(self, event):
-		self.beforeClose()
+		self.before_close_event()
 		super(BaseWidget, self).closeEvent(event)
-
-	def beforeClose(self):
-		""" 
-		Do something before closing widget 
-		Note that the window will be closed anyway    
-		"""
-		pass

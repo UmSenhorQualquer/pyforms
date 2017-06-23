@@ -22,7 +22,7 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlVisVis('VisVis')
 		
-		self._formset = [' ',(' ', '_control', ' '),' ']
+		self.formset = [' ',(' ', '_control', ' '),' ']
 
 		self._control.value = [ [(10,20,10), (30,40,10)], [(10,20,3)] ]
 
@@ -36,5 +36,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

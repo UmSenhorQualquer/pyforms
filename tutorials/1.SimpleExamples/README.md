@@ -10,7 +10,7 @@ Shows the most simple way to create windows forms application using pyforms.
 
 ## Example 2
 
-Shows you how to organize the forms using the variable "self._formset".
+Shows you how to organize the forms using the variable "self.formset".
 
 ![Simple example ](SimpleExample2/screenshot.png?raw=true "Screen")
 
@@ -18,7 +18,7 @@ Shows you how to organize the forms using the variable "self._formset".
 
 ## Example 3
 
-Shows you how to organize the forms **side by side** using the variable "self._formset".
+Shows you how to organize the forms **side by side** using the variable "self.formset".
 
 ![Simple example ](SimpleExample3/screenshot.png?raw=true "Screen")
 
@@ -26,7 +26,7 @@ Shows you how to organize the forms **side by side** using the variable "self._f
 
 ## Example 4
 
-Shows you how to **define tabs** using dictionaries in the variable "self._formset".
+Shows you how to **define tabs** using dictionaries in the variable "self.formset".
 
 ![Simple example ](SimpleExample4/screenshot.png?raw=true "Screen")
 

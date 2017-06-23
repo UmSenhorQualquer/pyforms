@@ -1,57 +1,59 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-'''
-@author: Ricardo Ribeiro
-@credits: Ricardo Ribeiro
-@license: MIT
-@version: 0.0
-@maintainer: Ricardo Ribeiro
-@email: ricardojvr@gmail.com
-@status: Development
-@lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
-'''
 
 import sys
 import os, types
 import inspect, platform
 import logging
-from PyQt4 import QtGui, QtCore
+
 from pysettings import conf
+
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QMainWindow
+	from PyQt5.QtWidgets import QDockWidget
+	from PyQt5.QtWidgets import QAction
+	from PyQt5.QtWidgets import QApplication
+	from PyQt5 import QtCore
+	from PyQt5.QtGui import QIcon
+else:
+	from PyQt4.QtGui import QMainWindow
+	from PyQt4.QtGui import QDockWidget
+	from PyQt4.QtGui import QAction
+	from PyQt4.QtGui import QIcon
+	from PyQt4.QtGui import QApplication
+	from PyQt4 import QtCore
 
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
 
-
-__author__ = "Ricardo Ribeiro"
-__copyright__ = ""
-__credits__ = "Ricardo Ribeiro"
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
-
 logger = logging.getLogger(__name__)
 
-class StandAloneContainer(QtGui.QMainWindow):
 
+class StandAloneContainer(QMainWindow):
 	def __init__(self, ClassObject):
-		super(QtGui.QMainWindow, self).__init__()
+		super(QMainWindow, self).__init__()
 
 		w = ClassObject()
+		w.app_main_window = self
 		self._widget = w
 
 		if len(w.mainmenu) > 0:
 			w._mainmenu = self.__initMainMenu(w.mainmenu)
 
-		w.initForm()
-		w.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
+		w.init_form()
+
+		if conf.PYFORMS_USE_QT5:
+			self.layout().setContentsMargins(conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN)
+		else:
+			self.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
 		self.setCentralWidget(w)
 		self.setWindowTitle(w.title)
 
 		docks = {}
-		for name, item in w.formControls.items():
+		for name, item in w.controls.items():
 			if isinstance(item, ControlDockWidget):
 				if item.side not in docks:
 					docks[item.side] = []
@@ -74,11 +76,17 @@ class StandAloneContainer(QtGui.QMainWindow):
 				widgets = sorted(widgets, key=lambda x: x[1].order)
 
 				for name, widget in widgets:
-					dock = QtGui.QDockWidget(self)
-					dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
-									 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
+					dock = QDockWidget(self)
+					dock.setFeatures(
+						QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetMovable)
 					dock.setObjectName(name)
-					widget.form.layout().setMargin(widget.margin)
+						
+					if conf.PYFORMS_USE_QT5:
+						dock.setContentsMargins(0,0,0,0)
+						widget.form.layout().setContentsMargins(widget.margin,widget.margin,widget.margin,widget.margin)
+					else:
+						dock.setMargin(0)
+						widget.form.layout().setMargin(widget.margin)
 
 					# print dock.objectName(),1
 					dock.setWidget(widget.form)
@@ -88,11 +96,15 @@ class StandAloneContainer(QtGui.QMainWindow):
 
 					self.addDockWidget(side, dock)
 			else:
-				dock = QtGui.QDockWidget(self)
-				dock.setFeatures(QtGui.QDockWidget.DockWidgetFloatable |
-								 QtGui.QDockWidget.DockWidgetClosable | QtGui.QDockWidget.DockWidgetMovable)
+				dock = QDockWidget(self)
+				dock.setFeatures(
+					QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable | QDockWidget.DockWidgetMovable)
 				# dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
-				widget.form.layout().setMargin(widget.margin)
+				
+				if conf.PYFORMS_USE_QT5:
+					widget.form.layout().setContentsMargins(widget.margin,widget.margin,widget.margin,widget.margin)
+				else:
+					widget.form.layout().setMargin(widget.margin)
 
 				# print dock.objectName(), 2
 				dock.setObjectName(name)
@@ -101,22 +113,20 @@ class StandAloneContainer(QtGui.QMainWindow):
 				dock.setWindowTitle(widget.label)
 				widget.dock = dock
 				if not widget._show: dock.hide()
-	
+
 		if conf.PYFORMS_STYLESHEET:
 			stylesheet_files = [conf.PYFORMS_STYLESHEET]
 
 			p = platform.system()
-			if p=='Windows' and conf.PYFORMS_STYLESHEET_WINDOWS:
+			if p == 'Windows' and conf.PYFORMS_STYLESHEET_WINDOWS:
 				stylesheet_files.append(conf.PYFORMS_STYLESHEET_WINDOWS)
-			elif p=='Darwin' and conf.PYFORMS_STYLESHEET_DARWIN:
+			elif p == 'Darwin' and conf.PYFORMS_STYLESHEET_DARWIN:
 				stylesheet_files.append(conf.PYFORMS_STYLESHEET_DARWIN)
-			elif p=='Linux' and conf.PYFORMS_STYLESHEET_LINUX:
+			elif p == 'Linux' and conf.PYFORMS_STYLESHEET_LINUX:
 				stylesheet_files.append(conf.PYFORMS_STYLESHEET_LINUX)
 
-			logger.debug('Import stylesheets: {0}'.format(stylesheet_files)	)	
+			logger.debug('Import stylesheets: {0}'.format(stylesheet_files))
 			self.loadStyleSheetFile(stylesheet_files)
-			
-		
 
 	def closeEvent(self, event):
 		self._widget.closeEvent(event)
@@ -132,10 +142,10 @@ class StandAloneContainer(QtGui.QMainWindow):
 					else:
 						for text, func in m1.items():
 							if text != 'icon':
-								action = QtGui.QAction(text, self)
+								action = QAction(text, self)
 								if 'icon' in m1.keys():
 									action.setIconVisibleInMenu(True)
-									action.setIcon(QtGui.QIcon(m1['icon']))
+									action.setIcon(QIcon(m1['icon']))
 								if func:
 									action.triggered.connect(func)
 									menu.addAction(action)
@@ -153,23 +163,23 @@ class StandAloneContainer(QtGui.QMainWindow):
 		self.setStyleSheet(content)
 
 
-
 def execute_test_file(myapp):
 	import argparse
 	parser = argparse.ArgumentParser()
 	parser.add_argument("test_file", help="File with the tests script")
 	args = parser.parse_args()
-	
+
 	with open(args.test_file) as f:
 		global_vars = globals()
-		local_vars  = locals()
+		local_vars = locals()
 		code = compile(f.read(), args.test_file, 'exec')
 		exec(code, global_vars, local_vars)
 
-def startApp(ClassObject, geometry=None):
+
+def start_app(ClassObject, geometry=None):
 	from pysettings import conf
 
-	app = QtGui.QApplication(sys.argv)
+	app = QApplication(sys.argv)
 
 	conf += 'pyforms.gui.settings'
 
@@ -183,25 +193,24 @@ def startApp(ClassObject, geometry=None):
 	else:
 		mainwindow.showMaximized()
 
-
-	if conf.PYFORMS_QUALITY_TESTS_PATH is not None: 
+	if conf.PYFORMS_QUALITY_TESTS_PATH is not None:
 		import argparse
 		parser = argparse.ArgumentParser()
 		parser.add_argument("--test", help="File with the tests script")
 		args = parser.parse_args()
-		
+
 		if args.test:
-			TEST_PATH 				= os.path.join( conf.PYFORMS_QUALITY_TESTS_PATH, args.test )
-			TEST_FILE_PATH 			= os.path.join( TEST_PATH, args.test+'.py')
-			DATA_PATH 				= os.path.join( TEST_PATH, 'data', sys.platform)
-			INPUT_DATA_PATH 		= os.path.join( DATA_PATH, 'input-data')
-			OUTPUT_DATA_PATH 		= os.path.join( DATA_PATH, 'output-data')
-			EXPECTED_DATA_PATH 		= os.path.join( DATA_PATH, 'expected-data')
+			TEST_PATH = os.path.join(conf.PYFORMS_QUALITY_TESTS_PATH, args.test)
+			TEST_FILE_PATH = os.path.join(TEST_PATH, args.test + '.py')
+			DATA_PATH = os.path.join(TEST_PATH, 'data', sys.platform)
+			INPUT_DATA_PATH = os.path.join(DATA_PATH, 'input-data')
+			OUTPUT_DATA_PATH = os.path.join(DATA_PATH, 'output-data')
+			EXPECTED_DATA_PATH = os.path.join(DATA_PATH, 'expected-data')
 
 			with open(TEST_FILE_PATH) as f:
-				global_vars = {} #globals()
-				local_vars  = locals()
-				code 		= compile(f.read(), TEST_FILE_PATH, 'exec')
+				global_vars = {}  # globals()
+				local_vars = locals()
+				code = compile(f.read(), TEST_FILE_PATH, 'exec')
 
 				exec(code, global_vars, local_vars)
 

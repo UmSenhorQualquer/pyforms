@@ -1,37 +1,34 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventTimeline.TimelineWidget
+from pysettings import conf
 
-"""
+if conf.PYFORMS_USE_QT5:
+	from PyQt5.QtWidgets import QWidget, QMessageBox
+	from PyQt5.QtGui import QColor, QPainter, QFont, QCursor
+	from PyQt5 import QtCore
 
-from PyQt4 import QtGui, QtCore
+else:
+	from PyQt4.QtGui import QWidget, QColor, QMessageBox, QPainter, QFont, QCursor
+	from PyQt4 import QtCore
+
 from pyforms.gui.Controls.ControlEventTimeline.Track import Track
 from pyforms.gui.Controls.ControlEventTimeline.TimelinePointer import TimelinePointer
 from pyforms.gui.Controls.ControlEventTimeline.TimelineDelta import TimelineDelta
 from pyforms.gui.Controls.ControlEventTimeline.TimelineChart import TimelineChart
 
 
-__author__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__credits__ = ["Ricardo Ribeiro", "Hugo Cachitas"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
-__status__ = "Development"
-
-
-class TimelineWidget(QtGui.QWidget):
+class TimelineWidget(QWidget):
 	"""
 	Timeline widget definition to be used in the ControlEventTimeline
 	"""
 
-	_defautcolor = QtGui.QColor(100, 100, 255)
+	_defautcolor = QColor(100, 100, 255)
 
 	def __init__(self, parent_control):
 		super(TimelineWidget, self).__init__()
 
-		self.parent_control = parent_control 
+		self.parent_control = parent_control
 
 		# self.setFocusPolicy(QtCore.Qt.StrongFocus)
 		# self.grabKeyboard()
@@ -45,15 +42,25 @@ class TimelineWidget(QtGui.QWidget):
 		self.setPalette(palette)
 
 		self._chartsColors = [
-			QtGui.QColor(255, 0, 0), QtGui.QColor(0, 100, 0),
-			QtGui.QColor(0, 0, 255), QtGui.QColor(100, 100, 0),
-			QtGui.QColor(100, 0, 100), QtGui.QColor(0, 100, 100)
+			QColor(240, 163, 255), QColor(0, 117, 220),
+			QColor(153, 63, 0), QColor(76, 0, 92),
+			QColor(25, 25, 25), QColor(0, 92, 49),
+			QColor(43, 206, 72), QColor(255, 204, 153),
+			QColor(128, 128, 128), QColor(148, 255, 181),
+			QColor(143, 124, 0), QColor(157, 204, 0),
+			QColor(194, 0, 136), QColor(0, 51, 128),
+			QColor(255, 164, 5), QColor(255, 168, 187),
+			QColor(66, 102, 0), QColor(255, 0, 16),
+			QColor(94, 241, 242), QColor(0, 153, 143),
+			QColor(116, 10, 255), QColor(153, 0, 0),
+			QColor(255, 255, 0), QColor(255, 80, 5)
 		]
 		self._charts = []
 		self._tracks = [Track(parent=self)]
 
 		self._scale = 1.0
 		self._lastMouseY = None
+		self._mouse_current_pos = None
 
 		self._moving = False
 		self._resizingBegin = False
@@ -62,7 +69,7 @@ class TimelineWidget(QtGui.QWidget):
 		self._creating_event_start = None
 		self._creating_event_end = None
 		self._n_tracks = 1
-	   
+
 		self._selected = None
 		self._selected_track = 0
 		self._pointer = TimelinePointer(0, self)
@@ -78,9 +85,29 @@ class TimelineWidget(QtGui.QWidget):
 	#### HELPERS/FUNCTIONS ###################################################
 	##########################################################################
 
-	def x2frame(self, x): return int(x / self._scale)
+	def __add__(self, other):
+		self.parent_control.__add__(other)
+		return self
 
-	def frame2x(self, frame): return int(frame * self._scale)
+	def __sub__(self, other):
+		self.parent_control.__sub__(other)
+		return self
+
+	def x2frame(self, x):
+		return int(x / self._scale)
+
+	def frame2x(self, frame):
+		return int(frame * self._scale)
+
+	def remove_track(self, track):
+		self._tracks.remove(track)
+		self.setMinimumHeight(Track.whichTop(len(self._tracks)))
+
+	# self.repaint()
+
+	def rename_graph(self, graph_index, newname):
+		self.parent_control.rename_graph(graph_index, newname)
+		
 
 	def removeSelected(self):
 		if self._selected != None and not self._selected.lock:
@@ -121,28 +148,28 @@ class TimelineWidget(QtGui.QWidget):
 		# Draw vertical lines
 		for x in range(start - (start % 100), end, 100):
 			painter.drawLine(x, 20, x, self.height())
-			string = "{0}".format( int(round(x/self._scale)) )
+			string = "{0}".format(int(round(x / self._scale)))
 			boundtext = painter.boundingRect(QtCore.QRectF(), string)
 			painter.drawText(x - boundtext.width() / 2, 15, string)
 
 			if self._video_fps:
-				string = "{0}".format( int(round( (x/self._scale)*(1000.0/self._video_fps)  )) )
+				string = "{0}".format(int(round((x / self._scale) * (1000.0 / self._video_fps))))
 				boundtext = painter.boundingRect(QtCore.QRectF(), string)
 				painter.drawText(x - boundtext.width() / 2, 30, string)
-			
-
 
 		painter.setOpacity(1.0)
 
 		for index, track in enumerate(self._tracks):
 			track.drawLabels(painter, index)
 
+
+
 	def add_chart(self, name, data):
 		chart = TimelineChart(self, color=self._chartsColors[len(self._charts)], name=name)
 		chart.import_data(data)
 		self._charts.append(chart)
 		self.repaint()
-		
+
 	def importchart_csv(self, csvfileobject):
 		chart = TimelineChart(self, color=self._chartsColors[len(self._charts)])
 		chart.import_csv(csvfileobject)
@@ -150,6 +177,7 @@ class TimelineWidget(QtGui.QWidget):
 
 		chart.name = "undefined name {0}".format(str(len(self._charts)))
 		self.repaint()
+		return chart
 
 	def import_csv(self, csvfileobject):
 		"""
@@ -164,7 +192,7 @@ class TimelineWidget(QtGui.QWidget):
 		self._selected = None
 
 		for row in csvfileobject:
-			if len(row)==0: continue
+			if len(row) == 0: continue
 			if row[0] == "T":
 				track = self.addTrack()
 				track.properties = row
@@ -223,25 +251,28 @@ class TimelineWidget(QtGui.QWidget):
 				csvfileobject.writerow(row)
 
 	def cleanCharts(self):
+		for graph in self.graphs: self -= 0
 		self._charts = []
 		self.repaint()
 
 	def clean(self):
+		for graph in self.graphs: self -= 0
 		self._charts = []
 		self._selected = None
-		for track in self._tracks:
-			track.clear()
+		for track in self._tracks: track.clear()
 		del self._tracks[:]
 		self._tracks = []
 		self.repaint()
 
-	def cleanLine(self):
-		if self._selected is not None:
-			self._tracks[self._selected.track].clear()
+	def cleanLine(self, track_index=None):
+		if track_index is not None or self._selected is not None:
+			track_index = track_index if track_index is not None else self._selected.track
+			if len(self._tracks) > track_index:
+				self._tracks[track_index].clear()
 			self._selected = None
+			self.repaint()
 		else:
-			QtGui.QMessageBox.about(
-				self, "Error", "You must select a timebar first")
+			QMessageBox.about(self, "Error", "You must select a timebar first")
 			return
 
 	def addTrack(self):
@@ -264,15 +295,15 @@ class TimelineWidget(QtGui.QWidget):
 	def paintEvent(self, e):
 		super(TimelineWidget, self).paintEvent(e)
 
-		painter = QtGui.QPainter()
+		painter = QPainter()
 		painter.begin(self)
-		painter.setRenderHint(QtGui.QPainter.Antialiasing)
-		painter.setFont(QtGui.QFont('Decorative', 8))
+		painter.setRenderHint(QPainter.Antialiasing)
+		painter.setFont(QFont('Decorative', 8))
 
 		start = self._scroll.horizontalScrollBar().sliderPosition()
 		end = start + self.parent().width() + 50
 
-		#Draw graphs ##########################################################
+		# Draw graphs ##########################################################
 		if len(self._charts) > 0:
 			painter.setPen(QtCore.Qt.black)
 			middle = self.height() // 2
@@ -281,7 +312,7 @@ class TimelineWidget(QtGui.QWidget):
 
 		for chart in self._charts:
 			chart.draw(painter, start, end, 0, self.height())
-		#End draw graph #######################################################
+		# End draw graph #######################################################
 
 
 		self.__drawTrackLines(painter, start, end)
@@ -291,7 +322,7 @@ class TimelineWidget(QtGui.QWidget):
 
 		# Draw the selected element
 		if self._selected != None:
-			painter.setBrush(QtGui.QColor(255, 0, 0))
+			painter.setBrush(QColor(255, 0, 0))
 			self._selected.draw(painter, showvalues=True)
 
 		# Draw the time pointer
@@ -300,7 +331,8 @@ class TimelineWidget(QtGui.QWidget):
 		painter.end()
 
 	def mouseDoubleClickEvent(self, event):
-		if self._selected is not None and self._selected != self._pointer and self._selected.collide(event.x(), event.y()):
+		if self._selected is not None and self._selected != self._pointer and self._selected.collide(event.x(),
+		                                                                                             event.y()):
 			self._selected.showEditWindow()
 		elif event.y() > 20:
 			top = (event.y() - 20) // 34
@@ -314,8 +346,8 @@ class TimelineWidget(QtGui.QWidget):
 			self._selected_track = self._selected.track
 			self.repaint()
 
-	def key_release_event(self, event): pass
-
+	def key_release_event(self, event):
+		pass
 
 	def keyReleaseEvent(self, event):
 		super(TimelineWidget, self).keyReleaseEvent(event)
@@ -354,12 +386,14 @@ class TimelineWidget(QtGui.QWidget):
 					self.repaint()
 
 				# Move the event end left
-				if modifier == int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Left:
+				if modifier == int(
+								QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Left:
 					self._selected.moveEnd(-1)
 					self.repaint()
 
 				# Move the event end right
-				if modifier == int(QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Right:
+				if modifier == int(
+								QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Right:
 					self._selected.moveEnd(1)
 					self.repaint()
 
@@ -400,7 +434,6 @@ class TimelineWidget(QtGui.QWidget):
 					self._creating_event = False
 				else:
 					self._creating_event = False
-		
 
 	def mousePressEvent(self, event):
 		# Select the track
@@ -430,12 +463,11 @@ class TimelineWidget(QtGui.QWidget):
 
 	def mouseMoveEvent(self, event):
 		super(TimelineWidget, self).mouseMoveEvent(event)
+		self.parent_control.mouse_moveover_timeline_event(event)
+		
+		self._mouse_current_pos = event.x(), event.y()
 
-		selected_chart = self.graphs_properties.selected_chart
-		if selected_chart: 
-			selected_chart.mouse_move_evt( event, 0, self.height() )
-		else:
-			self.graphs_properties.coordenate_text = None
+		
 
 		# Do nothing if no event bar is selected
 		if self._selected is None:
@@ -443,11 +475,11 @@ class TimelineWidget(QtGui.QWidget):
 
 		# Set cursors
 		if self._selected.canSlideBegin(event.x(), event.y()) or self._selected.canSlideEnd(event.x(), event.y()):
-			self.setCursor(QtGui.QCursor(QtCore.Qt.SizeHorCursor))
+			self.setCursor(QCursor(QtCore.Qt.SizeHorCursor))
 		elif self._selected.collide(event.x(), event.y()):
-			self.setCursor(QtGui.QCursor(QtCore.Qt.SizeAllCursor))
+			self.setCursor(QCursor(QtCore.Qt.SizeAllCursor))
 		else:
-			self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+			self.setCursor(QCursor(QtCore.Qt.ArrowCursor))
 
 		if self._selected is None:
 			return
@@ -471,7 +503,6 @@ class TimelineWidget(QtGui.QWidget):
 	def trackInPosition(self, x, y):
 		return (y - 30) // 34
 
-
 	def fpsChangeEvent(self):
 		pass
 
@@ -490,10 +521,12 @@ class TimelineWidget(QtGui.QWidget):
 			self._scroll.horizontalScrollBar().setSliderPosition(playerPos)
 
 	@property
-	def scroll(self): return self._scroll.horizontalScrollBar()
+	def scroll(self):
+		return self._scroll.horizontalScrollBar()
 
 	@property
-	def position(self): return self._pointer._position
+	def position(self):
+		return self._pointer._position
 
 	@position.setter
 	def position(self, value):
@@ -506,7 +539,8 @@ class TimelineWidget(QtGui.QWidget):
 		self.repaint()
 
 	@property
-	def scale(self): return self._scale
+	def scale(self):
+		return self._scale
 
 	@scale.setter
 	def scale(self, value):
@@ -514,20 +548,24 @@ class TimelineWidget(QtGui.QWidget):
 		self.repaint()
 
 	@property
-	def color(self): return self._defautcolor
+	def color(self):
+		return self._defautcolor
 
 	@color.setter
-	def color(self, value): self._defautcolor = value
+	def color(self, value):
+		self._defautcolor = value
 
 	@property
-	def tracks(self): return self._tracks
+	def tracks(self):
+		return self._tracks
 
 	@property
-	def numberoftracks(self): return len(self._tracks)  # self._n_tracks
+	def numberoftracks(self):
+		return len(self._tracks)  # self._n_tracks
 
 	@numberoftracks.setter
 	def numberoftracks(self, value):
-		#self._n_tracks = value
+		# self._n_tracks = value
 		if value < len(self._tracks):
 			for i in range(value, self._tracks + 1):
 				self.addTrack()
@@ -537,15 +575,25 @@ class TimelineWidget(QtGui.QWidget):
 
 	# Video playback properties
 	@property
-	def isPlaying(self): return self._video_playing
+	def isPlaying(self):
+		return self._video_playing
 
 	@property
-	def fps(self): return self._video_fps
+	def fps(self):
+		return self._video_fps
 
 	@fps.setter
-	def fps(self, value): self._video_fps = value
+	def fps(self, value):
+		self._video_fps = value
 
 	@property
 	def graphs_properties(self):
 		return self.parent_control._graphs_prop_win
-	
+
+	@property
+	def current_mouseover_track(self):
+		if self._mouse_current_pos is None: return None
+		return self.trackInPosition(*self._mouse_current_pos)
+
+	@property
+	def graphs(self): return self._charts

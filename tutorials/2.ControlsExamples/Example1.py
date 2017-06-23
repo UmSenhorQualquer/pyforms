@@ -26,7 +26,7 @@ class Example1(BaseWidget):
 		self._image			= ControlImage('Image')
 		self._boundaries	= ControlBoundingSlider('Bounding', horizontal=True)
 
-		self._formset = ['_directory', '_file', '_boundaries', '_filetree', '_image' ]
+		self.formset = ['_directory', '_file', '_boundaries', '_filetree', '_image' ]
 
 
 		self._filetree.value = '/'
@@ -43,4 +43,4 @@ class Example1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( Example1 )
+if __name__ == "__main__":	 pyforms.start_app( Example1 )

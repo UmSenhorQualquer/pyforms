@@ -24,7 +24,7 @@ class Example4(BaseWidget):
 		self._visvis	= ControlVisVis('Visvis')
 		
 
-		self._formset = [ '_visvis' ]
+		self.formset = [ '_visvis' ]
 
 		values1 =  [ (i, random.random(), random.random()) for i in range(130) ]
 		values2 =  [ (i, random.random(), random.random()) for i in range(130) ]
@@ -36,4 +36,4 @@ class Example4(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( Example4 )
+if __name__ == "__main__":	 pyforms.start_app( Example4 )

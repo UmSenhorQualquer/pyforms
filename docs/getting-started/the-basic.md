@@ -38,7 +38,7 @@ class SimpleExample1(BaseWidget):
 
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 ```
 
 If you run this file, it will produce the next window.
@@ -94,7 +94,7 @@ class SimpleExample1(BaseWidget):
 		" "+ self._lastname.value
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 ```
 
 The previous code produces the next window, after you had pressed the button:
@@ -108,8 +108,8 @@ The previous code produces the next window, after you had pressed the button:
 ## **Organize your form Controls**
 ***************************
 
-Use the BaseWidget._formset variable to organize the Controls inside the Window.  
-[Find here more details about the _formset variable](http://pyforms.readthedocs.org/en/latest/api-documentation/basewidget/#important-variables)
+Use the BaseWidget.formset variable to organize the Controls inside the Window.  
+[Find here more details about the formset variable](http://pyforms.readthedocs.org/en/latest/api-documentation/basewidget/#important-variables)
 
 
 ```python
@@ -121,7 +121,7 @@ class SimpleExample1(BaseWidget):
 		...
 
 		#Define the organization of the forms
-		self._formset = [ ('_firstname','_middlename','_lastname'), '_button', '_fullname', ' ']
+		self.formset = [ ('_firstname','_middlename','_lastname'), '_button', '_fullname', ' ']
 		#The ' ' is used to indicate that a empty space should be placed at the bottom of the window
 		#If you remove the ' ' the forms will occupy the entire window
 
@@ -134,7 +134,7 @@ Result:
 
 Try now:
 ```python
-self._formset = [ {
+self.formset = [ {
 		'Tab1':['_firstname','||','_middlename','||','_lastname'], 
 		'Tab2': ['_fullname']
 	},

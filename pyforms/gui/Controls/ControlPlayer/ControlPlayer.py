@@ -8,8 +8,19 @@
 import math
 import os
 import logging
-from PyQt4 import uic
-from PyQt4 import QtCore, QtGui
+
+from pysettings import conf
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import uic
+	from PyQt5 import QtCore
+	from PyQt5.QtWidgets import QFrame	
+	from PyQt5.QtWidgets import QApplication
+else:	
+	from PyQt4.QtGui import QFrame
+	from PyQt4 import uic
+	from PyQt4 import QtCore
+	from PyQt4.QtGui import QApplication
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
 from pysettings import conf
@@ -19,7 +30,7 @@ try:
 except:
 	print("Warning: was not possible to import cv2 in ControlPlayer")
 
-from PyQt4.QtGui import QApplication
+
 from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 
@@ -32,19 +43,21 @@ __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
 
-class ControlPlayer(ControlBase, QtGui.QFrame):
+class ControlPlayer(ControlBase, QFrame):
 
 	_videoWidget = None
 	_currentFrame = None
 
 	def __init__(self, *args):
-		QtGui.QFrame.__init__(self)
+		QFrame.__init__(self)
 		ControlBase.__init__(self, *args)
 		
-		self.speed = 1
+		self._speed = 1
 		self.logger = logging.getLogger('pyforms')
 
-	def initForm(self):
+		self._updateVideoFrame = True
+
+	def init_form(self):
 		# Get the current path of the file
 		rootPath = os.path.dirname(__file__)
 
@@ -72,100 +85,12 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.form.verticalSlider.valueChanged.connect(self.__rotateX)
 
 		self._currentFrame = None
-		# Controls if anything is drawn on the video
-		self._draw_on_video = True
 	
 		self.view_in_3D = False
 
-
-
-	def __rotateX(self):
-		self._videoWidget.rotateX = self.form.verticalSlider.value()
-		self.refresh()
-
-	def __rotateZ(self):
-		self._videoWidget.rotateZ = self.form.horizontalSlider.value()
-		self.refresh()
-
-	@property
-	def speed(self): return self._speed
-	@speed.setter
-	def speed(self, value): self._speed = value
-
-	@property
-	def onDoubleClick(self): return self._videoWidget.onDoubleClick
-
-	@onDoubleClick.setter
-	def onDoubleClick(self, value): self._videoWidget.onDoubleClick = value
-
-	@property
-	def onClick(self): return self._videoWidget.onClick
-
-	@onClick.setter
-	def onClick(self, value):  self._videoWidget.onClick = value
-
-	@property
-	def onDrag(self): return self._videoWidget.onDrag
-
-	@onDrag.setter
-	def onDrag(self, value): self._videoWidget.onDrag = value
-
-	@property
-	def onEndDrag(self): return self._videoWidget.onEndDrag
-
-	@onEndDrag.setter
-	def onEndDrag(self, value): self._videoWidget.onEndDrag = value
-
-	@property
-	def view_in_3D(self):
-		return self._videoWidget.onEndDrag
-
-	@view_in_3D.setter
-	def view_in_3D(self, value):
-		self.form.horizontalSlider.setVisible(value)
-		self.form.verticalSlider.setVisible(value)
-
-	@property
-	def on_key_release(self):
-		return self._videoWidget.onKeyRelease
-
-	@on_key_release.setter
-	def on_key_release(self, value):
-		self._videoWidget.onKeyRelease = value
-
-	@property
-	def isPainted(self): return self._draw_on_video
-
-	def processFrame(self, frame):
-		return frame
-
-	def update_frame(self):
-		if self.speed>1:  self.video_index += self.speed
-		(success, frame) = self.value.read()
-
-		if frame is not None:
-			self._currentFrame = frame
-
-		frame = self.processFrame(self._currentFrame.copy())
-		if isinstance(frame, list) or isinstance(frame, tuple):
-			self._videoWidget.paint(frame)
-		else:
-			self._videoWidget.paint([frame])
-
-		if not self.videoProgress.isSliderDown():
-			currentFrame = self.video_index
-
-			self.videoProgress.setValue(currentFrame)
-			if self._updateVideoFrame:
-				self.videoFrames.setValue(currentFrame)
-
-
-	def videoPlay_clicked(self):
-		"""Slot for Play/Pause functionality."""
-		if self.is_playing:
-			self.stop()
-		else:
-			self.play()
+	##########################################################################
+	############ FUNCTIONS ###################################################
+	##########################################################################
 
 	def play(self): 
 		self.videoPlay.setChecked(True)
@@ -175,68 +100,128 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.videoPlay.setChecked(False)
 		self._timer.stop()
 
+	def hide(self): QFrame.hide(self)
+
+	def show(self): QFrame.show(self)
+
 	def refresh(self):
 		if self._currentFrame is not None:
-			frame = self.processFrame(self._currentFrame.copy())
+			frame = self.process_frame_event(self._currentFrame.copy())
 			if isinstance(frame, list) or isinstance(frame, tuple):
 				self._videoWidget.paint(frame)
 			else:
 				self._videoWidget.paint([frame])
+		else:
+			self._videoWidget.paint(None)
 
-	def convertFrameToTime(self, totalMilliseconds):
-		# totalMilliseconds = totalMilliseconds*(1000.0/self._value.get(5))
-		if math.isnan(totalMilliseconds): return 0, 0, 0
-		totalseconds = int(totalMilliseconds / 1000)
-		minutes = int(totalseconds / 60)
-		seconds = totalseconds - (minutes * 60)
-		milliseconds = totalMilliseconds - (totalseconds * 1000)
-		return (minutes, seconds, milliseconds)
+	def save_form(self, data, path=None): return data
 
-	def videoProgress_valueChanged(self):
-		milli = self._value.get(0)
-		(minutes, seconds, milliseconds) = self.convertFrameToTime(milli)
-		self.videoTime.setText(
-			"%02d:%02d:%03d" % (minutes, seconds, milliseconds))
+	def load_form(self, data, path=None): pass
 
-	_updateVideoFrame = True
 
-	def videoProgress_sliderReleased(self):
-		jump2Frame = self.videoProgress.value()
-		self._value.set(1, jump2Frame)
-		self._updateVideoFrame = False
-		self.videoFrames.setValue(jump2Frame)
-		self._value.set(1, jump2Frame)
-		self._updateVideoFrame = True
+	##########################################################################
+	############ EVENTS ######################################################
+	##########################################################################
 
-	def videoFrames_valueChanged(self, i):
-		if not self.is_playing:
-			jump2Frame = self.videoProgress.value()
-			diff = jump2Frame - i
+	def process_frame_event(self, frame): return frame
 
-			self._value.set(1, jump2Frame - diff)
-			self._updateVideoFrame = False
-			self.update_frame()
-			self._updateVideoFrame = True
+	@property
+	def double_click_event(self): return self._videoWidget.onDoubleClick
+	@double_click_event.setter
+	def double_click_event(self, value): self._videoWidget.onDoubleClick = value
+
+	@property
+	def click_event(self): return self._videoWidget.onClick
+	@click_event.setter
+	def click_event(self, value):  self._videoWidget.onClick = value
+
+	@property
+	def drag_event(self): return self._videoWidget.onDrag
+	@drag_event.setter
+	def drag_event(self, value): self._videoWidget.onDrag = value
+
+	@property
+	def end_drag_event(self): return self._videoWidget.onEndDrag
+	@end_drag_event.setter
+	def end_drag_event(self, value): self._videoWidget.onEndDrag = value
+
+	@property
+	def key_release_event(self): return self._videoWidget.onKeyRelease
+	@key_release_event.setter
+	def key_release_event(self, value): self._videoWidget.onKeyRelease = value
+
+	##########################################################################
+	############ PROPERTIES ##################################################
+	##########################################################################
+
+	@property
+	def next_frame_step(self): return self._speed
+	@next_frame_step.setter
+	def next_frame_step(self, value): self._speed = value
+
+	@property
+	def view_in_3D(self): return self._videoWidget.onEndDrag
+	@view_in_3D.setter
+	def view_in_3D(self, value):
+		self.form.horizontalSlider.setVisible(value)
+		self.form.verticalSlider.setVisible(value)
+
+	@property
+	def video_index(self): return int(self._value.get(1)) if self._value else None
+
+	@video_index.setter
+	def video_index(self, value): self._value.set(1, value)
+
+	@property
+	def max(self): return int(self._value.get(7))
+
+	@property
+	def frame(self): return self._currentFrame
+
+	@frame.setter
+	def frame(self, value):
+		if isinstance(value, list) or isinstance(value, tuple):
+			self._videoWidget.paint(value)
+		elif value is not None:
+			self._videoWidget.paint([value])
+		else:
+			self._videoWidget.paint(None)
+		QApplication.processEvents()
+
+	@property
+	def fps(self): 
+		"""
+			Return the video frames per second
+		"""
+		return self._value.get(5)
+
+	@property
+	def help_text(self): return self._videoWidget._helpText
+
+	@help_text.setter
+	def help_text(self, value): self._videoWidget._helpText = value
+
+	@property
+	def form(self): return self
+
+	@property
+	def frame_width(self): return self._value.get(3)
+
+	@property
+	def frame_height(self): return self._value.get(4)
 
 	@property
 	def is_playing(self): return self._timer.isActive()
-
-
-	def updateControl(self):
-		if self._value:
-			self.videoControl.setEnabled(True)
-			self.videoProgress.setMinimum(0)
-			self.videoProgress.setValue(0)
-			self.videoProgress.setMaximum(self._value.get(7))
-			self.videoFrames.setMinimum(0)
-			self.videoFrames.setValue(0)
-			self.videoFrames.setMaximum(self._value.get(7))
 
 	@property
 	def value(self): return ControlBase.value.fget(self)
 
 	@value.setter
 	def value(self, value):
+		if value is None: 
+			self.stop()
+			self.videoControl.setEnabled(False)
+			self.refresh()
 		self._videoWidget.reset()
 
 		if value == 0:
@@ -262,62 +247,87 @@ class ControlPlayer(ControlBase, QtGui.QFrame):
 		self.refresh()
 
 
+	##########################################################################
+	############ PRIVATE FUNCTIONS ###########################################
+	##########################################################################
 
-	@property
-	def video_index(self): return int(self._value.get(1)) - 1
+	def __rotateX(self):
+		self._videoWidget.rotateX = self.form.verticalSlider.value()
+		self.refresh()
 
-	@video_index.setter
-	def video_index(self, value): self._value.set(1, value)
+	def __rotateZ(self):
+		self._videoWidget.rotateZ = self.form.horizontalSlider.value()
+		self.refresh()
 
-	@property
-	def max(self): return int(self._value.get(7))
+	
 
-	@property
-	def image(self): return self._currentFrame
+	
 
-	@image.setter
-	def image(self, value):
-		if isinstance(value, list) or isinstance(value, tuple):
-			self._videoWidget.paint(value)
+	def update_frame(self):
+		if not self.visible: self.stop()
+
+		if self.value is None: 
+			self._currentFrame = None
+			return
+		if self.next_frame_step>1:  self.video_index += self.next_frame_step
+		(success, frame) = self.value.read()
+
+		if not success: self.stop()
+		if frame is not None: self._currentFrame = frame
+
+		if self._currentFrame is not None:
+			frame = self.process_frame_event(self._currentFrame.copy())
+			if isinstance(frame, list) or isinstance(frame, tuple):
+				self._videoWidget.paint(frame)
+			else:
+				self._videoWidget.paint([frame])
+
+			if not self.videoProgress.isSliderDown():
+				currentFrame = self.video_index
+
+				self.videoProgress.setValue(currentFrame)
+				if self._updateVideoFrame:
+					self.videoFrames.setValue(currentFrame)
+
+
+	def videoPlay_clicked(self):
+		"""Slot for Play/Pause functionality."""
+		if self.is_playing:
+			self.stop()
 		else:
-			self._videoWidget.paint([value])
-		QApplication.processEvents()
+			self.play()
 
-	@property
-	def fps(self): 
-		"""
-			Return the video frames per second
-		"""
-		return self._value.get(5)
+	def convertFrameToTime(self, totalMilliseconds):
+		# totalMilliseconds = totalMilliseconds*(1000.0/self._value.get(5))
+		if math.isnan(totalMilliseconds): return 0, 0, 0
+		totalseconds = int(totalMilliseconds / 1000)
+		minutes = int(totalseconds / 60)
+		seconds = totalseconds - (minutes * 60)
+		milliseconds = totalMilliseconds - (totalseconds * 1000)
+		return (minutes, seconds, milliseconds)
 
-	@property
-	def help_text(self): return self._videoWidget._helpText
+	def videoProgress_valueChanged(self):
+		milli = self._value.get(0)
+		(minutes, seconds, milliseconds) = self.convertFrameToTime(milli)
+		self.videoTime.setText(
+			"%02d:%02d:%03d" % (minutes, seconds, milliseconds))
 
-	@help_text.setter
-	def help_text(self, value): self._videoWidget._helpText = value
+	
 
-	@property
-	def form(self): return self
+	def videoProgress_sliderReleased(self):
+		jump2Frame = self.videoProgress.value()
+		self._value.set(1, jump2Frame)
+		self._updateVideoFrame = False
+		self.videoFrames.setValue(jump2Frame)
+		self._value.set(1, jump2Frame)
+		self._updateVideoFrame = True
 
-	@property
-	def point(self): return self._videoWidget.point
+	def videoFrames_valueChanged(self, i):
+		if not self.is_playing:
+			jump2Frame = self.videoProgress.value()
+			diff = jump2Frame - i
 
-	@point.setter
-	def point(self, value): self._videoWidget.point = value
-
-	def hide(self):
-		QtGui.QFrame.hide(self)
-
-	def show(self):
-		QtGui.QFrame.show(self)
-
-	@property
-	def image_width(self): return self._value.get(3)
-
-	@property
-	def image_height(self): return self._value.get(4)
-
-
-	def save(self, data={}): return data
-
-	def load(self, data): pass
+			self._value.set(1, jump2Frame - diff)
+			self._updateVideoFrame = False
+			self.update_frame()
+			self._updateVideoFrame = True

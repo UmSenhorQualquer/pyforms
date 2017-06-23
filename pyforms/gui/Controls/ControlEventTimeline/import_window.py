@@ -28,7 +28,7 @@ class BonsaiImportFileDlg(BaseWidget):
 class ImportWindow(BaseWidget):
 
 	def __init__(self, timeline=None):
-		super(ImportWindow, self).__init__('Import file', parentWindow=timeline)
+		super(ImportWindow, self).__init__('Import file', parent_win=timeline)
 		self.setContentsMargins(10, 10, 10, 10)
 		self._timeline = timeline
 
@@ -39,16 +39,16 @@ class ImportWindow(BaseWidget):
 		self._file = ControlFile('File to import')
 
 		self._panel.value = self._file
-		self._filetype.addItem('Events file', 0)
-		self._filetype.addItem('Graph file', 1)
-		self._filetype.addItem('Bonsai events file', 2)
+		self._filetype.add_item('Events file', 0)
+		self._filetype.add_item('Graph file', 1)
+		self._filetype.add_item('Bonsai events file', 2)
 
 		self._formset = [
 			('_filetype', ' '),
 			'_panel',
 			(' ', '_importButton'), ' ']
 
-		self._filetype.changed = self.__fileTypeChanged
+		self._filetype.changed_event = self.__fileTypeChanged
 		self._importButton.value = self.__importData
 
 		from pyforms.gui.dialogs.csv_parser import CsvParserDialog
@@ -139,6 +139,8 @@ class ImportWindow(BaseWidget):
 
 					self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
 
+		self._timeline.repaint()
+		self._timeline._time.repaint()
 		self.close()  # pylint: disable=no-member
 
 
@@ -158,4 +160,4 @@ class ImportWindow(BaseWidget):
 # Execute the application
 if __name__ == "__main__":
 	import pyforms
-	pyforms.startApp(ImportWindow, geometry=(0, 0, 600, 400))
+	pyforms.start_app(ImportWindow, geometry=(0, 0, 600, 400))

@@ -14,6 +14,7 @@ from __init__ import *
 
 
 
+
 class SimpleExample1(BaseWidget):
 	
 	
@@ -26,9 +27,29 @@ class SimpleExample1(BaseWidget):
 		self._lastname 		= ControlText('Lastname name')
 		self._fullname 		= ControlText('Full name')
 		self._button 		= ControlButton('Press this button')
+		self._graph 		= ControlMatplotlib('Graph')
 
 		#Define the button action
 		self._button.value = self.__buttonAction
+
+		self._graph.value = self.__on_draw
+
+
+
+	def __on_draw(self, figure):
+		""" Redraws the figure
+		"""
+		data = [1,2,1,4]
+		x 	 = range(len(data))
+		
+		axes = figure.add_subplot(111)
+		axes.bar(left=x, height=data)
+
+		
+		axes = figure.add_subplot(222, projection='3d')
+		#axes.clear(); 
+		pts = axes.scatter(x, data, data, c=x)
+		figure.colorbar(pts)
 
 
 	def __buttonAction(self):
@@ -47,5 +68,5 @@ class SimpleExample1(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample1 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample1 )
 	

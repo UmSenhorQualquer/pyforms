@@ -12,25 +12,20 @@ class ControlProgress(ControlBase):
         ControlBase.__init__(self, label, defaultValue)
         
         
-    def initControl(self):
-        #return """<div id='id%s' class='progressbar' ></div>""" %  ( self._name )
-        return "controls.push(new ControlProgress('"+self._name+"'));"
-
     @property
     def value(self): return self._value
 
     @value.setter
-    def value(self, value): self._form.horizontalSlider.setValue( value )
+    def value(self, value): self._value = value
 
     @property
-    def min(self): return self._form.horizontalSlider.minimum()
+    def min(self): return
 
     @min.setter
-    def min(self, value): self._form.horizontalSlider.setMinimum(value)
+    def min(self, value): pass
 
     @property
-    def max(self): return self._form.horizontalSlider.maximum()
+    def max(self): return
 
     @max.setter
-    def max(self, value): self._form.horizontalSlider.setMaximum(value)
-        
+    def max(self, value): pass

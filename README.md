@@ -1,14 +1,11 @@
 ![Important](https://img.shields.io/badge/Important-Note-red.svg "Screen")  
-If you find this project useful, please, do not forget to ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/docs/imgs/start.png?raw=true "Screen") it.
+If you find this project useful, please, do not forget to ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/docs/imgs/start.png?raw=true "Screen") it.
 
-![New version available](https://img.shields.io/badge/New%20version%20available-0.1.3-green.svg "Screen")
+![New version available](https://img.shields.io/badge/New%20version%20available-2.0-green.svg "Screen")
 
 
 
 # Pyforms
-
-<!-- Posicione esta tag no cabeçalho ou imediatamente antes da tag de fechamento do corpo. -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- Posicione esta tag onde você deseja que o widget apareça. -->
 <div class="g-follow" data-annotation="bubble" data-height="24" data-rel="publisher"></div>

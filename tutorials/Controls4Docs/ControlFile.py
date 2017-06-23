@@ -22,7 +22,7 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlFile('Select a file')
 		
-		self._formset = [' ',(' ', '_control', ' '),' ']
+		self.formset = [' ',(' ', '_control', ' '),' ']
 
 		
 		
@@ -34,5 +34,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

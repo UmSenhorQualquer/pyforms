@@ -20,10 +20,38 @@ class SimpleExample(BaseWidget):
 		super(SimpleExample,self).__init__('Simple example')
 
 		#Definition of the forms fields
-		self._control 	= ControlBoundingSlider('Threshold', 0, 255, horizontal=True)
+		self._control 	= ControlBoundingSlider('Threshold', default=[80, 255], min=0, max=255, 
+			horizontal=True, helptext='help text example')
 		
-		self._formset = [' ','_control',' ']
+		self.formset = [' ','_control',' ']
+
+
+
+
+		# IO test
+		data = self._control.save_form({})
+		data['value'] = 200, 255
+		self._control.load_form(data)
+
+		self._control.hide()
+		self._control.show()
 		
+		self._control.add_popup_menu_option('option 0', function_action=lambda x: x)
+
+		submenu1 = self._control.add_popup_submenu('menu 1')
+		submenu2 = self._control.add_popup_submenu('menu 2', submenu=submenu1)
+
+		self._control.add_popup_menu_option('option 1', function_action=lambda x: x, key='Control+Q', submenu=submenu2)
+
+		self._control.changed_event = self.__control_changed_event
+
+		self._control.value = [10,100]
+		#self._control.enabled = False
+		#self._control.label = 'Some label'
+
+	def __control_changed_event(self):
+		print self._control.value
+
 
 
 
@@ -32,5 +60,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

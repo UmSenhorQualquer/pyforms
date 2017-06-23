@@ -29,5 +29,6 @@ from pyforms.Controls 	import ControlSlider
 from pyforms.Controls 	import ControlVisVis
 from pyforms.Controls 	import ControlVisVisVolume
 from pyforms.Controls 	import ControlEventTimeline
+from pyforms.Controls 	import ControlCodeEditor
 
 import pyforms

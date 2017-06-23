@@ -13,6 +13,8 @@ __status__      = "Development"
 from __init__ import *
 
 
+
+
 class SimpleExample(BaseWidget):
 	
 	
@@ -22,9 +24,9 @@ class SimpleExample(BaseWidget):
 		#Definition of the forms fields
 		self._control 	= ControlButton('Click me')
 		
-		self._formset = [' ',(' ','_control', ' '),' ']
+		self.formset = [' ',(' ','_control', ' '),' ']
 		
-
+		
 
 
 ##################################################################################################################
@@ -32,5 +34,5 @@ class SimpleExample(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample )
 	

@@ -11,12 +11,18 @@ class Container(object):
 		self.logger = logging.getLogger('pyforms')
 
 		self._algorithm = ClassObject()
-		self._algorithm.initForm()
+		self._algorithm.init_form()
 		form_path = os.path.join(tools.get_object_class_path( Container ), 'mainWindow.ui')
 		self._form = uic.loadUi( form_path )
 		self._form.verticalLayout.addWidget( self._algorithm )
 		self._form.verticalLayout.setMargin(10)
 		self._form.verticalLayout.setSpacing(0)
+
+		if conf.PYFORMS_USE_QT5:
+			self._form.verticalLayout.setContentsMargins(10,10,10,10)
+		else:
+			self._form.verticalLayout.setMargin(10)
+
 		self._form.actionExit.triggered.connect( self.actionExit_triggered )
 		self._form.show()
 		self._form.setWindowTitle( self._algorithm.title )
@@ -41,9 +47,7 @@ class Container(object):
 		try:
 			self._algorithm.execute()
 		except Exception as err:
-			tb = traceback.format_exc()
-			self.logger.debug("Action run failed: \n%s", tb)
-			self.logger.warning("Action run failed: %s", str(err))
+			self.logger.warning("Error", exc_info=True)
 		self.actionStop_triggered()
 		
 	def actionStop_triggered(self): 
@@ -53,9 +57,12 @@ class Container(object):
 
 	
 
-def startApp(ClassObject):
-	#print( sys.modules[sys.modules[ClassObject.__module__].__package__].__version__ )
+def start_app(ClassObject):
+	from pysettings import conf
 
 	app = QtGui.QApplication(sys.argv)
+
+	conf += 'pyforms.gui.settings'
+
 	container = Container(ClassObject)
 	app.exec_()

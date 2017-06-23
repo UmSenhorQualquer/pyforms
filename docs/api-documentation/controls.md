@@ -14,28 +14,33 @@ All the Controls inherit from this Control, therefore you can find its functions
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultValue='', helptext='')  
+#### \_\_init\_\_(label='', default='', helptext='')  
 
 **label** - Control label.  
-**defaultValue** - Initial value of the control.  
+**default** - Initial value of the control.  
 **helptext** - Text shown when the mouse is over the control.
 
 
 ### **Functions**
 ***************************
 
-#### initForm()  
+#### init_form()  
 
 Load the control UI and initiate all the events.
  	
-#### load(data)  
+#### load_form(data, path=None)  
+
 Loads the value of the control.  
-**data** - Is a dictionary with the required information to load the control.
+
+**data** - It is a dictionary with the required information to load the control.  
+**path** - Optional parameter that can be used to save the data.  
  	
-#### save(data)  
+#### save_form(data, path=None)  
 
 Save a value of the control to a dictionary.  
-**data** - Dictionary where the control value should be saved.
+
+**data** - Dictionary where the control value should be saved.  
+**path** - Optional parameter that can be used to load the data.  
  	
 #### show()  
 
@@ -45,51 +50,66 @@ Show the control.
 
 Hide the control.
  	
-#### addPopupMenuOption(label, functionAction=None, key=None)  
+#### add_popup_menu_option(label, function_action=None, key=None, icon=None, submenu=None)  
 
-Add an option to the Control popup menu.
- 	
-#### addPopupSubMenuOption(label, options, keys={})  
+Add an option to the Control popup menu.  
 
-Add submenu options to the Control popup menu.
+**label** - Label of the option  
+**function_action** - Optional parameter that can be used to load the data.  
+**key** - Dictionary where the control value should be saved.  
+**icon** - Optional parameter that can be used to load the data.  
+**submenu** - Parent submenu to which the option should be added. If no value is set, then the option will be added to the main popup menu.  
  	
-	
+#### add_popup_submenu(label, submenu=None)
+
+It returns a new sub popup menu. If submenu is open the menu is added to the main popup menu.
+
+```python
+control.add_popup_menu_option('option 0', function_action=self._do_something)
+submenu1 = self._control.add_popup_submenu('menu 1')
+submenu2 = self._control.add_popup_submenu('menu 2', submenu=submenu1)
+control.add_popup_menu_option('option 1', function_action=self._do_something, key='Control+Q', submenu=submenu2)
+
+```  
 
 ### **Events**
 ***************************
-
-#### changed()  
-
-Function called when ever the Control value is changed.
  	
-#### aboutToShowContextMenuEvent()  
+#### about_to_show_contextmenu_event()  
 
 Function called before the Control popup menu is opened.
- 
+
+#### changed_event()  
+
+Function called when ever the Control value is changed. The event function should return True if the data was saved with success.
+
 
 ### **Properties**
 ***************************
 
-#### value  
-This property returns or set what the control should manage or store.
- 	
-#### name  
-This property returns or set the name of the control.
- 	
-#### label  
-Returns or sets the label of the control.
+#### enabled  
+Returns or set if the control is enable or disable.
  	
 #### form  
 Returns the QWidget of the control.
  	
-#### parent  
-Returns or set the parent basewidget where the Control is.
- 	
 #### help  
 Returns or set the tip box of the control.
+ 	
+#### label  
+Returns or sets the label of the control.
+ 	
+#### name  
+This property returns or set the name of the control.
+ 	
+#### parent  
+Returns or set the parent basewidget where the Control is.
 
-#### enabled  
-Returns or set if the control is enable or disable.
+#### visible  
+Set and return the control visibility.
+
+#### value  
+This property returns or set what the control should manage or store.
 
 
 
@@ -107,9 +127,9 @@ Returns or set if the control is enable or disable.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=[20,40], min=0, max=100, horizontal=False, **kwargs) 
+#### \_\_init\_\_(label="", default=[20,40], min=0, max=100, horizontal=False) 
 
-**defaultValue** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
+**default** - The default value is a list containing in the first element the lower value and in the second element the upper value.  
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected.  
 **horizontal** - Flag indicating if the Bounding slider should be draw horizontally or vertically.  
@@ -149,7 +169,7 @@ If True the control works only with Integer values. If False the control will re
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', defaultValue='', checkable=False)
+#### \_\_init\_\_(label='', default=None, checkable=False, helptext='')
 
 **checkable** - Flag indicating if the button is checkable or not.
  	 	
@@ -157,29 +177,32 @@ If True the control works only with Integer values. If False the control will re
 ### **Functions**
 ***************************
 
-#### load(data)
+#### load_form(data, path=None)
 
 Because the value of this Control is a function, nothing is loaded
  	
-#### save(data)
+#### save_form(data, path=None)
 
 Because the value of this Control is a function, nothing is saved
 
 #### click()
 
-This function simulates a click of a button.
+This function simulates a click of the button.
 
 ### **Properties**
 ***************************
-
-#### value
-
-The value should be a pointer to function, that will be called everytime the button is pressed.
 
 #### checked
 
 In case the button was initiated with the flag checkable=True, it will get and set the checked state of the button.
 
+#### icon
+
+Return or set the button icon. The value should be a path to the icon or a QtGui.QIcon object.
+
+#### value
+
+The value should be a pointer to function, that will be called everytime the button is pressed.
 
 
 
@@ -236,6 +259,14 @@ controlVar += 'Element'
 
 Clear all the elements from the list.
 
+
+### **Events**
+***************************
+ 	
+#### selection_changed_event()  
+
+Function called when the selection changed.
+
 ### **Properties**
 ***************************
  	
@@ -243,9 +274,17 @@ Clear all the elements from the list.
 
 Return how many elements the list have.
  	
-#### checkedIndexes
+#### checked_indexes
 
 Returns the Elements with which have the checkboxes checked.
+
+#### items
+
+Returns a list of tuples with the format [(element, check boolean flag)]
+
+#### selected_row_index
+
+Returns the selected row index.
 
 #### value
 
@@ -253,7 +292,46 @@ It gets and sets all the List values. This property receives a list where each e
 
 ```python
 controlVar.value = [('item1',True), ('item2',False), 'item3']
-``` 
+```
+
+
+
+
+
+
+
+## ControlCodeEditor
+***************************
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/tutorials/Controls4Docs/ControlCodeEditor.png?raw=true "Screen")
+
+### **Events**
+***************************
+
+### key_pressed_event(event)
+
+Function called when a key is pressed.
+
+**event** - Qt event variable.  
+
+### **Properties**
+***************************
+
+#### changed
+
+Returns and sets the pointer to the function that is called when the button save is pressed.
+
+#### lexer
+
+Returns and sets the Scintilla lexer. By default the lexer is the QsciLexerPython.
+
+#### value
+
+Returns and sets the code text.
+
+
+
 
 
 
@@ -272,37 +350,71 @@ controlVar.value = [('item1',True), ('item2',False), 'item3']
 ### **Functions**
 ***************************
  	
-#### addItem(text, value=None)
+#### add_item(text, value=None)
 
 Add an item to the ComboBox. Items may have a value associated to it.
 
 ```python
-controlVar.addItem('Portugal', 	 'pt')
-controlVar.addItem('Angola', 	 'ao')
-controlVar.addItem('Moçambique', 'mz')
-controlVar.addItem('Brazil', 	 'br')
-controlVar.addItem('Cabo Verde', 'cv')
+controlVar.add_item('Portugal', 'pt')
+controlVar.add_item('Angola', 'ao')
+controlVar.add_item('Moçambique', 'mz')
+controlVar.add_item('Brazil')
+controlVar.add_item('Cabo Verde')
 ``` 
- 	
-#### clearItems()
+
+#### clear()
 
 Clear all the items of the ComboBox.
 
+#### count()
+
+Return the number o items in the combobox.
+
+#### get_item_index_by_name(item_name)
+
+Search the index of an item by the name.
+
+#### \_\_add\_\_(value)
+
+The same of add_item function.
+
+```python
+controlVar += ('Portugal', 'pt')
+controlVar += ('Angola', 'ao')
+controlVar += ('Moçambique', 'mz')
+controlVar += 'Brazil'
+controlVar += 'Cabo Verde'
+``` 
+
 ### **Events**
 ***************************
- 	
-#### activated(index) 
 
-Called when the user selectes an item in the combobox.  
+#### activated_event(index) 
+
+Called when the user select an item in the combobox.
 **index** - Activated item's index.
- 	
-#### highlighted(index)
 
-Called when the user passes with the mouse over an item in the combobox.  
+#### current_index_changed_event(index)
+
+Called when the current combobox index is changed.
+**index** - current selected index.
+
+#### edittext_changed_event(text)
+
+Called when the text is changed.
+**text** - changed text.
+
+#### highlighted_event(index)
+
+Called when the user passes with the mouse over an item in the combobox.
 **index** - highlighted item's index.
 
 ### **Properties**
 ***************************
+
+#### current_index
+
+Returns and sets the selected index.
 
 #### items
 
@@ -334,7 +446,12 @@ Gets and set the current selected item text.
 
 This control is used to select a directory.
 
+### **Functions**
+***************************
 
+#### click()
+
+Simulates the push of the button.
 
 
 
@@ -352,9 +469,11 @@ This control is used to create DockWidget.
 ### **Constructer**
 ***************************
 
-#### \_\_init\_\_(label='', default=None, side='left')
+#### \_\_init\_\_(label='', default=None, side='left', order=0, margin=0)
 
 **side** - Side where the dock widget should be initiated. It can assumes the values: left, right, top or bottom.
+**order** - Top-left order that the dock will assume in the application window.
+**margin** - Margin of the dock.
 
 
 
@@ -394,41 +513,92 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlEventTimeline.png?raw=true "Screen")
 
+This control implements a timeline where it is possible to display events and graphs.
 
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100, **kwargs)
+#### \_\_init\_\_(label="", default=0, max=100)
+
+**default** - Default position of the pointer.
+**min** - Timeline start.
+**max** - Timeline end.
 
 ### **Functions**
 ***************************
- 	 	
-#### getExportFilename()
- 	
-#### addRow(values)
- 	
-#### addPeriod(value, track=0, color=None)	source code
+
+#### add_event(value, row=0, color=None)
+
+Add a new a new event.
+
+**value** - Event description. The format is a tuple: ('event name', start, end)
+**row** - Row where the event will be display.
+**color** - Color of the event.
+
+#### add_graph(name, data)
+
+Add a new graph.
+
+**name** - Graph name.
+**data** - [(frame index, value), ...] list.
+
+#### import_graph_file(filename, separator=';', ignore_rows=0)
+
+Import a graph csv file.
+
+**filename** - Filename to load.
+**separator** - CSV separator character.
+**ignore_rows** - Ignore the first n lines when loading the file.
+
+#### import_csv(csvfile)
+
+Import an event file from a csv.reader cursor. 
+
+**csvfile** - csv.reader cursor.
+
+```python
+csvfile = open(filename, 'U')
+spamreader = csv.reader(csvfile)
+
+control.import_csv(spamreader)
+```  
+
+#### show_graphs_properties()
+
+Shows the graphs properties window.
 
 ### **Events**
 ***************************
 
-#### playVideoEvent()
+#### pointer_changed_event()
 
-#### fpsChanged()
+Shows the graphs properties window.
 
-#### pointerChanged()
- 	
+
 ### **Properties**
 ***************************
 
 #### value
 
-#### max
- 	
-#### mouseOverLine
+Returns the events list.
 
+#### max
+
+Returns or sets the maximum of time that the control will handle.
  	
- 	
+#### mouse_over_row_index
+
+Returns the index of the row which the mouse is over.
+
+#### rows
+
+Returns a list of rows objects.
+
+#### graphs
+
+Returns a list of graphs objects.
+
+
 
 
 
@@ -443,34 +613,19 @@ It may receive an element, or a list of elements from the types BaseWidget or Ba
 
 The control may be used to select a file.
 
+### **Functions**
+***************************
+
+#### click()
+
+Simulates the push of the button.
+
 ### **Properties**
 ***************************
 
 #### value
 
 Gets and sets a file path.
-
-
-
-
-
-
-
-## ControlFilesTree
-***************************
-
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlFilesTree.png?raw=true "Screen")
-
-Show the directory files in a tree view
-
-⋅⋅⋅Note Is not fully developed yet.⋅⋅
-
-### **Properties**
-***************************
-
-#### value
-
-Gets and sets a directory path.
 
 
 
@@ -488,10 +643,7 @@ Gets and sets a directory path.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlImage.png?raw=true "Screen")
 
-
 Displays an image or a list of images.
-
-	
 
 ### **Functions**
 ***************************
@@ -502,7 +654,7 @@ Redraw the image or set of images
 
 ### **Properties**
 ***************************
- 	
+
 #### value
 
 This property receives an image path, a numpy image or a list of numpy images.  
@@ -522,7 +674,7 @@ img2 = cv2.imread('lena_color.png', 1)
 controlVar.value = [img1, img2]
 ```  
 
-**Note:** the value can only be set outside the constructor and the initForm function.
+**Note:** the value can only be set outside the constructor and the init_form function.
 
 
 ## ControlLabel
@@ -553,11 +705,10 @@ Displays a list of values.
 ### **Constructer**
 ***************************
  	
-#### \_\_init\_\_(label="", defaultValue="", plusFunction=None, minusFunction=None)
+#### \_\_init\_\_(label="", default="", add_function=None, remove_function=None)
 
-**defaultValue** - 
-**plusFunction** - 
-**minusFunction** - 
+**add_function** - Function called when the add button is pressed.
+**remove_function** - Function called when the remove button is pressed.
 
 
 ### **Functions**
@@ -569,67 +720,100 @@ Clear all the values from the list.
  	
 #### \_\_add\_\_(values)	source code
 
-Inserts a new row with the list of values.
+Inserts a new row with the list of values. 
+**Notes:**
+- It is possible to use a QWidget value.
+- If the value has the attribute icon, this icon will be displayed.
  	
 #### \_\_sub\_\_(index)
 
 Removes the row with the index.
 
-#### setValue(column, row, value)
+#### set_value(column, row, value)
 
 Set the value of a specific cell.
  	
-#### getValue(column, row)	source code
+#### get_value(column, row)	source code
 
 Get the value of a specific cell.
+
+#### resize_rows_contents()
+
+Auto resize the rows acording to the content.
+
+#### get_currentrow_value()
+
+Get the current row values.
+
+#### get_cell(column, row)
+
+Returns the a specific cell from the QTableWidget.
 
 ### **Events**
 ***************************
  	
-#### dataChangedEvent(row, col, item)  
+#### data_changed_event(row, col, item)
+
+Called when any of list the content is updated.
  	
-#### tableWidgetCellChanged(nextRow, nextCol, previousRow, previousCol) 
+#### item_selection_changed_event()
+
+Called when ever the selection changes.
  	
-#### tableWidgetItemChanged(current, previous) 
+#### current_cell_changed_event(next_row, next_col, previous_row, previous_col)
+
+Called when a new cell is selected.
  	
-#### tableWidgetItemSelectionChanged() 
- 	
-#### itemSelectionChanged() 
- 	
-#### currentCellChanged(nextRow, nextCol, previousRow, previousCol) 
- 	
-#### currentItemChanged(current, previous)
+#### current_item_changed_event(current, previous)
+
+Called when the item select changed.
+
+#### cell_double_clicked_event(row, column)
+
+Called on item item double click.
 
 ### **Properties**
 ***************************
 
-#### horizontalHeaders
+#### horizontal_headers
 
 Get and set the horizontal headers in the table list.
+
+#### word_wrap
+
+Get and set the word wrap.
+
+#### rows_count
+
+Returns the number of rows.
+
+#### columns_count
+
+Returns the number of columns.
  	
-#### selectEntireRow
+#### select_entire_row
 
 Accepts a boolean indicating if should allow only the selection of the entire row or not.
  	
-#### count
-
-Return the number of rows.
- 	
 #### value
 
-Get and set the list values.
+Get and set a list of values.
  	
-#### mouseSelectedRowsIndexes
+#### selected_rows_indexes
 
 Return the selected indexes.
  	
-#### mouseSelectedRowIndex
+#### selected_row_index
 
 Return the selected index.
  	
-#### iconSize
+#### icon_size
 
 Gets and sets the icon size.
+
+#### readonly
+
+Returns and sets the readonly flag for the control.
 
 
 
@@ -659,29 +843,28 @@ The constructer receives only a label.
 
 #### \_\_add\_\_(other)
 
+Add a basewidget to the mdi area.
+
 Usage:  
 ```python
 controlVar += baseWidget
-```  
-or  
+```
+
+#### \_\_sub\_\_(other)
+
+Remove a basewidget from the mdi area.
+
+Usage:  
 ```python
-controlVar += [baseWidget1 , baseWidget2]
-```  
+controlVar -= baseWidget
+```
 
 ### **Properties**
 ***************************
 
-#### showCloseButton
+#### show_subwin_close_button
 
 Boolean flag, indicating if should show the subwindows close button or not.
- 	
-#### value
-
-Sets a BaseWidget or a list of BaseWidgets representing the windows.
-
-
-
-
 
 
 
@@ -696,25 +879,30 @@ Sets a BaseWidget or a list of BaseWidgets representing the windows.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="", default=0, min=0, max=100)
 
-**min** - Defines the minimum value that can be selected.  
-**max** - Defines the maximum value that can be selected. 
+**min** - Defines the minimum value that can be selected.
+**max** - Defines the maximum value that can be selected.
 
 ### **Properties**
 ***************************
 
 #### min
 
-Defines the minimum value that can be selected.  
+Defines the minimum value that can be selected.
  	
 #### max
 
-Defines the maximum value that can be selected.  
+Defines the maximum value that can be selected.
 
 #### value
 
 Returns the selected number.
+
+#### decimals
+
+Returns and sets the number of allowed decimals.
+
 
 
 
@@ -738,7 +926,7 @@ Returns the selected number.
 
 Refresh the GL scene.
  	
-#### resetZoomAndRotation()
+#### reset_zoom_and_rotation()
 
 Reset all the zoom and scene rotations.
 
@@ -751,12 +939,15 @@ Gets and sets a GL scene.
  	
 #### width
 
-Gets the GL window width
+Gets the GL window width.
  	
 #### height
 
-Gets the GL window height
+Gets the GL window height.
 
+#### clear_color
+
+Returns and sets the background color.
 
 
 
@@ -775,47 +966,71 @@ Gets the GL window height
 ### **Functions**
 ***************************
 
-#### pausePlay()
+#### play()
 
-Toggle video play.
+Plays the video.
+
+#### stop()
+
+Stops the video.
  	
 #### refresh()	
 
 Refresh the last painted frame.
- 	
-#### isPlaying()
 
-Returns a boolean indicating if the video is playing.
+#### update_frame()
+
+Read the next frame and display it.
 
 ### **Events**
 ***************************
 
-#### processFrame(frame)
+#### double_click_event(event, x, y)
 
-Function called before the frame is rendered.
+Called on double click
+
+**event** - Qt event.
+**x** - Mouse x coordenate in the video.
+**y** - Mouse y coordenate in the video.
+
+#### click_event(event, x, y)
+
+Called on when the mouse click is activated.
+
+**event** - Qt event.
+**x** - Mouse x coordenate in the video.
+**y** - Mouse y coordenate in the video.
+
+#### drag_event(start_point, end_point)
+
+Called everytime the mouse is dragging in the video.
+
+**start_point** - Drag starting point.
+**end_point** - Drag end point.
+
+#### end_drag_event(start_point, end_point)
+
+Called when the mouse ends dragging the video.
+
+**start_point** - Drag starting point.
+**end_point** - Drag end point.
+
+#### key_release_event(event)
+
+Called everytime a key is pressed.
+
+**event** - Qt key event.
+
+#### process_frame_event(frame)
+
+Function called before the frame is rendered. It should return a frame or a list of frames.
+
+**frame** - Numpy array representing the image.
+
+
  	
 ### **Properties**
 ***************************
-
-#### onDoubleClick
-
-Gets and sets the function called on double click event.  
-The funtion receives the next parameters: onDoubleClick(event, x, y)
- 	
-#### onClick
-
-Gets and sets the function called on click event.  
-The funtion receives the next parameters: onClick(event, x, y)
- 	
-#### onDrag
-
-Gets and sets the function called during a drag event.  
-The funtion receives the next parameters: onDrag(startPoint, endPoint)
- 	
-#### onEndDrag
-
-Gets and sets the function called when a drag event ends.  
-The funtion receives the next parameters: onEndDrag(startPoint, endPoint)
 
 #### value
 
@@ -830,15 +1045,14 @@ or
 ```python
 controlVar.value = cv2.VideoCapture('~/home/ricardo/video.avi')
 ```
- 	
-#### startFrame
+#### next_frame_step
 
-Gets and sets the first frame.
+Sets and gets the number of flags that should be jumped on the next cycle.
 
-#### endFrame
+#### view_in_3D
 
-Gets and sets the last frame.
- 	
+Activates the 3D visualization mode. It can be usefull to produce some 3D data visualization.
+
 #### video_index
 
 Returns the current frame index.
@@ -847,18 +1061,29 @@ Returns the current frame index.
 
 Returns the total number of frames of a video.
  	
-#### image
+#### frame
 
-Returns and sets the image beeing rendered.
+Returns and sets the frame image that is beeing rendered.
  	
 #### fps
 
 Returns and sets the video FPS.
  	
-#### helpText
+#### help_text
 
 Return and set the help text that should be rendered in the video.
 
+#### frame_width
+
+Width of the frame that is being displayed
+
+#### frame_height
+
+Height of the frame that is being displayed
+
+#### is_playing
+
+Returns True if the player is playing.
 
 
 
@@ -874,12 +1099,22 @@ Return and set the help text that should be rendered in the video.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="%p%", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="%p%", default=0, min=0, max=100)
 
 **label** - This is the text that will be shown in the ProgressBar.
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
 
+### **Functions**
+***************************
+
+#### \_\_add\_\_(other)
+
+Increments the progress.
+
+#### \_\_sub\_\_(other)
+
+Reduce the progress.
 
 ### **Properties**
 ***************************
@@ -910,7 +1145,7 @@ Current position.
 ### **Constructor**
 ***************************
 
-#### \_\_init\_\_(label="", defaultValue=0, min=0, max=100)
+#### \_\_init\_\_(label="", default=0, min=0, max=100)
 
 **min** - Defines the minimum value that can be selected.  
 **max** - Defines the maximum value that can be selected. 
@@ -945,9 +1180,9 @@ Defines the maximum value that can be selected.
 ### **Events**
 ***************************
 
-#### finishEditing() 
+#### key_pressed_event(event)
 
-Event called when the user ends the control edition.
+Event called everytime a key is pressed.
 
 
 
@@ -960,6 +1195,19 @@ Event called when the user ends the control edition.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTextArea.png?raw=true "Screen")
 
+### **Functions**
+***************************
+
+#### \_\_add\_\_(other)
+
+Append text to the bottom.
+
+### **Properties**
+***************************
+
+#### readonly
+
+Returns and sets the readonly flag for the control.
 
 
 ## ControlToolBox
@@ -968,6 +1216,14 @@ Event called when the user ends the control edition.
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlToolBox.png?raw=true "Screen")
+
+#### set_item_enabled(index, enabled)
+
+Enable or disable an item
+
+#### is_item_enabled(index)
+
+Check if an item is enabled or disabled
 
 ### **Properties**
 ***************************
@@ -984,16 +1240,140 @@ It returns and receives a list of BaseWidgets.
 
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTree.png?raw=true "Screen")
 
-
-### iconsize
-
-
-## ControlTreeView
+### **Functions**
 ***************************
 
-![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlTreeView.png?raw=true "Screen")
+#### \_\_add\_\_(other)
+
+Add an item to the root node.
+
+#### \_\_sub\_\_(other)
+
+Remove an item from the root node.
+
+#### add_popup_menu_option(label='', function_action=None, key=None, item=None, icon=None, submenu=None)
+
+Add a popup menu option to all the items, or a specific item.
+
+**label** - Label of the menu option.
+**function_action** - Function to be called when the option is selected.
+**key** - Option hotkey.
+**item** - Item to which the popup menu option should be applied.
+**icon** - Icon of the popup menu option.
+**submenu** - Submenu where the option will be added.
+
+#### clear()
+
+Clear all the items from the ControlTree.
+
+#### expand_item(item, expand=True, parents=True)
+
+Expand or close an item and their parents.
+
+**item** - Option hotkey.
+**expand** - Flag indicating if the item should be expanded or closed.
+**parents** - Flag indicating if the parents of the item should be expanded or closed.
+
+#### create_child(name, parent=None, icon=None)
+
+Create a new child item.
+
+**name** - Name of the new item.
+**parent** - Parent item of the new item.
+**icon** - Icon of the new item.
+
+##### To the return item it is possible to associate the events:
+
+```python
+item = control.create_child('new item')
+item.key_pressed_event = self.__key_pressed_event
+item.double_clicked_event = self.__double_clicked_event
+
+def __key_pressed_event(self, event): pass
+def __double_clicked_event(self): pass
+```
+
+#### clone_tree(tree, copy_function=None)
+
+Clone the items of a ControlTree.
+
+**tree** - ControlTree to clone.
+**copy_function** - Function with the arguments "copy_function(item, new_item)" and will be called everytime a new tree item is created.
+
+#### clone_item(parent, item, copy_function=None)
+
+Clone an item.
+
+**parent** - Parent to add the clone.
+**item** - QTreeWidgetItem to clone.
+**copy_function** - Function with the arguments "copy_function(item, new_item)" and will be called everytime a new tree item is created.
 
 
+#### item.key_pressed_event(event)
+
+Called when the item is selected and a key is pressed.
+
+#### item.double_clicked_event()
+
+Called when an item is double clicked.
+
+
+### **Events**
+***************************
+
+#### item_changed_event(item)
+
+Called everytime an item is updated.
+
+**item** - Updated item.
+
+#### item_selection_changed_event()
+
+Called when ever a new item is selected.
+
+#### item_double_clicked_event(item)
+
+Called an item is double clicked by the mouse.
+
+**item** - The item that was double clicked.
+
+#### key_press_event(event)
+
+Called when a key is pressed.
+
+**event** - Qt event.
+
+#### rows_inserted_event(parent, start, end	)
+
+Called when new items are inserted.
+
+**parent** - Parent to which the rows were inserted.
+**start** - Insertion starting row.
+**end** - Insertion ending row.
+
+
+### **Properties**
+***************************
+
+#### show_header
+
+Flag that shows or hide the header.
+
+#### selected_rows_indexes
+
+Retrieve the selected rows.
+
+#### selected_row_index
+
+Retrive and set the selected row.
+
+#### selected_item
+
+Retrive and set the selected item.
+
+#### icon_size
+
+Returns and sets the items icons size.
 
 
 
@@ -1003,9 +1383,7 @@ It returns and receives a list of BaseWidgets.
 
 ![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
 
-
 ![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlVisVis.png?raw=true "Screen")
-
 
 ### **Functions**
 ***************************
@@ -1025,7 +1403,7 @@ Gets and sets a list of 2D or 3D points to display.
 
 Set the graph legend
 
-#### showGrid
+#### show_grid
 
 (True or False). Show a grid in the graph
 
@@ -1070,8 +1448,35 @@ Repaint the image.
 
 Gets and sets an numpy array image with volume.
 
-#### colorMap
+#### colors_limits
+
+Gets and sets the colors limits.
+
+#### visvis
+
+Return the visvis object.
+
+#### color_map
 
 Gets and sets the color map to display.  
 It can receives the next values: CM_BONE, CM_COOL, CM_COPPER, CM_GRAY, CM_HOT, CM_HSV, CM_JET, CM_PINK, CM_AUTUMN, CM_SPRING, CM_SUMMER, CM_WINTER.  
 Check out [VisVis documentation](https://code.google.com/p/visvis/wiki/Colormaps).
+
+
+
+
+
+
+## ControlWeb
+***************************
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/tutorials/Controls4Docs/ControlWeb.png?raw=true "Screen")
+
+Displays a web-browser.
+
+### **Properties**
+***************************
+
+#### value
+
+Gets and sets the URL of the page to load.

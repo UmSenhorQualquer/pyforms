@@ -10,7 +10,7 @@ from pyforms.Controls import ControlNumber
 class CsvParserDialog(BaseWidget):
 
     def __init__(self, parent=None):
-        super(CsvParserDialog, self).__init__('CSV Choose the columns', parentWindow = parent)
+        super(CsvParserDialog, self).__init__('CSV Choose the columns', parent_win = parent)
         self._filename = None
 
         # Definition of the forms fields
@@ -25,9 +25,9 @@ class CsvParserDialog(BaseWidget):
         self._loadButton = ControlButton('Load')
 
         self._formset = [('_filename','_startingrow'), ('_separator', '_frameCol', '_xCol', '_yCol', '_zCol', '_loadButton'), '_filePreview']
-        self._separator.changed = self.__refreshPreview
-        self._filename.changed  = self.__refreshPreview
-        self._startingrow.changed = self.__refreshPreview
+        self._separator.changed_event = self.__refreshPreview
+        self._filename.changed_event  = self.__refreshPreview
+        self._startingrow.changed_event = self.__refreshPreview
 
         #self._filename.value = '/home/ricardo/Downloads/2012.12.01_13.48_3D_POSITIONS_version_03.06.2015.csv'
 
@@ -135,4 +135,4 @@ class CsvParserDialog(BaseWidget):
 # Execute the application
 if __name__ == "__main__":
     import pyforms
-    pyforms.startApp(CsvParserDialog, geometry=(0, 0, 600, 400))
+    pyforms.start_app(CsvParserDialog, geometry=(0, 0, 600, 400))

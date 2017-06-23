@@ -27,7 +27,7 @@ class SimpleExample4(BaseWidget):
 		self._button 		= ControlButton('Press this button')
 
 		#Define the organization of the forms
-		self._formset = [ {
+		self.formset = [ {
 						  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
 						  	'Tab2': ['_fullname']
 						  },
@@ -52,5 +52,5 @@ class SimpleExample4(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 pyforms.startApp( SimpleExample4 )
+if __name__ == "__main__":	 pyforms.start_app( SimpleExample4 )
 	

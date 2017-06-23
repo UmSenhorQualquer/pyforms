@@ -1,10 +1,10 @@
 # Simple example 4
 
-This example shows you how to define tabs using dictionaries in the variable "self._formset".
+This example shows you how to define tabs using dictionaries in the variable "self.formset".
 		
 ```python
 	#Use dictionaries for tabs
-	self._formset = [ {
+	self.formset = [ {
 					  	'Tab1':['_firstname','||','_middlename','||','_lastname'], 
 						'Tab2': ['_fullname']
 					  },
