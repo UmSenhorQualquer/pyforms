@@ -1,6 +1,6 @@
 from pyforms.gui.Controls.ControlPlayer.AbstractGLWidget import AbstractGLWidget
 
-
+import math
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QOpenGLWidget
 from PyQt5 import QtCore

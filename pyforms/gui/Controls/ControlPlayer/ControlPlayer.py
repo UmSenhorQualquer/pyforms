@@ -15,19 +15,20 @@ if conf.PYFORMS_USE_QT5:
 	from PyQt5 import QtCore
 	from PyQt5.QtWidgets import QFrame	
 	from PyQt5.QtWidgets import QApplication
+
+	import platform
+
+	if platform.system() == 'Darwin':
+		from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+	else:
+		from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+
 else:	
 	from PyQt4.QtGui import QFrame
 	from PyQt4 import uic
 	from PyQt4 import QtCore
 	from PyQt4.QtGui import QApplication
-
-import platform
-
-if platform.system() == 'Darwin':
-	from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
-else:
 	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
-
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
