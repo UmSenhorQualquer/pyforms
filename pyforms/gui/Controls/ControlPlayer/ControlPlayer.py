@@ -21,6 +21,14 @@ else:
 	from PyQt4 import QtCore
 	from PyQt4.QtGui import QApplication
 
+import platform
+
+if platform.system() == 'Darwin':
+	from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+else:
+	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+
+
 from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
 from pysettings import conf
@@ -31,7 +39,7 @@ except:
 	print("Warning: was not possible to import cv2 in ControlPlayer")
 
 
-from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+
 
 
 __author__ = "Ricardo Ribeiro"
