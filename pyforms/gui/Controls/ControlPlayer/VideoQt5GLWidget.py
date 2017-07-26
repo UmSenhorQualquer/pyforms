@@ -19,7 +19,7 @@ class VideoQt5GLWidget(AbstractGLWidget, QOpenGLWidget):
 		'''
 		self.gl.glClearDepth(1.0)
 		self.gl.glClearColor(0, 0, 0, 1.0)
-		self.gl.glEnable(GL.GL_DEPTH_TEST)
+		self.gl.glEnable(self.gl.GL_DEPTH_TEST)
 
 	def perspective(self, fovy, aspect, zNear, zFar):
 		ymax = zNear * math.tan( fovy * math.pi / 360.0 );
