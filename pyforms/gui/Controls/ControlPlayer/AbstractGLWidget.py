@@ -332,7 +332,7 @@ class AbstractGLWidget(object):
 			self._mouseLeftDown = False
 
 	def mousePressEvent(self, event):
-		super(VideoGLWidget, self).mousePressEvent(event)
+		super(AbstractGLWidget, self).mousePressEvent(event)
 		self.setFocus(QtCore.Qt.MouseFocusReason)
 
 		self._mouseDown = True
@@ -379,13 +379,13 @@ class AbstractGLWidget(object):
 			self.onDrag(p1, p2)
 
 	def keyPressEvent(self, event):
-		super(VideoGLWidget, self).keyPressEvent(event)
+		super(AbstractGLWidget, self).keyPressEvent(event)
 
 		#Set the flag move_img to true, for the image position to be updated
 		if event.key() == QtCore.Qt.Key_M: self._move_img = True
 
 	def keyReleaseEvent(self, event):
-		super(VideoGLWidget, self).keyReleaseEvent(event)
+		super(AbstractGLWidget, self).keyReleaseEvent(event)
 
 		# Control video playback using the space bar to Play/Pause
 		if event.key() == QtCore.Qt.Key_Space:
