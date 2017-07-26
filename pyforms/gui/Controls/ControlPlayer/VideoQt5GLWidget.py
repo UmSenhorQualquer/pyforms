@@ -17,9 +17,9 @@ class VideoQt5GLWidget(AbstractGLWidget, QOpenGLWidget):
 		 Sets up the OpenGL rendering context, defines display lists, etc. 
 		 Gets called once before the first time resizeGL() or paintGL() is called.
 		'''
-		GL.glClearDepth(1.0)
-		GL.glClearColor(0, 0, 0, 1.0)
-		GL.glEnable(GL.GL_DEPTH_TEST)
+		self.gl.glClearDepth(1.0)
+		self.gl.glClearColor(0, 0, 0, 1.0)
+		self.gl.glEnable(GL.GL_DEPTH_TEST)
 
 	def perspective(self, fovy, aspect, zNear, zFar):
 		ymax = zNear * math.tan( fovy * math.pi / 360.0 );
