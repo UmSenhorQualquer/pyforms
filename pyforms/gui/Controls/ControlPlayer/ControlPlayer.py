@@ -155,9 +155,9 @@ class ControlPlayer(ControlBase, QFrame):
 	def end_drag_event(self, value): self._videoWidget.onEndDrag = value
 
 	@property
-	def key_release_event(self): return self._videoWidget.onKeyRelease
+	def key_release_event(self): return self._videoWidget.on_key_release
 	@key_release_event.setter
-	def key_release_event(self, value): self._videoWidget.onKeyRelease = value
+	def key_release_event(self, value): self._videoWidget.on_key_release = value
 
 	##########################################################################
 	############ PROPERTIES ##################################################

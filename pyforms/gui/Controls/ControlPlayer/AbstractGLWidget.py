@@ -6,14 +6,16 @@
 """
 
 from pysettings import conf
-import logging, math, pyforms.utils.tools as tools
+import logging, math, pyforms.utils.tools as tools, time
 
 if conf.PYFORMS_USE_QT5:
 	from PyQt5 import QtGui
 	from PyQt5 import QtCore
+	from PyQt5.QtWidgets import QApplication
 else:
 	from PyQt4 import QtGui
 	from PyQt4 import QtCore
+	from PyQt4.QtGui import QApplication	
 
 import OpenGL.GL as GL
 import OpenGL.GLU as GLU
@@ -31,6 +33,13 @@ __version__ = "0.0"
 __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
+
+class MouseEvent:
+
+	def __init__(self, event):
+		self.x = event.x()
+		self.y = event.y()
+		self.button = event.button()
 
 
 class AbstractGLWidget(object):
@@ -54,12 +63,19 @@ class AbstractGLWidget(object):
 		#Last mouse opengl calculated position
 		#This variable is updated everytime the opengl scene is rendered
 		#and a mouse button is down
+		self._mouse_pressed = False
+		self._mouse_leftbtn_pressed = False
+
+		self._mouse_clicked_event = None # store the event variable of the mouse click event
+		self._mouse_dblclicked_event = None # store the event variable of the mouse double click event
+		self._mouse_move_event = None # store the event variable of the mouse move event
+
+
 		self._last_mouse_gl_pos = None
 
 		self._lastGlX = 0.0 #Last 
 		self._lastGlY = 0.0
-		self._mouseDown = False
-		self._mouseLeftDown = False
+		
 		self._move_img 	= False
 		self._width 	= 1.0
 		self._height 	= 1.0
@@ -205,24 +221,67 @@ class AbstractGLWidget(object):
 
 		GL.glColor4f(1, 1, 1, 1.0)
 
-		if self._mouseDown:
+		# mouse events: find the image position where the mouse is
+		if self._mouse_pressed:
 			modelview 	= GL.glGetDoublev(GL.GL_MODELVIEW_MATRIX)
 			projection	= GL.glGetDoublev(GL.GL_PROJECTION_MATRIX)
 			viewport 	= GL.glGetIntegerv(GL.GL_VIEWPORT)
-			
-			winX 		= float(self._mouseX)
-			winY 		= float(viewport[3] - self._mouseY)
-			winZ 		= GL.glReadPixels( winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
-
+			winX = float(self._mouseX)
+			winY = float(viewport[3] - self._mouseY)
+			winZ = GL.glReadPixels( winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
 			self._glX, self._glY, self._glZ = GLU.gluUnProject( winX, winY, winZ[0][0], modelview, projection, viewport)
 			
 			if not self._last_mouse_gl_pos: self._last_mouse_gl_pos = self._glX, self._glY, self._glZ
+
 			
+			#mouse click event
+			if self._mouse_clicked_event is not None:
+			
+				if hasattr(self, 'imgWidth'):
+					self.onClick(self._mouse_clicked_event , self._get_current_x(), self._get_current_y())
+
+				if self._mouse_clicked_event.button == 1:
+					self._mouse_leftbtn_pressed = True
+					self._mouseStartDragPoint = self._get_current_mouse_point()
+
+				if self._mouse_clicked_event.button == 4:
+					self._mouseStartDragPoint = self._get_current_mouse_point()
+					self._move_img = True
+					self._last_mouse_gl_pos = None
+					self._lastGlX = self._glX
+					self._lastGlY = self._glY
+				self._mouse_clicked_event = None
+
+			#mouse double click event
+			if self._mouse_dblclicked_event is not None:
+				if hasattr(self, 'imgWidth'):
+					self.onDoubleClick(self._mouse_dblclicked_event, self._get_current_x(), self._get_current_y())
+				self._mouse_dblclicked_event = None
+
+			#mouse move event
+			if self._mouse_move_event is not None:
+				if self._mouse_leftbtn_pressed and self._mouse_pressed:
+					p1 = self._mouseStartDragPoint
+					p2 = self._get_current_mouse_point()
+					self.onDrag(p1, p2)
+
+				if self._move_img and self._mouse_pressed:
+					p1 = self._mouseStartDragPoint
+					p2 = self._get_current_mouse_point()
+					self.onDrag(p1, p2)
+				self._mouse_move_event = None
+
+
+
+
+
+		# end of the mouse events #################################
+
 
 		GL.glEnable(GL.GL_TEXTURE_2D)
 		GL.glDisable(GL.GL_DEPTH_TEST)
 
-		if self._move_img:
+		if self._move_img and self._last_mouse_gl_pos is not None:
 			self._x -= (self._last_mouse_gl_pos[0]-self._glX)
 			self._y -= (self._last_mouse_gl_pos[1]-self._glY)
 
@@ -259,14 +318,14 @@ class AbstractGLWidget(object):
 
 	def show_tmp_msg(self, msg, timeout=2000):
 		self._tmp_msg = msg
-		self.repaint()
+		self.update()
 		QtCore.QTimer.singleShot(2000, self.__hide_tmp_msg )
 
 
 	def paint(self, frames):
 		if frames is None:
 			self.reset()
-			self.repaint()
+			self.update()
 			return
 		elif self.image_2_display is None or len(self.image_2_display) == 0:
 			self.imgHeight, self.imgWidth = frames[0].shape[:2]
@@ -282,7 +341,7 @@ class AbstractGLWidget(object):
 
 		self.image_2_display = frames
 		self._pending_frames = frames
-		self.repaint()
+		self.update()
 
 	def wheelEvent(self, event):
 		
@@ -308,75 +367,53 @@ class AbstractGLWidget(object):
 				self.zoom = 7
 
 			# self.logger.debug("Wheel event | Current zoom: %s | Delta: %s | Zoom factor: %s", self.zoom, event.delta(), zoom_factor)
-			self.repaint()
+			self.update()
 
-	def mouseDoubleClickEvent(self, event):
-		self._mouseX = event.x()
-		self._mouseY = event.y()
-
-		self.repaint()
-		if hasattr(self, 'imgWidth'):
-			self.onDoubleClick(event, self._get_current_x(), self._get_current_y())
-
+	
 	def mouseReleaseEvent(self, event):
-		self._mouseDown = False
 
-		if event.button() == 4:
-			self._move_img = False
+		self._mouse_pressed = False
+
+		if event.button() == 4: self._move_img = False
 			
-
 		if event.button() == 1:
-			if hasattr(self, 'imgWidth') and self._mouseLeftDown:
+			if hasattr(self, 'imgWidth') and self._mouse_leftbtn_pressed:
 				self.onEndDrag(self._mouseStartDragPoint, self._get_current_mouse_point())
+				self._mouseStartDragPoint = None
+			self._mouse_leftbtn_pressed = False
 
-			self._mouseLeftDown = False
-
+	
+		
 	def mousePressEvent(self, event):
 		super(AbstractGLWidget, self).mousePressEvent(event)
 		self.setFocus(QtCore.Qt.MouseFocusReason)
 
-		self._mouseDown = True
-		# self.logger.debug("%s", "Mouse press (before) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
-		# self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
+		self._mouse_pressed = True
 		self._mouseX = event.x()
 		self._mouseY = event.y()
+		self._mouse_clicked_event = MouseEvent(event)
 
 		self.repaint()
-		# self.logger.debug("%s", "Mouse press (after) event: X ({0}) Y ({1})".format(self._mouseX, self._mouseY))
-		# self.logger.debug("OpenGL coordinates: %s", 'X ({0}) Y ({1})'.format(self._glX, self._glY))
+		
+	def mouseDoubleClickEvent(self, event):
+		self._mouse_pressed = True
+		self._mouseX = event.x()
+		self._mouseY = event.y()
+		self._mouse_dblclicked_event = MouseEvent(event)
 
-		if hasattr(self, 'imgWidth'):
-			self.onClick(event, self._get_current_x(), self._get_current_y())
-
-		if event.button() == 1:
-			self._mouseLeftDown = True
-			# self.logger.debug("glx: %s | x: %s | gly: %s | y: %s | imgWdith: %s | imgHeight: %s | height: %s", self._glX, self._x, self._glY, self._y, self.imgWidth, self.imgHeight, self._height)
-			self._mouseStartDragPoint = self._get_current_mouse_point()
-
-			# self.logger.debug("Button 1 pressed")
-		if event.button() == 4:
-			self._move_img = True
-			self._last_mouse_gl_pos = None
-			self._lastGlX = self._glX
-			self._lastGlY = self._glY
+		self.repaint()
+		
 
 	def mouseMoveEvent(self, event):
 		self.setFocus(QtCore.Qt.MouseFocusReason)
 
 		self._mouseX = event.x()
 		self._mouseY = event.y()
-		# self.repaint()
-		if self._mouseLeftDown and self._mouseDown:
-			self.repaint()
-			p1 = self._mouseStartDragPoint
-			p2 = self._get_current_mouse_point()
-			self.onDrag(p1, p2)
+		self._mouse_move_event = MouseEvent(event)
 
-		if self._move_img and self._mouseDown:
-			self.repaint()
-			p1 = self._mouseStartDragPoint
-			p2 = self._get_current_mouse_point()
-			self.onDrag(p1, p2)
+		QApplication.processEvents()
+		self.update()
+		
 
 	def keyPressEvent(self, event):
 		super(AbstractGLWidget, self).keyPressEvent(event)
@@ -459,7 +496,7 @@ class AbstractGLWidget(object):
 
 	def __hide_tmp_msg(self): 
 		self._tmp_msg = None
-		self.repaint()
+		self.update()
 
 	def onDoubleClick(self, event, x, y): pass
 
@@ -477,7 +514,7 @@ class AbstractGLWidget(object):
 	@rotateX.setter
 	def rotateX(self, value):
 		self._rotateX = value
-		self.repaint()
+		self.update()
 
 	@property
 	def rotateZ(self): return self._rotateZ
@@ -485,7 +522,7 @@ class AbstractGLWidget(object):
 	@rotateZ.setter
 	def rotateZ(self, value):
 		self._rotateZ = value
-		self.repaint()
+		self.update()
 
 	def _get_current_mouse_point(self):
 		'''

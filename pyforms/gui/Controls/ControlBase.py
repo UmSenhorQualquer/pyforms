@@ -90,7 +90,7 @@ class ControlBase(object):
 		if not self._popup_menu:
 			self.form.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 			self.form.customContextMenuRequested.connect(self._open_popup_menu)
-			self._popup_menu = QMenu()
+			self._popup_menu = QMenu(self.parent)
 			self._popup_menu.aboutToShow.connect( self.about_to_show_contextmenu_event)
 
 	def add_popup_submenu(self, label, submenu=None):
