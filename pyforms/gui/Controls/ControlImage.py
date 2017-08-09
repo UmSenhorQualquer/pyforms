@@ -55,7 +55,7 @@ class ControlImage(ControlBase):
 		self._form.imageLayout.addWidget(self._imageWidget)
 
 	def save_form(self, data, path=None):
-		if self.value != None: data['value'] = self._value
+		if type(self.value) is np.ndarray: data['value'] = self._value
 
 	def load_form(self, data, path=None):
 		if 'value' in data: self.value = data['value']
