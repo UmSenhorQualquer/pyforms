@@ -44,6 +44,7 @@ else:
 
 	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
+import numpy as np
 
 class ControlImage(ControlBase):
 	_imageWidget = None
