@@ -12,6 +12,64 @@ else:
 
 from pyforms.gui.Controls.ControlEventTimeline.Track import Track
 
+from pyforms import BaseWidget
+from pyforms.Controls import ControlText, ControlNumber, ControlButton
+
+
+class DeltaEditWindow(BaseWidget):
+
+	def __init__(self, parent_win, label, begin, end):
+		BaseWidget.__init__(self, 'Edit frame', parent_win=parent_win)
+
+		if conf.PYFORMS_USE_QT5:
+			self.layout().setContentsMargins(5,5,5,5)
+		else:
+			self.layout().setMargin(5)
+
+		self._label = ControlText('Label', label)
+		self._begin = ControlNumber('Begin', begin, 0, 100000000000000)
+		self._end 	= ControlNumber('End', end, 0, 100000000000000)
+
+		self._applybtn = ControlButton('Apply')
+
+		self.formset = [
+			'_label',
+			('_begin', '_end'),
+			'_applybtn'
+		]
+
+		self._begin.changed_event = self.__begin_changed_event
+		self._end.changed_event   = self.__end_changed_event
+
+	def __begin_changed_event(self):
+		if self._begin.value>=self._end.value:
+			self._begin.value = self._end.value-1
+
+	def __end_changed_event(self):
+		if self._end.value<=self._begin.value:
+			self._end.value = self._begin.value+1
+
+
+	@property
+	def comment(self): return self._label.value 
+	@comment.setter
+	def comment(self, value): self._label.value = value
+
+	@property
+	def begin(self): return self._begin.value 
+	@begin.setter
+	def begin(self, value): self._begin.value = value
+
+	@property
+	def end(self): return self._end.value 
+	@end.setter
+	def end(self, value): self._end.value = value
+
+	@property
+	def apply_function(self): return self._applybtn.value 
+	@apply_function.setter
+	def apply_function(self, value): self._applybtn.value = value
+
 
 class TimelineDelta(object):
 	"""
@@ -79,7 +137,9 @@ class TimelineDelta(object):
 		:param y: 
 		:return: 
 		"""
-		return not self._lock and x == int(round(self.begin)) and self._top <= y <= (self._top + self._height)
+		begin = int(round(self.begin))
+		end   = int(round(self.end))
+		return not self._lock and begin <= x <= (begin+10) and self._top <= y <= (self._top + self._height) and (x-end)**2 > (x-begin)**2 
 
 	def canSlideEnd(self, x, y):
 		"""
@@ -88,24 +148,30 @@ class TimelineDelta(object):
 		:param y: 
 		:return: 
 		"""
-		return not self._lock and int(round(self.end)) == x and self._top <= y <= (self._top + self._height)
+		begin = int(round(self.begin))
+		end   = int(round(self.end))
+		#check if the delta is not locked
+		#check if the x is inside an range of 10 pixels
+		#check if the y is within the boundaries of the delta
+		return not self._lock and (end-10) <= x <= end and self._top <= y <= (self._top + self._height) and (x-end)**2 < (x-begin)**2 
 
 	def moveEnd(self, x):
 		"""
 		Move the right edge of the event rectangle.
 		:param x: 
 		"""
+		jump = x/self._parent._scale
 
 		# Do nothing if locked
 		if self._lock:
 			return
 
 		# Do nothing if trying to go over the pther edge
-		if self._end <= self._begin - x and x < 0:
+		if (self._end+jump) <= self._begin and jump < 0:
 			return
 
 		# Increment accordingly
-		self._end += x / self._parent._scale
+		self._end += jump
 
 		# Minimum begin position is at 0
 		if self._end > (self._parent.width() / self._parent._scale):
@@ -116,21 +182,21 @@ class TimelineDelta(object):
 		Move the left edge of the event rectangle.
 		:param x: 
 		"""
+		jump = x/self._parent._scale
 
 		# Do nothing if locked
 		if self._lock:
 			return
 
 		# Do nothing if trying to go over the other edge
-		if self._begin >= self._end - x and x > 0:
+		if (self._begin+jump) >= self._end and jump > 0:
 			return
 
 		# Increment accordingly
-		self._begin += x / self._parent._scale
+		self._begin += jump
 
 		# Minimum begin position is at 0
-		if self._begin < 0:
-			self._begin = 0
+		if self._begin < 0: self._begin = 0
 
 	def move(self, x, y):
 		"""
@@ -156,11 +222,27 @@ class TimelineDelta(object):
 		
 		:return: 
 		"""
+		"""
 		text, ok = QInputDialog.getText(
 			self._parent, 'Edit event', 'Comment:', text=self._title)
-		if ok:
-			self._title = str(text)
-			self._parent.repaint()
+		"""
+		if hasattr(self, 'edit_form'):
+			self.edit_form.comment 	= self._title
+			self.edit_form.begin 	= self._begin
+			self.edit_form.end 		= self._end			
+			self.edit_form.show()
+		else:
+			self.edit_form = DeltaEditWindow(self._parent, self._title, self._begin, self._end)
+			self.edit_form.apply_function = self.__apply_changes
+			self.edit_form.show()
+		
+		
+	def __apply_changes(self):
+		self._title = self.edit_form.comment
+		self._begin = self.edit_form.begin
+		self._end   = self.edit_form.end
+		self._parent.repaint()
+		self.edit_form.hide()
 
 	def draw(self, painter, showvalues=False):
 		"""

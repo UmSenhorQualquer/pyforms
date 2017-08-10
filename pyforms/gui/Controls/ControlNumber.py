@@ -24,14 +24,14 @@ class ControlNumber(ControlBase):
 	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__, "number.ui")
 		self._form = uic.loadUi(control_path)
+		self.min = self._min
+		self.max = self._max
 		self.label = self._label
 		self.value = self._value
 		self.form.label.setAccessibleName('ControlNumber-label')
 		self.form.spinBox.valueChanged.connect(self.value_changed)
 		self.form.spinBox.setDecimals(0)
-		self.min = self._min
-		self.max = self._max
-
+		
 	def value_changed(self, value):
 		self._updateSlider = False
 		self.value = value
@@ -53,9 +53,9 @@ class ControlNumber(ControlBase):
 		return self._value
 
 	@value.setter
-	def value(self, value):
-		ControlBase.value.fset(self, value)
+	def value(self, value):		
 		self.form.spinBox.setValue(value)
+		ControlBase.value.fset(self, value)
 
 	@property
 	def min(self): return self.form.spinBox.minimum()
