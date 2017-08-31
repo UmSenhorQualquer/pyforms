@@ -277,7 +277,7 @@ class ControlList(ControlBase, QWidget):
 		return self.tableWidget.columnCount()
 
 	def __len__(self):
-		return self.rows_count()
+		return self.rows_count
 
 	@property
 	def value(self):

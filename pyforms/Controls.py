@@ -58,7 +58,7 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 			from pyforms.gui.Controls.ControlVisVisVolume import ControlVisVisVolume
 		except:
 			logger.warning("VisVis not installed")
-			logger.warning(traceback.format_exc())
+			#logger.warning(traceback.format_exc())
 
 	from pyforms.gui.Controls.ControlEventTimeline.ControlEventTimeline import ControlEventTimeline
 	from pyforms.gui.Controls.ControlEventsGraph.ControlEventsGraph import ControlEventsGraph
