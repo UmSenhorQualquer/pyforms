@@ -61,6 +61,7 @@ class ControlMatplotlib(ControlBase, QWidget):
 
 	def draw(self): 
 		self.on_draw(self._fig)
+		self.canvas.draw()
 
 	def on_draw(self, figure):
 		""" Redraws the figure

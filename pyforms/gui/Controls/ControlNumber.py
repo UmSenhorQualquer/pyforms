@@ -29,10 +29,10 @@ class ControlNumber(ControlBase):
 		self.label = self._label
 		self.value = self._value
 		self.form.label.setAccessibleName('ControlNumber-label')
-		self.form.spinBox.valueChanged.connect(self.value_changed)
+		self.form.spinBox.valueChanged.connect(self.update_event)
 		self.form.spinBox.setDecimals(0)
 		
-	def value_changed(self, value):
+	def update_event(self, value):
 		self._updateSlider = False
 		self.value = value
 		self._updateSlider = True

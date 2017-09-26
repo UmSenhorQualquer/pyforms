@@ -22,7 +22,7 @@ class GenericCsvParserDialog(BaseWidget):
 		self._startingrow   = ControlNumber('Starting row', 0)
 		
 		for index, column in enumerate(columns):
-			setattr(self, '_col_{0}'.format(index),  ControlNumber(column, index, 0, 1000) )
+			setattr(self, '_col_{0}'.format(index),  ControlNumber(column, index, -1, 1000) )
 
 		self._filePreview = ControlList('Preview')
 		self._loadButton = ControlButton('Load')
