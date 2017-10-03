@@ -87,10 +87,15 @@ class ControlMdiArea(ControlBase, QMdiArea):
 
 		try:
 			window = self.activeSubWindow()
+
 			if window:
 				widget = window.widget()
 				# self.removeSubWindow(window) DO NOT REMOVE TO KEEP WINDOW POSITION
-				widget.beforeClose()
+				widget.before_close_event()
+			else:
+				if hasattr(window, 'before_close_event'):
+					widget.before_close_event()
+
 			closeEvent.accept()
 
 			logger.debug("Sub window closed. MDI area sub windows: %s", self.subWindowList())
