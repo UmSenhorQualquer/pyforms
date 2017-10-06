@@ -775,6 +775,10 @@ Called on item item double click.
 ### **Properties**
 ***************************
 
+#### autoscroll
+
+Returns and sets the autoscroll flag. If True the ControlList will position the scroll automatically to a position where the new new added item will be visible.
+
 #### horizontal_headers
 
 Get and set the horizontal headers in the table list.
@@ -1208,6 +1212,11 @@ Append text to the bottom.
 #### readonly
 
 Returns and sets the readonly flag for the control.
+
+
+#### autoscroll
+
+Returns and sets the autoscroll flag. If True the ControlTextArea will scroll always the text to the bottom everytime a new text is added.
 
 
 ## ControlToolBox

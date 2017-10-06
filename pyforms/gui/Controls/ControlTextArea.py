@@ -4,9 +4,9 @@
 import pyforms.utils.tools as tools
 from pysettings import conf
 if conf.PYFORMS_USE_QT5:
-    from PyQt5 import uic
+	from PyQt5 import uic, QtGui
 else:
-    from PyQt4 import uic
+	from PyQt4 import uic, QtGui
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 __author__ = "Ricardo Ribeiro"
@@ -20,40 +20,56 @@ __status__ = "Development"
 
 class ControlTextArea(ControlBase):
 
-    def init_form(self):
-        control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
-        self._form = uic.loadUi(control_path)
-        self._form.label.setText(self._label)
-        if self._value:
-            self._form.plainTextEdit.setPlainText(str(self._value))
+	def __init__(self, label='', default=None, helptext=None):
+		ControlBase.__init__(self, label, default, helptext)
+		self.autoscroll = False
+		
 
-        if not self._label or len(self._label)==0: 
-            self.form.label.hide()
+	def init_form(self):
+		control_path = tools.getFileInSameDirectory(__file__, "textArea.ui")
+		self._form = uic.loadUi(control_path)
+		self._form.label.setText(self._label)
+		if self._value:
+			self._form.plainTextEdit.setPlainText(str(self._value))
 
-        super(ControlTextArea, self).init_form()
-        self.form.plainTextEdit.textChanged.connect(self.finishEditing)
+		if not self._label or len(self._label)==0: 
+			self.form.label.hide()
 
-    def __add__(self, other):
-        self._form.plainTextEdit.appendPlainText(str(other))
-        return self
+		super(ControlTextArea, self).init_form()
+		self.form.plainTextEdit.textChanged.connect(self.finishEditing)
 
-    def finishEditing(self):
-        """Function called when the lineEdit widget is edited"""
-        self.changed_event()
-        
+	def __add__(self, other):
+		self._form.plainTextEdit.appendPlainText(str(other))
 
-    @property
-    def value(self):
-        return self._form.plainTextEdit.toPlainText()
+		# if activated the text field is autoscrolled to the bottom
+		if self.autoscroll:
+			self._form.plainTextEdit.moveCursor(QtGui.QTextCursor.End)
 
-    @value.setter
-    def value(self, value):
-        self._form.plainTextEdit.setPlainText(str(value))
+		return self
 
-    @property
-    def readonly(self):
-        return self._form.plainTextEdit.isReadOnly()
+	def finishEditing(self):
+		"""Function called when the lineEdit widget is edited"""
+		self.changed_event()
+		
 
-    @readonly.setter
-    def readonly(self, value):
-        self._form.plainTextEdit.setReadOnly(value)
+	@property
+	def value(self):
+		return self._form.plainTextEdit.toPlainText()
+
+	@value.setter
+	def value(self, value):
+		self._form.plainTextEdit.setPlainText(str(value))
+
+	@property
+	def readonly(self):
+		return self._form.plainTextEdit.isReadOnly()
+
+	@readonly.setter
+	def readonly(self, value):
+		self._form.plainTextEdit.setReadOnly(value)
+
+
+	@property
+	def autoscroll(self): return self._autoscroll
+	@autoscroll.setter
+	def autoscroll(self, value): self._autoscroll = value

@@ -48,6 +48,9 @@ class ControlList(ControlBase, QWidget):
 		self._minusFunction = remove_function
 		ControlBase.__init__(self, label, default)
 
+		self.autoscroll = False
+		
+
 	##########################################################################
 	############ FUNCTIONS ###################################################
 	##########################################################################
@@ -133,16 +136,23 @@ class ControlList(ControlBase, QWidget):
 			self.value = data['value']
 
 	def __add__(self, other):
+		row_index = self.tableWidget.rowCount()
 
-		row = self.tableWidget.rowCount()
+		self.tableWidget.insertRow(row_index)
 
-		self.tableWidget.insertRow(row)
+		#increase the number of columns if necessary ####
 		if self.tableWidget.currentColumn() < len(other):
 			self.tableWidget.setColumnCount(len(other))
+		#################################################
 
-		for column, e in enumerate(other): self.set_value(column, row, e)
+		for column, e in enumerate(other): self.set_value(column, row_index, e)
 
 		self.tableWidget.resizeColumnsToContents()
+
+		# auto scroll the list to the new inserted item ##################
+		if self.autoscroll:
+			self.tableWidget.scrollToItem( self.get_cell(0,row_index) )
+		##################################################################
 		return self
 
 	def __sub__(self, other):
@@ -343,6 +353,12 @@ class ControlList(ControlBase, QWidget):
 			self.tableWidget.setIconSize(QtCore.QSize(*value))
 		else:
 			self.tableWidget.setIconSize(QtCore.QSize(value, value))
+
+	@property
+	def autoscroll(self): return self._autoscroll
+	@autoscroll.setter
+	def autoscroll(self, value): self._autoscroll = value
+
 
 	##########################################################################
 	############ PRIVATE FUNCTIONS ###########################################
