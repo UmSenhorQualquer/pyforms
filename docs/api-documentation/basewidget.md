@@ -37,9 +37,9 @@ class SimpleExample(BaseWidget):
 
 ### \_\_init\_\_(title='Untitled', parent_win=None, win_flag=None)
 
-**title** - Title of the window.
-**parent_win** - Parent widget. If the win_flag is None and the parent parameters is set, then the flag_win will be QtCore.Qt.Dialog.
-**win_flag** - Window type flag. Type of Qt.WindowType.
+**title** - Title of the window.  
+**parent_win** - Parent widget. If the win_flag is None and the parent parameters is set, then the flag_win will be QtCore.Qt.Dialog.  
+**win_flag** - Window type flag. Type of Qt.WindowType.  
 
 ## **Functions**
 ***************************

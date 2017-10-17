@@ -11,12 +11,12 @@ import pyforms.utils.tools as tools
 if conf.PYFORMS_USE_QT5:
 	from PyQt5.QtWidgets import QApplication
 	from PyQt5.QtGui import QFontMetrics, QColor, QIcon, QFont
-	from PyQt5.Qsci import QsciScintilla, QsciLexerPython
+	from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 	from PyQt5 import uic
 	from PyQt5 import QtCore
 else:
 	from PyQt4.QtGui import QApplication, QFontMetrics, QColor, QIcon, QFont
-	from PyQt4.Qsci import QsciScintilla, QsciLexerPython
+	from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 	from PyQt4 import uic
 	from PyQt4 import QtCore
 
@@ -141,6 +141,18 @@ class ControlCodeEditor(ControlBase):
 		# Don't want to see the horizontal scrollbar at all
 		# Use raw message to Scintilla here (all messages are documented here: http://www.scintilla.org/ScintillaDoc.html)
 		self._code_editor.SendScintilla(QsciScintilla.SCI_SETHSCROLLBAR, 0)
+		
+		self._lexer_obj = lexer
+		self.qsci_api = QsciAPIs(self._lexer_obj)
+		## Add autocompletion strings
+		self.qsci_api.add("aLongString")
+		self.qsci_api.add("aLongerString")
+		self.qsci_api.add("aDifferentString")
+		self.qsci_api.add("sOmethingElse")
+		## Compile the api for use in the lexer
+		self.qsci_api.prepare()
+		self._code_editor.setAutoCompletionThreshold(1)
+		self._code_editor.setAutoCompletionSource(QsciScintilla.AcsAll)
 
 	# not too small
 	# self._code_editor.setMinimumSize(600, 450)
