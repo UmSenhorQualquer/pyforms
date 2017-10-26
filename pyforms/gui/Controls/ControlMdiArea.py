@@ -5,13 +5,7 @@ import logging
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QMdiArea
-	from PyQt5.QtWidgets import QMdiSubWindow
-
-else:
-	from PyQt4.QtGui import QMdiArea
-	from PyQt4.QtGui import QMdiSubWindow
+from AnyQt.QtWidgets import QMdiArea, QMdiSubWindow
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

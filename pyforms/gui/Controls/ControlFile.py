@@ -7,13 +7,9 @@ from pyforms.gui.Controls.ControlText import ControlText
 
 import pyforms.utils.tools as tools
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QFileDialog
-	from PyQt5 import uic
 
-else:
-	from PyQt4.QtGui import QFileDialog
-	from PyQt4 import uic
+from AnyQt 			 import uic
+from AnyQt.QtWidgets import QFileDialog
 
 
 class ControlFile(ControlText):

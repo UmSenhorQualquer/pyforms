@@ -1,24 +1,11 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
+from pysettings 	 import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QMenu
-	from PyQt5.QtWidgets import QAction
-	from PyQt5.QtGui import QIcon
-	from PyQt5.QtGui import QKeySequence
-	from PyQt5 import QtCore
-	from PyQt5 import uic
-else:
-	from PyQt4.QtGui import Qmenu
-	from PyQt4.QtGui import QAction
-	from PyQt4.QtGui import QIcon
-	from PyQt4.QtGui import QKeySequence
-	from PyQt4 import QtCore
-	from PyQt4 import uic
-
-
+from AnyQt 			 import QtCore, uic
+from AnyQt.QtWidgets import QMenu, QAction
+from AnyQt.QtGui 	 import QIcon, QKeySequence
 
 class ControlBase(object):
 	"""

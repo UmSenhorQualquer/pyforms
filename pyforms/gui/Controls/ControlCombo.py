@@ -6,10 +6,7 @@ import pyforms.utils.tools as tools
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic
-else:
-	from PyQt4 import uic
+from AnyQt 			 import uic
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

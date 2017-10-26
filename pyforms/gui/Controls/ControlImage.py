@@ -15,29 +15,28 @@ try:
 except:
 	logger.debug("OpenCV not available")
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic
+import OpenGL.GL  as GL
+import OpenGL.GLU as GLU
+		
+from AnyQt 			 import QtCore, QtOpenGL, uic
+from AnyQt.QtWidgets import QWidget
 
+from AnyQt import _api
+
+if _api.USED_API == _api.QT_API_PYQT5:
 	try:
-		import OpenGL.GL  as GL
-		import OpenGL.GLU as GLU
 		from PyQt5.QtOpenGL import QGLWidget
 	except:
 		logger.debug("No OpenGL library available")
 
 	import platform
-
 	if platform.system() == 'Darwin':
 		from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
 	else:
 		from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
-else:
-	from PyQt4 import uic
-
+elif _api.USED_API == _api.QT_API_PYQT4:
 	try:
-		import OpenGL.GL  as GL
-		import OpenGL.GLU as GLU
 		from PyQt4.QtOpenGL import QGLWidget
 	except:
 		logger.debug("No OpenGL library available")

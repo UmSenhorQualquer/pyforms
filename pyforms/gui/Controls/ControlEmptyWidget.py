@@ -3,12 +3,7 @@
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget
-	from PyQt5.QtWidgets import QVBoxLayout
-else:
-	from PyQt4.QtGui import QWidget
-	from PyQt4.QtGui import QVBoxLayout
+from AnyQt.QtWidgets import QWidget, QVBoxLayout
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.BaseWidget import BaseWidget

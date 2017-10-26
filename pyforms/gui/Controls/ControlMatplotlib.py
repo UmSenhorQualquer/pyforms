@@ -12,11 +12,7 @@ __status__      = "Development"
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget, QVBoxLayout
-else:
-	from PyQt4.QtGui import QWidget, QVBoxLayout
-
+from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayo
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

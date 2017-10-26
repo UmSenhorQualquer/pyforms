@@ -5,15 +5,8 @@ from pysettings import conf
 
 import pyforms.utils.tools as tools
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QListWidgetItem
-	from PyQt5 import uic
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QListWidgetItem
-	from PyQt4 import uic
-	from PyQt4 import QtCore
+from AnyQt 			 import uic, QtCore
+from AnyQt.QtWidgets import QListWidgetItem
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

@@ -5,16 +5,9 @@
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QPushButton
-	from PyQt5.QtWidgets import QSizePolicy
-	from PyQt5.QtGui import QIcon
-	from PyQt5 import uic
-else:
-	from PyQt4.QtGui import QPushButton
-	from PyQt4.QtGui import QSizePolicy
-	from PyQt4.QtGui import QIcon
-	from PyQt4 import uic
+from AnyQt 			 import uic
+from AnyQt.QtWidgets import QPushButton, QSizePolicy
+from AnyQt.QtGui 	 import QIcon
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

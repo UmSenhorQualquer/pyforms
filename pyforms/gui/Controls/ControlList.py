@@ -9,23 +9,9 @@ import os
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget
-	from PyQt5.QtWidgets import QTableWidgetItem
-	from PyQt5.QtWidgets import QAbstractItemView
-	from PyQt5.QtGui import QIcon
-	from PyQt5 import uic
-	from PyQt5 import QtCore
-	from PyQt5.QtCore import Qt
-
-else:
-	from PyQt4.QtGui import QWidget
-	from PyQt4.QtGui import QTableWidgetItem
-	from PyQt4.QtGui import QAbstractItemView
-	from PyQt4.QtGui import QIcon
-	from PyQt4 import uic
-	from PyQt4 import QtCore
-	from PyQt4.QtCore import Qt
+from AnyQt 			 import QtCore, uic
+from AnyQt.QtWidgets import QTableWidgetItem, QWidget, QAbstractItemView
+from AnyQt.QtGui 	 import QIcon
 
 from pyforms.gui.BaseWidget import BaseWidget
 from pyforms.gui.Controls.ControlBase import ControlBase
@@ -174,7 +160,7 @@ class ControlList(ControlBase, QWidget):
 		else:
 			args = [value] if not hasattr(value, 'icon') else [QIcon(value.icon), value]
 			item = QTableWidgetItem()
-			item.setData(Qt.EditRole, *args)
+			item.setData(QtCore.Qt.EditRole, *args)
 			self.tableWidget.setItem(row, column, item)
 
 	def get_value(self, column, row):

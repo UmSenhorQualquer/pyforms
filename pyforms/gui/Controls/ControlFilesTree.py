@@ -6,16 +6,8 @@ from pysettings import conf
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QTreeView
-	from PyQt5.QtWidgets import QFileSystemModel
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QTreeView
-	from PyQt4.QtGui import QFileSystemModel
-	from PyQt4 import QtCore
-
+from AnyQt 			 import QtCore
+from AnyQt.QtWidgets import QTreeView, QFileSystemModel
 
 class ControlFilesTree(ControlBase):
 	def init_form(self):

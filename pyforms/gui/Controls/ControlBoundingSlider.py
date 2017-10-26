@@ -3,27 +3,9 @@
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget
-	from PyQt5.QtWidgets import QVBoxLayout
-	from PyQt5.QtWidgets import QHBoxLayout
-	from PyQt5.QtWidgets import QSpinBox
-	from PyQt5.QtGui import QPainter
-	from PyQt5.QtGui import QFont
-	from PyQt5.QtGui import QColor
-	from PyQt5.QtGui import QCursor
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QWidget
-	from PyQt4.QtGui import QVBoxLayout
-	from PyQt4.QtGui import QHBoxLayout
-	from PyQt4.QtGui import QPainter
-	from PyQt4.QtGui import QFont
-	from PyQt4.QtGui import QColor
-	from PyQt4.QtGui import QCursor
-	from PyQt4.QtGui import QSpinBox
-	from PyQt4 import QtCore
+from AnyQt 			 import QtCore
+from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpinBox
+from AnyQt.QtGui 	 import QFont, QColor, QCursor, QPainter
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 

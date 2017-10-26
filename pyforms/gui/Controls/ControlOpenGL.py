@@ -9,25 +9,33 @@ logger = logging.getLogger(__name__)
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QSizePolicy
+from AnyQt.QtWidgets import QSizePolicy
 
+from AnyQt import _api
+
+from OpenGL.GL  import *
+from OpenGL.GLU import *
+		
+from AnyQt import _api
+if _api.USED_API == _api.QT_API_PYQT5:
 	try:
-		from OpenGL.GL import *
-		from OpenGL.GLU import *
 		from PyQt5.QtOpenGL import QGLWidget
 	except:
 		logger.debug("No OpenGL library available")
 
-else:
-	from PyQt4.QtGui import QSizePolicy
+	import platform
+	if platform.system() == 'Darwin':
+		from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+	else:
+		from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
+elif _api.USED_API == _api.QT_API_PYQT4:
 	try:
-		from OpenGL.GL import *
-		from OpenGL.GLU import *
 		from PyQt4.QtOpenGL import QGLWidget
 	except:
 		logger.debug("No OpenGL library available")
+
+	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 
 class OpenglGLWidget(QGLWidget):
