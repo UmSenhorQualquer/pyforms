@@ -12,15 +12,17 @@ __status__      = "Development"
 
 from pysettings import conf
 
-from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayo
+from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 
 from pyforms.gui.Controls.ControlBase import ControlBase
 
 
-if conf.PYFORMS_USE_QT5:
+from AnyQt import _api
+
+if _api.USED_API == _api.QT_API_PYQT5:
 	from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 	from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-else:
+elif _api.USED_API == _api.QT_API_PYQT4:
 	from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 	from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 
