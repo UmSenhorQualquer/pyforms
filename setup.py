@@ -6,7 +6,7 @@ import re
 
 version = ''
 with open('pyforms/__init__.py', 'r') as fd: version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-                                                                 fd.read(), re.MULTILINE).group(1)
+																 fd.read(), re.MULTILINE).group(1)
 
 if not version: raise RuntimeError('Cannot find version information')
 
@@ -19,7 +19,9 @@ setup(
 	author_email='ricardojvr@gmail.com',
 	license='MIT',
 	url='https://github.com/UmSenhorQualquer/pyforms',
-
+	install_requires=[
+		"anyqt",
+	],
 	packages=[
 		'pyforms',
 		'pyforms.utils',
