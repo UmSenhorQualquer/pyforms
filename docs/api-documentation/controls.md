@@ -754,7 +754,7 @@ Returns the a specific cell from the QTableWidget.
  	
 #### data_changed_event(row, col, item)
 
-Called when any of list the content is updated.
+Called when any of content of the list is updated.
  	
 #### item_selection_changed_event()
 

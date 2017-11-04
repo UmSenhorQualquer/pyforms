@@ -40,6 +40,7 @@ class MouseEvent:
 		self.x = event.x()
 		self.y = event.y()
 		self.button = event.button()
+		self.event = event
 
 
 class AbstractGLWidget(object):
@@ -455,39 +456,39 @@ class AbstractGLWidget(object):
 		if event.key() == QtCore.Qt.Key_M: self._move_img = False
 
 		if event.key() == QtCore.Qt.Key_1: 
-			self._control.speed = 1
+			self._control.next_frame_step = 1
 			self.show_tmp_msg('Speed: 1x')
 
 		if event.key() == QtCore.Qt.Key_2: 
-			self._control.speed = 2
+			self._control.next_frame_step = 2
 			self.show_tmp_msg('Speed: 2x')
 
 		if event.key() == QtCore.Qt.Key_3: 
-			self._control.speed = 3
+			self._control.next_frame_step = 3
 			self.show_tmp_msg('Speed: 3x')
 
 		if event.key() == QtCore.Qt.Key_4: 
-			self._control.speed = 4
+			self._control.next_frame_step = 4
 			self.show_tmp_msg('Speed: 4x')
 
 		if event.key() == QtCore.Qt.Key_5: 
-			self._control.speed = 5
+			self._control.next_frame_step = 5
 			self.show_tmp_msg('Speed: 5x')
 
 		if event.key() == QtCore.Qt.Key_6: 
-			self._control.speed = 6
+			self._control.next_frame_step = 6
 			self.show_tmp_msg('Speed: 6x')
 
 		if event.key() == QtCore.Qt.Key_7: 
-			self._control.speed = 7
+			self._control.next_frame_step = 7
 			self.show_tmp_msg('Speed: 7x')
 
 		if event.key() == QtCore.Qt.Key_8: 
-			self._control.speed = 8
+			self._control.next_frame_step = 8
 			self.show_tmp_msg('Speed: 8x')
 
 		if event.key() == QtCore.Qt.Key_9: 
-			self._control.speed = 9
+			self._control.next_frame_step = 9
 			self.show_tmp_msg('Speed: 9x')
 
 		

@@ -157,6 +157,10 @@ class ControlList(ControlBase, QWidget):
 			self.tableWidget.setCellWidget(row, column, value)
 			value.show()
 			self.tableWidget.setRowHeight(row, value.height())
+		elif isinstance(value, ControlBase):
+			self.tableWidget.setCellWidget(row, column, value.form)
+			value.show()
+			self.tableWidget.setRowHeight(row, value.form.height())
 		else:
 			args = [value] if not hasattr(value, 'icon') else [QIcon(value.icon), value]
 			item = QTableWidgetItem()
