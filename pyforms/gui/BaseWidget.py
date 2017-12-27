@@ -461,9 +461,12 @@ class BaseWidget(QFrame):
     def visible(self):
         return self.isVisible()
 
-    @visible.setter
-    def visible(self, value):
-        self.show() if value else self.hide()
+    @property
+    def mainmenu(self):
+        return self._mainmenu
+    @mainmenu.setter
+    def mainmenu(self, value):
+        self._mainmenu = value
 
     ##########################################################################
     ############ PRIVATE FUNCTIONS ###########################################
