@@ -15,13 +15,22 @@ class ControlBase(object):
     @undocumented: __repr__
     """
 
-    def __init__(self, label='', default=None, helptext=None):
-        self._help      = helptext
-        self._value     = default
+    def __init__(self, *args, **kwargs):
         self._form      = None  # Qt widget
         self._parent    = None  # Parent window
-        self._label     = label # Label
         self._popup_menu = None
+        
+        self._help          = kwargs.get('helptext', None)
+        self._value         = kwargs.get('default',  None)
+        self._label         = kwargs.get('label', args[0] if len(args)>0 else '')
+        """
+        self._visible       = kwargs.get('visible', True)
+        self._error         = kwargs.get('error', False)
+        self._css           = kwargs.get('css', None)
+        self._enabled       = kwargs.get('enabled', True)
+        self._readonly      = kwargs.get('readonly', False)
+        self._label_visible = kwargs.get('label_visible', True)
+        """
         
         self.init_form()
 
@@ -37,6 +46,7 @@ class ControlBase(object):
         Load Control and initiate the events
         """     
         if self.help: self.form.setToolTip(self.help)
+   
 
 
     def load_form(self, data, path=None):
