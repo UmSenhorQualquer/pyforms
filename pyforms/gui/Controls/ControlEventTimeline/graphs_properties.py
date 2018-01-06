@@ -24,10 +24,10 @@ class GraphsProperties(BaseWidget):
 		# Definition of the forms fields
 		self._graphs_list = ControlList('Graphs list')
 		self._name        = ControlText('Name')
-		self._min_value   = ControlNumber('Min', 0, -sys.float_info.max, sys.float_info.max)
-		self._max_value   = ControlNumber('Max', 0, -sys.float_info.max, sys.float_info.max)
-		self._values_zoom = ControlSlider('Amplitude', 100, 60, 400)
-		self._values_top  = ControlNumber('Bottom', 0, -1000, 1000)
+		self._min_value   = ControlNumber('Min', default=0,  minimum=-sys.float_info.min, maximum=sys.float_info.max)
+		self._max_value   = ControlNumber('Max', default=0,  minimum=-sys.float_info.min, maximum=sys.float_info.max)
+		self._values_zoom = ControlSlider('Amplitude', default=100,  minimum=60, maximum=400)
+		self._values_top  = ControlNumber('Bottom', default=0,  minimum=-1000, maximum=1000)
 		self._remove_graph_btn = ControlButton('Remove graph')
 		self._value 	  = ControlLabel()
 

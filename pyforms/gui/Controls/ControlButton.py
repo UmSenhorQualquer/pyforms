@@ -16,6 +16,7 @@ class ControlButton(ControlBase):
 	def __init__(self, label='', default=None, checkable=False, helptext=None):
 		self._checkable = checkable
 		super(ControlButton, self).__init__(label=label, default=default, helptext=helptext)
+		if default: self.value = default
 
 	def init_form(self):
 		self._form = QPushButton()
