@@ -10,7 +10,7 @@ except:
 
 class BaseWidget(object):
 
-	def __init__(self, title):
+	def __init__(self, title, parent_win=None, win_flag=None):
 		self._parser = argparse.ArgumentParser()
 		with open('pid.txt', 'w') as f:
 			f.write( str(os.getpid()) )

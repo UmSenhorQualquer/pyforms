@@ -26,34 +26,34 @@ else:
 	from PyQt4.QtGui import QApplication
 	from PyQt4 import QtCore
 
+from pyforms.gui.BaseWidget import BaseWidget
 from pyforms.gui.Controls.ControlDockWidget import ControlDockWidget
 
 logger = logging.getLogger(__name__)
 
 
 class StandAloneContainer(QMainWindow):
-	def __init__(self, ClassObject):
+	def __init__(self, app_instance):
 		super(QMainWindow, self).__init__()
 
-		w = ClassObject()
-		w.app_main_window = self
-		self._widget = w
+		app_instance.app_main_window = self
+		self._widget = app_instance
 
-		if len(w.mainmenu) > 0:
-			w._mainmenu = self.__initMainMenu(w.mainmenu)
+		if len(app_instance.mainmenu) > 0:
+			app_instance._mainmenu = self.__initMainMenu(app_instance.mainmenu)
 
-		w.init_form()
+		app_instance.init_form()
 
 		if conf.PYFORMS_USE_QT5:
 			self.layout().setContentsMargins(conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN,conf.PYFORMS_MAINWINDOW_MARGIN)
 		else:
 			self.layout().setMargin(conf.PYFORMS_MAINWINDOW_MARGIN)
 
-		self.setCentralWidget(w)
-		self.setWindowTitle(w.title)
+		self.setCentralWidget(app_instance)
+		self.setWindowTitle(app_instance.title)
 
 		docks = {}
-		for name, item in w.controls.items():
+		for name, item in app_instance.controls.items():
 			if isinstance(item, ControlDockWidget):
 				if item.side not in docks:
 					docks[item.side] = []
@@ -176,14 +176,17 @@ def execute_test_file(myapp):
 		exec(code, global_vars, local_vars)
 
 
-def start_app(ClassObject, geometry=None):
+def start_app(AppClass, geometry=None, **kwargs):
 	from pysettings import conf
 
 	app = QApplication(sys.argv)
 
 	conf += 'pyforms.gui.settings'
 
-	mainwindow = StandAloneContainer(ClassObject)
+	app_def = AppClass(**kwargs)
+
+
+	mainwindow = StandAloneContainer(app_def)
 
 	myapp = mainwindow.centralWidget()
 

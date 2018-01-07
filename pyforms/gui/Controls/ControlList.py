@@ -101,7 +101,7 @@ class ControlList(ControlBase, QWidget):
 				for column in range(self.columns_count):
 					v = self.get_value(column, row)
 					if isinstance(v, BaseWidget):
-						columns.append(v.save({}))
+						columns.append(v.save_form({}, path))
 					else:
 						columns.append(str(v))
 				rows.append(columns)
@@ -115,7 +115,7 @@ class ControlList(ControlBase, QWidget):
 				for column in range(len(rows[row])):
 					v = self.get_value(column, row)
 					if isinstance(v, BaseWidget):
-						v.load(rows[row][column])
+						v.load_form(rows[row][column], path)
 					else:
 						self.set_value(column, row, rows[row][column])
 		elif 'value' in data.keys():
