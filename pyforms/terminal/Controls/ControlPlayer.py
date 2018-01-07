@@ -87,14 +87,18 @@ class ControlPlayer(ControlBase):
 
     @value.setter
     def value(self, value):
-        if isinstance( value, (str, unicode) ):
-            ControlBase.value.fset(self, cv2.VideoCapture( value ) )
-            self._filename = value
-        if isinstance( value, dict ): 
-            ControlBase.value.fset(self, cv2.VideoCapture( value['filename'] ) )
-            if 'position' in value.keys(): self.video_index = int(value['position'])
-            self._filename = value['filename']
-        self._max = int(self._value.get(7))
+        if value:
+            if isinstance( value, str ):
+                ControlBase.value.fset(self, cv2.VideoCapture( value ) )
+                self._filename = value
+            if isinstance( value, dict ): 
+                ControlBase.value.fset(self, cv2.VideoCapture( value['filename'] ) )
+                if 'position' in value.keys(): self.video_index = int(value['position'])
+                self._filename = value['filename']
+            self._max = int(self._value.get(7))
+        else:
+            self._filename = None
+            self._value = None
         
 
 

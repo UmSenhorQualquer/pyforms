@@ -7,11 +7,11 @@ class ControlBase(object):
     _label          = None
     _controlHTML    = ""
 
-    def __init__(self, label = "", defaultValue = "", helptext=None):
+    def __init__(self, *args, **kwargs):
         self._id = uuid.uuid4()
-        self._value = defaultValue
+        self._value = kwargs.get('default', None)
         self._parent = 1
-        self._label = label
+        self._label = kwargs.get('label', args[0] if len(args)>0 else '')
 
     def init_form(self): pass
 
