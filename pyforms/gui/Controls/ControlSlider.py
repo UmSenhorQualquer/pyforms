@@ -47,7 +47,7 @@ class ControlSlider(ControlBase):
 		if 'value' in data: self.value = int(data['value'])
 
 	def save_form(self, data, path=None):
-		if self.value: data['value'] = self.value
+		data['value'] = self.value
 
 	@property
 	def value(self):

@@ -29,7 +29,7 @@ class ControlCheckBox(ControlBase):
 
 	def load_form(self, data, path=None):
 		if 'value' in data:
-			self._form.checkBox.setChecked(data['value'] == 'True')
+			self._form.checkBox.setChecked(data['value'] == 'True' or data['value'] == True)
 
 	def save_form(self, data, path=None):
 		data['value'] = str(self._form.checkBox.isChecked())

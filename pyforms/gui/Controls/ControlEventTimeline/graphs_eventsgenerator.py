@@ -31,7 +31,7 @@ class GraphsEventsGenerator(BaseWidget):
 
 
 		# Definition of the forms fields
-		self._graphs_list = ControlList('Graphs list (try double click)')
+		self._graphs_list = ControlList('Graphs list (try double click)', readonly=False, select_entire_row=True)
 		self._equation    = ControlTextArea('Equation')
 		self._graphname   = ControlText('Graph name')
 		self._genevts_btn = ControlButton('Generate graph')

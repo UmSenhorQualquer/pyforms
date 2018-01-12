@@ -5,7 +5,9 @@
 
 """
 import logging
+from pyforms.terminal.BaseWidget import BaseWidget
 from pyforms.terminal.Controls.ControlBase import ControlBase
+
 
 logger = logging.getLogger(__name__)
 
@@ -38,17 +40,20 @@ class ControlList(ControlBase):
         return data
 
     def load_form(self, data, path=None):
-        if self.value:
-            rows = data['value']
-            for row in range(len(rows)):
-                for column in range(len(rows[row])):
-                    v = self.get_value(column, row)
+        rows = data.get('value')
+        
+        if self.value is not None and rows is not None:
+            for row_index in range(len(self.value)):
+                for column_index in range(len(self.value[row_index])):
+                    v = self.get_value(column_index, row_index)
+
                     if isinstance(v, BaseWidget):
-                        v.load(rows[row][column])
+                        v.load_form(rows[row_index][column_index], path)
                     else:
-                        self.set_value(column, row, rows[row][column])
-        elif 'value' in data.keys():
-            self.value = data['value']
+                        self.value[row_index] = list(self.value[row_index])
+                        self.value[row_index][column_index] = rows[row_index][column_index]
+        elif rows is not None:
+            self.value = rows
 
     def __add__(self, other):
         self._value.append(val)
@@ -89,10 +94,10 @@ class ControlList(ControlBase):
         """
 
     def set_value(self, column, row, value):
-        pass
+        self.value[row][column] = value
 
     def get_value(self, column, row):
-        pass
+        return self.value[row][column]
 
     def resize_rows_contents(self):
         pass

@@ -176,19 +176,24 @@ def execute_test_file(myapp):
 		exec(code, global_vars, local_vars)
 
 
-def start_app(AppClass, geometry=None, **kwargs):
+def start_app(*args, **kwargs):
 	from pysettings import conf
+
+	AppClass = args[0]
 
 	app = QApplication(sys.argv)
 
 	conf += 'pyforms.gui.settings'
 
-	app_def = AppClass(**kwargs)
+	
+	app_def = AppClass(**kwargs.get('app_args', {}))
 
 
 	mainwindow = StandAloneContainer(app_def)
 
 	myapp = mainwindow.centralWidget()
+
+	geometry = kwargs.get('geometry', None)
 
 	if geometry is not None:
 		mainwindow.show()

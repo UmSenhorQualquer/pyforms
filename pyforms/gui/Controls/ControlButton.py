@@ -13,9 +13,11 @@ from pyforms.gui.Controls.ControlBase import ControlBase
 
 
 class ControlButton(ControlBase):
-	def __init__(self, label='', default=None, checkable=False, helptext=None):
-		self._checkable = checkable
-		super(ControlButton, self).__init__(label=label, default=default, helptext=helptext)
+	def __init__(self, *args, **kwargs):
+		self._checkable = kwargs.get('checkable', False)
+		super(ControlButton, self).__init__(*args, **kwargs)
+
+		default = kwargs.get('default', None)
 		if default: self.value = default
 
 	def init_form(self):

@@ -33,7 +33,12 @@ class BaseWidget(QFrame):
     The class implements the most basic widget or window.
     """
 
-    def __init__(self, title='Untitled', parent_win=None, win_flag=None):
+    def __init__(self, *args, **kwargs):
+        title = kwargs.get('title', args[0] if len(args)>0 else '')
+
+        parent_win = kwargs.get('parent_win', None)
+        win_flag = kwargs.get('win_flag', None)
+
         if parent_win is not None and win_flag is None: win_flag = QtCore.Qt.Dialog
 
         QFrame.__init__(self) if parent_win is None else QFrame.__init__(self, parent_win, win_flag)
@@ -47,6 +52,7 @@ class BaseWidget(QFrame):
             layout.setContentsMargins(0,0,0,0)
         else:
             layout.setMargin(0)
+
 
         self.title = title
         self.has_progress = False

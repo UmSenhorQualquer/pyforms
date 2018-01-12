@@ -16,12 +16,15 @@ class ControlBase(object):
     def init_form(self): pass
 
     def load_form(self, data, path=None):
-        if 'value' in data: self.value = data['value']
+        oldvalue = self.value
+        self.value = data.get('value', None)
+        if oldvalue!=self.value: self.changed_event()
 
-    def save_form(self, data, path=None):
-        if self.value: data['value'] = self.value
-
-    def value_updated(self, value): pass
+    def changed_event(self):
+        """
+        Function called when ever the Control value is changed
+        """
+        return True
 
     def show(self):pass
 
@@ -55,7 +58,7 @@ class ControlBase(object):
     def value(self, value):
         oldvalue = self._value
         self._value = value
-        if oldvalue!=value: self.value_updated(value)
+        if oldvalue!=value: self.changed_event()
 
     ############################################################################
 
@@ -80,27 +83,4 @@ class ControlBase(object):
 
 
 
-    @property
-    def maxWidth(self): return -1
-
-    @maxWidth.setter
-    def maxWidth(self, value): pass
-
-    @property
-    def minWidth(self): return -1
-
-    @minWidth.setter
-    def minWidth(self, value): pass
-
-
-    @property
-    def maxHeight(self): return -1
-
-    @maxHeight.setter
-    def maxHeight(self, value): pass
-
-    @property
-    def minHeight(self): return -1
-
-    @minHeight.setter
-    def minHeight(self, value): pass
+    

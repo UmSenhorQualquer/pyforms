@@ -26,15 +26,16 @@ class ControlList(ControlBase, QWidget):
 
 	CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
-	def __init__(self, label="", default="", add_function=None,
-	             remove_function=None):
+	def __init__(self, *args, **kwargs):
 		QWidget.__init__(self)
 
-		self._plusFunction = add_function
-		self._minusFunction = remove_function
-		ControlBase.__init__(self, label, default)
+		self._plusFunction = kwargs.get('add_function', None)
+		self._minusFunction = kwargs.get('remove_function', None)
+		ControlBase.__init__(self, *args, **kwargs)
 
 		self.autoscroll = False
+
+		self.select_entire_row = kwargs.get('select_entire_row', False)
 		
 
 	##########################################################################
@@ -72,6 +73,8 @@ class ControlList(ControlBase, QWidget):
 		else:
 			self.plusButton.pressed.connect(plusFunction)
 			self.minusButton.pressed.connect(minusFunction)
+
+		
 
 	def __repr__(self):
 		return "ControlList " + str(self._value)

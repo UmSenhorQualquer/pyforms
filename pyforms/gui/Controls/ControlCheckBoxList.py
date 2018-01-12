@@ -130,6 +130,7 @@ class ControlCheckBoxList(ControlBase):
     def value(self, value):
         self.clear()
         for row in value: self += row
+        self.changed_event()
 
     @property
     def selected_row_index(self):

@@ -2,16 +2,13 @@ from pyforms.terminal.Controls.ControlBase import ControlBase
 
 class ControlSlider(ControlBase):
 
-    _min = 0
-    _max = 100
 
-    def __init__(self, label = "", helptext=None, defaultValue = 0, min = 0, max = 100):
-        self._updateSlider = True
-        self._min = min
-        self._max = max
+    def __init__(self, *args, **kwargs):
+        self._min = kwargs.get('minimum', 0)
+        self._max = kwargs.get('maximum', 100)
+        if 'default' not in kwargs: kwargs['default'] = 0
+        ControlBase.__init__(self, *args, **kwargs)
         
-        ControlBase.__init__(self, label, defaultValue)
-
 
     @property
     def min(self): return self._min

@@ -19,6 +19,8 @@ class ControlBase(object):
         self._form      = None  # Qt widget
         self._parent    = None  # Parent window
         self._popup_menu = None
+
+        self.changed_event  = kwargs.get('changed_event', self.changed_event)
         
         self._help          = kwargs.get('helptext', None)
         self._value         = kwargs.get('default',  None)
@@ -33,6 +35,12 @@ class ControlBase(object):
         """
         
         self.init_form()
+
+        self.enabled = kwargs.get('enabled', True)
+        self.readonly = kwargs.get('readonly', False)
+
+        if not kwargs.get('visible', True):
+            self.hide()
 
 
     def __repr__(self): return str(self._value)
@@ -62,8 +70,7 @@ class ControlBase(object):
         Save a value to dict variable
         @param data: dictionary with to where the value of the Control will be added
         """
-        if self.value:
-            data['value'] = self.value
+        data['value'] = self.value
         return data
 
     def show(self):
