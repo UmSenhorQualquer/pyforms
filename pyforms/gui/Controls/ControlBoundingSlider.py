@@ -19,6 +19,7 @@ class GaugeWidgetVertical(QWidget):
         self.setMinimumWidth(30)
         self.setMaximumWidth(50)
 
+        self._step = 0
         self._lower = 0
         self._higher = 100
         self._minVal = 0
@@ -52,7 +53,11 @@ class GaugeWidgetVertical(QWidget):
         draw.setBrush(QtCore.Qt.NoBrush)
         draw.setPen(QColor(200, 200, 255))
 
-        for i in range(self.height() / 5, (self.height() - self.height() / 5) + 1, self.height() / 5):
+        b = int(self.height() / 5)
+        e = int(self.height() - (self.height() / 5) + 1)
+        s = int(self.height() / 5)
+
+        for i in range( b, e, s ):
             draw.drawLine(0, i, window_with, i)
 
         draw.setBrush(QColor(33, 133, 208))
@@ -250,15 +255,14 @@ class GaugeWidgetHorizontal(GaugeWidgetVertical):
 
 
 class ControlBoundingSlider(ControlBase):
-    def __init__(self, label="", default=[20, 40], min=0, max=100, horizontal=False, helptext=None,
-                 show_spinboxes=True):
-        self._horizontal = horizontal
-        self._show_spinboxes = show_spinboxes
-        ControlBase.__init__(self, label, default, helptext=helptext)
+    def __init__(self, *args, **kwargs):
+        self._horizontal     = kwargs.get('horizontal', True)
+        self._show_spinboxes = kwargs.get('show_spinboxes', True)
+        ControlBase.__init__(self,  *args, **kwargs)
 
-        self.min = min
-        self.max = max
-        self.value = default
+        self.min = kwargs.get('min', kwargs.get('minimum', 0))
+        self.max = kwargs.get('max', kwargs.get('maximum', 100))
+        self.value = kwargs.get('default', [10,20])
         self.__update()
 
     def init_form(self):
