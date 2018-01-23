@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
-
-from pyforms.gui.Controls.ControlText import ControlText
+from pysettings 					  import conf
+from pyforms.gui.controls.ControlText import ControlText
 
 import pyforms.utils.tools as tools
 
@@ -28,9 +27,9 @@ class ControlFile(ControlText):
 	def click(self):
 		value = QFileDialog.getOpenFileName(self.parent, self._label, self.value)
 		
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			value = value[0]
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			value = str(value)
 
 		if value and len(value)>0: self.value = value

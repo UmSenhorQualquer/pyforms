@@ -1,31 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import csv
-import os
+import csv, os
 
-from pysettings import conf
+from pysettings  	 import conf
+from AnyQt.QtWidgets import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox
+from AnyQt.QtWidgets import QPushButton, QLabel, QSlider, QHBoxLayout, QVBoxLayout
+from AnyQt 			 import QtCore
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox, QPushButton, QLabel, \
-		QSlider, QHBoxLayout, QVBoxLayout
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox, QPushButton, QLabel, QSlider, \
-		QHBoxLayout, QVBoxLayout
-	from PyQt4 import QtCore
-
-from pyforms.gui.Controls.ControlEventTimeline.TimelineChart import TimelineChart
-from pyforms.gui.Controls.ControlBase import ControlBase
-from pyforms.gui.Controls.ControlEventTimeline.TimelineWidget import TimelineWidget
-from pyforms.gui.Controls.ControlEventTimeline.TimelinePopupWindow import TimelinePopupWindow
-from pyforms.gui.Controls.ControlEventTimeline.import_window import ImportWindow
-
-from pyforms.gui.Controls.ControlEventTimeline.graphs_graph2event import Graph2Event
-from pyforms.gui.Controls.ControlEventTimeline.graphs_properties  import GraphsProperties
-from pyforms.gui.Controls.ControlEventTimeline.graphs_eventsgenerator import GraphsEventsGenerator
-
+from pyforms.gui.controls.ControlBase 								import ControlBase
+from pyforms.gui.controls.control_event_timeline.TimelineChart 		import TimelineChart
+from pyforms.gui.controls.control_event_timeline.TimelineWidget 		import TimelineWidget
+from pyforms.gui.controls.control_event_timeline.TimelinePopupWindow 	import TimelinePopupWindow
+from pyforms.gui.controls.control_event_timeline.import_window 		import ImportWindow
+from pyforms.gui.controls.control_event_timeline.graphs_graph2event 		import Graph2Event
+from pyforms.gui.controls.control_event_timeline.graphs_properties  		import GraphsProperties
+from pyforms.gui.controls.control_event_timeline.graphs_eventsgenerator 	import GraphsEventsGenerator
 
 
 class ControlEventTimeline(ControlBase, QWidget):
@@ -90,10 +80,10 @@ class ControlEventTimeline(ControlBase, QWidget):
 		vlayout = QVBoxLayout()
 		hlayout = QHBoxLayout()
 		
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			hlayout.setContentsMargins(0,0,0,0)
 			vlayout.setContentsMargins(0,0,0,0)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			hlayout.setMargin(0)
 			vlayout.setMargin(0)
 

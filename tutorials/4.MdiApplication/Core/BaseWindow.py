@@ -1,10 +1,10 @@
 import pyforms
 from pyforms import BaseWidget
 
-from pyforms.Controls	import ControlText
-from pyforms.Controls	import ControlButton
-from pyforms.Controls 	import ControlDockWidget
-from pyforms.Controls	import ControlMdiArea
+from pyforms.controls	import ControlText
+from pyforms.controls	import ControlButton
+from pyforms.controls 	import ControlDockWidget
+from pyforms.controls	import ControlMdiArea
 
 from Core.SimpleExample1 import SimpleExample1
 from Core.Controllers.ProjectTree import ProjectTree

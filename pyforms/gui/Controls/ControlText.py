@@ -10,18 +10,10 @@
 @status: Development
 @lastEditedBy: Carlos Mão de Ferro (carlos.maodeferro@neuro.fchampalimaud.org)
 '''
-
-from pyforms.gui.Controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QLineEdit
-	from PyQt5 import uic
-else:
-	from PyQt4.QtGui import QLineEdit
-	from PyQt4 import uic
+from pyforms.gui.controls.ControlBase import ControlBase
+from AnyQt.QtWidgets import QLineEdit
+from AnyQt 			 import uic
 
 class ControlText(ControlBase):
 

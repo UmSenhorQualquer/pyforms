@@ -7,7 +7,7 @@ from AnyQt 			 import uic, QtCore
 
 
 import pyforms.utils.tools as tools
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlCheckBox(ControlBase):

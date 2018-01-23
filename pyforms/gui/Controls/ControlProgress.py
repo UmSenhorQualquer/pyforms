@@ -2,19 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-
-from pyforms.gui.Controls.ControlBase import ControlBase
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic
-	from PyQt5.QtWidgets import QApplication
-
-else:
-	from PyQt4 import uic
-	from PyQt4.QtGui import QApplication
-
+from pyforms.gui.controls.ControlBase import ControlBase
+from AnyQt 			 import uic
+from AnyQt.QtWidgets import QApplication
 
 class ControlProgress(ControlBase):
 	def __init__(self, label="%p%", default=0, min=0, max=100):

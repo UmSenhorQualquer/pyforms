@@ -1,12 +1,12 @@
 import csv, time, datetime, decimal, logging, sys, numpy as np
 from pyforms import BaseWidget
-from pyforms.Controls import ControlProgress
-from pyforms.Controls import ControlButton
-from pyforms.Controls import ControlList
-from pyforms.Controls import ControlNumber
-from pyforms.Controls import ControlSlider
-from pyforms.Controls import ControlText
-from pyforms.Controls import ControlLabel
+from pyforms.controls import ControlProgress
+from pyforms.controls import ControlButton
+from pyforms.controls import ControlList
+from pyforms.controls import ControlNumber
+from pyforms.controls import ControlSlider
+from pyforms.controls import ControlText
+from pyforms.controls import ControlLabel
 
 logger = logging.getLogger(__name__)
 

@@ -8,7 +8,7 @@ import pyforms.utils.tools as tools
 
 from AnyQt import uic
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlNumber(ControlBase):

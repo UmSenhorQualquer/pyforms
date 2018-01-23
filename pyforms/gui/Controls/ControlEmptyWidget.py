@@ -3,10 +3,10 @@
 
 from pysettings import conf
 
-from AnyQt.QtWidgets import QWidget, QVBoxLayout
-
-from pyforms.gui.Controls.ControlBase import ControlBase
-from pyforms.gui.BaseWidget import BaseWidget
+from AnyQt 								import _api
+from AnyQt.QtWidgets 				    import QWidget, QVBoxLayout
+from pyforms.gui.controls.ControlBase   import ControlBase
+from pyforms.gui.basewidget 			import BaseWidget
 
 
 class ControlEmptyWidget(ControlBase, QWidget):
@@ -14,9 +14,9 @@ class ControlEmptyWidget(ControlBase, QWidget):
 		QWidget.__init__(self)
 		layout = QVBoxLayout()
 
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			layout.setContentsMargins(0,0,0,0)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			layout.setMargin(0)
 
 

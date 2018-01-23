@@ -3,19 +3,13 @@
 
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QToolBox
-	from PyQt5.QtWidgets import QFrame
-	from PyQt5.QtWidgets import QVBoxLayout
-	from PyQt5.QtWidgets import QHBoxLayout
+from AnyQt 			 import _api
+from AnyQt.QtWidgets import QToolBox
+from AnyQt.QtWidgets import QFrame
+from AnyQt.QtWidgets import QVBoxLayout
+from AnyQt.QtWidgets import QHBoxLayout
 
-else:
-	from PyQt4.QtGui import QToolBox
-	from PyQt4.QtGui import QFrame
-	from PyQt4.QtGui import QVBoxLayout
-	from PyQt4.QtGui import QHBoxLayout
-
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlToolBox(ControlBase):
@@ -39,9 +33,9 @@ class ControlToolBox(ControlBase):
 				widget = QFrame(self.form);
 				layout = QVBoxLayout();
 				
-				if conf.PYFORMS_USE_QT5:
+				if _api.USED_API == _api.QT_API_PYQT5:
 					layout.setContentsMargins(0,0,0,0)
-				else:
+				elif _api.USED_API == _api.QT_API_PYQT4:
 					layout.setMargin(0)
 
 				widget.setLayout(layout)
@@ -51,9 +45,9 @@ class ControlToolBox(ControlBase):
 						hwidget = QFrame(self.form);
 						hlayout = QHBoxLayout();
 						
-						if conf.PYFORMS_USE_QT5:
+						if _api.USED_API == _api.QT_API_PYQT5:
 							hlayout.setContentsMargins(0,0,0,0)
-						else:
+						elif _api.USED_API == _api.QT_API_PYQT4:
 							hlayout.setMargin(0)
 							
 						hwidget.setLayout(hlayout)

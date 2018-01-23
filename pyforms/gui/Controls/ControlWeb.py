@@ -9,16 +9,9 @@ __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView
-	from PyQt5.QtCore import QUrl
-else:
-	from PyQt4.QtCore import QUrl
-	from PyQt4.QtWebKit import QWebView
-
-from pyforms.gui.Controls.ControlBase import ControlBase
+from AnyQt.QtWebEngineWidgets 			import QWebEngineView as QWebView
+from AnyQt.QtCore 						import QUrl
+from pyforms.gui.controls.ControlBase 	import ControlBase
 
 
 class ControlWeb(ControlBase, QWebView):

@@ -1,17 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
-
 import pyforms.utils.tools as tools
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic
-
-else:
-	from PyQt4 import uic
-
-from pyforms.gui.Controls.ControlBase import ControlBase
+from AnyQt 							  import uic
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlSlider(ControlBase):

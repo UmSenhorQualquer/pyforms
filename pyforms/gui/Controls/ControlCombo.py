@@ -8,7 +8,7 @@ from pysettings import conf
 
 from AnyQt.QtWidgets import QLabel, QWidget, QComboBox, QHBoxLayout, QSizePolicy
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlCombo(ControlBase, QWidget):

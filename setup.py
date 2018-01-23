@@ -22,21 +22,10 @@ setup(
 	install_requires=[
 		"anyqt",
 	],
-	packages=[
-		'pyforms',
-		'pyforms.utils',
-		'pyforms.terminal',
-		'pyforms.terminal.Controls',
-		'pyforms.gui',
-		'pyforms.gui.dialogs',
-		'pyforms.gui.Controls',
-		'pyforms.gui.Controls.ControlEventTimeline',
-		'pyforms.gui.Controls.ControlEventsGraph',
-		'pyforms.gui.Controls.ControlPlayer'],
-
+	packages=find_packages(),
 	package_data={'pyforms': [
-		'gui/Controls/uipics/*.png',
-		'gui/mainWindow.ui', 'gui/Controls/*.ui', 'gui/Controls/ControlPlayer/*.ui',
-		'gui/Controls/ControlEventTimeline/*.ui']
+		'gui/controls/uipics/*.png',
+		'gui/mainWindow.ui', 'gui/controls/*.ui', 'gui/controls/control_player/*.ui',
+		'gui/controls/control_events_timeline/*.ui']
 	},
 )

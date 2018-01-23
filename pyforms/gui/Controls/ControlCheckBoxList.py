@@ -8,7 +8,7 @@ import pyforms.utils.tools as tools
 from AnyQt 			 import uic, QtCore
 from AnyQt.QtWidgets import QListWidgetItem
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlCheckBoxList(ControlBase):

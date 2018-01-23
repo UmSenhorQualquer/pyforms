@@ -1,14 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import pyforms.utils.tools as tools
-from pysettings import conf
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic, QtGui
-else:
-	from PyQt4 import uic, QtGui
-from pyforms.gui.Controls.ControlBase import ControlBase
-
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
@@ -17,6 +9,9 @@ __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
+import pyforms.utils.tools as tools
+from AnyQt 		import uic, QtGui
+from pyforms.gui.controls.ControlBase import ControlBase
 
 class ControlTextArea(ControlBase):
 

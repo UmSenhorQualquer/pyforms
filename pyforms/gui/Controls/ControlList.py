@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlList
+""" pyforms.gui.controls.ControlList
 
 """
 import logging
@@ -13,8 +13,8 @@ from AnyQt 			 import QtCore, uic
 from AnyQt.QtWidgets import QTableWidgetItem, QWidget, QAbstractItemView
 from AnyQt.QtGui 	 import QIcon
 
-from pyforms.gui.BaseWidget import BaseWidget
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.basewidget import BaseWidget
+from pyforms.gui.controls.ControlBase import ControlBase
 
 logger = logging.getLogger(__name__)
 

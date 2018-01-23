@@ -2,21 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from pysettings      import conf
+from AnyQt.QtWidgets import QWidget
+from AnyQt.QtGui 	 import QColor, QPainter, QFont
+from AnyQt 		     import QtCore
 
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget
-	from PyQt5.QtGui import QColor, QPainter, QFont
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QWidget, QColor, QPainter, QFont
-	from PyQt4 import QtCore
-
-from pyforms.gui.Controls.ControlEventsGraph.Track import Track
-from pyforms.gui.Controls.ControlEventsGraph.Pointer import Pointer
-from pyforms.gui.Controls.ControlEventsGraph.Event import Event
+from pyforms.gui.controls.control_events_graph.Track 	 import Track
+from pyforms.gui.controls.control_events_graph.Pointer import Pointer
+from pyforms.gui.controls.control_events_graph.Event 	 import Event
 
 
 class EventsWidget(QWidget):

@@ -1,4 +1,4 @@
-from pyforms.Controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir, ControlNumber
+from pyforms.controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir, ControlNumber
 from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 

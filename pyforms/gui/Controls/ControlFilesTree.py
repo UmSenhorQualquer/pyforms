@@ -4,7 +4,7 @@
 
 from pysettings import conf
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 from AnyQt 			 import QtCore
 from AnyQt.QtWidgets import QTreeView, QFileSystemModel

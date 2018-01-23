@@ -7,7 +7,7 @@ from pysettings import conf
 
 from AnyQt.QtWidgets import QMdiArea, QMdiSubWindow
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 logger = logging.getLogger(__name__)
 

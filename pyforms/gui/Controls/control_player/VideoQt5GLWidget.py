@@ -1,9 +1,9 @@
-from pyforms.gui.Controls.ControlPlayer.AbstractGLWidget import AbstractGLWidget
+from pyforms.gui.controls.ControlPlayer.AbstractGLWidget import AbstractGLWidget
 
 import math
-from PyQt5 import QtGui
-from PyQt5.QtWidgets import QOpenGLWidget
-from PyQt5 import QtCore
+from AnyQt import QtGui
+from AnyQt.QtWidgets import QOpenGLWidget
+from AnyQt import QtCore
 
 
 class VideoQt5GLWidget(AbstractGLWidget, QOpenGLWidget):

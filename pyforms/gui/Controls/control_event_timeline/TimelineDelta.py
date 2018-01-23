@@ -1,30 +1,17 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QInputDialog
-	from PyQt5.QtGui import QColor
-
-else:
-	from PyQt4.QtGui import QColor, QInputDialog
-
-from pyforms.gui.Controls.ControlEventTimeline.Track import Track
-
-from pyforms import BaseWidget
-from pyforms.Controls import ControlText, ControlNumber, ControlButton
-
+from pyforms.gui.controls.control_event_timeline.Track import Track
+from pyforms 		  import BaseWidget
+from pyforms.controls import ControlText, ControlNumber, ControlButton
+from AnyQt.QtWidgets  import QInputDialog
+from AnyQt.QtGui 	  import QColor
 
 class DeltaEditWindow(BaseWidget):
 
 	def __init__(self, parent_win, label, begin, end):
 		BaseWidget.__init__(self, 'Edit frame', parent_win=parent_win)
 
-		if conf.PYFORMS_USE_QT5:
-			self.layout().setContentsMargins(5,5,5,5)
-		else:
-			self.layout().setMargin(5)
+		self.set_margin(5)
 
 		self._label = ControlText('Label', label)
 		self._begin = ControlNumber('Begin', begin, 0, 100000000000000)

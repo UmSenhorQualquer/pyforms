@@ -1,45 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-
-import os
 import json
-import subprocess
-import time, sys
-from datetime import datetime, timedelta
 
-from pysettings import conf
+from pysettings 	 import conf
+from AnyQt.QtWidgets import QFrame
+from AnyQt.QtWidgets import QVBoxLayout
+from AnyQt.QtWidgets import QTabWidget
+from AnyQt.QtWidgets import QSplitter
+from AnyQt.QtWidgets import QHBoxLayout
+from AnyQt.QtWidgets import QSpacerItem
+from AnyQt.QtWidgets import QSizePolicy
+from AnyQt.QtWidgets import QLabel
+from AnyQt.QtGui 	 import QFont
+from AnyQt.QtWidgets import QFileDialog
+from AnyQt.QtWidgets import QApplication
+from AnyQt 			 import QtCore, _api
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QFrame
-	from PyQt5.QtWidgets import QVBoxLayout
-	from PyQt5.QtWidgets import QTabWidget
-	from PyQt5.QtWidgets import QSplitter
-	from PyQt5.QtWidgets import QHBoxLayout
-	from PyQt5.QtWidgets import QSpacerItem
-	from PyQt5.QtWidgets import QSizePolicy
-	from PyQt5.QtWidgets import QLabel
-	from PyQt5.QtGui import QFont
-	from PyQt5.QtWidgets import QFileDialog
-	from PyQt5.QtWidgets import QApplication
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QFrame
-	from PyQt4.QtGui import QVBoxLayout
-	from PyQt4.QtGui import QTabWidget
-	from PyQt4.QtGui import QSplitter
-	from PyQt4.QtGui import QHBoxLayout
-	from PyQt4.QtGui import QSpacerItem
-	from PyQt4.QtGui import QSizePolicy
-	from PyQt4.QtGui import QLabel
-	from PyQt4.QtGui import QFont
-	from PyQt4.QtGui import QFileDialog
-	from PyQt4.QtGui import QApplication
-	from PyQt4 import QtCore
-
-from pyforms.gui.Controls.ControlBase import ControlBase
-from pyforms.gui.Controls.ControlProgress import ControlProgress
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class BaseWidget(QFrame):
@@ -58,13 +36,12 @@ class BaseWidget(QFrame):
 		layout = QVBoxLayout()
 		self.setLayout(layout)
 		
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			layout.setContentsMargins(0,0,0,0)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			layout.setMargin(0)
 
 		self.title = title
-		self.has_progress = False
 
 		self._mainmenu = []
 		self._splitters = []
@@ -86,12 +63,7 @@ class BaseWidget(QFrame):
 		"""
 		if not self._formLoaded:
 
-			if self.has_progress:
-				self._progress = ControlProgress("Progress", 0, 100)
-				self._progress.hide()
-				if self._formset != None:
-					self._formset += ['_progress']
-
+			
 			if self._formset is not None:
 				control = self.generate_panel(self._formset)
 				self.layout().addWidget(control)
@@ -104,9 +76,9 @@ class BaseWidget(QFrame):
 			self._formLoaded = True
 
 	def set_margin(self, margin):
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			self.layout().setContentsMargins(margin,margin,margin,margin)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			self.layout().setMargin(margin)
 
 
@@ -318,9 +290,9 @@ class BaseWidget(QFrame):
 						param.name = row
 						layout.addWidget(param.form)
 		
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			layout.setContentsMargins(0,0,0,0)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			layout.setMargin(0)
 			
 		control.setLayout(layout)
@@ -448,34 +420,7 @@ class BaseWidget(QFrame):
 	def uid(self, value):
 		self._uid = value
 
-	@property
-	def max_progress(self):
-		return self._progress.max
-
-	@max_progress.setter
-	def max_progress(self, value):
-		self._progress.max = value
-
-	@property
-	def min_progress(self):
-		return self._progress.min
-
-	@min_progress.setter
-	def min_progress(self, value):
-		self._progress.min = value
-
-	@property
-	def progress(self):
-		return self._progress.value
-
-	@progress.setter
-	def progress(self, value):
-		self._progress.value = value
-		QApplication.processEvents()
-
-		if value == self.max_progress: self._progress.hide()
-		if value == self.min_progress: self._progress.show()
-
+	
 	@property
 	def visible(self):
 		return self.isVisible()

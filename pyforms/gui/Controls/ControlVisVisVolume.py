@@ -9,19 +9,11 @@ __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
 
-import pyforms.utils.tools as tools
-from pyforms.gui.Controls.ControlBase import ControlBase
-
-from visvis import Point, Pointset
-import visvis as vv
-import numpy as np
-
-from pysettings import conf
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
-else:
-	from PyQt4.QtGui import QWidget, QVBoxLayout, QSizePolicy
-
+import visvis as vv, numpy as np
+from pyforms.gui.controls.ControlBase import ControlBase
+from visvis  						  import Point, Pointset
+from AnyQt 							  import _api
+from AnyQt.QtWidgets  				  import QWidget, QVBoxLayout, QSizePolicy
 
 class ControlVisVisVolume(ControlBase):
 	def init_form(self):
@@ -29,9 +21,9 @@ class ControlVisVisVolume(ControlBase):
 		layout = QVBoxLayout()
 		layout.setMargin(0)
 
-		if conf.PYFORMS_USE_QT5:
+		if _api.USED_API == _api.QT_API_PYQT5:
 			layout.setContentsMargins(0,0,0,0)
-		else:
+		elif _api.USED_API == _api.QT_API_PYQT4:
 			layout.setMargin(0)
 
 		self._form.setLayout(layout)

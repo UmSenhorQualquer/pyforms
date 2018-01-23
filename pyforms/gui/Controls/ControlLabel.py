@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlLabel"""
+""" pyforms.gui.controls.ControlLabel"""
 
 import pyforms.utils.tools as tools
 from pysettings import conf
 
 from AnyQt           import uic
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 __author__ = "Carlos Mão de Ferro"
 __copyright__ = ""

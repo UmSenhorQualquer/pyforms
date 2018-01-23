@@ -10,25 +10,25 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 from pyforms 			import BaseWidget
-from pyforms.Controls 	import ControlBoundingSlider
-from pyforms.Controls 	import ControlText
-from pyforms.Controls 	import ControlButton
-from pyforms.Controls 	import ControlCheckBox
-from pyforms.Controls 	import ControlCheckBoxList
-from pyforms.Controls 	import ControlCombo
-from pyforms.Controls 	import ControlDir
-from pyforms.Controls 	import ControlDockWidget
-from pyforms.Controls 	import ControlEmptyWidget
-from pyforms.Controls 	import ControlFile
-from pyforms.Controls 	import ControlFilesTree
-from pyforms.Controls 	import ControlImage
-from pyforms.Controls 	import ControlList
-from pyforms.Controls 	import ControlPlayer
-from pyforms.Controls 	import ControlProgress
-from pyforms.Controls 	import ControlSlider
-from pyforms.Controls 	import ControlVisVis
-from pyforms.Controls 	import ControlVisVisVolume
-from pyforms.Controls 	import ControlEventTimeline
-from pyforms.Controls 	import ControlCodeEditor
+from pyforms.controls 	import ControlBoundingSlider
+from pyforms.controls 	import ControlText
+from pyforms.controls 	import ControlButton
+from pyforms.controls 	import ControlCheckBox
+from pyforms.controls 	import ControlCheckBoxList
+from pyforms.controls 	import ControlCombo
+from pyforms.controls 	import ControlDir
+from pyforms.controls 	import ControlDockWidget
+from pyforms.controls 	import ControlEmptyWidget
+from pyforms.controls 	import ControlFile
+from pyforms.controls 	import ControlFilesTree
+from pyforms.controls 	import ControlImage
+from pyforms.controls 	import ControlList
+from pyforms.controls 	import ControlPlayer
+from pyforms.controls 	import ControlProgress
+from pyforms.controls 	import ControlSlider
+from pyforms.controls 	import ControlVisVis
+from pyforms.controls 	import ControlVisVisVolume
+from pyforms.controls 	import ControlEventTimeline
+from pyforms.controls 	import ControlCodeEditor
 
 import pyforms

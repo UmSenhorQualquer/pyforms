@@ -3,7 +3,7 @@
 
 from pysettings import conf
 
-from pyforms.gui.Controls.ControlText import ControlText
+from pyforms.gui.controls.ControlText import ControlText
 
 import pyforms.utils.tools as tools
 

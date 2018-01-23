@@ -1,16 +1,7 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtGui import QColor
-	from PyQt5 import QtCore
-
-else:
-	from PyQt4.QtGui import QColor
-	from PyQt4 import QtCore
-
+from AnyQt.QtGui import QColor
+from AnyQt 		 import QtCore
 
 class TimelinePointer(object):
 	def __init__(self, position, parent):

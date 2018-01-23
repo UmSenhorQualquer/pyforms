@@ -6,7 +6,7 @@ import logging
 from AnyQt import _api
 from pysettings import conf
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools
 
 from AnyQt 			 import QtCore, uic
@@ -14,7 +14,7 @@ from AnyQt.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QSp
 from AnyQt.QtGui 	 import QFontMetrics, QColor, QIcon, QFont
 
 if _api.USED_API == _api.QT_API_PYQT5:
-    from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
+    from AnyQt.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 elif _api.USED_API == _api.QT_API_PYQT4:
     from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 

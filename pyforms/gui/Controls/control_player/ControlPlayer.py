@@ -1,48 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlPlayer.ControlPlayer
+""" pyforms.gui.controls.ControlPlayer.ControlPlayer
 
 """
-
-import math
-import os
-import logging
-
-from pysettings import conf
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import uic
-	from PyQt5 import QtCore
-	from PyQt5.QtWidgets import QFrame	
-	from PyQt5.QtWidgets import QApplication
-
-	import platform
-
-	if platform.system() == 'Darwin':
-		from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
-	else:
-		from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
-
-else:	
-	from PyQt4.QtGui import QFrame
-	from PyQt4 import uic
-	from PyQt4 import QtCore
-	from PyQt4.QtGui import QApplication
-	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
-
-from pyforms.gui.Controls.ControlBase import ControlBase
-import pyforms.utils.tools as tools
-from pysettings import conf
-
-try:
-	import cv2
-except:
-	print("Warning: was not possible to import cv2 in ControlPlayer")
-
-
-
-
-
 __author__ = "Ricardo Ribeiro"
 __credits__ = ["Ricardo Ribeiro"]
 __license__ = "MIT"
@@ -50,6 +11,26 @@ __version__ = "0.0"
 __maintainer__ = "Ricardo Ribeiro"
 __email__ = "ricardojvr@gmail.com"
 __status__ = "Development"
+
+import logging, platform, os, math, cv2
+
+from pysettings 	 import conf
+from AnyQt 			 import uic, _api
+from AnyQt 			 import QtCore
+from AnyQt.QtWidgets import QFrame	
+from AnyQt.QtWidgets import QApplication
+from pyforms.gui.controls.ControlBase import ControlBase
+
+if _api.USED_API == _api.QT_API_PYQT5:
+	import platform
+	if platform.system() == 'Darwin':
+		from pyforms.gui.controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+	else:
+		from pyforms.gui.controls.ControlPlayer.VideoGLWidget 	 import VideoGLWidget
+
+elif _api.USED_API == _api.QT_API_PYQT4:	
+	from pyforms.gui.controls.ControlPlayer.VideoGLWidget 		 import VideoGLWidget
+
 
 
 class ControlPlayer(ControlBase, QFrame):

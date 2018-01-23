@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" pyforms.gui.Controls.ControlEventTimeline.__init__
+""" pyforms.gui.controls.ControlEventTimeline.__init__
 
 """
 
@@ -16,6 +16,6 @@ __status__ = "Development"
 
 __all__ = ['ControlEventTimeline',
            'TimelineWidget',
-           'Event',
-           'Pointer',
+           'TimelineDelta',
+           'TimelinePointer',
            'TimelinePopupWindow']

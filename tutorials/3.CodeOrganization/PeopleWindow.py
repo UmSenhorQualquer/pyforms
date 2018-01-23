@@ -3,7 +3,7 @@ from People import People
 from PersonWindow import PersonWindow
 from AddMenuFuntionality import AddMenuFuntionality
 
-from pyforms.Controls		import ControlDockWidget
+from pyforms.controls		import ControlDockWidget
 
 
 class PeopleWindow(AddMenuFuntionality, People, BaseWidget):

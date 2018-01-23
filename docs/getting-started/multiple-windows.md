@@ -67,8 +67,8 @@ This window should inherit from the BaseWidget and Person classes.
 ```python
 import pyforms
 from pyforms 			import BaseWidget
-from pyforms.Controls 	import ControlText
-from pyforms.Controls 	import ControlButton
+from pyforms.controls 	import ControlText
+from pyforms.controls 	import ControlButton
 from Person 			import Person
 
 class PersonWindow(Person, BaseWidget):
@@ -111,7 +111,7 @@ This window should inherit from the BaseWidget and People classes.
 ```python
 import pyforms
 from pyforms 				import BaseWidget
-from pyforms.Controls  		import ControlList
+from pyforms.controls  		import ControlList
 from People 				import People
 from PersonWindow 			import PersonWindow
 from AddMenuFuntionality 	import AddMenuFuntionality
@@ -179,7 +179,7 @@ The application will look like:
 Instead of opening a new window everytime we want to add a new Person, we will change the Application to open the PersonWindow inside the PeopleWindow. For this we will use the ControlEmptyWidget.
 
 ```python
-from pyforms.Controls		import ControlEmptyWidget
+from pyforms.controls		import ControlEmptyWidget
 ...
 
 	def __init__(self):
@@ -205,7 +205,7 @@ from pyforms.Controls		import ControlEmptyWidget
 A DockWidget works like the EmptyWidget but can be detached or moved around the sides of the main Window.
 
 ```python
-from pyforms.Controls		import ControlDockWidget
+from pyforms.controls		import ControlDockWidget
 ...
 
 	def __init__(self):

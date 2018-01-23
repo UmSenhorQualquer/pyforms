@@ -7,7 +7,7 @@ from AnyQt 			 import QtCore
 from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpinBox
 from AnyQt.QtGui 	 import QFont, QColor, QCursor, QPainter
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class GaugeWidgetVertical(QWidget):
@@ -273,9 +273,9 @@ class ControlBoundingSlider(ControlBase):
 				hlayout = QVBoxLayout()
 			
 
-			if conf.PYFORMS_USE_QT5:
+			if _api.USED_API == _api.QT_API_PYQT5:
 				hlayout.setContentsMargins(0,0,0,0)
-			else:
+			elif _api.USED_API == _api.QT_API_PYQT4:
 				hlayout.setMargin(0)
 
 

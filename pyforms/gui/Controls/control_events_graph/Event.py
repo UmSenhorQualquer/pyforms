@@ -1,15 +1,8 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtGui import QColor
-
-else:
-	from PyQt4.QtGui import QColor
-
-from pyforms.gui.Controls.ControlEventsGraph.Track import Track
+from AnyQt.QtGui import QColor
+from pyforms.gui.controls.control_events_graph.Track import Track
 
 
 class Event(object):

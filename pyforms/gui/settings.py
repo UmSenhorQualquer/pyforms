@@ -2,20 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QStyle, qApp
-	from PyQt5.QtGui import QIcon, QPixmap
-
-else:
-	from PyQt4.QtGui import QStyle, qApp, QIcon, QPixmap
+from AnyQt.QtGui import QIcon, QPixmap
+from AnyQt.QtWidgets import QStyle, qApp
 
 
 def path(filename):
-	"""
-	
+	"""	
 	:param filename: 
 	:return: 
 	"""

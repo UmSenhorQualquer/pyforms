@@ -1,14 +1,6 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtGui import QColor
-
-else:
-	from PyQt4.QtGui import QColor
-
+from AnyQt.QtGui import QColor
 
 class TimelineChart(object):
 	"""

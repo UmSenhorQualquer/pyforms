@@ -9,7 +9,7 @@ from AnyQt 			 import uic
 from AnyQt.QtWidgets import QPushButton, QSizePolicy
 from AnyQt.QtGui 	 import QIcon
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 class ControlButton(ControlBase):

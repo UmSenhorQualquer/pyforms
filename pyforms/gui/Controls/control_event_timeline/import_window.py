@@ -1,11 +1,11 @@
 import csv
 from pyforms import BaseWidget
-from pyforms.Controls import ControlProgress
-from pyforms.Controls import ControlCombo
-from pyforms.Controls import ControlButton
-from pyforms.Controls import ControlEmptyWidget
-from pyforms.Controls import ControlFile
-from pyforms.Controls import ControlNumber
+from pyforms.controls import ControlProgress
+from pyforms.controls import ControlCombo
+from pyforms.controls import ControlButton
+from pyforms.controls import ControlEmptyWidget
+from pyforms.controls import ControlFile
+from pyforms.controls import ControlNumber
 
 		
 import time

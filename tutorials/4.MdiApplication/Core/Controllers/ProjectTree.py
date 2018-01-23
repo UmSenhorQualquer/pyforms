@@ -3,9 +3,9 @@ from pyforms import BaseWidget
 
 
 from PyQt4 import QtGui, QtCore
-from pyforms.Controls import ControlText
-from pyforms.Controls import ControlButton
-from pyforms.Controls import ControlTree
+from pyforms.controls import ControlText
+from pyforms.controls import ControlButton
+from pyforms.controls import ControlTree
 
 
 class ProjectTree(BaseWidget):

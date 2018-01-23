@@ -7,7 +7,7 @@ from pysettings import conf
 
 logger = logging.getLogger(__name__)
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 from pyforms.utils import tools
 
 try:
@@ -25,15 +25,15 @@ from AnyQt import _api
 
 if _api.USED_API == _api.QT_API_PYQT5:
 	try:
-		from PyQt5.QtOpenGL import QGLWidget
+		from AnyQt.QtOpenGL import QGLWidget
 	except:
 		logger.debug("No OpenGL library available")
 
 	import platform
 	if platform.system() == 'Darwin':
-		from pyforms.gui.Controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+		from pyforms.gui.controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
 	else:
-		from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+		from pyforms.gui.controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 elif _api.USED_API == _api.QT_API_PYQT4:
 	try:
@@ -41,7 +41,7 @@ elif _api.USED_API == _api.QT_API_PYQT4:
 	except:
 		logger.debug("No OpenGL library available")
 
-	from pyforms.gui.Controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+	from pyforms.gui.controls.ControlPlayer.VideoGLWidget import VideoGLWidget
 
 import numpy as np
 

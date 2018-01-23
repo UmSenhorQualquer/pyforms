@@ -7,8 +7,8 @@ The next code produces this Window:
 ```python
 import pyforms
 from pyforms 			import BaseWidget
-from pyforms.Controls 	import ControlText
-from pyforms.Controls 	import ControlButton
+from pyforms.controls 	import ControlText
+from pyforms.controls 	import ControlButton
 from Person 			import Person
 
 class PersonWindow(Person, BaseWidget):

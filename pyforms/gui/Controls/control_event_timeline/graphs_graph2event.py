@@ -1,26 +1,14 @@
-import csv, sys
-from pyforms import BaseWidget
-from pyforms.Controls import ControlProgress
-from pyforms.Controls import ControlButton
-from pyforms.Controls import ControlList
-from pyforms.Controls import ControlNumber
-from pyforms.Controls import ControlSlider
-from pyforms.Controls import ControlTextArea
-from pyforms.Controls import ControlText
-from pyforms.Controls import ControlNumber
-from pyforms.Controls import ControlLabel
-		
-import time
-import datetime
-
-from pysettings import conf
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5.QtWidgets import QMessageBox
-else:
-	from PyQt4.QtGui import QMessageBox
-
-
+from pyforms 		  import BaseWidget
+from pyforms.controls import ControlProgress
+from pyforms.controls import ControlButton
+from pyforms.controls import ControlList
+from pyforms.controls import ControlNumber
+from pyforms.controls import ControlSlider
+from pyforms.controls import ControlTextArea
+from pyforms.controls import ControlText
+from pyforms.controls import ControlNumber
+from pyforms.controls import ControlLabel
+from AnyQt.QtWidgets  import QMessageBox
 
 class Graph2Event(BaseWidget):
 

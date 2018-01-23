@@ -11,9 +11,9 @@ __status__      = "Development"
 
 
 from pyforms 			import BaseWidget
-from pyforms.Controls 	import ControlText
-from pyforms.Controls 	import ControlButton
-from pyforms.Controls  	import ControlList
+from pyforms.controls 	import ControlText
+from pyforms.controls 	import ControlButton
+from pyforms.controls  	import ControlList
 
 import pyforms
 

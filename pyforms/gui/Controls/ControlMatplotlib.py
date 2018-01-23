@@ -14,7 +14,7 @@ from pysettings import conf
 
 from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 
-from pyforms.gui.Controls.ControlBase import ControlBase
+from pyforms.gui.controls.ControlBase import ControlBase
 
 
 from AnyQt import _api
