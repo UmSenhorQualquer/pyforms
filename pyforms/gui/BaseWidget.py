@@ -3,7 +3,7 @@
 
 import json
 
-from pysettings 	 import conf
+from pysettings      import conf
 from AnyQt.QtWidgets import QFrame
 from AnyQt.QtWidgets import QVBoxLayout
 from AnyQt.QtWidgets import QTabWidget
@@ -12,10 +12,10 @@ from AnyQt.QtWidgets import QHBoxLayout
 from AnyQt.QtWidgets import QSpacerItem
 from AnyQt.QtWidgets import QSizePolicy
 from AnyQt.QtWidgets import QLabel
-from AnyQt.QtGui 	 import QFont
+from AnyQt.QtGui     import QFont
 from AnyQt.QtWidgets import QFileDialog
 from AnyQt.QtWidgets import QApplication
-from AnyQt 			 import QtCore, _api
+from AnyQt           import QtCore, _api
 
 from pyforms.gui.controls.ControlBase import ControlBase
 
@@ -35,15 +35,15 @@ class BaseWidget(QFrame):
 
         QFrame.__init__(self) if parent_win is None else QFrame.__init__(self, parent_win, win_flag)
 
-		layout = QVBoxLayout()
-		self.setLayout(layout)
-		
-		if _api.USED_API == _api.QT_API_PYQT5:
-			layout.setContentsMargins(0,0,0,0)
-		elif _api.USED_API == _api.QT_API_PYQT4:
-			layout.setMargin(0)
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+        
+        if _api.USED_API == _api.QT_API_PYQT5:
+            layout.setContentsMargins(0,0,0,0)
+        elif _api.USED_API == _api.QT_API_PYQT4:
+            layout.setMargin(0)
 
-		self.title = title
+        self.title = title
 
         self.title = title
         self.has_progress = False
@@ -67,23 +67,23 @@ class BaseWidget(QFrame):
         """
         if not self._formLoaded:
 
-			
-			if self._formset is not None:
-				control = self.generate_panel(self._formset)
-				self.layout().addWidget(control)
-			else:
-				allparams = self.controls
-				for key, param in allparams.items():
-					param.parent = self
-					param.name = key
-					self.layout().addWidget(param.form)
-			self._formLoaded = True
+            
+            if self._formset is not None:
+                control = self.generate_panel(self._formset)
+                self.layout().addWidget(control)
+            else:
+                allparams = self.controls
+                for key, param in allparams.items():
+                    param.parent = self
+                    param.name = key
+                    self.layout().addWidget(param.form)
+            self._formLoaded = True
 
-	def set_margin(self, margin):
-		if _api.USED_API == _api.QT_API_PYQT5:
-			self.layout().setContentsMargins(margin,margin,margin,margin)
-		elif _api.USED_API == _api.QT_API_PYQT4:
-			self.layout().setMargin(margin)
+    def set_margin(self, margin):
+        if _api.USED_API == _api.QT_API_PYQT5:
+            self.layout().setContentsMargins(margin,margin,margin,margin)
+        elif _api.USED_API == _api.QT_API_PYQT4:
+            self.layout().setMargin(margin)
 
 
     def generate_tabs(self, formsetdict):
@@ -288,19 +288,19 @@ class BaseWidget(QFrame):
 
                         label.setToolTip(label.text())
 
-						layout.addWidget(label)
-					else:
-						param.parent = self
-						param.name = row
-						layout.addWidget(param.form)
-		
-		if _api.USED_API == _api.QT_API_PYQT5:
-			layout.setContentsMargins(0,0,0,0)
-		elif _api.USED_API == _api.QT_API_PYQT4:
-			layout.setMargin(0)
-			
-		control.setLayout(layout)
-		return control
+                        layout.addWidget(label)
+                    else:
+                        param.parent = self
+                        param.name = row
+                        layout.addWidget(param.form)
+        
+        if _api.USED_API == _api.QT_API_PYQT5:
+            layout.setContentsMargins(0,0,0,0)
+        elif _api.USED_API == _api.QT_API_PYQT4:
+            layout.setMargin(0)
+            
+        control.setLayout(layout)
+        return control
 
     def show(self):
         self.init_form()
@@ -423,10 +423,10 @@ class BaseWidget(QFrame):
 
     
 
-	
-	@property
-	def visible(self):
-		return self.isVisible()
+    
+    @property
+    def visible(self):
+        return self.isVisible()
 
     @property
     def mainmenu(self):

@@ -277,10 +277,10 @@ class ControlBoundingSlider(ControlBase):
                 hlayout = QVBoxLayout()
             
 
-			if _api.USED_API == _api.QT_API_PYQT5:
-				hlayout.setContentsMargins(0,0,0,0)
-			elif _api.USED_API == _api.QT_API_PYQT4:
-				hlayout.setMargin(0)
+            if _api.USED_API == _api.QT_API_PYQT5:
+                hlayout.setContentsMargins(0,0,0,0)
+            elif _api.USED_API == _api.QT_API_PYQT4:
+                hlayout.setMargin(0)
 
 
             hwidget.setLayout(hlayout)
