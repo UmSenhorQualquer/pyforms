@@ -7,12 +7,15 @@ from AnyQt 			 import uic
 from AnyQt.QtWidgets import QApplication
 
 class ControlProgress(ControlBase):
-	def __init__(self, label="%p%", default=0, min=0, max=100):
-		self._updateSlider = True
-		self._min = min
-		self._max = max
 
-		ControlBase.__init__(self, label, default)
+	def __init__(self, *args, **kwargs):
+		self._updateSlider = True
+		self._min = kwargs.get('minimum', 0)
+		self._max = kwargs.get('maximum', 100)
+		if 'default' not in kwargs: kwargs['default'] = 0
+		ControlBase.__init__(self, *args, **kwargs)
+
+		
 
 	def init_form(self):
 		module_path = os.path.abspath(os.path.dirname(__file__))

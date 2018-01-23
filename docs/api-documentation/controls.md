@@ -613,6 +613,13 @@ Returns a list of graphs objects.
 
 The control may be used to select a file.
 
+### **Constructer**
+***************************
+
+#### \_\_init\_\_(label='', default='', helptext='', use_save_dialog=False)  
+
+**use_save_dialog** - By default the control will select a file to be opened. If this flab is True The control will open a file to be created or updated.
+
 ### **Functions**
 ***************************
 

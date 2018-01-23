@@ -38,25 +38,25 @@ class ControlPlayer(ControlBase):
     
     def process_frame_event(self, frame): pass
 
-    def play(): pass
+    def play(self): pass
 
-    def stop(): pass
+    def stop(self): pass
 
-    def refresh(): pass
+    def refresh(self): pass
 
-    def update_frame(): pass
+    def update_frame(self): pass
 
-    def double_click_event(event, x, y): pass
+    def double_click_event(self, event, x, y): pass
 
-    def click_event(event, x, y): pass
+    def click_event(self, event, x, y): pass
 
-    def drag_event(start_point, end_point): pass
+    def drag_event(self, start_point, end_point): pass
 
-    def end_drag_event(start_point, end_point): pass
+    def end_drag_event(self, start_point, end_point): pass
 
-    def key_release_event(event): pass
+    def key_release_event(self, event): pass
 
-    def process_frame_event(frame): pass
+    def process_frame_event(self, frame): pass
 
     def save_Form(self, data): pass
 
@@ -87,14 +87,22 @@ class ControlPlayer(ControlBase):
 
     @value.setter
     def value(self, value):
-        if isinstance( value, (str, unicode) ):
-            ControlBase.value.fset(self, cv2.VideoCapture( value ) )
-            self._filename = value
-        if isinstance( value, dict ): 
-            ControlBase.value.fset(self, cv2.VideoCapture( value['filename'] ) )
-            if 'position' in value.keys(): self.video_index = int(value['position'])
-            self._filename = value['filename']
-        self._max = int(self._value.get(7))
+        if value:
+            if isinstance( value, str ):
+                ControlBase.value.fset(self, cv2.VideoCapture( value ) )
+                self._filename = value
+            if isinstance( value, dict ): 
+                ControlBase.value.fset(self, cv2.VideoCapture( value['filename'] ) )
+                if 'position' in value.keys(): self.video_index = int(value['position'])
+                self._filename = value['filename']
+
+            if isinstance(value, cv2.VideoCapture):
+                ControlBase.value.fset(self, value )
+            
+            self._max = int(self._value.get(7))
+        else:
+            self._filename = None
+            self._value = None
         
 
 

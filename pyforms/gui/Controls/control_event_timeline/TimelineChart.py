@@ -116,21 +116,21 @@ class TimelineChart(object):
 		painter.setPen(self._color)
 		painter.setOpacity(0.7)
 
-		fov_height = (bottom - top) * self._zoom
-		start = self._widget.x2frame(left)
-		end = self._widget.x2frame(right)
-		end = len(self) if end > len(self) else end
-		diff_max_min = (self._graph_max - self._graph_min)
+		fov_height 	 = (bottom - top) * self.zoom  #calculate the height visible 
+		start 		 = self._widget.x2frame(left)  #calculate the start frame to draw
+		end 		 = self._widget.x2frame(right) #calculate the end frame to draw
+		end 		 = len(self) if end > len(self) else end #check if the end frame his higher than the available data
+		diff_max_min = (self._graph_max - self._graph_min) #calculate the difference bettween the lower and higher value
 
 		top = (-self._graph_min if self._graph_min > 0 else abs(self._graph_min)) * self._zoom
 
 		if diff_max_min <= 0: diff_max_min = 1
 
-		last_coordenate = None
+		last_coordenate   = None
 		last_real_x_coord = None
 
 		for i, y in enumerate(self._data[start:end]):
-			if y:
+			if y is not None:
 				x = i + start
 				if y == None: continue
 				y = self._top + ((top + y) * fov_height) // diff_max_min

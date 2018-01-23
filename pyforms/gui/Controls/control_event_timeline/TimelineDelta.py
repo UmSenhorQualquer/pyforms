@@ -13,9 +13,9 @@ class DeltaEditWindow(BaseWidget):
 
 		self.set_margin(5)
 
-		self._label = ControlText('Label', label)
-		self._begin = ControlNumber('Begin', begin, 0, 100000000000000)
-		self._end 	= ControlNumber('End', end, 0, 100000000000000)
+		self._label = ControlText('Label', 	 default=label)
+		self._begin = ControlNumber('Begin', default=begin, minimum=0, maximum=100000000000000)
+		self._end 	= ControlNumber('End',   default=end, 	minimum=0, maximum=100000000000000)
 
 		self._applybtn = ControlButton('Apply')
 
@@ -29,12 +29,16 @@ class DeltaEditWindow(BaseWidget):
 		self._end.changed_event   = self.__end_changed_event
 
 	def __begin_changed_event(self):
-		if self._begin.value>=self._end.value:
+		if not hasattr(self, '_updating') and self._begin.value>=self._end.value:
+			self._updating = True
 			self._begin.value = self._end.value-1
+			del self._updating
 
 	def __end_changed_event(self):
-		if self._end.value<=self._begin.value:
+		if not hasattr(self, '_updating') and self._end.value<=self._begin.value:
+			self._updating = True
 			self._end.value = self._begin.value+1
+			del self._updating
 
 
 	@property

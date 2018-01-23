@@ -15,9 +15,10 @@ from pyforms.gui.controls.ControlBase import ControlBase
 
 class ControlTextArea(ControlBase):
 
-	def __init__(self, label='', default=None, helptext=None):
-		ControlBase.__init__(self, label, default, helptext)
+	def __init__(self, *args, **kwargs):
+		ControlBase.__init__(self, *args, **kwargs)
 		self.autoscroll = False
+		
 		
 
 	def init_form(self):

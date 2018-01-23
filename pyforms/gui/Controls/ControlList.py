@@ -26,15 +26,16 @@ class ControlList(ControlBase, QWidget):
 
 	CELL_VALUE_BEFORE_CHANGE = None  # store value when cell is double clicked
 
-	def __init__(self, label="", default="", add_function=None,
-	             remove_function=None):
+	def __init__(self, *args, **kwargs):
 		QWidget.__init__(self)
 
-		self._plusFunction = add_function
-		self._minusFunction = remove_function
-		ControlBase.__init__(self, label, default)
+		self._plusFunction = kwargs.get('add_function', None)
+		self._minusFunction = kwargs.get('remove_function', None)
+		ControlBase.__init__(self, *args, **kwargs)
 
 		self.autoscroll = False
+
+		self.select_entire_row = kwargs.get('select_entire_row', False)
 		
 
 	##########################################################################
@@ -73,6 +74,8 @@ class ControlList(ControlBase, QWidget):
 			self.plusButton.pressed.connect(plusFunction)
 			self.minusButton.pressed.connect(minusFunction)
 
+		
+
 	def __repr__(self):
 		return "ControlList " + str(self._value)
 
@@ -101,7 +104,7 @@ class ControlList(ControlBase, QWidget):
 				for column in range(self.columns_count):
 					v = self.get_value(column, row)
 					if isinstance(v, BaseWidget):
-						columns.append(v.save({}))
+						columns.append(v.save_form({}, path))
 					else:
 						columns.append(str(v))
 				rows.append(columns)
@@ -115,7 +118,7 @@ class ControlList(ControlBase, QWidget):
 				for column in range(len(rows[row])):
 					v = self.get_value(column, row)
 					if isinstance(v, BaseWidget):
-						v.load(rows[row][column])
+						v.load_form(rows[row][column], path)
 					else:
 						self.set_value(column, row, rows[row][column])
 		elif 'value' in data.keys():

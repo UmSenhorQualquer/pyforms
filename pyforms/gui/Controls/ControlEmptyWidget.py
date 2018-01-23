@@ -10,7 +10,7 @@ from pyforms.gui.basewidget 			import BaseWidget
 
 
 class ControlEmptyWidget(ControlBase, QWidget):
-	def __init__(self, label='', default=None):
+	def __init__(self, *args, **kwargs):
 		QWidget.__init__(self)
 		layout = QVBoxLayout()
 
@@ -22,8 +22,8 @@ class ControlEmptyWidget(ControlBase, QWidget):
 
 		self.form.setLayout(layout)
 
-		ControlBase.__init__(self, label)
-		self.value = default
+		ControlBase.__init__(self, *args, **kwargs)
+		self.value = kwargs.get('default', None)
 
 	def init_form(self):
 		pass

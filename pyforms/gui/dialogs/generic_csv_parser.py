@@ -18,11 +18,11 @@ class GenericCsvParserDialog(BaseWidget):
 
         # Definition of the forms fields
         self._filename = ControlFile('CSV File')
-        self._separator = ControlText('Separator', 'auto')
-        self._startingrow = ControlNumber('Starting row', 0)
+        self._separator = ControlText('Separator', default='auto')
+        self._startingrow = ControlNumber('Starting row', default=0)
 
         for index, column in enumerate(columns):
-            setattr(self, '_col_{0}'.format(index), ControlNumber(column, index, -1, 1000))
+            setattr(self, '_col_{0}'.format(index), ControlNumber(column, default=index, minimum=-1, maximum=1000))
 
         self._filePreview = ControlList('Preview')
         self._loadButton = ControlButton('Load')
