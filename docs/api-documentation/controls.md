@@ -856,15 +856,8 @@ Sets and gets a function called to draw the graph. This functions receives a mat
 Usage:  
 ```python
 
-def on_draw(figure):
-	""" Redraws the figure
-	"""
+def on_draw(figure:
 	x = range(len(self.value))
-
-	#self._axes = self._fig.add_subplot(111)
-	
-	#self._axes.bar(left=x, height=self.data)
-	#self.canvas.draw()
 
 	axes = figure.add_subplot(111, projection='3d')
 	axes.clear(); 
