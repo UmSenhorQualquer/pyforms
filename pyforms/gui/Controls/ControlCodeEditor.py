@@ -29,7 +29,7 @@ class ControlCodeEditor(ControlBase):
 
 	ARROW_MARKER_NUM = 8
 
-	def __init__(self, label='', default='', helptext='', read_only=True):
+	def __init__(self, *args, **kwargs):
 		"""
 		
 		:param label: 
@@ -38,7 +38,7 @@ class ControlCodeEditor(ControlBase):
 		"""
 		self._read_only = read_only
 
-		super(ControlCodeEditor, self).__init__(label, default, helptext)
+		super(ControlCodeEditor, self).__init__(*args, **kwargs)
 
 		self._changed_func = None
 

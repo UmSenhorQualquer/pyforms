@@ -22,9 +22,6 @@ __status__ = "Development"
 
 class ControlLabel(ControlBase):
 
-    def __init__(self, label=''):
-        super(ControlLabel, self).__init__(label=label, default=label)
-
     def init_form(self):
         control_path = tools.getFileInSameDirectory(__file__, "label.ui")
         self._form = uic.loadUi(control_path)

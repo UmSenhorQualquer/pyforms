@@ -14,9 +14,9 @@ from pyforms.gui.controls.ControlBase import ControlBase
 class ControlCombo(ControlBase, QWidget):
 	"""This class represents a wrapper to the combo box"""
 
-	def __init__(self, label='', default=None, helptext=None):		
+	def __init__(self, *args, **kwargs):		
 		QWidget.__init__(self)
-		ControlBase.__init__(self, label, default, helptext)
+		ControlBase.__init__(self, *args, **kwargs)
 		
 	##########################################################################
 	############ Functions ###################################################

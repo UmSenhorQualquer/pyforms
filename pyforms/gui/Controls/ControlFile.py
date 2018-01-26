@@ -13,9 +13,9 @@ from AnyQt.QtWidgets import QFileDialog
 
 class ControlFile(ControlText):
 
-	def __init__(self, label='', default=None, helptext=None, use_save_dialog=False):
+	def __init__(self, *args, **kwargs):
 		super(ControlFile, self).__init__(label, default, helptext)
-		self.use_save_dialog = use_save_dialog
+		self.use_save_dialog = kwargs.get('use_save_dialog', False)
 
 	def init_form(self):
 		control_path = tools.getFileInSameDirectory(__file__, "fileInput.ui")

@@ -9,9 +9,9 @@ from AnyQt import QtCore
 class ControlTree(ControlBase, QTreeWidget):
 	"""This class represents a wrapper to the QTreeWidget"""
 
-	def __init__(self, label='', default=''):
+	def __init__(self, *args, **kwargs):
 		QTreeWidget.__init__(self)
-		ControlBase.__init__(self, label, default)
+		ControlBase.__init__(self, *args, **kwargs)
 
 	def init_form(self):
 		self.setSelectionBehavior(QAbstractItemView.SelectRows)

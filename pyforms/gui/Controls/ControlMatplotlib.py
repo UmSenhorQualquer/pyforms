@@ -33,9 +33,9 @@ from mpl_toolkits.mplot3d import Axes3D
 
 class ControlMatplotlib(ControlBase, QWidget):
 
-	def __init__(self, label = ""):
+	def __init__(self, *args, **kwargs):
 		QWidget.__init__(self)
-		ControlBase.__init__(self, label)
+		ControlBase.__init__(self, *args, **kwargs)
 
 	def init_form(self):
 
@@ -80,11 +80,6 @@ class ControlMatplotlib(ControlBase, QWidget):
 	############################################################################
 	############ Properties ####################################################
 	############################################################################
-
-	@property
-	def axes(self): return self._axes
-	@axes.setter
-	def axes(self, value): self._axes = value
 
 	@property
 	def fig(self): return self._fig

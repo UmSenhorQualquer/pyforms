@@ -7,9 +7,9 @@ from AnyQt.QtGui 	 import QStandardItem, QStandardItemModel
 
 
 class ControlTreeView(ControlBase, QTreeView):
-	def __init__(self, title='untitled'):
+	def __init__(self, *args, **kwargs):
 		QTreeView.__init__(self)
-		ControlBase.__init__(self, title)
+		ControlBase.__init__(self, *args, **kwargs)
 
 	def init_form(self):
 		self.setSelectionBehavior(QAbstractItemView.SelectRows)

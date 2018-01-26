@@ -831,6 +831,49 @@ Returns and sets the readonly flag for the control.
 
 
 
+## ControlMatplotlib
+***************************
+
+![Docs updated](https://img.shields.io/badge/UNITARY%20TESTS-OK-green.svg "Screen")
+
+![Control image](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/master/tutorials/Controls4Docs/ControlMatplotlib.png?raw=true "Screen")
+
+### **Functions**
+***************************
+
+#### draw()
+
+Draw the graph.
+
+### **Properties**
+***************************
+
+#### value
+
+Sets and gets a function called to draw the graph. This functions receives a matplotlib figure as parameter.
+
+
+Usage:  
+```python
+
+def on_draw(figure):
+	""" Redraws the figure
+	"""
+	x = range(len(self.value))
+
+	#self._axes = self._fig.add_subplot(111)
+	
+	#self._axes.bar(left=x, height=self.data)
+	#self.canvas.draw()
+
+	axes = figure.add_subplot(111, projection='3d')
+	axes.clear(); 
+	pts = axes.scatter(x, x, x, c=x)
+	figure.colorbar(pts)
+
+
+obj.value = on_draw
+```
 
 
 

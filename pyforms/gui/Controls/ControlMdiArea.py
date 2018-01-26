@@ -18,9 +18,9 @@ class ControlMdiArea(ControlBase, QMdiArea):
 	 an area in which MDI windows are displayed.
 	"""
 
-	def __init__(self, label=""):
+	def __init__(self, *args, **kwargs):
 		QMdiArea.__init__(self)
-		ControlBase.__init__(self, label)
+		ControlBase.__init__(self, *args, **kwargs)
 		self._showCloseButton = True
 
 		self.logger = logging.getLogger(__name__)
