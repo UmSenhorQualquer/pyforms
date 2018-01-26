@@ -107,6 +107,7 @@ class StandAloneContainer(QMainWindow):
 			logger.debug('Import stylesheets: {0}'.format(stylesheet_files))
 			self.loadStyleSheetFile(stylesheet_files)
 
+
 	def closeEvent(self, event):
 		self._widget.closeEvent(event)
 

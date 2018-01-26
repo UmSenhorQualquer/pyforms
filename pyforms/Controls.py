@@ -33,14 +33,14 @@ if conf.PYFORMS_MODE=='GUI':
 			from pyforms.gui.controls.ControlMatplotlib import ControlMatplotlib
 		except:
 			logger.warning("Matplot lib not installed or not working properly")
-			logger.warning(traceback.format_exc())
+			logger.debug(traceback.format_exc())
 
 	if conf.PYFORMS_WEB_ENABLED:
 		try:
 			from pyforms.gui.controls.ControlWeb import ControlWeb
 		except:
 			logger.warning("QtWebKit lib not installed or not working properly")
-			logger.warning(traceback.format_exc())
+			logger.debug(traceback.format_exc())
 
 	if conf.PYFORMS_GL_ENABLED:
 		try:
@@ -49,7 +49,7 @@ if conf.PYFORMS_MODE=='GUI':
 			from pyforms.gui.controls.control_player.ControlPlayer 	import ControlPlayer
 		except:
 			logger.warning("GL widgets or Opencv not installed")
-			logger.warning(traceback.format_exc())
+			logger.debug(traceback.format_exc())
 	
 	if conf.PYFORMS_VISVIS_ENABLED:
 		try:
@@ -57,13 +57,13 @@ if conf.PYFORMS_MODE=='GUI':
 			from pyforms.gui.controls.ControlVisVisVolume 	import ControlVisVisVolume
 		except:
 			logger.warning("VisVis not installed")
-			logger.warning(traceback.format_exc())
+			logger.debug(traceback.format_exc())
 
 	if conf.PYFORMS_QSCINTILLA_ENABLED:
 		try:
 			from pyforms.gui.controls.ControlCodeEditor import ControlCodeEditor
 		except:
-			logger.debug("QScintilla2 not installed")
+			logger.warning("QScintilla2 not installed")
 			logger.debug(traceback.format_exc())
 
 
