@@ -27,6 +27,8 @@ import AnyQt
 from pyforms.gui.Controls.ControlBase import ControlBase
 from pyforms.gui.Controls.ControlProgress import ControlProgress
 
+from AnyQt.QtWidgets import QMessageBox
+
 
 class BaseWidget(QFrame):
     """
@@ -365,7 +367,9 @@ class BaseWidget(QFrame):
     def close(self):
         super(BaseWidget, self).close()
 
-    def message(self, msg, title=None, msg_type=None): pass
+    def message(self, msg, title=None, msg_type=''): 
+        QMessageBox.information( self, title if title else msg_type, msg)
+
     def success(self,   msg, title=None):   self.message(msg, title, msg_type='success')
     def info(self,      msg, title=None):   self.message(msg, title, msg_type='info')
     def warning(self,   msg, title=None):   self.message(msg, title, msg_type='warning');
