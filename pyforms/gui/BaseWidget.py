@@ -422,7 +422,9 @@ class BaseWidget(QFrame):
         return self._formLoaded
 
     
-
+    @property 
+    def form(self): 
+        return self 
     
     @property
     def visible(self):
