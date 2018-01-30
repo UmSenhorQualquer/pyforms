@@ -16,8 +16,8 @@ Import the pyforms library, the BaseWidget and the Controls classes that you wil
 ```python
 import pyforms
 from   pyforms 			import BaseWidget
-from   pyforms.Controls import ControlText
-from   pyforms.Controls import ControlButton
+from   pyforms.controls import ControlText
+from   pyforms.controls import ControlButton
 ```
 
 ### Create your application class.
@@ -70,8 +70,8 @@ The final code should look like:
 ```python
 import pyforms
 from   pyforms 			import BaseWidget
-from   pyforms.Controls import ControlText
-from   pyforms.Controls import ControlButton
+from   pyforms.controls import ControlText
+from   pyforms.controls import ControlButton
 
 class SimpleExample1(BaseWidget):
 	

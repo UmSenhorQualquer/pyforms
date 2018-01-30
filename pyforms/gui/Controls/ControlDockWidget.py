@@ -16,6 +16,8 @@ class ControlDockWidget(ControlEmptyWidget):
 		self.side = kwargs.get('side', 'left')
 		self.order = kwargs.get('order',0)
 		self.margin = kwargs.get('margin', 0)
+
+		default = kwargs.get('default', None)
 		if default is not None: self.value = default
 		self._show = True
 
