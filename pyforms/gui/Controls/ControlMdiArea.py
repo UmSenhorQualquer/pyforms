@@ -22,6 +22,7 @@ class ControlMdiArea(ControlBase, QMdiArea):
 		QMdiArea.__init__(self)
 		ControlBase.__init__(self, *args, **kwargs)
 		self._showCloseButton = True
+		self._openWindows = []
 
 		self.logger = logging.getLogger(__name__)
 
