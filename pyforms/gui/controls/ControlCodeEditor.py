@@ -14,7 +14,7 @@ from AnyQt.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QSp
 from AnyQt.QtGui 	 import QFontMetrics, QColor, QIcon, QFont
 
 if _api.USED_API == _api.QT_API_PYQT5:
-    from AnyQt.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
+    from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 elif _api.USED_API == _api.QT_API_PYQT4:
     from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
 
@@ -36,11 +36,11 @@ class ControlCodeEditor(ControlBase):
 		:param default: 
 		:param helptext: 
 		"""
-		self._read_only = read_only
-
+		self._read_only = kwargs.get('readonly', None)
+		self._changed_func = None
 		super(ControlCodeEditor, self).__init__(*args, **kwargs)
 
-		self._changed_func = None
+		
 
 	def init_form(self):
 		"""
@@ -235,7 +235,7 @@ class ControlCodeEditor(ControlBase):
 	@value.setter
 	def value(self, value):
 		ControlBase.value.fset(self, value)
-		if len(value) > 0:
+		if value is not None and len(value) > 0:
 			self._code_editor.setText(str(value))
 			self._code_editor.setModified(False)
 			self._save_button.setEnabled(False)

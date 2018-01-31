@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json
+import json, AnyQt
 
 from pysettings      import conf
+
 from AnyQt.QtWidgets import QFrame
 from AnyQt.QtWidgets import QVBoxLayout
 from AnyQt.QtWidgets import QTabWidget
@@ -436,6 +437,68 @@ class BaseWidget(QFrame):
     @mainmenu.setter
     def mainmenu(self, value):
         self._mainmenu = value
+
+
+    @property
+    def controls(self):
+        """
+        Return all the form controls from the the module
+        """
+        result = {}
+        for name, var in vars(self).items():
+            try:
+                if isinstance(var, ControlBase):
+                    result[name] = var
+            except:
+                pass
+        return result
+
+    ############################################################################
+    ############ GUI Properties ################################################
+    ############################################################################
+
+
+    @property
+    def form_has_loaded(self):
+        return self._formLoaded
+
+    
+
+    @property
+    def form(self):
+        return self
+
+    @property
+    def title(self):
+        return self.windowTitle()
+
+    @title.setter
+    def title(self, value):
+        self.setWindowTitle(value)
+
+    
+    @property
+    def formset(self):
+        return self._formset
+
+    @formset.setter
+    def formset(self, value):
+        self._formset = value
+
+    @property
+    def uid(self):
+        return self._uid
+
+    @uid.setter
+    def uid(self, value):
+        self._uid = value
+
+    
+    @property
+    def visible(self):
+        return self.isVisible()
+
+    
 
     ##########################################################################
     ############ PRIVATE FUNCTIONS ###########################################
