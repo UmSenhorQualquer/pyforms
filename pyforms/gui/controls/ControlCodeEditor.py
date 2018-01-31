@@ -36,7 +36,7 @@ class ControlCodeEditor(ControlBase):
 		:param default: 
 		:param helptext: 
 		"""
-		self._read_only = kwargs.get('readonly', None)
+		self._read_only = kwargs.get('readonly', False)
 		self._changed_func = None
 		super(ControlCodeEditor, self).__init__(*args, **kwargs)
 
@@ -55,7 +55,7 @@ class ControlCodeEditor(ControlBase):
 		self._save_button = self._form.save_button
 		self._save_button.clicked[bool].connect(self.on_save_changes)
 
-		if not self._read_only:
+		if self._read_only:
 			self._code_editor.setReadOnly(True)
 			self._save_button.setVisible(False)
 
