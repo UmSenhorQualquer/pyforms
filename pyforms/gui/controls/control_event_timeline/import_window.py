@@ -12,6 +12,10 @@ import time
 import datetime
 import dateutil.parser
 
+import logging
+
+logger=logging.getLogger(__file__)
+
 class BonsaiImportFileDlg(BaseWidget):
 
     def __init__(self, timeline=None):
@@ -183,71 +187,75 @@ class ImportWindow(BaseWidget):
 
     def __import_bonsai_events_oldformat(self):
         
-        with open(self._bonsai_import_dlg._file.value, 'rU') as csvfile:
-            windows_events = []
-            points_events  = []
-            first_date     = None
+        try:
+            with open(self._bonsai_import_dlg._file.value, 'rU') as csvfile:
+                windows_events = []
+                points_events  = []
+                first_date     = None
 
-            for row in csvfile:
-                row = row[:-1] #remove the newline character
+                for row in csvfile:
+                    row = row[:-1] #remove the newline character
 
-                if row.endswith('WindowClosing'):
-                    split     = row.rfind(' ')
-                    #eventtype = row[-split:]
-                    eventtype = 'end'
-                    timestr   = row[split-33:split]
-                    eventname = row[4:split-33]
-                elif row.endswith('PointEvent'):
-                    split     = row.rfind(' ')
-                    eventtype = row[split+1:]
-                    timestr   = row[split-33:split]
-                    eventname = row[:split-33]
-                else:
-                    eventtype = 'start'
-                    timestr   = row[-33:]
-                    eventname = row[6:-33]
-                
-                cvttime = dateutil.parser.parse(timestr.replace('T', ' '))
-                cvttime = cvttime.replace(tzinfo=None)
-                if first_date is None: first_date = cvttime
-                
-                seconds = (cvttime - first_date).total_seconds()
-                frame   = int(round(self._bonsai_import_dlg._fps.value * seconds))
+                    if row.endswith('WindowClosing'):
+                        split     = row.rfind(' ')
+                        #eventtype = row[-split:]
+                        eventtype = 'end'
+                        timestr   = row[split-33:split]
+                        eventname = row[4:split-33]
+                    elif row.endswith('PointEvent'):
+                        split     = row.rfind(' ')
+                        eventtype = row[split+1:]
+                        timestr   = row[split-33:split]
+                        eventname = row[:split-33]
+                    else:
+                        eventtype = 'start'
+                        timestr   = row[-33:]
+                        eventname = row[6:-33]
+                    
+                    cvttime = dateutil.parser.parse(timestr.replace('T', ' '))
+                    cvttime = cvttime.replace(tzinfo=None)
+                    if first_date is None: first_date = cvttime
+                    
+                    seconds = (cvttime - first_date).total_seconds()
+                    frame   = int(round(self._bonsai_import_dlg._fps.value * seconds))
 
-                if eventtype=='PointEvent':
-                    points_events.append([eventtype, frame, eventname])
-                else:
-                    if eventtype=='start':
-                        windows_events.append( [eventtype, frame, eventname] )
-                    elif eventtype=='end':
-                        windows_events.append( [eventtype, frame, eventname] )
-                
-            windows_events = sorted(windows_events, key=lambda x: (x[0][0].capitalize(), x[0][1]))
-            points_events  = sorted(points_events,  key=lambda x: (x[0].capitalize(), x[1]))
-            ntracks        = len(set([x[0][1] for x in windows_events])) + 1
+                    if eventtype=='PointEvent':
+                        points_events.append([eventtype, frame, eventname])
+                    else:
+                        if eventtype=='start':
+                            windows_events.append( [eventtype, frame, eventname] )
+                        elif eventtype=='end':
+                            windows_events.append( [eventtype, frame, eventname] )
+                    
+                windows_events = sorted(windows_events, key=lambda x: (x[0][0].capitalize(), x[0][1]))
+                points_events  = sorted(points_events,  key=lambda x: (x[0].capitalize(), x[1]))
+                ntracks        = len(set([x[0][1] for x in windows_events])) + 1
 
-            # collapse
-            events = []
-            events_types = {}  # Events names
-            current_track = 0
-            for index in range(0, len(points_events)):
-                eventtype, frame, eventname = points_events[index]
-                events_types[eventname] = current_track
-                self._timeline.add_period([frame, frame+2, eventname], row=current_track)
-
-            current_track = 1
-
-            for i in range(0, len(windows_events), 2):
-                start = windows_events[i]  
-                end   = windows_events[i+1]
-                eventtype, frame_begin, eventname = start
-                _, frame_end, _ = end
-                
-                if eventname not in events_types:
+                # collapse
+                events = []
+                events_types = {}  # Events names
+                current_track = 0
+                for index in range(0, len(points_events)):
+                    eventtype, frame, eventname = points_events[index]
                     events_types[eventname] = current_track
-                    track         = current_track
-                    current_track += 1
-                else:
-                    track = events_types[eventname]
+                    self._timeline.add_period([frame, frame+2, eventname], row=current_track)
 
-                self._timeline.add_period([frame_begin, frame_end, eventname], row=track)
+                current_track = 1
+
+                for i in range(0, len(windows_events), 2):
+                    start = windows_events[i]  
+                    end   = windows_events[i+1]
+                    eventtype, frame_begin, eventname = start
+                    _, frame_end, _ = end
+                    
+                    if eventname not in events_types:
+                        events_types[eventname] = current_track
+                        track         = current_track
+                        current_track += 1
+                    else:
+                        track = events_types[eventname]
+
+                    self._timeline.add_period([frame_begin, frame_end, eventname], row=track)
+        except Exception as e:
+            self.warning("An error occurred when trying to import the file. Please check the logs.")
+            logger.error(e, exc_info=True)
