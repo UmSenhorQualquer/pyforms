@@ -1,7 +1,9 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from AnyQt.QtGui import QColor
-from AnyQt 		 import QtCore
+from AnyQt import QtCore
+
 
 class TimelinePointer(object):
 	def __init__(self, position, parent):

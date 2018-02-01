@@ -7,14 +7,15 @@ from pyforms.gui.controls.ControlText import ControlText
 import pyforms.utils.tools as tools
 
 
-from AnyQt 			 import uic
+from AnyQt 			 import uic, _api
 from AnyQt.QtWidgets import QFileDialog
 
 
 class ControlFile(ControlText):
 
 	def __init__(self, *args, **kwargs):
-		super(ControlFile, self).__init__(label, default, helptext)
+
+		super(ControlFile, self).__init__(*args, **kwargs)
 		self.use_save_dialog = kwargs.get('use_save_dialog', False)
 
 	def init_form(self):

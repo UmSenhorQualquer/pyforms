@@ -26,6 +26,6 @@ setup(
 	package_data={'pyforms': [
 		'gui/controls/uipics/*.png',
 		'gui/mainWindow.ui', 'gui/controls/*.ui', 'gui/controls/control_player/*.ui',
-		'gui/controls/control_events_timeline/*.ui']
+		'gui/controls/control_event_timeline/*.ui']
 	},
 )

@@ -1,10 +1,14 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
+
+from AnyQt.QtWidgets import QInputDialog
+from AnyQt.QtGui import QColor
+
 from pyforms.gui.controls.control_event_timeline.Track import Track
-from pyforms 		  import BaseWidget
+
+from pyforms import BaseWidget
 from pyforms.controls import ControlText, ControlNumber, ControlButton
-from AnyQt.QtWidgets  import QInputDialog
-from AnyQt.QtGui 	  import QColor
+
 
 class DeltaEditWindow(BaseWidget):
 
@@ -100,7 +104,7 @@ class TimelineDelta(object):
 		"""
 		if self.track >= (self._parent.numberoftracks - 1):
 			for i in range(self._parent.numberoftracks - 1, self.track + 1):
-				self._parent.addTrack()
+				self._parent.add_track()
 
 	def collide(self, x, y):
 		"""
@@ -316,7 +320,7 @@ class TimelineDelta(object):
 
 		# Verify if the new track exists. In case not create it
 		self._top = Track.whichTop(value)
-		if self.track >= len(self._parent._tracks): self._parent.addTrack()
+		if self.track >= len(self._parent._tracks): self._parent.add_track()
 
 		# if do not exists in the track add it
 		if self not in self._parent._tracks[self.track].periods: self._parent._tracks[self.track].periods.append(self)

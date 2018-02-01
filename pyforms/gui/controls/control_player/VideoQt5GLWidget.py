@@ -1,4 +1,4 @@
-from pyforms.gui.controls.ControlPlayer.AbstractGLWidget import AbstractGLWidget
+from pyforms.gui.controls.control_player.AbstractGLWidget import AbstractGLWidget
 
 import math
 from AnyQt import QtGui

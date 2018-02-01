@@ -3,7 +3,7 @@
 
 from pysettings import conf
 
-from AnyQt           import QtCore
+from AnyQt           import QtCore, _api
 from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSpinBox
 from AnyQt.QtGui     import QFont, QColor, QCursor, QPainter
 

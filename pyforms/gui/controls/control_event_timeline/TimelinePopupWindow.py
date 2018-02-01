@@ -1,11 +1,15 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
-import pyforms.utils.tools as tools
+
+from pysettings import conf
 
 from AnyQt.QtWidgets import QDialog, QInputDialog, QColorDialog
-from AnyQt.QtGui 	 import QColor, QPixmap, QFont, QPainter
-from AnyQt 		 	 import uic
-from AnyQt  		 import QtCore
+from AnyQt.QtGui import QColor, QPixmap, QFont, QPainter
+from AnyQt import uic
+from AnyQt import QtCore
+
+
+import pyforms.utils.tools as tools
 
 
 class TimelinePopupWindow(QDialog):

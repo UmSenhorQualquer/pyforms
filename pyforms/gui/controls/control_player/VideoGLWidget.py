@@ -5,7 +5,7 @@
 
 """
 
-from pyforms.gui.controls.ControlPlayer.AbstractGLWidget import AbstractGLWidget
+from pyforms.gui.controls.control_player.AbstractGLWidget import AbstractGLWidget
 from AnyQt.QtOpenGL import QGLWidget
 
 class VideoGLWidget(AbstractGLWidget, QGLWidget): pass

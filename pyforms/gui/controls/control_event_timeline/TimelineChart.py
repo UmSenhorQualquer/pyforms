@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from AnyQt.QtGui import QColor
 
+
 class TimelineChart(object):
 	"""
 	"""

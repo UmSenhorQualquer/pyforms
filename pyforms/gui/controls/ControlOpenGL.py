@@ -25,9 +25,9 @@ if _api.USED_API == _api.QT_API_PYQT5:
 
 	import platform
 	if platform.system() == 'Darwin':
-		from pyforms.gui.controls.ControlPlayer.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
+		from pyforms.gui.controls.control_player.VideoQt5GLWidget import VideoQt5GLWidget as VideoGLWidget
 	else:
-		from pyforms.gui.controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+		from pyforms.gui.controls.control_player.VideoGLWidget import VideoGLWidget
 
 elif _api.USED_API == _api.QT_API_PYQT4:
 	try:
@@ -35,7 +35,7 @@ elif _api.USED_API == _api.QT_API_PYQT4:
 	except:
 		logger.debug("No OpenGL library available")
 
-	from pyforms.gui.controls.ControlPlayer.VideoGLWidget import VideoGLWidget
+	from pyforms.gui.controls.control_player.VideoGLWidget import VideoGLWidget
 
 
 class OpenglGLWidget(QGLWidget):

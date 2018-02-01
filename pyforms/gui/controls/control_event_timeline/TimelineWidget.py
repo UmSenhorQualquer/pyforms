@@ -1,13 +1,15 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
-from AnyQt.QtWidgets import QWidget, QMessageBox
-from AnyQt.QtGui 	 import QColor, QPainter, QFont, QCursor
-from AnyQt 			 import QtCore
 
-from pyforms.gui.controls.control_event_timeline.Track 			import Track
-from pyforms.gui.controls.control_event_timeline.TimelinePointer  import TimelinePointer
-from pyforms.gui.controls.control_event_timeline.TimelineDelta 	import TimelineDelta
-from pyforms.gui.controls.control_event_timeline.TimelineChart    import TimelineChart
+
+from AnyQt.QtWidgets import QWidget, QMessageBox
+from AnyQt.QtGui import QColor, QPainter, QFont, QCursor
+from AnyQt import QtCore
+
+from pyforms.gui.controls.control_event_timeline.Track import Track
+from pyforms.gui.controls.control_event_timeline.TimelinePointer import TimelinePointer
+from pyforms.gui.controls.control_event_timeline.TimelineDelta import TimelineDelta
+from pyforms.gui.controls.control_event_timeline.TimelineChart import TimelineChart
 
 
 class TimelineWidget(QWidget):
@@ -186,10 +188,10 @@ class TimelineWidget(QWidget):
 		for row in csvfileobject:
 			if len(row) == 0: continue
 			if row[0] == "T":
-				track = self.addTrack()
+				track = self.add_track()
 				track.properties = row
 			elif row[0] == "P":
-				period = self.addPeriod([0, 1, '-'])
+				period = self.add_period([0, 1, '-'])
 				period.properties = row
 
 	def export_csv(self, csvfileobject):
@@ -267,16 +269,16 @@ class TimelineWidget(QWidget):
 			QMessageBox.about(self, "Error", "You must select a timebar first")
 			return
 
-	def addTrack(self):
+	def add_track(self):
 		t = Track(parent=self)
 		self._tracks.append(t)
 		self.setMinimumHeight(Track.whichTop(len(self._tracks)))
 		return t
 
-	def addPeriod(self, value, track=0, color=None):
+	def add_period(self, value, row=0, color=None):
 		"""Adds an annotated interval."""
 		begin, end, title = value
-		period = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(track))
+		period = TimelineDelta(begin, end, title=title, parent=self, top=Track.whichTop(row))
 		self._tracks[period.track].periods.append(period)
 		return period
 
@@ -421,7 +423,7 @@ class TimelineWidget(QWidget):
 				comment = ""
 
 				if end > start:
-					self.addPeriod((start, end, comment), self._selected_track)
+					self.add_period((start, end, comment), self._selected_track)
 					self.repaint()
 					self._creating_event = False
 				else:
@@ -560,7 +562,7 @@ class TimelineWidget(QWidget):
 		# self._n_tracks = value
 		if value < len(self._tracks):
 			for i in range(value, self._tracks + 1):
-				self.addTrack()
+				self.add_track()
 		y = value * 34 + 20
 		if y + 40 > self.height():
 			self.setMinimumHeight(y + 40)
