@@ -113,7 +113,7 @@ class TimelineDelta(object):
 		"""
 		if self.track >= (self._parent.numberoftracks - 1):
 			for i in range(self._parent.numberoftracks - 1, self.track + 1):
-				self._parent.addTrack()
+				self._parent.add_track()
 
 	def collide(self, x, y):
 		"""
@@ -329,7 +329,7 @@ class TimelineDelta(object):
 
 		# Verify if the new track exists. In case not create it
 		self._top = Track.whichTop(value)
-		if self.track >= len(self._parent._tracks): self._parent.addTrack()
+		if self.track >= len(self._parent._tracks): self._parent.add_track()
 
 		# if do not exists in the track add it
 		if self not in self._parent._tracks[self.track].periods: self._parent._tracks[self.track].periods.append(self)

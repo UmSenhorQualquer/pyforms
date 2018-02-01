@@ -197,7 +197,7 @@ class ControlEventTimeline(ControlBase, QWidget):
 		:param color: 
 		:return: 
 		"""
-		self._time.addPeriod(value, track, color)
+		self._time.add_period(value, row, color)
 		self._time.repaint()
 
 	def add_graph(self, name, data):
@@ -300,7 +300,7 @@ class ControlEventTimeline(ControlBase, QWidget):
 				break
 
 	def __add_track_2_bottom_evt(self):
-		self._time.addTrack()
+		self._time.add_track()
 
 	def __remove_track_from_bottom_evt(self):
 		if len(self._time.tracks) > 0:

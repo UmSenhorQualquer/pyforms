@@ -18,7 +18,7 @@ class BonsaiImportFileDlg(BaseWidget):
         super(BonsaiImportFileDlg, self).__init__('Import file')
 
         self._file = ControlFile('File to import')
-        self._fps = ControlNumber('Video FPS', 30)
+        self._fps = ControlNumber('Video FPS', default=30)
 
         self._formset = [('_fps', '_file')]
 
@@ -161,7 +161,7 @@ class ImportWindow(BaseWidget):
             for index in range(0, len(pointEventValues)):
                 pointEventValue = pointEventValues[index]
                 eventsTypes[pointEventValue[0]] = currentTrack
-                self._timeline.addPeriod([pointEventValue[1], pointEventValue[1] + 50, pointEventValue[0]], track=currentTrack)
+                self._timeline.add_period([pointEventValue[1], pointEventValue[1] + 50, pointEventValue[0]], row=currentTrack)
 
             currentTrack = 1
 
@@ -176,7 +176,7 @@ class ImportWindow(BaseWidget):
                 else:
                     track = eventsTypes[row0[0]]
 
-                self._timeline.addPeriod([row0[1], row1[1], row0[0]], track=track)
+                self._timeline.add_period([row0[1], row1[1], row0[0]], row=track)
 
 
 
@@ -186,42 +186,41 @@ class ImportWindow(BaseWidget):
         with open(self._bonsai_import_dlg._file.value, 'rU') as csvfile:
             windows_events = []
             points_events  = []
+            first_date     = None
 
             for row in csvfile:
                 row = row[:-1] #remove the newline character
 
-                if row.startswith('start'):
-                    eventtype = 'start'
-                    timestr   = row[-33:]
-                    eventname = row[:-33]
-                elif row.startswith('end'):
+                if row.endswith('WindowClosing'):
                     split     = row.rfind(' ')
                     #eventtype = row[-split:]
                     eventtype = 'end'
-                    timestr   = row[-33-split:-split]
-                    eventname = row[:-33-split]
-                else:
+                    timestr   = row[split-33:split]
+                    eventname = row[4:split-33]
+                elif row.endswith('PointEvent'):
                     split     = row.rfind(' ')
                     eventtype = row[split+1:]
                     timestr   = row[split-33:split]
-                    eventname = row[:-33-split]
-
-                print(split)
-                print(eventtype)
-                print(timestr)
-                print(eventname)
-
+                    eventname = row[:split-33]
+                else:
+                    eventtype = 'start'
+                    timestr   = row[-33:]
+                    eventname = row[6:-33]
+                
                 cvttime = dateutil.parser.parse(timestr.replace('T', ' '))
-                seconds = (cvttime - datetime.datetime(1900, 1, 1)).total_seconds()
+                cvttime = cvttime.replace(tzinfo=None)
+                if first_date is None: first_date = cvttime
+                
+                seconds = (cvttime - first_date).total_seconds()
                 frame   = int(round(self._bonsai_import_dlg._fps.value * seconds))
 
                 if eventtype=='PointEvent':
                     points_events.append([eventtype, frame, eventname])
                 else:
                     if eventtype=='start':
-                        windows_events.append( [[eventtype, frame, eventname]] )
+                        windows_events.append( [eventtype, frame, eventname] )
                     elif eventtype=='end':
-                        windows_events[-1].append( [eventtype, frame, eventname] )
+                        windows_events.append( [eventtype, frame, eventname] )
                 
             windows_events = sorted(windows_events, key=lambda x: (x[0][0].capitalize(), x[0][1]))
             points_events  = sorted(points_events,  key=lambda x: (x[0].capitalize(), x[1]))
@@ -234,11 +233,13 @@ class ImportWindow(BaseWidget):
             for index in range(0, len(points_events)):
                 eventtype, frame, eventname = points_events[index]
                 events_types[eventname] = current_track
-                self._timeline.addPeriod([frame, frame + 50, eventname], track=current_track)
+                self._timeline.add_period([frame, frame+2, eventname], row=current_track)
 
             current_track = 1
 
-            for start, end in windows_events:
+            for i in range(0, len(windows_events), 2):
+                start = windows_events[i]  
+                end   = windows_events[i+1]
                 eventtype, frame_begin, eventname = start
                 _, frame_end, _ = end
                 
@@ -249,4 +250,5 @@ class ImportWindow(BaseWidget):
                 else:
                     track = events_types[eventname]
 
-                self._timeline.addPeriod([frame_begin, frame_end, eventname], track=track)
+                print('add',eventname,track, frame_begin, frame_end)
+                self._timeline.add_period([frame_begin, frame_end, eventname], row=track)
