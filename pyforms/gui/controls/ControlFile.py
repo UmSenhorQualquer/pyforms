@@ -33,7 +33,7 @@ class ControlFile(ControlText):
 	def click(self):
 
 		if self.use_save_dialog:
-			value = QFileDialog.getSaveFileName(self.parent, self._label, self.value)
+			value, _ = QFileDialog.getSaveFileName(self.parent, self._label, self.value)
 		else:
 			value = QFileDialog.getOpenFileName(self.parent, self._label, self.value)
 

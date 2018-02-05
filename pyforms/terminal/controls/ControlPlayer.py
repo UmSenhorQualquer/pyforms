@@ -69,7 +69,7 @@ class ControlPlayer(ControlBase):
 
         _, image = capture.read()
         if isinstance(image, numpy.ndarray):
-            image = self.processFrame(image)
+            image = self.process_frame_event(image)
 
             if isinstance(image, list) or isinstance(image, tuple):
                 image = groupImage(image, True)

@@ -29,8 +29,10 @@ class BaseWidget(QFrame):
     def __init__(self, *args, **kwargs):
         title = kwargs.get('title', args[0] if len(args)>0 else '')
 
-        parent_win = kwargs.get('parent_win', None)
-        win_flag = kwargs.get('win_flag', None)
+        parent_win = kwargs.get('parent_win', kwargs.get('parent_widget', None))
+        win_flag   = kwargs.get('win_flag', None)
+
+        self._parent_widget = parent_win
 
         if parent_win is not None and win_flag is None: win_flag = QtCore.Qt.Dialog
 
@@ -340,7 +342,7 @@ class BaseWidget(QFrame):
         data = {}
         self.save_form(data)
 
-        filename = QFileDialog.getSaveFileName(self, 'Select file')
+        filename, _ = QFileDialog.getSaveFileName(self, 'Select file')
         with open(filename, 'w') as output_file: json.dump(data, output_file)
 
     def load_form_filename(self, filename):
@@ -350,7 +352,7 @@ class BaseWidget(QFrame):
         self.load_form(data)
 
     def load_window(self):
-        filename = QFileDialog.getOpenFileNames(self, 'Select file')
+        filename, _ = QFileDialog.getOpenFileNames(self, 'Select file')
         self.load_form_filename(str(filename[0]))
 
     def close(self):
@@ -462,7 +464,9 @@ class BaseWidget(QFrame):
     def form_has_loaded(self):
         return self._formLoaded
 
-    
+    @property
+    def parent_widget(self):
+        return self._parent_widget
 
     @property
     def form(self):

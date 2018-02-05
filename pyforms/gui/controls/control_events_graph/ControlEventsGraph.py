@@ -86,7 +86,7 @@ class ControlEventsGraph(ControlBase, QWidget):
 
 	def __export(self):
 		"""Export annotations to a file."""
-		filename = QFileDialog.getSaveFileName(parent=self,
+		filename, _ = QFileDialog.getSaveFileName(parent=self,
 		                                       caption="Export annotations file",
 		                                       directory=self.get_export_filename(),
 		                                       filter="CSV Files (*.csv)",

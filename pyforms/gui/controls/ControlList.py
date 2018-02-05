@@ -62,6 +62,9 @@ class ControlList(ControlBase, QWidget):
 		self.tableWidget.cellDoubleClicked.connect(self.tableWidgetCellDoubleClicked)
 		self.tableWidget.model().dataChanged.connect(self._dataChangedEvent)
 
+
+		self.tableWidget.horizontalHeader().setVisible(False)
+
 		if plusFunction is None and minusFunction is None:
 			self.bottomBar.hide()
 		elif plusFunction is None:

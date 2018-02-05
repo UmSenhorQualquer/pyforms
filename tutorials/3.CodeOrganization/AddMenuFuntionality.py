@@ -23,7 +23,7 @@ class AddMenuFuntionality(object):
 	
 		
 	def __savePeople(self):
-		filename = QtGui.QFileDialog.getSaveFileName(parent=self,
+		filename, _ = QtGui.QFileDialog.getSaveFileName(parent=self,
 			caption="Save file",
 			directory=".",
 			filter="*.dat")
@@ -31,7 +31,7 @@ class AddMenuFuntionality(object):
 		if filename!=None and filename!='': self.save(filename)
 
 	def __loadPeople(self):
-		filename = QtGui.QFileDialog.getOpenFileName(parent=self,
+		filename, _ = QtGui.QFileDialog.getOpenFileName(parent=self,
 			caption="Import file",
 			directory=".",
 			filter="*.dat")

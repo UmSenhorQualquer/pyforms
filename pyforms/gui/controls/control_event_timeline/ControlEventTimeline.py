@@ -439,7 +439,7 @@ class ControlEventTimeline(ControlBase, QWidget):
         QMessageBox.warning(
             self, "Important!", 'Please note that this file cannot be imported after.')
 
-        filename = QFileDialog.getSaveFileName(parent=self,
+        filename, _ = QFileDialog.getSaveFileName(parent=self,
                                                caption="Export matrix file",
                                                directory="untitled.csv",
                                                filter="CSV Files (*.csv)",

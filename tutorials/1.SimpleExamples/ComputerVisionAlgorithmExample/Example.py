@@ -30,7 +30,7 @@ class ComputerVisionAlgorithm(BaseWidget):
 		#Define the event that will be called when the run button is processed
 		self._runbutton.value 	  = self.__runEvent
 		#Define the event called before showing the image in the player
-		self._player.processFrame = self.__processFrame
+		self._player.process_frame_event = self.__process_frame
 
 		#Define the organization of the Form Controls
 		self.formset = [ 
@@ -47,7 +47,7 @@ class ComputerVisionAlgorithm(BaseWidget):
 		"""
 		self._player.value = self._videofile.value
 
-	def __processFrame(self, frame):
+	def __process_frame(self, frame):
 		"""
 		Do some processing to the frame and return the result frame
 		"""
