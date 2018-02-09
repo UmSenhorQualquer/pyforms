@@ -1,15 +1,15 @@
-from pyforms.terminal.Controls.ControlBase import ControlBase
+from pyforms.terminal.controls.ControlBase import ControlBase
 
 class ControlProgress(ControlBase):
 
     _min = 0
     _max = 100
 
-    def __init__(self, label = "%p%", defaultValue = 0, min = 0, max = 100, helptext=None):
+    def __init__(self, *args, **kwargs):
         self._updateSlider = True
         self._min = min
         self._max = max
-        ControlBase.__init__(self, label, defaultValue)
+        ControlBase.__init__(self, *args, **kwargs)
         
         
     @property

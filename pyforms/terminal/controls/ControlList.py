@@ -6,7 +6,7 @@
 """
 import logging
 from pyforms.terminal.BaseWidget import BaseWidget
-from pyforms.terminal.Controls.ControlBase import ControlBase
+from pyforms.terminal.controls.ControlBase import ControlBase
 
 
 logger = logging.getLogger(__name__)

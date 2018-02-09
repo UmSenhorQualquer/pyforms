@@ -70,6 +70,7 @@ if conf.PYFORMS_MODE=='GUI':
 elif conf.PYFORMS_MODE=='TERMINAL':
 
 	from pyforms.terminal.controls.ControlBase 		import ControlBase
+	from pyforms.terminal.controls.ControlBoundingSlider 	import ControlBoundingSlider
 	from pyforms.terminal.controls.ControlText 		import ControlText
 	from pyforms.terminal.controls.ControlButton 	import ControlButton
 	from pyforms.terminal.controls.ControlCheckBox 	import ControlCheckBox

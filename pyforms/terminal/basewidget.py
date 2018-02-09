@@ -23,6 +23,8 @@ class BaseWidget(object):
     ############ Module functions  #############################################
     ############################################################################
 
+    def set_margin(self, margin):pass
+
     def init_form(self, parse=True):
         result = {}
         for fieldname, var in self.controls.items():

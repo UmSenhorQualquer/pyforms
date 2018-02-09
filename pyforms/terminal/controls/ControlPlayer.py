@@ -1,12 +1,13 @@
-from pyforms.terminal.Controls.ControlBase import ControlBase
-import numpy
+from pyforms.terminal.controls.ControlBase import ControlBase
+from pyforms.utils.tools import groupImage
+import numpy, types
 
 
 import numpy as np 
 try:
-    from StringIO import StringIO
+    from StringIO import StringIO as BufferClass
 except ImportError:
-    from io import StringIO
+    from io import BytesIO as BufferClass
 
 
 try:
@@ -77,7 +78,7 @@ class ControlPlayer(ControlBase):
 
             if len(image.shape)>2: image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
             image = Image.fromarray(image)
-            buff = StringIO.StringIO()
+            buff = BufferClass()
             image.save(buff, format="PNG")
             content = buff.getvalue()
             buff.close()
@@ -96,7 +97,7 @@ class ControlPlayer(ControlBase):
                 if 'position' in value.keys(): self.video_index = int(value['position'])
                 self._filename = value['filename']
 
-            if isinstance(value, cv2.VideoCapture):
+            if isinstance(value,types.BuiltinFunctionType):
                 ControlBase.value.fset(self, value )
             
             self._max = int(self._value.get(7))
@@ -120,5 +121,26 @@ class ControlPlayer(ControlBase):
 
     @image.setter
     def image(self, value): pass
-        
 
+
+
+
+
+    @property
+    def frame_width(self): return self._value.get(3)
+
+    @property
+    def frame_height(self): return self._value.get(4)
+
+    @property
+    def max(self): return int(self._value.get(7))
+
+    @property
+    def frame(self): return self._currentFrame
+
+    @property
+    def fps(self): 
+        """
+            Return the video frames per second
+        """
+        return self._value.get(5)
