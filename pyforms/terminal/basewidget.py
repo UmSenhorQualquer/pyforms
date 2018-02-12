@@ -1,4 +1,4 @@
-from pyforms.controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir, ControlNumber
+from pyforms.controls import ControlFile, ControlSlider, ControlText, ControlCombo, ControlCheckBox, ControlBase, ControlDir, ControlNumber, ControlBoundingSlider
 from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 import simplejson as json
@@ -31,7 +31,7 @@ class BaseWidget(object):
             name = var._name
             if isinstance(var, (
                     ControlFile, ControlSlider,   ControlText, 
-                    ControlCombo,ControlCheckBox, ControlDir, ControlNumber
+                    ControlCombo,ControlCheckBox, ControlDir, ControlNumber, ControlBoundingSlider
                 ) 
             ):
                 self._parser.add_argument("--%s" % name, help=var.label)
@@ -89,6 +89,8 @@ class BaseWidget(object):
                     var.value = self._args.__dict__[name]=='True'
                 elif isinstance(var, (ControlSlider, ControlNumber) ):
                     var.value = int(self._args.__dict__[name])
+                elif isinstance(var, ControlBoundingSlider):
+                    var.value = eval(self._args.__dict__[name])
 
         if self._args.load:
             print('\n--------- LOADING CONFIG ------------------')

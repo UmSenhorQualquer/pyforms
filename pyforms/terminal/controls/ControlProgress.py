@@ -1,4 +1,5 @@
 from pyforms.terminal.controls.ControlBase import ControlBase
+from sys import stdout
 
 class ControlProgress(ControlBase):
 
@@ -7,8 +8,8 @@ class ControlProgress(ControlBase):
 
     def __init__(self, *args, **kwargs):
         self._updateSlider = True
-        self._min = min
-        self._max = max
+        self._min = kwargs.get('min', kwargs.get('minimum', 0))
+        self._max = kwargs.get('max', kwargs.get('maximum', 100))
         ControlBase.__init__(self, *args, **kwargs)
         
         
@@ -16,16 +17,21 @@ class ControlProgress(ControlBase):
     def value(self): return self._value
 
     @value.setter
-    def value(self, value):self._value = value
+    def value(self, value):
+        #diff = self._max-self._min
+
+        if (value % 100 == 0):
+            stdout.write( '\rprogress {0}/{1}'.format(value-self._min, self._max) )
+        self._value = value
 
     @property
-    def min(self): return
+    def min(self): return self._min
 
     @min.setter
-    def min(self, value): pass
+    def min(self, value): self._min = value
 
     @property
-    def max(self): return
+    def max(self): return self._max
 
     @max.setter
-    def max(self, value): pass
+    def max(self, value): self._max = value
