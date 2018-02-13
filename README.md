@@ -1,7 +1,7 @@
 ![Important](https://img.shields.io/badge/Important-Note-red.svg "Screen")  
 If you find this project useful, please, do not forget to ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/docs/imgs/start.png?raw=true "Screen") it.
 
-![New version available](https://img.shields.io/badge/New%20version%20available-2.0-green.svg "Screen")
+![New version available](https://img.shields.io/badge/New%20version%20available-3.0-green.svg "Screen")
 
 
 
@@ -35,6 +35,7 @@ Example of an application running in the Desktop, Web and Terminal enviroments:
 ## Examples of applications developed in Pyforms
 * [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
 * [3D tracking analyser](https://github.com/UmSenhorQualquer/3D-tracking-analyser)
+* [PyBpod](http://pybpod.readthedocs.io)
 
 ## Documentation
 
