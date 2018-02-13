@@ -13,8 +13,7 @@ if not version: raise RuntimeError('Cannot find version information')
 setup(
 	name='PyForms',
 	version=version,
-	description="""Pyforms is a Python 2.7 and 3.4 framework to develop GUI application,
-		which promotes modular software design and code reusability with minimal effort.""",
+	description="""Pyforms is a Python 2.7 and 3.4 framework to develop GUI applications based on pyqt""",
 	author='Ricardo Ribeiro',
 	author_email='ricardojvr@gmail.com',
 	license='MIT',
