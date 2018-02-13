@@ -3,10 +3,13 @@ from datetime import datetime, timedelta
 import argparse, uuid, os, shutil, time, sys, subprocess
 import simplejson as json
 
+import logging, traceback; logger=logging.getLogger(__file__)
+
 try:
     import requests
 except:
-    print("No requests lib")
+    logger.warning("No requests lib")
+    logger.error(e, exc_info=True)
 
 
 class BaseWidget(object):

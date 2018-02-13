@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from pyforms.gui.controls.ControlBase import ControlBase
 

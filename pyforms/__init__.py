@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from pysettings import conf
+
+from pyforms.utils.settings_manager import conf
 
 conf += 'pyforms.settings'
 

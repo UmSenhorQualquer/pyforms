@@ -5,7 +5,7 @@ from AnyQt.QtWidgets import QMainWindow, QDockWidget, QAction, QApplication
 from AnyQt 			 import QtCore, _api
 from AnyQt.QtGui 	 import QIcon
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 import sys, os, platform, logging
 
 logger = logging.getLogger(__name__)
@@ -157,7 +157,7 @@ def execute_test_file(myapp):
 
 
 def start_app(ClassObject, geometry=None):
-	from pysettings import conf
+	from pyforms.utils.settings_manager import conf
 
 	app = QApplication(sys.argv)
 

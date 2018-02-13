@@ -13,7 +13,7 @@ import traceback
 import time
 import datetime
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 from AnyQt.QtWidgets import QMessageBox
 
 

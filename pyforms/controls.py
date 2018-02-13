@@ -48,7 +48,7 @@ if conf.PYFORMS_MODE=='GUI':
 			from pyforms.gui.controls.ControlImage 					import ControlImage
 			from pyforms.gui.controls.control_player.ControlPlayer 	import ControlPlayer
 		except Exception as e:
-			logger.warning("GL widgets or Opencv not installed")
+			logger.warning("GL widgets or Opencv is not installed")
 			logger.error(e, exc_info=True)
 	
 	if conf.PYFORMS_VISVIS_ENABLED:

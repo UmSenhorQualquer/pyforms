@@ -1,7 +1,7 @@
 #!/usr/bifn/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt 								import _api
 from AnyQt.QtWidgets 				    import QWidget, QVBoxLayout

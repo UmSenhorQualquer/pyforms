@@ -4,7 +4,7 @@
 import csv
 import os
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 
 from AnyQt.QtWidgets import QWidget, QScrollArea, QColorDialog, QFileDialog, QMessageBox, QPushButton, QLabel, QSlider, QHBoxLayout, QVBoxLayout

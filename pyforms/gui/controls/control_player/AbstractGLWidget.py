@@ -6,7 +6,7 @@
 """
 import logging, cv2
 
-from pysettings 	 import conf
+from pyforms.utils.settings_manager 	 import conf
 from AnyQt 			 import QtGui, QtCore, _api
 from AnyQt.QtWidgets import QApplication
 

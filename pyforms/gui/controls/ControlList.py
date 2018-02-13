@@ -7,7 +7,7 @@
 import logging
 import os
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt 			 import QtCore, uic
 from AnyQt.QtWidgets import QTableWidgetItem, QWidget, QAbstractItemView

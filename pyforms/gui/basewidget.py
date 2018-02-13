@@ -3,7 +3,7 @@
 
 import json, AnyQt
 
-from pysettings      import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt.QtWidgets import QFrame
 from AnyQt.QtWidgets import QVBoxLayout

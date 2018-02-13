@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings 					  import conf
+from pyforms.utils.settings_manager 					  import conf
 from pyforms.gui.controls.ControlText import ControlText
 
 import pyforms.utils.tools as tools

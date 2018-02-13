@@ -20,7 +20,14 @@ setup(
 	license='MIT',
 	url='https://github.com/UmSenhorQualquer/pyforms',
 	install_requires=[
-		"anyqt",
+		'anyqt',
+		'pyqt5',
+		'pyopengl',
+		'QScintilla',
+		'visvis',
+		'matplotlib',
+		'python-dateutil',
+		'numpy'
 	],
 	packages=find_packages(),
 	package_data={'pyforms': [

@@ -3,7 +3,7 @@
 
 import re
 import logging
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 logger = logging.getLogger(__name__)
 

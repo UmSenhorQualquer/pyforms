@@ -1,4 +1,4 @@
-from pysettings import conf;
+from pyforms.utils.settings_manager import conf;
 import settings
 conf+=settings
 

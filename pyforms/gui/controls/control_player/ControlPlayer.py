@@ -14,7 +14,7 @@ __status__ = "Development"
 
 import logging, platform, os, math, cv2
 
-from pysettings 	 import conf
+from pyforms.utils.settings_manager 	 import conf
 from AnyQt 			 import uic, _api
 from AnyQt 			 import QtCore
 from AnyQt.QtWidgets import QFrame	

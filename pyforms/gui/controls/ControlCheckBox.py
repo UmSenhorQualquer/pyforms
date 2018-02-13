@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt 			 import uic, QtCore
 

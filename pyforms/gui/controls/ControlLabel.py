@@ -4,7 +4,7 @@
 """ pyforms.gui.controls.ControlLabel"""
 
 import pyforms.utils.tools as tools
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt           import uic
 

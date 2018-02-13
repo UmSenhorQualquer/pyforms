@@ -4,7 +4,7 @@
 import logging
 
 from AnyQt import _api
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from pyforms.gui.controls.ControlBase import ControlBase
 import pyforms.utils.tools as tools

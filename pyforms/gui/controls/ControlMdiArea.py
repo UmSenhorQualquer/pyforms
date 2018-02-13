@@ -3,7 +3,7 @@
 
 import logging
 
-from pysettings import conf
+from pyforms.utils.settings_manager import conf
 
 from AnyQt.QtWidgets import QMdiArea, QMdiSubWindow
 
