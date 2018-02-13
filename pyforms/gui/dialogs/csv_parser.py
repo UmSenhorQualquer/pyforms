@@ -15,12 +15,12 @@ class CsvParserDialog(BaseWidget):
 
         # Definition of the forms fields
         self._filename = ControlFile('CSV File')
-        self._separator = ControlText('Separator', ';')
-        self._startingrow = ControlNumber('Starting row', 0)
-        self._frameCol = ControlNumber('Frame column', 0, 0, 100)
-        self._xCol = ControlNumber('X column', 1, 0, 100)
-        self._yCol = ControlNumber('Y column', 2, 0, 100)
-        self._zCol = ControlNumber('Z column', 3, 0, 100)
+        self._separator = ControlText('Separator', default=';')
+        self._startingrow = ControlNumber('Starting row', default=0)
+        self._frameCol = ControlNumber('Frame column', default=0, minumum=0, maximum=100)
+        self._xCol = ControlNumber('X column', default=1, minumum=0, maximum=100)
+        self._yCol = ControlNumber('Y column', default=2, minumum=0, maximum=100)
+        self._zCol = ControlNumber('Z column', default=3, minumum=0, maximum=100)
         self._filePreview = ControlList('Preview')
         self._loadButton = ControlButton('Load')
 
@@ -40,10 +40,10 @@ class CsvParserDialog(BaseWidget):
         self.__refreshPreview()
 
     @property
-    def loadFileEvent(self): return self._loadButton.value
+    def load_file_event(self): return self._loadButton.value
 
-    @loadFileEvent.setter
-    def loadFileEvent(self, value): self._loadButton.value = value
+    @load_file_event.setter
+    def load_file_event(self, value): self._loadButton.value = value
 
     @property
     def separator(self): return self._separator.value
@@ -107,7 +107,7 @@ class CsvParserDialog(BaseWidget):
 
     def next(self):
         if self._spamreader != None:
-            row = self._spamreader.next()
+            row = next(self._spamreader)
             return [row[int(col)] for col in self._cols]
         else:
             raise StopIteration()

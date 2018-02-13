@@ -19,15 +19,14 @@ class ControlVisVisVolume(ControlBase):
 	def init_form(self):
 		self._form = QWidget()
 		layout = QVBoxLayout()
-		layout.setMargin(0)
-
+		
 		if _api.USED_API == _api.QT_API_PYQT5:
 			layout.setContentsMargins(0,0,0,0)
 		elif _api.USED_API == _api.QT_API_PYQT4:
 			layout.setMargin(0)
 
 		self._form.setLayout(layout)
-		self._app = vv.use('pyqt4')
+		self._app = vv.use('pyqt5')
 		self._app.Create()
 		self._first = True
 

@@ -66,7 +66,7 @@ if conf.PYFORMS_MODE=='GUI':
 			logger.warning("QScintilla2 not installed")
 			logger.error(e, exc_info=True)
 
-
+	
 elif conf.PYFORMS_MODE=='TERMINAL':
 
 	from pyforms.terminal.controls.ControlBase 		import ControlBase

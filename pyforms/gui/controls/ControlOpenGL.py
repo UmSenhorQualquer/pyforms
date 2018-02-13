@@ -85,10 +85,16 @@ class OpenglGLWidget(QGLWidget):
         :param height: 
         :return: 
         """
+
         glViewport(0, 0, width, height)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluPerspective(65.0, float(width) / float(height), 0.01, 800.0)
+
+        if height!=0:
+            ratio = float(width) / float(height)
+        else:
+            ratio = 1
+        gluPerspective(65.0, ratio, 0.01, 800.0)
 
     def paintGL(self):
         """
