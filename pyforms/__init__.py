@@ -13,7 +13,6 @@ __maintainer__ 	= ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ 		= ["ricardojvr@gmail.com", "cajomferro@gmail.com"]
 __status__ 		= "Production"
 
-
 if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 
 	from pyforms.gui import controls
