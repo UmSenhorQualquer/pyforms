@@ -31,3 +31,7 @@ elif conf.PYFORMS_MODE in ['WEB']:
 	from pyforms_web.web import Controls
 	from pyforms_web.web.BaseWidget import BaseWidget
 	from pyforms_web.web.appmanager import start_app
+
+	from pyforms_web.web.django_pyforms.model_admin import ModelAdmin
+	from pyforms_web.web.django_pyforms.model_admin import ViewFormAdmin
+	from pyforms_web.web.django_pyforms.model_admin import EditFormAdmin
