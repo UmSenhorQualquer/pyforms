@@ -28,8 +28,8 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 
 elif conf.PYFORMS_MODE in ['WEB']:
 
-	from pyforms_web.web import Controls
-	from pyforms_web.web.BaseWidget import BaseWidget
+	from pyforms_web.web import controls
+	from pyforms_web.web.basewidget import BaseWidget, no_columns, segment
 	from pyforms_web.web.appmanager import start_app
 
 	from pyforms_web.web.django_pyforms.model_admin import ModelAdmin

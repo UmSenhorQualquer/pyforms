@@ -85,22 +85,23 @@ elif conf.PYFORMS_MODE=='TERMINAL':
 
 elif conf.PYFORMS_MODE=='WEB':
 
-	from pyforms_web.web.Controls.ControlBase 			import ControlBase
-	from pyforms_web.web.Controls.ControlText 			import ControlText
-	from pyforms_web.web.Controls.ControlBoundingSlider import ControlBoundingSlider
-	from pyforms_web.web.Controls.ControlDate 			import ControlDate
-	from pyforms_web.web.Controls.ControlButton 		import ControlButton
-	from pyforms_web.web.Controls.ControlCheckBox 		import ControlCheckBox
-	from pyforms_web.web.Controls.ControlCombo 			import ControlCombo
-	from pyforms_web.web.Controls.ControlDir 			import ControlDir
-	from pyforms_web.web.Controls.ControlFile 			import ControlFile
-	from pyforms_web.web.Controls.ControlImage 			import ControlImage
-	from pyforms_web.web.Controls.ControlSlider 		import ControlSlider
-	from pyforms_web.web.Controls.ControlPlayer 		import ControlPlayer
-	from pyforms_web.web.Controls.ControlProgress 		import ControlProgress
-	from pyforms_web.web.Controls.ControlVisVis 		import ControlVisVis
-	from pyforms_web.web.Controls.ControlList 			import ControlList
-	from pyforms_web.web.Controls.ControlLabel 			import ControlLabel
-	from pyforms_web.web.Controls.ControlTimeout 		import ControlTimeout
-	from pyforms_web.web.Controls.ControlEmptyWidget 	import ControlEmptyWidget
-	from pyforms_web.web.Controls.ControlWorkflow 		import ControlWorkflow
+	from pyforms_web.web.controls.ControlBase 			import ControlBase
+	from pyforms_web.web.controls.ControlText 			import ControlText
+	from pyforms_web.web.controls.ControlBoundingSlider import ControlBoundingSlider
+	from pyforms_web.web.controls.ControlDate 			import ControlDate
+	from pyforms_web.web.controls.ControlButton 		import ControlButton
+	from pyforms_web.web.controls.ControlCheckBox 		import ControlCheckBox
+	from pyforms_web.web.controls.ControlCombo 			import ControlCombo
+	from pyforms_web.web.controls.ControlDir 			import ControlDir
+	from pyforms_web.web.controls.ControlFile 			import ControlFile
+	from pyforms_web.web.controls.ControlImage 			import ControlImage
+	from pyforms_web.web.controls.ControlSlider 		import ControlSlider
+	from pyforms_web.web.controls.ControlPlayer 		import ControlPlayer
+	from pyforms_web.web.controls.ControlProgress 		import ControlProgress
+	from pyforms_web.web.controls.ControlVisVis 		import ControlVisVis
+	from pyforms_web.web.controls.ControlList 			import ControlList
+	from pyforms_web.web.controls.ControlLabel 			import ControlLabel
+	from pyforms_web.web.controls.ControlTimeout 		import ControlTimeout
+	from pyforms_web.web.controls.ControlEmptyWidget 	import ControlEmptyWidget
+	from pyforms_web.web.controls.ControlWorkflow 		import ControlWorkflow
+	from pyforms_web.web.controls.ControlPieChart 		import ControlPieChart
