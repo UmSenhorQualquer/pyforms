@@ -20,6 +20,8 @@ from AnyQt           import QtCore, _api
 
 from pyforms.gui.controls.ControlBase import ControlBase
 
+from AnyQt.QtWidgets import QMessageBox
+
 
 class BaseWidget(QFrame):
     """
@@ -358,11 +360,39 @@ class BaseWidget(QFrame):
     def close(self):
         super(BaseWidget, self).close()
 
-    def message(self, msg, title=None, msg_type=None): pass
+
+    def question(self, msg, title=None, ):
+        reply = QMessageBox.question(self, title, msg, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes or reply == QMessageBox.No:
+            return reply == QMessageBox.Yes
+        else:
+            return None
+
+    def message(self, msg, title=None, msg_type=None):
+        if msg_type=='success':
+            QMessageBox.about(self, title, msg)
+        elif msg_type=='info':
+            QMessageBox.information(self, title, msg)
+        elif msg_type=='warning':
+            QMessageBox.warning(self, title, msg)
+        elif msg_type=='error':
+            QMessageBox.critical(self, title, msg)
+        elif msg_type=='about':
+            QMessageBox.about(self, title, msg)
+        elif msg_type=='aboutQt':
+            QMessageBox.aboutQt(self, msg)
+        else:
+            QMessageBox.about(self, title, msg)
+
+
     def success(self,   msg, title=None):   self.message(msg, title, msg_type='success')
     def info(self,      msg, title=None):   self.message(msg, title, msg_type='info')
     def warning(self,   msg, title=None):   self.message(msg, title, msg_type='warning');
     def alert(self,     msg, title=None):   self.message(msg, title, msg_type='error')
+    def critical(self,  msg, title=None):   self.message(msg, title, msg_type='error')
+    def about(self,     msg, title=None):   self.message(msg, title, msg_type='about')
+    def aboutQt(self,   msg, title=None):   self.message(msg, title, msg_type='aboutQt')
 
     def message_popup(self, msg, title='', buttons=None, handler=None, msg_type='success'):
         pass

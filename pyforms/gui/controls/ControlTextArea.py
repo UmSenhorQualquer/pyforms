@@ -17,7 +17,7 @@ class ControlTextArea(ControlBase):
 
 	def __init__(self, *args, **kwargs):
 		ControlBase.__init__(self, *args, **kwargs)
-		self.autoscroll = False
+		self.autoscroll = kwargs.get('autoscroll', False)
 		
 		
 
