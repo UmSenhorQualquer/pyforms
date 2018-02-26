@@ -362,7 +362,7 @@ class BaseWidget(QFrame):
 
 
     def question(self, msg, title=None, ):
-        reply = QMessageBox.question(self, title, msg, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        reply = QMessageBox.question(self, title, msg, QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
         if reply == QMessageBox.Yes or reply == QMessageBox.No:
             return reply == QMessageBox.Yes

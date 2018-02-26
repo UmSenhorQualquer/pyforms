@@ -16,12 +16,10 @@ class ControlBase(object):
     """
 
     def __init__(self, *args, **kwargs):
-        self._form      = None  # Qt widget
-        self._parent    = None  # Parent window
+        self._form       = None  # Qt widget
+        self._parent     = None  # Parent window
         self._popup_menu = None
 
-        self.changed_event  = kwargs.get('changed_event', self.changed_event)
-        
         self._help          = kwargs.get('helptext', None)
         self._value         = kwargs.get('default',  None)
         self._label         = kwargs.get('label', args[0] if len(args)>0 else '')
@@ -33,14 +31,13 @@ class ControlBase(object):
         self._readonly      = kwargs.get('readonly', False)
         self._label_visible = kwargs.get('label_visible', True)
         """
-        
+
         self.init_form()
 
-        self.enabled = kwargs.get('enabled', True)
-        self.readonly = kwargs.get('readonly', False)
-
-        if not kwargs.get('visible', True):
-            self.hide()
+        self.changed_event  = kwargs.get('changed_event', self.changed_event)
+        self.enabled        = kwargs.get('enabled', True)
+        self.readonly       = kwargs.get('readonly', False)
+        if not kwargs.get('visible', True):  self.hide()
 
 
     def __repr__(self): return str(self._value)
