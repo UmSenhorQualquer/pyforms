@@ -206,6 +206,7 @@ class ControlPlayer(ControlBase, QFrame):
 
 	@value.setter
 	def value(self, value):
+		self.form.setUpdatesEnabled(False)
 		if value is None: 
 			self.stop()
 			self.videoControl.setEnabled(False)
@@ -233,6 +234,7 @@ class ControlPlayer(ControlBase, QFrame):
 			self.videoControl.setEnabled(True)
 
 		self.refresh()
+		self.form.setUpdatesEnabled(True)
 
 
 	##########################################################################
@@ -252,6 +254,8 @@ class ControlPlayer(ControlBase, QFrame):
 	
 
 	def update_frame(self):
+		self.form.setUpdatesEnabled(False)
+
 		if not self.visible: self.stop()
 
 		if self.value is None: 
@@ -276,6 +280,9 @@ class ControlPlayer(ControlBase, QFrame):
 				self.videoProgress.setValue(currentFrame)
 				if self._updateVideoFrame:
 					self.videoFrames.setValue(currentFrame)
+
+		self.form.setUpdatesEnabled(True)
+
 
 
 	def videoPlay_clicked(self):

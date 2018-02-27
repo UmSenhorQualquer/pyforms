@@ -20,6 +20,9 @@ class ControlButton(ControlBase):
 		default = kwargs.get('default', None)
 		if default: self.value = default
 
+		icon = kwargs.get('icon', None)
+		if icon: self.icon = icon
+
 	def init_form(self):
 		self._form = QPushButton()
 		self._form.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
