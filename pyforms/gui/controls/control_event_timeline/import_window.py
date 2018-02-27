@@ -193,6 +193,8 @@ class ImportWindow(BaseWidget):
                 points_events  = []
                 first_date     = None
 
+
+                open_windows = {}
                 for row in csvfile:
                     row = row[:-1] #remove the newline character
 
@@ -201,7 +203,7 @@ class ImportWindow(BaseWidget):
                         #eventtype = row[-split:]
                         eventtype = 'end'
                         timestr   = row[split-33:split]
-                        eventname = row[4:split-33]
+                        eventname = row[3:split-33].strip()
                     elif row.endswith('PointEvent'):
                         split     = row.rfind(' ')
                         eventtype = row[split+1:]
@@ -210,7 +212,7 @@ class ImportWindow(BaseWidget):
                     else:
                         eventtype = 'start'
                         timestr   = row[-33:]
-                        eventname = row[6:-33]
+                        eventname = row[5:-33].strip()
                     
                     cvttime = dateutil.parser.parse(timestr.replace('T', ' '))
                     cvttime = cvttime.replace(tzinfo=None)
@@ -223,11 +225,14 @@ class ImportWindow(BaseWidget):
                         points_events.append([eventtype, frame, eventname])
                     else:
                         if eventtype=='start':
-                            windows_events.append( [eventtype, frame, eventname] )
+                            open_windows[eventname] = frame
                         elif eventtype=='end':
-                            windows_events.append( [eventtype, frame, eventname] )
+                            begin_frame = open_windows[eventname]
+                            del open_windows[eventname]
+                            windows_events.append( [eventtype, (begin_frame, frame) , eventname] )
                     
-                windows_events = sorted(windows_events, key=lambda x: (x[0][0].capitalize(), x[0][1]))
+
+                windows_events = sorted(windows_events, key=lambda x: (x[0].capitalize(), x[2], x[1]))
                 points_events  = sorted(points_events,  key=lambda x: (x[0].capitalize(), x[1]))
                 ntracks        = len(set([x[0][1] for x in windows_events])) + 1
 
@@ -242,11 +247,8 @@ class ImportWindow(BaseWidget):
 
                 current_track = 1
 
-                for i in range(0, len(windows_events), 2):
-                    start = windows_events[i]  
-                    end   = windows_events[i+1]
-                    eventtype, frame_begin, eventname = start
-                    _, frame_end, _ = end
+                for event in windows_events:
+                    eventtype, (frame_begin, frame_end), eventname = event
                     
                     if eventname not in events_types:
                         events_types[eventname] = current_track
@@ -256,6 +258,8 @@ class ImportWindow(BaseWidget):
                         track = events_types[eventname]
 
                     self._timeline.add_period([frame_begin, frame_end, eventname], row=track)
+
+
         except Exception as e:
             self.warning("An error occurred when trying to import the file. Please check the logs.")
             logger.error(e, exc_info=True)
