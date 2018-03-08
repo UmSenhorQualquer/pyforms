@@ -23,7 +23,7 @@ class BonsaiImportFileDlg(BaseWidget):
 
         self._file          = ControlFile('File to import')
         self._fps           = ControlNumber('Video FPS', default=30)
-        self._startframe    = ControlNumber('Initial frame', visible=False)
+        self._startframe    = ControlNumber('Initial frame', visible=False, maximum=100000)
 
 
         self._formset = [('_startframe','_fps', '_file')]
