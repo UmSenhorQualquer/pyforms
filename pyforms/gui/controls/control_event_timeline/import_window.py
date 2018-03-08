@@ -21,10 +21,12 @@ class BonsaiImportFileDlg(BaseWidget):
     def __init__(self, timeline=None):
         super(BonsaiImportFileDlg, self).__init__('Import file')
 
-        self._file = ControlFile('File to import')
-        self._fps = ControlNumber('Video FPS', default=30)
+        self._file          = ControlFile('File to import')
+        self._fps           = ControlNumber('Video FPS', default=30)
+        self._startframe    = ControlNumber('Initial frame', visible=False)
 
-        self._formset = [('_fps', '_file')]
+
+        self._formset = [('_startframe','_fps', '_file')]
 
         #self._file.value = '/home/ricardo/Desktop/rat1e2.csv'
 
@@ -37,11 +39,11 @@ class ImportWindow(BaseWidget):
         self._timeline = timeline
 
         # Definition of the forms fields
-        self._filetype = ControlCombo('Please select the type of file you would like to import:')
-        self._importButton = ControlButton('Import')
-        self._panel = ControlEmptyWidget('Panel')
-        self._file = ControlFile('File to import')
-
+        self._filetype      = ControlCombo('Please select the type of file you would like to import:')
+        self._importButton  = ControlButton('Import')
+        self._panel         = ControlEmptyWidget('Panel')
+        self._file          = ControlFile('File to import')
+        
         self._panel.value = self._file
         self._filetype.add_item('Events file', 0)
         self._filetype.add_item('Graph file', 1)
@@ -51,7 +53,9 @@ class ImportWindow(BaseWidget):
         self._formset = [
             ('_filetype', ' '),
             '_panel',
-            (' ', '_importButton'), ' ']
+            (' ', '_importButton'),
+            ' '
+        ]
 
         self._filetype.changed_event = self.__fileTypeChanged
         self._importButton.value = self.__importData
@@ -72,8 +76,13 @@ class ImportWindow(BaseWidget):
         elif self._filetype.value == 1:
             self._panel.value = self._graphCsvParserDlg
 
-        elif self._filetype.value in [2, 3]:
+        elif self._filetype.value == 2:
             self._panel.value = self._bonsai_import_dlg
+            self._bonsai_import_dlg._startframe.hide()
+
+        elif self._filetype.value == 3:
+            self._panel.value = self._bonsai_import_dlg
+            self._bonsai_import_dlg._startframe.show()
 
 
 
@@ -193,6 +202,7 @@ class ImportWindow(BaseWidget):
                 points_events  = []
                 first_date     = None
 
+                initial_frame = int(self._bonsai_import_dlg._startframe.value)
 
                 open_windows = {}
                 for row in csvfile:
@@ -219,7 +229,7 @@ class ImportWindow(BaseWidget):
                     if first_date is None: first_date = cvttime
                     
                     seconds = (cvttime - first_date).total_seconds()
-                    frame   = int(round(self._bonsai_import_dlg._fps.value * seconds))
+                    frame   = int(round(self._bonsai_import_dlg._fps.value * seconds)) + initial_frame
 
                     if eventtype=='PointEvent':
                         points_events.append([eventtype, frame, eventname])
