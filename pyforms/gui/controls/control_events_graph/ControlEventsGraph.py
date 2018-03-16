@@ -5,8 +5,7 @@ import csv
 from pyforms.gui.controls.ControlBase 					  import ControlBase
 from pyforms.gui.controls.control_events_graph.EventsWidget import EventsWidget
 from AnyQt.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QScrollBar, QFileDialog
-from AnyQt 			 import QtCore
-
+from AnyQt 			 import QtCore, _api
 
 class ControlEventsGraph(ControlBase, QWidget):
 	"""
