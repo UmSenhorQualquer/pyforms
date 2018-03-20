@@ -40,6 +40,7 @@ class ControlCodeEditor(ControlBase):
 		self._changed_func = None
 		super(ControlCodeEditor, self).__init__(*args, **kwargs)
 
+		self.discart_event = kwargs.get('discart_event', self.discart_event)
 		
 
 	def init_form(self):
@@ -50,14 +51,19 @@ class ControlCodeEditor(ControlBase):
 		control_path = tools.getFileInSameDirectory(__file__, "code_editor.ui")
 		self._form = uic.loadUi(control_path)
 
-		self._code_editor = self._form.code_editor
 
+		self._code_editor = self._form.code_editor
 		self._save_button = self._form.save_button
+		self._discart_button = self._form.discart_button
+
 		self._save_button.clicked[bool].connect(self.on_save_changes)
+		self._discart_button.clicked[bool].connect(self.on_discart_changes)
+
 
 		if self._read_only:
 			self._code_editor.setReadOnly(True)
 			self._save_button.setVisible(False)
+			self._discart_button.setVisible(False)
 
 		self.form.font_size.addItem('9')
 		self.form.font_size.addItem('10')
@@ -74,6 +80,7 @@ class ControlCodeEditor(ControlBase):
 		self.form.font_size.currentIndexChanged.connect(self.__font_size_index_changed)
 
 		self.form.save_button.setIcon(QIcon(conf.PYFORMS_ICON_CODEEDITOR_SAVE))
+		self.form.discart_button.setIcon(QIcon(conf.PYFORMS_ICON_CODEEDITOR_DISCART))
 
 		self.lexer = QsciLexerPython
 
@@ -179,15 +186,30 @@ class ControlCodeEditor(ControlBase):
 		"""
 		On modification change, re-enable save button
 		"""
-		if self._changed_func: self._save_button.setEnabled(True)
+		if self._changed_func: 
+			self._save_button.setEnabled(True)
+			self._discart_button.setEnabled(True)
 
 	def on_save_changes(self):
 		"""
 		On button save clicked, save changes made on the code editor to file
 		"""
-		if self.changed_event() and self._changed_func:
+		if self.changed_event():
 			self._code_editor.setModified(False)
 			self._save_button.setEnabled(False)
+			self._discart_button.setEnabled(False)
+
+	def on_discart_changes(self):
+
+		if self.discart_event():
+			self._code_editor.setModified(False)
+			self._save_button.setEnabled(False)
+			self._discart_button.setEnabled(False)
+
+	def discart_event(self):
+
+		return True
+
 
 	def _key_pressed(self, event):
 		"""
@@ -234,11 +256,11 @@ class ControlCodeEditor(ControlBase):
 
 	@value.setter
 	def value(self, value):
-		ControlBase.value.fset(self, value)
-		if value is not None and len(value) > 0:
+		if value is not None:
 			self._code_editor.setText(str(value))
 			self._code_editor.setModified(False)
 			self._save_button.setEnabled(False)
+			self._discart_button.setEnabled(False)
 
 	@property
 	def changed_event(self):

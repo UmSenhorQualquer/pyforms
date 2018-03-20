@@ -20,7 +20,34 @@ from AnyQt           import QtCore, _api
 
 from pyforms.gui.controls.ControlBase import ControlBase
 
-from AnyQt.QtWidgets import QMessageBox
+from AnyQt.QtWidgets import QMessageBox, QInputDialog
+
+class vsplitter(object):
+    def __init__(self, *args, **kwargs):
+        self.items = args
+        self.left_width = kwargs.get('left_width', 1)
+        self.right_width = kwargs.get('right_width', 1)
+    def __getitem__(self,index): return self.items[index]
+    def __setitem__(self,index,value): self.items[index] = value
+    def __len__(self):  return len(self.items)
+    def __iter__(self): 
+        self._index = -1; return self
+    def __next__(self): 
+        self._index += 1
+        if self._index>=len(self.items): raise StopIteration
+        return self.items[self._index]
+
+class hsplitter(object):
+    def __init__(self, *args, **kwargs):  self.items = args
+    def __getitem__(self,index): return self.items[index]
+    def __setitem__(self,index,value): self.items[index] = value
+    def __len__(self):  return len(self.items)
+    def __iter__(self): 
+        self._index = -1; return self
+    def __next__(self): 
+        self._index += 1
+        if self._index>=len(self.items): raise StopIteration
+        return self.items[self._index]
 
 
 class BaseWidget(QFrame):
@@ -72,7 +99,6 @@ class BaseWidget(QFrame):
         """
         if not self._formLoaded:
 
-            
             if self._formset is not None:
                 control = self.generate_panel(self._formset)
                 self.layout().addWidget(control)
@@ -116,34 +142,26 @@ class BaseWidget(QFrame):
         @type formset: list
         """
         control = None
-        if '=' in formset:
-            control = QSplitter(QtCore.Qt.Vertical)
-            tmp = list(formset)
-            index = tmp.index('=')
-            firstPanel = self.generate_panel(formset[0:index])
-            secondPanel = self.generate_panel(formset[index + 1:])
-            control.addWidget(firstPanel)
-            control.addWidget(secondPanel)
+        if '=' in formset or isinstance( formset, hsplitter ):
+            control      = QSplitter(QtCore.Qt.Vertical)
+            index        = list(formset).index('=')
+            first_panel  = self.generate_panel(formset[0:index])
+            second_panel = self.generate_panel(formset[index+1:])
+            control.addWidget(first_panel)
+            control.addWidget(second_panel)
             self._splitters.append(control)
             return control
-        elif '||' in formset:
-            control = QSplitter(QtCore.Qt.Horizontal)
-            tmp = list(formset)
-            rindex = lindex = index = tmp.index('||')
-            rindex -= 1
-            rindex += 2
-            if isinstance(formset[lindex - 1], int):
-                lindex = lindex - 1
-            if len(formset) > rindex and isinstance(formset[index + 1], int):
-                rindex += 1
-            firstPanel = self.generate_panel(formset[0:lindex])
-            secondPanel = self.generate_panel(formset[rindex:])
-            if isinstance(formset[index - 1], int):
-                firstPanel.setMaximumWidth(formset[index - 1])
-            if isinstance(formset[index + 1], int):
-                secondPanel.setMaximumWidth(formset[index + 1])
-            control.addWidget(firstPanel)
-            control.addWidget(secondPanel)
+        elif '||' in formset or isinstance( formset, vsplitter ):
+            control      = QSplitter(QtCore.Qt.Horizontal)
+            index        = list(formset).index('||')
+            first_panel  = self.generate_panel(formset[0:index])
+            second_panel = self.generate_panel(formset[index+1:])
+            control.addWidget(first_panel)
+            control.addWidget(second_panel)
+
+            if isinstance( formset, vsplitter ):
+                sizes = [formset.left_width, formset.right_width]
+                control.setSizes(sizes)
             self._splitters.append(control)
             return control
         control = QFrame(self)
@@ -151,7 +169,7 @@ class BaseWidget(QFrame):
         if type(formset) is tuple:
             layout = QHBoxLayout()
             for row in formset:
-                if isinstance(row, (list, tuple)):
+                if isinstance(row, (list, tuple, vsplitter, hsplitter) ):
                     panel = self.generate_panel(row)
                     layout.addWidget(panel)
                 elif row == " ":
@@ -224,7 +242,7 @@ class BaseWidget(QFrame):
         elif type(formset) is list:
             layout = QVBoxLayout()
             for row in formset:
-                if isinstance(row, (list, tuple)):
+                if isinstance(row, (list, tuple, vsplitter, hsplitter) ):
                     panel = self.generate_panel(row)
                     layout.addWidget(panel)
                 elif row == " ":
@@ -361,9 +379,17 @@ class BaseWidget(QFrame):
         super(BaseWidget, self).close()
 
 
-    def question(self, msg, title=None, ):
-        reply = QMessageBox.question(self, title, msg, QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+    def input_text(self, msg, title='', default=None):
+        text, ok = QInputDialog.getText(self, title, msg, text=default)
+        if ok:
+            return str(text)
+        else:
+            return None
 
+    def question(self, msg, title=None, ):
+        m = QMessageBox(QMessageBox.Question, title, msg, 
+            QMessageBox.Yes | QMessageBox.No) 
+        reply = m.exec()
         if reply == QMessageBox.Yes or reply == QMessageBox.No:
             return reply == QMessageBox.Yes
         else:
@@ -371,20 +397,21 @@ class BaseWidget(QFrame):
 
     def message(self, msg, title=None, msg_type=None):
         if msg_type=='success':
-            QMessageBox.about(self, title, msg)
+            m = QMessageBox(QMessageBox.NoIcon, title, msg) 
         elif msg_type=='info':
-            QMessageBox.information(self, title, msg)
+            m = QMessageBox(QMessageBox.Information, title, msg)    
         elif msg_type=='warning':
-            QMessageBox.warning(self, title, msg)
+            m = QMessageBox(QMessageBox.Warning, title, msg) 
         elif msg_type=='error':
-            QMessageBox.critical(self, title, msg)
+            m = QMessageBox(QMessageBox.Critical, title, msg) 
         elif msg_type=='about':
-            QMessageBox.about(self, title, msg)
+            m = QMessageBox(QMessageBox.Question, title, msg) 
         elif msg_type=='aboutQt':
-            QMessageBox.aboutQt(self, msg)
+            m = QMessageBox(QMessageBox.Question, title, msg)
         else:
-            QMessageBox.about(self, title, msg)
+            m = QMessageBox(QMessageBox.NoIcon, title, msg)
 
+        m.exec()
 
     def success(self,   msg, title=None):   self.message(msg, title, msg_type='success')
     def info(self,      msg, title=None):   self.message(msg, title, msg_type='info')

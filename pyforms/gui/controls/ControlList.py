@@ -43,7 +43,7 @@ class ControlList(ControlBase, QWidget):
     ##########################################################################
 
     def init_form(self):
-        plusFunction = self._plusFunction
+        plusFunction  = self._plusFunction
         minusFunction = self._minusFunction
 
         # Get the current path of the file
@@ -53,12 +53,9 @@ class ControlList(ControlBase, QWidget):
 
         self.label = self._label
 
-        self.tableWidget.currentCellChanged.connect(
-            self.tableWidgetCellChanged)
-        self.tableWidget.currentItemChanged.connect(
-            self.tableWidgetItemChanged)
-        self.tableWidget.itemSelectionChanged.connect(
-            self.tableWidgetItemSelectionChanged)
+        self.tableWidget.currentCellChanged.connect(self.tableWidgetCellChanged)
+        self.tableWidget.currentItemChanged.connect(self.tableWidgetItemChanged)
+        self.tableWidget.itemSelectionChanged.connect(self.tableWidgetItemSelectionChanged)
         self.tableWidget.cellDoubleClicked.connect(self.tableWidgetCellDoubleClicked)
         self.tableWidget.model().dataChanged.connect(self._dataChangedEvent)
 
@@ -66,7 +63,8 @@ class ControlList(ControlBase, QWidget):
         self.tableWidget.horizontalHeader().setVisible(False)
 
         if plusFunction is None and minusFunction is None:
-            self.bottomBar.hide()
+            self.plusButton.hide()
+            self.minusButton.hide()
         elif plusFunction is None:
             self.plusButton.hide()
             self.minusButton.pressed.connect(minusFunction)

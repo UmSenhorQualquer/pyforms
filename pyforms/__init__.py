@@ -18,6 +18,7 @@ if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 	from pyforms.gui import controls
 	from pyforms.gui.basewidget import BaseWidget
 	from pyforms.gui.appmanager import start_app
+	from pyforms.gui.basewidget import vsplitter, hsplitter
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
 

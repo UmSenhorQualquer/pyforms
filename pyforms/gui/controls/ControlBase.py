@@ -76,7 +76,10 @@ class ControlBase(object):
         """
         if self.form is None:
             return
-        self.form.show()
+        elif self.form==self:
+            super(ControlBase,self).show()
+        else:
+            self.form.show()
 
     def hide(self):
         """
@@ -84,7 +87,10 @@ class ControlBase(object):
         """
         if self.form is None:
             return
-        self.form.hide()
+        elif self.form==self:
+            super(ControlBase,self).hide()
+        else:
+            self.form.hide()
 
 
     def __create_popup_menu(self):
