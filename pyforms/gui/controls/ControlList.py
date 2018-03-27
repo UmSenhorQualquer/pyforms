@@ -336,7 +336,7 @@ class ControlList(ControlBase, QWidget):
 
     @label.setter
     def label(self, value):
-        if value != '':
+        if value.strip() != '':
             self.labelWidget.setText(value)
         else:
             self.labelWidget.hide()
