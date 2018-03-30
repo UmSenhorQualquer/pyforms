@@ -80,7 +80,8 @@ class BaseWidget(QFrame):
         self.title = title
         self.has_progress = False
 
-        self._mainmenu = []
+        self.toolbar    = []
+        self._mainmenu  = []
         self._splitters = []
         self._tabs = []
         self._formset = None

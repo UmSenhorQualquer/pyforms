@@ -7,6 +7,7 @@ if conf.PYFORMS_MODE=='GUI':
 	from pyforms.gui.controls.ControlText 			import ControlText
 	from pyforms.gui.controls.ControlBoundingSlider import ControlBoundingSlider
 	from pyforms.gui.controls.ControlButton 		import ControlButton
+	from pyforms.gui.controls.ControlToolButton 	import ControlToolButton
 	from pyforms.gui.controls.ControlCheckBoxList 	import ControlCheckBoxList
 	from pyforms.gui.controls.ControlCheckBox 		import ControlCheckBox
 	from pyforms.gui.controls.ControlCombo 			import ControlCombo
