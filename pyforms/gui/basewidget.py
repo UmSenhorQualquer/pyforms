@@ -387,6 +387,22 @@ class BaseWidget(QFrame):
         else:
             return None
 
+    def input_double(self, msg, title='', default=None):
+        text, ok = QInputDialog.getDouble(self, title, msg, text=default)
+        if ok:
+            return float(text)
+        else:
+            return None
+
+
+    def input_int(self, msg, title='', default=None):
+        text, ok = QInputDialog.getInt(self, title, msg, text=default)
+        if ok:
+            return int(text)
+        else:
+            return None
+
+
     def question(self, msg, title=None, ):
         m = QMessageBox(QMessageBox.Question, title, msg, 
             QMessageBox.Yes | QMessageBox.No) 
@@ -432,6 +448,8 @@ class BaseWidget(QFrame):
         return self.message_popup(msg, title, buttons, handler, msg_type='warning')
     def alert_popup(self, msg, title='', buttons=None, handler=None):
         return self.message_popup(msg, title, buttons, handler, msg_type='alert')
+
+
 
 
     ##########################################################################
