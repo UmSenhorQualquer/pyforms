@@ -24,6 +24,7 @@ if conf.PYFORMS_MODE=='GUI':
 	from pyforms.gui.controls.ControlSlider 		import ControlSlider
 	from pyforms.gui.controls.ControlTextArea 		import ControlTextArea
 	from pyforms.gui.controls.ControlToolBox 		import ControlToolBox
+	from pyforms.gui.controls.ControlTableView 		import ControlTableView
 	from pyforms.gui.controls.ControlTree 			import ControlTree
 	from pyforms.gui.controls.ControlTreeView 		import ControlTreeView
 	from pyforms.gui.controls.control_event_timeline.ControlEventTimeline 	import ControlEventTimeline
