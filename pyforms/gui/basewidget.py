@@ -387,16 +387,15 @@ class BaseWidget(QFrame):
         else:
             return None
 
-    def input_double(self, msg, title='', default=None):
-        text, ok = QInputDialog.getDouble(self, title, msg, text=default)
+    def input_double(self, msg, title='', default=0,  min=-2147483647, max=2147483647, decimals=1):
+        text, ok = QInputDialog.getDouble(self, title, msg, value=default, min=min, max=max, decimals=decimals)
         if ok:
             return float(text)
         else:
             return None
-
-
-    def input_int(self, msg, title='', default=None):
-        text, ok = QInputDialog.getInt(self, title, msg, text=default)
+        
+    def input_int(self, msg, title='', default=0, min=-2147483647, max=2147483647):
+        text, ok = QInputDialog.getInt(self, title, msg, value=default, min=min, max=max)
         if ok:
             return int(text)
         else:
