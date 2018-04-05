@@ -40,19 +40,21 @@ class PluginsFinder(object):
                 class_name = values[-1]
                 module_name = ('.' + '.'.join(values[:-1])) if len(values) > 1 else ''
                 module = __import__(plugin + module_name, fromlist=[''])
-                class_def = getattr(module, class_name)
-                res.append(class_def)
-            except ImportError:
+                try:
+                    class_def = getattr(module, class_name)
+                    res.append(class_def)
+                except AttributeError:
+                    if not conf.PYFORMS_SILENT_PLUGINS_FINDER:
+                        logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),  exc_info=True)
+                        
+            except ModuleNotFoundError:
                 if not conf.PYFORMS_SILENT_PLUGINS_FINDER:
-                    logger.error(
-                        'Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),
-                        exc_info=True)
-                pass
+                    logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),  exc_info=True)
+                        
             except:
-                if not conf.PYFORMS_SILENT_PLUGINS_FINDER:
-                    logger.error(
-                        'Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),
-                        exc_info=True)
+                logger.error(
+                    'Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),
+                    exc_info=True)
                 pass
 
         return res
