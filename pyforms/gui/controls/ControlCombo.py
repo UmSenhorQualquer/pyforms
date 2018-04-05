@@ -156,6 +156,10 @@ class ControlCombo(ControlBase, QWidget):
 		self._combo.setCurrentIndex(value)
 
 	@property
+	def values(self):
+		return self._items.values()
+
+	@property
 	def items(self):
 		return self._items.items()
 
