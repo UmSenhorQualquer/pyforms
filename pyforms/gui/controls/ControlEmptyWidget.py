@@ -50,9 +50,16 @@ class ControlEmptyWidget(ControlBase, QWidget):
 		if isinstance(value, list):
 			for w in value:
 				self.form.layout().addWidget(w.form)
+				if not hasattr(w, 'about_to_be_shown'):
+					w.about_to_be_shown = True
+					w.show()
+					del w.about_to_be_shown
 		else:
 			self.form.layout().addWidget(value.form)
-
+			if not hasattr(value, 'about_to_be_shown'):
+				value.about_to_be_shown = True
+				value.show()
+				del value.about_to_be_shown
 		# The init_form should be called only for the BaseWidget
 
 		if isinstance(value, BaseWidget) and not value._formLoaded:
