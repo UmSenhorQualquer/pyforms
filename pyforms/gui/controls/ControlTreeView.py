@@ -26,9 +26,11 @@ class ControlTreeView(ControlBase, QTreeView):
         #self.setAcceptDrops(True)
 
         self.value = QStandardItemModel() if self._value is None else self._value
-        self.selectionChanged = self.selectionChanged
+        
+        #self.selectionChanged       = self.__selectionChanged
+        self.mouseDoubleClickEvent  = self.__itemDoubleClicked
 
-        self.mouseDoubleClickEvent = self.__itemDoubleClicked
+        self.selectionModel().selectionChanged.connect(self.__selectionChanged)
 
     def item_selection_changed_event(self, selected, deselected):
         pass
@@ -43,10 +45,11 @@ class ControlTreeView(ControlBase, QTreeView):
     def __itemDoubleClicked(self, evt):
         self.item_double_clicked_event(evt)
 
-    def selectionChanged(self, selected, deselected):
-        super(QTreeView, self.form).selectionChanged(selected, deselected)
+    def __selectionChanged(self, selected, deselected):
+        #def selectionChanged(self, selected, deselected):
         self.item_selection_changed_event(selected, deselected)
-
+        #super(QTreeView, self.form).selectionChanged(selected, deselected)
+        
     ###################################################
     ## PROPERTIES #####################################
     ###################################################
@@ -62,6 +65,7 @@ class ControlTreeView(ControlBase, QTreeView):
         for index in self.selectedIndexes():
             res = []
             while index.isValid():
+                print( index.data() )
                 res.append( index.data() )
                 index = index.parent()
             return list(reversed(res))

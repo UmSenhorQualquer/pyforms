@@ -47,7 +47,7 @@ class PluginsFinder(object):
                     if not conf.PYFORMS_SILENT_PLUGINS_FINDER:
                         logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),  exc_info=True)
                         
-            except ModuleNotFoundError:
+            except ImportError:
                 if not conf.PYFORMS_SILENT_PLUGINS_FINDER:
                     logger.error('Error importing model {0} {1} {2}'.format(str(plugin), str(package_name), str(class_name)),  exc_info=True)
                         
