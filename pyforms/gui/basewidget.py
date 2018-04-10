@@ -402,14 +402,28 @@ class BaseWidget(QFrame):
             return None
 
 
-    def question(self, msg, title=None, ):
-        m = QMessageBox(QMessageBox.Question, title, msg, 
-            QMessageBox.Yes | QMessageBox.No) 
+    def question(self, msg, title=None, buttons=['no', 'yes']):
+        btns = None
+        for btn in buttons:
+            if btn.lower()=='cancel':
+                b = QMessageBox.Cancel
+            elif btn.lower()=='no':
+                b = QMessageBox.No
+            elif btn.lower()=='yes':
+                b = QMessageBox.Yes
+
+            if btns is None: 
+                btns=b
+            else: btns |= b 
+
+        m = QMessageBox(QMessageBox.Question, title, msg, btns) 
         reply = m.exec()
-        if reply == QMessageBox.Yes or reply == QMessageBox.No:
-            return reply == QMessageBox.Yes
-        else:
-            return None
+
+        if reply==QMessageBox.Cancel: return 'cancel'
+        elif reply==QMessageBox.No:   return 'no'
+        elif reply==QMessageBox.Yes:  return 'yes'
+
+        return None
 
     def message(self, msg, title=None, msg_type=None):
         if msg_type=='success':
