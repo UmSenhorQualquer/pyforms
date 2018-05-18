@@ -4,7 +4,7 @@
 
 import pyforms.utils.tools as tools
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 from AnyQt.QtWidgets import QLabel, QWidget, QComboBox, QHBoxLayout, QSizePolicy
 

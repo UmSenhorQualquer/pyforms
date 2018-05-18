@@ -1,6 +1,6 @@
 # Settings
 
-Pyforms is using the pyforms.utils.settings_manager library to manage it settings.
+Pyforms is using the confapp library to manage it settings.
 Here it is described some of the settings of the library.
 
 

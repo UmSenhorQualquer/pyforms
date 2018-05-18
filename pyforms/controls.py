@@ -1,4 +1,4 @@
-from pyforms import conf
+from confapp import conf
 
 if conf.PYFORMS_MODE=='GUI':
 	import logging, traceback; logger=logging.getLogger(__file__)
@@ -87,23 +87,47 @@ elif conf.PYFORMS_MODE=='TERMINAL':
 
 elif conf.PYFORMS_MODE=='WEB':
 
-	from pyforms_web.web.controls.ControlBase 			import ControlBase
-	from pyforms_web.web.controls.ControlText 			import ControlText
-	from pyforms_web.web.controls.ControlBoundingSlider import ControlBoundingSlider
-	from pyforms_web.web.controls.ControlDate 			import ControlDate
-	from pyforms_web.web.controls.ControlButton 		import ControlButton
-	from pyforms_web.web.controls.ControlCheckBox 		import ControlCheckBox
-	from pyforms_web.web.controls.ControlCombo 			import ControlCombo
-	from pyforms_web.web.controls.ControlDir 			import ControlDir
-	from pyforms_web.web.controls.ControlFile 			import ControlFile
-	from pyforms_web.web.controls.ControlImage 			import ControlImage
-	from pyforms_web.web.controls.ControlSlider 		import ControlSlider
-	from pyforms_web.web.controls.ControlPlayer 		import ControlPlayer
-	from pyforms_web.web.controls.ControlProgress 		import ControlProgress
-	from pyforms_web.web.controls.ControlVisVis 		import ControlVisVis
-	from pyforms_web.web.controls.ControlList 			import ControlList
-	from pyforms_web.web.controls.ControlLabel 			import ControlLabel
-	from pyforms_web.web.controls.ControlTimeout 		import ControlTimeout
-	from pyforms_web.web.controls.ControlEmptyWidget 	import ControlEmptyWidget
-	from pyforms_web.web.controls.ControlWorkflow 		import ControlWorkflow
-	from pyforms_web.web.controls.ControlPieChart 		import ControlPieChart
+	from pyforms_web.controls.control_base                   import ControlBase
+	from pyforms_web.controls.control_autocomplete           import ControlAutoComplete
+	from pyforms_web.controls.control_boundingslider         import ControlBoundingSlider
+	from pyforms_web.controls.control_breadcrumb             import ControlBreadcrumb
+	from pyforms_web.controls.control_button                 import ControlButton
+	from pyforms_web.controls.control_calendar               import ControlCalendar
+	from pyforms_web.controls.control_checkboxlist           import ControlCheckBoxList
+	from pyforms_web.controls.control_checkboxlistquery      import ControlCheckBoxListQuery
+	from pyforms_web.controls.control_checkbox               import ControlCheckBox
+	from pyforms_web.controls.control_combo                  import ControlCombo
+	from pyforms_web.controls.control_date                   import ControlDate
+	from pyforms_web.controls.control_datetime               import ControlDateTime
+	from pyforms_web.controls.control_dir                    import ControlDir
+	from pyforms_web.controls.control_email                  import ControlEmail
+	from pyforms_web.controls.control_emptywidget            import ControlEmptyWidget
+	from pyforms_web.controls.control_feed                   import ControlFeed
+	from pyforms_web.controls.control_file                   import ControlFile
+	from pyforms_web.controls.control_fileupload             import ControlFileUpload
+	from pyforms_web.controls.control_float                  import ControlFloat
+	from pyforms_web.controls.control_html                   import ControlHtml
+	from pyforms_web.controls.control_image                  import ControlImage
+	from pyforms_web.controls.control_integer                import ControlInteger
+	from pyforms_web.controls.control_itemslist              import ControlItemsList
+	from pyforms_web.controls.control_label                  import ControlLabel
+	from pyforms_web.controls.control_list                   import ControlList
+	from pyforms_web.controls.control_menu                   import ControlMenu
+	from pyforms_web.controls.control_multiplechecks         import ControlMultipleChecks
+	from pyforms_web.controls.control_multipleselection      import ControlMultipleSelection
+	from pyforms_web.controls.control_multipleselectionquery import ControlMultipleSelectionQuery
+	from pyforms_web.controls.control_password               import ControlPassword
+	from pyforms_web.controls.control_piechart               import ControlPieChart
+	from pyforms_web.controls.control_player                 import ControlPlayer
+	from pyforms_web.controls.control_progress               import ControlProgress
+	from pyforms_web.controls.control_querycards             import ControlQueryCards
+	from pyforms_web.controls.control_querycombo             import ControlQueryCombo
+	from pyforms_web.controls.control_queryitem              import ControlQueryItem
+	from pyforms_web.controls.control_querylist              import ControlQueryList
+	from pyforms_web.controls.control_slider                 import ControlSlider
+	from pyforms_web.controls.control_template               import ControlTemplate
+	from pyforms_web.controls.control_textarea               import ControlTextArea
+	from pyforms_web.controls.control_text                   import ControlText
+	from pyforms_web.controls.control_timeout                import ControlTimeout
+	from pyforms_web.controls.control_visvis                 import ControlVisVis
+	from pyforms_web.controls.control_workflow               import ControlWorkflow

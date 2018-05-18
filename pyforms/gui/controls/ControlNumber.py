@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 import pyforms.utils.tools as tools
 

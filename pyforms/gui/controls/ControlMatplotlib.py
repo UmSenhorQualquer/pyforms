@@ -10,7 +10,7 @@ __email__       = "ricardojvr@gmail.com"
 __status__      = "Development"
 
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 from AnyQt.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 

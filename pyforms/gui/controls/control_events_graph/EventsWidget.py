@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from pyforms.utils.settings_manager      import conf
+from confapp      import conf
 from AnyQt.QtWidgets import QWidget
 from AnyQt.QtGui 	 import QColor, QPainter, QFont
 from AnyQt 		     import QtCore

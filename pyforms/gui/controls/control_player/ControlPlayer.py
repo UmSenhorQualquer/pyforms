@@ -14,7 +14,7 @@ __status__ = "Development"
 
 import logging, platform, os, math, cv2
 
-from pyforms.utils.settings_manager 	 import conf
+from confapp 	 import conf
 from AnyQt 			 import uic, _api
 from AnyQt 			 import QtCore
 from AnyQt.QtWidgets import QFrame	
@@ -38,9 +38,11 @@ class ControlPlayer(ControlBase, QFrame):
 	_videoWidget = None
 	_currentFrame = None
 
-	def __init__(self, *args):
+	def __init__(self, *args, **kwargs):
 		QFrame.__init__(self)
-		ControlBase.__init__(self, *args)
+		ControlBase.__init__(self, *args, **kwargs)
+
+		self.process_frame_event = kwargs.get('process_frame_event', self.process_frame_event)
 		
 		self._speed = 1
 		self.logger = logging.getLogger('pyforms')

@@ -3,7 +3,7 @@
 
 import json, AnyQt
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 from AnyQt.QtWidgets import QFrame
 from AnyQt.QtWidgets import QVBoxLayout
@@ -39,6 +39,34 @@ class vsplitter(object):
 
 class hsplitter(object):
     def __init__(self, *args, **kwargs):  self.items = args
+    def __getitem__(self,index): return self.items[index]
+    def __setitem__(self,index,value): self.items[index] = value
+    def __len__(self):  return len(self.items)
+    def __iter__(self): 
+        self._index = -1; return self
+    def __next__(self): 
+        self._index += 1
+        if self._index>=len(self.items): raise StopIteration
+        return self.items[self._index]
+
+
+class no_columns(object):
+    def __init__(self, *args):  self.items = args
+    def __getitem__(self,index): return self.items[index]
+    def __setitem__(self,index,value): self.items[index] = value
+    def __len__(self):  return len(self.items)
+    def __iter__(self): 
+        self._index = -1; return self
+    def __next__(self): 
+        self._index += 1
+        if self._index>=len(self.items): raise StopIteration
+        return self.items[self._index]
+
+
+class segment(object):
+    def __init__(self, *args, **kwargs): 
+        self.css = kwargs.get('css', '')
+        self.items = args
     def __getitem__(self,index): return self.items[index]
     def __setitem__(self,index,value): self.items[index] = value
     def __len__(self):  return len(self.items)
@@ -167,10 +195,10 @@ class BaseWidget(QFrame):
             return control
         control = QFrame(self)
         layout = None
-        if type(formset) is tuple:
+        if isinstance(formset, (tuple, no_columns)):
             layout = QHBoxLayout()
             for row in formset:
-                if isinstance(row, (list, tuple, vsplitter, hsplitter) ):
+                if isinstance(row, (list, tuple, vsplitter, hsplitter, no_columns, segment) ):
                     panel = self.generate_panel(row)
                     layout.addWidget(panel)
                 elif row == " ":
@@ -240,17 +268,17 @@ class BaseWidget(QFrame):
                         param.parent = self
                         param.name = row
                         layout.addWidget(param.form)
-        elif type(formset) is list:
+        elif isinstance(formset, (list, segment)):
             layout = QVBoxLayout()
             for row in formset:
-                if isinstance(row, (list, tuple, vsplitter, hsplitter) ):
+                if isinstance(row, (list, tuple, vsplitter, hsplitter, segment, no_columns) ):
                     panel = self.generate_panel(row)
                     layout.addWidget(panel)
                 elif row == " ":
                     spacer = QSpacerItem(
                         20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
                     layout.addItem(spacer)
-                elif type(row) is dict:
+                elif isinstance(formset, dict):
                     c = self.generate_tabs(row)
                     layout.addWidget(c)
                     self._tabs.append(c)

@@ -1,7 +1,7 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 from AnyQt.QtWidgets import QDialog, QInputDialog, QColorDialog
 from AnyQt.QtGui import QColor, QPixmap, QFont, QPainter

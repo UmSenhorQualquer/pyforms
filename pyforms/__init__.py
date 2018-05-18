@@ -1,9 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 conf += 'pyforms.settings'
+
+try:
+	import settings
+	conf += settings
+except:
+	pass
 
 __author__ 		= "Ricardo Ribeiro"
 __credits__ 	= ["Ricardo Ribeiro"]
@@ -13,12 +19,14 @@ __maintainer__ 	= ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ 		= ["ricardojvr@gmail.com", "cajomferro@gmail.com"]
 __status__ 		= "Production"
 
+print(conf.PYFORMS_MODE)
+
 if conf.PYFORMS_MODE in ['GUI', 'GUI-OPENCSP']:
 
 	from pyforms.gui import controls
 	from pyforms.gui.basewidget import BaseWidget
 	from pyforms.gui.appmanager import start_app
-	from pyforms.gui.basewidget import vsplitter, hsplitter
+	from pyforms.gui.basewidget import vsplitter, hsplitter, segment, no_columns
 
 elif conf.PYFORMS_MODE in ['TERMINAL']:
 
@@ -29,10 +37,7 @@ elif conf.PYFORMS_MODE in ['TERMINAL']:
 
 elif conf.PYFORMS_MODE in ['WEB']:
 
-	from pyforms_web.web import controls
-	from pyforms_web.web.basewidget import BaseWidget, no_columns, segment
-	from pyforms_web.web.appmanager import start_app
-
-	from pyforms_web.web.django_pyforms.model_admin import ModelAdmin
-	from pyforms_web.web.django_pyforms.model_admin import ViewFormAdmin
-	from pyforms_web.web.django_pyforms.model_admin import EditFormAdmin
+	from pyforms_web.basewidget import BaseWidget, no_columns, segment
+	from pyforms_web.modeladmin import ModelAdmin
+	from pyforms_web.modeladmin import ViewFormAdmin
+	from pyforms_web.modeladmin import EditFormAdmin

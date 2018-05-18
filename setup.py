@@ -26,7 +26,8 @@ setup(
 		'visvis',
 		'matplotlib',
 		'python-dateutil',
-		'numpy'
+		'numpy',
+		'appconf'
 	],
 	packages=find_packages(),
 	package_data={'pyforms': [

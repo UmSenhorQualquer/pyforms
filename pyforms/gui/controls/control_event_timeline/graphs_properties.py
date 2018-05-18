@@ -7,7 +7,7 @@ from pyforms.controls import ControlNumber
 from pyforms.controls import ControlSlider
 from pyforms.controls import ControlText
 from pyforms.controls import ControlLabel
-from pyforms.utils.settings_manager import conf
+from confapp import conf
 
 if conf.PYFORMS_MODE=='GUI':
 	from AnyQt.QtWidgets import QColorDialog
