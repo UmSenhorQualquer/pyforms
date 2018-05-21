@@ -27,7 +27,7 @@ setup(
 		'matplotlib',
 		'python-dateutil',
 		'numpy',
-		'appconf'
+		'confapp'
 	],
 	packages=find_packages(),
 	package_data={'pyforms': [

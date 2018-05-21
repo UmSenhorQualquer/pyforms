@@ -71,3 +71,5 @@ org.eclipse.mylyn.tasks.ui.prefs
 .idea/workspace.xml
 .idea/tasks.xml
 
+
+\.DS_Store
