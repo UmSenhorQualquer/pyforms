@@ -15,7 +15,7 @@ from confapp import conf
 conf += 'pyforms.settings'
 
 try:
-	import settings
-	conf += settings
+	import local_settings
+	conf += local_settings
 except:
 	pass
