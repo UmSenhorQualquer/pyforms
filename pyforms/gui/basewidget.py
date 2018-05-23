@@ -278,7 +278,7 @@ class BaseWidget(QFrame):
                     spacer = QSpacerItem(
                         20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
                     layout.addItem(spacer)
-                elif isinstance(formset, dict):
+                elif type(row) is dict:
                     c = self.generate_tabs(row)
                     layout.addWidget(c)
                     self._tabs.append(c)
