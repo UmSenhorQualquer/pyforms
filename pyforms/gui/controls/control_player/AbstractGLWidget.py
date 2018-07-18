@@ -325,7 +325,8 @@ class AbstractGLWidget(object):
 			else:
 				self._height = 1
 				self._width = float(self.imgWidth) / float(self.imgHeight)
-				self._y = 0.5
+				self._y = 0
+				self._x = -float(self._width) / 2
 
 		self.image_2_display = frames
 		self._pending_frames = frames
