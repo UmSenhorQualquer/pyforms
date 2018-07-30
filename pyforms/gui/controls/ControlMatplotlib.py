@@ -37,6 +37,8 @@ class ControlMatplotlib(ControlBase, QWidget):
 		QWidget.__init__(self)
 		ControlBase.__init__(self, *args, **kwargs)
 
+		self.on_draw = kwargs.get('on_draw', self.on_draw)
+
 	def init_form(self):
 
 		self._fig   = Figure((5.0, 4.0), dpi=100)
