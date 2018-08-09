@@ -23,7 +23,7 @@ except:
 
 if conf.PYFORMS_MODE == 'GUI':
 
-    from pyforms.gui.appmanager import start_app
+    from pyforms_gui.appmanager import start_app
 
 elif conf.PYFORMS_MODE == 'TERMINAL':
 
