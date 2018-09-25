@@ -1,0 +1,9 @@
+[submodule "pyforms-gui"]
+	path = pyforms-gui
+	url = https://github.com/UmSenhorQualquer/pyforms-gui.git
+[submodule "pyforms-web"]
+	path = pyforms-web
+	url = https://github.com/UmSenhorQualquer/pyforms-web.git
+[submodule "pyforms-terminal"]
+	path = pyforms-terminal
+	url = https://github.com/UmSenhorQualquer/pyforms-terminal.git
