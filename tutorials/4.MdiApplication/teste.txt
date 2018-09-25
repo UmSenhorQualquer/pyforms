@@ -1,1 +1,0 @@
-{"_projectTree": {"side": "right"}, "_textField": {"value": "Alguma coisa"}, "_mdiArea": {}, "_details": {"side": "left", "value": {"_button": {}, "_middlename": {"value": "aaaa"}, "_lastname": {"value": "dddd"}, "_fullname": {"value": "qqq"}, "_firstname": {"value": "Default value"}}}}
