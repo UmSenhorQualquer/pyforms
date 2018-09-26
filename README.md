@@ -8,15 +8,13 @@ If you find this project useful, please, do not forget to ![star it](https://raw
 #### --- IMPORTANT UPDATES ---
 On version v4 Pyforms code was reorganized and splitted in 3 subprojects. Now the GUI, Web and Terminal implementations are located at the repositories
 
-![Pyforms logo](docs/imgs/pyforms-gui.jpg){ width=48px } [pyforms-gui @ github](https://github.com/UmSenhorQualquer/pyforms-gui)
-
-![Pyforms logo](docs/imgs/pyforms-web.jpg){ width=48px } [pyforms-web @ github](https://github.com/UmSenhorQualquer/pyforms-web)
-
-![Pyforms logo](docs/imgs/pyforms-terminal.jpg){ width=48px } [pyforms-terminal @ github](https://github.com/UmSenhorQualquer/pyforms-terminal)
+- [pyforms-gui @ github](https://github.com/UmSenhorQualquer/pyforms-gui)
+- [pyforms-web @ github](https://github.com/UmSenhorQualquer/pyforms-web)
+- [pyforms-terminal @ github](https://github.com/UmSenhorQualquer/pyforms-terminal)
 
 and their respectives documentation at:
 
-- [pyforms-gui @ read the docs](https://pyforms-gui.readthedocs.io) 
+- [pyforms-gui @ read the docs](https://pyforms-gui.readthedocs.io)
 - [pyforms-web @ read the docs](https://pyforms-web.readthedocs.io)
 - [pyforms-terminal @ read the docs](https://pyforms-terminal.readthedocs.io)
 
