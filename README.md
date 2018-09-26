@@ -47,9 +47,7 @@ The main diference of these updates, is that, it is not mandatory anymore to ins
 
 ----
 
-![Pyforms logo](docs/imgs/pyforms.jpg?raw=true "Screen")
-
-# Pyforms
+# ![Pyforms logo](docs/imgs/pyforms.jpg?raw=true "Screen")
 
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
