@@ -1,23 +1,61 @@
-![Important](https://img.shields.io/badge/Important-Note-red.svg "Screen")  
 If you find this project useful, please, do not forget to ![star it](https://raw.githubusercontent.com/UmSenhorQualquer/pyforms/v1.0.beta/docs/imgs/start.png?raw=true "Screen") it.
 
-![New version available](https://img.shields.io/badge/New%20version%20available-3.0-green.svg "Screen")
+![Version](https://img.shields.io/badge/version-4-green.svg "Screen")
+
+---
+
+#### --- IMPORTANT UPDATES ---
+On version v4 Pyforms code was reorganized and splitted in 3 subprojects. Now the GUI, Web and Terminal implementations are located at the repositories
+
+- [pyforms-gui @ github](https://github.com/UmSenhorQualquer/pyforms-gui)
+- [pyforms-web @ github](https://github.com/UmSenhorQualquer/pyforms-web)
+- [pyforms-terminal @ github](https://github.com/UmSenhorQualquer/pyforms-terminal)
+
+and their respectives documentation at:
+
+- [pyforms-gui @ read the docs](https://pyforms-gui.readthedocs.io)
+- [pyforms-web @ read the docs](https://pyforms-web.readthedocs.io)
+- [pyforms-terminal @ read the docs](https://pyforms-terminal.readthedocs.io)
 
 
+
+#### Pyforms on PyPI
+
+The libraries are now available on the PyPI repositories, which means you can install them using the commands 
+
+```bash
+> pip install pyforms-gui
+> pip install pyforms-web
+> pip install pyforms-terminal
+```
+
+If you wish you can also install all layers at once, using the command:
+
+```bash
+> pip install pyforms
+```
+
+#### Impact of these updates to the user
+
+All the modules will be imported in the same way as in previous versions, with the exception of the **BaseWidget** class, that now is imported using the string: 
+```python
+from pyforms.basewidget import BaseWidget
+```
+The main diference of these updates, is that, it is not mandatory anymore to install all the 3 diferent layers and its requirements. For example, it does not make sense to install **pyforms-gui** and its requirements like pyqt5 on a webserver where we are going to execute pyforms only on Web mode.
+
+
+----
 
 # Pyforms
-
-<!-- Posicione esta tag onde você deseja que o widget apareça. -->
-<div class="g-follow" data-annotation="bubble" data-height="24" data-rel="publisher"></div>
 
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
 ### It offers:
 * A Python layer of Desktop forms, based on PyQt, OpenGL and other libraries.
-* A Python layer that allow applications to run on Desktop GUI, Web and terminal without requiring code modifications.
+* A Python layer that allow applications to run on Desktop GUI, Web and Terminal without requiring code modifications.
 * A group of rules and methodologies that help the developer maintaining his code short, clean, reusable and readable. 
 
-![Diagram](docs/pyforms.png?raw=true "Screen")
+![Diagram](docs/imgs/pyforms-layers.png?raw=true "Screen")
 
 Example of an application running in the Desktop, Web and Terminal enviroments:
 
@@ -71,19 +109,19 @@ class ComputerVisionAlgorithm(BaseWidget):
 		super(ComputerVisionAlgorithm,self).__init__('Computer vision algorithm example')
 
 		#Definition of the forms fields
-		self._videofile 	= ControlFile('Video')
-		self._outputfile 	= ControlText('Results output file')
-		self._threshold 	= ControlSlider('Threshold', 114, 0,255)
-		self._blobsize 		= ControlSlider('Minimum blob size', 100, 100,2000)
-		self._player 		= ControlPlayer('Player')
-		self._runbutton 	= ControlButton('Run')
+		self._videofile   = ControlFile('Video')
+		self._outputfile  = ControlText('Results output file')
+		self._threshold   = ControlSlider('Threshold', 114, 0,255)
+		self._blobsize    = ControlSlider('Minimum blob size', 100, 100,2000)
+		self._player      = ControlPlayer('Player')
+		self._runbutton   = ControlButton('Run')
 
 		#Define the function that will be called when a file is selected
-		self._videofile.changed 	= self.__videoFileSelectionEvent
+		self._videofile.changed = self.__video_file_selection_event
 		#Define the event that will be called when the run button is processed
-		self._runbutton.value 		= self.__runEvent
+		self._runbutton.value = self.__run_event
 		#Define the event called before showing the image in the player
-		self._player.process_frame_event 	= self.__process_frame
+		self._player.process_frame_event = self.__process_frame
 
 		#Define the organization of the Form Controls
 		self._formset = [ 
@@ -94,7 +132,7 @@ class ComputerVisionAlgorithm(BaseWidget):
 		]
 
 
-	def __videoFileSelectionEvent(self):
+	def __video_file_selection_event(self):
 		"""
 		When the videofile is selected instanciate the video in the player
 		"""
@@ -106,7 +144,7 @@ class ComputerVisionAlgorithm(BaseWidget):
 		"""
 		return frame
 
-	def __runEvent(self):
+	def __run_event(self):
 		"""
 		After setting the best parameters run the full algorithm
 		"""
