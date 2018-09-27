@@ -9,6 +9,7 @@ pypi = xmlrpc.client.ServerProxy('https://pypi.org')
 DIRECTORIES_TO_SEARCH_FORM = [
     os.path.join('.'),
     os.path.join('pyforms-web'),
+    os.path.join('pyforms-web', 'orquestra'),
     os.path.join('pyforms-gui'),
     os.path.join('pyforms-terminal'),
 ]
