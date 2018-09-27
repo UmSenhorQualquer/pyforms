@@ -47,7 +47,7 @@ The main diference of these updates, is that, it is not mandatory anymore to ins
 
 ----
 
-# ![Pyforms logo](docs/imgs/pyforms.jpg?raw=true "Screen")
+# ![Pyforms logo](docs/source/_static/imgs/pyforms.jpg?raw=true "Screen")
 
 Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI applications, which promotes modular software design and code reusability with minimal effort.
 
@@ -56,11 +56,11 @@ Pyforms is a Python 2.7.x and 3.x cross-enviroment framework to develop GUI appl
 * A Python layer that allow applications to run on Desktop GUI, Web and Terminal without requiring code modifications.
 * A group of rules and methodologies that help the developer maintaining his code short, clean, reusable and readable. 
 
-![Diagram](docs/imgs/pyforms-layers.png?raw=true "Screen")
+![Diagram](docs/source/_static/imgs/pyforms-layers.png?raw=true "Screen")
 
 Example of an application running in the Desktop, Web and Terminal enviroments:
 
-![Application-Example](docs/example.png?raw=true "Screen")
+![Application-Example](docs/source/_static/imgs/example.png?raw=true "Screen")
 
 ## Advantages
 * With a minimal API, interfaces are easily defined using a short Python code.
