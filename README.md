@@ -152,4 +152,4 @@ class ComputerVisionAlgorithm(BaseWidget):
 		pass
 ```
 
-![ScreenShot](docs/imgs/computer-vision-algorithm.png)
+![ScreenShot](docs/source/_static/imgs/computer-vision-algorithm.png)
