@@ -16,7 +16,7 @@ DIRECTORIES_TO_SEARCH_FORM = [
 CURRENT_DIRECTORY = os.getcwd()
 
 
-Popen(['pip','install','--upgrade','setuptools','wheel','twine'])
+Popen(['pip','install','--upgrade','setuptools','wheel','twine']).communicate()
 
 def version_compare(a, b):
 
@@ -68,8 +68,8 @@ for dir_name in DIRECTORIES_TO_SEARCH_FORM:
 
         if os.path.isdir('./dist'):
             shutil.rmtree('./dist')
-        Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'])
-        Popen(['twine', 'upload', os.path.join('dist','*')])
+        Popen(['python', 'setup.py', 'sdist', 'bdist_wheel']).communicate()
+        Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
 
     
     os.chdir(CURRENT_DIRECTORY)
