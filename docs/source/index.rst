@@ -73,6 +73,11 @@ Developer
    :caption: Getting started
    
    getting-started/first-app
+
+.. toctree::
+   :maxdepth: 4
+   :caption: More docs
+   
    Pyforms-GUI <https://pyforms-gui.readthedocs.io>
    Pyforms-WEB <https://pyforms-web.readthedocs.io>
    Pyforms-TERMINAL <https://pyforms-terminal.readthedocs.io>
