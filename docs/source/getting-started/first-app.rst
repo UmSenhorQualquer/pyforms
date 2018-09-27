@@ -78,7 +78,7 @@ Create the file **example.py** and add the next code to it.
 Execute the app in GUI mode
 ____________________________
 
-By default the GUI mode will be activated.
+By default the GUI mode is active.
 
 Now execute in the terminal the next command:
 
@@ -126,10 +126,13 @@ Now execute in the terminal the next command:
       --load LOAD           Load a json file containing the pyforms form
                             configuration.
 
+Set some parameters and execute the function run_event:
+
 .. code-block:: bash
 
     $ python example.py terminal_mode --_videofile "/home/ricardo/Documents/pictures4presentations/3dscene.mp4" --exec run_event
 
+The output will be:
 
 .. code-block:: console
 

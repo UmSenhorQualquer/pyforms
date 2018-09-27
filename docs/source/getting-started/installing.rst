@@ -39,7 +39,7 @@ Install & configure
 Configure
 ___________
 
-To switch between execution modes, you can create the file **local_settings.py** with the content:
+To switch between execution modes, create the file **local_settings.py** in application running directory with the content:
 
 .. code-block:: python
 
